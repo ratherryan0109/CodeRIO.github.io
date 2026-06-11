@@ -1,0 +1,458 @@
+function initDashboard() {
+  var user = Utils.getStorage('coderio_user');
+  if (!user) return;
+
+  var nameEl = document.getElementById('dashUserName');
+  if (nameEl) nameEl.textContent = user.displayName || user.email || user.user_metadata?.full_name || 'User';
+
+  updateWelcomeMessage();
+  updateStats();
+  updateStreak();
+  loadRecentActivity();
+  loadAchievements();
+  initDailyGoals();
+  initCharts();
+  initAnalyticsToggle();
+}
+
+function updateWelcomeMessage() {
+  var hour = new Date().getHours();
+  var greeting = hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening';
+  var el = document.getElementById('dashGreeting');
+  if (el) el.textContent = greeting;
+}
+
+function updateStats() {
+  var stats = typeof LearningTracker !== 'undefined' ? LearningTracker.getTotalStats() : null;
+  if (!stats) {
+    var courseProgress = Utils.getStorage('course_progress', {});
+    var courses = Utils.getStorage('courses_data', []);
+    var courseIds = Object.keys(courseProgress);
+    var totalCompleted = 0;
+    courseIds.forEach(function(cid) {
+      var p = courseProgress[cid];
+      totalCompleted += (p.completed || []).length;
+    });
+
+    var activeCount = courseIds.filter(function(cid) {
+      var p = courseProgress[cid];
+      return p.status === 'active' || (!p.status && p.completed && p.completed.length > 0);
+    }).length;
+
+    var completedCount = courseIds.filter(function(cid) {
+      return courseProgress[cid].status === 'completed';
+    }).length;
+
+    var quizResultsObj = Utils.getStorage('quiz_results', {});
+    var quizCount = Object.values(quizResultsObj).reduce(function(sum, arr) { return sum + arr.length; }, 0);
+    var typingHistory = Utils.getStorage('typing_history', []);
+    var quizCorrect = 0, quizTotal = 0;
+    Object.values(quizResultsObj).forEach(function(arr) {
+      arr.forEach(function(q) { quizCorrect += q.score || 0; quizTotal += q.total || 0; });
+    });
+    var accuracy = quizTotal > 0 ? Math.round((quizCorrect / quizTotal) * 100) + '%' : '0%';
+
+    setStat('statLearningProgress', totalCompleted > 0 ? Math.min(100, Math.round((totalCompleted / Math.max(courseIds.length * 5, 1)) * 100)) + '%' : '0%');
+    setStat('statActiveCourses', activeCount || '0');
+    setStat('statCompletedCourses', completedCount || '0');
+    setStat('statTotalLessons', totalCompleted || '0');
+    setStat('statAvgAccuracy', accuracy);
+    setStat('statTypingTests', typingHistory.length || '0');
+    setStat('statTotalTime', '0m');
+    setStat('statAP', typeof AchievementSystem !== 'undefined' ? AchievementSystem.getUserAP() : 0);
+    return;
+  }
+
+  setStat('statLearningProgress', stats.totalLessonsCompleted > 0 ? Math.min(100, Math.round((stats.totalLessonsCompleted / Math.max(Object.keys(Utils.getStorage('course_progress', {})).length * 5, 1)) * 100)) + '%' : '0%');
+  setStat('statActiveCourses', stats.activeCourses || '0');
+  setStat('statCompletedCourses', stats.completedCourses || '0');
+  setStat('statTotalLessons', stats.totalModulesCompleted || '0');
+  setStat('statAvgAccuracy', stats.totalQuizAccuracy + '%');
+  setStat('statTypingTests', stats.totalTypingTests || '0');
+  setStat('statTotalTime', formatTimeSpent(stats.totalTimeSpent || 0));
+  setStat('statAP', typeof AchievementSystem !== 'undefined' ? AchievementSystem.getUserAP() : 0);
+}
+
+function setStat(id, val) {
+  var el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+function formatTimeSpent(ms) {
+  var totalSec = Math.floor(ms / 1000);
+  var h = Math.floor(totalSec / 3600);
+  var m = Math.floor((totalSec % 3600) / 60);
+  if (h > 0) return h + 'h ' + m + 'm';
+  return m + 'm';
+}
+
+function updateStreak() {
+  var activities = Utils.getStorage('coderio_activity', []);
+  var quizResults = Utils.getStorage('quiz_results', {});
+  var typingHistory = Utils.getStorage('typing_history', []);
+
+  var activeDates = new Set();
+  activities.forEach(function(a) { if (a.time) activeDates.add(new Date(a.time).toDateString()); });
+  Object.values(quizResults).forEach(function(arr) {
+    arr.forEach(function(q) { if (q.date) activeDates.add(new Date(q.date).toDateString()); });
+  });
+  typingHistory.forEach(function(t) { if (t.date) activeDates.add(new Date(t.date).toDateString()); });
+
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  var streak = 0;
+  var check = new Date(today);
+  while (activeDates.has(check.toDateString())) {
+    streak++;
+    check.setDate(check.getDate() - 1);
+  }
+  if (streak === 0 && activeDates.has(today.toDateString())) streak = 1;
+
+  var el = document.getElementById('streakCount');
+  if (el) el.textContent = streak;
+
+  var daysEl = document.getElementById('streakDays');
+  if (daysEl) {
+    var names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var html = '';
+    for (var i = 6; i >= 0; i--) {
+      var d = new Date(today);
+      d.setDate(d.getDate() - i);
+      html += '<div class="streak-day ' + (activeDates.has(d.toDateString()) ? 'active' : 'inactive') + '">' + names[d.getDay()] + '</div>';
+    }
+    daysEl.innerHTML = html;
+  }
+}
+
+function loadRecentActivity() {
+  var activityList = document.getElementById('activityList');
+  if (!activityList) return;
+
+  var activities = Utils.getStorage('coderio_activity', []);
+  if (activities.length === 0) {
+    activityList.innerHTML = '<div class="empty-state" style="padding:2rem;text-align:center;color:var(--text-muted)"><i class="fas fa-history" style="font-size:2rem;margin-bottom:0.8rem;display:block"></i><p>No activity yet. Start learning to build your activity timeline.</p></div>';
+    return;
+  }
+
+  activityList.innerHTML = activities.slice(-10).reverse().map(function(a) {
+    return '<div class="activity-item"><div class="activity-dot blue"></div><div class="activity-content"><p>' + a.text + '</p><small>' + Utils.timeAgo(a.time) + '</small></div></div>';
+  }).join('');
+}
+
+function loadAchievements() {
+  var container = document.getElementById('achievementsContainer');
+  if (!container) return;
+
+  if (typeof AchievementSystem !== 'undefined') {
+    var earned = AchievementSystem.getUserAchievements();
+    var earnedIds = earned.map(function(a) { return a.id; });
+
+    var html = '';
+    var needed = AchievementSystem.ACHIEVEMENTS;
+    needed.slice(0, 12).forEach(function(a) {
+      var isEarned = earnedIds.indexOf(a.id) !== -1;
+      html += '<div class="achievement-item ' + (isEarned ? 'earned' : 'locked') + '"><i class="fas ' + a.icon + '"></i><span>' + a.title + '</span></div>';
+    });
+    container.innerHTML = html + '<div style="grid-column:1/-1;text-align:center;margin-top:0.5rem"><a href="achievements.html" style="color:var(--primary);font-size:0.85rem">View all (' + earnedIds.length + '/' + AchievementSystem.ACHIEVEMENTS.length + ') →</a></div>';
+  } else {
+    container.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--text-muted)"><p>Achievements system not loaded.</p></div>';
+  }
+}
+
+function initDailyGoals() {
+  if (typeof DailyGoals !== 'undefined') {
+    DailyGoals.renderWidget('dailyGoalsWidget');
+  }
+}
+
+function initCharts() {
+  if (typeof Chart === 'undefined') return;
+  initWeeklyChart();
+  initCourseChart();
+  initTypingChart();
+}
+
+function getActivityData(days) {
+  var activities = Utils.getStorage('coderio_activity', []);
+  var result = [];
+  var now = new Date();
+  for (var i = days - 1; i >= 0; i--) {
+    var d = new Date(now);
+    d.setDate(d.getDate() - i);
+    var dateStr = d.toISOString().split('T')[0];
+    var count = activities.filter(function(a) {
+      return a.time && a.time.startsWith(dateStr);
+    }).length;
+    result.push({ date: dateStr, count: count, label: days <= 8 ? d.toLocaleDateString('en-US', { weekday: 'short' }) : 'Day ' + (days - i) });
+  }
+  return result;
+}
+
+function initWeeklyChart() {
+  var canvas = document.getElementById('weeklyChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var data = getActivityData(7);
+  var hasData = data.some(function(d) { return d.count > 0; });
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.map(function(d) { return d.label; }),
+      datasets: [{
+        label: 'Activities',
+        data: hasData ? data.map(function(d) { return d.count; }) : [0, 0, 0, 0, 0, 0, 0],
+        borderColor: '#06b6d4',
+        backgroundColor: 'rgba(6,182,212,0.1)',
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#06b6d4',
+        pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+function initCourseChart() {
+  var canvas = document.getElementById('courseChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var courseProgress = Utils.getStorage('course_progress', {});
+  var courseIds = Object.keys(courseProgress);
+  var completed = courseIds.filter(function(cid) {
+    return courseProgress[cid].status === 'completed';
+  }).length;
+  var active = courseIds.filter(function(cid) {
+    return courseProgress[cid].status === 'active' || (!courseProgress[cid].status && courseProgress[cid].completed && courseProgress[cid].completed.length > 0);
+  }).length;
+  var paused = courseIds.filter(function(cid) {
+    return courseProgress[cid].status === 'paused';
+  }).length;
+  var notStarted = courseIds.length - completed - active - paused;
+
+  var labels = [];
+  var data = [];
+  var colors = [];
+
+  if (completed > 0) { labels.push('Completed'); data.push(completed); colors.push('#22c55e'); }
+  if (active > 0) { labels.push('Active'); data.push(active); colors.push('#06b6d4'); }
+  if (paused > 0) { labels.push('Paused'); data.push(paused); colors.push('#eab308'); }
+  if (notStarted > 0) { labels.push('Not Started'); data.push(notStarted); colors.push('#94a3b8'); }
+
+  if (data.length === 0) {
+    labels = ['No Courses'];
+    data = [1];
+    colors = ['rgba(6,182,212,0.2)'];
+  }
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: colors,
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
+        }
+      }
+    }
+  });
+}
+
+function initTypingChart() {
+  var canvas = document.getElementById('typingChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var typingHistory = Utils.getStorage('typing_history', []);
+  var recent = typingHistory.slice(-10);
+  var labels = recent.map(function(_, i) { return '#' + (i + 1); });
+  var data = recent.map(function(t) { return t.wpm || 0; });
+
+  if (data.length === 0) {
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['No Data'],
+        datasets: [{
+          label: 'WPM',
+          data: [0],
+          backgroundColor: 'rgba(6,182,212,0.2)',
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+    return;
+  }
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'WPM',
+        data: data,
+        backgroundColor: 'rgba(6,182,212,0.7)',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+function initAnalyticsToggle() {
+  var weeklyBtn = document.getElementById('toggleWeekly');
+  var monthlyBtn = document.getElementById('toggleMonthly');
+  var todayBtn = document.getElementById('toggleToday');
+
+  function setActive(btn) {
+    document.querySelectorAll('.analytics-toggle button').forEach(function(b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+  }
+
+  if (weeklyBtn) {
+    weeklyBtn.addEventListener('click', function() {
+      setActive(this);
+      var old = Chart.getChart('weeklyChart');
+      if (old) old.destroy();
+      initWeeklyChart();
+    });
+  }
+  if (monthlyBtn) {
+    monthlyBtn.addEventListener('click', function() {
+      setActive(this);
+      var old = Chart.getChart('weeklyChart');
+      if (old) old.destroy();
+      initMonthlyChart();
+    });
+  }
+  if (todayBtn) {
+    todayBtn.addEventListener('click', function() {
+      setActive(this);
+      var old = Chart.getChart('weeklyChart');
+      if (old) old.destroy();
+      initTodayChart();
+    });
+  }
+}
+
+function initMonthlyChart() {
+  var canvas = document.getElementById('weeklyChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var data = getActivityData(30);
+  var hasData = data.some(function(d) { return d.count > 0; });
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.map(function(d) { return d.date.slice(5); }),
+      datasets: [{
+        label: 'Activities',
+        data: hasData ? data.map(function(d) { return d.count; }) : new Array(30).fill(0),
+        backgroundColor: 'rgba(6,182,212,0.6)',
+        borderRadius: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+        x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } }
+      }
+    }
+  });
+}
+
+function initTodayChart() {
+  var canvas = document.getElementById('weeklyChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var activities = Utils.getStorage('coderio_activity', []);
+  var today = new Date().toISOString().split('T')[0];
+  var todayActivities = activities.filter(function(a) { return a.time && a.time.startsWith(today); });
+
+  var hours = [];
+  for (var i = 0; i < 24; i++) {
+    var hourStr = (i < 10 ? '0' : '') + i;
+    hours.push({ label: hourStr + ':00', count: 0 });
+  }
+
+  todayActivities.forEach(function(a) {
+    var h = parseInt(a.time.split('T')[1].split(':')[0]);
+    if (h >= 0 && h < 24) hours[h].count++;
+  });
+
+  var hasData = hours.some(function(h) { return h.count > 0; });
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: hours.map(function(h) { return h.label; }),
+      datasets: [{
+        label: 'Activities',
+        data: hasData ? hours.map(function(h) { return h.count; }) : new Array(24).fill(0),
+        backgroundColor: 'rgba(6,182,212,0.6)',
+        borderRadius: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+        x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } }
+      }
+    }
+  });
+}
+
+function addActivity(text) {
+  var activities = Utils.getStorage('coderio_activity', []);
+  activities.push({ text: text, time: new Date().toISOString() });
+  Utils.setStorage('coderio_activity', activities);
+  loadRecentActivity();
+}

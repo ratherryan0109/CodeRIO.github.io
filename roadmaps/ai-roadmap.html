@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI / ML Roadmap - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Roadmap" data-roadmap="ai">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toast" class="toast-container"></div>
+
+  <main>
+    <section id="roadmapHeader" class="page-header glass">
+      <div class="header-content">
+        <h1><i class="fas fa-brain"></i> AI / Machine Learning Roadmap</h1>
+        <p>Dive into artificial intelligence — from mathematics and statistics to deep learning, NLP, and deploying production models.</p>
+        <div class="header-stats">
+          <span><i class="fas fa-layer-group"></i> 10 Steps</span>
+          <span><i class="fas fa-clock"></i> 6-12 Months</span>
+          <span><i class="fas fa-signal"></i> Intermediate to Advanced</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="roadmapContainer" class="roadmap-container"></div>
+
+    <noscript>
+      <div class="roadmap-fallback glass">
+        <div class="timeline">
+          <div class="timeline-step">
+            <div class="step-number">1</div>
+            <div class="step-content glass">
+              <h3>Mathematics & Statistics Foundation</h3>
+              <p>Linear algebra (matrices, vectors, eigenvalues), calculus (derivatives, gradients), probability, and statistical inference.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-square-root-alt"></i> 3Blue1Brown</span>
+                <span class="badge"><i class="fas fa-chart-bar"></i> StatQuest</span>
+                <span class="badge"><i class="fas fa-book"></i> Mathematics for ML</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">2</div>
+            <div class="step-content glass">
+              <h3>Python for Data Science</h3>
+              <p>NumPy, Pandas, Matplotlib, Seaborn — data manipulation, visualization, and exploratory data analysis workflows.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-python"></i> Python Docs</span>
+                <span class="badge"><i class="fas fa-table"></i> Pandas Guide</span>
+                <span class="badge"><i class="fas fa-video"></i> DataCamp</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">3</div>
+            <div class="step-content glass">
+              <h3>Machine Learning Fundamentals</h3>
+              <p>Supervised vs unsupervised learning, regression, classification, clustering, bias-variance tradeoff, cross-validation, and regularization.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-graduation-cap"></i> Andrew Ng ML</span>
+                <span class="badge"><i class="fas fa-book"></i> ISLR</span>
+                <span class="badge"><i class="fas fa-video"></i> StatQuest ML</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">4</div>
+            <div class="step-content glass">
+              <h3>Scikit-Learn & Model Building</h3>
+              <p>Decision trees, random forests, SVM, k-means, PCA, feature engineering, pipeline creation, and model evaluation metrics.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-cogs"></i> Scikit-Learn</span>
+                <span class="badge"><i class="fas fa-video"></i> Python ML Tutorial</span>
+                <span class="badge"><i class="fas fa-book"></i> Hands-On ML</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">5</div>
+            <div class="step-content glass">
+              <h3>Deep Learning & Neural Networks</h3>
+              <p>Perceptrons, activation functions, backpropagation, CNNs for images, RNNs/LSTMs for sequences, and transfer learning.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-network-wired"></i> Deep Learning Specialization</span>
+                <span class="badge"><i class="fas fa-video"></i> Fast.ai</span>
+                <span class="badge"><i class="fas fa-fire"></i> PyTorch Tutorials</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">6</div>
+            <div class="step-content glass">
+              <h3>TensorFlow & PyTorch</h3>
+              <p>Build and train models with TensorFlow/Keras and PyTorch, GPU acceleration, model serialization, and deployment formats.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-tensorflow"></i> TensorFlow</span>
+                <span class="badge"><i class="fas fa-torch"></i> PyTorch</span>
+                <span class="badge"><i class="fas fa-video"></i> Aladdin Persson</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">7</div>
+            <div class="step-content glass">
+              <h3>Natural Language Processing</h3>
+              <p>Tokenization, embeddings (Word2Vec, GloVe), transformers (BERT, GPT), sequence-to-sequence models, and attention mechanisms.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-language"></i> Hugging Face</span>
+                <span class="badge"><i class="fas fa-video"></i> NLP Zero to Hero</span>
+                <span class="badge"><i class="fas fa-book"></i> Speech & NLP</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">8</div>
+            <div class="step-content glass">
+              <h3>Computer Vision</h3>
+              <p>Image classification, object detection (YOLO, SSD), image segmentation (U-Net), GANs, and OpenCV for image processing.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-eye"></i> OpenCV</span>
+                <span class="badge"><i class="fas fa-video"></i> CV with TensorFlow</span>
+                <span class="badge"><i class="fas fa-image"></i> Papers With Code</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">9</div>
+            <div class="step-content glass">
+              <h3>MLOps & Model Deployment</h3>
+              <p>Model versioning (DVC), experiment tracking (MLflow), containerization, serving with FastAPI/Flask, and monitoring drift.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-cogs"></i> MLflow</span>
+                <span class="badge"><i class="fab fa-docker"></i> Docker</span>
+                <span class="badge"><i class="fas fa-cloud"></i> SageMaker</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">10</div>
+            <div class="step-content glass">
+              <h3>Specialized Domains & Research</h3>
+              <p>Reinforcement learning, generative AI, LLMs, responsible AI, ethics, and reading/implementing state-of-the-art research papers.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-robot"></i> OpenAI Spinning Up</span>
+                <span class="badge"><i class="fas fa-newspaper"></i> ArXiv</span>
+                <span class="badge"><i class="fas fa-video"></i> Yannic Kilcher</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </noscript>
+  </main>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/roadmap.js"></script>
+</body>
+</html>
+

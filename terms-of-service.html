@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .tos-wrapper {
+      display: flex;
+      gap: 2.5rem;
+      padding: 2rem 8% 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+    .tos-sidebar {
+      position: sticky;
+      top: 100px;
+      width: 260px;
+      flex-shrink: 0;
+      padding: 1.5rem;
+      border-radius: var(--border-radius-lg);
+      background: var(--bg-card);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+    }
+    .tos-sidebar h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .tos-sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .tos-sidebar a:hover,
+    .tos-sidebar a.active {
+      background: rgba(6,182,212,0.1);
+      color: var(--primary);
+    }
+    .tos-sidebar a i {
+      width: 20px;
+      text-align: center;
+      color: var(--primary);
+    }
+    .tos-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .tos-card {
+      padding: 2rem 2.5rem;
+      border-radius: var(--border-radius-lg);
+      background: var(--bg-card);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      transition: var(--transition);
+      scroll-margin-top: 100px;
+    }
+    .tos-card:hover {
+      box-shadow: var(--shadow-sm);
+    }
+    .tos-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .tos-card-header .tos-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .tos-card-header h2 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+    }
+    .tos-card ul {
+      margin: 0.8rem 0;
+    }
+    .tos-card ul li {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      line-height: 1.6;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .tos-card ul li:last-child { border-bottom: none; }
+    .tos-card ul li i {
+      margin-top: 0.25rem;
+      flex-shrink: 0;
+      color: var(--primary);
+      font-size: 0.8rem;
+    }
+    .tos-card p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .tos-card p:last-child { margin-bottom: 0; }
+    .tos-card strong { color: var(--text); }
+    .tos-card .highlight-link {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .tos-card .highlight-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 900px) {
+      .tos-wrapper {
+        flex-direction: column;
+        padding: 2rem 5% 3rem;
+      }
+      .tos-sidebar {
+        position: static;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        padding: 1rem;
+      }
+      .tos-sidebar h4 { display: none; }
+      .tos-sidebar a { font-size: 0.85rem; padding: 0.5rem 0.8rem; }
+      .tos-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body data-page="Terms">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <section class="page-header">
+    <h1>Terms of <span style="color:var(--primary)">Service</span></h1>
+    <p>Please read these terms carefully before using the CodeRio platform. Last updated: June 1, 2026.</p>
+  </section>
+
+  <div class="tos-wrapper">
+    <nav class="tos-sidebar">
+      <h4>Jump to Section</h4>
+      <a href="#platform-rules" class="active"><i class="fas fa-file-contract"></i> Platform Rules</a>
+      <a href="#user-responsibilities"><i class="fas fa-user-check"></i> Responsibilities</a>
+      <a href="#account-rules"><i class="fas fa-user-shield"></i> Account Rules</a>
+      <a href="#content-ownership"><i class="fas fa-copyright"></i> Content Ownership</a>
+      <a href="#prohibited"><i class="fas fa-ban"></i> Prohibited Activities</a>
+      <a href="#termination"><i class="fas fa-stop-circle"></i> Termination</a>
+    </nav>
+
+    <div class="tos-content">
+      <div class="tos-card" id="platform-rules">
+        <div class="tos-card-header">
+          <div class="tos-icon" style="background:rgba(6,182,212,0.1);color:var(--primary);"><i class="fas fa-file-contract"></i></div>
+          <h2>Platform Rules</h2>
+        </div>
+        <p>By accessing or using CodeRio, you agree to be legally bound by these Terms of Service. If you do not agree with any part of these terms, you must not use the platform.</p>
+        <p>CodeRio reserves the right to update or modify these terms at any time. When material changes are made, we will notify registered users via email and platform notification. Your continued use of the platform after changes take effect constitutes acceptance of the revised terms.</p>
+        <ul>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> You must be at least 13 years of age to create an account. Users between 13 and 18 must have parental or guardian consent.</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> You may use the platform only for lawful purposes and in compliance with all applicable laws and regulations.</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> You agree not to access or use the platform in any way that could damage, disable, or impair our servers or infrastructure.</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> We reserve the right to refuse service, terminate accounts, or remove content at our discretion, particularly in cases of repeated violations.</li>
+        </ul>
+      </div>
+
+      <div class="tos-card" id="user-responsibilities">
+        <div class="tos-card-header">
+          <div class="tos-icon" style="background:rgba(34,197,94,0.1);color:var(--success);"><i class="fas fa-user-check"></i></div>
+          <h2>User Responsibilities</h2>
+        </div>
+        <p>As a CodeRio user, you agree to the following responsibilities to maintain a safe and productive learning environment for everyone:</p>
+        <ul>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Accurate information</strong> &mdash; provide truthful and accurate information when creating your account and updating your profile</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Account security</strong> &mdash; maintain the confidentiality of your login credentials and notify us immediately of any unauthorized access</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Lawful use</strong> &mdash; use the platform solely for lawful purposes and in accordance with these terms</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Respect intellectual property</strong> &mdash; respect the copyrights, trademarks, and intellectual property rights of CodeRio and third parties</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Report issues</strong> &mdash; promptly report any security vulnerabilities, bugs, or abusive behavior you encounter on the platform</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Constructive conduct</strong> &mdash; engage with the community in a respectful manner; harassment, hate speech, and bullying will not be tolerated</li>
+        </ul>
+      </div>
+
+      <div class="tos-card" id="account-rules">
+        <div class="tos-card-header">
+          <div class="tos-icon" style="background:rgba(245,158,11,0.1);color:var(--warning);"><i class="fas fa-user-shield"></i></div>
+          <h2>Account Rules</h2>
+        </div>
+        <p>Your CodeRio account is your gateway to all platform features. The following rules govern account creation, usage, and management:</p>
+        <ul>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>One person, one account</strong> &mdash; each individual may maintain only one free account. Duplicate accounts may be merged or terminated.</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>No account sharing</strong> &mdash; you may not share your account credentials with others or allow third parties to access your account.</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Account security</strong> &mdash; you are fully responsible for all activity that occurs under your account, whether authorized or not.</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Self-service deletion</strong> &mdash; you may delete your account at any time through your profile settings. Data removal follows our Privacy Policy schedule.</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Premium subscriptions</strong> &mdash; paid plans are subject to additional terms presented at the time of purchase. Subscriptions auto-renew unless cancelled.</li>
+        </ul>
+      </div>
+
+      <div class="tos-card" id="content-ownership">
+        <div class="tos-card-header">
+          <div class="tos-icon" style="background:rgba(168,85,247,0.1);color:#a855f7;"><i class="fas fa-copyright"></i></div>
+          <h2>Content Ownership</h2>
+        </div>
+        <p>Clear ownership terms protect both our platform and the content you create. Here is how content rights work on CodeRio:</p>
+        <ul>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Your content stays yours</strong> &mdash; any code, comments, projects, or other content you submit to the platform remains your intellectual property</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Platform license</strong> &mdash; by submitting content, you grant CodeRio a non-exclusive, royalty-free, worldwide license to display, distribute, and use your content on the platform for educational purposes</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>CodeRio owns the platform</strong> &mdash; all curriculum, tutorials, challenges, design elements, branding, and infrastructure are owned by CodeRio or its licensors</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>No third-party infringement</strong> &mdash; you represent that you own or have the necessary rights to any content you submit, and that it does not infringe on any third-party rights</li>
+        </ul>
+      </div>
+
+      <div class="tos-card" id="prohibited">
+        <div class="tos-card-header">
+          <div class="tos-icon" style="background:rgba(239,68,68,0.1);color:var(--error);"><i class="fas fa-ban"></i></div>
+          <h2>Prohibited Activities</h2>
+        </div>
+        <p>The following activities are strictly prohibited on CodeRio and may result in immediate account suspension without warning:</p>
+        <ul>
+          <li><i class="fas fa-times-circle" style="color:var(--error);"></i> Uploading or distributing malicious code, viruses, worms, or any content designed to disrupt platform operations</li>
+          <li><i class="fas fa-times-circle" style="color:var(--error);"></i> Attempting to access, modify, or delete another user's account, data, or content without explicit authorization</li>
+          <li><i class="fas fa-times-circle" style="color:var(--error);"></i> Using automated scripts, bots, or AI tools to complete coding challenges, quizzes, or projects meant for human learning</li>
+          <li><i class="fas fa-times-circle" style="color:var(--error);"></i> Scraping, crawling, data mining, or harvesting platform content, user data, or course materials without prior written permission</li>
+          <li><i class="fas fa-times-circle" style="color:var(--error);"></i> Posting spam, unsolicited advertisements, promotional content, or affiliate links anywhere on the platform</li>
+          <li><i class="fas fa-times-circle" style="color:var(--error);"></i> Harassing, threatening, bullying, or intimidating other users, including via direct messages, comments, or forum posts</li>
+          <li><i class="fas fa-times-circle" style="color:var(--error);"></i> Impersonating CodeRio staff, moderators, or other users through fake accounts, name misrepresentation, or avatar spoofing</li>
+        </ul>
+      </div>
+
+      <div class="tos-card" id="termination">
+        <div class="tos-card-header">
+          <div class="tos-icon" style="background:rgba(6,182,212,0.1);color:var(--primary);"><i class="fas fa-stop-circle"></i></div>
+          <h2>Termination Policy</h2>
+        </div>
+        <p>CodeRio reserves the right to suspend or terminate accounts under the following circumstances. We strive to be fair and transparent in all enforcement actions.</p>
+        <ul>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Terms violations</strong> &mdash; repeated or severe violations of these Terms of Service, especially prohibited activities, will result in account termination</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Fraudulent activity</strong> &mdash; any evidence of fraudulent billing, payment chargebacks, or unauthorized use of payment methods</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Harm to platform</strong> &mdash; actions that compromise platform security, stability, or the experience of other users</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Extended inactivity</strong> &mdash; free accounts inactive for more than 24 consecutive months may be deactivated and data deleted</li>
+          <li><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>Appeal process</strong> &mdash; terminated users may appeal the decision by contacting support@coderio.dev within 30 days of termination</li>
+        </ul>
+        <p>Upon termination, your access to all platform content, progress data, and account features will be revoked. We recommend exporting any data you wish to keep before account deletion.</p>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="react">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>React</h1>
+      <p>React is a JavaScript library for building user interfaces, developed by Facebook (Meta). It uses a component-based architecture with a virtual DOM for efficient rendering, making it one of the most popular frontend frameworks worldwide.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 8 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>React was created by Jordan Walke at Facebook in 2011 and open-sourced in 2013. It introduced the concept of a virtual DOM, which minimizes direct DOM manipulation by computing diffs between component states and applying minimal updates. React's declarative paradigm lets you describe what the UI should look like for any given state, and React handles the rendering.</p>
+      <p>React applications are built from reusable components that manage their own state and compose together to form complex UIs. JSX, a JavaScript XML syntax extension, allows writing HTML-like markup directly in JavaScript. React 16 introduced Hooks (useState, useEffect, useContext, etc.), which replaced class-based lifecycle methods with functional components.</p>
+      <p>The React ecosystem is vast and includes React Router for navigation, Redux/Zustand for state management, Next.js for server-side rendering, React Native for mobile apps, and testing libraries like React Testing Library. React powers applications like Facebook, Instagram, Netflix, Airbnb, Uber, and Discord.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn React?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-cubes" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Component-Based Architecture</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Break UIs into reusable, self-contained components that manage their own state and can be composed together.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-bolt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Virtual DOM Performance</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Efficiently updates only the parts of the DOM that changed, providing smooth 60fps rendering even in complex apps.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-hook" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Modern Hooks API</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">useState, useEffect, useRef, useContext, and custom hooks provide a clean, functional approach to state and lifecycle.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-mobile-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Cross-Platform with React Native</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Leverage your React knowledge to build native iOS and Android mobile apps using React Native.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">React is used by thousands of companies across every industry:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Facebook/Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/instagram/instagram-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Instagram</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">React is used everywhere from startups to Fortune 500 companies. Netflix uses React for their UI platform, Uber uses it for their web dashboard, Discord built their app with React, and WhatsApp Web is a React application. The React ecosystem powers e-commerce (Shopify), content platforms (Medium), design tools (Figma), and productivity apps (Notion, Trello).</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">JavaScript fundamentals, ES6+ (arrow functions, destructuring, spread, modules), basic HTML/CSS</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-2)</h4><p style="color:var(--text-secondary);font-size:0.9rem">JSX, components, props, children, conditional rendering, lists, keys</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 3-4)</h4><p style="color:var(--text-secondary);font-size:0.9rem">useState, useEffect, useRef, events, forms, lifting state up, useEffect cleanup</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 5-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">useContext, useReducer, custom hooks, React Router, performance optimization</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 7-8)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Next.js, testing (RTL), state management (Redux/Zustand), patterns (render props, HOCs)</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> React Fundamentals & JSX</h3><p>Setting up a React project with Vite, JSX syntax, rendering elements, React StrictMode, and project structure.</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Components & Props</h3><p>Functional components, component composition, props, children, default props, prop types, fragment shorthand.</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Conditional Rendering & Lists</h3><p>Ternary operators, logical &&, if-else patterns, map() for lists, list keys, key best practices, index as anti-pattern.</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Events & Forms</h3><p>Event handling in React, synthetic events, form inputs, controlled components, uncontrolled refs, form validation.</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">5</span> State with useState</h3><p>useState hook, state updates, immutability, state batching, derived state, lifting state up, colocation.</p></div>
+      <div class="module-card"><h3><span class="module-number">6</span> Side Effects with useEffect</h3><p>useEffect hook, dependency arrays, cleanup functions, data fetching, subscriptions, timers, effect lifecycle.</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Refs & DOM Manipulation</h3><p>useRef hook, ref forwarding, imperative DOM access, measuring elements, storing mutable values, callback refs.</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Component Communication</h3><p>Props drilling, lifting state, callback props, children composition, context basics, compound components.</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">9</span> Context API & useContext</h3><p>React.createContext, useContext hook, provider pattern, context performance, memoizing context values, nested contexts.</p></div>
+      <div class="module-card"><h3><span class="module-number">10</span> useReducer & State Management</h3><p>useReducer hook, reducer pattern, dispatch actions, action types, complex state logic, combining with context.</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Custom Hooks</h3><p>Building custom hooks, hook composition, useLocalStorage, useDebounce, useFetch, useMediaQuery patterns.</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> React Router</h3><p>React Router v6, BrowserRouter, Routes, Route, Link, NavLink, useParams, useNavigate, nested routes, lazy loading.</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">13</span> Performance Optimization</h3><p>React.memo, useMemo, useCallback, lazy loading, Suspense, virtualization (react-window), bundle analysis.</p></div>
+      <div class="module-card"><h3><span class="module-number">14</span> Testing React Apps</h3><p>React Testing Library, Jest, testing components, testing hooks, mocking API calls, user events, accessibility tests.</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> State Management (Redux/Zustand)</h3><p>Redux Toolkit, createSlice, configureStore, Zustand, stores, selectors, actions, middleware, devtools.</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Next.js & Full-Stack React</h3><p>Next.js App Router, server components, server actions, data fetching, SSR/SSG/ISR, API routes, middleware.</p></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. JSX Fundamentals</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">JSX is a syntax extension for JavaScript that looks like HTML. It is transpiled to React.createElement calls by Babel or TypeScript. JSX expressions use curly braces for dynamic values and must have a single root element.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>function Greeting({ name, age }) {
+  return (
+    <div className="greeting">
+      <h1>Hello, {name}!</h1>
+      {age >= 18 && <p>You are an adult.</p>}
+      <button onClick={() => alert('Hi!')}>Say Hi</button>
+    </div>
+  );
+}
+
+// Equivalent createElement call
+React.createElement('div', { className: 'greeting' },
+  React.createElement('h1', null, 'Hello, ', name, '!')
+);</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. useState Deep Dive</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">useState returns a state value and a setter function. State updates are asynchronous and batched. When updating objects or arrays, always create new copies (immutability). The setter accepts a function for updates based on previous state.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const [count, setCount] = useState(0);
+const [user, setUser] = useState({ name: '', age: 0 });
+
+// Batching - multiple updates in one render
+setCount(c => c + 1);
+setCount(c => c + 1); // count becomes +2
+
+// Immutable object updates
+setUser(prev => ({ ...prev, name: 'Alice' }));
+
+// Immutable array updates
+const [items, setItems] = useState([1, 2, 3]);
+setItems(prev => [...prev, 4]);          // add
+setItems(prev => prev.filter(i => i > 1)); // remove</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. useEffect Patterns</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">useEffect runs after every render by default. The dependency array controls when it re-runs. Empty deps [] means run once on mount. Return a cleanup function to avoid memory leaks from subscriptions or timers.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// On mount only (data fetching)
+useEffect(() => {
+  fetch('/api/data').then(res => res.json()).then(setData);
+}, []);
+
+// On state change
+useEffect(() => {
+  document.title = `Count: ${count}`;
+}, [count]);
+
+// With cleanup (subscriptions)
+useEffect(() => {
+  const ws = new WebSocket('ws://example.com');
+  ws.onmessage = (e) => setMessages(prev => [...prev, e.data]);
+  return () => ws.close();  // cleanup on unmount
+}, []);
+
+// Debounced search
+useEffect(() => {
+  const timer = setTimeout(() => search(query), 300);
+  return () => clearTimeout(timer);
+}, [query]);</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Custom Hooks</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Custom hooks extract reusable stateful logic. They are JavaScript functions whose names start with 'use' and can call other hooks. Custom hooks compose together to build complex behaviors from simple building blocks.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>function useLocalStorage<T>(key: string, initial: T) {
+  const [value, setValue] = useState(() => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : initial;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue] as const;
+}
+
+function useDebounce<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+  return debounced;
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Context API & useReducer</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Context provides a way to pass data through the component tree without prop drilling. useReducer is ideal for complex state logic with multiple sub-values or when the next state depends on the previous one.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const AuthContext = createContext<AuthState>(null);
+
+function authReducer(state, action) {
+  switch (action.type) {
+    case 'LOGIN':
+      return { ...state, user: action.payload, isAuthenticated: true };
+    case 'LOGOUT':
+      return { ...state, user: null, isAuthenticated: false };
+    case 'SET_LOADING':
+      return { ...state, loading: action.payload };
+    default:
+      return state;
+  }
+}
+
+function AuthProvider({ children }) {
+  const [state, dispatch] = useReducer(authReducer, {
+    user: null, isAuthenticated: false, loading: false
+  });
+  return (
+    <AuthContext.Provider value={{ state, dispatch }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Performance: memo, useMemo, useCallback</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">React.memo prevents re-renders when props haven't changed. useMemo caches expensive computations. useCallback prevents new function references on every render. Use them when profiling shows actual performance issues.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const ExpensiveList = React.memo(({ items }) => {
+  return items.map(item => <div key={item.id}>{item.name}</div>);
+});
+
+function Dashboard({ data }) {
+  // Memoize expensive computation
+  const totals = useMemo(() => {
+    return data.reduce((sum, item) => sum + item.value, 0);
+  }, [data]);
+
+  // Memoize callback to maintain referential equality
+  const handleClick = useCallback((id) => {
+    console.log('Clicked:', id);
+  }, []);
+
+  return <ExpensiveList items={data} onItemClick={handleClick} />;
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. React Router v6</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">React Router v6 uses a declarative route configuration with <Routes> and <Route> components. It supports nested routes, layout routes, URL parameters, search params, and programmatic navigation.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<ProductDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function ProductDetail() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [search] = useSearchParams();
+  return <div>Product {id}, page {search.get('page')}</div>;
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Testing with React Testing Library</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">React Testing Library encourages testing components from the user's perspective: finding elements by role, label, text, and test ID rather than implementation details. It works with Jest or Vitest.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+test('counter increments on button click', async () => {
+  render(<Counter />);
+  const button = screen.getByRole('button', { name: /increment/i });
+  const display = screen.getByTestId('count');
+
+  expect(display).toHaveTextContent('0');
+  await userEvent.click(button);
+  expect(display).toHaveTextContent('1');
+});
+
+test('form submission shows success', async () => {
+  render(<LoginForm />);
+  await userEvent.type(screen.getByLabelText(/email/i), 'a@b.com');
+  await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+  expect(screen.getByText(/success/i)).toBeInTheDocument();
+});</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Todo App with useReducer</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>function todoReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [...state, { id: Date.now(), text: action.payload, done: false }];
+    case 'TOGGLE_TODO':
+      return state.map(todo =>
+        todo.id === action.payload ? { ...todo, done: !todo.done } : todo
+      );
+    case 'DELETE_TODO':
+      return state.filter(todo => todo.id !== action.payload);
+    default:
+      return state;
+  }
+}
+
+function TodoApp() {
+  const [todos, dispatch] = useReducer(todoReducer, []);
+  const [input, setInput] = useState('');
+
+  const addTodo = () => {
+    if (input.trim()) {
+      dispatch({ type: 'ADD_TODO', payload: input });
+      setInput('');
+    }
+  };
+
+  return (
+    <div>
+      <input value={input} onChange={e => setInput(e.target.value)} />
+      <button onClick={addTodo}>Add</button>
+      {todos.map(todo => (
+        <div key={todo.id}>
+          <span style={{ textDecoration: todo.done ? 'line-through' : 'none' }}
+                onClick={() => dispatch({ type: 'TOGGLE_TODO', payload: todo.id })}>
+            {todo.text}
+          </span>
+          <button onClick={() => dispatch({ type: 'DELETE_TODO', payload: todo.id })}>x</button>
+        </div>
+      ))}
+    </div>
+  );
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Data Fetching with Custom Hook</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+
+    fetch(url)
+      .then(res => {
+        if (!res.ok) throw new Error('Fetch failed');
+        return res.json();
+      })
+      .then(data => { if (!cancelled) { setData(data); setLoading(false); }})
+      .catch(err => { if (!cancelled) { setError(err); setLoading(false); }});
+
+    return () => { cancelled = true; };
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+function UserProfile({ userId }) {
+  const { data: user, loading, error } = useFetch(`/api/users/${userId}`);
+
+  if (loading) return <Spinner />;
+  if (error) return <Error message={error.message} />;
+  return <div><h2>{user.name}</h2><p>{user.email}</p></div>;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Build a Profile Card</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a component that displays avatar, name, bio, and social links using props.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Counter App</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a counter with increment, decrement, and reset buttons using useState.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Searchable Product List</h4><p style="color:var(--text-muted);font-size:0.85rem">Fetch products from an API and add search/filter functionality with debounce.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Multi-Step Form</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a multi-step registration form with validation, progress indicator, and context for state.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Theme Toggle with Context</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a dark/light mode toggle using Context API with persisted preference.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Infinite Scroll Gallery</h4><p style="color:var(--text-muted);font-size:0.85rem">Build an image gallery with infinite scroll, lazy loading, and virtualization.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Kanban Board with DnD</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a drag-and-drop kanban board with useReducer and React DnD or dnd-kit.</p></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">E-commerce Storefront</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A full product catalog with cart, checkout, and order history using React Router and Context.</p><span class="badge badge-primary">React</span> <span class="badge badge-primary">Router</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Social Media Dashboard</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A dashboard with charts, metrics, and real-time updates using custom hooks and data visualization.</p><span class="badge badge-primary">React</span> <span class="badge badge-primary">Hooks</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Real-Time Chat App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A messaging app with WebSocket integration, user presence, and message history using React.</p><span class="badge badge-primary">React</span> <span class="badge badge-primary">WebSocket</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Recipe Finder App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Search recipes by ingredients, save favorites, and create meal plans with useReducer and Context.</p><span class="badge badge-primary">React</span> <span class="badge badge-primary">API</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Project Management Tool</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A Trello-like board with drag-and-drop, task assignments, due dates, and activity logs.</p><span class="badge badge-primary">React</span> <span class="badge badge-primary">DnD</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Markdown Note Editor</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A note-taking app with markdown preview, syntax highlighting, folder organization, and localStorage persistence.</p><span class="badge badge-primary">React</span> <span class="badge badge-primary">Markdown</span></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=react&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+

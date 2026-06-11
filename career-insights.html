@@ -1,0 +1,496 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Insights - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    :root { --chart-high: #dc2626; --chart-medium: #d97706; --chart-low: #94a3b8; }
+    .insights-header { padding: 3rem 8% 1.5rem; text-align: center; }
+    .insights-header h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--primary-dark); margin-bottom: 0.5rem; }
+    .insights-header p { color: var(--text-secondary); max-width: 650px; margin: 0 auto 1.5rem; line-height: 1.7; }
+    .country-selector-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+    .country-selector-wrap label { font-weight: 600; color: var(--text-secondary); }
+    .country-selector-wrap select { padding: 0.7rem 2.5rem 0.7rem 1.2rem; border-radius: var(--border-radius-sm); border: 2px solid #e2e8f0; background: var(--white); font-size: 1rem; font-weight: 600; color: var(--text); appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%2364748b' d='M7 9.5L2 4.5h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; cursor: pointer; min-width: 200px; }
+    .country-selector-wrap select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(6,182,212,0.12); }
+    .detected-badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(6,182,212,0.12); color: var(--primary); }
+    .section { padding: 3rem 8%; }
+    .insight-card { background: var(--bg-card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.8rem; transition: var(--transition); height: 100%; }
+    .insight-card:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+    .insight-card h3 { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; font-size: 1.1rem; color: var(--primary-dark); }
+    .salary-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .salary-table th { text-align: left; padding: 0.7rem 0.5rem; border-bottom: 1px solid var(--glass-border); font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .salary-table td { padding: 0.6rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .salary-table tr:last-child td { border-bottom: none; }
+    .role-name { font-weight: 600; }
+    .demand-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .demand-high { background: rgba(239,68,68,0.15); color: #dc2626; }
+    .demand-medium { background: rgba(245,158,11,0.15); color: #d97706; }
+    .demand-low { background: rgba(100,116,139,0.15); color: #64748b; }
+    .demand-bar-wrap { display: flex; align-items: center; gap: 0.8rem; }
+    .demand-bar { height: 8px; border-radius: 4px; flex: 1; max-width: 120px; background: #e2e8f0; overflow: hidden; }
+    .demand-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+    .demand-bar-fill.high { background: #dc2626; }
+    .demand-bar-fill.medium { background: #d97706; }
+    .demand-bar-fill.low { background: #94a3b8; }
+    .skill-tag { display: inline-block; padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(6,182,212,0.1); color: var(--primary); margin: 0.2rem 0.3rem; border: 1px solid rgba(6,182,212,0.2); transition: var(--transition); }
+    .skill-tag:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+    .cost-living-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+    .cost-item { text-align: center; padding: 1.2rem 1rem; background: rgba(255,255,255,0.06); border-radius: var(--border-radius-sm); border: 1px solid var(--glass-border-light); }
+    .cost-item .cost-index { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+    .cost-item .cost-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+    .cost-item .cost-rank { font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 10px; display: inline-block; margin-top: 0.3rem; }
+    .remote-friendly-tag { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; background: rgba(34,197,94,0.15); color: var(--success); }
+    .remote-partial-tag { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .growth-rate { font-weight: 600; font-size: 0.85rem; }
+    .growth-up { color: var(--success); }
+    .insight-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .insight-tab { padding: 0.6rem 1.4rem; border-radius: var(--border-radius-sm); font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: var(--transition); border: 2px solid #e2e8f0; background: var(--white); color: var(--text-secondary); }
+    .insight-tab:hover { border-color: var(--primary); color: var(--primary); }
+    .insight-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .visualization-section { display: none; }
+    .visualization-section.active { display: block; }
+    .chart-bar-container { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+    .chart-bar-label { min-width: 140px; font-weight: 600; font-size: 0.85rem; color: var(--text); }
+    .chart-bar-track { flex: 1; height: 28px; background: #e2e8f0; border-radius: 6px; overflow: hidden; position: relative; }
+    .chart-bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.6rem; font-size: 0.75rem; font-weight: 700; color: white; transition: width 0.8s ease; min-width: 0; }
+    .chart-bar-value { min-width: 70px; text-align: right; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+    .remote-section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .remote-role-card { padding: 1.5rem; border-radius: var(--border-radius-md); background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); transition: var(--transition); }
+    .remote-role-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+    .remote-role-card h4 { margin-bottom: 0.5rem; font-size: 1.05rem; }
+    .remote-role-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; line-height: 1.5; }
+    .remote-role-card .meta-row { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-muted); }
+    .remote-role-card .meta-row span { display: flex; align-items: center; gap: 0.3rem; }
+    .top-skills-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    @media (max-width: 768px) {
+      .salary-table { font-size: 0.8rem; }
+      .salary-table th, .salary-table td { padding: 0.4rem 0.3rem; }
+      .chart-bar-container { flex-wrap: wrap; gap: 0.4rem; }
+      .chart-bar-label { min-width: 100px; }
+      .cost-living-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body data-page="CareerInsights">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"><a href="Register.html" class="btn btn-primary btn-sm">Sign Up</a></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main>
+    <section class="insights-header">
+      <h1><i class="fas fa-chart-line" style="color:var(--primary)"></i> Career Insights</h1>
+      <p>Explore salary benchmarks, hiring demand, and top skills for developer roles across the globe. Data is based on publicly available sources and industry surveys.</p>
+      <div class="country-selector-wrap">
+        <label for="countrySelect"><i class="fas fa-globe"></i> Country:</label>
+        <select id="countrySelect"></select>
+        <span class="detected-badge"><i class="fas fa-map-pin"></i> Detected: <span id="detectedCountry">--</span></span>
+      </div>
+    </section>
+
+    <div class="section" style="padding-top:0;padding-bottom:0">
+      <div class="insight-tabs" id="insightTabs">
+        <span class="insight-tab active" data-tab="salary">Salary Overview</span>
+        <span class="insight-tab" data-tab="demand">Hiring Demand</span>
+        <span class="insight-tab" data-tab="skills">Top Skills</span>
+        <span class="insight-tab" data-tab="cost">Cost of Living</span>
+        <span class="insight-tab" data-tab="remote">Remote Work</span>
+        <span class="insight-tab" data-tab="jobs">Browse Jobs</span>
+      </div>
+    </div>
+
+    <div class="section visualization-section active" id="tabSalary">
+      <div class="insight-card">
+        <h3><i class="fas fa-dollar-sign" style="color:var(--primary)"></i> <span id="salaryTitle">Salary Ranges</span></h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.2rem">Average annual salaries (in local currency). Figures are indicative and may vary by experience, company, and location.</p>
+        <div style="overflow-x:auto">
+          <table class="salary-table">
+            <thead>
+              <tr><th>Role</th><th style="text-align:right">Avg Salary</th><th style="text-align:center">Demand</th><th style="text-align:center">Growth</th><th style="text-align:right">Open Positions</th><th style="text-align:right">Trend</th></tr>
+            </thead>
+            <tbody id="salaryTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section visualization-section" id="tabDemand">
+      <div class="insight-card">
+        <h3><i class="fas fa-fire" style="color:var(--primary)"></i> <span id="demandTitle">Hiring Demand</span></h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.2rem">Visual representation of hiring demand levels by role. Wider bars indicate higher demand.</p>
+        <div id="demandChart"></div>
+      </div>
+    </div>
+
+    <div class="section visualization-section" id="tabSkills">
+      <div class="insight-card">
+        <h3><i class="fas fa-code" style="color:var(--primary)"></i> <span id="skillsTitle">Top Skills in Demand</span></h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.2rem">Most sought-after technical skills by employers, grouped by category.</p>
+        <div class="top-skills-section" id="skillsContainer"></div>
+      </div>
+    </div>
+
+    <div class="section visualization-section" id="tabCost">
+      <div class="insight-card">
+        <h3><i class="fas fa-home" style="color:var(--primary)"></i> Cost of Living Comparison</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.2rem">Relative cost of living index (New York = 100). Lower values indicate more affordable cities.</p>
+        <div class="cost-living-grid" id="costGrid"></div>
+      </div>
+    </div>
+
+    <div class="section visualization-section" id="tabRemote">
+      <div class="insight-card">
+        <h3><i class="fas fa-wifi" style="color:var(--primary)"></i> Remote Work Opportunities</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.2rem">Roles with the highest remote job availability and average remote salary range.</p>
+        <div class="remote-section-grid" id="remoteGrid"></div>
+      </div>
+    </div>
+
+    <div class="section visualization-section" id="tabJobs">
+      <div class="insight-card">
+        <h3><i class="fas fa-briefcase" style="color:var(--primary)"></i> <span id="jobsTitle">Browse Live Jobs</span></h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.2rem">Search for real job openings on top platforms. Select a role to open filtered search results.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+          <div style="flex:1;min-width:200px">
+            <label style="font-weight:600;display:block;margin-bottom:0.4rem;font-size:0.85rem;color:var(--text-secondary)">Role</label>
+            <select id="jobRoleSelect" style="width:100%;padding:0.7rem 1rem;border-radius:var(--border-radius-sm);border:1px solid var(--glass-border);background:var(--bg-card);font-size:0.9rem;color:var(--text)"></select>
+          </div>
+          <div style="flex:1;min-width:200px">
+            <label style="font-weight:600;display:block;margin-bottom:0.4rem;font-size:0.85rem;color:var(--text-secondary)">Location</label>
+            <input type="text" id="jobLocationInput" placeholder="e.g. San Francisco, London, Remote" style="width:100%;padding:0.7rem 1rem;border-radius:var(--border-radius-sm);border:1px solid var(--glass-border);background:var(--bg-card);font-size:0.9rem;color:var(--text)">
+          </div>
+        </div>
+        <div id="jobBoardLinks" style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a id="jobLinkLinkedIn" href="#" target="_blank" class="btn btn-primary" rel="noopener" style="flex:1;min-width:140px;text-align:center"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a id="jobLinkIndeed" href="#" target="_blank" class="btn btn-ghost" rel="noopener" style="flex:1;min-width:140px;text-align:center"><i class="fas fa-search"></i> Indeed</a>
+          <a id="jobLinkInternshala" href="#" target="_blank" class="btn btn-ghost" rel="noopener" style="flex:1;min-width:140px;text-align:center"><i class="fas fa-graduation-cap"></i> Internshala</a>
+          <a id="jobLinkNaukri" href="#" target="_blank" class="btn btn-ghost" rel="noopener" style="flex:1;min-width:140px;text-align:center"><i class="fas fa-briefcase"></i> Naukri</a>
+          <a id="jobLinkGlassdoor" href="#" target="_blank" class="btn btn-ghost" rel="noopener" style="flex:1;min-width:140px;text-align:center"><i class="fas fa-building"></i> Glassdoor</a>
+        </div>
+        <div style="margin-top:1rem;padding:1rem;background:rgba(6,182,212,0.06);border-radius:12px;border:1px solid rgba(6,182,212,0.15)">
+          <p style="font-size:0.85rem;color:var(--text-muted);margin:0"><i class="fas fa-info-circle" style="color:var(--primary)"></i> Links open job search results on each platform filtered by your selected role and location. Results are live and updated by the respective platforms.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/learning.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/daily-goals.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  var COUNTRIES = [
+    { id: "US", name: "United States", locale: "en-US", currency: "USD", symbol: "$" },
+    { id: "GB", name: "United Kingdom", locale: "en-GB", currency: "GBP", symbol: "£" },
+    { id: "CA", name: "Canada", locale: "en-CA", currency: "CAD", symbol: "C$" },
+    { id: "AU", name: "Australia", locale: "en-AU", currency: "AUD", symbol: "A$" },
+    { id: "DE", name: "Germany", locale: "de-DE", currency: "EUR", symbol: "€" },
+    { id: "FR", name: "France", locale: "fr-FR", currency: "EUR", symbol: "€" },
+    { id: "IN", name: "India", locale: "en-IN", currency: "INR", symbol: "₹" },
+    { id: "SG", name: "Singapore", locale: "en-SG", currency: "SGD", symbol: "S$" },
+    { id: "BR", name: "Brazil", locale: "pt-BR", currency: "BRL", symbol: "R$" },
+    { id: "JP", name: "Japan", locale: "ja-JP", currency: "JPY", symbol: "¥" }
+  ];
+  var ROLES = [
+    "Frontend Developer", "Backend Developer", "Full-Stack Developer",
+    "DevOps Engineer", "Data Scientist", "Mobile Developer", "AI/ML Engineer"
+  ];
+
+  var ROLE_ICONS = {
+    "Frontend Developer": "fa-solid fa-laptop-code",
+    "Backend Developer": "fa-solid fa-server",
+    "Full-Stack Developer": "fa-solid fa-layer-group",
+    "DevOps Engineer": "fa-solid fa-cloud",
+    "Data Scientist": "fa-solid fa-chart-bar",
+    "Mobile Developer": "fa-solid fa-mobile-alt",
+    "AI/ML Engineer": "fa-solid fa-brain"
+  };
+
+  var CAREER_DATA = {
+    "US": {
+      name: "United States", currency: "USD", symbol: "$", costOfLiving: 100,
+      skills: { "Frontend": ["React","TypeScript","Next.js","CSS/Sass","Tailwind CSS","GraphQL","Jest","Webpack"], "Backend": ["Node.js","Python","AWS","Docker","PostgreSQL","Redis","Kubernetes","REST APIs"], "DevOps": ["Kubernetes","Terraform","AWS/Azure","CI/CD","Docker","Ansible","Prometheus","Linux"], "Data": ["Python","SQL","TensorFlow","PyTorch","Spark","Tableau","R","Machine Learning"], "Mobile": ["React Native","Swift","Kotlin","Flutter","Firebase","Android SDK","iOS SDK"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","LLMs","RAG","MLOps"] },
+      roles: { "Frontend Developer":{salary:[95000,155000],demand:"High",growth:"8%",positions:28500}, "Backend Developer":{salary:[100000,165000],demand:"High",growth:"10%",positions:32000}, "Full-Stack Developer":{salary:[105000,170000],demand:"High",growth:"9%",positions:27800}, "DevOps Engineer":{salary:[110000,175000],demand:"High",growth:"12%",positions:19500}, "Data Scientist":{salary:[115000,180000],demand:"Medium",growth:"7%",positions:14200}, "Mobile Developer":{salary:[95000,150000],demand:"Medium",growth:"6%",positions:12100}, "AI/ML Engineer":{salary:[125000,200000],demand:"High",growth:"15%",positions:16800} }
+    },
+    "GB": {
+      name: "United Kingdom", currency: "GBP", symbol: "£", costOfLiving: 72,
+      skills: { "Frontend": ["React","TypeScript","Angular","Vue.js","Sass","Node.js","Jasmine"], "Backend": ["Node.js","Python","Java","AWS","PostgreSQL","Docker","Spring Boot"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","Jenkins","Linux","Git"], "Data": ["Python","SQL","R","Tableau","Power BI","Spark","Machine Learning"], "Mobile": ["Swift","Kotlin","React Native","Flutter","Xcode","Android Studio"], "AI": ["Python","TensorFlow","PyTorch","NLP","scikit-learn","LLMs","MLOps"] },
+      roles: { "Frontend Developer":{salary:[45000,85000],demand:"High",growth:"7%",positions:12500}, "Backend Developer":{salary:[50000,90000],demand:"High",growth:"8%",positions:14000}, "Full-Stack Developer":{salary:[48000,88000],demand:"High",growth:"8%",positions:11200}, "DevOps Engineer":{salary:[55000,95000],demand:"Medium",growth:"10%",positions:8200}, "Data Scientist":{salary:[52000,95000],demand:"Medium",growth:"6%",positions:6800}, "Mobile Developer":{salary:[42000,80000],demand:"Medium",growth:"5%",positions:5400}, "AI/ML Engineer":{salary:[60000,110000],demand:"High",growth:"14%",positions:7200} }
+    },
+    "CA": {
+      name: "Canada", currency: "CAD", symbol: "C$", costOfLiving: 74,
+      skills: { "Frontend": ["React","TypeScript","JavaScript","Angular","Vue.js","Node.js","GraphQL"], "Backend": ["Node.js","Python","Java","AWS","Docker","PostgreSQL","MongoDB"], "DevOps": ["AWS","Docker","Kubernetes","Terraform","CI/CD","Linux","Ansible"], "Data": ["Python","SQL","R","TensorFlow","Tableau","Spark","Machine Learning"], "Mobile": ["React Native","Swift","Kotlin","Flutter","Firebase","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","scikit-learn","LLMs"] },
+      roles: { "Frontend Developer":{salary:[70000,120000],demand:"High",growth:"8%",positions:8200}, "Backend Developer":{salary:[75000,125000],demand:"High",growth:"9%",positions:9500}, "Full-Stack Developer":{salary:[72000,120000],demand:"High",growth:"8%",positions:7600}, "DevOps Engineer":{salary:[80000,135000],demand:"Medium",growth:"11%",positions:5200}, "Data Scientist":{salary:[78000,130000],demand:"Medium",growth:"7%",positions:4200}, "Mobile Developer":{salary:[65000,110000],demand:"Medium",growth:"5%",positions:3600}, "AI/ML Engineer":{salary:[90000,150000],demand:"High",growth:"14%",positions:4800} }
+    },
+    "AU": {
+      name: "Australia", currency: "AUD", symbol: "A$", costOfLiving: 68,
+      skills: { "Frontend": ["React","TypeScript","JavaScript","Vue.js","Angular","Node.js","Sass"], "Backend": ["Python","Node.js","Java","AWS","PostgreSQL","Docker","Spring"], "DevOps": ["AWS","Docker","Kubernetes","Terraform","CI/CD","Linux","Bash"], "Data": ["Python","SQL","R","Tableau","Power BI","Spark","Machine Learning"], "Mobile": ["React Native","Swift","Kotlin","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","scikit-learn","MLOps","LLMs"] },
+      roles: { "Frontend Developer":{salary:[85000,140000],demand:"High",growth:"7%",positions:5200}, "Backend Developer":{salary:[90000,150000],demand:"High",growth:"8%",positions:5800}, "Full-Stack Developer":{salary:[88000,145000],demand:"High",growth:"8%",positions:4600}, "DevOps Engineer":{salary:[100000,160000],demand:"Medium",growth:"10%",positions:3200}, "Data Scientist":{salary:[95000,155000],demand:"Medium",growth:"6%",positions:2600}, "Mobile Developer":{salary:[80000,130000],demand:"Medium",growth:"5%",positions:2100}, "AI/ML Engineer":{salary:[110000,180000],demand:"High",growth:"13%",positions:2800} }
+    },
+    "DE": {
+      name: "Germany", currency: "EUR", symbol: "€", costOfLiving: 62,
+      skills: { "Frontend": ["React","TypeScript","Angular","Vue.js","JavaScript","Node.js","Sass"], "Backend": ["Java","Python","Node.js","AWS","Docker","PostgreSQL","Spring Boot"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","Jenkins","Linux","GitLab CI"], "Data": ["Python","SQL","R","TensorFlow","Tableau","Spark","Machine Learning"], "Mobile": ["Kotlin","Swift","React Native","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","scikit-learn","LLMs"] },
+      roles: { "Frontend Developer":{salary:[50000,85000],demand:"High",growth:"7%",positions:9800}, "Backend Developer":{salary:[55000,90000],demand:"High",growth:"8%",positions:11000}, "Full-Stack Developer":{salary:[52000,88000],demand:"High",growth:"8%",positions:8400}, "DevOps Engineer":{salary:[60000,95000],demand:"Medium",growth:"10%",positions:5800}, "Data Scientist":{salary:[58000,95000],demand:"Medium",growth:"7%",positions:4500}, "Mobile Developer":{salary:[48000,80000],demand:"Medium",growth:"5%",positions:3800}, "AI/ML Engineer":{salary:[65000,110000],demand:"High",growth:"14%",positions:5100} }
+    },
+    "FR": {
+      name: "France", currency: "EUR", symbol: "€", costOfLiving: 58,
+      skills: { "Frontend": ["React","TypeScript","JavaScript","Angular","Vue.js","Node.js","Sass"], "Backend": ["Java","Python","Node.js","AWS","Docker","PostgreSQL","Symfony"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","CI/CD","Linux","Ansible"], "Data": ["Python","SQL","R","TensorFlow","Tableau","Spark","Machine Learning"], "Mobile": ["Kotlin","Swift","React Native","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","scikit-learn","MLOps","LLMs"] },
+      roles: { "Frontend Developer":{salary:[42000,72000],demand:"High",growth:"6%",positions:7200}, "Backend Developer":{salary:[45000,78000],demand:"Medium",growth:"7%",positions:8100}, "Full-Stack Developer":{salary:[44000,75000],demand:"High",growth:"7%",positions:6200}, "DevOps Engineer":{salary:[50000,82000],demand:"Medium",growth:"9%",positions:4100}, "Data Scientist":{salary:[48000,80000],demand:"Medium",growth:"6%",positions:3200}, "Mobile Developer":{salary:[40000,70000],demand:"Low",growth:"4%",positions:2600}, "AI/ML Engineer":{salary:[55000,95000],demand:"High",growth:"13%",positions:3800} }
+    },
+    "IN": {
+      name: "India", currency: "INR", symbol: "₹", costOfLiving: 22,
+      skills: { "Frontend": ["React","JavaScript","TypeScript","Angular","Vue.js","Node.js","CSS"], "Backend": ["Node.js","Python","Java","AWS","Docker","PostgreSQL","MongoDB"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","Jenkins","Linux","Ansible"], "Data": ["Python","SQL","Machine Learning","Tableau","TensorFlow","Spark","R"], "Mobile": ["React Native","Kotlin","Flutter","Swift","Android","Firebase"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","LLMs","MLOps"] },
+      roles: { "Frontend Developer":{salary:[600000,1800000],demand:"High",growth:"12%",positions:45000}, "Backend Developer":{salary:[700000,2000000],demand:"High",growth:"13%",positions:52000}, "Full-Stack Developer":{salary:[650000,1900000],demand:"High",growth:"12%",positions:38000}, "DevOps Engineer":{salary:[800000,2200000],demand:"High",growth:"15%",positions:18000}, "Data Scientist":{salary:[900000,2500000],demand:"Medium",growth:"10%",positions:12000}, "Mobile Developer":{salary:[550000,1600000],demand:"Medium",growth:"8%",positions:15000}, "AI/ML Engineer":{salary:[1000000,3000000],demand:"High",growth:"18%",positions:14000} }
+    },
+    "SG": {
+      name: "Singapore", currency: "SGD", symbol: "S$", costOfLiving: 85,
+      skills: { "Frontend": ["React","TypeScript","JavaScript","Next.js","Node.js","GraphQL","Sass"], "Backend": ["Node.js","Python","Java","AWS","Docker","PostgreSQL","Go"], "DevOps": ["Kubernetes","Docker","AWS","Terraform","CI/CD","Linux","Helm"], "Data": ["Python","SQL","Machine Learning","Tableau","TensorFlow","Spark","R"], "Mobile": ["React Native","Swift","Kotlin","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","LLMs","MLOps"] },
+      roles: { "Frontend Developer":{salary:[55000,95000],demand:"High",growth:"8%",positions:3200}, "Backend Developer":{salary:[60000,105000],demand:"High",growth:"9%",positions:3800}, "Full-Stack Developer":{salary:[58000,100000],demand:"High",growth:"8%",positions:2800}, "DevOps Engineer":{salary:[65000,115000],demand:"Medium",growth:"11%",positions:1800}, "Data Scientist":{salary:[62000,110000],demand:"Medium",growth:"7%",positions:1400}, "Mobile Developer":{salary:[50000,90000],demand:"Medium",growth:"5%",positions:1100}, "AI/ML Engineer":{salary:[72000,130000],demand:"High",growth:"14%",positions:1600} }
+    },
+    "BR": {
+      name: "Brazil", currency: "BRL", symbol: "R$", costOfLiving: 32,
+      skills: { "Frontend": ["React","JavaScript","TypeScript","Node.js","Vue.js","Angular","CSS"], "Backend": ["Node.js","Python","Java","AWS","Docker","PostgreSQL","Spring"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","Jenkins","Linux","CI/CD"], "Data": ["Python","SQL","Machine Learning","R","Tableau","TensorFlow","Power BI"], "Mobile": ["React Native","Kotlin","Flutter","Swift","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","scikit-learn","LLMs","Computer Vision"] },
+      roles: { "Frontend Developer":{salary:[60000,150000],demand:"High",growth:"10%",positions:8500}, "Backend Developer":{salary:[70000,160000],demand:"High",growth:"11%",positions:9200}, "Full-Stack Developer":{salary:[65000,155000],demand:"High",growth:"10%",positions:7200}, "DevOps Engineer":{salary:[80000,180000],demand:"Medium",growth:"13%",positions:4200}, "Data Scientist":{salary:[85000,190000],demand:"Medium",growth:"9%",positions:3100}, "Mobile Developer":{salary:[55000,140000],demand:"Medium",growth:"7%",positions:3800}, "AI/ML Engineer":{salary:[95000,220000],demand:"High",growth:"16%",positions:3500} }
+    },
+    "JP": {
+      name: "Japan", currency: "JPY", symbol: "¥", costOfLiving: 70,
+      skills: { "Frontend": ["React","TypeScript","JavaScript","Vue.js","Angular","Node.js","Sass"], "Backend": ["Java","Python","Node.js","AWS","Docker","PostgreSQL","Spring"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","CI/CD","Linux","Ansible"], "Data": ["Python","SQL","R","TensorFlow","Tableau","Spark","Machine Learning"], "Mobile": ["Swift","Kotlin","React Native","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","scikit-learn","LLMs"] },
+      roles: { "Frontend Developer":{salary:[4500000,9000000],demand:"Medium",growth:"5%",positions:6200}, "Backend Developer":{salary:[5000000,10000000],demand:"Medium",growth:"6%",positions:7100}, "Full-Stack Developer":{salary:[4800000,9500000],demand:"Medium",growth:"6%",positions:5400}, "DevOps Engineer":{salary:[5500000,11000000],demand:"Medium",growth:"8%",positions:3500}, "Data Scientist":{salary:[6000000,12000000],demand:"Low",growth:"5%",positions:2800}, "Mobile Developer":{salary:[4200000,8500000],demand:"Low",growth:"3%",positions:2400}, "AI/ML Engineer":{salary:[6500000,13000000],demand:"Medium",growth:"10%",positions:3200} }
+    }
+  };
+  var REMOTE_DATA = [
+    { role: "Frontend Developer", remotePct: 72, avgSalary: "$85K-$145K", type: "Highly Remote", description: "Most companies are remote-first for frontend roles. Strong portfolio and React/Vue skills increase chances." },
+    { role: "Backend Developer", remotePct: 68, avgSalary: "$90K-$155K", type: "Highly Remote", description: "Backend roles frequently offer remote. Cloud expertise (AWS/GCP) and API design skills are key." },
+    { role: "Full-Stack Developer", remotePct: 65, avgSalary: "$88K-$150K", type: "Highly Remote", description: "Full-stack devs are in high demand for remote positions. Versatility across the stack is valued." },
+    { role: "DevOps Engineer", remotePct: 58, avgSalary: "$100K-$165K", type: "Often Remote", description: "DevOps is increasingly remote. Infrastructure-as-code and CI/CD pipeline expertise essential." },
+    { role: "Data Scientist", remotePct: 45, avgSalary: "$95K-$160K", type: "Hybrid/Remote", description: "Data science roles offer moderate remote flexibility. Strong analytical and communication skills needed." },
+    { role: "Mobile Developer", remotePct: 50, avgSalary: "$80K-$135K", type: "Often Remote", description: "Mobile development offers solid remote opportunities. Cross-platform frameworks are a plus." },
+    { role: "AI/ML Engineer", remotePct: 48, avgSalary: "$110K-$185K", type: "Hybrid/Remote", description: "AI/ML roles are growing remote-friendly. Experience with LLMs and MLOps pipelines is highly valued." },
+    { role: "Technical Writer", remotePct: 85, avgSalary: "$65K-$110K", type: "Highly Remote", description: "One of the most remote-friendly roles. Strong documentation and API writing skills required." },
+    { role: "UI/UX Designer", remotePct: 75, avgSalary: "$75K-$130K", type: "Highly Remote", description: "Design roles are very remote-friendly. A strong portfolio and Figma proficiency are essential." },
+    { role: "Cybersecurity Analyst", remotePct: 40, avgSalary: "$95K-$150K", type: "Hybrid/Remote", description: "Growing remote options in security. Certifications like CISSP and CEH are advantageous." }
+  ];
+
+  var COST_DATA = [
+    { country: "United States", city: "New York", index: 100, rank: "Very High" },
+    { country: "United States", city: "Austin", index: 72, rank: "High" },
+    { country: "United Kingdom", city: "London", index: 82, rank: "Very High" },
+    { country: "United Kingdom", city: "Manchester", index: 58, rank: "Moderate" },
+    { country: "Canada", city: "Toronto", index: 74, rank: "High" },
+    { country: "Canada", city: "Vancouver", index: 78, rank: "High" },
+    { country: "Australia", city: "Sydney", index: 80, rank: "Very High" },
+    { country: "Australia", city: "Melbourne", index: 68, rank: "High" },
+    { country: "Germany", city: "Berlin", index: 62, rank: "Moderate" },
+    { country: "Germany", city: "Munich", index: 68, rank: "High" },
+    { country: "France", city: "Paris", index: 75, rank: "High" },
+    { country: "France", city: "Lyon", index: 58, rank: "Moderate" },
+    { country: "India", city: "Bangalore", index: 22, rank: "Low" },
+    { country: "India", city: "Mumbai", index: 25, rank: "Low" },
+    { country: "Singapore", city: "Singapore", index: 85, rank: "Very High" },
+    { country: "Brazil", city: "Sao Paulo", index: 32, rank: "Low" },
+    { country: "Brazil", city: "Rio de Janeiro", index: 35, rank: "Low" },
+    { country: "Japan", city: "Tokyo", index: 82, rank: "Very High" },
+    { country: "Japan", city: "Osaka", index: 64, rank: "Moderate" }
+  ];
+
+  var LOCALE_MAP = { "en-US":"US","en-GB":"GB","en-CA":"CA","en-AU":"AU","de-DE":"DE","fr-FR":"FR","en-IN":"IN","en-SG":"SG","pt-BR":"BR","ja-JP":"JP","en":"US","de":"DE","fr":"FR","ja":"JP","pt":"BR" };
+
+  var currentCountry = "US";
+
+  function getCountryByLocale() {
+    var lang = navigator.language || navigator.userLanguage || "en-US";
+    if (LOCALE_MAP[lang]) return LOCALE_MAP[lang];
+    var short = lang.split("-")[0];
+    return LOCALE_MAP[short] || "US";
+  }
+
+  function formatSalary(min, max, symbol) {
+    if (!symbol) symbol = "$";
+    if (min >= 1000000) return symbol + (min/1000000).toFixed(1) + "M - " + symbol + (max/1000000).toFixed(1) + "M";
+    if (min >= 1000) return symbol + Math.round(min/1000) + "K - " + symbol + Math.round(max/1000) + "K";
+    return symbol + Number(min).toLocaleString() + " - " + symbol + Number(max).toLocaleString();
+  }
+
+  function getDemandClass(demand) { return demand === "High" ? "high" : demand === "Medium" ? "medium" : "low"; }
+
+  function esc(str) { return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+  function init() {
+    var storedLoc = Utils.getStorage('coderio_location');
+    var detected = storedLoc && storedLoc.countryCode ? storedLoc.countryCode : getCountryByLocale();
+    document.getElementById("detectedCountry").textContent = COUNTRIES.find(function(c){return c.id===detected})?.name||(storedLoc?.country||"United States");
+
+    var sel = document.getElementById("countrySelect");
+    COUNTRIES.forEach(function(c) {
+      var opt = document.createElement("option");
+      opt.value = c.id;
+      opt.textContent = c.name + " (" + c.currency + ")";
+      sel.appendChild(opt);
+    });
+    sel.value = detected;
+    currentCountry = detected;
+
+    sel.addEventListener("change", function() { currentCountry = this.value; refreshAll(); });
+
+    document.querySelectorAll(".insight-tab").forEach(function(tab) {
+      tab.addEventListener("click", function() {
+        document.querySelectorAll(".insight-tab").forEach(function(t){t.classList.remove("active");});
+        this.classList.add("active");
+        var tabId = this.dataset.tab;
+        document.querySelectorAll(".visualization-section").forEach(function(s){s.classList.remove("active");});
+        var target = document.getElementById("tab" + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+        if (target) target.classList.add("active");
+      });
+    });
+
+    var roleSelect = document.getElementById("jobRoleSelect");
+    if (roleSelect) {
+      ROLES.forEach(function(r) {
+        var opt = document.createElement("option");
+        opt.value = r;
+        opt.textContent = r;
+        roleSelect.appendChild(opt);
+      });
+      roleSelect.addEventListener("change", updateJobLinks);
+      document.getElementById("jobLocationInput").addEventListener("input", updateJobLinks);
+    }
+
+    refreshAll();
+    updateJobLinks();
+  }
+
+  function updateJobLinks() {
+    var role = document.getElementById("jobRoleSelect").value;
+    var loc = document.getElementById("jobLocationInput").value.trim();
+    var country = COUNTRIES.find(function(c){return c.id===currentCountry})?.name||"United States";
+    var query = encodeURIComponent(role + " developer " + (loc || country));
+    document.getElementById("jobLinkLinkedIn").href = "https://www.linkedin.com/jobs/search/?keywords=" + encodeURIComponent(role + " developer") + "&location=" + encodeURIComponent(loc || country);
+    document.getElementById("jobLinkIndeed").href = "https://www.indeed.com/q-" + query + ".html";
+    document.getElementById("jobLinkInternshala").href = "https://internshala.com/internships/" + encodeURIComponent(role.toLowerCase().replace(/\s+/g, "-") + "-internship") + (loc ? "?location=" + encodeURIComponent(loc) : "");
+    document.getElementById("jobLinkNaukri").href = "https://www.naukri.com/" + encodeURIComponent(role.replace(/\s+/g, "-") + "-jobs") + (loc ? "?city=" + encodeURIComponent(loc) : "");
+    document.getElementById("jobLinkGlassdoor").href = "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=" + encodeURIComponent(role + " " + (loc || country));
+  }
+
+  function refreshAll() { renderSalaryTable(); renderDemandChart(); renderSkills(); renderCostOfLiving(); renderRemote(); }
+
+  function renderSalaryTable() {
+    var data = CAREER_DATA[currentCountry];
+    if (!data) return;
+    document.getElementById("salaryTitle").textContent = "Salary Ranges in " + data.name;
+    document.getElementById("demandTitle").textContent = "Hiring Demand in " + data.name;
+    document.getElementById("skillsTitle").textContent = "Top Skills in Demand - " + data.name;
+
+    var tbody = document.getElementById("salaryTableBody");
+    var html = "";
+    ROLES.forEach(function(role) {
+      var r = data.roles[role];
+      if (!r) return;
+      var icon = ROLE_ICONS[role] || "fa-solid fa-code";
+      var salaryStr = formatSalary(r.salary[0], r.salary[1], data.symbol);
+      var dClass = getDemandClass(r.demand);
+      var badgeHtml = '<span class="demand-badge demand-' + dClass + '"><i class="fas fa-circle" style="font-size:0.5rem"></i> ' + r.demand + '</span>';
+      var pct = r.demand === "High" ? 90 : r.demand === "Medium" ? 55 : 25;
+      html += '<tr><td class="role-name"><i class="' + icon + '" style="color:var(--primary);margin-right:0.5rem;width:18px"></i>' + esc(role) + '</td><td style="text-align:right;font-weight:600">' + salaryStr + '</td><td style="text-align:center">' + badgeHtml + '</td><td style="text-align:center"><span class="growth-rate growth-up">' + r.growth + ' <i class="fas fa-arrow-up"></i></span></td><td style="text-align:right;font-size:0.85rem;color:var(--text-muted)">' + Number(r.positions).toLocaleString() + '</td><td style="text-align:right"><div class="demand-bar-wrap"><div class="demand-bar"><div class="demand-bar-fill ' + dClass + '" style="width:' + pct + '%"></div></div></div></td></tr>';
+    });
+    tbody.innerHTML = html;
+  }
+
+  function renderDemandChart() {
+    var data = CAREER_DATA[currentCountry];
+    if (!data) return;
+    var container = document.getElementById("demandChart");
+    var html = "";
+    ROLES.forEach(function(role) {
+      var r = data.roles[role];
+      if (!r) return;
+      var icon = ROLE_ICONS[role] || "fa-solid fa-code";
+      var dClass = getDemandClass(r.demand);
+      var pct = r.demand === "High" ? 92 : r.demand === "Medium" ? 58 : 28;
+      var color = r.demand === "High" ? "#dc2626" : r.demand === "Medium" ? "#d97706" : "#94a3b8";
+      html += '<div class="chart-bar-container"><div class="chart-bar-label"><i class="' + icon + '" style="color:var(--primary);margin-right:0.4rem"></i>' + esc(role) + '</div><div class="chart-bar-track"><div class="chart-bar-fill" style="width:' + pct + '%;background:' + color + '">' + (pct > 20 ? r.demand : "") + '</div></div><div class="chart-bar-value">' + r.demand + '</div></div>';
+    });
+    container.innerHTML = html;
+  }
+
+  function renderSkills() {
+    var data = CAREER_DATA[currentCountry];
+    if (!data) return;
+    var container = document.getElementById("skillsContainer");
+    var html = "";
+    var cats = [
+      { key: "Frontend", title: "Frontend", icon: "fa-solid fa-laptop-code" },
+      { key: "Backend", title: "Backend", icon: "fa-solid fa-server" },
+      { key: "DevOps", title: "DevOps & Cloud", icon: "fa-solid fa-cloud" },
+      { key: "Data", title: "Data & Analytics", icon: "fa-solid fa-chart-bar" },
+      { key: "Mobile", title: "Mobile", icon: "fa-solid fa-mobile-alt" },
+      { key: "AI", title: "AI & Machine Learning", icon: "fa-solid fa-brain" }
+    ];
+    cats.forEach(function(cat) {
+      var skills = data.skills[cat.key];
+      if (!skills || skills.length === 0) return;
+      html += '<div class="insight-card" style="padding:1.2rem"><h4 style="margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;font-size:0.95rem;color:var(--primary-dark)"><i class="' + cat.icon + '" style="color:var(--primary)"></i> ' + cat.title + '</h4><div>';
+      skills.forEach(function(s) { html += '<span class="skill-tag">' + esc(s) + '</span>'; });
+      html += '</div></div>';
+    });
+    container.innerHTML = html;
+  }
+
+  function renderCostOfLiving() {
+    var container = document.getElementById("costGrid");
+    var html = "";
+    COST_DATA.forEach(function(item) {
+      var color = item.rank === "Very High" ? "#dc2626" : item.rank === "High" ? "#d97706" : item.rank === "Moderate" ? "#06b6d4" : "#22c55e";
+      html += '<div class="cost-item"><div style="font-weight:600;font-size:0.9rem;margin-bottom:0.3rem">' + esc(item.city) + '</div><div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem">' + esc(item.country) + '</div><div class="cost-index">' + item.index + '</div><div class="cost-label">Cost Index</div><span class="cost-rank" style="background:' + color + '20;color:' + color + '">' + item.rank + '</span></div>';
+    });
+    container.innerHTML = html;
+  }
+
+  function renderRemote() {
+    var container = document.getElementById("remoteGrid");
+    var html = "";
+    REMOTE_DATA.forEach(function(item) {
+      var tClass = item.type === "Highly Remote" ? "remote-friendly-tag" : "remote-partial-tag";
+      var pColor = item.remotePct >= 65 ? "var(--success)" : item.remotePct >= 45 ? "var(--warning)" : "var(--text-muted)";
+      html += '<div class="remote-role-card"><h4>' + esc(item.role) + '</h4><p>' + esc(item.description) + '</p><div class="meta-row"><span><i class="fas fa-wifi" style="color:' + pColor + '"></i> ' + item.remotePct + '% Remote</span><span><i class="fas fa-money-bill-wave" style="color:var(--primary)"></i> ' + item.avgSalary + '</span><span class="' + tClass + '"><i class="fas fa-check-circle"></i> ' + item.type + '</span></div></div>';
+    });
+    container.innerHTML = html;
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>

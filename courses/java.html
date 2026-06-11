@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/navbar.css"><link rel="stylesheet" href="../css/courses.css"><link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="java">
+  <div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div>
+  <div class="toast-container"></div>
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li><li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"><button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button></div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Java</h1>
+      <p>Java is a robust, object-oriented programming language renowned for its "write once, run anywhere" capability. It powers enterprise applications, Android apps, web services, and large-scale systems worldwide.</p>
+      <div class="course-meta"><div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div><div class="course-meta-item"><i class="fas fa-clock"></i> 10 Weeks</div><div class="course-meta-item"><i class="fas fa-book-open"></i> 20 Modules</div></div>
+    </div>
+    <div class="course-hero-image"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
+  </section>
+
+  <section class="course-content">
+    <div class="course-section"><h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Java was developed by James Gosling at Sun Microsystems and released in 1995. It was designed with the principle of "write once, run anywhere" (WORA), meaning compiled Java code can run on any platform with a Java Virtual Machine (JVM) without recompilation.</p>
+      <p>Java is a statically-typed, class-based, object-oriented language that emphasizes early error detection and robust memory management through automatic garbage collection. Its ecosystem includes Spring Boot for enterprise apps, Android SDK for mobile, Hibernate for ORM, and Maven/Gradle for build automation.</p>
+      <p>With millions of developers worldwide, Java is used in banking systems, e-commerce platforms, scientific applications, big data processing (Hadoop, Spark), and cloud-native microservices. The language continues to evolve with bi-annual releases, adding features like lambda expressions (Java 8), modules (Java 9), records and pattern matching (Java 16+).</p>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-star"></i> Why Learn Java?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-building" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Enterprise Standard</h4><p style="color:var(--text-secondary);font-size:0.95rem">The #1 language for enterprise and banking software.</p></div>
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-mobile-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Android Development</h4><p style="color:var(--text-secondary);font-size:0.95rem">Native Android apps are built with Java or Kotlin.</p></div>
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Strong Typing & Safety</h4><p style="color:var(--text-secondary);font-size:0.95rem">Static typing catches errors at compile time.</p></div>
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-globe" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Massive Ecosystem</h4><p style="color:var(--text-secondary);font-size:0.95rem">Extensive libraries, frameworks, and community support.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apache</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spring</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Netflix uses Java for its streaming infrastructure, LinkedIn runs on Java, Amazon's backend services are Java-based, Twitter moved from Ruby to Java for performance, and Android (Google) uses Java for its SDK. Major banks like Goldman Sachs and JP Morgan rely on Java for trading systems.</p>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Basic programming concepts, JDK installed, IDE (IntelliJ, Eclipse)</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-3)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Syntax, data types, operators, conditionals, loops, arrays, methods, OOP basics</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 4-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Collections, generics, exceptions, I/O, lambda, streams, threading basics</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 7-9)</h4><p style="color:var(--text-secondary);font-size:0.9rem">JDBC, JPA/Hibernate, Spring Boot, REST APIs, unit testing, design patterns</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 10-12)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Microservices, Docker, Kubernetes, reactive programming, performance tuning</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules"><h2><i class="fas fa-layer-group"></i> Modules</h2>
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> Java Fundamentals</h3><p>JVM, JRE, JDK, main method, package declaration, import statements, primitive types, variables</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Operators & Control Flow</h3><p>Arithmetic, relational, logical, bitwise operators. if-else, switch, for, while, do-while, break, continue</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Arrays & Strings</h3><p>Array declaration and initialization, multidimensional arrays, String methods, StringBuilder, StringBuffer</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Object-Oriented Java</h3><p>Classes, objects, constructors, this keyword, static, encapsulation, getters/setters, access modifiers</p></div>
+      <div class="module-card"><h3><span class="module-number">5</span> Inheritance & Polymorphism</h3><p>extends, super, method overriding, @Override, final keyword, abstract classes, interfaces</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">6</span> Collections Framework</h3><p>ArrayList, LinkedList, HashSet, TreeSet, HashMap, TreeMap, Comparable, Comparator, iterators</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Generics & Enums</h3><p>Generic classes, methods, bounded type parameters, wildcards, enum types with fields and methods</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Exception Handling</h3><p>try-catch-finally, checked vs unchecked exceptions, throws, custom exceptions, try-with-resources</p></div>
+      <div class="module-card"><h3><span class="module-number">9</span> Lambda & Streams</h3><p>Functional interfaces, lambda expressions, method references, Stream API (map, filter, reduce, collect)</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">10</span> File I/O & Serialization</h3><p>FileReader/Writer, BufferedReader, NIO Files API, Object serialization, transient keyword</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Multithreading & Concurrency</h3><p>Thread class, Runnable, synchronized, wait/notify, ExecutorService, CompletableFuture, locks</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> JDBC & Database</h3><p>Connection, Statement, PreparedStatement, ResultSet, transactions, connection pooling (HikariCP)</p></div>
+      <div class="module-card"><h3><span class="module-number">13</span> Testing with JUnit</h3><p>JUnit 5, assertions, parameterized tests, test lifecycle, mocking with Mockito, code coverage</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">14</span> Spring Boot</h3><p>IoC, DI, Spring MVC, REST controllers, @Autowired, application.properties, embedded Tomcat</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Spring Data JPA / Hibernate</h3><p>ORM, entities, repositories, JPQL, native queries, cascading, fetch types, migrations (Flyway)</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Microservices Architecture</h3><p>Spring Cloud, service discovery (Eureka), API gateway, circuit breakers, distributed tracing</p></div>
+      <div class="module-card"><h3><span class="module-number">17</span> Reactive Programming</h3><p>Project Reactor, WebFlux, reactive streams, Mono/Flux, backpressure, reactive MongoDB</p></div>
+      <div class="module-card"><h3><span class="module-number">18</span> Performance & Security</h3><p>JVM tuning, garbage collection, profiling (JProfiler), OWASP, Spring Security, JWT authentication</p></div>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-sticky-note"></i> Notes</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Java Main Method</h4><p style="color:var(--text-secondary);font-size:0.95rem">The entry point of every Java application.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Collections & Generics</h4><p style="color:var(--text-secondary);font-size:0.95rem">Type-safe collections with generics.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>List&lt;String&gt; names = new ArrayList&lt;&gt;();
+names.add("Alice");
+names.add("Bob");
+names.forEach(System.out::println);
+
+Map&lt;String, Integer&gt; ages = new HashMap&lt;&gt;();
+ages.put("Alice", 30);
+ages.put("Bob", 25);
+
+// Stream API
+int sum = ages.values().stream()
+    .mapToInt(Integer::intValue)
+    .sum();</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Lambda Expressions</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Functional interface
+@FunctionalInterface
+interface Calculator {
+    int calculate(int a, int b);
+}
+
+Calculator add = (a, b) -> a + b;
+Calculator multiply = (a, b) -> a * b;
+
+System.out.println(add.calculate(5, 3));    // 8
+System.out.println(multiply.calculate(5, 3)); // 15</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Spring Boot REST Controller</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    @GetMapping
+    public List&lt;User&gt; getAllUsers() {
+        return userService.findAll();
+    }
+
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.save(user);
+    }
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userService.findById(id);
+    }
+}</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Threading Basics</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Using Thread class
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running in: " + Thread.currentThread().getName());
+    }
+}
+new MyThread().start();
+
+// Using Runnable (preferred)
+Runnable task = () -> System.out.println("Task running");
+new Thread(task).start();
+
+// ExecutorService
+ExecutorService executor = Executors.newFixedThreadPool(4);
+executor.submit(() -> System.out.println("Pooled task"));
+executor.shutdown();</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Records (Java 16+)</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Compact data carrier class
+public record Person(String name, int age) {}
+
+// Usage
+Person p = new Person("Alice", 30);
+System.out.println(p.name());  // Alice
+System.out.println(p.age());   // 30
+System.out.println(p);         // Person[name=Alice, age=30]
+
+// Records automatically generate: constructor, getters, equals, hashCode, toString</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Exception Handling</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>public void readFile(String path) {
+    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+    } catch (FileNotFoundException e) {
+        System.err.println("File not found: " + path);
+    } catch (IOException e) {
+        System.err.println("IO Error: " + e.getMessage());
+    }
+    // try-with-resources auto-closes br
+}</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. JVM Memory Model</h4><p style="color:var(--text-secondary);font-size:0.95rem">Heap stores objects, Stack stores primitives and references. Metaspace (replaced PermGen) stores class metadata. Garbage collection (GC) reclaims unused objects in the heap.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// JVM flags example
+// -Xms512m -Xmx2g -XX:+UseG1GC
+// -XX:MaxMetaspaceSize=256m
+
+// Memory monitoring
+Runtime rt = Runtime.getRuntime();
+System.out.println("Total: " + rt.totalMemory());
+System.out.println("Free: " + rt.freeMemory());
+System.out.println("Max: " + rt.maxMemory());</code></pre></div>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-code"></i> Examples</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example: Spring Boot CRUD App</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>@Entity
+public class Product {
+    @Id @GeneratedValue
+    private Long id;
+    private String name;
+    private double price;
+    // getters, setters, constructors
+}
+
+@Repository
+public interface ProductRepository extends JpaRepository&lt;Product, Long&gt; {
+    List&lt;Product&gt; findByNameContaining(String keyword);
+}
+
+@Service
+public class ProductService {
+    @Autowired
+    private ProductRepository repo;
+
+    public List&lt;Product&gt; searchProducts(String q) {
+        return repo.findByNameContaining(q);
+    }
+}</code></pre></div>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">FizzBuzz</h4><p style="color:var(--text-muted);font-size:0.85rem">Classic FizzBuzz in Java.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Bank Account Class</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a BankAccount class with deposit, withdraw, and balance methods.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Student Management System</h4><p style="color:var(--text-muted);font-size:0.85rem">Console-based CRUD app using ArrayList to manage student records.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">File Word Counter</h4><p style="color:var(--text-muted);font-size:0.85rem">Read a file and count word frequencies using HashMap.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Thread-safe Counter</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a thread-safe counter using synchronized and AtomicInteger.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">REST API with Spring Boot</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a complete REST API for a library management system.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Chat Server with Sockets</h4><p style="color:var(--text-muted);font-size:0.85rem">Multi-client chat server using Java sockets and threading.</p></div></div>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">E-Commerce Backend</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Spring Boot REST API with products, cart, orders, and payment integration.</p><span class="badge badge-primary">Spring Boot</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Android Weather App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Native Android app fetching weather data with location services.</p><span class="badge badge-primary">Android</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Task Management System</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Full-stack app with Spring Boot backend and React/Angular frontend.</p><span class="badge badge-primary">Full Stack</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Blog Platform</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Multi-user blog with auth, posts, comments, and file uploads.</p><span class="badge badge-primary">Spring Boot</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Banking System</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Console-based banking with accounts, transactions, and interest calculation.</p><span class="badge badge-primary">Java</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Microservices Dashboard</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Multiple Spring Boot microservices with API gateway and service discovery.</p><span class="badge badge-primary">Microservices</span></div>
+      </div>
+    </div>
+
+    <div class="course-section"><h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=java&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+

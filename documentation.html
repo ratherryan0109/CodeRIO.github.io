@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - CodeRio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .docs-wrapper { display: flex; gap: 2rem; align-items: flex-start; }
+        .docs-sidebar { flex: 0 0 280px; position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; }
+        .docs-sidebar .glass-card { padding: 1.5rem; }
+        .docs-sidebar h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted, #94a3b8); margin-bottom: 0.75rem; }
+        .docs-sidebar ul { list-style: none; padding: 0; }
+        .docs-sidebar li { margin-bottom: 0.4rem; }
+        .docs-sidebar a { color: var(--text-secondary, #cbd5e1); font-size: 0.9rem; padding: 0.3rem 0.75rem; border-radius: 6px; display: block; transition: all 0.2s; }
+        .docs-sidebar a:hover, .docs-sidebar a.active { background: rgba(99,102,241,0.15); color: #818cf8; }
+        .docs-main { flex: 1; min-width: 0; }
+        .docs-section { margin-bottom: 3rem; }
+        .docs-section h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #f1f5f9; }
+        .docs-section h3 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; color: #e2e8f0; }
+        .docs-section p { color: #94a3b8; line-height: 1.8; margin-bottom: 1rem; }
+        .docs-section ul, .docs-section ol { color: #94a3b8; line-height: 1.8; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .docs-section li { margin-bottom: 0.5rem; }
+        .docs-section code { background: rgba(99,102,241,0.1); color: #a5b4fc; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; }
+        .docs-section pre { background: rgba(15,23,42,0.6); border: 1px solid rgba(99,102,241,0.2); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+        .docs-section pre code { background: none; padding: 0; color: #e2e8f0; }
+        .docs-toc { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.15); border-radius: 8px; padding: 1.25rem; margin-bottom: 2rem; }
+        .docs-toc h3 { font-size: 1rem; margin-top: 0; margin-bottom: 0.75rem; }
+        .docs-toc a { display: block; padding: 0.25rem 0; color: #94a3b8; font-size: 0.9rem; }
+        .docs-toc a:hover { color: #818cf8; }
+        .docs-nav-toggle { display: none; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); color: #e2e8f0; padding: 0.75rem 1rem; border-radius: 8px; width: 100%; text-align: left; cursor: pointer; margin-bottom: 1rem; font-size: 0.95rem; }
+        @media (max-width: 768px) {
+            .docs-wrapper { flex-direction: column; }
+            .docs-sidebar { position: static; flex: none; width: 100%; max-height: none; display: none; }
+            .docs-sidebar.open { display: block; }
+            .docs-nav-toggle { display: block; }
+        }
+    </style>
+</head>
+<body data-page="Documentation">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon"><i class="fas fa-code"></i></span>
+            CodeRio
+        </div>
+        <button class="mobile-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Learn.html">Learn</a></li>
+            <li><a href="Practice.html">Practice</a></li>
+            <li><a href="Projects.html">Projects</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="auth/profile.html">Profile</a></li>
+        </ul>
+        <div class="nav-auth">
+            <a href="login.html" class="btn btn-outline">Log In</a>
+            <a href="Register.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1><span class="gradient-text">Documentation</span></h1>
+                <p>Everything you need to know about using CodeRio</p>
+            </div>
+        </section>
+
+        <section class="section docs-section-wrapper">
+            <div class="container">
+                <button class="docs-nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">
+                    <i class="fas fa-bars"></i> Table of Contents
+                </button>
+                <div class="docs-wrapper">
+                    <aside class="docs-sidebar">
+                        <div class="glass-card">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="#getting-started" class="active">Introduction</a></li>
+                                <li><a href="#platform-guide">Platform Guide</a></li>
+                                <li><a href="#dashboard-guide">Dashboard Guide</a></li>
+                                <li><a href="#course-guide">Course Guide</a></li>
+                            </ul>
+                            <h4 style="margin-top:1.25rem;">Features</h4>
+                            <ul>
+                                <li><a href="#typing-lab">Typing Lab</a></li>
+                                <li><a href="#practice-hub">Practice Hub</a></li>
+                                <li><a href="#projects">Projects</a></li>
+                            </ul>
+                            <h4 style="margin-top:1.25rem;">Community</h4>
+                            <ul>
+                                <li><a href="#community">Community</a></li>
+                                <li><a href="#faq">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <div class="docs-main">
+                        <div class="docs-toc">
+                            <h3>On this page</h3>
+                            <a href="#getting-started">Getting Started</a>
+                            <a href="#platform-guide">Platform Guide</a>
+                            <a href="#dashboard-guide">Dashboard Guide</a>
+                            <a href="#course-guide">Course Guide</a>
+                            <a href="#typing-lab">Typing Lab</a>
+                            <a href="#practice-hub">Practice Hub</a>
+                            <a href="#projects">Projects</a>
+                            <a href="#community">Community</a>
+                            <a href="#faq">FAQ</a>
+                        </div>
+
+                        <div id="getting-started" class="docs-section glass-card">
+                            <h2>Getting Started</h2>
+                            <p>Welcome to CodeRio! This guide will help you get started with our platform and make the most of your learning experience.</p>
+                            <h3>Creating Your Account</h3>
+                            <p>To begin, click the "Sign Up" button in the top right corner. You can register using your email address or connect with Google/GitHub for a faster setup. Verify your email address to unlock all features.</p>
+                            <h3>Setting Up Your Profile</h3>
+                            <p>After logging in, navigate to your profile settings to customize your experience. You can set your coding experience level, select topics of interest, and upload a profile picture. Your profile helps us recommend relevant content.</p>
+                            <h3>Platform Overview</h3>
+                            <p>CodeRio is organized into five main areas: Learn (courses), Practice (coding challenges), Projects (hands-on builds), Community (discussions), and Dashboard (your progress). Use the navigation bar to switch between sections.</p>
+                        </div>
+
+                        <div id="platform-guide" class="docs-section glass-card">
+                            <h2>Platform Guide</h2>
+                            <p>CodeRio is built around an interactive, project-based learning philosophy. Here's how each component works together to create your learning journey.</p>
+                            <h3>Learning Paths</h3>
+                            <p>Learning Paths are curated sequences of courses and challenges designed to take you from beginner to advanced in a specific domain. Each path includes video lessons, reading materials, coding exercises, and quizzes.</p>
+                            <h3>Progress Tracking</h3>
+                            <p>Your progress is automatically tracked across all sections. The platform uses a spaced repetition system to reinforce concepts at optimal intervals. You can view your completion percentage, skill scores, and learning streaks on your dashboard.</p>
+                            <h3>Gamification</h3>
+                            <p>Earn XP points, badges, and achievements as you complete lessons and challenges. Leaderboards let you compare your progress with peers, and daily streaks reward consistent practice.</p>
+                        </div>
+
+                        <div id="dashboard-guide" class="docs-section glass-card">
+                            <h2>Dashboard Guide</h2>
+                            <p>Your Dashboard is the central hub for monitoring your learning journey. Access it anytime by clicking your profile avatar or the Dashboard link.</p>
+                            <h3>Progress Overview</h3>
+                            <p>The top section displays your overall progress: total courses completed, challenges solved, projects built, and current streak. A skill radar chart shows your proficiency across different programming domains.</p>
+                            <h3>Activity Feed</h3>
+                            <p>Your recent activity is shown in a timeline view, including lessons completed, badges earned, and code submissions. Use filters to view by date range or activity type.</p>
+                            <h3>Recommendations</h3>
+                            <p>Based on your performance and interests, the dashboard suggests next steps: relevant courses, practice challenges, or community events. These recommendations adapt as you progress.</p>
+                        </div>
+
+                        <div id="course-guide" class="docs-section glass-card">
+                            <h2>Course Guide</h2>
+                            <p>Courses are structured learning modules that combine theory with hands-on practice. Each course includes multiple lessons, projects, and assessments.</p>
+                            <h3>Course Structure</h3>
+                            <p>Each course is divided into modules and lessons. Modules group related concepts, while lessons are individual learning units. Lessons typically include a video or reading, interactive examples, and coding exercises.</p>
+                            <h3>Interactive Editor</h3>
+                            <p>Our built-in code editor supports syntax highlighting, auto-completion, and real-time preview. You can write, test, and debug code directly in the browser without setting up a local environment.</p>
+                            <h3>Assessments & Quizzes</h3>
+                            <p>Each module ends with a quiz to test your understanding, and courses include a final project that applies everything you've learned. Assessments are auto-graded with detailed feedback.</p>
+<pre><code>// Example: Your first JavaScript lesson
+function greet(name) {
+    return `Hello, ${name}! Welcome to CodeRio.`;
+}
+console.log(greet("Developer"));</code></pre>
+                        </div>
+
+                        <div id="typing-lab" class="docs-section glass-card">
+                            <h2>Typing Lab</h2>
+                            <p>The Typing Lab helps you improve your coding speed and accuracy through targeted practice with real syntax.</p>
+                            <h3>How It Works</h3>
+                            <p>You're presented with code snippets that you must type as quickly and accurately as possible. The lab tracks your WPM (words per minute), accuracy percentage, and common error patterns.</p>
+                            <h3>Practice Modes</h3>
+                            <ul>
+                                <li><strong>Free Mode:</strong> Practice with random code snippets from various languages</li>
+                                <li><strong>Language Focus:</strong> Target specific languages like Python, JavaScript, or Java</li>
+                                <li><strong>Challenge Mode:</strong> Race against the clock with increasingly difficult snippets</li>
+                                <li><strong>Custom Drills:</strong> Upload your own code or practice specific syntax patterns</li>
+                            </ul>
+                            <h3>Progress Analytics</h3>
+                            <p>View detailed statistics on your typing performance over time, including speed trends, accuracy improvements, and which characters or patterns you find most challenging.</p>
+                        </div>
+
+                        <div id="practice-hub" class="docs-section glass-card">
+                            <h2>Practice Hub</h2>
+                            <p>The Practice Hub is where you hone your coding skills through challenges, coding problems, and algorithmic exercises.</p>
+                            <h3>Problem Categories</h3>
+                            <ul>
+                                <li><strong>Algorithms:</strong> Sorting, searching, dynamic programming, and graph problems</li>
+                                <li><strong>Data Structures:</strong> Arrays, linked lists, trees, hash tables, and more</li>
+                                <li><strong>Database:</strong> SQL queries, normalization, and optimization challenges</li>
+                                <li><strong>System Design:</strong> Design distributed systems, APIs, and scalable architectures</li>
+                            </ul>
+                            <h3>Difficulty Levels</h3>
+                            <p>Problems are tagged as Easy, Medium, Hard, or Expert. You can filter by difficulty to find challenges appropriate for your skill level. Each problem includes hints and a discussion forum.</p>
+                            <h3>Code Runner</h3>
+                            <p>Our code runner supports multiple languages including Python, JavaScript, Java, C++, Go, and Rust. Solutions are tested against hidden test cases for thorough validation.</p>
+                        </div>
+
+                        <div id="projects" class="docs-section glass-card">
+                            <h2>Projects</h2>
+                            <p>Projects are real-world applications you build from scratch, applying everything you've learned in courses and practice.</p>
+                            <h3>Project Categories</h3>
+                            <ul>
+                                <li><strong>Web Apps:</strong> Build full-stack applications with modern frameworks</li>
+                                <li><strong>CLI Tools:</strong> Create command-line utilities and developer tools</li>
+                                <li><strong>APIs:</strong> Design and implement RESTful and GraphQL APIs</li>
+                                <li><strong>Data Science:</strong> Analyze datasets and build ML models</li>
+                                <li><strong>Mobile:</strong> Cross-platform mobile apps with React Native</li>
+                            </ul>
+                            <h3>Project Workflow</h3>
+                            <p>Each project includes a detailed specification, acceptance criteria, and suggested milestones. You can work independently or collaborate with peers. Submit your project for review and receive feedback from mentors.</p>
+                            <h3>Portfolio Building</h3>
+                            <p>Completed projects are added to your public portfolio page, which you can share with employers. Each project includes a live demo link, source code repository, and your reflection on the development process.</p>
+                        </div>
+
+                        <div id="community" class="docs-section glass-card">
+                            <h2>Community</h2>
+                            <p>CodeRio's community features connect you with fellow learners, mentors, and industry professionals.</p>
+                            <h3>Discussion Forums</h3>
+                            <p>Each course and challenge has a dedicated discussion thread where you can ask questions, share solutions, and help others. Forums are moderated by community leaders and CodeRio staff.</p>
+                            <h3>Study Groups</h3>
+                            <p>Form or join study groups based on learning paths, languages, or goals. Study groups have shared progress tracking, group challenges, and scheduled live sessions.</p>
+                            <h3>Mentorship Program</h3>
+                            <p>Connect with experienced developers for one-on-one mentorship. Mentors provide code reviews, career advice, and personalized guidance. Apply through your dashboard to join the program.</p>
+                            <h3>Events & Hackathons</h3>
+                            <p>Participate in weekly coding competitions, monthly hackathons, and guest speaker sessions. Events are announced in the community calendar and through notifications.</p>
+                        </div>
+
+                        <div id="faq" class="docs-section glass-card">
+                            <h2>FAQ</h2>
+                            <p>Quick answers to common questions about using CodeRio.</p>
+                            <h3>Is CodeRio free?</h3>
+                            <p>Yes! CodeRio offers a generous free tier with access to introductory courses, practice challenges, and community features. Premium subscriptions unlock advanced courses, unlimited practice, and mentorship.</p>
+                            <h3>Can I download courses for offline access?</h3>
+                            <p>Premium subscribers can download video lessons and course materials for offline viewing through our mobile app. Desktop offline access is coming soon.</p>
+                            <h3>How are challenges graded?</h3>
+                            <p>Code challenges are graded automatically using comprehensive test suites. Your solution is checked against multiple test cases, including edge cases, performance constraints, and code quality metrics.</p>
+                            <p>For more questions, visit our <a href="faq.html" class="highlight-link">FAQ page</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

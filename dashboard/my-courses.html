@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Courses - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .course-status-badge { display:inline-flex;align-items:center;gap:0.4rem;padding:0.2rem 0.7rem;border-radius:20px;font-size:0.75rem;font-weight:600 }
+    .course-status-badge.active { background:rgba(6,182,212,0.15);color:var(--primary) }
+    .course-status-badge.paused { background:rgba(234,179,8,0.15);color:var(--warning) }
+    .course-status-badge.completed { background:rgba(34,197,94,0.15);color:var(--success) }
+    .course-card { transition:transform 0.2s,box-shadow 0.2s;cursor:default }
+    .course-card:hover { transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.12) }
+    .course-card .card-actions { display:flex;gap:0.5rem;margin-top:1rem }
+    .course-card .card-actions button { flex:1;font-size:0.85rem;padding:0.5rem 0.8rem }
+    .course-progress-label { display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem }
+    .last-active { font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem }
+    .filter-tabs { display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap }
+    .filter-tab { padding:0.4rem 1rem;border-radius:20px;font-size:0.85rem;cursor:pointer;border:1px solid var(--glass-border-light);background:transparent;color:var(--text-muted);transition:all 0.2s }
+    .filter-tab.active { background:var(--primary);color:#fff;border-color:var(--primary) }
+    .filter-tab:hover { border-color:var(--primary) }
+  </style>
+</head>
+<body data-page="MyCourses">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main class="dashboard-main" style="padding:2rem 8%;min-height:70vh;max-width:1200px;margin:0 auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem">
+      <div>
+        <h1 style="font-size:1.8rem"><i class="fas fa-book" style="color:var(--primary)"></i> My Courses</h1>
+        <p style="color:var(--text-muted)">Track your enrolled courses and continue learning.</p>
+      </div>
+      <a href="../Learn.html" class="btn btn-primary"><i class="fas fa-plus"></i> Browse Courses</a>
+    </div>
+
+    <div class="filter-tabs" id="filterTabs">
+      <span class="filter-tab active" data-filter="all">All</span>
+      <span class="filter-tab" data-filter="active">Active</span>
+      <span class="filter-tab" data-filter="paused">Paused</span>
+      <span class="filter-tab" data-filter="completed">Completed</span>
+    </div>
+
+    <div id="myCoursesGrid" class="grid grid-3">
+      <p style="color:var(--text-muted);grid-column:1/-1;text-align:center;padding:3rem">Loading your courses...</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/learning.js"></script>
+  <script src="../js/achievements.js"></script>
+  <script src="../js/daily-goals.js"></script>
+  <script src="../js/reminders.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      requireAuth();
+
+      var grid = document.getElementById('myCoursesGrid');
+      var filterTabs = document.querySelectorAll('.filter-tab');
+      var currentFilter = 'all';
+
+      filterTabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          filterTabs.forEach(function(t) { t.classList.remove('active'); });
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          renderCourses();
+        });
+      });
+
+      function getStatusBadge(status) {
+        var labels = { active: 'Active', paused: 'Paused', completed: 'Completed' };
+        return '<span class="course-status-badge ' + status + '">' + (labels[status] || 'Not Started') + '</span>';
+      }
+
+      function formatTimeSpent(ms) {
+        var totalSec = Math.floor(ms / 1000);
+        var h = Math.floor(totalSec / 3600);
+        var m = Math.floor((totalSec % 3600) / 60);
+        if (h > 0) return h + 'h ' + m + 'm';
+        return m + 'm';
+      }
+
+      function renderCourses() {
+        var courseProgress = Utils.getStorage('course_progress', {});
+        var coursesData = Utils.getStorage('courses_data', []);
+        var courseIds = Object.keys(courseProgress);
+
+        if (courseIds.length === 0) {
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem"><i class="fas fa-book-open" style="font-size:3rem;color:var(--text-muted);margin-bottom:1rem;display:block"></i><h3 style="margin-bottom:0.5rem">No courses yet</h3><p style="color:var(--text-muted);margin-bottom:1.5rem">Start learning by browsing our course catalog.</p><a href="../Learn.html" class="btn btn-primary">Browse Courses</a></div>';
+          return;
+        }
+
+        var filtered = courseIds.filter(function(cid) {
+          var entry = courseProgress[cid];
+          if (currentFilter === 'all') return true;
+          return (entry.status || 'active') === currentFilter;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem"><i class="fas fa-filter" style="font-size:2rem;color:var(--text-muted);margin-bottom:0.5rem;display:block"></i><p style="color:var(--text-muted)">No ' + currentFilter + ' courses.</p></div>';
+          return;
+        }
+
+        grid.innerHTML = filtered.map(function(cid) {
+          var entry = courseProgress[cid];
+          var course = (Array.isArray(coursesData) ? coursesData : []).find(function(c) { return c.id === cid; });
+          var title = course ? course.title : cid.replace(/-/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+          var icon = course ? (course.icon || 'fas fa-book') : 'fas fa-book';
+          var color = course ? (course.color || 'var(--primary)') : 'var(--primary)';
+          var status = entry.status || 'active';
+          var completedLessons = (entry.lessonsCompleted || []).length;
+          var completedModules = (entry.modulesCompleted || []).length;
+          var totalMods = course && course.lessons ? course.lessons.length : Math.max(completedModules + 5, 10);
+          var pct = totalMods > 0 ? Math.min(100, Math.round((completedModules / totalMods) * 100)) : 0;
+          var lastActive = entry.lastActivity ? Utils.timeAgo(entry.lastActivity) : 'Never';
+          var timeSpent = entry.timeSpent ? formatTimeSpent(entry.timeSpent) : '0m';
+          var currentMod = entry.currentModule || 1;
+
+          return '<div class="module-card course-card" style="border-left:3px solid ' + color + ';cursor:pointer" onclick="window.location.href=\'../courses/' + cid + '.html\'">'
+            + '<div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:0.8rem">'
+            + '<div style="width:48px;height:48px;border-radius:12px;background:' + color + '20;color:' + color + ';display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0"><i class="' + icon + '"></i></div>'
+            + '<div style="flex:1"><div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap"><h3 style="margin-bottom:0.2rem">' + Utils.sanitize(title) + '</h3>' + getStatusBadge(status) + '</div>'
+            + '<p style="font-size:0.85rem;color:var(--text-muted)">' + completedLessons + ' lessons, ' + completedModules + ' modules completed</p></div></div>'
+            + '<div style="height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:3px;transition:width 0.5s"></div></div>'
+            + '<div class="course-progress-label"><span style="font-size:0.8rem;color:var(--text-muted)">' + pct + '% complete</span><span style="font-size:0.75rem;color:var(--text-muted)"><i class="far fa-clock"></i> ' + timeSpent + '</span></div>'
+            + '<div class="last-active">Last active: ' + Utils.sanitize(lastActive) + (status === 'paused' ? ' &middot; Module ' + currentMod : '') + '</div>'
+            + '<div class="card-actions">'
+            + (status === 'active' ? '<button class="btn btn-sm btn-primary" onclick="event.stopPropagation();window.location.href=\'../lesson.html?course=' + cid + '&module=' + currentMod + '\'"><i class="fas fa-play"></i> Continue</button><button class="btn btn-sm btn-ghost pause-btn" data-cid="' + cid + '"><i class="fas fa-pause"></i> Pause</button><button class="btn btn-sm btn-ghost reset-btn" data-cid="' + cid + '" style="color:var(--error);border-color:rgba(239,68,68,0.3);font-size:0.75rem"><i class="fas fa-undo"></i></button>' : '')
+            + (status === 'paused' ? '<button class="btn btn-sm btn-success" onclick="event.stopPropagation();resumeCourse(\'' + cid + '\')"><i class="fas fa-play-circle"></i> Resume</button><button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();window.location.href=\'../courses/' + cid + '.html\'"><i class="fas fa-eye"></i> View</button><button class="btn btn-sm btn-ghost reset-btn" data-cid="' + cid + '" style="color:var(--error);border-color:rgba(239,68,68,0.3);font-size:0.75rem"><i class="fas fa-undo"></i></button>' : '')
+            + (status === 'completed' ? '<button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();window.location.href=\'../courses/' + cid + '.html\'" style="width:100%"><i class="fas fa-undo"></i> Review Course</button><button class="btn btn-sm btn-ghost reset-btn" data-cid="' + cid + '" style="color:var(--error);border-color:rgba(239,68,68,0.3);font-size:0.75rem"><i class="fas fa-trash"></i></button>' : '')
+            + '</div></div>';
+        }).join('');
+
+        document.querySelectorAll('.pause-btn').forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var cid = this.dataset.cid;
+            pauseCourse(cid);
+          });
+        });
+
+        document.querySelectorAll('.reset-btn').forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var cid = this.dataset.cid;
+            if (confirm('Reset all progress for ' + cid + '? This cannot be undone.')) {
+              resetCourse(cid);
+            }
+          });
+        });
+      }
+
+      window.pauseCourse = function(cid) {
+        var progress = Utils.getStorage('course_progress', {});
+        if (progress[cid]) {
+          progress[cid].status = 'paused';
+          progress[cid].pausedAt = new Date().toISOString();
+          Utils.setStorage('course_progress', progress);
+          Utils.showToast('Course paused. Progress saved.', 'info');
+          renderCourses();
+        }
+      };
+
+      window.resumeCourse = function(cid) {
+        var progress = Utils.getStorage('course_progress', {});
+        if (progress[cid]) {
+          progress[cid].status = 'active';
+          progress[cid].resumedAt = new Date().toISOString();
+          progress[cid].lastActivity = new Date().toISOString();
+          Utils.setStorage('course_progress', progress);
+          Utils.showToast('Course resumed!', 'success');
+          renderCourses();
+        }
+      };
+
+      window.resetCourse = function(cid) {
+        var progress = Utils.getStorage('course_progress', {});
+        delete progress[cid];
+        Utils.setStorage('course_progress', progress);
+        Utils.showToast('Progress reset for ' + cid, 'info');
+        renderCourses();
+      };
+
+      renderCourses();
+    });
+  </script>
+</body>
+</html>

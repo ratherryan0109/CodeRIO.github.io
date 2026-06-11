@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="go">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Go (Golang)</h1>
+      <p>Go, also known as Golang, is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson. It combines the efficiency of compiled languages with the ease of dynamic languages, making it ideal for scalable backend systems, cloud services, and distributed applications.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 8 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 14 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" alt="Go">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Go was created at Google in 2007 to address common criticisms of other languages while maintaining their strengths. It was publicly announced in 2009 and has since become one of the most popular languages for backend development, cloud infrastructure, and DevOps tooling. Go compiles quickly to a single binary, has built-in concurrency primitives (goroutines and channels), and provides a rich standard library for networking, HTTP, cryptography, and file I/O.</p>
+      <p>Go's syntax is clean and minimal, deliberately omitting features like classes and inheritance in favor of composition through interfaces. It uses explicit error handling rather than exceptions, has garbage collection, and supports cross-compilation for different operating systems and architectures. Go's toolchain includes a built-in formatter (gofmt), dependency management (go mod), testing framework, and profiling tools.</p>
+      <p>Go powers critical infrastructure at Google (Kubernetes, Docker, gRPC), Cloudflare's edge network, Netflix's performance monitoring, Uber's geofencing services, and Twitch's streaming platform. Its ecosystem includes thousands of open-source packages hosted on pkg.go.dev, with frameworks like Gin, Echo, Fiber for web development and CLI tools like Cobra for building command-line applications.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Go?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-tachometer-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Blazing Fast Performance</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Compiled to machine code, Go executes as fast as C/C++ with significantly faster compile times.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-cubes" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Built-in Concurrency</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Goroutines and channels make concurrent programming simple, safe, and efficient.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-cloud" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Cloud Native Standard</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Kubernetes, Docker, Terraform, and Prometheus are all written in Go.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-bolt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Simple & Readable</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Minimal syntax, no generics complexity (until Go 1.18), and automatic formatting enforce consistency.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Go is the backbone of modern cloud infrastructure and is adopted by leading technology companies:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Docker</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Kubernetes</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Real-world applications include Netflix's traffic management systems, Twitch's live streaming platform, Dropbox's file synchronization infrastructure, Cloudflare's edge computing services, and Monzo's banking backend. Go is also widely used for CLI tools, API gateways, database proxies, and microservices orchestration in enterprises.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic programming knowledge, understanding of variables, loops, and functions</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Go syntax, variables, data types, control flow, functions, packages</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 3-5)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Structs, interfaces, error handling, goroutines, channels, testing</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 6-7)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">HTTP servers, middleware, database interaction, JSON/Protobuf serialization</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Week 8)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">gRPC, microservices patterns, context package, reflection, build tags</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=go&module=1" class="module-card" onclick="LearningTracker.startLesson('go-01')"><h3><span class="module-number">1</span> Introduction to Go</h3><p>History of Go, installation, GOPATH vs Go Modules, workspace layout, and the Go toolchain (go build, go run, go fmt, go mod).</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Setup</span> <span class="badge badge-primary">Toolchain</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=2" class="module-card" onclick="LearningTracker.startLesson('go-02')"><h3><span class="module-number">2</span> Variables, Types & Constants</h3><p>Variable declarations, type inference, zero values, basic types (int, float, string, bool), constants with iota, and type conversion.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Types</span> <span class="badge badge-primary">Variables</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=3" class="module-card" onclick="LearningTracker.startLesson('go-03')"><h3><span class="module-number">3</span> Control Flow & Functions</h3><p>if/else, switch, for loops (Go has only for), defer, functions, multiple return values, variadic functions, and closures.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Control flow</span> <span class="badge badge-primary">Functions</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=4" class="module-card" onclick="LearningTracker.startLesson('go-04')"><h3><span class="module-number">4</span> Arrays, Slices & Maps</h3><p>Arrays (fixed size), slices (dynamic), slice operations (append, copy), maps (key-value), and range iteration over collections.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Slices</span> <span class="badge badge-primary">Maps</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=5" class="module-card" onclick="LearningTracker.startLesson('go-05')"><h3><span class="module-number">5</span> Strings & Runes</h3><p>String manipulation, rune vs byte, unicode handling, string builder, and common string functions from the strings package.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Strings</span> <span class="badge badge-primary">Runes</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=go&module=6" class="module-card" onclick="LearningTracker.startLesson('go-06')"><h3><span class="module-number">6</span> Structs & Methods</h3><p>Defining structs, fields, methods with value/pointer receivers, struct embedding (composition without inheritance), and tags.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Structs</span> <span class="badge badge-primary">Methods</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=7" class="module-card" onclick="LearningTracker.startLesson('go-07')"><h3><span class="module-number">7</span> Interfaces & Type Assertion</h3><p>Interface definition, implicit implementation, the empty interface, type switches, type assertions, and best practices.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Interfaces</span> <span class="badge badge-primary">Type assertion</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=8" class="module-card" onclick="LearningTracker.startLesson('go-08')"><h3><span class="module-number">8</span> Error Handling & Panic</h3><p>Error interface, custom errors, wrapping errors with fmt.Errorf, panic and recover, and idiomatic Go error handling patterns.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Errors</span> <span class="badge badge-primary">Panic</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=9" class="module-card" onclick="LearningTracker.startLesson('go-09')"><h3><span class="module-number">9</span> Goroutines & Channels</h3><p>Spawning goroutines, channel operations (send/receive), buffered vs unbuffered, select statement, and synchronization patterns.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Concurrency</span> <span class="badge badge-primary">Channels</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=10" class="module-card" onclick="LearningTracker.startLesson('go-10')"><h3><span class="module-number">10</span> Testing & Benchmarks</h3><p>Writing tests with the testing package, table-driven tests, subtests, benchmarks, coverage, and fuzzing in Go 1.18+.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Testing</span> <span class="badge badge-primary">Benchmarks</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=go&module=11" class="module-card" onclick="LearningTracker.startLesson('go-11')"><h3><span class="module-number">11</span> File I/O & Packages</h3><p>Reading/writing files, the os, io, bufio, and ioutil packages, working with JSON and XML, and creating reusable packages.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">File I/O</span> <span class="badge badge-primary">JSON</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=12" class="module-card" onclick="LearningTracker.startLesson('go-12')"><h3><span class="module-number">12</span> HTTP Servers & Clients</h3><p>net/http package, handlers and middleware, routing, serving static files, HTTP clients, and building RESTful APIs.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">HTTP</span> <span class="badge badge-primary">REST</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=13" class="module-card" onclick="LearningTracker.startLesson('go-13')"><h3><span class="module-number">13</span> Database & SQL</h3><p>database/sql interface, connecting to PostgreSQL/MySQL, executing queries, prepared statements, migrations, and connection pooling.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">SQL</span> <span class="badge badge-primary">Database</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=go&module=14" class="module-card" onclick="LearningTracker.startLesson('go-14')"><h3><span class="module-number">14</span> Context & Advanced Patterns</h3><p>context package for cancellation and deadlines, sync package (Mutex, WaitGroup, Once), atomic operations, and memory ordering.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Context</span> <span class="badge badge-primary">Sync</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Variable Declaration in Go</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Go supports multiple ways to declare variables. The short declaration operator := is the most common for local variables.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>var name string = "Alice"       // explicit type
+var age = 30                    // type inference
+city := "New York"              // short declaration
+var x, y int = 1, 2             // multiple variables
+var (
+    a = 10
+    b = "hello"
+)                               // grouped declarations</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Goroutines and Channels</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Goroutines are lightweight threads managed by the Go runtime. Channels allow typed communication between goroutines.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>func worker(id int, jobs <-chan int, results chan<- int) {
+    for j := range jobs {
+        fmt.Println("worker", id, "processing job", j)
+        time.Sleep(time.Second)
+        results <- j * 2
+    }
+}
+
+func main() {
+    jobs := make(chan int, 5)
+    results := make(chan int, 5)
+    for w := 1; w <= 3; w++ {
+        go worker(w, jobs, results)
+    }
+    for j := 1; j <= 5; j++ {
+        jobs <- j
+    }
+    close(jobs)
+    for r := 1; r <= 5; r++ {
+        <-results
+    }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Interfaces in Go</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Go interfaces are satisfied implicitly. A type implements an interface by implementing its methods - no explicit declaration needed.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>type Shape interface {
+    Area() float64
+    Perimeter() float64
+}
+
+type Rectangle struct {
+    Width, Height float64
+}
+
+func (r Rectangle) Area() float64 {
+    return r.Width * r.Height
+}
+
+func (r Rectangle) Perimeter() float64 {
+    return 2 * (r.Width + r.Height)
+}
+
+func printShape(s Shape) {
+    fmt.Printf("Area: %.2f, Perimeter: %.2f\n",
+        s.Area(), s.Perimeter())
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Error Handling Pattern</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Go uses explicit error returns rather than exceptions. Functions that can fail return error as the last return value.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>func divide(a, b float64) (float64, error) {
+    if b == 0 {
+        return 0, fmt.Errorf("division by zero")
+    }
+    return a / b, nil
+}
+
+func main() {
+    result, err := divide(10, 0)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(result)
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Defer Statement</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Defer schedules a function call to run after the surrounding function completes. It is commonly used for cleanup tasks.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>func readFile() {
+    file, err := os.Open("data.txt")
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer file.Close() // runs when readFile returns
+
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
+        fmt.Println(scanner.Text())
+    }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Struct Tags and JSON</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Struct tags provide metadata for serialization. The encoding/json package uses tags to map field names.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>type User struct {
+    ID        int       `json:"id"`
+    Name      string    `json:"name"`
+    Email     string    `json:"email,omitempty"`
+    CreatedAt time.Time `json:"created_at"`
+}
+
+u := User{ID: 1, Name: "Alice", Email: "alice@example.com"}
+data, _ := json.Marshal(u)
+fmt.Println(string(data))
+// {"id":1,"name":"Alice","email":"alice@example.com","created_at":"..."}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Pointers vs Values</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Go passes everything by value. Use pointers when you need to modify the original value or avoid copying large structs.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>func zeroVal(val int) {
+    val = 0
+}
+
+func zeroPtr(ptr *int) {
+    *ptr = 0
+}
+
+x := 5
+zeroVal(x)    // x is still 5
+zeroPtr(&x)   // x is now 0</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. The Select Statement</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Select lets a goroutine wait on multiple channel operations simultaneously, similar to a switch statement for channels.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>select {
+case msg1 := <-ch1:
+    fmt.Println("Received from ch1:", msg1)
+case msg2 := <-ch2:
+    fmt.Println("Received from ch2:", msg2)
+case <-time.After(1 * time.Second):
+    fmt.Println("Timeout!")
+default:
+    fmt.Println("No channels ready")
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: REST API Server with Gin</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A simple RESTful API server using the Gin web framework.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>package main
+
+import (
+    "net/http"
+    "github.com/gin-gonic/gin"
+)
+
+type Book struct {
+    ID     string  `json:"id"`
+    Title  string  `json:"title"`
+    Author string  `json:"author"`
+    Price  float64 `json:"price"`
+}
+
+var books = []Book{
+    {ID: "1", Title: "Go in Action", Author: "William Kennedy", Price: 39.99},
+    {ID: "2", Title: "The Go Programming Language", Author: "Donovan & Kernighan", Price: 44.99},
+}
+
+func getBooks(c *gin.Context) {
+    c.IndentedJSON(http.StatusOK, books)
+}
+
+func main() {
+    router := gin.Default()
+    router.GET("/books", getBooks)
+    router.Run("localhost:8080")
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: File Processing Pipeline</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A concurrent file processing pipeline using goroutines and channels.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>func generateJobs(files []string, jobs chan<- string) {
+    defer close(jobs)
+    for _, f := range files {
+        jobs <- f
+    }
+}
+
+func processFile(jobs <-chan string, results chan<- int) {
+    for file := range jobs {
+        data, _ := os.ReadFile(file)
+        lines := strings.Split(string(data), "\n")
+        results <- len(lines)
+    }
+}
+
+func main() {
+    files := []string{"a.txt", "b.txt", "c.txt"}
+    jobs := make(chan string, 3)
+    results := make(chan int, 3)
+
+    go generateJobs(files, jobs)
+    for w := 0; w < 2; w++ {
+        go processFile(jobs, results)
+    }
+
+    for i := 0; i < len(files); i++ {
+        fmt.Println("Lines:", <-results)
+    }
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">FizzBuzz</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a program that prints numbers from 1 to 100, replacing multiples of 3 with Fizz, 5 with Buzz, and both with FizzBuzz.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Word Counter</h4><p style="color:var(--text-muted);font-size:0.85rem">Read a text file and count the frequency of each word using maps and strings.Fields.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Concurrent Web Scraper</h4><p style="color:var(--text-muted);font-size:0.85rem">Use goroutines to fetch multiple URLs concurrently and report their HTTP status codes and response times.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">REST API CRUD</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a complete CRUD API for a todo list with in-memory storage using the net/http package.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Chat Server</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a simple TCP chat server that broadcasts messages from one client to all connected clients using goroutines.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Key-Value Store</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement an in-memory key-value store with concurrent read/write access, TTL support, and a simple HTTP API.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Load Balancer</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a round-robin HTTP load balancer that forwards requests to multiple backend servers and reports health status.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Rate Limiter</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a token bucket rate limiter with configurable rate and burst, usable as HTTP middleware.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">URL Shortener Service</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A URL shortening service with HTTP API, base62 encoding, redirect handling, and click tracking.</p>
+          <span class="badge badge-primary">HTTP</span> <span class="badge badge-primary">Router</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">CLI Task Manager</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A command-line todo application with file-based persistence, categories, priorities, and due dates.</p>
+          <span class="badge badge-primary">CLI</span> <span class="badge badge-primary">File I/O</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Distributed Cache</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A distributed in-memory cache with LRU eviction, TTL, HTTP API, and consistent hashing for sharding.</p>
+          <span class="badge badge-primary">Concurrency</span> <span class="badge badge-primary">Networking</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Monitoring Dashboard</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A real-time system monitoring dashboard with CPU, memory, disk metrics, and WebSocket push updates.</p>
+          <span class="badge badge-primary">WebSocket</span> <span class="badge badge-primary">Metrics</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Database Migration Tool</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A CLI tool for managing database schema migrations with up/down commands, version tracking, and rollbacks.</p>
+          <span class="badge badge-primary">SQL</span> <span class="badge badge-primary">CLI</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">gRPC Chat Application</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A real-time chat service using gRPC bidirectional streaming with protobuf serialization and user authentication.</p>
+          <span class="badge badge-primary">gRPC</span> <span class="badge badge-primary">Protobuf</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div id="interviewQuestionsContainer"></div>
+      </div>
+
+  </section>
+
+  <script src="../js/learning.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+

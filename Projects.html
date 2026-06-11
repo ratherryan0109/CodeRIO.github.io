@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #0f0f23; background: var(--bg); overflow-x: hidden; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(102,126,234,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(118,75,162,0.08) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+
+    .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .glass-strong { background: rgba(255,255,255,0.10); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; box-shadow: 0 12px 48px rgba(0,0,0,0.25); }
+
+    .projects-wrapper { position: relative; z-index: 1; padding: 2rem 8% 5rem; max-width: 1400px; margin: 0 auto; }
+
+    /* Hero */
+    .hero-section { text-align: center; padding: 3rem 0 2.5rem; position: relative; }
+    .hero-section h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; background: linear-gradient(135deg, #b254e5 100%, #f093fb 0%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .hero-section .subtitle { font-size: 1.1rem; color: rgba(15,15,35,0.6); max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .hero-stat { text-align: center; padding: 1rem 1.8rem; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
+
+    /* Stats Bar */
+    .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 2.5rem; }
+    .stat-card { padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; transition: all 0.4s ease; cursor: default; }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.2); }
+    .stat-card .stat-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .stat-card .stat-icon.purple { background: rgba(102,126,234,0.2); color: #a78bfa; }
+    .stat-card .stat-icon.green { background: rgba(52,211,153,0.2); color: #34d399; }
+    .stat-card .stat-icon.amber { background: rgba(251,191,36,0.2); color: #fbbf24; }
+    .stat-card .stat-icon.pink { background: rgba(244,114,182,0.2); color: #f472b6; }
+    .stat-card .stat-info .s-num { font-size: 1.4rem; font-weight: 700; }
+    .stat-card .stat-info .s-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.1rem; }
+
+    /* Filter Bar */
+    .filter-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-wrap i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.35); font-size: 0.9rem; pointer-events: none; }
+    .search-wrap input { width: 100%; padding: 0.8rem 1rem 0.8rem 2.6rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.06); color: #e0e0f0; font-size: 0.9rem; outline: none; transition: all 0.3s ease; backdrop-filter: blur(12px); }
+    .search-wrap input::placeholder { color: rgba(255,255,255,0.3); }
+    .search-wrap input:focus { border-color: rgba(167,139,250,0.5); box-shadow: 0 0 0 3px rgba(167,139,250,0.15); }
+    .filter-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .filter-tab { padding: 0.7rem 1.3rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.35s ease; }
+    .filter-tab:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.15); }
+    .filter-tab.active { background: rgba(167,139,250,0.2); color: #a78bfa; border-color: rgba(167,139,250,0.3); box-shadow: 0 0 20px rgba(167,139,250,0.1); }
+
+    /* Featured Project */
+    .featured-section { margin-bottom: 2.5rem; }
+    .featured-card { position: relative; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; overflow: hidden; border-radius: 20px; border: 1px solid transparent; background-clip: padding-box; }
+    .featured-card::before { content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 2px; background: linear-gradient(135deg, #a78bfa, #f093fb, #f5576c); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+    .featured-card .feat-content { flex: 1; min-width: 200px; position: relative; z-index: 1; }
+    .featured-card .feat-badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(239,68,68,0.2); color: #f87171; margin-bottom: 0.8rem; }
+    .featured-card h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .featured-card p { color: rgba(255,255,255,0.55); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.2rem; max-width: 500px; }
+    .featured-card .feat-tech { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .featured-card .feat-tech span { padding: 0.2rem 0.7rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; background: rgba(167,139,250,0.15); color: #a78bfa; }
+    .btn-feat { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.8rem; border-radius: 12px; border: none; font-weight: 700; font-size: 0.9rem; cursor: pointer; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; transition: all 0.35s ease; text-decoration: none; }
+    .btn-feat:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(102,126,234,0.35); }
+    .btn-feat i { transition: transform 0.3s ease; }
+    .btn-feat:hover i { transform: translateX(4px); }
+    .featured-card .feat-visual { position: relative; z-index: 1; font-size: 5rem; opacity: 0.6; flex-shrink: 0; filter: drop-shadow(0 0 30px rgba(167,139,250,0.3)); }
+
+    /* Difficulty Guide */
+    .diff-guide { margin-bottom: 2.5rem; }
+    .diff-guide h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.2rem; color: rgba(255,255,255,0.8); }
+    .diff-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .diff-card { padding: 1.3rem 1.5rem; transition: all 0.35s ease; cursor: default; }
+    .diff-card:hover { transform: translateY(-4px); }
+    .diff-card .diff-dot { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; margin-bottom: 0.7rem; font-size: 1rem; }
+    .diff-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .diff-card p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* Project Grid */
+    .section-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+    .section-label h3 { font-size: 1.2rem; font-weight: 700; }
+    .section-label span { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+
+    .project-card { padding: 1.6rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .project-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0; background: linear-gradient(135deg, rgba(167,139,250,0.05) 0%, transparent 50%); transition: opacity 0.4s ease; pointer-events: none; }
+    .project-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.18); }
+    .project-card:hover::after { opacity: 1; }
+    .project-card .p-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; }
+    .project-card .p-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; background: rgba(255,255,255,0.05); flex-shrink: 0; }
+    .project-card .diff-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.8rem; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+    .diff-badge.beg { background: rgba(52,211,153,0.15); color: #34d399; }
+    .diff-badge.int { background: rgba(251,191,36,0.15); color: #fbbf24; }
+    .diff-badge.adv { background: rgba(239,68,68,0.15); color: #f87171; }
+    .project-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .project-card p { color: rgba(255,255,255,0.5); font-size: 0.84rem; line-height: 1.6; margin-bottom: 0.8rem; flex: 1; }
+    .p-tech { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .p-tech span { padding: 0.15rem 0.55rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; background: rgba(167,139,250,0.1); color: #a78bfa; }
+    .p-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.06); }
+    .p-meta .p-time { font-size: 0.78rem; color: rgba(255,255,255,0.35); display: flex; align-items: center; gap: 0.35rem; }
+    .p-meta .p-time i { font-size: 0.75rem; }
+    .p-meta .p-start { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 600; color: #a78bfa; text-decoration: none; transition: all 0.3s ease; }
+    .p-meta .p-start i { transition: transform 0.3s ease; font-size: 0.75rem; }
+    .project-card:hover .p-start i { transform: translateX(4px); }
+    .project-card .skill-bar { margin-top: 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
+    .project-card .skill-bar .bar-track { flex: 1; height: 4px; border-radius: 4px; background: rgba(255,255,255,0.06); overflow: hidden; }
+    .project-card .skill-bar .bar-track .bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+    .project-card .skill-bar .bar-label { font-size: 0.65rem; color: rgba(255,255,255,0.3); white-space: nowrap; }
+    .project-card.hidden { display: none; }
+    .no-results { grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; }
+    .no-results i { font-size: 3rem; color: rgba(255,255,255,0.15); margin-bottom: 1rem; }
+    .no-results h3 { color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; }
+    .no-results p { color: rgba(255,255,255,0.25); }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+    .animate-in:nth-child(1) { animation-delay: 0.05s; }
+    .animate-in:nth-child(2) { animation-delay: 0.1s; }
+    .animate-in:nth-child(3) { animation-delay: 0.15s; }
+    .animate-in:nth-child(4) { animation-delay: 0.2s; }
+    .animate-in:nth-child(5) { animation-delay: 0.25s; }
+    .animate-in:nth-child(6) { animation-delay: 0.3s; }
+    .animate-in:nth-child(7) { animation-delay: 0.35s; }
+    .animate-in:nth-child(8) { animation-delay: 0.4s; }
+    .animate-in:nth-child(9) { animation-delay: 0.45s; }
+
+    @media (max-width: 768px) {
+      .projects-wrapper { padding: 1.5rem 5% 3rem; }
+      .hero-stats { gap: 1rem; }
+      .hero-stat { padding: 0.8rem 1rem; }
+      .hero-stat .num { font-size: 1.5rem; }
+      .featured-card { flex-direction: column; text-align: center; padding: 1.5rem; }
+      .featured-card p { max-width: 100%; }
+      .featured-card .feat-visual { font-size: 3.5rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .filter-bar { flex-direction: column; }
+      .search-wrap { width: 100%; }
+    }
+
+
+    .hero-stat .label,
+.stat-card .stat-info .s-label,
+.featured-card p,
+.diff-card p,
+.project-card p {
+    color: rgba(15,15,35,0.65);
+}
+
+.diff-guide h3 {
+    color: #1a1a2e;
+}
+.search-wrap input {
+    color: #1a1a2e;
+    background: rgba(255,255,255,0.9);
+}
+.search-wrap input::placeholder {
+    color: rgba(15,15,35,0.4);
+}
+.filter-tab {
+    color: #4a4a6a;
+    background: rgba(255,255,255,0.8);
+}
+.glass {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.featured-card p {
+    color: #4a4a6a;
+}
+
+  </style>
+</head>
+<body data-page="Projects">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html" class="active">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="projects-wrapper">
+
+    <!-- Hero -->
+    <section class="hero-section animate-in">
+      <h1>Build Amazing Projects</h1>
+      <p class="subtitle">Hands-on projects designed to help you apply your skills, build your portfolio, and showcase your work to employers.</p>
+      <div class="hero-stats">
+        <div class="hero-stat glass">
+          <div class="num" data-count="14">14+</div>
+          <div class="label">Projects</div>
+        </div>
+        <div class="hero-stat glass">
+          <div class="num">3</div>
+          <div class="label">Difficulty Levels</div>
+        </div>
+        <div class="hero-stat glass">
+          <div class="num">500+</div>
+          <div class="label">Hours of Content</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar animate-in">
+      <div class="stat-card glass">
+        <div class="stat-icon purple"><i class="fas fa-code-branch"></i></div>
+        <div class="stat-info">
+          <div class="s-num">14</div>
+          <div class="s-label">Total Projects</div>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-icon green"><i class="far fa-clock"></i></div>
+        <div class="stat-info">
+          <div class="s-num">500+</div>
+          <div class="s-label">Total Hours</div>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-icon amber"><i class="fas fa-layer-group"></i></div>
+        <div class="stat-info">
+          <div class="s-num">3</div>
+          <div class="s-label">Skill Levels</div>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-icon pink"><i class="fas fa-users"></i></div>
+        <div class="stat-info">
+          <div class="s-num">12K+</div>
+          <div class="s-label">Active Learners</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Project -->
+    <section class="featured-section animate-in">
+      <div class="featured-card glass-strong">
+        <div class="feat-content">
+          <span class="feat-badge"><i class="fas fa-star"></i> Featured Project</span>
+          <h2>AI Code Assistant</h2>
+          <p>An intelligent code assistant that uses AI to suggest completions, detect bugs, and refactor code. This advanced project will push your skills to the next level.</p>
+          <div class="feat-tech">
+            <span>Python</span>
+            <span>AI/ML</span>
+            <span>Flask</span>
+          </div>
+          <a href="projects/ai-code-assistant.html" class="btn-feat">Start Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="feat-visual">🤖</div>
+      </div>
+    </section>
+
+    <!-- Difficulty Guide -->
+    <section class="diff-guide animate-in">
+      <h3><i class="fas fa-signal" style="margin-right: 0.5rem; color: rgba(15,15,35,0.4);"></i> Difficulty Guide</h3>
+      <div class="diff-cards">
+        <div class="diff-card glass">
+          <div class="diff-dot" style="background: rgba(52,211,153,0.15); color: #34d399;"><i class="fas fa-seedling"></i></div>
+          <h4>Beginner</h4>
+          <p>Perfect for newcomers. Build foundational projects with HTML, CSS, and basic JavaScript.</p>
+        </div>
+        <div class="diff-card glass">
+          <div class="diff-dot" style="background: rgba(251,191,36,0.15); color: #fbbf24;"><i class="fas fa-chart-line"></i></div>
+          <h4>Intermediate</h4>
+          <p>For developers with some experience. Work with APIs, frameworks, and full-stack concepts.</p>
+        </div>
+        <div class="diff-card glass">
+          <div class="diff-dot" style="background: rgba(239,68,68,0.15); color: #f87171;"><i class="fas fa-rocket"></i></div>
+          <h4>Advanced</h4>
+          <p>Challenge yourself with complex architectures, AI/ML, and production-grade systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter + Grid -->
+    <section class="animate-in">
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search projects..." autocomplete="off">
+        </div>
+        <div class="filter-tabs" id="projectTabs">
+          <button class="filter-tab active" data-filter="all">All</button>
+          <button class="filter-tab" data-filter="beginner">Beginner</button>
+          <button class="filter-tab" data-filter="intermediate">Intermediate</button>
+          <button class="filter-tab" data-filter="advanced">Advanced</button>
+        </div>
+      </div>
+      <div class="section-label">
+        <h3>All Projects <span id="projectCount"></span></h3>
+        <span><i class="far fa-clock"></i> Estimated times included</span>
+      </div>
+      <div class="project-grid" id="projectGrid"></div>
+    </section>
+
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const projects = [
+      { title: 'Personal Portfolio Website', desc: 'Build a responsive portfolio site to showcase your projects, skills, and experience with modern design.', tech: ['HTML', 'CSS', 'JavaScript'], difficulty: 'beginner', time: '2-3 hours', slug: 'projects/personal-portfolio.html' },
+      { title: 'Weather Dashboard', desc: 'Create a weather app that fetches real-time data from an API and displays forecasts with beautiful visuals.', tech: ['JavaScript', 'API', 'CSS'], difficulty: 'beginner', time: '3-4 hours', slug: 'projects/weather-dashboard.html' },
+      { title: 'To-Do List App', desc: 'A full-featured task manager with add, edit, delete, filter, and local storage persistence.', tech: ['JavaScript', 'HTML', 'CSS'], difficulty: 'beginner', time: '2 hours', slug: 'projects/todo-list.html' },
+      { title: 'Calculator', desc: 'Build a fully functional calculator with support for basic arithmetic operations and clean UI.', tech: ['HTML', 'CSS', 'JavaScript'], difficulty: 'beginner', time: '1-2 hours', slug: 'projects/calculator.html' },
+      { title: 'E-Commerce Store', desc: 'A complete online storefront with product listings, cart functionality, and checkout flow.', tech: ['React', 'Node.js', 'CSS'], difficulty: 'intermediate', time: '15-20 hours', slug: 'projects/ecommerce-store.html' },
+      { title: 'Chat Application', desc: 'Real-time messaging app with user authentication, chat rooms, and message history using WebSockets.', tech: ['Node.js', 'Socket.io', 'React'], difficulty: 'intermediate', time: '20-25 hours', slug: 'projects/chat-app.html' },
+      { title: 'Blog Platform', desc: 'A full-stack blogging platform with markdown editor, comments, tags, and user profiles.', tech: ['Next.js', 'MongoDB', 'Tailwind'], difficulty: 'intermediate', time: '25-30 hours', slug: 'projects/blog-platform.html' },
+      { title: 'Movie Search App', desc: 'Search films, view ratings, trailers, and recommendations using The Movie Database API.', tech: ['React', 'API', 'CSS'], difficulty: 'intermediate', time: '8-10 hours', slug: 'projects/movie-search.html' },
+      { title: 'Social Media Dashboard', desc: 'Analytics dashboard displaying social media metrics with charts, filters, and data visualization.', tech: ['React', 'Chart.js', 'Node.js'], difficulty: 'intermediate', time: '12-15 hours', slug: 'projects/social-dashboard.html' },
+      { title: 'AI Code Assistant', desc: 'An intelligent code assistant that uses AI to suggest completions, detect bugs, and refactor code.', tech: ['Python', 'AI/ML', 'Flask'], difficulty: 'advanced', time: '40-50 hours', slug: 'projects/ai-code-assistant.html' },
+      { title: 'Scalable Video Platform', desc: 'A video streaming platform with transcoding, adaptive bitrate, user management, and analytics.', tech: ['Node.js', 'FFmpeg', 'React', 'AWS'], difficulty: 'advanced', time: '60-80 hours', slug: 'projects/video-platform.html' },
+      { title: 'Real-Time Collaboration Tool', desc: 'A Google Docs-style collaborative editor with live cursors, version history, and conflict resolution.', tech: ['WebSocket', 'React', 'MongoDB'], difficulty: 'advanced', time: '50-70 hours', slug: 'projects/collaboration-tool.html' },
+      { title: 'Blockchain Explorer', desc: 'Visualize blockchain transactions, blocks, and network stats with real-time updates and search.', tech: ['Python', 'Web3', 'React'], difficulty: 'advanced', time: '45-60 hours', slug: 'projects/blockchain-explorer.html' },
+      { title: 'DevOps Pipeline Visualizer', desc: 'Monitor and visualize CI/CD pipelines, container health, and deployment status across environments.', tech: ['Docker', 'Go', 'React'], difficulty: 'advanced', time: '35-50 hours', slug: 'projects/devops-pipeline.html' },
+    ];
+
+    const iconMap = {
+      'Personal Portfolio Website': '🎨', 'Weather Dashboard': '🌤️', 'To-Do List App': '✅', 'Calculator': '🔢',
+      'E-Commerce Store': '🛒', 'Chat Application': '💬', 'Blog Platform': '📝', 'Movie Search App': '🎬',
+      'Social Media Dashboard': '📊', 'AI Code Assistant': '🤖', 'Scalable Video Platform': '🎥',
+      'Real-Time Collaboration Tool': '👥', 'Blockchain Explorer': '🔗', 'DevOps Pipeline Visualizer': '🔄'
+    };
+
+    const skillLevels = { beginner: { pct: 30, label: 'Beginner' }, intermediate: { pct: 60, label: 'Intermediate' }, advanced: { pct: 90, label: 'Advanced' } };
+    const diffColors = { beginner: '#34d399', intermediate: '#fbbf24', advanced: '#f87171' };
+    const diffBadge = { beginner: 'beg', intermediate: 'int', advanced: 'adv' };
+
+    function renderProjects(filter = 'all', search = '') {
+      const grid = document.getElementById('projectGrid');
+      let filtered = filter === 'all' ? projects : projects.filter(p => p.difficulty === filter);
+      if (search) {
+        const q = search.toLowerCase();
+        filtered = filtered.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.tech.some(t => t.toLowerCase().includes(q)));
+      }
+      document.getElementById('projectCount').textContent = `(${filtered.length} project${filtered.length !== 1 ? 's' : ''})`;
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="no-results glass"><i class="fas fa-folder-open"></i><h3>No projects found</h3><p>Try a different difficulty level or search term.</p></div>';
+        return;
+      }
+      grid.innerHTML = filtered.map((p, i) => {
+        const sk = skillLevels[p.difficulty];
+        const dc = diffColors[p.difficulty];
+        const db = diffBadge[p.difficulty];
+        return `<div class="project-card glass" style="animation: fadeUp 0.5s ease ${i * 0.06}s both;">
+          <div class="p-top">
+            <div class="p-icon">${iconMap[p.title] || '📁'}</div>
+            <span class="diff-badge ${db}"><i class="fas fa-tag"></i> ${p.difficulty}</span>
+          </div>
+          <h3>${p.title}</h3>
+          <p>${p.desc}</p>
+          <div class="p-tech">${p.tech.map(t => `<span>${t}</span>`).join('')}</div>
+          <div class="skill-bar">
+            <div class="bar-track"><div class="bar-fill" style="width:${sk.pct}%;background:${dc};"></div></div>
+            <span class="bar-label">${sk.label}</span>
+          </div>
+          <div class="p-meta">
+            <span class="p-time"><i class="far fa-clock"></i> ${p.time}</span>
+            <a href="${p.slug}" class="p-start">Start Project <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProjects('all', '');
+
+      const tabs = document.querySelectorAll('#projectTabs .filter-tab');
+      const searchInput = document.getElementById('searchInput');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          renderProjects(tab.dataset.filter, searchInput.value);
+        });
+      });
+
+      let searchTimer;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+          const activeTab = document.querySelector('#projectTabs .filter-tab.active');
+          renderProjects(activeTab.dataset.filter, searchInput.value);
+        }, 250);
+      });
+    });
+  </script>
+</body>
+</html>

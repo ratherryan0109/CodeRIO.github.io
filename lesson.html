@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/courses.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="Lesson">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <section class="lesson-container" style="padding:2rem 8%;max-width:1000px;margin:0 auto">
+    <!-- Breadcrumb -->
+    <div class="lesson-breadcrumb" style="margin-bottom:1.5rem;font-size:0.9rem;color:var(--text-muted)">
+      <a href="Learn.html" style="color:var(--primary)">Courses</a> &gt;
+      <a href="#" id="lessonCourseLink" style="color:var(--primary)"></a> &gt;
+      <span id="lessonBreadcrumbModule"></span>
+    </div>
+
+    <!-- Hero -->
+    <div class="lesson-hero glass" style="padding:2.5rem;border-radius:var(--border-radius-lg);margin-bottom:2rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+        <div>
+          <h1 id="lessonTitle" style="font-size:2rem;margin-bottom:0.5rem"></h1>
+          <div id="lessonMeta" style="display:flex;gap:1rem;flex-wrap:wrap"></div>
+        </div>
+        <div id="lessonProgress" style="text-align:right">
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.3rem">Progress</div>
+          <div class="progress-bar" style="width:150px"><div class="progress-fill" id="lessonProgressFill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content area with sidebar -->
+    <div style="display:grid;grid-template-columns:250px 1fr;gap:2rem">
+      <!-- Sidebar: Module list -->
+      <aside class="lesson-sidebar glass" style="padding:1.5rem;border-radius:var(--border-radius-md);height:fit-content;position:sticky;top:100px;max-height:calc(100vh - 140px)">
+        <h3 style="font-size:1rem;margin-bottom:0.5rem;color:var(--primary-dark)" id="lessonSidebarTitle"><i class="fas fa-list"></i> All Courses</h3>
+        <div id="lessonModuleList" style="overflow-y:auto;max-height:calc(100vh - 200px);padding-right:0.3rem"></div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="lesson-content" style="min-height:60vh">
+        <!-- Learning Objectives -->
+        <div class="glass" style="padding:1.5rem;border-radius:var(--border-radius-md);margin-bottom:2rem">
+          <h3 style="margin-bottom:1rem"><i class="fas fa-bullseye" style="color:var(--primary)"></i> Learning Objectives</h3>
+          <ul id="lessonObjectives" style="padding-left:1.2rem;line-height:2"></ul>
+        </div>
+
+        <!-- Content -->
+        <div id="lessonBody"></div>
+
+        <!-- Code Examples -->
+        <div id="lessonCodeExamples"></div>
+
+        <!-- Exercises -->
+        <div id="lessonExercises" class="glass" style="padding:1.5rem;border-radius:var(--border-radius-md);margin-bottom:2rem">
+          <h3 style="margin-bottom:1rem"><i class="fas fa-tasks" style="color:var(--primary)"></i> Practice Exercises</h3>
+          <ul id="exercisesList" style="padding-left:1.2rem;line-height:2"></ul>
+        </div>
+
+        <!-- Videos -->
+        <div id="lessonVideos" class="glass" style="padding:1.5rem;border-radius:var(--border-radius-md);margin-bottom:2rem">
+          <h3 style="margin-bottom:1rem"><i class="fas fa-video" style="color:var(--primary)"></i> Video Resources</h3>
+          <div id="videosList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem"></div>
+        </div>
+
+        <!-- Quiz -->
+        <div id="lessonQuiz" class="glass" style="padding:1.5rem;border-radius:var(--border-radius-md);margin-bottom:2rem">
+          <h3 style="margin-bottom:1rem"><i class="fas fa-question-circle" style="color:var(--primary)"></i> Course Quiz</h3>
+          <p style="color:var(--text-secondary);margin-bottom:1rem">Test your knowledge with a full course quiz covering all modules.</p>
+          <a id="quizHubLink" href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Take Full Course Quiz</a>
+          <div id="quizScore" style="margin-top:1rem;font-weight:600"></div>
+        </div>
+
+        <!-- Take Notes -->
+        <div class="glass" style="padding:1.5rem;border-radius:var(--border-radius-md);margin-bottom:2rem">
+          <h3 style="margin-bottom:1rem"><i class="fas fa-sticky-note" style="color:var(--primary)"></i> Take Notes</h3>
+          <textarea id="lessonNotesInput" placeholder="Write your notes for this lesson..." rows="4" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.9rem;resize:vertical;font-family:inherit;margin-bottom:0.8rem"></textarea>
+          <button class="btn btn-primary btn-sm" onclick="saveLessonNotes()"><i class="fas fa-save"></i> Save Notes</button>
+          <span id="lessonNotesStatus" style="margin-left:1rem;font-size:0.85rem;color:var(--success);display:none"></span>
+        </div>
+
+        <!-- Navigation -->
+        <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+          <a id="prevLessonBtn" class="btn btn-ghost" style="display:none"><i class="fas fa-arrow-left"></i> Previous</a>
+          <a id="nextLessonBtn" class="btn btn-primary" style="display:none">Next <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </main>
+    </div>
+  </section>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/learning.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/daily-goals.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/lesson.js"></script>
+</body>
+</html>

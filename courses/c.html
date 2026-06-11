@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>C Course - CodeRio</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/navbar.css"><link rel="stylesheet" href="../css/courses.css"><link rel="stylesheet" href="../css/responsive.css"></head>
+<body data-page="Course" data-course="c">
+  <div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div><div class="toast-container"></div>
+  <nav class="navbar"><div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div><button class="mobile-toggle"><i class="fas fa-bars"></i></button><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li><li><a href="../auth/profile.html">Profile</a></li></ul><div class="nav-auth"><button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button></div></nav>
+  <section class="course-hero"><div class="course-hero-content"><h1>C Programming</h1><p>C is a powerful, low-level programming language that forms the foundation of modern computing. It provides direct memory access, making it ideal for system programming, embedded systems, and performance-critical applications.</p><div class="course-meta"><div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div><div class="course-meta-item"><i class="fas fa-clock"></i> 10 Weeks</div><div class="course-meta-item"><i class="fas fa-book-open"></i> 18 Modules</div></div></div><div class="course-hero-image"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"></div></section>
+  <section class="course-content">
+    <div class="course-section"><h2><i class="fas fa-info-circle"></i> Overview</h2><p>Created by Dennis Ritchie at Bell Labs in 1972, C is one of the most influential programming languages ever developed. It was designed for system programming and remains the gold standard for operating systems, embedded systems, and performance-critical software.</p><p>C provides low-level memory access through pointers, manual memory management, and minimal runtime overhead. Its influence extends to C++, C#, Java, Python, and many modern languages that borrow its syntax and concepts. The UNIX operating system was written in C, and Linux, Windows, and macOS kernels still use C extensively.</p><p>Despite being over 50 years old, C remains essential for systems programming, embedded devices (IoT), real-time systems, game engines, compilers, databases, and high-frequency trading. Understanding C provides deep insight into how computers work at the hardware level.</p></div>
+    <div class="course-section"><h2><i class="fas fa-star"></i> Why Learn C?</h2><div class="grid grid-2"><div class="glass" style="padding:1.5rem"><i class="fas fa-microchip" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">System-Level Access</h4><p style="color:var(--text-secondary);font-size:0.95rem">Direct memory manipulation via pointers.</p></div><div class="glass" style="padding:1.5rem"><i class="fas fa-tachometer-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Maximum Performance</h4><p style="color:var(--text-secondary);font-size:0.95rem">Minimal overhead, closest to machine code.</p></div><div class="glass" style="padding:1.5rem"><i class="fas fa-cogs" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Foundation of CS</h4><p style="color:var(--text-secondary);font-size:0.95rem">Understand how memory, stacks, and pointers work.</p></div><div class="glass" style="padding:1.5rem"><i class="fas fa-robot" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Embedded & IoT</h4><p style="color:var(--text-secondary);font-size:0.95rem">The standard language for microcontrollers.</p></div></div></div>
+    <div class="course-section"><h2><i class="fas fa-building"></i> Industry Usage</h2><div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center"><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Linux</p></div><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">CPython</p></div><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Git</p></div><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Nginx</p></div></div><p style="color:var(--text-secondary)">Linux kernel (95% C), Git version control, Python interpreter (CPython), Redis database, Nginx web server, MySQL (some components), Windows kernel, embedded systems (Arduino, ESP32), and countless IoT devices all run C code. C has the highest performance-to-power ratio of any mainstream language.</p></div>
+    <div class="course-section"><h2><i class="fas fa-road"></i> Learning Roadmap</h2><div style="display:flex;flex-direction:column;gap:0.8rem"><div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Basic programming logic, C compiler (GCC/Clang), understanding of binary/hex</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-3)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Variables, data types, operators, control flow, arrays, strings, functions</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 4-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Pointers, dynamic memory, structs, file I/O, preprocessor, recursion</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 7-9)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Linked lists, trees, function pointers, bit manipulation, multithreading</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 10-12)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Network programming, kernel modules, assembly integration, optimization</p></div></div></div>
+    <div class="course-section" id="courseModules"><h2><i class="fas fa-layer-group"></i> Modules</h2>
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> C Fundamentals</h3><p>Structure of C program, #include, main(), printf(), scanf(), basic syntax, comments</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Data Types & Variables</h3><p>int, float, double, char, void, sizeof(), type modifiers (short, long, unsigned), constants</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Operators & Expressions</h3><p>Arithmetic, relational, logical, bitwise, assignment, ternary, precedence, type casting</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Control Flow</h3><p>if-else, switch-case, for, while, do-while, break, continue, goto (avoid)</p></div>
+      <div class="module-card"><h3><span class="module-number">5</span> Arrays & Strings</h3><p>One/two-dimensional arrays, char arrays vs strings, string.h functions, array bounds</p></div>
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate</h3>
+      <div class="module-card"><h3><span class="module-number">6</span> Functions</h3><p>Declaration, definition, parameters, return values, recursion, static variables, inline functions</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Pointers</h3><p>Pointer declaration, dereferencing, pointer arithmetic, void pointers, NULL, double pointers</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Dynamic Memory</h3><p>malloc, calloc, realloc, free, memory leaks, dangling pointers, memory debugging (valgrind)</p></div>
+      <div class="module-card"><h3><span class="module-number">9</span> Structures & Unions</h3><p>struct declaration, typedef, nested structs, pointers to structs, unions, bit fields</p></div>
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced</h3>
+      <div class="module-card"><h3><span class="module-number">10</span> File I/O</h3><p>fopen, fclose, fprintf, fscanf, fread, fwrite, fseek, binary vs text files</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Preprocessor Directives</h3><p>#define macros, #ifdef, #ifndef, #pragma, #error, #include guards, conditional compilation</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> Data Structures in C</h3><p>Singly/doubly linked lists, stacks, queues, binary trees, hash tables in C</p></div>
+      <div class="module-card"><h3><span class="module-number">13</span> Function Pointers</h3><p>Declaration, callback functions, qsort, signal handlers, function pointer arrays</p></div>
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert</h3>
+      <div class="module-card"><h3><span class="module-number">14</span> Multithreading (POSIX)</h3><p>pthread_create, mutex, semaphores, condition variables, thread synchronization</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Socket Programming</h3><p>TCP/UDP sockets, bind, listen, accept, connect, client-server architecture</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Bit Manipulation</h3><p>Bit masks, setting/clearing/toggling bits, bit shifts, endianness, packed structs</p></div>
+      <div class="module-card"><h3><span class="module-number">17</span> Assembly Integration</h3><p>Inline assembly with __asm__, calling conventions, registers, optimization flags</p></div>
+      <div class="module-card"><h3><span class="module-number">18</span> Make & Build Systems</h3><p>Makefiles, CMake, autotools, compiler flags (O0-O3), static/shared libraries, linker scripts</p></div>
+    </div>
+    <div class="course-section"><h2><i class="fas fa-sticky-note"></i> Notes</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Pointers</h4><p style="color:var(--text-secondary);font-size:0.95rem">Pointers store memory addresses. They are essential for dynamic memory, arrays, and efficient parameter passing.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>int x = 42;
+int *ptr = &x;      // ptr holds address of x
+printf("%d\n", *ptr); // 42 (dereference)
+*ptr = 100;         // change x through ptr
+printf("%d\n", x);  // 100
+
+int arr[5] = {1,2,3,4,5};
+int *p = arr;       // array decays to pointer
+printf("%d", *(p+2)); // 3 (pointer arithmetic)</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Dynamic Memory Allocation</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>int *arr = (int*)malloc(5 * sizeof(int));
+if (arr == NULL) { /* handle error */ }
+for (int i = 0; i < 5; i++) arr[i] = i * 10;
+
+arr = (int*)realloc(arr, 10 * sizeof(int));
+// now arr has space for 10 ints
+
+free(arr); // always free!
+arr = NULL; // avoid dangling pointer</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Structures</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>typedef struct {
+    char name[50];
+    int age;
+    float gpa;
+} Student;
+
+Student s1 = {"Alice", 20, 3.8};
+Student *ptr = &s1;
+printf("%s", ptr->name); // arrow for pointer
+printf("%s", s1.name);   // dot for struct</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. File I/O</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>FILE *fp = fopen("data.txt", "w");
+if (fp == NULL) { perror("Error"); return; }
+fprintf(fp, "Name: %s, Age: %d\n", "Alice", 20);
+fclose(fp);
+
+fp = fopen("data.txt", "r");
+char buffer[256];
+while (fgets(buffer, sizeof(buffer), fp)) {
+    printf("%s", buffer);
+}
+fclose(fp);</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Function Pointers</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>int add(int a, int b) { return a + b; }
+int sub(int a, int b) { return a - b; }
+
+int (*operation)(int, int);
+operation = add;
+printf("%d\n", operation(5, 3)); // 8
+
+operation = sub;
+printf("%d\n", operation(5, 3)); // 2
+
+// Array of function pointers
+int (*ops[])(int,int) = {add, sub};</code></pre></div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Bit Manipulation</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>unsigned char flags = 0;
+#define FLAG_A 0b00000001
+#define FLAG_B 0b00000010
+#define FLAG_C 0b00000100
+
+flags |= FLAG_A;         // set bit
+flags &= ~FLAG_B;        // clear bit
+flags ^= FLAG_C;         // toggle bit
+int isSet = flags & FLAG_A;  // check bit
+
+// Check if power of 2
+int isPowerOf2(int n) {
+    return n > 0 && (n & (n-1)) == 0;
+}</code></pre></div>
+    </div>
+    <div class="course-section"><h2><i class="fas fa-code"></i> Examples</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example: Linked List</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+Node* createNode(int data) {
+    Node* n = (Node*)malloc(sizeof(Node));
+    n->data = data; n->next = NULL;
+    return n;
+}
+
+void append(Node** head, int data) {
+    Node* n = createNode(data);
+    if (*head == NULL) { *head = n; return; }
+    Node* curr = *head;
+    while (curr->next) curr = curr->next;
+    curr->next = n;
+}
+
+void printList(Node* head) {
+    while (head) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}</code></pre></div>
+    </div>
+    <div class="course-section"><h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Fibonacci Sequence</h4><p style="color:var(--text-muted);font-size:0.85rem">Print first N Fibonacci numbers using iteration and recursion.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Factorial Calculator</h4><p style="color:var(--text-muted);font-size:0.85rem">Compute factorial using both loop and recursion. Handle large numbers.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">String Reverser</h4><p style="color:var(--text-muted);font-size:0.85rem">Reverse a string in-place using pointers (no array indexing).</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Matrix Multiplication</h4><p style="color:var(--text-muted);font-size:0.85rem">Multiply two matrices using dynamic memory allocation.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Simple Shell</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a minimal command-line shell with fork/exec.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Memory Allocator</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement your own malloc/free using a free list.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">HTTP Server</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a simple HTTP/1.1 server that serves files from a directory.</p></div></div>
+    </div>
+    <div class="course-section"><h2><i class="fas fa-project-diagram"></i> Projects</h2><div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Mini Shell</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A command-line shell with pipes, redirections, and job control.</p><span class="badge badge-primary">C</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Database Engine</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Simple key-value store with B-tree indexing and persistence.</p><span class="badge badge-primary">C</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Game of Life</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Conway's Game of Life in terminal with ncurses.</p><span class="badge badge-primary">C</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Chat Server</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Multi-client TCP chat server with pthreads.</p><span class="badge badge-primary">C</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Compiler Frontend</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Lexer and parser for a simple programming language.</p><span class="badge badge-primary">C</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Snake Game</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Classic Snake game with linked list and terminal graphics.</p><span class="badge badge-primary">C</span></div>
+    </div></div>
+    <div class="course-section"><h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+  </section>
+  <script src="../js/utils.js"></script><script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=c&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+

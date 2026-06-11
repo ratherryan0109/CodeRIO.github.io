@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .auth-card { position: relative; overflow: hidden; }
+    .inline-error { color: var(--error); font-size: 0.82rem; margin-top: 0.3rem; display: none; }
+    .form-group.has-error input { border-color: var(--error); }
+    .spinner-sm { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; }
+    .recovery-error { background: rgba(239,68,68,0.1); color: #991b1b; padding: 0.8rem 1rem; border-radius: var(--border-radius-sm); margin-bottom: 1rem; font-size: 0.9rem; border: 1px solid rgba(239,68,68,0.3); display: none; }
+    .success-checkmark { width: 80px; height: 80px; border-radius: 50%; background: rgba(34,197,94,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .success-checkmark i { font-size: 2.8rem; color: var(--success); }
+    .recovery-success { display: none; text-align: center; padding: 1.5rem 0; }
+    .recovery-success h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text); }
+    .recovery-success p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .password-strength { margin-top: 0.6rem; }
+    .password-strength-bar { height: 6px; border-radius: 50px; background: #e2e8f0; overflow: hidden; }
+    .password-strength-fill { height: 100%; border-radius: 50px; transition: width 0.3s ease, background 0.3s ease; width: 0; }
+    .password-strength-label { font-size: 0.8rem; margin-top: 0.3rem; font-weight: 600; }
+    .strength-weak { color: var(--error); }
+    .strength-fair { color: var(--warning); }
+    .strength-strong { color: #6366f1; }
+    .strength-very-strong { color: var(--success); }
+  </style>
+</head>
+<body data-page="Recovery">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <i class="fas fa-code"></i>
+        <h1>CodeRio</h1>
+      </div>
+
+      <div id="recoveryFormContainer">
+        <h2>Set New Password</h2>
+        <p class="auth-subtitle" style="text-align:center;color:var(--text-secondary);margin-bottom:2rem;line-height:1.7;">
+          Enter your new password below.
+        </p>
+
+        <form id="recoveryForm">
+          <div class="form-group" id="passwordGroup">
+            <label for="recoveryPassword">New Password</label>
+            <div class="input-group">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" id="recoveryPassword" placeholder="Enter new password" required autocomplete="new-password">
+            </div>
+            <div class="password-strength">
+              <div class="password-strength-bar">
+                <div class="password-strength-fill" id="pwdStrengthFill"></div>
+              </div>
+              <div class="password-strength-label" id="pwdStrengthLabel"></div>
+            </div>
+            <p class="inline-error" id="passwordError">Password must be at least 6 characters.</p>
+          </div>
+          <div class="form-group" id="confirmGroup">
+            <label for="recoveryConfirm">Confirm Password</label>
+            <div class="input-group">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" id="recoveryConfirm" placeholder="Confirm new password" required autocomplete="new-password">
+            </div>
+            <p class="inline-error" id="confirmError">Passwords do not match.</p>
+          </div>
+          <div id="recoveryError" class="recovery-error"></div>
+          <button type="submit" id="recoverySubmit" class="btn btn-primary btn-block">
+            <span id="recoveryBtnText">Reset Password</span>
+            <span id="recoveryBtnSpinner" class="spinner-sm" style="display:none;"></span>
+          </button>
+        </form>
+
+        <div id="recoverySuccess" class="recovery-success">
+          <div class="success-checkmark">
+            <i class="fas fa-check"></i>
+          </div>
+          <h3>Password Reset!</h3>
+          <p>Your password has been updated successfully. Redirecting to login...</p>
+          <a href="../auth/login.html" class="btn btn-primary" style="display:inline-flex;">Back to Login</a>
+        </div>
+      </div>
+
+      <div id="recoveryInvalid" style="display:none;text-align:center;padding:2rem 0;">
+        <div style="font-size:3rem;color:var(--error);margin-bottom:1rem;"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3>Invalid Reset Link</h3>
+        <p style="color:var(--text-secondary);margin:1rem 0;line-height:1.7;">
+          This password reset link is invalid or has expired.
+        </p>
+        <a href="../auth/forgot-password.html" class="btn btn-primary" style="display:inline-flex;">Request New Link</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    function getPasswordStrength(password) {
+      let score = 0;
+      if (password.length >= 6) score += 1;
+      if (password.length >= 10) score += 1;
+      if (/[a-z]/.test(password)) score += 1;
+      if (/[A-Z]/.test(password)) score += 1;
+      if (/[0-9]/.test(password)) score += 1;
+      if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+      return score;
+    }
+    function getStrengthLabel(score) {
+      if (score <= 1) return { label: 'Weak', cls: 'strength-weak', pct: 20 };
+      if (score <= 2) return { label: 'Fair', cls: 'strength-fair', pct: 40 };
+      if (score <= 3) return { label: 'Fair', cls: 'strength-fair', pct: 50 };
+      if (score <= 4) return { label: 'Strong', cls: 'strength-strong', pct: 70 };
+      return { label: 'Very Strong', cls: 'strength-very-strong', pct: 100 };
+    }
+    function getStrengthColor(score) {
+      if (score <= 1) return 'var(--error)';
+      if (score <= 3) return 'var(--warning)';
+      if (score <= 4) return '#6366f1';
+      return 'var(--success)';
+    }
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      const sb = getSupabase();
+      if (!sb) {
+        document.getElementById('recoveryFormContainer').style.display = 'none';
+        document.getElementById('recoveryInvalid').style.display = 'block';
+        document.querySelector('#recoveryInvalid p').textContent = 'Supabase client not available. Please check your internet connection.';
+        return;
+      }
+
+      const hashParams = new URLSearchParams(window.location.hash.replace('#', '?'));
+      const accessToken = hashParams.get('access_token');
+      const type = hashParams.get('type');
+      const refreshToken = hashParams.get('refresh_token');
+
+      if (type === 'recovery' && accessToken) {
+        try {
+          const { error } = await sb.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken || accessToken
+          });
+          if (error) throw error;
+        } catch (err) {
+          document.getElementById('recoveryFormContainer').style.display = 'none';
+          document.getElementById('recoveryInvalid').style.display = 'block';
+          return;
+        }
+      } else {
+        document.getElementById('recoveryFormContainer').style.display = 'none';
+        document.getElementById('recoveryInvalid').style.display = 'block';
+        return;
+      }
+
+      const form = document.getElementById('recoveryForm');
+      const passwordInput = document.getElementById('recoveryPassword');
+      const confirmInput = document.getElementById('recoveryConfirm');
+      const errorEl = document.getElementById('recoveryError');
+      const submitBtn = document.getElementById('recoverySubmit');
+      const btnText = document.getElementById('recoveryBtnText');
+      const btnSpinner = document.getElementById('recoveryBtnSpinner');
+
+      const strengthFill = document.getElementById('pwdStrengthFill');
+      const strengthLabel = document.getElementById('pwdStrengthLabel');
+
+      passwordInput.addEventListener('input', function() {
+        const val = this.value;
+        const score = getPasswordStrength(val);
+        if (val.length === 0) {
+          strengthFill.style.width = '0';
+          strengthLabel.textContent = '';
+        } else {
+          const info = getStrengthLabel(score);
+          strengthFill.style.width = info.pct + '%';
+          strengthFill.style.background = getStrengthColor(score);
+          strengthLabel.textContent = info.label;
+          strengthLabel.className = 'password-strength-label ' + info.cls;
+        }
+      });
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+        const password = passwordInput.value;
+        const confirm = confirmInput.value;
+
+        if (password.length < 6) {
+          errorEl.textContent = 'Password must be at least 6 characters.';
+          errorEl.style.display = 'block';
+          return;
+        }
+        if (password !== confirm) {
+          errorEl.textContent = 'Passwords do not match.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        submitBtn.disabled = true;
+        btnText.textContent = 'Resetting...';
+        btnSpinner.style.display = 'inline-block';
+
+        try {
+          const { error } = await sb.auth.updateUser({ password: password });
+          if (error) throw error;
+          form.style.display = 'none';
+          document.getElementById('recoverySuccess').style.display = 'block';
+          Utils.showToast('Password reset successfully!', 'success');
+          setTimeout(function() {
+            window.location.href = '../auth/login.html';
+          }, 3000);
+        } catch (err) {
+          errorEl.textContent = err.message || 'Failed to reset password.';
+          errorEl.style.display = 'block';
+          submitBtn.disabled = false;
+          btnText.textContent = 'Reset Password';
+          btnSpinner.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+</body>
+</html>

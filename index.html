@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeRio - Learn Coding Interactively</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/courses.css">
+  <link rel="stylesheet" href="css/typing.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="Home">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Learn Coding <span>Interactively</span></h1>
+      <p>Practice coding, solve quizzes, build projects, and improve your programming skills with CodeRio.</p>
+      <div class="hero-buttons">
+        <a href="Learn.html" class="btn btn-primary">Start Learning</a>
+        <a href="Projects.html" class="btn btn-secondary">Explore Projects</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><h3>50+</h3><p>Courses</p></div>
+        <div class="hero-stat"><h3>10K+</h3><p>Learners</p></div>
+        <div class="hero-stat"><h3>200+</h3><p>Projects</p></div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+      <dotlottie-wc src="https://lottie.host/f6dce169-8a0d-4d5d-a75f-a8c4ef9664c7/AjDP73accm.lottie" style="width:100%;height:auto;max-width:560px" autoplay loop></dotlottie-wc>
+      <div class="hero-floating-card"><i class="fas fa-code"></i> 50+ Courses</div>
+      <div class="hero-floating-card"><i class="fas fa-users"></i> 10K+ Learners</div>
+      <div class="hero-floating-card"><i class="fas fa-rocket"></i> Interactive</div>
+    </div>
+  </section>
+
+  <section class="section features-section">
+    <h2 class="section-title">Why CodeRio?</h2>
+    <p class="section-subtitle">Everything you need to accelerate your programming journey in one platform.</p>
+    <div class="grid grid-3 features-grid">
+      <div class="feature-card glass">
+        <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+        <h3>Interactive Courses</h3>
+        <p>Learn by doing with hands-on coding exercises, real-time feedback, and project-based learning paths designed for all skill levels.</p>
+      </div>
+      <div class="feature-card glass">
+        <div class="feature-icon"><i class="fas fa-keyboard"></i></div>
+        <h3>Typing Lab</h3>
+        <p>Boost your coding speed and accuracy with specialized typing tests featuring programming-specific content and real-time analytics.</p>
+      </div>
+      <div class="feature-card glass">
+        <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+        <h3>Practice Platforms</h3>
+        <p>Access top competitive programming platforms, solve challenges, and track your progress across multiple coding judges in one place.</p>
+      </div>
+      <div class="feature-card glass">
+        <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
+        <h3>Real Projects</h3>
+        <p>Build production-ready projects with guided tutorials, code reviews, and deploy your portfolio to showcase to employers worldwide.</p>
+      </div>
+      <div class="feature-card glass">
+        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Track Progress</h3>
+        <p>Monitor your learning journey with detailed analytics, streaks, achievements, and personalized recommendations for continuous growth.</p>
+      </div>
+      <div class="feature-card glass">
+        <div class="feature-icon"><i class="fas fa-users"></i></div>
+        <h3>Community</h3>
+        <p>Join a vibrant community of learners, share your projects, participate in discussions, and grow together with fellow developers.</p>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="section courses">
+    <h2 class="section-title">Popular Courses</h2>
+    <p class="section-subtitle">Start your learning journey with our most popular programming courses.</p>
+    <div class="course-grid" id="homeCourseGrid"></div>
+  </section>
+
+  <section class="typing-wrapper" id="typing-test">
+    <div class="typing-left">
+      <p class="typing-small-title">CodeRio Typing Lab</p>
+      <h2>Master Your Coding Speed</h2>
+      <p class="typing-description">Enhance your typing performance through structured practice sessions designed to build speed, precision, and long-term consistency.</p>
+      <div class="typing-features">
+        <div class="typing-feature-item"><i class="fas fa-bolt"></i> Real-time WPM</div>
+        <div class="typing-feature-item"><i class="fas fa-bullseye"></i> Accuracy Tracking</div>
+        <div class="typing-feature-item"><i class="fas fa-chart-bar"></i> Detailed Stats</div>
+        <div class="typing-feature-item"><i class="fas fa-medal"></i> Rank System</div>
+      </div>
+    </div>
+    <div class="typing-test-box" id="typingBox">
+      <div class="start-indicator" id="startIndicator">Click Here & Start Typing</div>
+      <div class="typing-stats">
+        <div class="stat-card timer-card"><h2 id="timer">60</h2><p>Seconds</p></div>
+        <div class="stat-card"><h2 id="wpm">0</h2><p>WPM</p></div>
+        <div class="stat-card"><h2 id="cpm">0</h2><p>CPM</p></div>
+        <div class="stat-card"><h2 id="accuracy">0</h2><p>Accuracy</p></div>
+      </div>
+      <div class="quote-box" id="quote"></div>
+      <input type="text" id="hidden-input" autocomplete="off">
+      <div class="typing-progress"><div class="typing-progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="result-modal" id="resultModal">
+      <div class="result-card">
+        <img id="animal-image" src="" alt="animal">
+        <h2 id="animal-name"></h2>
+        <div class="result-rank" id="animal-rank"></div>
+        <p class="result-message" id="animal-message"></p>
+        <div class="result-stats">
+          <div class="result-stat"><h3 id="finalWpm">0</h3><span>WPM</span></div>
+          <div class="result-stat"><h3 id="finalAccuracy">0%</h3><span>Accuracy</span></div>
+          <div class="result-stat"><h3 id="finalCpm">0</h3><span>CPM</span></div>
+        </div>
+        <div class="result-details">
+          <div class="result-detail"><span>Mistakes</span><span id="finalMistakes">0</span></div>
+          <div class="result-detail"><span>Consistency</span><span id="finalConsistency">0%</span></div>
+        </div>
+        <button class="try-again-btn" id="retryBtn">Try Again</button>
+      </div>
+    </div>
+  </section>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/typing.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof initTypingTest === 'function') initTypingTest();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.stat-number').forEach(num => {
+              const target = parseInt(num.dataset.target);
+              const increment = target / 60;
+              let current = 0;
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  num.textContent = target.toLocaleString();
+                  clearInterval(timer);
+                } else {
+                  num.textContent = Math.floor(current).toLocaleString();
+                }
+              }, 25);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      const statsSection = document.querySelector('.stats-section');
+      if (statsSection) observer.observe(statsSection);
+    });
+  </script>
+</body>
+</html>

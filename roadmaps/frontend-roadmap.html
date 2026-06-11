@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Roadmap - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Roadmap" data-roadmap="frontend">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toast" class="toast-container"></div>
+
+  <main>
+    <section id="roadmapHeader" class="page-header glass">
+      <div class="header-content">
+        <h1><i class="fab fa-html5"></i> Frontend Development Roadmap</h1>
+        <p>Master the art of building beautiful, responsive, and interactive user interfaces. From HTML basics to modern frameworks like React and Vue.</p>
+        <div class="header-stats">
+          <span><i class="fas fa-layer-group"></i> 8 Steps</span>
+          <span><i class="fas fa-clock"></i> 3-6 Months</span>
+          <span><i class="fas fa-signal"></i> Beginner to Advanced</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="roadmapContainer" class="roadmap-container"></div>
+
+    <noscript>
+      <div class="roadmap-fallback glass">
+        <div class="timeline">
+          <div class="timeline-step">
+            <div class="step-number">1</div>
+            <div class="step-content glass">
+              <h3>HTML & HTML5</h3>
+              <p>Learn the foundation of web structure — semantic elements, forms, tables, multimedia, and accessibility best practices.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-mdn"></i> MDN Docs</span>
+                <span class="badge"><i class="fab fa-free-code-camp"></i> freeCodeCamp</span>
+                <span class="badge"><i class="fas fa-video"></i> Traversy Media</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">2</div>
+            <div class="step-content glass">
+              <h3>CSS & CSS3</h3>
+              <p>Master styling — Flexbox, Grid, animations, variables, responsive design with media queries, and preprocessors like SASS.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-css3-alt"></i> CSS Tricks</span>
+                <span class="badge"><i class="fas fa-book"></i> Josh Comeau CSS</span>
+                <span class="badge"><i class="fab fa-youtube"></i> Kevin Powell</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">3</div>
+            <div class="step-content glass">
+              <h3>JavaScript (ES6+)</h3>
+              <p>Core language — variables, functions, DOM manipulation, async/await, promises, closures, prototypes, and modules.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-js"></i> JavaScript.info</span>
+                <span class="badge"><i class="fas fa-video"></i> The Net Ninja</span>
+                <span class="badge"><i class="fas fa-code"></i> You Don't Know JS</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">4</div>
+            <div class="step-content glass">
+              <h3>Version Control (Git)</h3>
+              <p>Track changes, collaborate, branching strategies, pull requests, and open-source contributions via GitHub or GitLab.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-git-alt"></i> Git Docs</span>
+                <span class="badge"><i class="fab fa-github"></i> GitHub Guides</span>
+                <span class="badge"><i class="fas fa-video"></i> Colt Steele Git</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">5</div>
+            <div class="step-content glass">
+              <h3>Package Managers & Build Tools</h3>
+              <p>npm/yarn, Webpack, Vite, Babel, ESLint, Prettier — streamline your development workflow and bundle your code.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-npm"></i> npm Docs</span>
+                <span class="badge"><i class="fas fa-bolt"></i> Vite Guide</span>
+                <span class="badge"><i class="fas fa-video"></i> Fireship</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">6</div>
+            <div class="step-content glass">
+              <h3>Frontend Framework (React)</h3>
+              <p>Components, state management, hooks, routing, context API, performance optimization, and testing with React Testing Library.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fab fa-react"></i> React Docs</span>
+                <span class="badge"><i class="fas fa-video"></i> Epic React</span>
+                <span class="badge"><i class="fas fa-fire"></i> Scrimba React</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">7</div>
+            <div class="step-content glass">
+              <h3>State Management & API Integration</h3>
+              <p>Redux, Zustand, React Query, Axios, REST APIs, GraphQL, and WebSockets for real-time data.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-database"></i> Redux Toolkit</span>
+                <span class="badge"><i class="fas fa-project-diagram"></i> GraphQL Docs</span>
+                <span class="badge"><i class="fas fa-plug"></i> React Query</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-number">8</div>
+            <div class="step-content glass">
+              <h3>Testing, Deployment & Beyond</h3>
+              <p>Unit tests, integration tests, CI/CD, Vercel/Netlify deployment, performance audits, and progressive web apps.</p>
+              <div class="resource-badges">
+                <span class="badge"><i class="fas fa-check-circle"></i> Jest</span>
+                <span class="badge"><i class="fas fa-cloud"></i> Vercel</span>
+                <span class="badge"><i class="fas fa-chart-line"></i> Lighthouse</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </noscript>
+  </main>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/roadmap.js"></script>
+</body>
+</html>
+

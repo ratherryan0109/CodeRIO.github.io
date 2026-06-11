@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pandas Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="pandas">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="toast-container"></div>
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Pandas</h1>
+      <p>Pandas is a powerful, open-source Python library for data manipulation and analysis. Built on top of NumPy, it provides easy-to-use data structures like Series and DataFrame for working with structured data, making it an essential tool for data scientists and analysts worldwide.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 4 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 10 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas">
+    </div>
+  </section>
+  <section class="course-content">
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Pandas was created by Wes McKinney in 2008 to provide flexible, high-performance data analysis tools in Python. The name Pandas derives from "Panel Data", an econometrics term. Its two primary data structures - Series (1-dimensional labeled array) and DataFrame (2-dimensional labeled data structure with columns of potentially different types) - make it intuitive for users familiar with spreadsheets or SQL.</p>
+      <p>Pandas excels at data ingestion (CSV, Excel, SQL, JSON, HTML, Parquet), data cleaning (handling missing values, duplicates, outliers), data transformation (grouping, merging, reshaping, pivoting), time series analysis (date ranges, resampling, rolling windows), and integration with visualization libraries like Matplotlib and Seaborn. It is the foundation of the Python data science stack.</p>
+      <p>Pandas is used by Netflix (content recommendations), Spotify (music analytics), JP Morgan (financial modeling), Uber (ride data analysis), Airbnb (pricing algorithms), NASA (scientific data), and countless data science teams worldwide. It is considered a must-have skill for any data professional working in Python.</p>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Pandas?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-table" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">DataFrame Structure</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Intuitive 2D labeled data structure similar to spreadsheets or SQL tables.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-broom" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Data Cleaning Power</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Handle missing values, duplicates, and outliers with simple method calls.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-chart-line" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Time Series Analysis</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Date ranges, resampling, rolling windows, and lag operations built in.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-database" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">File Format Support</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Read/write CSV, Excel, SQL, JSON, Parquet, HDF5, and many more formats.</p>
+        </div>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Pandas is the backbone of data analytics across industries:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spotify</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Pandas is used in finance (JP Morgan, Goldman Sachs for risk analysis), healthcare (genomic data analysis), retail (inventory optimization), social media (user behavior analytics), sports analytics, and scientific research. It is typically the first tool data professionals reach for when exploring new datasets.</p>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic Python, NumPy fundamentals, understanding of tabular data</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Week 1)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Series, DataFrames, reading/writing CSV, basic indexing and selection</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Week 2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Data cleaning, handling missing data, duplicates, filtering, sorting</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Week 3)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">GroupBy, merge/join, pivot tables, time series, rolling windows</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Week 4)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Performance optimization, multi-index, custom aggregations, visualization integration</p>
+        </div>
+      </div>
+    </div>
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=pandas&module=1" class="module-card" onclick="LearningTracker.startLesson('pandas-01')">
+        <h3><span class="module-number">1</span> Getting Started</h3>
+        <p>Installing Pandas, import conventions, Series vs DataFrame, basic operations.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Setup</span> <span class="badge badge-primary">Basics</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=pandas&module=2" class="module-card" onclick="LearningTracker.startLesson('pandas-02')">
+        <h3><span class="module-number">2</span> Data Loading</h3>
+        <p>read_csv, read_excel, read_sql, read_json, to_csv, to_excel, file path handling.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">I/O</span> <span class="badge badge-primary">Files</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=pandas&module=3" class="module-card" onclick="LearningTracker.startLesson('pandas-03')">
+        <h3><span class="module-number">3</span> Indexing & Selection</h3>
+        <p>loc, iloc, boolean indexing, label vs position, query method, .at/.iat.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Indexing</span> <span class="badge badge-primary">Selection</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=pandas&module=4" class="module-card" onclick="LearningTracker.startLesson('pandas-04')">
+        <h3><span class="module-number">4</span> Data Cleaning</h3>
+        <p>isnull, dropna, fillna, duplicated, drop_duplicates, replace, astype.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Cleaning</span> <span class="badge badge-primary">Missing</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=pandas&module=5" class="module-card" onclick="LearningTracker.startLesson('pandas-05')">
+        <h3><span class="module-number">5</span> Data Transformation</h3>
+        <p>apply, map, applymap, transform, rank, cut, qcut, sorting, ranking.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Transform</span> <span class="badge badge-primary">Apply</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=pandas&module=6" class="module-card" onclick="LearningTracker.startLesson('pandas-06')">
+        <h3><span class="module-number">6</span> GroupBy & Aggregation</h3>
+        <p>groupby syntax, agg, aggregate, multi-level grouping, filter, transform.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">GroupBy</span> <span class="badge badge-primary">Aggregation</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=pandas&module=7" class="module-card" onclick="LearningTracker.startLesson('pandas-07')">
+        <h3><span class="module-number">7</span> Merge & Join</h3>
+        <p>merge (inner/outer/left/right), concat, join, handling overlapping columns.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Merge</span> <span class="badge badge-primary">Join</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=pandas&module=8" class="module-card" onclick="LearningTracker.startLesson('pandas-08')">
+        <h3><span class="module-number">8</span> Time Series</h3>
+        <p>DatetimeIndex, resample, asfreq, rolling, shift, diff, date_range, tz_localize.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Time series</span> <span class="badge badge-primary">Resample</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=pandas&module=9" class="module-card" onclick="LearningTracker.startLesson('pandas-09')">
+        <h3><span class="module-number">9</span> Advanced Data Structures</h3>
+        <p>MultiIndex (hierarchical index), stack/unstack, pivot, pivot_table, cross-tabulation.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">MultiIndex</span> <span class="badge badge-primary">Pivot</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=pandas&module=10" class="module-card" onclick="LearningTracker.startLesson('pandas-10')">
+        <h3><span class="module-number">10</span> Performance & Visualization</h3>
+        <p>Vectorization, eval/query optimization, plotting with Pandas, integration with Matplotlib/Seaborn.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Perf</span> <span class="badge badge-primary">Viz</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. DataFrame Basics</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">DataFrame is a 2D labeled data structure with columns of potentially different types. It is the primary Pandas data structure.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>import pandas as pd
+
+# From dict
+data = {'name': ['Alice', 'Bob', 'Charlie'],
+        'age': [25, 30, 35],
+        'city': ['NYC', 'LA', 'Chicago']}
+df = pd.DataFrame(data)
+
+# From CSV
+df = pd.read_csv('data.csv')
+
+# Basic info
+df.head()    # First 5 rows
+df.info()    # Column types and null counts
+df.describe() # Summary statistics</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Indexing with loc and iloc</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">loc uses label-based indexing, iloc uses integer position-based indexing.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># loc - label based
+df.loc[0]              # First row by index label
+df.loc[:, 'name']      # All rows, 'name' column
+df.loc[0:2, ['name', 'age']]  # Rows 0-2, specific columns
+
+# iloc - integer position
+df.iloc[0]             # First row
+df.iloc[:, 0]          # First column
+df.iloc[0:3, 0:2]      # First 3 rows, first 2 columns
+
+# Boolean indexing
+df[df['age'] > 30]     # Rows where age > 30
+df.query('age > 30')   # Same using query string</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Handling Missing Data</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Pandas represents missing data as NaN (Not a Number) and provides tools to detect, remove, or fill missing values.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>df.isnull().sum()      # Count nulls per column
+df.isna().sum()        # Same as isnull
+
+# Remove missing values
+df.dropna()            # Drop rows with any NaN
+df.dropna(axis=1)      # Drop columns with any NaN
+df.dropna(thresh=3)    # Drop rows with less than 3 non-null
+
+# Fill missing values
+df.fillna(0)           # Fill with 0
+df.fillna(df.mean())   # Fill with column mean
+df.fillna(method='ffill')  # Forward fill
+df.fillna(method='bfill')  # Backward fill</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. GroupBy Operations</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">GroupBy splits data into groups, applies a function, and combines results - a powerful pattern for aggregation.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Basic grouping
+df.groupby('city').mean()
+df.groupby('city')['age'].agg(['mean', 'std', 'count'])
+
+# Multiple groupby
+df.groupby(['city', 'gender']).agg({
+    'age': 'mean',
+    'salary': 'sum'
+})
+
+# Transform (same shape as original)
+df['age_zscore'] = df.groupby('city')['age'].transform(
+    lambda x: (x - x.mean()) / x.std()
+)</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Merging DataFrames</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Similar to SQL joins, Pandas provides merge() for combining DataFrames on keys.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># SQL-style joins
+pd.merge(df1, df2, on='key')
+pd.merge(df1, df2, on='key', how='inner')
+pd.merge(df1, df2, on='key', how='left')
+pd.merge(df1, df2, on='key', how='outer')
+
+# Merge on different column names
+pd.merge(df1, df2, left_on='id', right_on='user_id')
+
+# Concatenation
+pd.concat([df1, df2])              # Row-wise
+pd.concat([df1, df2], axis=1)      # Column-wise</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Time Series Analysis</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Pandas has extensive support for time series data with date ranges, resampling, and rolling windows.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Create date range
+dates = pd.date_range('2023-01-01', periods=10, freq='D')
+
+# Set datetime index
+df.index = pd.to_datetime(df['date'])
+
+# Resampling
+df.resample('M').mean()      # Monthly average
+df.resample('W').sum()       # Weekly sum
+
+# Rolling window
+df['rolling_avg'] = df['value'].rolling(window=7).mean()
+df['expanding'] = df['value'].expanding().mean()
+
+# Shift and diff
+df['prev_day'] = df['value'].shift(1)
+df['daily_change'] = df['value'].diff()</code></pre>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Sales Data Analysis</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">Analyze sales data with grouping, aggregation, and date operations.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>import pandas as pd
+
+# Sample sales data
+sales = pd.DataFrame({
+    'date': pd.date_range('2024-01-01', periods=100, freq='D'),
+    'product': ['A', 'B', 'C'] * 33 + ['A'],
+    'revenue': np.random.randint(100, 1000, 100),
+    'units': np.random.randint(1, 20, 100)
+})
+
+# Monthly revenue by product
+monthly = sales.groupby([pd.Grouper(key='date', freq='M'), 'product']).agg({
+    'revenue': 'sum',
+    'units': 'sum'
+}).reset_index()
+
+# Top products by revenue
+top_products = sales.groupby('product')['revenue'].sum().sort_values(ascending=False)
+
+# Moving average
+sales['revenue_ma7'] = sales.groupby('product')['revenue'].transform(
+    lambda x: x.rolling(7).mean()
+)</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Data Cleaning Pipeline</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A complete data cleaning workflow for a messy dataset.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>def clean_dataset(df):
+    # Step 1: Remove duplicates
+    df = df.drop_duplicates()
+
+    # Step 2: Handle missing values
+    df = df.fillna({
+        'age': df['age'].median(),
+        'income': df['income'].median(),
+        'name': 'Unknown',
+        'signup_date': pd.Timestamp('2024-01-01')
+    })
+
+    # Step 3: Fix data types
+    df['age'] = df['age'].astype(int)
+    df['signup_date'] = pd.to_datetime(df['signup_date'])
+
+    # Step 4: Remove outliers
+    q1 = df['income'].quantile(0.25)
+    q3 = df['income'].quantile(0.75)
+    iqr = q3 - q1
+    df = df[(df['income'] >= q1 - 1.5*iqr) & (df['income'] <= q3 + 1.5*iqr)]
+
+    return df</code></pre>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Load and Explore</h4><p style="color:var(--text-muted);font-size:0.85rem">Load a CSV file and print basic statistics using describe() and info().</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Filter Data</h4><p style="color:var(--text-muted);font-size:0.85rem">Filter rows where a column value exceeds a threshold using boolean indexing.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Clean Dataset</h4><p style="color:var(--text-muted);font-size:0.85rem">Handle missing values and duplicates in a messy real-world dataset.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Group Analysis</h4><p style="color:var(--text-muted);font-size:0.85rem">Use groupby to find average sales by region and product category.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Time Series Forecast</h4><p style="color:var(--text-muted);font-size:0.85rem">Resample daily data to monthly, compute rolling averages, and detect trends.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Multi-Table Merge</h4><p style="color:var(--text-muted);font-size:0.85rem">Merge customers, orders, and products tables, then compute total revenue by customer.</p></div>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Stock Market Analyzer</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Analyze stock data with moving averages, volatility, and portfolio returns.</p>
+          <span class="badge badge-primary">Pandas</span> <span class="badge badge-primary">Finance</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">COVID-19 Dashboard</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Clean and analyze COVID-19 data with time series and geographic visualizations.</p>
+          <span class="badge badge-primary">Pandas</span> <span class="badge badge-primary">Viz</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Customer Segmentation</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Use Pandas for ETL and feature engineering for customer clustering.</p>
+          <span class="badge badge-primary">ETL</span> <span class="badge badge-primary">ML</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">E-Commerce Analytics</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Analyze sales funnel, customer cohorts, and product performance metrics.</p>
+          <span class="badge badge-primary">Analytics</span> <span class="badge badge-primary">Cohort</span>
+        </div>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+  </section>
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Design - Placement Prep - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Placement">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toast" class="toast-container"></div>
+
+  <main>
+    <section class="page-header glass">
+      <div class="header-content">
+        <h1><i class="fas fa-sitemap"></i> System Design</h1>
+        <p>Architect scalable, reliable, and maintainable systems. Essential for senior engineering and architect-level interviews.</p>
+        <div class="header-stats">
+          <span><i class="fas fa-layer-group"></i> 8 Modules</span>
+          <span><i class="fas fa-question-circle"></i> 15+ Questions</span>
+          <span><i class="fas fa-star"></i> High Priority</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="concepts-grid">
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+        <h3>Scalability</h3>
+        <p>Horizontal scaling (add more machines) vs vertical scaling (upgrade hardware). Load balancers distribute traffic. Stateless design enables horizontal scaling.</p>
+        <div class="concept-example">
+          <code>Round Robin -> least connections<br>-> IP hash -> weighted</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-balance-scale"></i></div>
+        <h3>CAP Theorem</h3>
+        <p>Consistency, Availability, Partition Tolerance — pick two. CA (traditional RDBMS), CP (HBase, MongoDB), AP (Cassandra, DynamoDB). Network partitions are inevitable.</p>
+        <div class="concept-example">
+          <code>CP > AP > CA in distributed<br>systems (P is mandatory)</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-weight-hanging"></i></div>
+        <h3>Load Balancing</h3>
+        <p>Distributes requests across servers. Algorithms: round robin, least connections, IP hash, consistent hashing. Health checks ensure only healthy servers receive traffic.</p>
+        <div class="concept-example">
+          <code>LB -> [Server1, Server2,<br>Server3] healthy: all 3</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-database"></i></div>
+        <h3>Caching & CDN</h3>
+        <p>Redis/Memcached for in-memory cache. CDN (CloudFront, CloudFlare) for static assets. Cache strategies: write-through, write-around, write-back. Cache invalidation is hard.</p>
+        <div class="concept-example">
+          <code>Cache hit: fast response<br>Cache miss: query DB + populate</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-patterns-section glass">
+      <h2><i class="fas fa-puzzle-piece"></i> Design Patterns for System Design</h2>
+      <div class="patterns-list">
+        <div class="pattern-item">
+          <h4>Microservices Architecture</h4>
+          <p>Decompose monolith into small, independent services. Each owns its data, communicates via APIs/message queues. Benefits: independent deploy, scale, tech diversity. Challenges: distributed complexity, data consistency.</p>
+        </div>
+        <div class="pattern-item">
+          <h4>Event-Driven Architecture</h4>
+          <p>Components communicate via events. Producers emit events; consumers react. Message brokers: Kafka, RabbitMQ, SQS. Enables loose coupling and async processing.</p>
+        </div>
+        <div class="pattern-item">
+          <h4>CQRS (Command Query Responsibility Segregation)</h4>
+          <p>Separates read and write operations. Different models for commands (writes) and queries (reads). Often paired with Event Sourcing. Optimizes for different access patterns.</p>
+        </div>
+        <div class="pattern-item">
+          <h4>Database Sharding</h4>
+          <p>Horizontal partitioning of data across multiple databases. Shard key determines data distribution. Challenges: cross-shard joins, resharding, hotspotting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interview-questions glass">
+      <h2><i class="fas fa-question-circle"></i> Common Interview Questions</h2>
+      <div class="questions-list">
+        <div class="question-item">
+          <h4>Design a URL shortener (like bit.ly).</h4>
+          <p>Key components: encoding (base62), hash collision handling, redirect (301), analytics. Scale: distributed ID generation, caching, NoSQL for mapping, CDN for redirects.</p>
+        </div>
+        <div class="question-item">
+          <h4>Design a chat system (like WhatsApp).</h4>
+          <p>WebSocket for real-time, message queue for delivery, database for history, push notifications. Challenges: ordering, delivery guarantees, multi-device sync, end-to-end encryption.</p>
+        </div>
+        <div class="question-item">
+          <h4>Design a recommendation system.</h4>
+          <p>Collaborative filtering (user-item similarity), content-based (item features), hybrid approaches. Offline batch processing + online real-time serving. Use matrix factorization, embeddings.</p>
+        </div>
+        <div class="question-item">
+          <h4>Design a rate limiter.</h4>
+          <p>Token bucket, leaky bucket, sliding window log/counter. Distributed rate limiting requires Redis or similar. Return 429 Too Many Requests when limit exceeded.</p>
+        </div>
+        <div class="question-item">
+          <h4>Design a distributed key-value store.</h4>
+          <p>Consistent hashing for partitioning, replication for fault tolerance, quorum for consistency (R+W > N). Gossip protocol for membership. Vector clocks for conflict resolution.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="resources-section glass">
+      <h2><i class="fas fa-external-link-alt"></i> Resources & Best Practices</h2>
+      <div class="resources-content">
+        <div class="resource-item">
+          <h4>System Design Interview Framework</h4>
+          <p>Step 1: Understand scope & requirements. Step 2: Estimate scale (DAU, QPS, storage). Step 3: Design high-level components. Step 4: Deep dive into key components. Step 5: Identify bottlenecks and optimize.</p>
+        </div>
+        <div class="resource-item">
+          <h4>Key Tradeoffs to Discuss</h4>
+          <p>Consistency vs availability (CAP), SQL vs NoSQL, synchronous vs async, batch vs stream, monolithic vs microservices, strong vs eventual consistency.</p>
+        </div>
+        <div class="resource-item">
+          <h4>Must-Read Resources</h4>
+          <p>Designing Data-Intensive Applications (DDIA), System Design Interview (Alex Xu), High Scalability blog, Awesome Scalability GitHub, Papers: Google Spanner, Dynamo, MapReduce, Bigtable.</p>
+        </div>
+        <div class="resource-item">
+          <h4>Back-of-the-Envelope Numbers</h4>
+          <p>QPS: peak ~2x average. Storage: think in TB/PB. Network: 1 Gbps ~ 125 MB/s. DB: MySQL ~1k QPS, Redis ~100k QPS. Cache: 1ms vs DB: 10-50ms. 80/20 rule for caching.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

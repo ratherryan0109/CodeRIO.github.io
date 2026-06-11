@@ -1,0 +1,504 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep - CodeRio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/navbar.css"><link rel="stylesheet" href="css/interview-prep.css"><link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="InterviewPrep">
+<div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div>
+<nav class="navbar">
+<div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+<button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li><li><a href="auth/profile.html">Profile</a></li></ul>
+<div class="nav-auth"><a href="auth/login.html" class="btn btn-primary btn-sm">Sign In</a></div>
+</nav>
+
+<section class="interview-hero">
+<div class="course-hero-content">
+<h1><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Preparation System <span class="badge badge-primary" style="font-size:0.6rem;vertical-align:middle;margin-left:0.5rem">UPGRADED</span></h1>
+<p style="color:var(--text-secondary);max-width:700px">Ace your technical interviews with premium curated questions, structured answers, code examples, and real interview insights from top tech companies.</p>
+</div>
+</section>
+
+<section class="course-content" style="padding:1.5rem 8%">
+<div id="statsDashboard" class="interview-dashboard-grid"></div>
+
+<div class="glass" style="padding:1.5rem;margin-bottom:1.5rem">
+<div class="interview-filter-bar">
+<div class="interview-filter-group">
+<label><i class="fas fa-book"></i> Course</label>
+<select id="intCourseSelect"><option value="">Loading courses...</option></select>
+</div>
+<div class="interview-filter-group">
+<label><i class="fas fa-tag"></i> Topic</label>
+<select id="intTopicSelect"><option value="all">All Topics</option></select>
+</div>
+<div class="interview-filter-group">
+<label><i class="fas fa-filter"></i> Type</label>
+<select id="intTypeSelect"><option value="all">All Types</option><option value="conceptual">Conceptual</option><option value="scenario">Scenario</option><option value="code_analysis">Code Analysis</option><option value="debugging">Debugging</option><option value="real_interview">Real Interview</option><option value="compare_contrast">Compare/Contrast</option><option value="best_practice">Best Practice</option><option value="system_design">System Design</option><option value="fill_blank">Fill in the Blank</option><option value="output_prediction">Output Prediction</option></select>
+</div>
+<div class="interview-filter-group">
+<label><i class="fas fa-signal"></i> Difficulty</label>
+<div class="diff-buttons">
+<button class="diff-btn active" data-diff="all">All</button>
+<button class="diff-btn" data-diff="Beginner">Easy</button>
+<button class="diff-btn" data-diff="Intermediate">Medium</button>
+<button class="diff-btn" data-diff="Advanced">Hard</button>
+</div>
+</div>
+<div class="interview-filter-group" style="flex:2">
+<label><i class="fas fa-search"></i> Search</label>
+<div class="interview-search-wrap">
+<i class="fas fa-search"></i>
+<input type="text" id="intSearchInput" placeholder="Search questions, topics, companies...">
+</div>
+</div>
+<div class="interview-filter-group" style="flex:0 0 auto">
+<label>&nbsp;</label>
+<div class="iq-filter-toggles">
+<button class="iq-toggle-btn" data-filter="bookmarked"><i class="fas fa-bookmark"></i> Bookmarked</button>
+<button class="iq-toggle-btn" data-filter="studied"><i class="fas fa-check"></i> Studied</button>
+</div>
+</div>
+</div></div>
+
+<div class="interview-stats-bar" id="intStatsBar">
+<div class="interview-stat-pill"><i class="fas fa-database"></i> <span id="intTotalCount">0</span> questions</div>
+<div class="interview-stat-pill" style="color:var(--success)"><i class="fas fa-seedling"></i> <span id="intBeginnerCount">0</span> Beginner</div>
+<div class="interview-stat-pill" style="color:var(--warning)"><i class="fas fa-arrow-up"></i> <span id="intIntermediateCount">0</span> Intermediate</div>
+<div class="interview-stat-pill" style="color:var(--error)"><i class="fas fa-star"></i> <span id="intAdvancedCount">0</span> Advanced</div>
+</div>
+
+<div id="intQuestionsContainer"></div>
+<div id="intPagination" class="iq-pagination"></div>
+<div id="intNoResults" class="iq-no-results" style="display:none">
+<i class="fas fa-search"></i>
+<h3>No questions found</h3>
+<p>Try adjusting your filters or search query.</p>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+<div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+<div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+<div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+<div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+</div>
+<div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+</footer>
+
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/interview-data.js"></script>
+<script src="js/interview-engine.js"></script>
+<script src="js/interview-tracker.js"></script>
+<script src="js/main.js"></script>
+<script>
+var PER_PAGE = 10;
+var currentPage = 1;
+var allQuestions = [];
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+var COURSE_LIST = [
+  { id: 'python', label: 'Python' }, { id: 'javascript', label: 'JavaScript' }, { id: 'java', label: 'Java' },
+  { id: 'react', label: 'React' }, { id: 'sql', label: 'SQL' }, { id: 'dsa', label: 'DSA' },
+  { id: 'html', label: 'HTML' }, { id: 'css', label: 'CSS' }, { id: 'git', label: 'Git' },
+  { id: 'docker', label: 'Docker' }, { id: 'nodejs', label: 'Node.js' }, { id: 'typescript', label: 'TypeScript' },
+  { id: 'cpp', label: 'C++' }, { id: 'c', label: 'C' }, { id: 'go', label: 'Go' }, { id: 'rust', label: 'Rust' },
+  { id: 'linux', label: 'Linux' }, { id: 'mongodb', label: 'MongoDB' }, { id: 'mysql', label: 'MySQL' },
+  { id: 'csharp', label: 'C#' }, { id: 'kotlin', label: 'Kotlin' }, { id: 'swift', label: 'Swift' },
+  { id: 'pandas', label: 'Pandas' }, { id: 'security', label: 'Security' },
+  { id: 'dbms', label: 'DBMS' }, { id: 'oop', label: 'OOP' }, { id: 'os', label: 'Operating Systems' },
+  { id: 'networks', label: 'Computer Networks' }, { id: 'system_design', label: 'System Design' }
+];
+
+function populateCourseSelect() {
+  var sel = document.getElementById('intCourseSelect');
+  sel.innerHTML = '';
+  COURSE_LIST.forEach(function(c) {
+    var opt = document.createElement('option');
+    opt.value = c.id;
+    var questions = InterviewEngine.getQuestions(c.id);
+    opt.textContent = c.label + ' (' + (questions ? questions.length : 0) + ' questions)';
+    sel.appendChild(opt);
+  });
+}
+
+function renderDashboard() {
+  var stats = InterviewTracker.getStats();
+  var container = document.getElementById('statsDashboard');
+  container.innerHTML = ''
+    + '<div class="interview-dash-card glass"><div class="interview-dash-icon" style="color:var(--primary)"><i class="fas fa-eye"></i></div><div class="interview-dash-value">' + stats.viewed + '</div><div class="interview-dash-label">Questions Viewed</div></div>'
+    + '<div class="interview-dash-card glass"><div class="interview-dash-icon" style="color:var(--warning)"><i class="fas fa-bookmark"></i></div><div class="interview-dash-value">' + stats.bookmarked + '</div><div class="interview-dash-label">Bookmarked</div></div>'
+    + '<div class="interview-dash-card glass"><div class="interview-dash-icon" style="color:var(--success)"><i class="fas fa-check-circle"></i></div><div class="interview-dash-value">' + stats.studied + '</div><div class="interview-dash-label">Studied</div></div>'
+    + '<div class="interview-dash-card glass"><div class="interview-dash-icon" style="color:#6C5CE7"><i class="fas fa-layer-group"></i></div><div class="interview-dash-value" id="courseCountDash">' + COURSE_LIST.length + '</div><div class="interview-dash-label">Courses Available</div></div>';
+}
+
+function getDisplayQuestions() {
+  var courseId = document.getElementById('intCourseSelect').value;
+  var topic = document.getElementById('intTopicSelect').value;
+  var type = document.getElementById('intTypeSelect').value;
+  var difficulty = document.querySelector('.diff-btn.active')?.dataset.diff || 'all';
+  var search = document.getElementById('intSearchInput').value.toLowerCase();
+  var showBookmarked = document.querySelector('.iq-toggle-btn[data-filter="bookmarked"]')?.classList.contains('active');
+  var showStudied = document.querySelector('.iq-toggle-btn[data-filter="studied"]')?.classList.contains('active');
+
+  allQuestions = InterviewEngine.getQuestions(courseId) || [];
+  var filtered = allQuestions.slice();
+
+  if (topic !== 'all') filtered = filtered.filter(function(q) { return q.topic === topic; });
+  if (type !== 'all') filtered = filtered.filter(function(q) { return q.type === type; });
+  if (difficulty !== 'all') filtered = filtered.filter(function(q) { return q.difficulty === difficulty; });
+  if (search) filtered = filtered.filter(function(q) {
+    return q.question.toLowerCase().includes(search)
+      || q.topic.toLowerCase().includes(search)
+      || q.companies.some(function(c) { return c.toLowerCase().includes(search); })
+      || (q.answer && q.answer.overview && q.answer.overview.toLowerCase().includes(search));
+  });
+  if (showBookmarked) filtered = filtered.filter(function(q) { return InterviewTracker.isBookmarked(q.id, q.courseId); });
+  if (showStudied) filtered = filtered.filter(function(q) { return InterviewTracker.isStudied(q.id, q.courseId); });
+
+  return filtered;
+}
+
+function getUniqueTopics(courseId) {
+  var qs = InterviewEngine.getQuestions(courseId) || [];
+  var topics = {};
+  qs.forEach(function(q) { if (q.topic) topics[q.topic] = true; });
+  return Object.keys(topics).sort();
+}
+
+function updateTopicSelect(courseId) {
+  var sel = document.getElementById('intTopicSelect');
+  var current = sel.value;
+  sel.innerHTML = '<option value="all">All Topics</option>';
+  var topics = getUniqueTopics(courseId);
+  topics.forEach(function(t) {
+    var opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    if (t === current) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function renderQuestions() {
+  var filtered = getDisplayQuestions();
+  var totalQuestions = allQuestions.length;
+
+  document.getElementById('intTotalCount').textContent = totalQuestions;
+  document.getElementById('intBeginnerCount').textContent = allQuestions.filter(function(q) { return q.difficulty === 'Beginner'; }).length;
+  document.getElementById('intIntermediateCount').textContent = allQuestions.filter(function(q) { return q.difficulty === 'Intermediate'; }).length;
+  document.getElementById('intAdvancedCount').textContent = allQuestions.filter(function(q) { return q.difficulty === 'Advanced'; }).length;
+
+  if (filtered.length === 0) {
+    document.getElementById('intQuestionsContainer').innerHTML = '';
+    document.getElementById('intPagination').innerHTML = '';
+    document.getElementById('intNoResults').style.display = 'block';
+    return;
+  }
+  document.getElementById('intNoResults').style.display = 'none';
+
+  var totalPages = Math.ceil(filtered.length / PER_PAGE);
+  if (currentPage > totalPages) currentPage = totalPages;
+  var start = (currentPage - 1) * PER_PAGE;
+  var page = filtered.slice(start, start + PER_PAGE);
+
+  var html = '';
+  page.forEach(function(q, qi) {
+    var idx = start + qi;
+    InterviewTracker.trackView(q.id, q.courseId);
+    var diffClass = q.difficulty === 'Beginner' ? 'beginner' : q.difficulty === 'Intermediate' ? 'intermediate' : 'advanced';
+    var typeLabel = q.type.replace(/_/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+    var isBookmarked = InterviewTracker.isBookmarked(q.id, q.courseId);
+    var isStudied = InterviewTracker.isStudied(q.id, q.courseId);
+
+      html += '<div class="iq-card glass" data-idx="' + idx + '">'
+      + '<div class="iq-card-header" onclick="toggleIQCard(this)">'
+      + '<div style="flex:1">'
+      + '<div class="iq-title">' + esc(q.question) + '</div>'
+      + '<div class="iq-meta">'
+      + '<span class="iq-badge ' + diffClass + '"><i class="fas fa-' + (q.difficulty === 'Beginner' ? 'seedling' : q.difficulty === 'Intermediate' ? 'arrow-up' : 'star') + '"></i> ' + q.difficulty + '</span>'
+      + '<span class="iq-badge type"><i class="fas fa-' + ({ conceptual: 'brain', scenario: 'scroll', code_analysis: 'terminal', debugging: 'bug', real_interview: 'building', compare_contrast: 'balance-scale', best_practice: 'check-double', system_design: 'sitemap', fill_blank: 'puzzle-piece', output_prediction: 'chart-line' }[q.type] || 'question') + '"></i> ' + typeLabel + '</span>'
+      + '<span style="font-size:0.75rem;color:var(--text-muted)"><i class="far fa-clock"></i> ' + (q.readingTime || '3 min') + '</span>'
+      + '</div>'
+      + (q.companies && q.companies.length > 0 ? '<div class="iq-companies">' + q.companies.map(function(c) { return '<span class="iq-company-chip">' + esc(c) + '</span>'; }).join('') + '</div>' : '')
+      + '</div>'
+      + '<div><i class="fas fa-chevron-down iq-chevron" style="color:var(--text-muted)"></i></div>'
+      + '</div>'
+      + '<div class="iq-card-body">'
+      + (q.questionCode ? '<div class="iq-question-code">' + renderCodeBlockReadOnly(q.questionCode, 'javascript') + '</div>' : '')
+      + renderAnswer(q)
+      + renderActions(q)
+      + '</div>'
+      + '</div>';
+  });
+
+  document.getElementById('intQuestionsContainer').innerHTML = html;
+  renderPagination(totalPages);
+  renderDashboard();
+}
+
+function renderAnswer(q) {
+  var a = q.answer || {};
+  var sections = [
+    { id: 'overview', icon: 'info-circle', title: 'Answer Overview', content: a.overview || '' },
+    { id: 'keyConcepts', icon: 'list', title: 'Key Concepts', content: a.keyConcepts ? '<ul style="margin:0;padding-left:1.2rem">' + a.keyConcepts.map(function(k) { return '<li style="margin-bottom:0.3rem;color:var(--text-secondary)">' + esc(k) + '</li>'; }).join('') + '</ul>' : '' },
+    { id: 'detail', icon: 'book-open', title: 'Detailed Explanation', content: a.detailedExplanation || '' },
+    { id: 'code', icon: 'code', title: 'Code Example', content: a.codeExample ? renderCodeBlock(a.codeExample) : '' },
+    { id: 'realWorld', icon: 'globe', title: 'Real World Example', content: a.realWorldExample || '' },
+    { id: 'tips', icon: 'lightbulb', title: 'Interview Tips', content: a.interviewTips || '' },
+    { id: 'mistakes', icon: 'exclamation-triangle', title: 'Common Mistakes', content: a.commonMistakes ? '<ul style="margin:0;padding-left:1.2rem">' + a.commonMistakes.map(function(m) { return '<li style="margin-bottom:0.3rem;color:var(--text-secondary)">' + esc(m) + '</li>'; }).join('') + '</ul>' : '' },
+    { id: 'followups', icon: 'arrow-right', title: 'Follow-up Questions', content: a.followUpQuestions ? '<ul style="margin:0;padding-left:1.2rem">' + a.followUpQuestions.map(function(f) { return '<li style="margin-bottom:0.3rem;color:var(--text-secondary)"><i class="fas fa-question-circle" style="color:var(--primary);font-size:0.7rem;margin-right:0.3rem"></i>' + esc(f) + '</li>'; }).join('') + '</ul>' : '' }
+  ];
+
+  var videoHtml = '';
+  if (q.video) {
+    videoHtml = '<div class="iq-video-card">'
+      + '<div class="iq-video-thumb"><img src="' + esc(q.video.thumbnail) + '" alt="' + esc(q.video.title) + '" loading="lazy"><div class="play-overlay"><i class="fas fa-play"></i></div></div>'
+      + '<div class="iq-video-info"><h5>' + esc(q.video.title) + '</h5><p>' + esc(q.video.channel) + '</p><a href="' + esc(q.video.url) + '" target="_blank" class="btn btn-sm btn-primary" style="margin-top:0.3rem;padding:0.3rem 0.8rem;font-size:0.75rem"><i class="fas fa-play"></i> Watch Explanation</a></div>'
+      + '</div>';
+  }
+
+  var secHtml = sections.filter(function(s) { return s.content; }).map(function(s, i) {
+    return '<div class="iq-answer-section' + (i === 0 ? ' expanded' : '') + '">'
+      + '<div class="iq-answer-section-header" onclick="toggleAnswerSection(this)">'
+      + '<i class="fas fa-chevron-right" style="font-size:0.7rem"></i>'
+      + '<i class="fas fa-' + s.icon + '" style="color:var(--primary);width:1rem"></i>'
+      + s.title
+      + '</div>'
+      + '<div class="iq-answer-section-body">' + s.content + '</div>'
+      + '</div>';
+  }).join('');
+
+  return secHtml + videoHtml;
+}
+
+function renderCodeBlock(c) {
+  if (!c || !c.code) return '';
+  var lang = c.language || 'javascript';
+  var langColors = {javascript:'#f7df1e',js:'#f7df1e',html:'#e34f26',css:'#2965f1',python:'#3572A5',java:'#b07219',cpp:'#f34b7d',c:'#555',go:'#00ADD8',rust:'#dea584',sql:'#e38c00',typescript:'#3178c6',bash:'#4eaa25',nodejs:'#339933',csharp:'#178600',kotlin:'#F18E33',swift:'#ffac45',php:'#777bb4',ruby:'#701516',yaml:'#cb171e'};
+  var color = langColors[lang] || '#6C5CE7';
+  var label = lang.toUpperCase();
+  return '<div class="iq-code-editor" data-lang="' + esc(lang) + '" data-original="' + esc(c.code) + '" data-output="' + esc(c.output||'') + '">'
+    + '<div class="iq-code-header"><span class="iq-code-lang"><span class="iq-lang-dot" style="background:' + color + '"></span> ' + label + '</span></div>'
+    + '<textarea class="iq-code-textarea" spellcheck="false">' + esc(c.code) + '</textarea>'
+    + '<div class="iq-btn-bar">'
+    + '<button class="iq-btn iq-btn-copy" onclick="copyIQCodeNew(this)"><i class="fas fa-copy"></i> Copy</button>'
+    + '<button class="iq-btn iq-btn-reset" onclick="resetIQCode(this)"><i class="fas fa-undo"></i> Reset</button>'
+    + '</div>'
+    + '<div class="iq-output"></div>'
+    + '</div>';
+}
+
+function renderCodeBlockReadOnly(code, lang) {
+  if (!code) return '';
+  lang = lang || 'javascript';
+  var langColors = {javascript:'#f7df1e',js:'#f7df1e',html:'#e34f26',css:'#2965f1',python:'#3572A5',java:'#b07219',cpp:'#f34b7d',c:'#555',go:'#00ADD8',rust:'#dea584',sql:'#e38c00',typescript:'#3178c6',bash:'#4eaa25',nodejs:'#339933',csharp:'#178600',kotlin:'#F18E33',swift:'#ffac45',php:'#777bb4',ruby:'#701516',yaml:'#cb171e'};
+  var color = langColors[lang] || '#6C5CE7';
+  var label = lang.toUpperCase();
+  return '<div class="iq-code-editor" data-lang="' + esc(lang) + '" data-original="' + esc(code) + '">'
+    + '<div class="iq-code-header"><span class="iq-code-lang"><span class="iq-lang-dot" style="background:' + color + '"></span> ' + label + '</span></div>'
+    + '<textarea class="iq-code-textarea" spellcheck="false" readonly>' + esc(code) + '</textarea>'
+    + '<div class="iq-btn-bar">'
+    + '<button class="iq-btn iq-btn-copy" onclick="copyIQCodeNew(this)"><i class="fas fa-copy"></i> Copy</button>'
+    + '<button class="iq-btn iq-btn-reset" onclick="resetIQCode(this)"><i class="fas fa-undo"></i> Reset</button>'
+    + '</div>'
+    + '<div class="iq-output"></div>'
+    + '</div>';
+}
+
+function runIQCode(el) {
+  var ed = el.classList ? el.closest('.iq-code-editor') : el;
+  var ta = ed.querySelector('.iq-code-textarea');
+  var out = ed.querySelector('.iq-output');
+  var lang = ed.dataset.lang;
+  var code = ta.value;
+  if (lang === 'javascript' || lang === 'js') {
+    var logs = [];
+    var mock = function() {
+      var args = Array.prototype.slice.call(arguments).map(function(a) {
+        return typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a);
+      });
+      logs.push(args.join(' '));
+    };
+    var orig = console.log;
+    console.log = mock;
+    try {
+      (new Function(code))();
+      out.innerHTML = logs.length ? logs.map(function(l){return esc(l)}).join('<br>') : '<span style="color:#6a9955">(no output)</span>';
+    } catch(e) {
+      out.innerHTML = '<span style="color:#f48771">Error: ' + esc(e.message) + '</span>';
+    } finally {
+      console.log = orig;
+    }
+  } else if (lang === 'html') {
+    var blob = new Blob([code], {type:'text/html'});
+    var url = URL.createObjectURL(blob);
+    out.innerHTML = '<iframe sandbox="allow-scripts" src="' + url + '" style="width:100%;height:200px;border:none;border-radius:4px;background:white"></iframe>';
+  } else {
+    var extra = ed.dataset.output || '';
+    out.innerHTML = 'Output: ' + lang.toUpperCase() + ' execution not supported in browser. Here\'s the expected output:<br>' + esc(extra || '(no output provided)');
+  }
+}
+
+function copyIQCodeNew(btn) {
+  var ed = btn.closest('.iq-code-editor');
+  var ta = ed.querySelector('.iq-code-textarea');
+  navigator.clipboard.writeText(ta.value).then(function() {
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(function() { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+  }).catch(function() {
+    ta.select();
+    document.execCommand('copy');
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(function() { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+  });
+}
+
+function resetIQCode(btn) {
+  var ed = btn.closest('.iq-code-editor');
+  var ta = ed.querySelector('.iq-code-textarea');
+  ta.value = ed.dataset.original;
+  var out = ed.querySelector('.iq-output');
+  out.innerHTML = '';
+  ed.dataset.executed = 'false';
+}
+
+function renderActions(q) {
+  var bookmarked = InterviewTracker.isBookmarked(q.id, q.courseId);
+  var studied = InterviewTracker.isStudied(q.id, q.courseId);
+  return '<div class="iq-actions">'
+    + '<button class="iq-action-btn' + (bookmarked ? ' bookmarked' : '') + '" onclick="toggleBookmark(\'' + q.id + '\',\'' + q.courseId + '\',this)"><i class="fas fa-' + (bookmarked ? 'bookmark' : 'bookmark') + '"></i> ' + (bookmarked ? 'Bookmarked' : 'Bookmark') + '</button>'
+    + '<button class="iq-action-btn' + (studied ? ' studied' : '') + '" onclick="toggleStudied(\'' + q.id + '\',\'' + q.courseId + '\',this)"><i class="fas fa-' + (studied ? 'check-circle' : 'circle') + '"></i> ' + (studied ? 'Studied' : 'Mark Studied') + '</button>'
+    + '<button class="iq-action-btn" onclick="shareQuestion(this,\'' + esc(q.question.replace(/'/g,"\\'")) + '\')"><i class="fas fa-share-alt"></i> Share</button>'
+    + '</div>';
+}
+
+function toggleIQCard(header) {
+  var card = header.closest('.iq-card');
+  var wasClosed = !card.classList.contains('expanded');
+  card.classList.toggle('expanded');
+  if (wasClosed) {
+    var editors = card.querySelectorAll('.iq-code-editor');
+    editors.forEach(function(ed) {
+      if (ed.dataset.executed !== 'true') {
+        ed.dataset.executed = 'true';
+        runIQCode(ed);
+      }
+    });
+  }
+}
+
+function toggleAnswerSection(header) {
+  var section = header.closest('.iq-answer-section');
+  section.classList.toggle('expanded');
+}
+
+function renderPagination(totalPages) {
+  var container = document.getElementById('intPagination');
+  if (totalPages <= 1) { container.innerHTML = ''; return; }
+  var html = '';
+  html += '<button class="iq-page-btn" onclick="goPage(1)" ' + (currentPage === 1 ? 'disabled' : '') + '><i class="fas fa-angle-double-left"></i></button>';
+  html += '<button class="iq-page-btn" onclick="goPage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '><i class="fas fa-angle-left"></i></button>';
+  var startP = Math.max(1, currentPage - 2);
+  var endP = Math.min(totalPages, startP + 4);
+  for (var i = startP; i <= endP; i++) {
+    html += '<button class="iq-page-btn' + (i === currentPage ? ' active' : '') + '" onclick="goPage(' + i + ')">' + i + '</button>';
+  }
+  html += '<button class="iq-page-btn" onclick="goPage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '><i class="fas fa-angle-right"></i></button>';
+  html += '<button class="iq-page-btn" onclick="goPage(' + totalPages + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '><i class="fas fa-angle-double-right"></i></button>';
+  container.innerHTML = html;
+}
+
+function goPage(p) {
+  currentPage = p;
+  renderQuestions();
+  document.querySelectorAll('.iq-card').forEach(function(c) { c.classList.remove('expanded'); });
+}
+
+function toggleBookmark(id, courseId, btn) {
+  var nowBookmarked = InterviewTracker.toggleBookmark(id, courseId);
+  btn.innerHTML = '<i class="fas fa-' + (nowBookmarked ? 'bookmark' : 'bookmark') + '"></i> ' + (nowBookmarked ? 'Bookmarked' : 'Bookmark');
+  btn.classList.toggle('bookmarked', nowBookmarked);
+  renderDashboard();
+}
+
+function toggleStudied(id, courseId, btn) {
+  var nowStudied = InterviewTracker.toggleStudied(id, courseId);
+  btn.innerHTML = '<i class="fas fa-' + (nowStudied ? 'check-circle' : 'circle') + '"></i> ' + (nowStudied ? 'Studied' : 'Mark Studied');
+  btn.classList.toggle('studied', nowStudied);
+  renderDashboard();
+}
+
+function shareQuestion(btn, questionText) {
+  var text = 'Check out this interview question from CodeRio: ' + questionText;
+  if (navigator.share) {
+    navigator.share({ title: 'CodeRio Interview Question', text: text, url: window.location.href }).catch(function() {});
+  } else {
+    navigator.clipboard.writeText(text).then(function() {
+      Utils.showToast('Question copied to clipboard!', 'success');
+    });
+  }
+}
+
+function copyIQCode(btn) {
+  var block = btn.closest('.iq-code-block');
+  var codeEl = block.querySelector('.iq-code-body code');
+  if (!codeEl) return;
+  var txt = '';
+  codeEl.querySelectorAll('.line').forEach(function(l) { txt += l.textContent + '\n'; });
+  navigator.clipboard.writeText(txt.trim()).then(function() {
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(function() { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+  }).catch(function() {
+    var range = document.createRange();
+    range.selectNode(codeEl);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(function() { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  populateCourseSelect();
+  renderDashboard();
+
+  var courseSelect = document.getElementById('intCourseSelect');
+  var initialCourse = courseSelect.value;
+  updateTopicSelect(initialCourse);
+  renderQuestions();
+
+  courseSelect.addEventListener('change', function() {
+    updateTopicSelect(this.value);
+    currentPage = 1;
+    renderQuestions();
+  });
+
+  document.getElementById('intTopicSelect').addEventListener('change', function() { currentPage = 1; renderQuestions(); });
+  document.getElementById('intTypeSelect').addEventListener('change', function() { currentPage = 1; renderQuestions(); });
+  document.getElementById('intSearchInput').addEventListener('input', function() { currentPage = 1; renderQuestions(); });
+
+  document.querySelectorAll('.diff-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.diff-btn').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      currentPage = 1;
+      renderQuestions();
+    });
+  });
+
+  document.querySelectorAll('.iq-toggle-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      this.classList.toggle('active');
+      currentPage = 1;
+      renderQuestions();
+    });
+  });
+});
+</script>
+</body>
+</html>

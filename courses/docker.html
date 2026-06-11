@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="docker">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Docker</h1>
+      <p>Docker is a platform for developing, shipping, and running applications in containers. Containers are lightweight, portable, and consistent environments that package application code with all dependencies, eliminating the "it works on my machine" problem.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 6 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Docker was launched in 2013 by Solomon Hykes as an internal project at dotCloud. It popularized containerization by making it easy to create, deploy, and run containers using a simple CLI and a daemon-based architecture. Unlike virtual machines, containers share the host OS kernel, making them more lightweight and faster to start.</p>
+      <p>Docker uses images (read-only templates) to create containers. Images are built from Dockerfiles, a declarative syntax for specifying the environment, dependencies, and commands. Docker Hub is the default public registry for sharing images. Docker Compose defines multi-container applications using a YAML configuration file.</p>
+      <p>Docker has revolutionized software development and operations. It ensures consistency across development, testing, and production environments. Docker is the foundation for modern microservices, CI/CD pipelines, cloud-native applications, and container orchestration platforms like Kubernetes, Docker Swarm, and Amazon ECS.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Docker?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-box" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Consistent Environments</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Eliminate "it works on my machine" problems. Containers ensure your app runs identically on your laptop, CI server, and production.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-rocket" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Fast Deployment & Scaling</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Containers start in seconds, not minutes. Scale horizontally by spinning up more containers. Rollback instantly to previous versions.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-microchip" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Lightweight Resource Usage</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Unlike VMs, containers share the host kernel and require no guest OS. Run hundreds of containers on a single host with minimal overhead.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Industry Standard</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Docker is used by 80%+ of organizations. Required knowledge for DevOps, SRE, backend, and cloud engineering roles.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Docker is adopted by virtually every tech company for development and production:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spotify</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">PayPal</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Docker is used in every stage of the software lifecycle. Developers use it for local development environments. CI/CD pipelines build and test inside Docker containers. Production deployments use Docker with orchestration platforms. Companies like Netflix, Uber, Airbnb, Stripe, and Shopify all use Docker to run their applications at scale.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Command line basics, understanding of OS concepts (processes, networking, filesystem)</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-2)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Docker install, run/pull/ps, images vs containers, Dockerfile basics, ports, volumes</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 3-4)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Docker Compose, multi-stage builds, networking, Dockerfile optimization, health checks</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 5-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Docker Swarm, secrets management, logging, monitoring, security scanning, image signing</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 7-8)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Kubernetes orchestration, CI/CD with Docker, registry management, custom images, Docker API</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> Docker Fundamentals</h3><p>Installing Docker, Docker architecture (client, daemon, registry), containers vs VMs, Docker Desktop, first commands (run, ps, pull).</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Working with Images & Containers</h3><p>docker run, docker start/stop/rm, port mapping (-p), environment variables (-e), interactive mode (-it), detached mode (-d).</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Dockerfiles</h3><p>FROM, RUN, COPY, ADD, CMD, ENTRYPOINT, WORKDIR, EXPOSE, ENV, ARG, layers and caching, .dockerignore.</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Volumes & Data Persistence</h3><p>Bind mounts, named volumes, tmpfs mounts, volume drivers, sharing data between containers, backup/restore volumes.</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">5</span> Docker Compose</h3><p>docker-compose.yml, services, networks, volumes, environment, depends_on, ports, healthcheck, profiles.</p></div>
+      <div class="module-card"><h3><span class="module-number">6</span> Multi-Container Applications</h3><p>Dockerizing web apps (Node.js, Python, etc.), databases (PostgreSQL, MySQL), caching (Redis), reverse proxy (Nginx).</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Docker Networking</h3><p>Bridge, host, overlay, macvlan networks; container DNS; network isolation; exposing ports; service discovery.</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Multi-Stage Builds & Best Practices</h3><p>Multi-stage Dockerfiles for smaller images, layer caching optimization, security best practices, image tagging strategies.</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">9</span> Docker Swarm & Orchestration</h3><p>Swarm init/join, services, stacks, replicas, rolling updates, node management, Swarm mode networking.</p></div>
+      <div class="module-card"><h3><span class="module-number">10</span> Logging & Monitoring</h3><p>docker logs, logging drivers (json-file, syslog, fluentd), Docker metrics, Prometheus integration, cAdvisor.</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Security & Best Practices</h3><p>Image scanning (Docker Scout), secret management, user namespaces, seccomp, AppArmor, rootless mode, content trust.</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> CI/CD with Docker</h3><p>GitHub Actions Docker builds, GitLab CI, Jenkins with Docker, Docker layer caching in CI, automated testing.</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">13</span> Kubernetes Basics</h3><p>Pods, deployments, services, configmaps, secrets, ingress, kubectl, minikube/kind, port-forwarding.</p></div>
+      <div class="module-card"><h3><span class="module-number">14</span> Docker Registry & Distribution</h3><p>Docker Hub, private registries, Harbor, image tags, manifest lists, multi-architecture images, GC policies.</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Docker API & SDK</h3><p>Docker Engine API, Docker SDK for Python/Go/JS, programmatic container management, custom tooling.</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Production Docker</h3><p>Resource limits (CPU/memory), health checks, graceful shutdowns, init processes, production Compose files, blue/green deployment.</p></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Essential Docker Commands</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Docker CLI follows the pattern: docker [object] [action]. Common objects are container, image, volume, network, and system. Use --help flag for detailed documentation.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Container lifecycle
+docker run -d -p 8080:80 --name myapp nginx
+docker stop myapp
+docker start myapp
+docker rm -f myapp
+
+# Inspecting
+docker ps -a                 # List all containers
+docker logs -f myapp         # Follow logs
+docker exec -it myapp bash   # Enter running container
+docker inspect myapp         # Detailed metadata
+docker stats                 # Live resource usage
+
+# Images
+docker pull ubuntu:22.04
+docker build -t myapp:1.0 .
+docker images
+docker rmi myapp:1.0
+docker system prune -a       # Clean everything</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Writing Efficient Dockerfiles</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Each Dockerfile instruction creates a layer. Minimize layers, order instructions from least to most frequently changing to maximize cache usage. Use multi-stage builds to keep final images small.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Efficient Node.js Dockerfile
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine
+WORKDIR /app
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+USER nodejs
+EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
+CMD ["node", "dist/index.js"]</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Docker Compose Multi-Container Setup</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Docker Compose defines multi-container applications in YAML. Each service runs in its own container with isolated environments. Networks enable service discovery by service name.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># docker-compose.yml
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/app
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d app"]
+      interval: 5s
+
+  cache:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
+  redis_data:</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Docker Networking</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Docker provides several network drivers. Bridge is the default for standalone containers. Overlay enables multi-host communication in Swarm. Host gives a container direct access to the host network. Macvlan assigns MAC addresses to containers.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Create custom networks
+docker network create --driver bridge my-net
+docker network create --driver overlay --attachable swarm-net
+
+# Run containers on specific networks
+docker run -d --name app --network my-net myapp
+docker run -d --name db --network my-net postgres
+
+# Connect/disconnect containers
+docker network connect my-net container1
+docker network disconnect my-net container1
+
+# Internal DNS resolution - containers can reach each other by name
+# app can reach db at hostname: db, port: 5432
+
+# List and inspect networks
+docker network ls
+docker network inspect my-net</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Multi-Stage Builds</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Multi-stage builds use multiple FROM statements to create intermediate build stages. Each stage can use different base images. Only the final stage's layers are kept in the final image, enabling tiny production images.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Build stage: full SDK for compilation
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY ["MyApp.csproj", "."]
+RUN dotnet restore
+COPY . .
+RUN dotnet publish -c Release -o /app
+
+# Runtime stage: minimal runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+WORKDIR /app
+COPY --from=build /app .
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
+ENTRYPOINT ["dotnet", "MyApp.dll"]
+
+# Check image sizes
+docker images
+# SDK image: ~1.8GB
+# Final image: ~200MB</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Volumes & Data Management</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Docker volumes persist data independently of container lifecycle. Named volumes are managed by Docker, bind mounts map host directories, and tmpfs mounts store data in memory. Use volumes for databases, user uploads, and configuration.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Create and use named volumes
+docker volume create app-data
+docker run -v app-data:/data myapp
+
+# Bind mount (development)
+docker run -v $(pwd):/app -w /app node:20 npm run dev
+
+# Backup a volume
+docker run --rm -v app-data:/source -v $(pwd):/backup \
+  alpine tar czf /backup/backup.tar.gz -C /source .
+
+# Restore a volume
+docker run --rm -v app-data:/target -v $(pwd):/backup \
+  alpine tar xzf /backup/backup.tar.gz -C /target
+
+# Volume drivers for cloud storage
+docker volume create --driver=rexray/ebs my-ebs-volume</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Docker Security Best Practices</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Security in Docker is multi-layered: image security (scanning for vulnerabilities, using minimal base images), runtime security (read-only root, drop capabilities, non-root user), and host security (networking, resource limits).</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Dockerfile security directives
+FROM node:20-alpine
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+COPY --chown=appuser:appgroup . /app
+RUN chmod -R 755 /app
+
+# Runtime security
+docker run \
+  --read-only \
+  --cap-drop=ALL \
+  --cap-add=NET_BIND_SERVICE \
+  --security-opt=no-new-privileges:true \
+  --security-opt=seccomp=default.json \
+  -m 512m \
+  --cpus=1 \
+  myapp
+
+# Image scanning
+docker scout quickview myapp:latest
+docker scout recommendations myapp:latest</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Docker Swarm & Orchestration</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Docker Swarm turns a group of Docker hosts into a single virtual host. It provides native clustering, service discovery, load balancing, scaling, and rolling updates. Services are the Swarm equivalent of containers.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Initialize Swarm
+docker swarm init --advertise-addr 192.168.1.10
+docker swarm join-token worker
+
+# Deploy a service
+docker service create \
+  --name web \
+  --replicas 3 \
+  --publish 80:80 \
+  --update-delay 10s \
+  --rollback-monitor 20s \
+  nginx:alpine
+
+# Scale the service
+docker service scale web=5
+
+# Rollback if needed
+docker service update --rollback web
+
+# Stack deploy from compose file
+docker stack deploy -c docker-compose.yml myapp
+
+# Manage nodes
+docker node ls
+docker node promote node2
+docker node demote node2</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Full-Stack App with Docker Compose</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:4000
+
+  api:
+    build: ./api
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGODB_URI=mongodb://db:27017/app
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mongo:7
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 10s
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - api
+
+volumes:
+  mongo_data:</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: CI/CD Pipeline with Docker</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code># .github/workflows/deploy.yml
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            myapp:latest
+            myapp:${{ github.sha }}
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          script: |
+            docker pull myapp:latest
+            docker stack deploy -c docker-compose.yml myapp
+            docker image prune -f</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Run Your First Container</h4><p style="color:var(--text-muted);font-size:0.85rem">Pull and run an Nginx container, map port 8080, and view the default page.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Build a Custom Image</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a Dockerfile for a simple Node.js or Python app and build/push the image.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Docker Compose App</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a multi-service app with a web server, database, and cache using Docker Compose.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Multi-Stage Build</h4><p style="color:var(--text-muted);font-size:0.85rem">Convert a single-stage Dockerfile to multi-stage, reducing the final image size by at least 50%.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Volume Backup & Restore</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a named volume, write data to it, back it up to a tar file, and restore it to a new container.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Swarm Cluster Setup</h4><p style="color:var(--text-muted);font-size:0.85rem">Set up a Docker Swarm cluster (local with VMs), deploy a service, scale it, and perform a rolling update.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">CI/CD Pipeline</h4><p style="color:var(--text-muted);font-size:0.85rem">Set up a CI/CD pipeline with GitHub Actions that builds, tests, and deploys a Dockerized app.</p></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Microservices App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A microservices application with API gateway, auth service, user service, and product service using Docker Compose.</p><span class="badge badge-primary">Docker</span> <span class="badge badge-primary">Microservices</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Dev Environment in Containers</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Set up a complete development environment with databases, queues, and services all running in Docker.</p><span class="badge badge-primary">Docker</span> <span class="badge badge-primary">Dev</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">CI/CD Pipeline Project</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Build a complete CI/CD pipeline with GitHub Actions, Docker builds, and automated deployment.</p><span class="badge badge-primary">Docker</span> <span class="badge badge-primary">CI/CD</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Monitoring Stack</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Deploy Prometheus, Grafana, and cAdvisor in Docker for container and application monitoring.</p><span class="badge badge-primary">Docker</span> <span class="badge badge-primary">Monitoring</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Private Docker Registry</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Set up a private Docker registry with authentication, TLS, and garbage collection using Harbor.</p><span class="badge badge-primary">Docker</span> <span class="badge badge-primary">Registry</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Kubernetes Cluster with Docker</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Use kind or minikube to run a local Kubernetes cluster, deploy Docker images, and practice orchestration.</p><span class="badge badge-primary">Docker</span> <span class="badge badge-primary">Kubernetes</span></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=docker&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,845 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Platform - CodeRio Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; position: relative; z-index: 1; }
+    .project-detail-hero { margin-bottom: 3rem; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-detail-hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #ef4444, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 1000px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3.5rem; background: var(--glass-bg); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-body .section h2 { margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1.6rem; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.75rem; }
+    .project-body .section h3 { margin: 1.5rem 0 0.75rem; color: var(--primary); }
+    .code-block { background: #0f111a; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(239,68,68,0.2); position: relative; }
+    .code-block::before { content: attr(data-lang); position: absolute; top: 0.5rem; right: 0.75rem; font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.7; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1.2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); text-align: center; backdrop-filter: blur(4px); }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .diagram-box { background: #1a1d2e; border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; font-family: 'Fira Code', monospace; font-size: 0.8rem; overflow-x: auto; margin: 1rem 0; white-space: pre; color: #e2e8f0; }
+    .structure-tree { background: #1a1d2e; padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: 'Fira Code', monospace; font-size: 0.85rem; line-height: 2; border: 1px solid var(--glass-border); overflow-x: auto; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .table-wrap th, .table-wrap td { border: 1px solid var(--glass-border); padding: 0.6rem 0.8rem; text-align: left; }
+    .table-wrap th { background: rgba(239,68,68,0.1); color: #ef4444; font-weight: 600; }
+    .badge-tech { background: rgba(99,102,241,0.15); color: #818cf8; display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
+    .mistake-card { background: rgba(239,68,68,0.04); border-left: 4px solid #ef4444; padding: 1rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 0.75rem 0; }
+    .qa-card { background: rgba(99,102,241,0.04); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.75rem 0; }
+    .qa-card strong { color: var(--primary); }
+    .challenge-card { background: rgba(245,158,11,0.06); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 4% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Video Streaming Platform</h1>
+      <div class="meta">
+        <span class="badge" style="background:rgba(239,68,68,0.15);color:#ef4444">Advanced</span>
+        <span><i class="far fa-clock"></i> 60-80 hours</span>
+        <span><i class="fas fa-code-branch"></i> 10 technologies</span>
+        <span><i class="fas fa-star"></i> Capstone</span>
+      </div>
+    </div>
+
+    <div class="project-body">
+
+      <div class="section">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>Build a full-stack video streaming platform similar to YouTube or Vimeo, supporting video upload, transcoding, adaptive bitrate streaming (HLS/DASH), CDN delivery, user management, subscriptions, analytics, and live streaming. The platform uses Node.js/Python for the backend, React for the frontend, FFmpeg for video processing, AWS S3 + CloudFront for storage and delivery, and Redis + PostgreSQL for state and metadata. You will implement a complete video encoding pipeline, adaptive bitrate playlist generation, thumbnail extraction, content delivery optimization via CDN, and a user-facing video player with custom controls. The platform supports 4K uploads, automatic quality switching based on network conditions, and detailed watch-time analytics for content creators.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
+        <p>Modern video streaming at scale presents interconnected challenges: (1) Video files are large (1GB+ for 4K content) requiring efficient upload with resumable support, (2) Raw video must be transcoded into multiple formats/resolutions for adaptive streaming, (3) Global delivery with sub-second startup latency requires CDN optimization and edge caching, (4) Users on different devices and network conditions need adaptive quality switching, (5) Content creators need analytics — watch time, audience retention, geographic distribution, (6) Monetization requires subscription management, ad insertion, and pay-per-view access control. The goal is to build a platform that handles the entire video lifecycle — from upload to global delivery — with professional-grade quality, security, and analytics.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-briefcase" style="color:var(--success)"></i> Real World Use Cases</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fas fa-graduation-cap"></i><h4>E-Learning Platform</h4><p>Course video hosting with DRM protection, chapter markers, interactive quizzes overlayed on video, and watch-time tracking for completion certificates. Used by online course creators.</p></div>
+          <div class="feature-item"><i class="fas fa-gamepad"></i><h4>Live Game Streaming</h4><p>Real-time game streaming with sub-3-second latency via WebRTC + HLS hybrid. Chat integration, subscriber emotes, and VOD archiving of past streams. Twitch-like experience.</p></div>
+          <div class="feature-item"><i class="fas fa-video"></i><h4>Enterprise Video Training</h4><p>Internal corporate training videos with SSO integration, SCORM compliance, detailed employee viewing analytics, and mandatory video completion tracking for compliance training.</p></div>
+          <div class="feature-item"><i class="fas fa-film"></i><h4>Video-on-Demand Service</h4><p>Netflix-like streaming service with content library management, multi-language subtitles, parental controls, recommendation engine, and offline download support for mobile viewing.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>The global video streaming market is valued at $500B+ with 3.5B+ internet users streaming video regularly. YouTube serves 500+ hours of video uploaded every minute. Netflix accounts for 15% of global internet traffic. Key trends: (1) Live streaming growth — 150% increase since 2020, (2) Short-form video (TikTok, Reels, Shorts) driving new encoding and delivery paradigms, (3) AI-powered video — automatic highlight generation, content moderation, and recommendation, (4) Serverless video processing — AWS Elemental MediaConvert, Lambda-based transcoding, (5) Low-latency streaming — WebRTC and LL-HLS reducing latency to sub-2 seconds. This project builds skills for video infrastructure roles at YouTube, Twitch, Netflix, and media companies.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-check-circle" style="color:var(--success)"></i> Learning Outcomes</h2>
+        <ul>
+          <li><strong>Video Encoding Pipelines:</strong> Master FFmpeg for transcoding, segmenting, and packaging video. Understand codecs (H.264, H.265, AV1), containers (MP4, TS, WebM), and encoding parameters (CRF, bitrate, preset).</li>
+          <li><strong>Adaptive Bitrate Streaming:</strong> Implement HLS (HTTP Live Streaming) and MPEG-DASH with multiple renditions. Generate M3U8 playlists and MPD manifests. Implement client-side adaptive bitrate logic.</li>
+          <li><strong>CDN Architecture:</strong> Design and optimize content delivery using CloudFront/Akamai. Implement origin shielding, edge caching strategies, and geo-distributed content delivery.</li>
+          <li><strong>Video Storage Strategies:</strong> Build tiered storage — hot (S3 Standard), warm (S3 Infrequent Access), cold (S3 Glacier). Implement multipart upload with resumable support.</li>
+          <li><strong>Real-Time Analytics Pipeline:</strong> Build event-driven analytics using Kafka/Kinesis for tracking watch events, buffering ratio, quality switches, and viewer engagement.</li>
+          <li><strong>User & Subscription Management:</strong> Implement authentication, RBAC (viewer, creator, admin), subscription plans (Stripe/Billing), tiered content access, and family sharing.</li>
+          <li><strong>Live Streaming Infrastructure:</strong> Set up RTMP ingestion, transcoding pipeline for live streams, HLS packaging with low-latency mode, and DVR functionality.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-layer-group" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fab fa-node-js"></i><h4>Node.js 20</h4><span class="badge badge-tech">20 LTS</span><p>API + upload server</p></div>
+          <div class="feature-item"><i class="fas fa-video"></i><h4>FFmpeg</h4><span class="badge badge-tech">6.1</span><p>Video transcoding pipeline</p></div>
+          <div class="feature-item"><i class="fas fa-cloud"></i><h4>AWS S3 + CloudFront</h4><span class="badge badge-tech">CDK</span><p>Storage + CDN delivery</p></div>
+          <div class="feature-item"><i class="fab fa-react"></i><h4>React 18</h4><span class="badge badge-tech">18.2</span><p>Frontend with HLS.js player</p></div>
+          <div class="feature-item"><i class="fas fa-database"></i><h4>PostgreSQL + Redis</h4><span class="badge badge-tech">16 / 7.2</span><p>Metadata + caching/queue</p></div>
+          <div class="feature-item"><i class="fas fa-stream"></i><h4>Apache Kafka</h4><span class="badge badge-tech">3.6</span><p>Analytics event pipeline</p></div>
+          <div class="feature-item"><i class="fas fa-docker"></i><h4>Docker + ECS</h4><span class="badge badge-tech">24.0</span><p>Containerized deployment</p></div>
+          <div class="feature-item"><i class="fas fa-credit-card"></i><h4>Stripe</h4><span class="badge badge-tech">14.0</span><p>Subscription billing</p></div>
+          <div class="feature-item"><i class="fas fa-chart-bar"></i><h4>ClickHouse</h4><span class="badge badge-tech">24.1</span><p>Analytics database</p></div>
+          <div class="feature-item"><i class="fas fa-microphone"></i><h4>RTMP / WebRTC</h4><span class="badge badge-tech">SRT / WHIP</span><p>Live streaming ingest</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <div class="diagram-box">
++------------------------------------------------------------------+
+|                   VIDEO STREAMING PLATFORM ARCHITECTURE           |
++------------------------------------------------------------------+
+| UPLOAD PIPELINE:                                                  |
+| Creator → Multipart Upload (S3 presigned URLs) → S3 Raw Bucket    |
+|   → S3 Event Notification → SQS → Transcoder Worker (ECS)          |
+|   → FFmpeg Transcoding → S3 HLS Output → CloudFront Invalidation   |
+|                                                                   |
+| STREAMING DELIVERY:                                               |
+| Viewer → CloudFront Edge → S3 HLS Origin → HLS.js Player          |
+|   → Adaptive Bitrate (ABR) Logic switches quality based on BW     |
+|   → Analytics events sent to Kafka → ClickHouse for dashboards    |
+|                                                                   |
+| +-------------------+     +-------------------+     +-----------+ |
+| | Upload Service    |---->| Transcode Worker  |---->| S3 HLS   | |
+| | (Express)         |     | (FFmpeg + Node)   |     | Buckets   | |
+| +-------------------+     +-------------------+     +-----------+ |
+|         |                          |                      |       |
+|         v                          v                      v       |
+| +-------------------+     +-------------------+     +-----------+ |
+| | PostgreSQL        |     | Redis Queue       |     | CloudFront| |
+| | (videos, users,   |     | (Bull/Bee-Queue)  |     | CDN       | |
+| |  metadata)        |     | for transcode jobs |     |           | |
+| +-------------------+     +-------------------+     +-----------+ |
+|         |                          |                      |       |
+|         v                          v                      v       |
+| +-------------------+     +-------------------+     +-----------+ |
+| | API Gateway       |     | Kafka Events     |     | HLS.js    | |
+| | (REST + GraphQL)  |     | (analytics)      |     | Player    | |
+| +-------------------+     +-------------------+     +-----------+ |
++------------------------------------------------------------------+
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-database" style="color:var(--primary)"></i> Database Design</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Table</th><th>Columns</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>videos</td><td>id (UUID PK), title, description, creator_id, duration, status (uploading/processing/ready/failed), visibility (public/unlisted/private), s3_key, thumbnail_key, original_filename, file_size, mime_type, width, height, fps, bitrate, codec, created_at, published_at</td><td>Video metadata and processing status</td></tr>
+              <tr><td>video_renditions</td><td>id (UUID PK), video_id (FK), resolution, bitrate, codec, s3_key, file_size, hls_playlist_key, dash_manifest_key, framerate, width, height</td><td>Transcoded renditions (e.g., 1080p, 720p, 480p, 360p)</td></tr>
+              <tr><td>thumbnails</td><td>id (UUID PK), video_id, s3_key, width, height, timestamp_seconds, is_default</td><td>Auto-generated and custom thumbnails</td></tr>
+              <tr><td>captions</td><td>id (UUID PK), video_id, language, s3_key, format (vtt/srt), is_auto_generated, content (TEXT)</td><td>Subtitle/caption tracks</td></tr>
+              <tr><td>users</td><td>id (UUID PK), email, username, display_name, avatar_key, role (viewer/creator/admin), created_at</td><td>User accounts</td></tr>
+              <tr><td>channels</td><td>id (UUID PK), user_id, name, description, avatar_key, banner_key, subscriber_count, video_count, total_views</td><td>Creator channels</td></tr>
+              <tr><td>subscriptions</td><td>id (UUID PK), subscriber_id (FK users), channel_id (FK channels), plan_type (free/basic/premium/enterprise), stripe_subscription_id, status (active/canceled/past_due), current_period_start, current_period_end, created_at</td><td>User subscriptions to channels</td></tr>
+              <tr><td>watch_history</td><td>id (BIGSERIAL PK), user_id, video_id, watched_seconds, duration_seconds, completed (BOOL), quality_switches (INT), avg_bitrate, device_type, ip_address, user_agent, created_at</td><td>Per-view watch analytics</td></tr>
+              <tr><td>analytics_daily</td><td>id (BIGSERIAL PK), date, video_id/channel_id, views, unique_viewers, watch_time_minutes, avg_watch_percentage, completion_rate, revenue_cents</td><td>Daily aggregated analytics (materialized view)</td></tr>
+              <tr><td>playlists</td><td>id (UUID PK), channel_id, title, description, visibility, video_order (UUID[]), created_at, updated_at</td><td>Curated video playlists</td></tr>
+              <tr><td>comments</td><td>id (UUID PK), video_id, user_id, parent_id, text, likes_count, is_pinned, created_at, updated_at</td><td>Video comments (threaded)</td></tr>
+              <tr><td>transcode_jobs</td><td>id (UUID PK), video_id, status (queued/processing/completed/failed), progress (INT), started_at, completed_at, worker_id, error_message, output_manifest_key</td><td>Transcoding job tracking</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
+        <div class="structure-tree">
+video-platform/
+├── infrastructure/                     # AWS CDK IaC
+│   ├── lib/
+│   │   ├── storage-stack.ts            # S3 buckets + CloudFront
+│   │   ├── compute-stack.ts            # ECS cluster + task defs
+│   │   ├── pipeline-stack.ts           # SQS + Lambda triggers
+│   │   └── database-stack.ts           # RDS + ElastiCache
+│   └── bin/
+├── upload-service/                     # Video upload API
+│   ├── src/
+│   │   ├── routes/upload.ts            # Multipart upload endpoints
+│   │   ├── services/s3Service.ts       # S3 presigned URL generation
+│   │   └── middleware/auth.ts
+│   └── Dockerfile
+├── transcode-worker/                   # Video transcoding service
+│   ├── src/
+│   │   ├── workers/transcode.ts        # FFmpeg pipeline orchestrator
+│   │   ├── services/ffmpeg.ts          # FFmpeg command builder
+│   │   ├── services/hls.ts             # HLS playlist generator
+│   │   ├── services/thumbnail.ts       # Thumbnail extraction
+│   │   ├── services/caption.ts         # Auto-caption generation
+│   │   └── utils/codec.ts              # Codec detection and selection
+│   ├── scripts/
+│   │   ├── transcode.sh                # FFmpeg transcoding script
+│   │   ├── extract-thumbnails.sh
+│   │   └── validate-video.sh
+│   └── Dockerfile
+├── api-gateway/                         # REST + GraphQL API
+│   ├── src/
+│   │   ├── resolvers/                   # GraphQL resolvers
+│   │   │   ├── video.ts
+│   │   │   ├── user.ts
+│   │   │   ├── analytics.ts
+│   │   │   └── subscription.ts
+│   │   ├── routes/
+│   │   │   ├── auth.ts
+│   │   │   ├── videos.ts
+│   │   │   ├── comments.ts
+│   │   │   └── playlists.ts
+│   │   └── services/
+│   │       ├── videoService.ts
+│   │       ├── analyticsService.ts
+│   │       └── billingService.ts
+│   └── Dockerfile
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── VideoPlayer.tsx          # HLS.js player wrapper
+│   │   │   ├── VideoGrid.tsx
+│   │   │   ├── UploadPage.tsx
+│   │   │   ├── WatchPage.tsx
+│   │   │   ├── ChannelPage.tsx
+│   │   │   ├── CreatorDashboard.tsx
+│   │   │   ├── Subscriptions.tsx
+│   │   │   ├── Comments.tsx
+│   │   │   └── SearchBar.tsx
+│   │   ├── hooks/
+│   │   │   ├── useVideo.ts
+│   │   │   ├── useAnalytics.ts
+│   │   │   └── usePlayer.ts
+│   │   └── services/
+│   │       ├── api.ts
+│   │       └── player.ts
+│   └── package.json
+├── live-service/                        # Live streaming
+│   ├── src/
+│   │   ├── ingest/rtmp.ts              # RTMP server (Node-Media-Server)
+│   │   ├── transcode/live.ts           # Live transcoding pipeline
+│   │   └── playback/hls.ts             # Live HLS packaging
+│   └── Dockerfile
+├── analytics-pipeline/                  # Real-time analytics
+│   ├── src/
+│   │   ├── consumers/watchEvent.ts     # Kafka consumer for watch events
+│   │   └── aggregators/daily.ts        # Daily aggregation job
+│   └── docker-compose.kafka.yml
+├── scripts/
+│   ├── benchmark.sh                    # Load testing with k6
+│   ├── seed-data.ts
+│   └── deploy.sh
+├── docker-compose.yml
+└── README.md
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cogs" style="color:var(--primary)"></i> Implementation Guide</h2>
+
+        <h3>Step 1: Multipart Upload with Presigned URLs</h3>
+        <div class="code-block" data-lang="typescript"><code>// upload-service/src/routes/upload.ts
+import { Router } from 'express';
+import { S3Client, CreateMultipartUploadCommand, UploadPartCommand, CompleteMultipartUploadCommand, AbortMultipartUploadCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
+const router = Router();
+const s3 = new S3Client({ region: process.env.AWS_REGION });
+const BUCKET = process.env.RAW_VIDEO_BUCKET!;
+
+// Initiate multipart upload
+router.post('/upload/initiate', async (req, res) => {
+  const { fileName, fileSize, mimeType } = req.body;
+  const userId = req.user.id;
+
+  // Create S3 multipart upload
+  const command = new CreateMultipartUploadCommand({
+    Bucket: BUCKET,
+    Key: `uploads/${userId}/${Date.now()}-${fileName}`,
+    ContentType: mimeType,
+    Metadata: { userId, originalName: fileName, fileSize: String(fileSize) },
+  });
+
+  const { UploadId, Key } = await s3.send(command);
+
+  // Generate presigned URLs for each part
+  const partCount = Math.ceil(fileSize / (5 * 1024 * 1024)); // 5MB parts
+  const presignedUrls = await Promise.all(
+    Array.from({ length: partCount }, (_, i) => 
+      getSignedUrl(s3, new UploadPartCommand({
+        Bucket: BUCKET,
+        Key,
+        UploadId,
+        PartNumber: i + 1,
+      }), { expiresIn: 3600 })
+    )
+  );
+
+  res.json({
+    uploadId: UploadId,
+    key: Key,
+    presignedUrls,
+    partCount,
+  });
+});
+
+// Complete multipart upload
+router.post('/upload/complete', async (req, res) => {
+  const { key, uploadId, parts } = req.body;
+
+  const command = new CompleteMultipartUploadCommand({
+    Bucket: BUCKET,
+    Key: key,
+    UploadId: uploadId,
+    MultipartUpload: { Parts: parts.map((p: any) => ({ ETag: p.etag, PartNumber: p.partNumber })) },
+  });
+
+  const result = await s3.send(command);
+
+  // Trigger transcoding pipeline
+  await fetch(`${process.env.API_URL}/api/videos/process`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ key: result.Key, bucket: BUCKET }),
+  });
+
+  res.json({ location: result.Location, key: result.Key });
+});
+
+// Abort multipart upload
+router.post('/upload/abort', async (req, res) => {
+  const { key, uploadId } = req.body;
+  await s3.send(new AbortMultipartUploadCommand({
+    Bucket: BUCKET,
+    Key: key,
+    UploadId: uploadId,
+  }));
+  res.json({ status: 'aborted' });
+});
+
+export default router;</code></div>
+
+        <h3>Step 2: FFmpeg Transcoding Pipeline</h3>
+        <div class="code-block" data-lang="typescript"><code>// transcode-worker/src/services/ffmpeg.ts
+import { spawn } from 'child_process';
+import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { Readable } from 'stream';
+import { pipeline } from 'stream/promises';
+
+interface TranscodeConfig {
+  inputKey: string;
+  outputPrefix: string;
+  bucket: string;
+  resolutions: Resolution[];
+}
+
+interface Resolution {
+  name: string;       // '1080p', '720p', etc.
+  width: number;
+  height: number;
+  bitrate: string;    // '5000k', '2500k', etc.
+  maxrate: string;
+  bufsize: string;
+}
+
+const RESOLUTIONS: Resolution[] = [
+  { name: '1080p', width: 1920, height: 1080, bitrate: '5000k', maxrate: '7500k', bufsize: '10000k' },
+  { name: '720p', width: 1280, height: 720, bitrate: '2500k', maxrate: '3750k', bufsize: '5000k' },
+  { name: '480p', width: 854, height: 480, bitrate: '1000k', maxrate: '1500k', bufsize: '2000k' },
+  { name: '360p', width: 640, height: 360, bitrate: '600k', maxrate: '900k', bufsize: '1200k' },
+];
+
+export async function transcodeVideo(config: TranscodeConfig): Promise<string> {
+  const s3 = new S3Client({ region: process.env.AWS_REGION });
+  
+  // Download from S3
+  const getCommand = new GetObjectCommand({
+    Bucket: config.bucket,
+    Key: config.inputKey,
+  });
+  const response = await s3.send(getCommand);
+  const inputStream = response.Body as Readable;
+
+  // Transcode each resolution
+  const variantPlaylists: string[] = [];
+
+  for (const resolution of config.resolutions) {
+    const outputKey = `${config.outputPrefix}/${resolution.name}/index.m3u8`;
+    const segmentPattern = `${config.outputPrefix}/${resolution.name}/segment_%04d.ts`;
+
+    const ffmpegArgs = [
+      '-i', 'pipe:0',
+      '-vf', `scale=w=${resolution.width}:h=${resolution.height}:force_original_aspect_ratio=decrease,pad=${resolution.width}:${resolution.height}:(ow-iw)/2:(oh-ih)/2`,
+      '-c:v', 'libx264',
+      '-b:v', resolution.bitrate,
+      '-maxrate', resolution.maxrate,
+      '-bufsize', resolution.bufsize,
+      '-preset', 'medium',
+      '-crf', '23',
+      '-c:a', 'aac',
+      '-b:a', '128k',
+      '-ar', '48000',
+      '-f', 'hls',
+      '-hls_time', '6',
+      '-hls_list_size', '0',
+      '-hls_segment_filename', segmentPattern,
+      '-hls_playlist_type', 'vod',
+      '-movflags', '+faststart',
+      '-progress', 'pipe:2',
+      '-y',
+      outputKey,
+    ];
+
+    await new Promise<void>((resolve, reject) => {
+      const ffmpeg = spawn('ffmpeg', ffmpegArgs, { stdio: ['pipe', 'pipe', 'pipe'] });
+
+      // Pipe S3 stream to ffmpeg
+      pipeline(inputStream, ffmpeg.stdin!).catch(reject);
+
+      let stderr = '';
+      ffmpeg.stderr!.on('data', (data) => { stderr += data.toString(); });
+
+      ffmpeg.on('close', (code) => {
+        if (code === 0) {
+          variantPlaylists.push(`#EXT-X-STREAM-INF:BANDWIDTH=${parseInt(resolution.bitrate) * 1000},RESOLUTION=${resolution.width}x${resolution.height},CODECS="avc1.640028,mp4a.40.2"\n${resolution.name}/index.m3u8`);
+          resolve();
+        } else {
+          reject(new Error(`FFmpeg exited with code ${code}: ${stderr}`));
+        }
+      });
+    });
+  }
+
+  // Generate master playlist
+  const masterPlaylist = [
+    '#EXTM3U',
+    '#EXT-X-VERSION:3',
+    ...variantPlaylists,
+  ].join('\n');
+
+  const masterKey = `${config.outputPrefix}/master.m3u8`;
+  await s3.send(new PutObjectCommand({
+    Bucket: config.bucket,
+    Key: masterKey,
+    Body: masterPlaylist,
+    ContentType: 'application/vnd.apple.mpegurl',
+  }));
+
+  return masterKey;
+}</code></div>
+
+        <h3>Step 3: HLS Player with Adaptive Bitrate</h3>
+        <div class="code-block" data-lang="typescript"><code>// frontend/src/components/VideoPlayer.tsx
+import React, { useEffect, useRef, useState } from 'react';
+import Hls from 'hls.js';
+
+interface VideoPlayerProps {
+  src: string;            // Master playlist URL
+  poster?: string;
+  autoQuality?: boolean;
+  onProgress?: (currentTime: number, duration: number) => void;
+  onQualityChange?: (quality: { height: number; bitrate: number }) => void;
+}
+
+export const VideoPlayer: React.FC<VideoPlayerProps> = ({
+  src,
+  poster,
+  autoQuality = true,
+  onProgress,
+  onQualityChange,
+}) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hlsRef = useRef<Hls | null>(null);
+  const [qualities, setQualities] = useState<{ height: number; bitrate: number }[]>([]);
+  const [currentQuality, setCurrentQuality] = useState<number>(-1); // -1 = auto
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [buffered, setBuffered] = useState(0);
+  const progressInterval = useRef<number>();
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (Hls.isSupported()) {
+      const hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: true,
+        backbufferLength: 30,
+        maxBufferLength: 30,
+        maxMaxBufferLength: 60,
+        startLevel: currentQuality === -1 ? -1 : currentQuality,
+        abrEwmaFastVoD: 3,
+        abrEwmaSlowVoD: 8,
+        abrBandWidthUpFactor: 0.7,
+        abrBandWidthDownFactor: 0.4,
+      });
+
+      hls.loadSource(src);
+      hls.attachMedia(video);
+      hlsRef.current = hls;
+
+      hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+        const qualityLevels = data.levels.map((level, index) => ({
+          index,
+          height: level.height,
+          bitrate: level.bitrate,
+          name: level.height >= 1440 ? '4K' :
+                level.height >= 1080 ? '1080p' :
+                level.height >= 720 ? '720p' :
+                level.height >= 480 ? '480p' : '360p',
+        }));
+        setQualities(qualityLevels);
+      });
+
+      hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
+        const level = hls.levels[data.level];
+        onQualityChange?.({ height: level.height, bitrate: level.bitrate });
+      });
+
+      hls.on(Hls.Events.ERROR, (event, data) => {
+        if (data.fatal) {
+          switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+              hls.startLoad();
+              break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              hls.recoverMediaError();
+              break;
+            default:
+              break;
+          }
+        }
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // Native HLS support (Safari)
+      video.src = src;
+    }
+
+    // Progress tracking
+    progressInterval.current = window.setInterval(() => {
+      if (video && !video.paused) {
+        onProgress?.(video.currentTime, video.duration);
+        // Buffered percentage
+        if (video.buffered.length > 0) {
+          setBuffered(video.buffered.end(video.buffered.length - 1) / video.duration);
+        }
+      }
+    }, 1000);
+
+    return () => {
+      hlsRef.current?.destroy();
+      clearInterval(progressInterval.current);
+    };
+  }, [src]);
+
+  const switchQuality = (levelIndex: number) => {
+    if (hlsRef.current) {
+      hlsRef.current.currentLevel = levelIndex;
+      setCurrentQuality(levelIndex);
+    }
+  };
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <div className="video-player-wrapper" style={{ position: 'relative', background: '#000' }}>
+      <video
+        ref={videoRef}
+        poster={poster}
+        onClick={togglePlay}
+        style={{ width: '100%', maxHeight: '70vh', display: 'block' }}
+        controls
+      />
+      
+      {/* Quality selector */}
+      <div className="quality-selector" style={{
+        position: 'absolute', bottom: '60px', right: '16px', zIndex: 10,
+      }}>
+        <select
+          value={currentQuality}
+          onChange={(e) => switchQuality(parseInt(e.target.value))}
+          style={{
+            background: 'rgba(0,0,0,0.8)', color: 'white', border: '1px solid #444',
+            padding: '4px 8px', borderRadius: '4px', fontSize: '12px',
+          }}
+        >
+          <option value={-1}>Auto</option>
+          {qualities.map((q) => (
+            <option key={q.index} value={q.index}>
+              {q.name} ({Math.round(q.bitrate / 1000)} Mbps)
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Custom buffering bar */}
+      <div style={{
+        height: '3px', background: '#333', position: 'absolute', bottom: '48px',
+        left: 0, right: 0,
+      }}>
+        <div style={{
+          height: '100%', background: '#ef4444', width: `${buffered * 100}%`,
+          transition: 'width 0.5s ease',
+        }} />
+      </div>
+    </div>
+  );
+};</code></div>
+
+        <h3>Step 4: Analytics Pipeline</h3>
+        <div class="code-block" data-lang="typescript"><code>// analytics-pipeline/src/consumers/watchEvent.ts
+import { Kafka } from 'kafkajs';
+import { ClickHouse } from 'clickhouse';
+
+const kafka = new Kafka({
+  clientId: 'analytics-consumer',
+  brokers: process.env.KAFKA_BROKERS!.split(','),
+});
+
+const clickhouse = new ClickHouse({
+  host: process.env.CLICKHOUSE_HOST,
+  port: 8123,
+  protocol: 'http',
+});
+
+interface WatchEvent {
+  userId: string;
+  videoId: string;
+  eventType: 'play' | 'pause' | 'seek' | 'quality_change' | 'heartbeat' | 'complete';
+  timestamp: number;
+  currentTime: number;
+  duration: number;
+  quality: { height: number; bitrate: number };
+  deviceType: string;
+  ipAddress: string;
+  userAgent: string;
+  sessionId: string;
+}
+
+const consumer = kafka.consumer({ groupId: 'watch-events-group' });
+
+async function startConsumer() {
+  await consumer.connect();
+  await consumer.subscribe({ topic: 'video.watch.events', fromBeginning: true });
+
+  await consumer.run({
+    eachBatch: async ({ batch, resolveOffset, heartbeat }) => {
+      const events: WatchEvent[] = batch.messages
+        .map(msg => {
+          try {
+            return JSON.parse(msg.value!.toString()) as WatchEvent;
+          } catch { return null; }
+        })
+        .filter((e): e is WatchEvent => e !== null);
+
+      if (events.length === 0) return;
+
+      // Batch insert into ClickHouse
+      const values = events.map(e => {
+        const date = new Date(e.timestamp);
+        return `(
+          '${e.userId}', '${e.videoId}', '${e.eventType}',
+          ${e.currentTime}, ${e.duration}, ${e.quality.height}, ${e.quality.bitrate},
+          '${e.deviceType}', '${e.ipAddress}', '${e.sessionId}',
+          toDateTime('${date.toISOString().slice(0, 19).replace('T', ' ')}')
+        )`;
+      }).join(',\n');
+
+      await clickhouse.query(`
+        INSERT INTO watch_events (userId, videoId, eventType, currentTime, duration, qualityHeight, qualityBitrate, deviceType, ipAddress, sessionId, timestamp)
+        VALUES ${values}
+      `).toPromise();
+
+      // Resolve all offsets
+      for (const msg of batch.messages) {
+        await resolveOffset(msg.offset);
+      }
+      await heartbeat();
+    },
+  });
+}
+
+// Daily aggregation job
+async function runDailyAggregation() {
+  const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
+  await clickhouse.query(`
+    INSERT INTO analytics_daily (date, videoId, views, uniqueViewers, watchTimeMinutes, avgWatchPercentage, completionRate)
+    SELECT
+      toDate(timestamp) as date,
+      videoId,
+      countDistinct(sessionId) as views,
+      uniqExact(userId) as uniqueViewers,
+      sum(if(eventType = 'heartbeat', 10, 0)) / 60 as watchTimeMinutes,
+      avg(currentTime / duration) * 100 as avgWatchPercentage,
+      countIf(eventType = 'complete') / countDistinct(sessionId) * 100 as completionRate
+    FROM watch_events
+    WHERE toDate(timestamp) = '${yesterday}'
+    GROUP BY date, videoId
+  `).toPromise();
+}</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-tachometer-alt" style="color:var(--primary)"></i> Video Encoding Pipelines</h2>
+        <p><strong>FFmpeg Pipeline:</strong> Raw video → (1) Detect codec and container, (2) Generate keyframe index for seeking, (3) Transcode to H.264/AAC for maximum compatibility, (4) Generate multiple renditions at 1080p/720p/480p/360p, (5) Segment into 6-second HLS segments, (6) Generate master playlist and variant playlists, (7) Extract thumbnail at 25%, 50%, 75% positions, (8) Generate sprite sheet for timeline preview. The pipeline runs on ECS Fargate with GPU support for faster encoding. For 4K content, we also generate a 4K rendition using HEVC (H.265) codec for 50% bitrate savings.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-globe" style="color:var(--primary)"></i> CDN Concepts (CloudFront, Cloudflare)</h2>
+        <p><strong>CloudFront Distribution:</strong> (1) Origin: S3 bucket with HLS content, (2) Behavior: /hls/* → Cached for 1 year (versioned content), /thumbnails/* → Cached 1 day, /api/* → Proxy to API Gateway, (3) Origin Shield: Reduces S3 request cost by consolidating requests at regional edge, (4) Price Class: Use Price Class 100 (US, Europe) for cost savings, (5) Lambda@Edge: For token authorization on premium content, (6) WAF: Block malicious requests, geo-restriction for licensed content.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-sd-card" style="color:var(--primary)"></i> Video Storage Strategies (S3, GCS)</h2>
+        <p><strong>Tiered Storage:</strong> (1) Hot tier (S3 Standard): Videos published within 30 days, popular content. (2) Warm tier (S3 Infrequent Access): Videos 30-90 days old, moderate access. (3) Cold tier (S3 Glacier Deep Archive): Videos older than 90 days, archival. Lifecycle policies automatically transition objects. For originals (raw uploads), delete after successful transcoding or move to Glacier immediately.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-broadcast-tower" style="color:var(--primary)"></i> Streaming Protocols (HLS, RTMP, MPEG-DASH)</h2>
+        <p><strong>HLS (HTTP Live Streaming):</strong> Apple's protocol, widest support. Uses .ts segments with .m3u8 playlists. Supports adaptive bitrate, captions, and DRM (FairPlay). Our primary delivery format.</p>
+        <p><strong>MPEG-DASH:</strong> International standard (ISO/IEC 23009-1). Uses .m4s segments with .mpd manifest. Better codec support (VP9, AV1) and more flexible adaptation sets. Used for Android and smart TV apps.</p>
+        <p><strong>RTMP (Real-Time Messaging Protocol):</strong> Legacy protocol for live streaming ingest. We receive RTMP from OBS/Streamlabs, then repackage to HLS for delivery. Being replaced by SRT (Secure Reliable Transport) and WHIP (WebRTC HTTP Ingest Protocol).</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-sliders-h" style="color:var(--primary)"></i> Adaptive Bitrate Streaming</h2>
+        <p>ABR algorithms dynamically select the best quality based on network conditions. Our implementation (using HLS.js built-in ABR): (1) Measures download bandwidth using xhr progress events, (2) Uses EWMA (Exponentially Weighted Moving Average) to smooth bandwidth estimates, (3) Selects highest quality that can be sustained with 20% headroom, (4) On buffer depletion, immediately switch down, (5) On stable high bandwidth for 10 seconds, switch up, (6) Configurable: start with lower quality for fast startup (startLevel = -1 = auto), (7) User can override to fixed quality via quality selector.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cut" style="color:var(--primary)"></i> Transcoding Workflows</h2>
+        <p>Workflow: (1) S3 event notification triggers SQS message when raw upload completes. (2) Transcode worker picks up message, downloads video metadata (duration, codec, resolution). (3) Determines optimal encoding ladder based on source resolution and bitrate. (4) Runs FFmpeg pipeline — outputs HLS segments to temporary storage. (5) Uploads segments to S3 HLS bucket with appropriate cache headers. (6) Generates thumbnail strip (10 screenshots evenly spaced). (7) Updates video status in PostgreSQL to 'ready'. (8) Invalidates CloudFront cache for the video's CDN path. (9) Optionally deletes raw upload.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-chart-line" style="color:var(--primary)"></i> Analytics Pipeline</h2>
+        <p>Watch events are sent from the video player to a Kafka topic every 10 seconds (heartbeat). Events include: play, pause, seek, quality_change, heartbeat, complete. Kafka consumer batch-inserts into ClickHouse (columnar analytics DB) every second. Daily aggregation jobs produce per-video and per-creator analytics. Dashboards show: (1) Views over time, (2) Audience retention (watch percentage per timestamp), (3) Geographic distribution (CloudFront logs), (4) Device breakdown, (5) Quality distribution, (6) Revenue per video, (7) Subscriber growth.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-credit-card" style="color:var(--primary)"></i> Subscription/Billing Integration</h2>
+        <p>Stripe integration: (1) Creator subscription tiers: Basic ($4.99/mo), Premium ($9.99/mo), Enterprise ($19.99/mo). (2) Webhook handling for subscription lifecycle (created, updated, canceled, past_due). (3) Per-viewer entitlements checked via middleware on video access. (4) Revenue sharing: 70% to creator, 30% platform fee. (5) Payouts via Stripe Connect to creator bank accounts. (6) Free tier: ads before video (VAST/VPAID ad server integration).</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <div class="code-block" data-lang="bash"><code># Test transcoding with sample video
+ffmpeg -f lavfi -i testsrc=duration=30:size=1920x1080:rate=30 test-1080p.mp4
+
+# Run transcoding pipeline
+docker-compose run transcode-worker \
+  --input test-1080p.mp4 \
+  --resolutions 1080p,720p,480p
+
+# Verify HLS output
+ls -la output/*/index.m3u8
+ffprobe output/1080p/segment_0000.ts
+
+# Test HLS playback with ffplay
+ffplay https://d1jmyj3k6s9c6.cloudfront.net/hls/video123/master.m3u8
+
+# Load test video delivery
+k6 run scripts/loadtest.js \
+  -e TARGET_URL=https://d1jmyj3k6s9c6.cloudfront.net/hls/video123/720p/segment_0000.ts</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-shield-alt" style="color:var(--primary)"></i> Security Considerations</h2>
+        <ul><li><strong>Signed URLs:</strong> All video content served via CloudFront signed URLs with expiration (24h for regular viewing, 7d for offline download). Tokens are tied to user sessions.</li><li><strong>DRM:</strong> Widevine (Android/Chrome), FairPlay (iOS/Safari), and PlayReady (Xbox/Edge) integration using AWS MediaConvert for encrypting content.</li><li><strong>Upload Validation:</strong> Validate file type, scan for malware (ClamAV Lambda), check duration limits (free: 15min, premium: 4h), size limits (free: 1GB, premium: 10GB).</li><li><strong>Content Moderation:</strong> Automated moderation using AWS Rekognition for NSFW content. Manual review queue for flagged videos. Age restriction for mature content.</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="mistake-card"><strong>1. Using a single bitrate:</strong> Without adaptive streaming, viewers on slow connections buffer endlessly while fast connections get lower quality than possible. Always generate multiple renditions (at least 3: 480p, 720p, 1080p).</div>
+        <div class="mistake-card"><strong>2. Not optimizing for mobile:</strong> Mobile networks have higher latency and variable bandwidth. Use segment duration of 4s for live (lower latency) and 6s for VOD (better compression). Implement mobile-specific ABR parameters.</div>
+        <div class="mistake-card"><strong>3. Ignoring CDN cache hit ratio:</strong> Without proper cache headers, every request goes to origin. Set Cache-Control: max-age=31536000 for HLS segments (they're immutable). Use origin shield to reduce S3 costs.</div>
+        <div class="mistake-card"><strong>4. No failover for live streams:</strong> Live streaming must handle encoder disconnection, network issues, and server failure. Implement auto-reconnect with sequence number continuity. Use redundant ingest endpoints (primary + backup RTMP URLs).</div>
+        <div class="mistake-card"><strong>5. Storing all renditions permanently:</strong> Storage costs for multiple renditions add up fast. Delete low-bitrate renditions for old/unpopular content after 30 days. Regenerate on-demand if needed.</div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-trophy" style="color:var(--warning)"></i> Advanced Challenges</h2>
+        <div class="challenge-card"><strong>Challenge 1: Serverless Transcoding Pipeline</strong> Replace ECS-based transcoding with AWS Lambda + MediaConvert. Process videos up to 1 hour in Lambda (use EFS for temporary storage, or stream directly). Compare cost and performance vs EC2-based transcoding.</div>
+        <div class="challenge-card"><strong>Challenge 2: Real-Time Content Moderation</strong> Build a moderation pipeline using FFmpeg scene detection + AWS Rekognition. Automatically flag content containing: weapons, violence, adult content, or copyrighted material. Implement human review queue with justification requirement for takedowns.</div>
+        <div class="challenge-card"><strong>Challenge 3: Peer-Assisted Delivery (P2P CDN)</strong> Implement WebRTC-based peer-to-peer video delivery to reduce CDN costs. Use WebTorrent or custom WebRTC mesh for popular content. Serve 30% of traffic via peers. Handle peer churn and NAT traversal.</div>
+        <div class="challenge-card"><strong>Challenge 4: AI-Powered Video Search</strong> Implement semantic video search using CLIP embeddings. Generate embeddings for each video frame at key intervals. Allow natural language search: "show me when the presenter talks about databases". Build a search interface with timestamp results and preview thumbnails.</div>
+        <div class="challenge-card"><strong>Challenge 5: Multi-CDN Load Balancing</strong> Route traffic across CloudFront, Cloudflare, and Fastly based on real-time performance metrics. Implement client-side CDN selector using JavaScript that measures latency to each CDN's probe URL. Failover to backup CDN within 5 seconds.</div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="collaboration-tool.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous Project</a>
+        <a href="devops-pipeline.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+
+

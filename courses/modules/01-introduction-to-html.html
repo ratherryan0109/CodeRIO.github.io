@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn HTML - Introduction to HTML: what it is, how it works, and your first webpage">
+  <title>Introduction to HTML – CodeRio</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/courses.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body data-page="Lesson" data-course="html" data-lesson="01">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../../index.html" class="logo">
+        <span class="logo-icon">&lt;/&gt;</span> CodeRio
+      </a>
+      <div class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../../Learn.html"><i class="fas fa-book"></i> Learn</a></li>
+        <li><a href="../../Practice.html"><i class="fas fa-code"></i> Practice</a></li>
+        <li><a href="../../Projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+        <li><a href="../../About.html"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="../../auth/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="../../login.html" class="btn btn-ghost">Log In</a>
+        <a href="../../signup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="toastContainer"></div>
+
+  <div class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-hero-content">
+        <h1>Introduction to HTML</h1>
+        <div class="lesson-meta">
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="far fa-clock"></i> 45 min</span>
+          <span><i class="fas fa-list"></i> Module 1 of 14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-body">
+      <div class="lesson-section">
+        <h2><i class="fas fa-bullseye" style="color:var(--primary)"></i> Learning Objectives</h2>
+        <ul class="objective-list">
+          <li>Understand what HTML is and why it is essential for the web</li>
+          <li>Recognize the basic structure of an HTML document</li>
+          <li>Write your first HTML page with headings and paragraphs</li>
+          <li>Learn how tags, elements, and attributes work together</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-book-open" style="color:var(--primary)"></i> HTML Explained</h2>
+        <div class="analogy-box">
+          <i class="fas fa-lightbulb"></i>
+          <strong>Think of it like this:</strong>
+          <p>Imagine you are building a house. The <strong>HTML</strong> is the skeleton — the wooden frame that defines where the walls, windows, and doors go. CSS is the paint and wallpaper, and JavaScript is the electricity and plumbing that makes things happen. Without the skeleton, you have nothing to attach the other layers to.</p>
+        </div>
+        <p>HTML stands for <strong>HyperText Markup Language</strong>. It is the standard language used to create web pages. Every single website you visit — from Google to YouTube to this very page — is built with HTML at its core. When you "view page source" in your browser, you are looking at the raw HTML that structures the page.</p>
+        <p>HTML is not a programming language — it is a <em>markup</em> language. That means you use it to describe and label content, not to write logic or calculations. You tell the browser "this is a heading," "this is a paragraph," "this is a link," and the browser knows how to display it. Think of it like giving stage directions to an actor rather than writing the script of a play.</p>
+      </div>
+
+      <div class="lesson-section glass-card diagram-box">
+        <h2><i class="fas fa-diagram-project" style="color:var(--primary)"></i> Visual Diagram</h2>
+        <div class="diagram">
+          <div style="border:2px solid var(--primary);padding:1rem;border-radius:8px;text-align:center;">
+            <div style="background:var(--primary);color:#fff;padding:0.5rem;border-radius:4px;margin-bottom:0.5rem;">&lt;html&gt; — The entire webpage</div>
+            <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+              <div style="background:var(--success);color:#fff;padding:0.5rem;border-radius:4px;flex:1;min-width:120px;">&lt;head&gt;<br><small>Metadata, title, links</small></div>
+              <div style="background:var(--warning);color:#000;padding:0.5rem;border-radius:4px;flex:2;min-width:200px;">&lt;body&gt;<br><small>Visible content: headings, paragraphs, images, links</small></div>
+            </div>
+          </div>
+          <p style="margin-top:1rem;font-size:0.9rem;color:var(--text-muted);">Every HTML page has two main parts: the <code>head</code> (invisible setup) and the <code>body</code> (what you see).</p>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-seedling" style="color:var(--success)"></i> Beginner Example</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;My First Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  &lt;p&gt;This is my first HTML page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Line 1:</strong> <code>&lt;!DOCTYPE html&gt;</code> — tells the browser this is an HTML5 document. It is like saying "this is a recipe book" before you open it.</li>
+            <li><strong>Line 2:</strong> <code>&lt;html lang="en"&gt;</code> — the root element that wraps everything. <code>lang="en"</code> tells the browser the page is in English.</li>
+            <li><strong>Lines 3-5:</strong> The <code>&lt;head&gt;</code> — contains invisible setup: character encoding and the page title shown on the browser tab.</li>
+            <li><strong>Lines 6-9:</strong> The <code>&lt;body&gt;</code> — everything here appears on the screen. <code>&lt;h1&gt;</code> is a main heading, and <code>&lt;p&gt;</code> is a paragraph.</li>
+            <li><strong>Line 10:</strong> <code>&lt;/html&gt;</code> — closes the root element. Always close what you open.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--warning)"></i> Intermediate Example</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;About Me&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hi, I'm Alex&lt;/h1&gt;
+  &lt;h2&gt;A Web Developer in Training&lt;/h2&gt;
+  &lt;p&gt;I love building things for the web. HTML is my first step.&lt;/p&gt;
+  &lt;p&gt;When I am not coding, I enjoy hiking and reading.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 4-5:</strong> Two meta tags: <code>charset</code> ensures special characters (like é or ü) display correctly; <code>viewport</code> makes the page look good on phones.</li>
+            <li><strong>Line 10:</strong> <code>&lt;h2&gt;</code> is a sub-heading. You can have multiple heading levels (h1 through h6).</li>
+            <li><strong>Lines 11-12:</strong> Two separate <code>&lt;p&gt;</code> tags create two paragraphs. The browser adds space between them automatically.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-crown" style="color:var(--primary)"></i> Advanced Example</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="description" content="A personal portfolio showcasing web projects"&gt;
+  &lt;title&gt;Alex Rivera | Portfolio&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Alex Rivera&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;a href="#about"&gt;About&lt;/a&gt;
+      &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;section id="about"&gt;
+      &lt;h2&gt;About Me&lt;/h2&gt;
+      &lt;p&gt;I build accessible, performant websites.&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;section id="projects"&gt;
+      &lt;h2&gt;Projects&lt;/h2&gt;
+      &lt;p&gt;Coming soon!&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;
+    &lt;p>&amp;copy; 2026 Alex Rivera&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Line 5:</strong> A <code>meta description</code> tag — this is the snippet search engines show under your page title. Great for SEO.</li>
+            <li><strong>Lines 10-16:</strong> The <code>&lt;header&gt;</code> element contains introductory content and a <code>&lt;nav&gt;</code> with navigation links. Semantic HTML helps search engines understand your page.</li>
+            <li><strong>Lines 17-24:</strong> The <code>&lt;main&gt;</code> element wraps the primary content. Inside it, <code>&lt;section&gt;</code> elements group related content by topic.</li>
+            <li><strong>Line 25:</strong> <code>&lt;footer&gt;</code> holds copyright info. The <code>&amp;copy;</code> is an HTML entity that renders the © symbol.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-dumbbell" style="color:var(--primary)"></i> Exercises</h2>
+        <div class="exercise-list">
+          <div class="exercise-item">
+            <span class="exercise-number">1</span>
+            <p>Create a simple HTML page with your name as an h1 heading and a paragraph describing your favorite hobby.</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">2</span>
+            <p>Add a second heading (h2) and a second paragraph to your page. Change the title in the head to something meaningful.</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">3</span>
+            <p>Add a meta description tag to your page. View the page in your browser and inspect the head section using Developer Tools (F12).</p>
+            <span class="badge badge-info">Medium</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">4</span>
+            <p>Create a page with a header containing a logo text and a nav with three links, a main section with two topics, and a footer with copyright.</p>
+            <span class="badge badge-warning">Challenging</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Quick Quiz</h2>
+        <div class="quiz-container">
+          <div class="quiz-question" data-q="0">
+            <p><strong>1. What does HTML stand for?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q0" value="a"> A) HyperText Markup Language</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="b"> B) High Tech Modern Language</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="c"> C) HyperTransfer Markup Language</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="d"> D) Home Tool Markup Language</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="1">
+            <p><strong>2. Which part of an HTML document contains the visible content?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q1" value="a"> A) &lt;head&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="b"> B) &lt;body&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="c"> C) &lt;meta&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="d"> D) &lt;title&gt;</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="2">
+            <p><strong>3. Which tag is used to create a paragraph in HTML?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q2" value="a"> A) &lt;paragraph&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="b"> B) &lt;txt&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="c"> C) &lt;p&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="d"> D) &lt;para&gt;</label>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="checkQuiz()">Check Answers</button>
+          <div id="quizResult" style="margin-top:1rem"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-tasks" style="color:var(--primary)"></i> Assignment</h2>
+        <p>Build a personal "About Me" webpage using only HTML. Your page must include: a DOCTYPE declaration, an html tag with lang attribute, a head with charset and title meta tags, a body with at least one h1 heading, two h2 sub-headings, three paragraphs, and a footer. Save the file as <code>about-me.html</code> and open it in a browser. Take a screenshot and share what you built.</p>
+        <div class="assignment-hints">
+          <h4>Hints:</h4>
+          <ul>
+            <li>Use <kbd>Ctrl+S</kbd> (or <kbd>Cmd+S</kbd> on Mac) to save your file, then double-click it to open in your browser.</li>
+            <li>If your changes are not showing up, try a hard refresh with <kbd>Ctrl+Shift+R</kbd>.</li>
+            <li>Use the browser's Developer Tools (F12) to inspect your HTML and see if there are any errors.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-user-tie" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">Q: What is the purpose of the &lt;!DOCTYPE html&gt; declaration? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>It tells the browser which version of HTML the page is written in. For HTML5, it is simply <code>&lt;!DOCTYPE html&gt;</code>. Without it, some browsers may render the page in "quirks mode," which can cause layout issues.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: What is the difference between a tag and an element? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>A <strong>tag</strong> is the markup syntax like <code>&lt;p&gt;</code> or <code>&lt;/p&gt;</code>. An <strong>element</strong> includes the opening tag, the content, and the closing tag together. So <code>&lt;p&gt;Hello&lt;/p&gt;</code> is an element made of two tags and the content "Hello".</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: Why is the &lt;head&gt; section important even though nothing inside it shows on the page? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>The head contains critical metadata: the page title (shown on the browser tab), character encoding, viewport settings for mobile devices, links to CSS stylesheets, and meta tags for SEO. Without these, your page may not display correctly or rank well in search engines.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <ul>
+          <li><strong>Forgetting to close tags:</strong> Every opening tag (except void elements) needs a closing tag. <code>&lt;p&gt;Text</code> without <code>&lt;/p&gt;</code> can break your layout.</li>
+          <li><strong>Using uppercase tags:</strong> While <code>&lt;HTML&gt;</code> technically works, the convention is lowercase. Stick with <code>&lt;html&gt;</code> for consistency and readability.</li>
+          <li><strong>Putting content inside the head:</strong> Anything you want users to see must go inside <code>&lt;body&gt;</code>. The head is only for setup.</li>
+          <li><strong>Nesting incorrectly:</strong> Tags must close in reverse order of opening. <code>&lt;p&gt;&lt;strong&gt;Text&lt;/p&gt;&lt;/strong&gt;</code> is wrong — it should be <code>&lt;p&gt;&lt;strong&gt;Text&lt;/strong&gt;&lt;/p&gt;</code>.</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Additional Resources</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started" target="_blank">MDN: Getting Started with HTML</a></li>
+          <li><a href="https://www.w3schools.com/html/html_intro.asp" target="_blank">W3Schools: HTML Introduction</a></li>
+          <li><a href="https://html.spec.whatwg.org/multipage/" target="_blank">WHATWG HTML Living Standard</a></li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-video" style="color:var(--primary)"></i> Recommended Videos</h2>
+        <div class="video-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>HTML Full Course for Beginners</h4>
+              <p>freeCodeCamp • Beginner</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>HTML Tutorial for Beginners: HTML Crash Course</h4>
+              <p>Programming with Mosh • Beginner</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/mJgBOIoGihA" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>HTML Crash Course For Absolute Beginners</h4>
+              <p>Traversy Media • Beginner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-navigation">
+        <a href="02-html-elements.html" class="btn btn-primary">Next <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../../index.html">Home</a></li><li><a href="../../Learn.html">Learn</a></li><li><a href="../../Practice.html">Practice</a></li><li><a href="../../Projects.html">Projects</a></li><li><a href="../../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../../faq.html">FAQ</a></li><li><a href="../../privacy-policy.html">Privacy Policy</a></li><li><a href="../../terms-of-service.html">Terms of Service</a></li><li><a href="../../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/learning.js"></script>
+
+  <script>
+    function checkQuiz() {
+      let score = 0;
+      const q1 = document.querySelector('input[name="q0"]:checked')?.value;
+      const q2 = document.querySelector('input[name="q1"]:checked')?.value;
+      const q3 = document.querySelector('input[name="q2"]:checked')?.value;
+      if (q1 === 'a') score++;
+      if (q2 === 'b') score++;
+      if (q3 === 'c') score++;
+      let msg = 'You scored ' + score + '/3';
+      if (score === 3) msg += ' 🎉 Perfect!';
+      else if (score >= 2) msg += ' 👍 Good job!';
+      else msg += ' 💪 Keep practicing!';
+      document.getElementById('quizResult').innerHTML = '<div class="alert alert-info">' + msg + '</div>';
+    }
+
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        const isOpen = answer.style.maxHeight;
+        document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+        if (!isOpen) answer.style.maxHeight = answer.scrollHeight + 'px';
+      });
+    });
+  </script>
+</body>
+</html>

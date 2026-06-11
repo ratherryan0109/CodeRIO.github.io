@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achievements - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .achievements-header { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem }
+    .ap-display { text-align:center;padding:2rem;border-radius:16px;background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(139,92,246,0.1));border:1px solid var(--glass-border-light);margin-bottom:2rem }
+    .ap-display .ap-number { font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text }
+    .ap-display .ap-label { color:var(--text-muted);margin-top:0.3rem }
+    .ap-display .ap-breakdown { display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap }
+    .ap-breakdown-item { text-align:center }
+    .ap-breakdown-item .ab-value { font-size:1.1rem;font-weight:700 }
+    .ap-breakdown-item .ab-label { font-size:0.75rem;color:var(--text-muted) }
+    .category-filter { display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap }
+    .category-filter .cf-btn { padding:0.4rem 1rem;border-radius:20px;font-size:0.85rem;cursor:pointer;border:1px solid var(--glass-border-light);background:transparent;color:var(--text-muted);transition:all 0.2s }
+    .category-filter .cf-btn.active { background:var(--primary);color:#fff;border-color:var(--primary) }
+    .category-filter .cf-btn:hover { border-color:var(--primary) }
+    .achievement-category { margin-bottom:2rem }
+    .achievement-category h3 { font-size:1.2rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem }
+    .achievement-category h3 .cat-count { font-size:0.85rem;color:var(--text-muted);font-weight:400 }
+    .achievement-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem }
+    .achievement-card { padding:1.2rem;border-radius:12px;background:var(--glass-bg);border:1px solid var(--glass-border-light);transition:all 0.2s;text-align:center }
+    .achievement-card:hover { transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,0.08) }
+    .achievement-card.locked { opacity:0.55;filter:grayscale(0.5) }
+    .achievement-card .achievement-icon { font-size:2rem;margin-bottom:0.5rem;color:var(--primary) }
+    .achievement-card.locked .achievement-icon { color:var(--text-muted) }
+    .achievement-card h4 { font-size:0.95rem;margin-bottom:0.3rem }
+    .achievement-card p { font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem }
+    .achievement-card .achievement-ap { font-size:0.75rem;font-weight:600;color:var(--primary);display:inline-block;padding:0.15rem 0.5rem;border-radius:8px;background:rgba(6,182,212,0.1) }
+    .achievement-card.locked .achievement-ap { color:var(--text-muted);background:rgba(148,163,184,0.1) }
+    .achievement-card .unlock-date { font-size:0.7rem;color:var(--text-muted);margin-top:0.3rem }
+  </style>
+</head>
+<body data-page="Achievements">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main class="dashboard-main" style="padding:2rem 8%;min-height:70vh;max-width:1200px;margin:0 auto">
+    <div class="achievements-header">
+      <div>
+        <h1 style="font-size:1.8rem"><i class="fas fa-trophy" style="color:var(--warning)"></i> Achievements</h1>
+        <p style="color:var(--text-muted)">Track your accomplishments and earn Achievement Points (AP).</p>
+      </div>
+    </div>
+
+    <div class="ap-display">
+      <div class="ap-number" id="totalAP">0</div>
+      <div class="ap-label">Achievement Points</div>
+      <div class="ap-breakdown">
+        <div class="ap-breakdown-item"><div class="ab-value" id="earnedCount">0</div><div class="ab-label">Earned</div></div>
+        <div class="ap-breakdown-item"><div class="ab-value" id="totalCount">0</div><div class="ab-label">Total</div></div>
+        <div class="ap-breakdown-item"><div class="ab-value" id="completionPct">0%</div><div class="ab-label">Completion</div></div>
+        <div class="ap-breakdown-item"><div class="ab-value" id="earnedAP">0</div><div class="ab-label">From Achievements</div></div>
+        <div class="ap-breakdown-item"><div class="ab-value" id="directAP">0</div><div class="ab-label">Direct Awards</div></div>
+      </div>
+    </div>
+
+    <div class="category-filter" id="categoryFilter"></div>
+
+    <div id="achievementsContainer"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/learning.js"></script>
+  <script src="../js/achievements.js"></script>
+  <script src="../js/daily-goals.js"></script>
+  <script src="../js/reminders.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      requireAuth();
+      renderAchievements();
+    });
+
+    function renderAchievements() {
+      if (typeof AchievementSystem === 'undefined') {
+        document.getElementById('achievementsContainer').innerHTML = '<p style="text-align:center;padding:2rem;color:var(--text-muted)">Achievement system loading...</p>';
+        return;
+      }
+
+      var allAchievements = AchievementSystem.ACHIEVEMENTS;
+      var earned = AchievementSystem.getUserAchievements();
+      var earnedIds = earned.map(function(a) { return a.id; });
+      var totalAP = AchievementSystem.getUserAP();
+      var earnedAP = earned.reduce(function(s, a) { return s + (a.ap || 0); }, 0);
+      var pct = allAchievements.length > 0 ? Math.round((earnedIds.length / allAchievements.length) * 100) : 0;
+
+      document.getElementById('totalAP').textContent = totalAP;
+      document.getElementById('earnedCount').textContent = earnedIds.length;
+      document.getElementById('totalCount').textContent = allAchievements.length;
+      document.getElementById('completionPct').textContent = pct + '%';
+      document.getElementById('earnedAP').textContent = earnedAP;
+      document.getElementById('directAP').textContent = totalAP - earnedAP;
+
+      var categories = {};
+      allAchievements.forEach(function(a) {
+        if (!categories[a.category]) categories[a.category] = [];
+        categories[a.category].push(a);
+      });
+
+      var filterHtml = '<button class="cf-btn active" data-cat="all">All</button>';
+      Object.keys(categories).sort().forEach(function(cat) {
+        var total = categories[cat].length;
+        var earnedCat = earned.filter(function(e) { return categories[cat].some(function(c) { return c.id === e.id; }); }).length;
+        filterHtml += '<button class="cf-btn" data-cat="' + cat + '">' + cat + ' (' + earnedCat + '/' + total + ')</button>';
+      });
+      document.getElementById('categoryFilter').innerHTML = filterHtml;
+
+      document.querySelectorAll('.cf-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.cf-btn').forEach(function(b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          var cat = this.dataset.cat;
+          renderGrid(cat, categories, earned, earnedIds);
+        });
+      });
+
+      renderGrid('all', categories, earned, earnedIds);
+    }
+
+    function renderGrid(filterCat, categories, earned, earnedIds) {
+      var container = document.getElementById('achievementsContainer');
+      var html = '';
+
+      Object.keys(categories).sort().forEach(function(cat) {
+        if (filterCat !== 'all' && cat !== filterCat) return;
+        var items = categories[cat];
+        var earnedInCat = items.filter(function(a) { return earnedIds.indexOf(a.id) !== -1; }).length;
+
+        html += '<div class="achievement-category"><h3><i class="fas fa-' + (cat === 'Learning' ? 'graduation-cap' : cat === 'Quizzes' ? 'check-circle' : cat === 'Typing' ? 'keyboard' : cat === 'Projects' ? 'code' : cat === 'Roadmaps' ? 'map' : cat === 'Consistency' ? 'calendar-check' : cat === 'Practice' ? 'pen' : cat === 'Community' ? 'users' : 'star') + '" style="color:var(--primary)"></i> ' + cat + ' <span class="cat-count">(' + earnedInCat + '/' + items.length + ')</span></h3>';
+        html += '<div class="achievement-grid">';
+
+        items.forEach(function(ach) {
+          var isEarned = earnedIds.indexOf(ach.id) !== -1;
+          var earnedData = isEarned ? earned.find(function(e) { return e.id === ach.id; }) : null;
+          html += '<div class="achievement-card' + (isEarned ? '' : ' locked') + '">'
+            + '<div class="achievement-icon"><i class="fas ' + ach.icon + '"></i></div>'
+            + '<h4>' + ach.title + '</h4>'
+            + '<p>' + ach.desc + '</p>'
+            + '<span class="achievement-ap">+' + ach.ap + ' AP</span>'
+            + (earnedData && earnedData.unlockedAt ? '<div class="unlock-date">' + Utils.formatDate(earnedData.unlockedAt) + '</div>' : '')
+            + '</div>';
+        });
+
+        html += '</div></div>';
+      });
+
+      container.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

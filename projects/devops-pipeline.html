@@ -1,0 +1,972 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps Pipeline - CodeRio Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; position: relative; z-index: 1; }
+    .project-detail-hero { margin-bottom: 3rem; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-detail-hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #3b82f6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .project-body { max-width: 1000px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3.5rem; background: var(--glass-bg); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-body .section h2 { margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1.6rem; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.75rem; }
+    .code-block { background: #0f111a; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(59,130,246,0.2); position: relative; }
+    .code-block::before { content: attr(data-lang); position: absolute; top: 0.5rem; right: 0.75rem; font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.7; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1.2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); text-align: center; backdrop-filter: blur(4px); }
+    .feature-item i { font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .diagram-box { background: #1a1d2e; border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; font-family: 'Fira Code', monospace; font-size: 0.8rem; overflow-x: auto; margin: 1rem 0; white-space: pre; color: #e2e8f0; }
+    .structure-tree { background: #1a1d2e; padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: 'Fira Code', monospace; font-size: 0.85rem; line-height: 2; border: 1px solid var(--glass-border); overflow-x: auto; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .table-wrap th, .table-wrap td { border: 1px solid var(--glass-border); padding: 0.6rem 0.8rem; text-align: left; }
+    .table-wrap th { background: rgba(59,130,246,0.1); color: #3b82f6; font-weight: 600; }
+    .badge-tech { background: rgba(99,102,241,0.15); color: #818cf8; display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
+    .mistake-card { background: rgba(239,68,68,0.04); border-left: 4px solid #ef4444; padding: 1rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 0.75rem 0; }
+    .qa-card { background: rgba(99,102,241,0.04); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.75rem 0; }
+    .qa-card strong { color: var(--primary); }
+    .challenge-card { background: rgba(245,158,11,0.06); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 4% 3rem; } }
+  </style>
+</head>
+<body data-page="Project">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>DevOps CI/CD Pipeline</h1>
+      <div class="meta">
+        <span class="badge" style="background:rgba(59,130,246,0.15);color:#3b82f6">Advanced</span>
+        <span><i class="far fa-clock"></i> 40-55 hours</span>
+        <span><i class="fas fa-code-branch"></i> 9 technologies</span>
+        <span><i class="fas fa-star"></i> Capstone</span>
+      </div>
+    </div>
+
+    <div class="project-body">
+
+      <div class="section">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>Build a production-grade DevOps CI/CD pipeline that automates the entire software delivery lifecycle — from code commit to production deployment with automated testing, security scanning, containerization, orchestration, and monitoring. This project implements GitOps workflows using GitHub Actions and Jenkins, containerization with Docker, orchestration with Kubernetes (EKS/GKE), infrastructure as Code (Terraform/Pulumi), and comprehensive observability with Prometheus, Grafana, and the ELK stack. You will design and implement blue-green deployments, canary releases, automated rollback, and feature flags. The pipeline handles multiple environments (dev, staging, production) with progressive delivery, secret management (Hashicorp Vault/AWS Secrets Manager), and compliance auditing. Deploy a sample microservices application to demonstrate the complete pipeline in action.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
+        <p>Modern software teams face critical DevOps challenges: (1) Manual deployments are error-prone, slow, and inconsistent across environments. (2) Without automated testing in the pipeline, bugs reach production. (3) Infrastructure is treated as a snowflake — manually configured servers that can't be reproduced. (4) Security vulnerabilities go undetected until audits. (5) No standardized way to rollback bad deployments. (6) Monitoring is reactive — teams find out about issues from users rather than alerts. (7) Multi-environment management (dev, staging, prod) leads to configuration drift. The goal is to build a comprehensive CI/CD platform that treats infrastructure as code, automates quality gates, provides observability, and enables safe, rapid deployments with automated rollback capabilities.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-briefcase" style="color:var(--success)"></i> Real World Use Cases</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fas fa-rocket"></i><h4>Startup Deployment Pipeline</h4><p>One-command deployment from PR merge to production with automated testing, container build, staging deploy, integration tests, and gradual production rollout with canary releases.</p></div>
+          <div class="feature-item"><i class="fas fa-shield-alt"></i><h4>Compliance-First Pipeline</h4><p>Financial services pipeline with mandatory security scanning (SAST, DAST, dependency audit), signed container images, audit logging of all deployments, and approval gates for production.</p></div>
+          <div class="feature-item"><i class="fas fa-microchip"></i><h4>Microservices Platform</h4><p>50+ microservices with independent deployment pipelines, service mesh (Istio) traffic management, canary releases per service, and centralized observability across the fleet.</p></div>
+          <div class="feature-item"><i class="fas fa-mobile-alt"></i><h4>Mobile App CI/CD</h4><p>Automated build, test, and deployment pipeline for iOS/Android apps with code signing, beta distribution (TestFlight/Play Console), and staged rollout with crash monitoring.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>The DevOps market is projected to reach $25B by 2028. High-performing DevOps teams deploy 208x more frequently and recover from incidents 2,604x faster (DORA 2023 report). Key trends: (1) GitOps — ArgoCD/Flux as the standard for Kubernetes deployments, (2) Platform Engineering — building internal developer platforms with Backstage, (3) FinOps — cost optimization of cloud infrastructure, (4) Shift-left security — integrating security earlier in the pipeline (DevSecOps), (5) AIOps — AI-powered incident response and anomaly detection. This project directly maps to DevOps/SRE roles at any tech company and is essential for cloud infrastructure careers.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-check-circle" style="color:var(--success)"></i> Learning Outcomes</h2>
+        <ul>
+          <li><strong>CI/CD Pipeline Design:</strong> Architect multi-stage pipelines with parallel execution, caching, artifact management, and conditional stages. Implement pipeline as code using YAML and Groovy DSL.</li>
+          <li><strong>Docker & Containerization:</strong> Write production Dockerfiles with multi-stage builds, layer optimization, non-root users, and security scanning. Implement container registries with image signing.</li>
+          <li><strong>Kubernetes Orchestration:</strong> Deploy and manage applications on EKS/GKE with Deployments, Services, Ingress, ConfigMaps, Secrets, HPA, and PodDisruptionBudgets. Implement service mesh with Istio.</li>
+          <li><strong>Infrastructure as Code:</strong> Define cloud infrastructure (VPC, subnets, EKS cluster, RDS, ElastiCache) using Terraform. Implement state management, modules, and remote backends.</li>
+          <li><strong>Monitoring & Observability:</strong> Set up Prometheus for metrics collection, Grafana dashboards, ELK stack for log aggregation, and distributed tracing with OpenTelemetry.</li>
+          <li><strong>Deployment Strategies:</strong> Implement blue-green deployments, canary releases with traffic splitting, and automated rollback based on health checks and error rate thresholds.</li>
+          <li><strong>Security & Compliance:</strong> Integrate SAST (SonarQube), DAST (OWASP ZAP), container scanning (Trivy), dependency auditing (Snyk), and secrets management (Vault).</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-layer-group" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fab fa-github"></i><h4>GitHub Actions</h4><span class="badge badge-tech">CI/CD</span><p>Pipeline orchestration</p></div>
+          <div class="feature-item"><i class="fab fa-docker"></i><h4>Docker</h4><span class="badge badge-tech">24.0</span><p>Containerization</p></div>
+          <div class="feature-item"><i class="fas fa-cloud"></i><h4>Kubernetes (EKS)</h4><span class="badge badge-tech">1.29</span><p>Container orchestration</p></div>
+          <div class="feature-item"><i class="fas fa-terrain"></i><h4>Terraform</h4><span class="badge badge-tech">1.7</span><p>Infrastructure as Code</p></div>
+          <div class="feature-item"><i class="fas fa-chart-pie"></i><h4>Prometheus + Grafana</h4><span class="badge badge-tech">2.50</span><p>Metrics & monitoring</p></div>
+          <div class="feature-item"><i class="fas fa-search"></i><h4>ELK Stack</h4><span class="badge badge-tech">8.12</span><p>Log aggregation</p></div>
+          <div class="feature-item"><i class="fas fa-traffic"></i><h4>Istio</h4><span class="badge badge-tech">1.21</span><p>Service mesh</p></div>
+          <div class="feature-item"><i class="fas fa-shield"></i><h4>SonarQube / Trivy</h4><span class="badge badge-tech">10.4/0.50</span><p>Security scanning</p></div>
+          <div class="feature-item"><i class="fab fa-jenkins"></i><h4>Jenkins</h4><span class="badge badge-tech">2.440</span><p>Alternative CI server</p></div>
+          <div class="feature-item"><i class="fas fa-code-branch"></i><h4>ArgoCD</h4><span class="badge badge-tech">2.10</span><p>GitOps deployment</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <div class="diagram-box">
++------------------------------------------------------------------+
+|                  CI/CD PIPELINE ARCHITECTURE                       |
++------------------------------------------------------------------+
+|                                                                   |
+|  DEVELOPER → git push → GitHub                                    |
+|                              |                                     |
+|                              v                                     |
+|  +----------------------------------------------------------+    |
+|  | GITHUB ACTIONS CI PIPELINE                               |    |
+|  |                                                          |    |
+|  | 1. Checkout & Lint (eslint, prettier)                    |    |
+|  | 2. Unit Tests (jest, pytest)                             |    |
+|  | 3. Build (npm run build, docker build)                   |    |
+|  | 4. SAST (SonarQube code quality)                        |    |
+|  | 5. Dependency Scan (Snyk / npm audit)                   |    |
+|  | 6. Container Scan (Trivy)                                |    |
+|  | 7. Push to ECR (signed images)                          |    |
+|  | 8. Update K8s manifests (kustomize/helm)                 |    |
+|  | 9. Trigger ArgoCD sync                                   |    |
+|  +----------------------------------------------------------+    |
+|                              |                                     |
+|                              v                                     |
+|  +----------------------------------------------------------+    |
+|  | ARGOCD (GitOps)                                          |    |
+|  |                                                          |    |
+|  | Monitors git repo for manifest changes                   |    |
+|  | Syncs desired state to Kubernetes cluster                |    |
+|  |                                                          |    |
+|  | +----------+  +----------+  +----------+                 |    |
+|  | | Dev      |  | Staging  |  | Prod     |                 |    |
+|  | | Env      |  | Env      |  | Env      |                 |    |
+|  | +----------+  +----------+  +----------+                 |    |
+|  +----------------------------------------------------------+    |
+|                              |                                     |
+|                              v                                     |
+|  +----------------------------------------------------------+    |
+|  | KUBERNETES CLUSTER (EKS)                                 |    |
+|  |                                                          |    |
+|  | +------------------+  +------------------+                |    |
+|  | | Istio Ingress    |  | Service Mesh     |                |    |
+|  | | Gateway          |  | (Traffic mgmt)   |                |    |
+|  | +--------+---------+  +--------+---------+                |    |
+|  |          |                     |                          |    |
+|  | +--------+---------+  +--------+---------+                |    |
+|  | | Blue Deployment  |  | Green Deployment  |                |    |
+|  | | v1.0.0 (stable)  |  | v1.1.0 (candidate)|                |    |
+|  | +------------------+  +------------------+                |    |
+|  |                                                          |    |
+|  | +------------------+  +------------------+                |    |
+|  | | HPA (Horizontal  |  | PDB (Pod         |                |    |
+|  | | Pod Autoscaler)  |  | Disruption Budget)|                |    |
+|  | +------------------+  +------------------+                |    |
+|  |                                                          |    |
+|  | +------------------------------------------------------+ |    |
+|  | | OBSERVABILITY STACK                                  | |    |
+|  | | Prometheus → Grafana dashboards                     | |    |
+|  | | Fluentd → Elasticsearch → Kibana (logs)             | |    |
+|  | | Jaeger → Distributed Tracing                        | |    |
+|  | +------------------------------------------------------+ |    |
+|  +----------------------------------------------------------+    |
++------------------------------------------------------------------+
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
+        <div class="structure-tree">
+devops-pipeline/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                       # Main CI pipeline
+│       ├── security-scan.yml            # Weekly security scan
+│       ├── terraform-plan.yml           # Terraform plan on PR
+│       └── cleanup.yml                  # Cleanup old artifacts
+├── terraform/                           # Infrastructure as Code
+│   ├── environments/
+│   │   ├── dev/
+│   │   │   ├── main.tf
+│   │   │   ├── vars.tf
+│   │   │   └── terraform.tfvars
+│   │   ├── staging/
+│   │   └── production/
+│   ├── modules/
+│   │   ├── eks/                         # EKS cluster module
+│   │   │   ├── main.tf
+│   │   │   ├── outputs.tf
+│   │   │   └── variables.tf
+│   │   ├── rds/                         # RDS database module
+│   │   ├── vpc/                         # VPC networking module
+│   │   ├── redis/                       # ElastiCache module
+│   │   └── monitoring/                  # Prometheus + Grafana
+│   ├── backend.tf                       # Terraform state (S3 + DynamoDB)
+│   └── providers.tf
+├── kubernetes/                          # Kubernetes manifests
+│   ├── base/                            # Base overlays (kustomize)
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   ├── ingress.yaml
+│   │   ├── configmap.yaml
+│   │   ├── hpa.yaml
+│   │   └── pdb.yaml
+│   ├── overlays/
+│   │   ├── dev/
+│   │   │   └── kustomization.yaml
+│   │   ├── staging/
+│   │   │   └── kustomization.yaml
+│   │   └── production/
+│   │       └── kustomization.yaml
+│   ├── istio/                           # Service mesh configs
+│   │   ├── virtual-service.yaml
+│   │   ├── destination-rule.yaml
+│   │   └── gateway.yaml
+│   └── monitoring/                       # Observability manifests
+│       ├── prometheus/
+│       │   ├── prometheus.yaml
+│       │   ├── rules.yaml
+│       │   └── service-monitor.yaml
+│       ├── grafana/
+│       │   ├── grafana.yaml
+│       │   └── dashboards/
+│       │       ├── kubernetes-cluster.json
+│       │       └── application-metrics.json
+│       └── fluentd/
+│           └── fluentd-daemonset.yaml
+├── helm-charts/                         # Helm charts
+│   └── sample-app/
+│       ├── Chart.yaml
+│       ├── values.yaml
+│       ├── values-dev.yaml
+│       ├── values-staging.yaml
+│       ├── values-production.yaml
+│       └── templates/
+│           ├── deployment.yaml
+│           ├── service.yaml
+│           ├── ingress.yaml
+│           ├── _helpers.tpl
+│           └── tests/
+│               └── test-connection.yaml
+├── sample-app/                          # Sample microservice
+│   ├── src/
+│   │   ├── app.js
+│   │   └── routes/
+│   ├── Dockerfile
+│   ├── Dockerfile.multistage
+│   ├── tests/
+│   │   ├── unit/
+│   │   └── integration/
+│   ├── package.json
+│   └── sonar-project.properties
+├── scripts/
+│   ├── deploy.sh                        # Deployment helper
+│   ├── rollback.sh                      # Rollback to previous version
+│   ├── canary.sh                        # Canary release script
+│   └── seed-vault.sh                    # Seed secrets in Vault
+├── jenkins/                             # Alternative Jenkins pipeline
+│   ├── Jenkinsfile
+│   └── shared-libraries/
+│       └── vars/
+│           ├── buildImage.groovy
+│           ├── deployToK8s.groovy
+│           └── runTests.groovy
+├── docker-compose.yml                   # Local dev environment
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cogs" style="color:var(--primary)"></i> Implementation Guide</h2>
+
+        <h3>Step 1: CI Pipeline — GitHub Actions</h3>
+        <div class="code-block" data-lang="yaml"><code># .github/workflows/ci.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: sample-app
+  K8S_NAMESPACE: production
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: sample-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: sample-app
+
+      - name: Run linter
+        run: npx eslint src/
+        working-directory: sample-app
+
+      - name: Run unit tests
+        run: npm test -- --coverage
+        working-directory: sample-app
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: sample-app/coverage/
+
+  sonar-scan:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v1
+        with:
+          projectBaseDir: sample-app
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+  security-scan:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run dependency security audit
+        run: npm audit --audit-level=high
+        working-directory: sample-app
+        continue-on-error: true
+
+      - name: Run Snyk Security Scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+          working-directory: sample-app
+
+  build-and-push:
+    needs: [lint-and-test, sonar-scan, security-scan]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push Docker image
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+            -f sample-app/Dockerfile.multistage sample-app/
+          
+          # Scan container for vulnerabilities
+          docker scout quick $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          
+          # Push to ECR
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+  deploy-staging:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure kubectl
+        uses: aws-actions/aws-kubectl@v1
+        with:
+          kubeconfig: ${{ secrets.KUBECONFIG_STAGING }}
+
+      - name: Update Kubernetes manifests with new image
+        run: |
+          cd kubernetes/overlays/staging
+          kustomize edit set image ${{ needs.build-and-push.outputs.image }}
+          
+      - name: Deploy to staging
+        run: |
+          kustomize build kubernetes/overlays/staging | kubectl apply -f -
+          kubectl rollout status deployment/sample-app -n staging --timeout=5m
+
+      - name: Run integration tests
+        run: |
+          curl -f http://staging.example.com/api/health || exit 1
+          npm run test:integration
+        working-directory: sample-app
+
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure kubectl
+        uses: aws-actions/aws-kubectl@v1
+        with:
+          kubeconfig: ${{ secrets.KUBECONFIG_PROD }}
+
+      - name: Canary deployment (10% traffic)
+        run: |
+          kubectl set image deployment/sample-app-canary \
+            sample-app=${{ needs.build-and-push.outputs.image }} \
+            -n production
+          kubectl rollout status deployment/sample-app-canary -n production --timeout=3m
+
+      - name: Monitor canary health
+        run: |
+          # Check error rate < 0.1% for 5 minutes
+          for i in {1..30}; do
+            ERROR_RATE=$(curl -s http://prometheus:9090/api/v1/query \
+              --data-urlencode 'query=rate(http_requests_total{status=~"5..",namespace="production"}[1m])')
+            echo "Error rate: $ERROR_RATE"
+            sleep 10
+          done
+
+      - name: Promote to full rollout
+        run: |
+          # Shift 100% traffic to new version
+          kubectl apply -f kubernetes/istio/virtual-service-production.yaml
+          kubectl rollout status deployment/sample-app -n production --timeout=5m
+
+      - name: Record deployment
+        uses: mbta/actions-deployment-record@v2
+        with:
+          environment: production
+          version: ${{ github.sha }}</code></div>
+
+        <h3>Step 2: Multi-Stage Docker Build</h3>
+        <div class="code-block" data-lang="dockerfile"><code># sample-app/Dockerfile.multistage
+# Stage 1: Build
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Separate dependency install for better caching
+COPY package*.json ./
+RUN npm ci --only=production && cp -R node_modules /prod_modules
+RUN npm ci
+
+# Copy source and build
+COPY . .
+RUN npm run build
+
+# Stage 2: Production
+FROM node:20-alpine
+RUN apk add --no-cache tini curl
+
+# Create non-root user
+RUN addgroup -g 1001 appgroup && \
+    adduser -u 1001 -G appgroup -s /bin/sh -D appuser
+
+WORKDIR /app
+
+# Copy from builder
+COPY --from=builder /prod_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json ./
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/api/health || exit 1
+
+USER appuser
+
+EXPOSE 3000
+
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["node", "dist/app.js"]</code></div>
+
+        <h3>Step 3: Terraform Infrastructure as Code</h3>
+        <div class="code-block" data-lang="hcl"><code># terraform/modules/eks/main.tf
+resource "aws_eks_cluster" "main" {
+  name     = var.cluster_name
+  role_arn = aws_iam_role.eks_cluster.arn
+  version  = var.kubernetes_version
+
+  vpc_config {
+    subnet_ids              = var.private_subnet_ids
+    endpoint_private_access = true
+    endpoint_public_access  = var.enable_public_access
+    security_group_ids      = [aws_security_group.eks_cluster.id]
+  }
+
+  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+
+  encryption_config {
+    provider {
+      key_arn = aws_kms_key.eks.arn
+    }
+    resources = ["secrets"]
+  }
+
+  tags = {
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
+}
+
+resource "aws_eks_node_group" "main" {
+  cluster_name    = aws_eks_cluster.main.name
+  node_group_name = "${var.cluster_name}-nodes"
+  node_role_arn   = aws_iam_role.eks_nodes.arn
+  subnet_ids      = var.private_subnet_ids
+  instance_types  = var.instance_types
+  capacity_type   = var.capacity_type  # ON_DEMAND or SPOT
+
+  scaling_config {
+    desired_size = var.desired_size
+    min_size     = var.min_size
+    max_size     = var.max_size
+  }
+
+  update_config {
+    max_unavailable_percentage = 33
+  }
+
+  tags = {
+    Environment = var.environment
+    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
+    "k8s.io/cluster-autoscaler/enabled" = "true"
+  }
+}
+
+# Auto-scaling: Cluster Autoscaler
+resource "helm_release" "cluster_autoscaler" {
+  name       = "cluster-autoscaler"
+  repository = "https://kubernetes.github.io/autoscaler"
+  chart      = "cluster-autoscaler"
+  namespace  = "kube-system"
+
+  set {
+    name  = "autoDiscovery.clusterName"
+    value = var.cluster_name
+  }
+  set {
+    name  = "awsRegion"
+    value = var.aws_region
+  }
+}
+
+# Monitoring: Prometheus + Grafana via Helm
+resource "helm_release" "prometheus_stack" {
+  name       = "kube-prometheus-stack"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "kube-prometheus-stack"
+  namespace  = "monitoring"
+  create_namespace = true
+
+  values = [file("${path.module}/values/prometheus-values.yaml")]
+}
+
+# Ingress Controller: AWS Load Balancer Controller
+resource "helm_release" "aws_lb_controller" {
+  name       = "aws-load-balancer-controller"
+  repository = "https://aws.github.io/eks-charts"
+  chart      = "aws-load-balancer-controller"
+  namespace  = "kube-system"
+
+  set {
+    name  = "clusterName"
+    value = var.cluster_name
+  }
+  set {
+    name  = "serviceAccount.name"
+    value = "aws-load-balancer-controller"
+  }
+}
+
+# Service Mesh: Istio
+resource "helm_release" "istio_base" {
+  name       = "istio-base"
+  repository = "https://istio-release.storage.googleapis.com/charts"
+  chart      = "base"
+  namespace  = "istio-system"
+  create_namespace = true
+}
+
+resource "helm_release" "istiod" {
+  name       = "istiod"
+  repository = "https://istio-release.storage.googleapis.com/charts"
+  chart      = "istiod"
+  namespace  = "istio-system"
+  depends_on = [helm_release.istio_base]
+}</code></div>
+
+        <h3>Step 4: Kubernetes Canary Deployment</h3>
+        <div class="code-block" data-lang="yaml"><code># kubernetes/istio/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: sample-app
+  namespace: production
+spec:
+  hosts:
+  - app.example.com
+  gateways:
+  - sample-app-gateway
+  http:
+  - match:
+    - headers:
+        x-canary:
+          exact: "true"
+    route:
+    - destination:
+        host: sample-app-canary
+        port:
+          number: 80
+      weight: 100
+  - route:
+    - destination:
+        host: sample-app
+        port:
+          number: 80
+      weight: 90
+    - destination:
+        host: sample-app-canary
+        port:
+          number: 80
+      weight: 10
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: sample-app
+  namespace: production
+spec:
+  host: sample-app
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http1MaxPendingRequests: 10
+        maxRequestsPerConnection: 10
+    outlierDetection:
+      consecutive5xxErrors: 5
+      interval: 30s
+      baseEjectionTime: 60s
+---
+# kubernetes/base/hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sample-app
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sample-app
+  minReplicas: 3
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 25
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15</code></div>
+
+        <h3>Step 5: Observability Stack</h3>
+        <div class="code-block" data-lang="yaml"><code># kubernetes/monitoring/prometheus/rules.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: application-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: application
+    rules:
+    - alert: HighErrorRate
+      expr: |
+        rate(http_requests_total{status=~"5.."}[5m]) 
+        / 
+        rate(http_requests_total[5m]) > 0.01
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High HTTP error rate ({{ $value }}%)"
+        description: "Error rate is above 1% for 5 minutes"
+
+    - alert: HighLatency
+      expr: |
+        histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 0.5
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High request latency (P95: {{ $value }}s)"
+
+    - alert: PodCrashLooping
+      expr: |
+        rate(kube_pod_container_status_restarts_total[15m]) > 3
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Pod {{ $labels.pod }} is crash looping"
+
+    - alert: HighCPUUsage
+      expr: |
+        sum(rate(container_cpu_usage_seconds_total[5m])) by (pod) > 0.8
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High CPU usage on {{ $labels.pod }}"
+
+    - alert: LowDiskSpace
+      expr: |
+        node_filesystem_avail_bytes{mountpoint="/"} / 
+        node_filesystem_size_bytes{mountpoint="/"} < 0.1
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Low disk space on {{ $labels.instance }}"</code></div>
+
+        <h3>Step 6: ArgoCD GitOps Configuration</h3>
+        <div class="code-block" data-lang="yaml"><code># argocd/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/yourorg/devops-pipeline.git
+    targetRevision: HEAD
+    path: kubernetes/overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    - RespectIgnoreDifferences=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-brain" style="color:var(--primary)"></i> CI/CD Fundamentals</h2>
+        <p><strong>Continuous Integration:</strong> Every code push triggers automated build, test, and analysis. Quality gates: (1) All unit tests pass (100% required), (2) Code coverage > 80%, (3) SonarQube quality gate passes (no blocker/critical issues), (4) No high-severity vulnerabilities in dependencies, (5) Container scan passes (no critical vulnerabilities). If any gate fails, the pipeline stops and notifies the team via Slack.</p>
+        <p><strong>Continuous Delivery:</strong> After CI passes, artifacts are automatically deployed to staging for further testing. If staging tests pass, the pipeline creates a release candidate and deploys to production with approval gates.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cubes" style="color:var(--primary)"></i> Docker Containerization</h2>
+        <p>Best practices in the Dockerfile: (1) Multi-stage builds reduce final image size from 1.2GB to 150MB. (2) Use Alpine-based images for smaller footprint. (3) Separate dependency installation from source copy for better layer caching. (4) Run as non-root user (uid 1001). (5) Use tini as init to handle PID 1 and signal forwarding. (6) Implement health checks for Kubernetes liveness/readiness probes. (7) Scan images with Trivy/docker scout before pushing to registry. (8) Sign images with Cosign for supply chain security.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-ship" style="color:var(--primary)"></i> Kubernetes Orchestration</h2>
+        <p>Production cluster configuration: (1) EKS with managed node groups (on-demand for control, spot for workers), (2) Cluster Autoscaler for node-level scaling (3-20 nodes), (3) HPA for pod-level scaling based on CPU/memory/custom metrics, (4) PodDisruptionBudget ensuring min 2 pods always available during rolling updates, (5) Topology Spread Constraints for multi-AZ distribution, (6) Network Policies based on zero-trust model, (7) Pod Security Standards (restricted profile), (8) Resource quotas per namespace.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Actions / Jenkins</h2>
+        <p><strong>GitHub Actions:</strong> Used as primary CI/CD with self-hosted runners for GPU/ARM builds. Secrets stored in GitHub Actions encrypted secrets. Matrix builds for multi-architecture (linux/amd64, linux/arm64). Environments with required reviewers for production. Deployment records for audit trail.</p>
+        <p><strong>Jenkins (Alternative):</strong> Jenkinsfile defines the same pipeline using Groovy DSL. Shared libraries for reusable pipeline steps (buildImage, deployToK8s, runTests). Blue Ocean UI for pipeline visualization. Build agents dynamically provisioned on Kubernetes (Jenkins Kubernetes plugin).</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-chart-line" style="color:var(--primary)"></i> Monitoring and Alerting</h2>
+        <p><strong>Prometheus:</strong> Collects metrics from: (1) Kubernetes API server (cluster state), (2) kubelet (pod metrics), (3) application /metrics endpoint (HTTP requests, latency, errors), (4) Istio (service mesh traffic metrics), (5) Node exporter (node-level CPU, memory, disk), (6) AWS EBS CSI driver (volume metrics). Alerting rules in PrometheusRule CRD trigger alerts to Alertmanager, which routes to PagerDuty (critical), Slack (warnings), and email (info).</p>
+        <p><strong>Grafana:</strong> Dashboards: (1) Kubernetes Cluster Overview — node/pod resource usage, (2) Application Performance — request rate, latency P50/P95/P99, error rate, (3) Deployment Dashboard — deployment frequency, lead time, change failure rate, (4) Cost Dashboard — per-namespace resource cost.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-building" style="color:var(--primary)"></i> Infrastructure as Code</h2>
+        <p>Terraform manages all cloud infrastructure: VPC (public/private subnets, NAT gateways, flow logs), EKS cluster (control plane logging, encryption, node groups), RDS (PostgreSQL with Multi-AZ, automated backups, deletion protection), ElastiCache (Redis cluster with replication), S3 (Terraform state backend with DynamoDB locking), IAM roles/policies (least privilege per service), ACM certificates, Route53 DNS. State stored in S3 with DynamoDB locking for team collaboration.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-exchange-alt" style="color:var(--primary)"></i> Blue-Green Deployments</h2>
+        <p>Blue-green deployment strategy: (1) Blue is current production (version N), accepting 100% traffic. (2) Green is new version (version N+1), deployed alongside blue with same resources. (3) After green passes health checks and integration tests, Istio virtual service switches traffic from blue to green (instant switch or gradual with weight options). (4) Blue remains running for 30 minutes for rollback. (5) If issues detected, switch back to blue instantly. (6) After validation period, blue is scaled down. Benefits: zero-downtime, instant rollback, full production validation before cutover.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-flask" style="color:var(--primary)"></i> Canary Releases</h2>
+        <p>Canary deployment in Istio: (1) New version deployed with `sample-app-canary` service. (2) Initial traffic weight: 10% canary, 90% stable. (3) Monitor canary error rate, latency, and business metrics for 5-30 minutes. (4) If metrics degrade, auto-rollback: set canary weight to 0%, send alert. (5) If stable, gradually increase canary: 25% → 50% → 75% → 100%. (6) After 100%, rename canary service or update main deployment. (7) Users can be pinned to a specific version using header-based routing (x-canary: true).</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-database" style="color:var(--primary)"></i> Log Aggregation</h2>
+        <p>ELK Stack: (1) Fluentd DaemonSet on each node collects: container logs (stdout/stderr), Kubernetes audit logs, application JSON logs, and system logs. (2) Logs are parsed, enriched (with pod name, namespace, container name, node), and shipped to Elasticsearch. (3) Elasticsearch cluster (3 nodes) indexes logs with ILM policy: hot (7 days on SSD), warm (30 days on HDD), cold (90 days), delete after 90 days. (4) Kibana dashboards for: error rate trends, deployment logs, security audit trail, and per-pod log explorer.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <div class="code-block" data-lang="bash"><code># Test pipeline locally with act
+act push --job lint-and-test
+
+# Test Docker build
+docker build -f sample-app/Dockerfile.multistage -t test:latest sample-app/
+docker scout quick test:latest
+
+# Test Kubernetes manifests
+kubectl kustomize kubernetes/overlays/dev | kubectl apply --dry-run=client -f -
+
+# Test Helm chart
+helm lint helm-charts/sample-app/
+helm template helm-charts/sample-app/ --values helm-charts/sample-app/values-dev.yaml
+
+# Test Terraform
+cd terraform/environments/dev
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+
+# Run integration tests
+npm run test:integration
+k6 run scripts/loadtest.js
+
+# Test rollback
+kubectl rollout undo deployment/sample-app -n production
+
+# Test canary
+bash scripts/canary.sh --service sample-app --version v2.0.0 --percentage 10</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-shield-alt" style="color:var(--primary)"></i> Security Considerations</h2>
+        <ul><li><strong>Image Signing:</strong> All container images signed with Cosign using keyless signing (OIDC). Verification enforced in admission controller (Kyverno).</li><li><strong>Secrets Management:</strong> External Secrets Operator syncs secrets from AWS Secrets Manager to Kubernetes. CSI Secrets Store for mounted secrets. No secrets in Git.</li><li><strong>Network Security:</strong> Calico network policies enforce zero-trust: only frontend can access API, only API can access DB. EKS security groups restrict node-to-node communication.</li><li><strong>Compliance:</strong> All pipeline actions logged to CloudTrail + ELK. Deployment approvals recorded. Container images scanned weekly. Infrastructure compliance checked with AWS Config rules.</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="mistake-card"><strong>1. Pipeline too long (>&gt;30 min):</strong> Developers push less frequently when CI takes too long. Parallelize independent stages, cache dependencies, use larger runners. Target: &lt;10 minute CI pipeline.</div>
+        <div class="mistake-card"><strong>2. Environment drift:</strong> Dev/staging/prod configurations diverge over time. Use the same Helm chart across environments with different values files. Infrastructure-as-code for all environments. Prevent manual changes to staging/prod.</div>
+        <div class="mistake-card"><strong>3. No rollback plan:</strong> Deployments without automated rollback cause extended outages. Always have a rollback script. With ArgoCD, rollback is one click. Test rollback regularly.</div>
+        <div class="mistake-card"><strong>4. Insufficient monitoring:</strong> Deploying without metrics means you don't know if the deployment caused problems. Implement RED metrics (Rate, Errors, Duration) before first deployment. Set up alerting for deployment-related metrics.</div>
+        <div class="mistake-card"><strong>5. Not testing the pipeline itself:</strong> Pipeline failures block all deployments. Test pipeline changes in a separate branch. Use pipeline-as-code with versioning. Have a backup CI system (GitHub Actions + Jenkins as fallback).</div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card"><strong>Q1:</strong> Explain the difference between blue-green and canary deployments.<br><strong>A:</strong> Blue-green: Two identical environments (blue=current, green=new). Switch all traffic at once when green is ready. Fast cutover, instant rollback (just switch back), but double the resources during deployment. Canary: Gradually shift traffic percentage (10% → 50% → 100%) to new version. More granular validation, slower rollout, auto-rollback based on metrics, but more complex traffic management. Choose blue-green for simple apps, canary for critical services.</div>
+        <div class="qa-card"><strong>Q2:</strong> How do you secure a containerized application in Kubernetes?<br><strong>A:</strong> (1) Run as non-root user in container. (2) Read-only root filesystem. (3) Drop all Linux capabilities, add only needed ones. (4) Pod Security Standards: restricted profile. (5) Network policies: deny all ingress/egress by default. (6) Seccomp profile limiting syscalls. (7) Image scanning + signing. (8) Secrets not in environment variables, use volume mounts. (9) Resource limits prevent DoS. (10) Regular pod security audits with kubescape.</div>
+        <div class="qa-card"><strong>Q3:</strong> Design a GitOps workflow for microservices deployment.<br><strong>A:</strong> (1) Each microservice has a repo with source code + Dockerfile. (2) CI pipeline builds and pushes image to ECR with git SHA tag. (3) CI updates the deployment manifest in a separate "config" repo (k8s-manifests). (4) ArgoCD monitors the config repo and syncs changes to the cluster. (5) Each microservice has: Deployment, Service, HPA, PDB, ServiceMonitor, VirtualService. (6) Environment overlays via kustomize (dev/staging/prod differ in replicas, resources, env vars). (7) Rollback: revert config repo commit, ArgoCD auto-syncs.</div>
+        <div class="qa-card"><strong>Q4:</strong> How do you handle database migrations in CI/CD?<br><strong>A:</strong> (1) Migration scripts are versioned and run as part of deployment. (2) Use a dedicated init container that runs migrations before the app starts. (3) Migrations must be backward-compatible: adding columns (safe), removing columns (2-step: stop writing, then remove), renaming columns (add new, dual-write, migrate data, remove old). (4) For rollback: have revert migrations. (5) Test migrations against a clone of production data in staging. (6) Use tools like Flyway or Alembic with automated rollback validation.</div>
+        <div class="qa-card"><strong>Q5:</strong> What metrics would you monitor for deployment health?<br><strong>A:</strong> RED metrics: Rate (requests/sec), Errors (% of 5xx responses), Duration (P50/P95/P99 latency). Additionally: (1) Deployment success rate, (2) Time to rollback, (3) Error budget burn rate, (4) Pod restart count, (5) CPU/Memory after deploy vs before, (6) Business metrics: sign-ups, orders, etc. during deployment window, (7) Upstream dependencies latency. Monitor for 30 minutes after each deployment.</div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-trophy" style="color:var(--warning)"></i> Advanced Challenges</h2>
+        <div class="challenge-card"><strong>Challenge 1: Multi-Cluster Deployment</strong> Extend the pipeline to deploy across multiple Kubernetes clusters (us-east, eu-west, ap-southeast) with Istio multi-cluster mesh. Implement global load balancing with latency-based routing. Handle cluster-level failures gracefully.</div>
+        <div class="challenge-card"><strong>Challenge 2: FinOps Dashboard</strong> Build a cost monitoring dashboard that tracks: per-namespace resource costs, spot instance savings, storage costs by tier, data transfer costs, and cost anomaly detection. Implement budget alerts and automated right-sizing recommendations.</div>
+        <div class="challenge-card"><strong>Challenge 3: AI-Powered Incident Response</strong> Integrate an LLM with monitoring to: auto-classify alerts (false positive vs real issue), suggest runbook steps for known incident types, generate post-mortem drafts from alert data, and predict incident severity based on metric patterns.</div>
+        <div class="challenge-card"><strong>Challenge 4: Serverless + Kubernetes Hybrid</strong> Deploy some workloads on Kubernetes, others on Lambda, with unified observability. Use Knative for serverless Kubernetes. Implement event-driven scaling: Lambda processes SQS events, spins up K8s jobs for heavy processing.</div>
+        <div class="challenge-card"><strong>Challenge 5: Compliance & Audit Pipeline</strong> Build a compliance pipeline that: (1) Checks all K8s resources against CIS benchmarks, (2) Verifies container images are signed and vulnerability-free, (3) Audits all kubectl commands with audit2rbac, (4) Generates compliance reports for SOC2/ISO27001, (5) Enforces pod security standards with OPA/Gatekeeper policies.</div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="video-platform.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous Project</a>
+        <a href="ai-code-assistant.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,634 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a real-time chat application with Socket.io, room management, user authentication, typing indicators, and online status. Complete Node.js engineering guide.">
+  <meta name="keywords" content="chat app, Socket.io, WebSocket, real-time, Node.js, Express, authentication, rooms, typing indicator">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="Chat Application - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a real-time chat application with Socket.io.">
+  <meta property="og:type" content="website">
+  <title>Chat Application - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/chat-app.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="chat-app">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Chat Application</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Intermediate</span>
+        <span><i class="far fa-clock"></i> 8-12 hours</span>
+        <span><i class="fas fa-code-branch"></i> Socket.io, Node.js, Express, MongoDB</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A comprehensive engineering guide to building a real-time chat application with Socket.io, room management, user authentication, typing indicators, message formatting, and online presence tracking.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This real-time chat application project teaches you how to build a complete messaging platform from scratch using Socket.io for bidirectional real-time communication, Node.js/Express for the backend, and MongoDB for persistent message storage. Users can create accounts, join multiple chat rooms, send formatted messages with image/file attachments, see typing indicators, know when other users are online, and receive push notifications for new messages. The project covers WebSocket architecture, event-driven programming, JWT authentication, file uploads with Multer, and message pagination.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Real-time communication is fundamental to modern web applications - from Slack and Discord to customer support chat and collaborative tools. Building a reliable chat system requires understanding WebSocket protocols, managing concurrent connections, handling message ordering, dealing with reconnection logic, and ensuring message delivery guarantees. The challenge is building a system that handles: multiple simultaneous chat rooms, message history with infinite scroll, typing indicators that don't cause excessive events, online/offline presence detection, file/image sharing, and message delivery receipts (sent, delivered, read).</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Team Collaboration:</strong> A remote team uses the chat app with channels for different projects (#frontend, #backend, #design) and direct messaging for private conversations.</li>
+          <li><strong>Customer Support:</strong> An e-commerce site integrates the chat for live customer support with agent assignment, chat queues, and pre-defined response templates.</li>
+          <li><strong>Community Platform:</strong> A gaming community creates rooms for different games, with voice chat integration, mod-only channels, and automated moderation bots.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>Real-time features are expected in modern web applications. Socket.io powers real-time features for millions of users at companies like Trello, Patreon, and Microsoft. Understanding WebSocket architecture is critical for building collaborative tools (Google Docs, Figma), live dashboards (Datadog, Grafana), gaming platforms, and financial trading interfaces. The event-driven patterns you learn transfer to message queues (RabbitMQ, Kafka), event sourcing architectures, and real-time data pipelines.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Architect a real-time communication system using Socket.io with namespaces, rooms, and event emitters for scalable message delivery</li>
+          <li>Implement JWT-based authentication with socket middleware for secure WebSocket connections and user identity verification</li>
+          <li>Build a multi-room chat system with room creation, joining/leaving, and room listing with unread message counts</li>
+          <li>Handle typing indicators with throttled events to prevent UI flooding and network congestion</li>
+          <li>Implement online/offline presence detection with heartbeat/ping mechanism and user status broadcasting</li>
+          <li>Build message formatting with markdown support (bold, italic, code blocks, mentions) and image/file attachment uploads</li>
+          <li>Implement message persistence with MongoDB, including pagination with cursor-based infinite scroll and message search</li>
+          <li>Handle reconnection logic with automatic rejoin of rooms, message delivery receipts, and offline message queuing</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fas fa-plug"></i> Socket.io</span>
+          <span class="badge-tech"><i class="fab fa-node-js"></i> Node.js + Express</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> MongoDB + Mongoose</span>
+          <span class="badge-tech"><i class="fas fa-lock"></i> JWT Auth</span>
+          <span class="badge-tech"><i class="fab fa-react"></i> React (optional)</span>
+          <span class="badge-tech"><i class="fas fa-cloud-upload-alt"></i> Multer + Cloudinary</span>
+          <span class="badge-tech"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS3</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Intermediate JavaScript with async/await, Promises, and ES6+ modules</li>
+          <li>Node.js and Express experience: routing, middleware, error handling</li>
+          <li>Understanding of REST APIs and HTTP protocol basics</li>
+          <li>Familiarity with MongoDB or any NoSQL database (CRUD operations, indexes)</li>
+          <li>Basic understanding of authentication concepts (JWT, sessions, password hashing with bcrypt)</li>
+          <li>Node.js installed (v18+) and MongoDB Atlas account (free tier)</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The system uses a client-server architecture with WebSocket as the primary communication channel. The Socket.io server runs alongside the Express HTTP server on the same port, sharing the authentication context. Connections are organized into namespaces (default namespace for general chat, admin namespace for moderation). Within each namespace, rooms group users by chat channel. The server maintains an in-memory map of connected users (socketId -> userId) for fast presence lookups, while persisting messages to MongoDB for history. File uploads are handled via Multer middleware and stored on Cloudinary with URLs embedded in message objects. Message delivery uses an acknowledgement pattern where the client sends an ACK after rendering, enabling read receipts. The reconnection system uses exponential backoff with jitter and rejoins all rooms on reconnection.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+chat-app/
+├── server/
+│   ├── src/
+│   │   ├── index.js          # Entry point, HTTP + Socket.io setup
+│   │   ├── socket/
+│   │   │   ├── index.js      # Socket.io initialization
+│   │   │   ├── auth.js       # Socket authentication middleware
+│   │   │   ├── chatHandler.js # Message events
+│   │   │   ├── roomHandler.js # Room management
+│   │   │   └── presenceHandler.js # Online/offline
+│   │   ├── models/
+│   │   │   ├── Message.js
+│   │   │   ├── User.js
+│   │   │   └── Room.js
+│   │   ├── routes/
+│   │   │   ├── auth.js
+│   │   │   ├── users.js
+│   │   │   └── upload.js
+│   │   ├── middleware/
+│   │   │   ├── auth.js
+│   │   │   └── errorHandler.js
+│   │   └── utils/
+│   │       └── helpers.js
+│   ├── package.json
+│   └── .env
+├── client/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── contexts/
+│   │   └── services/
+│   └── package.json
+├── docker-compose.yml
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: Server Setup & Socket.io Fundamentals</h4>
+          <p>Initialize the Express server with Socket.io. Implement the connection/disconnection lifecycle. Create the basic event system: client emits 'chat message', server broadcasts to all clients in the room. Test with a simple HTML client that connects and sends messages.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: Authentication & User Management</h4>
+          <p>Implement user registration and login with JWT tokens. Add socket middleware to authenticate connections using the JWT token sent in the auth handshake. Store user profiles in MongoDB with avatars and display names. Implement guest/anon access for non-registered users.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Room Management</h4>
+          <p>Implement room CRUD: create room, list rooms, join room, leave room, delete room (admin only). Messages are scoped to rooms - users only receive events for rooms they've joined. Room metadata includes name, description, topic, member count, and creation date.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Typing Indicators & Presence</h4>
+          <p>Implement typing indicator events: 'typing:start' and 'typing:stop' with 2-second debounce. Broadcast only to the room. Implement online presence with socket connection/disconnection tracking. Add a heartbeat every 30 seconds to detect stale connections. Show online/away/offline status with colored indicators.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: Message History & File Uploads</h4>
+          <p>Store messages in MongoDB with fields: content, sender, room, timestamp, type (text/image/file), and metadata. Implement cursor-based pagination for infinite scroll. Add Multer middleware for file uploads with Cloudinary storage. Support image preview, file download, and drag-and-drop upload.</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: Socket.io Server with Authentication Middleware</h4>
+          <p>Set up the Socket.io server with JWT authentication middleware that validates tokens on connection and attaches user data to the socket object.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: { origin: '*', methods: ['GET', 'POST'] },
+  pingInterval: 25000,
+  pingTimeout: 20000
+});
+
+// Authentication middleware for Socket.io
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  if (!token) {
+    return next(new Error('Authentication required'));
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    socket.userId = decoded.userId;
+    socket.username = decoded.username;
+    socket.avatar = decoded.avatar;
+    next();
+  } catch (err) {
+    next(new Error('Invalid token'));
+  }
+});
+
+const onlineUsers = new Map(); // userId -> Set<socketId>
+
+io.on('connection', (socket) => {
+  console.log(`User connected: ${socket.username} (${socket.id})`);
+
+  // Track online users
+  if (!onlineUsers.has(socket.userId)) {
+    onlineUsers.set(socket.userId, new Set());
+  }
+  onlineUsers.get(socket.userId).add(socket.id);
+  io.emit('user:online', { userId: socket.userId, username: socket.username });
+
+  socket.on('disconnect', () => {
+    const userSockets = onlineUsers.get(socket.userId);
+    if (userSockets) {
+      userSockets.delete(socket.id);
+      if (userSockets.size === 0) {
+        onlineUsers.delete(socket.userId);
+        io.emit('user:offline', { userId: socket.userId });
+      }
+    }
+    console.log(`User disconnected: ${socket.username}`);
+  });
+});
+
+server.listen(process.env.PORT || 3000, () => {
+  console.log('Server running on port', process.env.PORT || 3000);
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: Room Management Events</h4>
+          <p>Implement room creation, joining, leaving, and message broadcasting scoped to rooms. Users can be in multiple rooms simultaneously.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>// In-memory room store (use MongoDB for persistence)
+const rooms = new Map();
+
+// Add default rooms
+rooms.set('general', { id: 'general', name: 'General', description: 'General discussion', createdBy: 'system', createdAt: new Date() });
+rooms.set('random', { id: 'random', name: 'Random', description: 'Random topics and fun', createdBy: 'system', createdAt: new Date() });
+
+socket.on('room:join', (roomId, callback) => {
+  if (!rooms.has(roomId)) {
+    return callback({ error: 'Room not found' });
+  }
+  socket.join(roomId);
+  socket.currentRooms = socket.currentRooms || [];
+  socket.currentRooms.push(roomId);
+  const room = rooms.get(roomId);
+  io.to(roomId).emit('user:joined', {
+    userId: socket.userId,
+    username: socket.username,
+    roomId
+  });
+  callback({ success: true, room });
+});
+
+socket.on('room:leave', (roomId) => {
+  socket.leave(roomId);
+  socket.currentRooms = socket.currentRooms.filter(r => r !== roomId);
+  io.to(roomId).emit('user:left', {
+    userId: socket.userId,
+    username: socket.username,
+    roomId
+  });
+});
+
+socket.on('room:create', (data, callback) => {
+  const { name, description } = data;
+  const id = crypto.randomBytes(8).toString('hex');
+  const room = { id, name, description, createdBy: socket.userId, createdAt: new Date(), memberCount: 0 };
+  rooms.set(id, room);
+  socket.join(id);
+  io.emit('room:created', room);
+  callback({ success: true, room });
+});
+
+socket.on('room:list', (callback) => {
+  const roomList = Array.from(rooms.values()).map(r => ({
+    ...r,
+    memberCount: io.sockets.adapter.rooms.get(r.id)?.size || 0
+  }));
+  callback(roomList);
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Message Handling with Persistence and ACKs</h4>
+          <p>Handle message sending, storage, and delivery with read receipts. Messages are stored in MongoDB and broadcast to the room.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const Message = require('../models/Message');
+
+socket.on('message:send', async (data, callback) => {
+  try {
+    const { roomId, content, type = 'text', metadata = {} } = data;
+
+    if (!roomId || !content?.trim()) {
+      return callback({ error: 'Message content is required' });
+    }
+
+    // Create and save message
+    const message = new Message({
+      roomId,
+      sender: socket.userId,
+      senderName: socket.username,
+      senderAvatar: socket.avatar,
+      content: content.trim(),
+      type,
+      metadata,
+      timestamp: new Date()
+    });
+    await message.save();
+
+    // Broadcast to room
+    io.to(roomId).emit('message:new', message.toObject());
+
+    // Acknowledge with message ID and timestamp
+    callback({
+      success: true,
+      messageId: message._id,
+      timestamp: message.timestamp
+    });
+  } catch (err) {
+    callback({ error: 'Failed to save message' });
+  }
+});
+
+// Message history with cursor-based pagination
+socket.on('message:history', async (data, callback) => {
+  try {
+    const { roomId, cursor, limit = 50 } = data;
+    const query = { roomId };
+    if (cursor) {
+      query.timestamp = { $lt: new Date(cursor) };
+    }
+    const messages = await Message.find(query)
+      .sort({ timestamp: -1 })
+      .limit(limit)
+      .lean();
+    callback({
+      messages: messages.reverse(),
+      hasMore: messages.length === limit,
+      nextCursor: messages.length > 0 ? messages[0].timestamp : null
+    });
+  } catch (err) {
+    callback({ error: 'Failed to load messages' });
+  }
+});
+
+// Message read receipt
+socket.on('message:read', async (data) => {
+  const { messageId, roomId } = data;
+  io.to(roomId).emit('message:read', {
+    messageId,
+    userId: socket.userId,
+    readAt: new Date()
+  });
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Typing Indicators with Throttling</h4>
+          <p>Implement typing indicators with event throttling to prevent flooding the network with typing events. Users stop typing after 2 seconds of inactivity.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const typingUsers = new Map(); // roomId -> Map<userId, timeout>
+
+socket.on('typing:start', (roomId) => {
+  if (!roomId) return;
+  socket.to(roomId).emit('typing:update', {
+    userId: socket.userId,
+    username: socket.username,
+    isTyping: true,
+    roomId
+  });
+
+  // Auto-stop typing after 3 seconds
+  if (!typingUsers.has(roomId)) {
+    typingUsers.set(roomId, new Map());
+  }
+  const roomTyping = typingUsers.get(roomId);
+  if (roomTyping.has(socket.userId)) {
+    clearTimeout(roomTyping.get(socket.userId));
+  }
+  roomTyping.set(socket.userId, setTimeout(() => {
+    socket.to(roomId).emit('typing:update', {
+      userId: socket.userId,
+      username: socket.username,
+      isTyping: false,
+      roomId
+    });
+    roomTyping.delete(socket.userId);
+    if (roomTyping.size === 0) typingUsers.delete(roomId);
+  }, 3000));
+});
+
+socket.on('typing:stop', (roomId) => {
+  if (!roomId) return;
+  const roomTyping = typingUsers.get(roomId);
+  if (roomTyping?.has(socket.userId)) {
+    clearTimeout(roomTyping.get(socket.userId));
+    roomTyping.delete(socket.userId);
+    if (roomTyping.size === 0) typingUsers.delete(roomId);
+  }
+  socket.to(roomId).emit('typing:update', {
+    userId: socket.userId,
+    username: socket.username,
+    isTyping: false,
+    roomId
+  });
+});
+
+// Client-side throttling
+let typingTimeout;
+const TYPING_THROTTLE = 1000;
+
+function handleTyping(roomId) {
+  socket.emit('typing:start', roomId);
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(() => {
+    socket.emit('typing:stop', roomId);
+  }, 2000);
+}
+
+messageInput.addEventListener('input', () => {
+  if (messageInput.value.trim()) {
+    handleTyping(currentRoomId);
+  }
+});
+
+// Render typing indicators in UI
+socket.on('typing:update', (data) => {
+  const indicator = document.getElementById('typing-indicator');
+  const typingUsers = getTypingUsers(data.roomId);
+  if (data.isTyping) {
+    typingUsers.set(data.userId, data.username);
+  } else {
+    typingUsers.delete(data.userId);
+  }
+  if (typingUsers.size > 0) {
+    const names = Array.from(typingUsers.values());
+    indicator.textContent = names.length === 1
+      ? `${names[0]} is typing...`
+      : names.length === 2
+        ? `${names[0]} and ${names[1]} are typing...`
+        : `${names[0]} and ${names.length - 1} others are typing...`;
+    indicator.style.display = 'block';
+  } else {
+    indicator.style.display = 'none';
+  }
+});</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>Connection Testing:</strong> Open multiple browser tabs and connect as different users. Verify each user sees the correct online status. Disconnect a tab and verify the offline event fires. Test reconnection by stopping and restarting the server.</p>
+        <p><strong>Room Testing:</strong> Create a room from one client, verify all clients see the new room. Join multiple rooms and verify messages only appear in the correct room. Test that leaving a room stops receiving messages.</p>
+        <p><strong>Message Testing:</strong> Send messages with special characters, emoji, and long text. Verify messages persist after page refresh. Test message pagination by sending 100+ messages. Send an empty message and verify it's rejected. Test file uploads with images, PDFs, and large files.</p>
+        <p><strong>Typing Indicators:</strong> Open two tabs as different users. Type in one tab and verify the typing indicator appears in the other. Stop typing and verify the indicator disappears after 3 seconds. Test rapid typing and verify it doesn't cause multiple events.</p>
+        <p><strong>Authentication Testing:</strong> Try connecting without a token (should be rejected). Use an expired token (should be rejected). Switch users and verify the correct identity is shown. Test that disconnected users are removed from online status.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>Server Deployment:</strong> Deploy the Node.js server to Railway, Render, or Fly.io. These platforms support WebSocket connections natively. For traditional hosting (AWS EC2, DigitalOcean), ensure the load balancer supports WebSocket (sticky sessions or WebSocket passthrough). Set environment variables for JWT_SECRET, MONGODB_URI, and CLOUDINARY_URL.</p>
+        <p><strong>Client Deployment:</strong> If using a separate client, deploy to Vercel or Netlify. Configure the client with the server URL via environment variable. For the vanilla HTML client, update the server URL in the script.</p>
+        <p><strong>Scaling:</strong> For horizontal scaling, use Socket.io's Redis adapter to share events across multiple server instances. Set up a Redis server and configure the adapter: new RedisAdapter(io, pubClient, subClient). Use MongoDB replica sets for message persistence reliability.</p>
+        <p><strong>Monitoring:</strong> Use Socket.io's built-in metrics (io.engine.clientsCount, adapter.rooms). Set up Prometheus + Grafana for monitoring. Configure alerts for high connection counts, message latency, and error rates.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. Not Handling Socket.io Reconnection Properly</strong><br>
+          When a client reconnects after a temporary disconnect, they lose their room membership. Always listen for the 'connect' event on the client side and rejoin all previously joined rooms. Use the socket.io.reconnect() callback to restore state. Store the list of joined rooms in localStorage for recovery after page refresh.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Broadcasting Messages Without Server Validation</strong><br>
+          Never trust client-side data. Always validate message content, room membership, and user permissions on the server before broadcasting. A malicious client could emit forged events to impersonate other users or join restricted rooms. Validate the JWT token on every reconnection and check room membership before processing message:send events.
+        </div>
+        <div class="challenge-card">
+          <strong>3. Memory Leaks from Event Listener Accumulation</strong><br>
+          Every time a component mounts and attaches a socket event listener, it creates a new listener. Without proper cleanup, these listeners accumulate and cause double-firing events and memory leaks. Always remove event listeners in the component cleanup function. Use socket.off() or socket.removeAllListeners() in the useEffect cleanup.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Excessive Typing Indicator Events</strong><br>
+          Without throttling, every keystroke emits a typing event, causing 10-30 events per second per user. With 100 users typing, this floods the network. Implement client-side throttling: emit typing:start at most once per second, and auto-emit typing:stop after 2 seconds of inactivity. On the server, track typing state per user per room and debounce the stop event.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain how WebSockets differ from HTTP and when you would use each.<br>
+          <strong>A:</strong> HTTP is a request-response protocol where the client initiates communication. Each request opens a new connection (or reuses one via keep-alive). WebSocket provides a full-duplex persistent connection over a single TCP socket, allowing the server to push data to the client without polling. Use HTTP for REST APIs, CRUD operations, and cacheable content. Use WebSocket for real-time features: chat, live notifications, collaborative editing, gaming, financial tickers, and live dashboards. WebSocket has lower latency for bidirectional communication but requires more server resources per connection.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How does Socket.io handle reconnection and what configuration options are available?<br>
+          <strong>A:</strong> Socket.io client automatically attempts reconnection when the connection drops. Key options: reconnection (boolean, default true), reconnectionAttempts (Infinity), reconnectionDelay (1000ms initial), reconnectionDelayMax (5000ms), randomizationFactor (0.5, adds jitter). The client uses exponential backoff: delay doubles with each attempt up to reconnectionDelayMax, with jitter to prevent thundering herd. On reconnection, the client re-authenticates and re-emits any buffered events. The 'reconnect' event fires on successful reconnection.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What is the difference between Socket.io namespaces and rooms?<br>
+          <strong>A:</strong> Namespaces are logical channels that create separate communication contexts on the same server. Each namespace has its own event handlers, middleware, and connection pool. Think of namespaces like separate applications (e.g., /chat, /admin, /analytics). Rooms are sub-channels within a namespace for grouping connected sockets (e.g., different chat channels). A socket can be in multiple rooms but typically joins one namespace. Rooms are created dynamically when sockets join them and are removed when empty. Use namespaces for different features, rooms for sub-grouping within a feature.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you scale Socket.io horizontally across multiple servers?<br>
+          <strong>A:</strong> Use Socket.io's Redis adapter to share events across server instances. The adapter uses Redis Pub/Sub: when one server emits an event, it publishes to Redis, and all other servers receive the event and forward it to their connected clients. All clients connect to the same Redis instance (or cluster). For sticky sessions, configure the load balancer to route the same client to the same server (required for long-polling transport). Configure the adapter: const { createAdapter } = require('@socket.io/redis-adapter'); const pubClient = redis.createClient(); const subClient = pubClient.duplicate(); io.adapter(createAdapter(pubClient, subClient)).
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement end-to-end encryption in a chat application?<br>
+          <strong>A:</strong> Implement the Signal Protocol (used by WhatsApp and Signal) for end-to-end encrypted messaging. Each user has a public/private key pair. Messages are encrypted with AES-256-GCM using a symmetric key that's exchanged using the Diffie-Hellman key exchange. Keys are stored client-side in IndexedDB. The server only sees encrypted ciphertext and cannot read messages. Implement Perfect Forward Secrecy using ephemeral keys that change with each session. Use a trusted key verification mechanism (QR code scanning or fingerprint comparison) to prevent man-in-the-middle attacks. The server handles key distribution, room membership, and delivery but never has access to plaintext.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Architected a real-time chat platform using Socket.io with Redis adapter for horizontal scalability, supporting 10,000+ concurrent WebSocket connections across distributed server instances</li>
+          <li>Implemented JWT-authenticated WebSocket connections with middleware-based token validation, user identity verification, and room-based access control for secure multi-channel communication</li>
+          <li>Built an event-driven messaging system with MongoDB persistence, cursor-based pagination for infinite scroll, read receipts, and message search with text indexes</li>
+          <li>Developed real-time presence detection with heartbeat-based online/offline tracking, per-room typing indicators with throttled event emission, and user status broadcasting</li>
+          <li>Integrated file upload system using Multer middleware with Cloudinary storage, supporting drag-and-drop image sharing, file download with progress indicators, and automatic thumbnail generation</li>
+          <li>Implemented automatic reconnection with exponential backoff and jitter, room membership restoration, and offline message queuing for reliable message delivery</li>
+          <li>Designed a modular server architecture with separate handlers for chat, room management, and presence concerns, enabling independent scaling and maintenance</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include demo GIF of the chat in action, setup instructions for server and client, environment variables documentation, WebSocket event reference table, and architecture diagram showing the data flow.</p>
+        <p><strong>Commit Messages:</strong> feat: implement JWT socket authentication middleware, fix: prevent duplicate typing indicators on reconnect, refactor: extract room handler from main socket file, perf: add Redis adapter for horizontal scaling.</p>
+        <p><strong>API Documentation:</strong> Document all Socket.io events with expected payloads and callbacks. Use a tool like Socket.io-admin-ui for debugging. Include examples of the event flow for common operations (user joins room, sends message, leaves room).</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Voice/Video Chat:</strong> Integrate WebRTC for peer-to-peer voice and video calls between users. Implement a signaling server using Socket.io to exchange SDP offers and ICE candidates. Add call controls (mute, speaker, hang up) and picture-in-picture mode.</li>
+          <li><strong>Message Reactions & Threads:</strong> Add emoji reactions to messages (like Slack/Discord). Implement threaded replies where clicking a message opens a thread view with all replies. Store reactions and thread metadata in MongoDB subdocuments.</li>
+          <li><strong>Chat Bots & Automation:</strong> Create a bot API that allows developers to build chat bots. Implement a weather bot, reminder bot, and poll bot as examples. Use Socket.io's bot user accounts with special permissions.</li>
+          <li><strong>Moderation System:</strong> Add message reporting, user muting/banning, profanity filtering, and rate limiting. Implement auto-moderation with keyword detection and spam filtering. Create an admin dashboard for managing users and moderating content.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://socket.io/docs/v4/" target="_blank">Socket.io Documentation</a> - Official Socket.io v4 docs</li>
+          <li><a href="https://socket.io/docs/v4/redis-adapter/" target="_blank">Socket.io Redis Adapter</a> - Scaling Socket.io with Redis</li>
+          <li><a href="https://mongoosejs.com/docs/" target="_blank">Mongoose Documentation</a> - MongoDB ODM for Node.js</li>
+          <li><a href="https://jwt.io/introduction" target="_blank">JWT Introduction</a> - JSON Web Token guide</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="_blank">MDN WebSocket API</a> - Native WebSocket reference</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="ecommerce-store.html" class="btn btn-ghost">E-Commerce Store</a>
+          <a href="blog-platform.html" class="btn btn-ghost">Blog Platform</a>
+          <a href="social-dashboard.html" class="btn btn-ghost">Social Dashboard</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="ecommerce-store.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: E-Commerce Store</a>
+        <a href="blog-platform.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

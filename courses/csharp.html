@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>C# Course - CodeRio</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/navbar.css"><link rel="stylesheet" href="../css/courses.css"><link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="csharp"><div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div><div class="toast-container"></div>
+<nav class="navbar"><div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div><button class="mobile-toggle"><i class="fas fa-bars"></i></button><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li><li><a href="../auth/profile.html">Profile</a></li></ul><div class="nav-auth"><button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button></div></nav>
+<section class="course-hero"><div class="course-hero-content"><h1>C#</h1><p>C# (pronounced C-sharp) is a modern, object-oriented language developed by Microsoft. It powers Windows applications, games (Unity), web services (ASP.NET), and enterprise software with its rich ecosystem and strong typing.</p><div class="course-meta"><div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div><div class="course-meta-item"><i class="fas fa-clock"></i> 10 Weeks</div><div class="course-meta-item"><i class="fas fa-book-open"></i> 18 Modules</div></div></div><div class="course-hero-image"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"></div></section>
+<section class="course-content">
+<div class="course-section"><h2><i class="fas fa-info-circle"></i> Overview</h2><p>C# was created by Anders Hejlsberg at Microsoft in 2000 as part of the .NET initiative. It combines the power of C++ with the simplicity of Visual Basic, offering a type-safe, object-oriented language with garbage collection, properties, events, and LINQ.</p><p>C# runs on the .NET runtime (CLR), which provides cross-platform support via .NET Core/.NET 5+. The language has evolved rapidly: C# 2.0 (generics), C# 3.0 (LINQ), C# 4.0 (dynamic), C# 5.0 (async), C# 6.0 (null-conditional), C# 7.0 (pattern matching), C# 8.0 (nullable refs), C# 9.0 (records), C# 10.0 (global usings), C# 11.0 (raw strings), C# 12.0 (primary constructors).</p><p>C# is the primary language for Unity game development, ASP.NET Core web apps, Xamarin/MAUI mobile apps, Windows desktop apps (WPF, WinForms), cloud services on Azure, and enterprise applications.</p></div>
+<div class="course-section"><h2><i class="fas fa-star"></i> Why Learn C#?</h2><div class="grid grid-2"><div class="glass" style="padding:1.5rem"><i class="fas fa-gamepad" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Game Development</h4><p style="color:var(--text-secondary);font-size:0.95rem">Unity, the world's #1 game engine, uses C#.</p></div><div class="glass" style="padding:1.5rem"><i class="fas fa-server" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">ASP.NET Core</h4><p style="color:var(--text-secondary);font-size:0.95rem">High-performance web framework for APIs and apps.</p></div><div class="glass" style="padding:1.5rem"><i class="fas fa-laptop" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Cross-Platform</h4><p style="color:var(--text-secondary);font-size:0.95rem">Run on Windows, Linux, macOS with .NET Core.</p></div><div class="glass" style="padding:1.5rem"><i class="fas fa-building" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Enterprise Ready</h4><p style="color:var(--text-secondary);font-size:0.95rem">Used by 80% of Fortune 500 companies.</p></div></div></div>
+<div class="course-section"><h2><i class="fas fa-building"></i> Industry Usage</h2><div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center"><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Unity</p></div><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">.NET</p></div><div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/stackoverflow/stackoverflow-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Stack Overflow</p></div></div><p style="color:var(--text-secondary)">Stack Overflow's entire backend runs on C# and ASP.NET. Microsoft builds Visual Studio, Azure, and Xbox services in C#. Unity games (Cuphead, Hollow Knight, Genshin Impact) use C# scripting. GoDaddy, MarketWatch, and many enterprise systems use C#.</p></div>
+<div class="course-section"><h2><i class="fas fa-road"></i> Learning Roadmap</h2><div style="display:flex;flex-direction:column;gap:0.8rem"><div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Basic programming logic, .NET SDK, IDE (VS/Rider)</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner</h4><p style="color:var(--text-secondary);font-size:0.9rem">Syntax, OOP, properties, events, LINQ, collections</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate</h4><p style="color:var(--text-secondary);font-size:0.9rem">Async/await, dependency injection, EF Core, ASP.NET, MVC</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced</h4><p style="color:var(--text-secondary);font-size:0.9rem">Web API, Blazor, SignalR, testing, authentication, caching</p></div><div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert</h4><p style="color:var(--text-secondary);font-size:0.9rem">Microservices, Docker/K8s, Azure cloud, performance tuning</p></div></div></div>
+<div class="course-section" id="courseModules"><h2><i class="fas fa-layer-group"></i> Modules</h2>
+<h3 style="color:var(--success);margin:1.5rem 0 1rem">Beginner</h3>
+<a href="../lesson.html?course=csharp&module=1" class="module-card" onclick="LearningTracker.startLesson('csharp-01')"><h3><span class="module-number">1</span> C# Basics</h3><p>Console I/O, data types, nullable types, var, string interpolation, verbatim strings, null-conditional operators</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=2" class="module-card" onclick="LearningTracker.startLesson('csharp-02')"><h3><span class="module-number">2</span> OOP in C#</h3><p>Classes, structs, records, properties (get/set), auto-properties, init-only setters, inheritance, sealed</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=3" class="module-card" onclick="LearningTracker.startLesson('csharp-03')"><h3><span class="module-number">3</span> Interfaces & Polymorphism</h3><p>Interfaces, explicit implementation, abstract classes, virtual override, pattern matching, switch expressions</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=4" class="module-card" onclick="LearningTracker.startLesson('csharp-04')"><h3><span class="module-number">4</span> Collections & LINQ</h3><p>List, Dictionary, HashSet, Queue, Stack, LINQ queries (Where, Select, GroupBy, OrderBy, Join)</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<h3 style="color:var(--warning);margin:1.5rem 0 1rem">Intermediate</h3>
+<a href="../lesson.html?course=csharp&module=5" class="module-card" onclick="LearningTracker.startLesson('csharp-05')"><h3><span class="module-number">5</span> Delegates & Events</h3><p>Func, Action, Predicate, event keyword, custom events, EventHandler, multicast delegates</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=6" class="module-card" onclick="LearningTracker.startLesson('csharp-06')"><h3><span class="module-number">6</span> Exception Handling</h3><p>try/catch/finally, custom exceptions, finally semantics, throw vs throw ex, exception filters</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=7" class="module-card" onclick="LearningTracker.startLesson('csharp-07')"><h3><span class="module-number">7</span> Async Programming</h3><p>async/await, Task, Task&lt;T&gt;, ConfigureAwait, ValueTask, Parallel.ForEach, CancellationToken</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=8" class="module-card" onclick="LearningTracker.startLesson('csharp-08')"><h3><span class="module-number">8</span> Generics & Reflection</h3><p>Generic constraints, covariance/contravariance, Attribute, reflection API, dynamic keyword</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<h3 style="color:var(--error);margin:1.5rem 0 1rem">Advanced</h3>
+<a href="../lesson.html?course=csharp&module=9" class="module-card" onclick="LearningTracker.startLesson('csharp-09')"><h3><span class="module-number">9</span> ASP.NET Core Web API</h3><p>Minimal vs Controller APIs, routing, model binding, validation, middleware pipeline, filters</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 50 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=10" class="module-card" onclick="LearningTracker.startLesson('csharp-10')"><h3><span class="module-number">10</span> Entity Framework Core</h3><p>DbContext, DbSet, migrations, LINQ queries, eager/lazy loading, relationships, owned entities</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=11" class="module-card" onclick="LearningTracker.startLesson('csharp-11')"><h3><span class="module-number">11</span> Dependency Injection</h3><p>IServiceCollection, lifetimes (singleton/scoped/transient), service locator, DI in ASP.NET</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=12" class="module-card" onclick="LearningTracker.startLesson('csharp-12')"><h3><span class="module-number">12</span> Testing in C#</h3><p>xUnit/NUnit, Moq mocking, FluentAssertions, integration testing, TestContainers, F# test data</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<h3 style="color:#a855f7;margin:1.5rem 0 1rem">Expert</h3>
+<a href="../lesson.html?course=csharp&module=13" class="module-card" onclick="LearningTracker.startLesson('csharp-13')"><h3><span class="module-number">13</span> Blazor & SignalR</h3><p>Blazor Server/WebAssembly, components, data binding, SignalR real-time, WebSockets</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=14" class="module-card" onclick="LearningTracker.startLesson('csharp-14')"><h3><span class="module-number">14</span> Microservices</h3><p>gRPC, Dapr, message brokers (RabbitMQ), event sourcing, CQRS, API gateway (Ocelot)</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 50 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=15" class="module-card" onclick="LearningTracker.startLesson('csharp-15')"><h3><span class="module-number">15</span> Performance & Memory</h3><p>Span&lt;T&gt;, Memory&lt;T&gt;, ref structs, unsafe code, IL weaving, benchmark DotNet, GC tuning</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+<a href="../lesson.html?course=csharp&module=16" class="module-card" onclick="LearningTracker.startLesson('csharp-16')"><h3><span class="module-number">16</span> .NET MAUI</h3><p>Cross-platform UI, MVVM pattern, XAML bindings, platform-specific code, shell navigation</p><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+</div>
+<div class="course-section"><h2><i class="fas fa-sticky-note"></i> Notes</h2>
+<div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. LINQ (Language Integrated Query)</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>var products = context.Products
+    .Where(p => p.Price > 10 && p.Category == "Electronics")
+    .OrderByDescending(p => p.Price)
+    .Select(p => new { p.Name, p.Price })
+    .ToList();
+
+// LINQ with method syntax vs query syntax
+var query = from p in products
+            group p by p.Category into g
+            where g.Count() > 5
+            select new { Category = g.Key, Count = g.Count() };</code></pre></div>
+<div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Async/Await</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>public async Task<User?> GetUserAsync(int id) {
+    var response = await httpClient.GetAsync($"/users/{id}");
+
+    if (!response.IsSuccessStatusCode) {
+        return null;
+    }
+
+    return await response.Content
+        .ReadFromJsonAsync<User>();
+}
+
+// Parallel execution
+var task1 = GetUserAsync(1);
+var task2 = GetUserAsync(2);
+var results = await Task.WhenAll(task1, task2);</code></pre></div>
+<div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Dependency Injection</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Program.cs (ASP.NET Core)
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connString));
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+// In a controller
+public class UsersController : ControllerBase {
+    private readonly IUserService _userService;
+
+    public UsersController(IUserService userService) {
+        _userService = userService; // Injected!
+    }
+}</code></pre></div>
+</div>
+<div class="course-section"><h2><i class="fas fa-code"></i> Examples</h2>
+<div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example: Minimal API with EF Core</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<TodoDb>(opt =>
+    opt.UseInMemoryDatabase("TodoList"));
+
+var app = builder.Build();
+
+app.MapGet("/todos", async (TodoDb db) =>
+    await db.Todos.ToListAsync());
+
+app.MapPost("/todos", async (Todo todo, TodoDb db) => {
+    db.Todos.Add(todo);
+    await db.SaveChangesAsync();
+    return Results.Created($"/todos/{todo.Id}", todo);
+});
+
+app.MapGet("/todos/{id}", async (int id, TodoDb db) =>
+    await db.Todos.FindAsync(id) is Todo todo
+        ? Results.Ok(todo)
+        : Results.NotFound());
+
+app.Run();</code></pre></div>
+</div>
+<div class="course-section"><h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+<div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary">Easy</span><div><h4 style="font-size:0.95rem">Calculator App</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a console calculator with operator overloading.</p></div></div>
+<div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary">Easy</span><div><h4 style="font-size:0.95rem">LINQ Practice</h4><p style="color:var(--text-muted);font-size:0.85rem">Use LINQ to query and process a list of objects.</p></div></div>
+<div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning">Medium</span><div><h4 style="font-size:0.95rem">File Search Tool</h4><p style="color:var(--text-muted);font-size:0.85rem">Async file search with cancellation support.</p></div></div>
+<div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning">Medium</span><div><h4 style="font-size:0.95rem">REST API</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a CRUD API for a library with ASP.NET Core.</p></div></div>
+<div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning">Medium</span><div><h4 style="font-size:0.95rem">Chat Console</h4><p style="color:var(--text-muted);font-size:0.85rem">Real-time console chat using SignalR.</p></div></div>
+<div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error">Hard</span><div><h4 style="font-size:0.95rem">E-Commerce Backend</h4><p style="color:var(--text-muted);font-size:0.85rem">Full e-commerce API with auth, cart, orders, payments.</p></div></div>
+<div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error">Hard</span><div><h4 style="font-size:0.95rem">Blazor Dashboard</h4><p style="color:var(--text-muted);font-size:0.85rem">Interactive dashboard with charts and real-time data.</p></div></div>
+</div>
+<div class="course-section"><h2><i class="fas fa-project-diagram"></i> Projects</h2><div class="grid grid-2"><div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Blog Engine</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">ASP.NET Core blog with CMS, auth, comments, SEO.</p><span class="badge badge-primary">C#</span></div><div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Unity Game</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">2D platformer or puzzle game in Unity with C# scripts.</p><span class="badge badge-primary">C#</span></div><div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Task Manager</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">WPF/MAUI desktop app with drag-drop task management.</p><span class="badge badge-primary">C#</span></div><div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">URL Shortener</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Minimal API URL shortener with Redis caching.</p><span class="badge badge-primary">C#</span></div><div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Stock Tracker</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Real-time stock price tracker with SignalR and charts.</p><span class="badge badge-primary">C#</span></div><div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Microservices App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Multi-service app with gRPC, RabbitMQ, Docker.</p><span class="badge badge-primary">C#</span></div></div></div>
+<div class="course-section"><h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+</div>
+</section>
+<script src="../js/learning.js"></script><script src="../js/utils.js"></script><script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

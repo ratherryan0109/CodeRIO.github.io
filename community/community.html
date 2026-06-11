@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Community">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toast" class="toast-container"></div>
+
+  <main>
+    <section class="community-hero glass">
+      <div class="hero-content">
+        <h1><i class="fas fa-users"></i> CodeRio Community</h1>
+        <p>Join thousands of developers learning, building, and growing together. Share knowledge, collaborate on projects, and accelerate your coding journey.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn-join glass"><i class="fas fa-user-plus"></i> Join the Community</a>
+          <a href="#" class="btn-browse"><i class="fas fa-comments"></i> Browse Discussions</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card glass">
+        <i class="fas fa-user-graduate"></i>
+        <h3 class="stat-number" data-target="12500">0</h3>
+        <p>Members</p>
+      </div>
+      <div class="stat-card glass">
+        <i class="fas fa-comments"></i>
+        <h3 class="stat-number" data-target="8400">0</h3>
+        <p>Discussions</p>
+      </div>
+      <div class="stat-card glass">
+        <i class="fas fa-code-branch"></i>
+        <h3 class="stat-number" data-target="3200">0</h3>
+        <p>Projects</p>
+      </div>
+      <div class="stat-card glass">
+        <i class="fas fa-trophy"></i>
+        <h3 class="stat-number" data-target="1500">0</h3>
+        <p>Success Stories</p>
+      </div>
+    </section>
+
+    <section class="discussions-section">
+      <h2><i class="fas fa-comments"></i> Recent Discussions</h2>
+      <div class="discussions-list">
+        <div class="discussion-card glass">
+          <div class="disc-avatar"><i class="fas fa-user-circle"></i></div>
+          <div class="disc-content">
+            <h4>Best approach for learning React in 2026?</h4>
+            <p>Started with vanilla JS, looking for the most up-to-date React learning path...</p>
+            <div class="disc-meta">
+              <span><i class="fas fa-user"></i> SarahDev</span>
+              <span><i class="fas fa-clock"></i> 2 hours ago</span>
+              <span><i class="fas fa-reply"></i> 24 replies</span>
+              <span class="tag tag-react"><i class="fab fa-react"></i> React</span>
+            </div>
+          </div>
+        </div>
+        <div class="discussion-card glass">
+          <div class="disc-avatar"><i class="fas fa-user-circle"></i></div>
+          <div class="disc-content">
+            <h4>System Design interview prep group</h4>
+            <p>Looking for 3-4 people to form a study group for system design interviews. We'll meet weekly...</p>
+            <div class="disc-meta">
+              <span><i class="fas fa-user"></i> ArchMaster</span>
+              <span><i class="fas fa-clock"></i> 5 hours ago</span>
+              <span><i class="fas fa-reply"></i> 18 replies</span>
+              <span class="tag tag-sd"><i class="fas fa-sitemap"></i> System Design</span>
+            </div>
+          </div>
+        </div>
+        <div class="discussion-card glass">
+          <div class="disc-avatar"><i class="fas fa-user-circle"></i></div>
+          <div class="disc-content">
+            <h4>Python vs Go for backend microservices?</h4>
+            <p>Our team is deciding between Python and Go for our next microservice. What are your experiences...</p>
+            <div class="disc-meta">
+              <span><i class="fas fa-user"></i> CodeWanderer</span>
+              <span><i class="fas fa-clock"></i> 8 hours ago</span>
+              <span><i class="fas fa-reply"></i> 32 replies</span>
+              <span class="tag tag-python"><i class="fab fa-python"></i> Python</span>
+            </div>
+          </div>
+        </div>
+        <div class="discussion-card glass">
+          <div class="disc-avatar"><i class="fas fa-user-circle"></i></div>
+          <div class="disc-content">
+            <h4>How to prepare for Google interview in 3 months?</h4>
+            <p>I have an upcoming Google interview. Need advice on structured prep plan covering DSA, system design...</p>
+            <div class="disc-meta">
+              <span><i class="fas fa-user"></i> GooglerWannabe</span>
+              <span><i class="fas fa-clock"></i> 1 day ago</span>
+              <span><i class="fas fa-reply"></i> 45 replies</span>
+              <span class="tag tag-career"><i class="fas fa-briefcase"></i> Career</span>
+            </div>
+          </div>
+        </div>
+        <div class="discussion-card glass">
+          <div class="disc-avatar"><i class="fas fa-user-circle"></i></div>
+          <div class="disc-content">
+            <h4>Open source contributions for beginners</h4>
+            <p>A guide I put together for making your first open source contribution. Feedback welcome...</p>
+            <div class="disc-meta">
+              <span><i class="fas fa-user"></i> OSSHero</span>
+              <span><i class="fas fa-clock"></i> 2 days ago</span>
+              <span><i class="fas fa-reply"></i> 56 replies</span>
+              <span class="tag tag-oss"><i class="fab fa-github"></i> Open Source</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learners-section glass">
+      <h2><i class="fas fa-star"></i> Featured Learners</h2>
+      <div class="learners-grid">
+        <div class="learner-card">
+          <div class="learner-avatar"><i class="fas fa-user-circle"></i></div>
+          <h4>Ananya Sharma</h4>
+          <p class="learner-title">Full Stack Developer</p>
+          <p class="learner-bio">Completed 12 projects on CodeRio. Now working as a SDE at Amazon.</p>
+          <div class="learner-stats">
+            <span><i class="fas fa-fire"></i> 156 day streak</span>
+            <span><i class="fas fa-trophy"></i> Top Contributor</span>
+          </div>
+        </div>
+        <div class="learner-card">
+          <div class="learner-avatar"><i class="fas fa-user-circle"></i></div>
+          <h4>Rahul Patel</h4>
+          <p class="learner-title">AI/ML Engineer</p>
+          <p class="learner-bio">Published 3 research papers in NLP. Built 5 production ML models.</p>
+          <div class="learner-stats">
+            <span><i class="fas fa-fire"></i> 89 day streak</span>
+            <span><i class="fas fa-code"></i> 45 projects</span>
+          </div>
+        </div>
+        <div class="learner-card">
+          <div class="learner-avatar"><i class="fas fa-user-circle"></i></div>
+          <h4>Priya Gupta</h4>
+          <p class="learner-title">DevOps Engineer</p>
+          <p class="learner-bio">Mentored 200+ students. Built CI/CD pipelines for 30+ startups.</p>
+          <div class="learner-stats">
+            <span><i class="fas fa-fire"></i> 234 day streak</span>
+            <span><i class="fas fa-medal"></i> Top Mentor</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="success-stories glass">
+      <h2><i class="fas fa-trophy"></i> Success Stories</h2>
+      <div class="stories-grid">
+        <div class="story-card">
+          <div class="story-quote"><i class="fas fa-quote-left"></i></div>
+          <p class="story-text">CodeRio's structured roadmaps helped me go from zero to landing my dream job in just 8 months. The community support was invaluable.</p>
+          <div class="story-author">
+            <span><i class="fas fa-user-circle"></i> Vikram Singh</span>
+            <span class="story-role">SDE at Google</span>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-quote"><i class="fas fa-quote-left"></i></div>
+          <p class="story-text">The placement preparation section covered everything I needed for interviews. I practiced with the questions and got offers from 3 top companies.</p>
+          <div class="story-author">
+            <span><i class="fas fa-user-circle"></i> Neha Jain</span>
+            <span class="story-role">SDE at Microsoft</span>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-quote"><i class="fas fa-quote-left"></i></div>
+          <p class="story-text">From complete beginner to building full-stack apps in 6 months. The project-based learning approach is exactly what works for me.</p>
+          <div class="story-author">
+            <span><i class="fas fa-user-circle"></i> Arjun Reddy</span>
+            <span class="story-role">Full Stack Developer at Flipkart</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="join-cta glass">
+      <div class="cta-content">
+        <h2>Ready to Join Our Community?</h2>
+        <p>Connect with 12,500+ developers, share knowledge, build projects, and land your dream job.</p>
+        <a href="#" class="btn-join-cta glass"><i class="fas fa-rocket"></i> Get Started Free</a>
+      </div>
+    </section>
+  </main>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

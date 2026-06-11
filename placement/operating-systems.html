@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operating Systems - Placement Prep - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Placement">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toast" class="toast-container"></div>
+
+  <main>
+    <section class="page-header glass">
+      <div class="header-content">
+        <h1><i class="fas fa-desktop"></i> Operating Systems</h1>
+        <p>Essential OS concepts — process management, memory management, file systems, and synchronization for tech interviews.</p>
+        <div class="header-stats">
+          <span><i class="fas fa-layer-group"></i> 5 Modules</span>
+          <span><i class="fas fa-question-circle"></i> 25+ Questions</span>
+          <span><i class="fas fa-star"></i> High Priority</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="concepts-grid">
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-tasks"></i></div>
+        <h3>Process Management</h3>
+        <p>Process states (new, ready, running, waiting, terminated), PCB, context switching, scheduling algorithms (FCFS, SJF, Round Robin, Priority).</p>
+        <div class="concept-example">
+          <code>PCB stores: PID, state,<br>registers, PC, memory info</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-memory"></i></div>
+        <h3>Memory Management</h3>
+        <p>Paging, segmentation, virtual memory, page replacement (FIFO, LRU, Optimal), TLB, thrashing, and memory allocation strategies.</p>
+        <div class="concept-example">
+          <code>Virtual address -> MMU -><br>Physical address via page table</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-sync-alt"></i></div>
+        <h3>Process Synchronization</h3>
+        <p>Race conditions, critical section, mutex, semaphores, monitors, deadlock (4 necessary conditions), and classical problems (Dining Philosophers, Readers-Writers).</p>
+        <div class="concept-example">
+          <code>wait(S); // P operation<br>signal(S); // V operation</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-folder"></i></div>
+        <h3>File Systems</h3>
+        <p>File allocation methods (contiguous, linked, indexed), directory structures, free space management, disk scheduling (SCAN, C-SCAN, FCFS).</p>
+        <div class="concept-example">
+          <code>inode: metadata about file<br>except its name</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes-section glass">
+      <h2><i class="fas fa-pen-alt"></i> Detailed Notes</h2>
+      <div class="notes-content">
+        <div class="note-block">
+          <h4>Process vs Thread</h4>
+          <p>Process: independent execution unit with own memory space. Thread: light-weight process sharing memory within a process. Multi-threading improves responsiveness and resource utilization.</p>
+        </div>
+        <div class="note-block">
+          <h4>CPU Scheduling Algorithms</h4>
+          <p>FCFS (non-preemptive, convoy effect), SJF (optimal avg waiting time, starvation), Round Robin (time quantum, fair), Priority (starvation, aging).</p>
+        </div>
+        <div class="note-block">
+          <h4>Deadlock Conditions</h4>
+          <p>Mutual exclusion, hold and wait, no preemption, circular wait. Prevention: break any condition. Avoidance: Banker's algorithm. Detection: resource allocation graph.</p>
+        </div>
+        <div class="note-block">
+          <h4>Page Replacement Algorithms</h4>
+          <p>FIFO (Belady's anomaly), LRU (optimal but costly), Optimal (theoretical perfect), Clock (approximation of LRU). Minimize page faults.</p>
+        </div>
+        <div class="note-block">
+          <h4>Disk Scheduling</h4>
+          <p>FCFS (fair but slow), SCAN (elevator algorithm), C-SCAN (uniform wait time), LOOK (goes only as far as requests). Seek time optimization.</p>
+        </div>
+        <div class="note-block">
+          <h4>Virtual Memory</h4>
+          <p>Allows execution of processes larger than physical memory. Demand paging, page faults, swapping. Thrashing occurs when system spends more time paging than executing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interview-questions glass">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div class="questions-list">
+        <div class="question-item">
+          <h4>What is the difference between a mutex and a semaphore?</h4>
+          <p>Mutex: binary lock for mutual exclusion, owned by thread that acquires it. Semaphore: counting mechanism, can signal/wait, not owned. Binary semaphore != mutex (no ownership).</p>
+        </div>
+        <div class="question-item">
+          <h4>Explain the Banker's algorithm.</h4>
+          <p>Deadlock avoidance algorithm. Processes declare max resource needs. System checks if granting a request leads to a safe state (some sequence where all processes can finish).</p>
+        </div>
+        <div class="question-item">
+          <h4>What is thrashing and how to handle it?</h4>
+          <p>Excessive paging due to low memory. System spends time swapping pages instead of executing. Solutions: increase RAM, reduce degree of multiprogramming, working set model.</p>
+        </div>
+        <div class="question-item">
+          <h4>What is the difference between paging and segmentation?</h4>
+          <p>Paging: fixed-size frames, no external fragmentation, internal fragmentation possible. Segmentation: variable-size logical segments, external fragmentation, matches user's view of memory.</p>
+        </div>
+        <div class="question-item">
+          <h4>Explain the Dining Philosophers problem.</h4>
+          <p>Classic synchronization problem. 5 philosophers, 5 forks. Solution: pick up both forks only if available, use mutex/semaphore, or limit concurrent philosophers to 4.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cheatsheet glass">
+      <h2><i class="fas fa-file-alt"></i> Cheat Sheet</h2>
+      <div class="cheatsheet-grid">
+        <div class="cheatsheet-item">
+          <span class="cs-term">Process</span>
+          <span class="cs-def">Program in execution</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Thread</span>
+          <span class="cs-def">Lightweight process</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Mutex</span>
+          <span class="cs-def">Lock for mutual exclusion</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Semaphore</span>
+          <span class="cs-def">Signaling mechanism</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Deadlock</span>
+          <span class="cs-def">Circular wait for resources</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Page Fault</span>
+          <span class="cs-def">Page not in memory</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">LRU</span>
+          <span class="cs-def">Replace least recently used</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">RR</span>
+          <span class="cs-def">Round Robin scheduling</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

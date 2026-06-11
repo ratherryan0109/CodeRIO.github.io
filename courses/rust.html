@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rust Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="rust">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Rust</h1>
+      <p>Rust is a systems programming language focused on safety, speed, and concurrency. Developed by Mozilla Research and first stabilized in 2015, Rust guarantees memory safety without a garbage collector through its unique ownership and borrowing system. It has been voted the most loved language on Stack Overflow every year since 2016.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Advanced</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 10 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg" alt="Rust">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Rust was created by Graydon Hoare at Mozilla Research, with the first stable release (1.0) in May 2015. It was designed to address the fundamental tension between safety and control in systems programming. Rust's key innovation is its ownership system: every value has a single owner, and the compiler enforces rules about how references (borrows) work at compile time, eliminating entire categories of bugs such as use-after-free, double-free, and data races.</p>
+      <p>Rust compiles to native code via LLVM, delivering performance comparable to C and C++. Its package manager and build tool, Cargo, provides dependency management, testing, documentation generation, and benchmarking out of the box. Rust's pattern matching, algebraic data types (enums with data), and trait-based generics make it expressive enough for high-level abstractions while maintaining zero-cost execution.</p>
+      <p>Rust is used by Firefox for CSS engine (Servo/Stylo), AWS for infrastructure (Firecracker, Bottlerocket), Dropbox for file sync, Figma for performance-critical rendering, Discord for read-state storage, and Cloudflare for edge computing. The Linux kernel has begun accepting Rust code as a second language for drivers, and Microsoft is using Rust to replace C# components in Azure.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Rust?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Memory Safety Guaranteed</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Ownership and borrowing prevent memory bugs at compile time, without garbage collection.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-tachometer-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Zero-Cost Abstractions</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">High-level Rust code compiles to the same efficient machine code as low-level C.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-cogs" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Fearless Concurrency</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">The type system prevents data races at compile time, making concurrent code safe.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-laptop-code" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Modern Tooling</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Cargo, rustfmt, clippy, rust-analyzer - an integrated toolchain experience.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Rust is adopted by leading technology companies for performance-critical and safety-critical systems:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mozilla/mozilla-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Mozilla</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dropbox/dropbox-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Dropbox</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Real-world applications include the Firefox Servo CSS engine, AWS Firecracker microVM, Cloudflare's Pingora proxy, Discord's read-state service, Figma's multiplayer engine, Meta's source control system, and the Android OS networking stack. Rust is increasingly adopted in blockchain development, embedded systems, WebAssembly compilation, and secure cryptography libraries.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Solid programming fundamentals, understanding of memory, pointers, and data structures</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-3)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Rust syntax, variables, data types, control flow, functions, ownership basics</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 4-6)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Ownership, borrowing, lifetimes, structs, enums, pattern matching, error handling</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 7-8)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Traits, generics, closures, iterators, smart pointers, concurrency with Send/Sync</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Weeks 9-10)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Unsafe Rust, FFI, macros, async/await, WebAssembly, embedded Rust</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=rust&module=1" class="module-card" onclick="LearningTracker.startLesson('rust-01')"><h3><span class="module-number">1</span> Getting Started with Rust</h3><p>Installing Rust with rustup, Hello World, Cargo projects, workspace structure, and the Rust toolchain (rustc, cargo, rustfmt, clippy).</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Setup</span> <span class="badge badge-primary">Cargo</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=2" class="module-card" onclick="LearningTracker.startLesson('rust-02')"><h3><span class="module-number">2</span> Variables & Mutability</h3><p>let vs let mut, constants, shadowing, scalar types (i32, f64, bool, char), compound types (tuples, arrays), and type annotations.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Variables</span> <span class="badge badge-primary">Types</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=3" class="module-card" onclick="LearningTracker.startLesson('rust-03')"><h3><span class="module-number">3</span> Control Flow & Functions</h3><p>if/else, loops (loop, while, for), match expressions, functions, parameters, return values, and statements vs expressions.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Control flow</span> <span class="badge badge-primary">Functions</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=4" class="module-card" onclick="LearningTracker.startLesson('rust-04')"><h3><span class="module-number">4</span> Ownership Fundamentals</h3><p>Stack vs heap, ownership rules, move semantics, the Copy trait, clone, and how ownership transfers between functions.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Ownership</span> <span class="badge badge-primary">Move</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=5" class="module-card" onclick="LearningTracker.startLesson('rust-05')"><h3><span class="module-number">5</span> References & Borrowing</h3><p>Shared references (&T), mutable references (&mut T), borrowing rules, slices (&str, &[T]), and the borrow checker.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Borrowing</span> <span class="badge badge-primary">References</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=rust&module=6" class="module-card" onclick="LearningTracker.startLesson('rust-06')"><h3><span class="module-number">6</span> Structs & Enums</h3><p>Defining structs (named, tuple, unit), struct methods, enums with data, Option&lt;T&gt; and Result&lt;T, E&gt;, and match patterns.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Structs</span> <span class="badge badge-primary">Enums</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=7" class="module-card" onclick="LearningTracker.startLesson('rust-07')"><h3><span class="module-number">7</span> Pattern Matching</h3><p>match arms, if let, while let, destructuring structs/enums/tuples, guard clauses, and @ bindings in patterns.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Patterns</span> <span class="badge badge-primary">Destructuring</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=8" class="module-card" onclick="LearningTracker.startLesson('rust-08')"><h3><span class="module-number">8</span> Error Handling</h3><p>Result&lt;T, E&gt;, the ? operator, panic!, unwrap/expect, custom error types, thiserror and anyhow crates.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Errors</span> <span class="badge badge-primary">Result</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=9" class="module-card" onclick="LearningTracker.startLesson('rust-09')"><h3><span class="module-number">9</span> Generics & Traits</h3><p>Generic functions and structs, trait definitions, implementing traits, trait bounds, derived traits, and associated types.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Generics</span> <span class="badge badge-primary">Traits</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=10" class="module-card" onclick="LearningTracker.startLesson('rust-10')"><h3><span class="module-number">10</span> Collections & Iterators</h3><p>Vec&lt;T&gt;, HashMap&lt;K,V&gt;, HashSet&lt;T&gt;, String vs &amp;str, iterators (iter, into_iter, map, filter, collect, fold), and closures.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Collections</span> <span class="badge badge-primary">Iterators</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=rust&module=11" class="module-card" onclick="LearningTracker.startLesson('rust-11')"><h3><span class="module-number">11</span> Lifetimes</h3><p>Lifetime annotations, elision rules, lifetime elision for functions and methods, static lifetime, and lifetime bounds.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Lifetimes</span> <span class="badge badge-primary">Borrow checker</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=12" class="module-card" onclick="LearningTracker.startLesson('rust-12')"><h3><span class="module-number">12</span> Smart Pointers</h3><p>Box&lt;T&gt;, Rc&lt;T&gt;, RefCell&lt;T&gt; for interior mutability, Arc&lt;T&gt; for thread safety, Mutex&lt;T&gt;, and the Deref/Drop traits.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Smart pointers</span> <span class="badge badge-primary">RefCell</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=13" class="module-card" onclick="LearningTracker.startLesson('rust-13')"><h3><span class="module-number">13</span> Concurrency</h3><p>thread::spawn, message passing with channels, shared state with Arc&lt;Mutex&lt;T&gt;&gt;, Send and Sync traits, rayon for data parallelism.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Concurrency</span> <span class="badge badge-primary">Send/Sync</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=14" class="module-card" onclick="LearningTracker.startLesson('rust-14')"><h3><span class="module-number">14</span> Async Programming</h3><p>async/await syntax, Future trait, tokio runtime, async I/O, async channels, and building async web servers.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Async</span> <span class="badge badge-primary">Tokio</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <a href="../lesson.html?course=rust&module=15" class="module-card" onclick="LearningTracker.startLesson('rust-15')"><h3><span class="module-number">15</span> Unsafe Rust & FFI</h3><p>Unsafe blocks, raw pointers, calling C functions, building C-compatible APIs, and safety invariants in unsafe code.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Unsafe</span> <span class="badge badge-primary">FFI</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+      <a href="../lesson.html?course=rust&module=16" class="module-card" onclick="LearningTracker.startLesson('rust-16')"><h3><span class="module-number">16</span> Macros & Metaprogramming</h3><p>Declarative macros (macro_rules!), procedural macros (derive, attribute, function-like), and crate-level macro patterns.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Macros</span> <span class="badge badge-primary">Metaprogramming</span></div><div class="module-footer"><span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span><span class="module-arrow"><i class="fas fa-arrow-right"></i></span></div></a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Ownership Rules</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Rust's ownership system has three fundamental rules that the compiler enforces at compile time.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;  // s1 is MOVED to s2
+
+    // println!("{}", s1); // ERROR: borrow of moved value
+    println!("{}", s2);   // OK
+
+    let s3 = s2.clone();  // deep copy (expensive)
+    println!("{} {}", s2, s3); // both valid
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Borrowing and References</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">References allow you to access data without taking ownership. At any time, you can have either one mutable reference or any number of immutable references.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>fn calculate_length(s: &String) -> usize {
+    s.len()  // borrows, not owns
+}  // s goes out of scope, but nothing happens
+
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &s;      // immutable borrow
+    let r2 = &s;      // another immutable borrow (OK)
+    // let r3 = &mut s; // ERROR: cannot borrow as mutable
+    println!("{} {}", r1, r2);
+    let r3 = &mut s;  // OK: no immutable borrows in scope
+    r3.push_str(" world");
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Pattern Matching with Enums</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Rust enums are algebraic data types that can hold data. Match expressions exhaustively handle all variants.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(u8, u8, u8),
+}
+
+fn handle_msg(msg: Message) {
+    match msg {
+        Message::Quit => println!("Quitting"),
+        Message::Move { x, y } => {
+            println!("Move to ({}, {})", x, y);
+        }
+        Message::Write(text) => println!("{}", text),
+        Message::ChangeColor(r, g, b) => {
+            println!("Color: {} {} {}", r, g, b);
+        }
+    }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Error Handling with Result</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Rust encourages explicit error handling through the Result type. The ? operator propagates errors automatically.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username(path: &str) -> Result<String, io::Error> {
+    let mut file = File::open(path)?; // propagates error
+    let mut content = String::new();
+    file.read_to_string(&mut content)?;
+    Ok(content.trim().to_string())
+}
+
+fn main() {
+    match read_username("user.txt") {
+        Ok(name) => println!("User: {}", name),
+        Err(e) => eprintln!("Failed: {}", e),
+    }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Traits and Generics</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Traits define shared behavior. Generics with trait bounds allow polymorphic functions without runtime overhead.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>trait Summary {
+    fn summarize(&self) -> String;
+}
+
+struct Article {
+    title: String,
+    content: String,
+}
+
+impl Summary for Article {
+    fn summarize(&self) -> String {
+        format!("{}: {}...", self.title, &self.content[..20])
+    }
+}
+
+fn notify<T: Summary>(item: T) {
+    println!("Breaking: {}", item.summarize());
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Lifetimes</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Lifetime annotations tell the borrow checker how long references are valid. They ensure references don't outlive the data they point to.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+
+fn main() {
+    let s1 = String::from("short");
+    let result;
+    {
+        let s2 = String::from("longer");
+        result = longest(&s1, &s2);
+        println!("Longest: {}", result);
+    }
+    // println!("{}", result); // ERROR: s2 dropped
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Closures and Iterators</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Closures are anonymous functions that capture their environment. Iterators enable lazy, chainable data processing.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>let numbers = vec![1, 2, 3, 4, 5, 6];
+
+let even_sum: i32 = numbers
+    .iter()
+    .filter(|&x| x % 2 == 0)
+    .map(|x| x * x)
+    .sum();
+
+println!("Sum of even squares: {}", even_sum);
+
+let expensive = |x: i32| -> i32 {
+    println!("computing...");
+    x * 2
+};</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Concurrency with Channels</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Rust's std::sync::mpsc channels enable safe message passing between threads, following Go's CSP model.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>use std::sync::mpsc;
+use std::thread;
+
+let (tx, rx) = mpsc::channel();
+
+thread::spawn(move || {
+    tx.send(String::from("hello")).unwrap();
+});
+
+let received = rx.recv().unwrap();
+println!("Got: {}", received);</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: CLI Todo Application</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A simple command-line todo list using structs and file I/O.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>use std::fs;
+use std::io::{self, Write};
+
+struct Todo {
+    items: Vec<String>,
+}
+
+impl Todo {
+    fn new() -> Self {
+        Todo { items: Vec::new() }
+    }
+
+    fn add(&mut self, item: String) {
+        self.items.push(item);
+    }
+
+    fn save(&self, path: &str) -> io::Result<()> {
+        let content = self.items.join("\n");
+        fs::write(path, content)
+    }
+
+    fn load(path: &str) -> io::Result<Self> {
+        let content = fs::read_to_string(path)?;
+        let items = content.lines().map(String::from).collect();
+        Ok(Todo { items })
+    }
+}
+
+fn main() -> io::Result<()> {
+    let mut todo = Todo::new();
+    todo.add("Learn Rust".to_string());
+    todo.add("Build a project".to_string());
+    todo.save("todo.txt")?;
+    println!("Saved {} tasks", todo.items.len());
+    Ok(())
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Simple Web Server</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A basic HTTP server using the standard library.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>use std::net::{TcpListener, TcpStream};
+use std::io::{Read, Write};
+
+fn handle_client(mut stream: TcpStream) {
+    let mut buffer = [0; 1024];
+    stream.read(&mut buffer).unwrap();
+
+    let response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h1>Hello from Rust!</h1>";
+    stream.write(response.as_bytes()).unwrap();
+    stream.flush().unwrap();
+}
+
+fn main() -> io::Result<()> {
+    let listener = TcpListener::bind("127.0.0.1:8080")?;
+    for stream in listener.incoming() {
+        handle_client(stream?);
+    }
+    Ok(())
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Temperature Converter</h4><p style="color:var(--text-muted);font-size:0.85rem">Write functions to convert between Fahrenheit and Celsius using proper types and match expressions.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Fibonacci Generator</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a Fibonacci sequence generator using an iterator pattern with the Iterator trait.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Custom Vector Implementation</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a simplified Vec-like struct with push, pop, get, and len methods, managing heap memory with Box.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Thread Pool</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a thread pool for executing jobs concurrently using channels, Arc, and Mutex.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">JSON Parser</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a simple JSON parser that can parse objects, arrays, strings, numbers, and booleans.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Mini Redis Clone</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a key-value store server with TCP protocol, supporting SET, GET, DEL commands with persistence.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Game of Life</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement Conway's Game of Life in the terminal using Rust's standard library and timing controls.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Custom Allocator</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a simple bump allocator using unsafe Rust and the GlobalAlloc trait.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">HTTP Load Tester</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A concurrent HTTP load testing tool with configurable concurrency, request count, and latency reporting.</p>
+          <span class="badge badge-primary">Concurrency</span> <span class="badge badge-primary">HTTP</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">File Synchronization Tool</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A CLI tool that watches a directory and syncs changes to a remote server using checksums.</p>
+          <span class="badge badge-primary">File I/O</span> <span class="badge badge-primary">CLI</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">WebAssembly Game</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Compile a simple snake or pong game to WebAssembly using wasm-pack and web-sys.</p>
+          <span class="badge badge-primary">WASM</span> <span class="badge badge-primary">Game</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Chat Server</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A multi-threaded chat server using TCP streams, with rooms, private messages, and nicknames.</p>
+          <span class="badge badge-primary">TCP</span> <span class="badge badge-primary">Concurrency</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Markdown Parser</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A Rust library that parses Markdown to HTML, supporting headings, bold, italic, lists, and code blocks.</p>
+          <span class="badge badge-primary">Parsing</span> <span class="badge badge-primary">Library</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Embedded Sensor Reader</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Read sensor data from an I2C/SPI peripheral on Raspberry Pi using Rust's embedded-hal traits.</p>
+          <span class="badge badge-primary">Embedded</span> <span class="badge badge-primary">HAL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div id="interviewQuestionsContainer"></div>
+      </div>
+
+  </section>
+
+  <script src="../js/learning.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+

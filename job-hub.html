@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Hub - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .job-hub-header { padding: 3rem 8% 1.5rem; text-align: center; }
+    .job-hub-header h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--primary-dark); margin-bottom: 0.5rem; }
+    .job-hub-header p { color: var(--text-secondary); max-width: 650px; margin: 0 auto 1.5rem; line-height: 1.7; }
+    .search-bar-wrap { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center; margin-top: 1.5rem; }
+    .search-bar-wrap input { flex: 1; min-width: 250px; max-width: 500px; padding: 0.8rem 1.2rem 0.8rem 3rem; border-radius: var(--border-radius-sm); border: 2px solid #e2e8f0; font-size: 1rem; background: var(--white); color: var(--text); }
+    .search-bar-wrap input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(6,182,212,0.12); }
+    .search-input-wrap { position: relative; flex: 1; min-width: 250px; max-width: 500px; }
+    .search-input-wrap i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
+    .filter-section { padding: 0 8% 2rem; }
+    .filter-grid { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
+    .filter-grid .filter-item { min-width: 150px; flex: 1; }
+    .filter-grid label { display: block; font-weight: 600; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-secondary); }
+    .filter-grid select, .filter-grid input[type="checkbox"] { width: 100%; padding: 0.6rem 1rem; border-radius: var(--border-radius-sm); border: 2px solid #e2e8f0; background: var(--white); font-size: 0.9rem; color: var(--text); }
+    .filter-grid select:focus { outline: none; border-color: var(--primary); }
+    .saved-jobs-section { padding: 0 8%; margin-bottom: 1.5rem; }
+    .saved-jobs-toggle { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.5rem; border-radius: var(--border-radius-sm); border: 2px solid var(--primary); background: transparent; color: var(--primary); font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 0.9rem; }
+    .saved-jobs-toggle:hover { background: var(--primary); color: white; }
+    .saved-jobs-panel { display: none; padding: 1.5rem; border-radius: var(--border-radius-lg); background: var(--bg-card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); margin-top: 1rem; }
+    .saved-jobs-panel.open { display: block; }
+    .saved-jobs-panel h3 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .saved-job-item { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1rem; border-radius: var(--border-radius-sm); background: rgba(255,255,255,0.06); margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+    .saved-job-item:last-child { margin-bottom: 0; }
+    .saved-job-item .job-title-sm { font-weight: 600; font-size: 0.9rem; }
+    .saved-job-item .job-company-sm { color: var(--text-muted); font-size: 0.8rem; }
+    .saved-job-item .btn-sm { font-size: 0.75rem; padding: 0.3rem 0.8rem; }
+    .job-listing-section { padding: 2rem 8%; min-height: 50vh; }
+    .job-card { background: var(--bg-card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.8rem; transition: var(--transition); margin-bottom: 1.5rem; }
+    .job-card:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+    .job-card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+    .job-card-header .job-title { font-size: 1.15rem; font-weight: 700; flex: 1; }
+    .job-card-header .job-company { color: var(--text-secondary); font-weight: 500; }
+    .job-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.6rem 0; }
+    .job-tag { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .job-tag.remote { background: rgba(34,197,94,0.15); color: var(--success); }
+    .job-tag.hybrid { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .job-tag.onsite { background: rgba(100,116,139,0.15); color: var(--text-muted); }
+    .job-tag.fulltime { background: rgba(6,182,212,0.15); color: var(--primary); }
+    .job-tag.contract { background: rgba(139,92,246,0.15); color: #7c3aed; }
+    .job-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-secondary); margin: 0.6rem 0; }
+    .job-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .job-description { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0.8rem 0; }
+    .job-card-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1rem; }
+    .job-card-actions .btn { font-size: 0.85rem; padding: 0.5rem 1.2rem; }
+    .pagination { display: flex; gap: 0.5rem; justify-content: center; align-items: center; margin-top: 2rem; flex-wrap: wrap; }
+    .pagination button { padding: 0.5rem 1rem; border-radius: var(--border-radius-sm); border: 2px solid #e2e8f0; background: var(--white); font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 0.85rem; }
+    .pagination button:hover { border-color: var(--primary); color: var(--primary); }
+    .pagination button.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .pagination button:disabled { opacity: 0.4; cursor: default; }
+    .pagination .page-info { font-size: 0.85rem; color: var(--text-muted); }
+    .results-count { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .empty-state { text-align: center; padding: 4rem 2rem; }
+    .empty-state i { font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem; display: block; }
+    .empty-state h3 { color: var(--text-muted); margin-bottom: 0.5rem; }
+    .empty-state p { color: var(--text-light); }
+    .experience-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .exp-junior { background: rgba(34,197,94,0.15); color: var(--success); }
+    .exp-mid { background: rgba(6,182,212,0.15); color: var(--primary); }
+    .exp-senior { background: rgba(139,92,246,0.15); color: #7c3aed; }
+    .exp-lead { background: rgba(239,68,68,0.15); color: #dc2626; }
+    .salary-range { font-weight: 600; color: var(--text); }
+    .posted-date { font-size: 0.8rem; color: var(--text-muted); }
+    .clear-filters-btn { padding: 0.5rem 1rem; border-radius: var(--border-radius-sm); border: 2px solid var(--error); background: transparent; color: var(--error); font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 0.85rem; }
+    .clear-filters-btn:hover { background: var(--error); color: white; }
+    @media (max-width: 768px) {
+      .filter-grid .filter-item { min-width: 120px; }
+      .job-card-header { flex-direction: column; }
+      .job-meta { gap: 0.8rem; }
+      .job-card-actions { flex-direction: column; }
+      .job-card-actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body data-page="JobHub">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"><a href="Register.html" class="btn btn-primary btn-sm">Sign Up</a></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main>
+    <section class="job-hub-header">
+      <h1><i class="fas fa-briefcase" style="color:var(--primary)"></i> Job Hub</h1>
+      <p>Discover tech opportunities from top companies worldwide. Save jobs, filter by role and location, and find your next career move.</p>
+      <div class="search-bar-wrap">
+        <div class="search-input-wrap">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search by job title, company, or keyword...">
+        </div>
+        <button class="btn btn-primary" id="searchBtn"><i class="fas fa-search"></i> Search</button>
+        <button class="clear-filters-btn" id="clearFiltersBtn"><i class="fas fa-times"></i> Clear</button>
+      </div>
+    </section>
+
+    <section class="filter-section">
+      <div class="filter-grid">
+        <div class="filter-item">
+          <label for="filterCountry">Country</label>
+          <select id="filterCountry">
+            <option value="all">All Countries</option>
+          </select>
+        </div>
+        <div class="filter-item" style="min-width:100px;flex:0.5">
+          <label for="filterRemote">Remote Only</label>
+          <div style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0">
+            <input type="checkbox" id="filterRemote" style="width:18px;height:18px;accent-color:var(--primary)">
+            <span style="font-size:0.9rem;color:var(--text-secondary)">Remote / Hybrid</span>
+          </div>
+        </div>
+        <div class="filter-item">
+          <label for="filterSalary">Salary Range</label>
+          <select id="filterSalary">
+            <option value="all">Any Salary</option>
+            <option value="0-30000">Under $30K</option>
+            <option value="30000-60000">$30K - $60K</option>
+            <option value="60000-100000">$60K - $100K</option>
+            <option value="100000-150000">$100K - $150K</option>
+            <option value="150000-999999">$150K+</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label for="filterExperience">Experience Level</label>
+          <select id="filterExperience">
+            <option value="all">All Levels</option>
+            <option value="Junior">Junior</option>
+            <option value="Mid-Level">Mid-Level</option>
+            <option value="Senior">Senior</option>
+            <option value="Lead">Lead</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="saved-jobs-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem">
+        <span style="font-size:0.9rem;color:var(--text-muted)"><span id="resultsCount">0</span> jobs found</span>
+        <button class="saved-jobs-toggle" id="savedJobsToggle">
+          <i class="fas fa-bookmark"></i> Saved Jobs (<span id="savedCount">0</span>)
+        </button>
+      </div>
+      <div class="saved-jobs-panel" id="savedJobsPanel">
+        <h3><i class="fas fa-bookmark" style="color:var(--primary)"></i> Your Saved Jobs</h3>
+        <div id="savedJobsList"><p style="color:var(--text-muted);font-size:0.9rem">No saved jobs yet. Click the <i class="fas fa-bookmark"></i> icon on any job to save it.</p></div>
+      </div>
+    </section>
+
+    <section class="job-listing-section">
+      <div id="jobsContainer"></div>
+      <div class="pagination" id="pagination"></div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/learning.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/daily-goals.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  var JOBS_DATA = [
+    { id: 1, title: "Senior Frontend Developer", company: "Google", location: "Mountain View, CA, USA", country: "US", salaryMin: 150000, salaryMax: 220000, currency: "$", experience: "Senior", tags: ["remote","fulltime"], posted: "2026-06-01", description: "Build and maintain Google's web applications using React, TypeScript, and Angular. Drive frontend architecture decisions and mentor junior engineers." },
+    { id: 2, title: "Backend Engineer", company: "Stripe", location: "San Francisco, CA, USA", country: "US", salaryMin: 140000, salaryMax: 200000, currency: "$", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-06-03", description: "Design and build scalable payment infrastructure APIs. Work with Ruby, Java, and distributed systems at massive scale." },
+    { id: 3, title: "Full Stack Developer", company: "Shopify", location: "Ottawa, ON, Canada", country: "CA", salaryMin: 110000, salaryMax: 160000, currency: "C$", experience: "Mid-Level", tags: ["remote","fulltime"], posted: "2026-05-28", description: "Build merchant-facing features across the Shopify stack. Work with React, Ruby on Rails, and GraphQL to power e-commerce experiences." },
+    { id: 4, title: "DevOps Engineer", company: "Amazon Web Services", location: "Seattle, WA, USA", country: "US", salaryMin: 130000, salaryMax: 190000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-06-05", description: "Design and operate AWS infrastructure at planet scale. Automate deployment pipelines and build monitoring solutions for internal services." },
+    { id: 5, title: "Data Scientist", company: "Spotify", location: "London, UK", country: "GB", salaryMin: 70000, salaryMax: 105000, currency: "£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Analyze user behavior data to improve music recommendations. Use Python, SQL, and machine learning to drive product decisions." },
+    { id: 6, title: "Junior Frontend Developer", company: "HubSpot", location: "Dublin, Ireland", country: "GB", salaryMin: 42000, salaryMax: 58000, currency: "£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-07", description: "Build responsive marketing tools and customer-facing features. Work with React, TypeScript, and CSS-in-JS in a collaborative team." },
+    { id: 7, title: "AI/ML Engineer", company: "DeepMind", location: "London, UK", country: "GB", salaryMin: 90000, salaryMax: 150000, currency: "£", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-05-25", description: "Research and implement cutting-edge machine learning models. Work on reinforcement learning, NLP, and generative AI projects." },
+    { id: 8, title: "Mobile Developer (React Native)", company: "Uber", location: "Amsterdam, Netherlands", country: "DE", salaryMin: 65000, salaryMax: 95000, currency: "€", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-04", description: "Build cross-platform mobile experiences for Uber's rider and driver apps using React Native and TypeScript." },
+    { id: 9, title: "Full Stack Developer", company: "Atlassian", location: "Sydney, Australia", country: "AU", salaryMin: 110000, salaryMax: 165000, currency: "A$", experience: "Mid-Level", tags: ["remote","fulltime"], posted: "2026-06-01", description: "Develop cloud-based collaboration tools. Full stack role spanning React, Node.js, and microservices architecture." },
+    { id: 10, title: "Backend Developer", company: "Flipkart", location: "Bangalore, India", country: "IN", salaryMin: 1200000, salaryMax: 2500000, currency: "₹", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-06", description: "Build scalable backend systems for India's largest e-commerce platform. Work with Java, Spring Boot, and distributed databases." },
+    { id: 11, title: "DevOps Lead", company: "GitLab", location: "Remote", country: "US", salaryMin: 140000, salaryMax: 200000, currency: "$", experience: "Lead", tags: ["remote","fulltime"], posted: "2026-05-30", description: "Lead infrastructure and platform engineering for GitLab's SaaS offering. Drive Kubernetes, Terraform, and CI/CD strategy." },
+    { id: 12, title: "Frontend Developer", company: "Canva", location: "Sydney, Australia", country: "AU", salaryMin: 95000, salaryMax: 140000, currency: "A$", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Build intuitive design tools used by millions. Work with React, TypeScript, and WebGL to create stunning visual interfaces." },
+    { id: 13, title: "AI Engineer", company: "SAP", location: "Berlin, Germany", country: "DE", salaryMin: 70000, salaryMax: 110000, currency: "€", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-05-29", description: "Integrate AI capabilities into enterprise software products. Develop NLP models and intelligent automation solutions." },
+    { id: 14, title: "Senior Backend Developer", company: "Zomato", location: "Gurgaon, India", country: "IN", salaryMin: 1800000, salaryMax: 3500000, currency: "₹", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-06-03", description: "Architect and build high-throughput food delivery systems. Work with Go, Kafka, and PostgreSQL at massive scale." },
+    { id: 15, title: "Data Engineer", company: "Netflix", location: "Los Gatos, CA, USA", country: "US", salaryMin: 160000, salaryMax: 250000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-06-05", description: "Build data pipelines processing petabytes of streaming data. Work with Spark, Flink, and Kafka to power personalization." },
+    { id: 16, title: "Frontend Developer (Vue.js)", company: "GitLab", location: "Remote", country: "US", salaryMin: 100000, salaryMax: 155000, currency: "$", experience: "Mid-Level", tags: ["remote","fulltime"], posted: "2026-06-01", description: "Build Vue.js components for GitLab's web interface. Contribute to open source and improve developer experience." },
+    { id: 17, title: "Junior Backend Developer", company: "Twilio", location: "Dublin, Ireland", country: "GB", salaryMin: 38000, salaryMax: 52000, currency: "£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-08", description: "Learn and contribute to building communication APIs. Work with Python, Django, and PostgreSQL in a supportive team." },
+    { id: 18, title: "Full Stack Developer", company: "Razorpay", location: "Bangalore, India", country: "IN", salaryMin: 1000000, salaryMax: 2200000, currency: "₹", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-04", description: "Build payment solutions for millions of businesses. Full stack with React, Node.js, and microservices." },
+    { id: 19, title: "Mobile Developer (Flutter)", company: "Nubank", location: "Sao Paulo, Brazil", country: "BR", salaryMin: 110000, salaryMax: 200000, currency: "R$", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Build cross-platform banking experiences using Flutter. Work on features that serve millions of customers across Latin America." },
+    { id: 20, title: "DevOps Engineer", company: "Thoughtworks", location: "Singapore", country: "SG", salaryMin: 70000, salaryMax: 110000, currency: "S$", experience: "Mid-Level", tags: ["hybrid","contract"], posted: "2026-05-27", description: "Implement CI/CD pipelines and cloud infrastructure for client projects. Work with AWS, Terraform, and Docker." },
+    { id: 21, title: "Senior Data Scientist", company: "Mercado Libre", location: "Buenos Aires, Argentina", country: "BR", salaryMin: 90000, salaryMax: 150000, currency: "R$", experience: "Senior", tags: ["remote","fulltime"], posted: "2026-06-06", description: "Build machine learning models for Latin America's largest e-commerce platform. Use Python, Spark, and MLflow." },
+    { id: 22, title: "Backend Developer (Go)", company: "Cloudflare", location: "London, UK", country: "GB", salaryMin: 75000, salaryMax: 120000, currency: "£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-05-31", description: "Build high-performance edge computing services using Go. Work on DNS, CDN, and security products." },
+    { id: 23, title: "AI/ML Engineer", company: "Cognizant", location: "Chennai, India", country: "IN", salaryMin: 800000, salaryMax: 1800000, currency: "₹", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-03", description: "Develop AI solutions for enterprise clients. Build NLP models, chatbots, and intelligent automation systems." },
+    { id: 24, title: "Lead Frontend Developer", company: "Salesforce", location: "San Francisco, CA, USA", country: "US", salaryMin: 170000, salaryMax: 250000, currency: "$", experience: "Lead", tags: ["hybrid","fulltime"], posted: "2026-05-26", description: "Lead frontend architecture for Salesforce's CRM platform. Drive component library design and performance optimization." },
+    { id: 25, title: "Full Stack Developer", company: "Revolut", location: "London, UK", country: "GB", salaryMin: 65000, salaryMax: 100000, currency: "£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-07", description: "Build financial products for millions of users. Work across React, Python, and Kubernetes in a fast-paced fintech environment." },
+    { id: 26, title: "Backend Developer", company: "Sea Limited", location: "Singapore", country: "SG", salaryMin: 72000, salaryMax: 120000, currency: "S$", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-01", description: "Build backend systems for Shopee and Garena. Work with Go, C++, and large-scale distributed systems." },
+    { id: 27, title: "Junior DevOps Engineer", company: "DigitalOcean", location: "New York, NY, USA", country: "US", salaryMin: 80000, salaryMax: 120000, currency: "$", experience: "Junior", tags: ["remote","fulltime"], posted: "2026-06-08", description: "Learn cloud infrastructure management. Assist with Kubernetes clusters, monitoring, and automation tooling." },
+    { id: 28, title: "Mobile Developer (Swift)", company: "Apple", location: "Cupertino, CA, USA", country: "US", salaryMin: 140000, salaryMax: 200000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-05-29", description: "Build native iOS applications using Swift and SwiftUI. Work on features used by billions of users worldwide." },
+    { id: 29, title: "Data Scientist", company: "Alibaba", location: "Hangzhou, China", country: "JP", salaryMin: 500000, salaryMax: 900000, currency: "¥", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-04", description: "Analyze e-commerce and cloud data to drive business decisions. Use Python, SQL, and machine learning at massive scale." },
+    { id: 30, title: "Frontend Developer (Angular)", company: "DBS Bank", location: "Singapore", country: "SG", salaryMin: 60000, salaryMax: 95000, currency: "S$", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Build digital banking portals using Angular and TypeScript. Create responsive, accessible financial dashboards." },
+    { id: 31, title: "Senior DevOps Engineer", company: "Adobe", location: "San Jose, CA, USA", country: "US", salaryMin: 150000, salaryMax: 215000, currency: "$", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-06-06", description: "Build and maintain CI/CD infrastructure for Adobe Creative Cloud. Drive Kubernetes adoption and cloud optimization." },
+    { id: 32, title: "Backend Developer (Python)", company: "Booking.com", location: "Amsterdam, Netherlands", country: "DE", salaryMin: 60000, salaryMax: 90000, currency: "€", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-05-28", description: "Build travel booking backend systems using Python and Django. Work on high-traffic APIs serving millions of users daily." },
+    { id: 33, title: "AI/ML Research Engineer", company: "OpenAI", location: "San Francisco, CA, USA", country: "US", salaryMin: 200000, salaryMax: 350000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-06-07", description: "Research and develop advanced AI models. Work on cutting-edge NLP, multimodal AI, and reinforcement learning." },
+    { id: 34, title: "Full Stack Developer", company: "Gojek", location: "Jakarta, Indonesia", country: "SG", salaryMin: 30000, salaryMax: 60000, currency: "S$", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-05", description: "Build super-app features for millions of Southeast Asian users. Work with Go, React, and microservices." },
+    { id: 35, title: "Junior Full Stack Developer", company: "Intercom", location: "Dublin, Ireland", country: "GB", salaryMin: 40000, salaryMax: 55000, currency: "£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-09", description: "Build customer communication tools. Learn Ruby on Rails, React, and PostgreSQL in a supportive engineering team." }
+  ];
+  // ======================== APP STATE ========================
+  var currentPage = 1;
+  var pageSize = 10;
+  var filteredJobs = [];
+  var savedJobs = [];
+
+  // ======================== HELPERS ========================
+  function esc(str) { return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+  function getCountryList() {
+    var map = {};
+    JOBS_DATA.forEach(function(j) { map[j.country] = true; });
+    return Object.keys(map).sort();
+  }
+
+  function getCountryName(code) {
+    var names = { "US":"United States","GB":"United Kingdom","CA":"Canada","AU":"Australia","DE":"Germany","FR":"France","IN":"India","SG":"Singapore","BR":"Brazil","JP":"Japan" };
+    return names[code] || code;
+  }
+
+  function formatSalary(min, max, currency) {
+    if (!currency) currency = "$";
+    if (min >= 100000) return currency + Math.round(min/1000) + "K - " + currency + Math.round(max/1000) + "K";
+    if (min >= 1000) return currency + Math.round(min/1000) + "K - " + currency + Math.round(max/1000) + "K";
+    return currency + Number(min).toLocaleString() + " - " + currency + Number(max).toLocaleString();
+  }
+
+  function timeAgo(dateStr) {
+    var now = new Date();
+    var d = new Date(dateStr);
+    var diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+    if (diff === 0) return "Today";
+    if (diff === 1) return "1 day ago";
+    if (diff < 7) return diff + " days ago";
+    if (diff < 30) return Math.floor(diff / 7) + " weeks ago";
+    return Math.floor(diff / 30) + " months ago";
+  }
+
+  function getExpClass(exp) {
+    if (exp === "Junior") return "exp-junior";
+    if (exp === "Mid-Level") return "exp-mid";
+    if (exp === "Senior") return "exp-senior";
+    if (exp === "Lead") return "exp-lead";
+    return "exp-mid";
+  }
+
+  function getTagClass(tag) {
+    if (tag === "remote" || tag === "hybrid") return tag;
+    if (tag === "fulltime") return "fulltime";
+    if (tag === "contract") return "contract";
+    return "onsite";
+  }
+
+  function parseSalaryRange(rangeStr) {
+    if (rangeStr === "all") return null;
+    var parts = rangeStr.split("-");
+    return { min: parseInt(parts[0]), max: parseInt(parts[1]) };
+  }
+
+  // ======================== SAVED JOBS ========================
+  function loadSavedJobs() {
+    try {
+      var data = localStorage.getItem("coderio_saved_jobs");
+      savedJobs = data ? JSON.parse(data) : [];
+    } catch(e) { savedJobs = []; }
+  }
+
+  function saveSavedJobs() {
+    try { localStorage.setItem("coderio_saved_jobs", JSON.stringify(savedJobs)); } catch(e) {}
+  }
+
+  function isJobSaved(id) {
+    return savedJobs.indexOf(id) !== -1;
+  }
+
+  function toggleSaveJob(id) {
+    var idx = savedJobs.indexOf(id);
+    if (idx === -1) { savedJobs.push(id); } else { savedJobs.splice(idx, 1); }
+    saveSavedJobs();
+    renderSavedJobsPanel();
+    renderJobs();
+    if (typeof Utils !== "undefined" && Utils.showToast) {
+      Utils.showToast(idx === -1 ? "Job saved!" : "Job removed from saved.", idx === -1 ? "success" : "info");
+    }
+  }
+
+  function renderSavedJobsPanel() {
+    document.getElementById("savedCount").textContent = savedJobs.length;
+    var list = document.getElementById("savedJobsList");
+    if (savedJobs.length === 0) {
+      list.innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem">No saved jobs yet. Click the <i class="fas fa-bookmark"></i> icon on any job to save it.</p>';
+      return;
+    }
+    var html = "";
+    savedJobs.forEach(function(id) {
+      var job = JOBS_DATA.find(function(j) { return j.id === id; });
+      if (!job) return;
+      html += '<div class="saved-job-item">';
+      html += '<div><div class="job-title-sm">' + esc(job.title) + '</div><div class="job-company-sm">' + esc(job.company) + ' - ' + esc(job.location) + '</div></div>';
+      html += '<div style="display:flex;gap:0.3rem"><button class="btn btn-sm btn-primary" onclick="viewJob(' + id + ')"><i class="fas fa-eye"></i></button><button class="btn btn-sm btn-ghost" onclick="toggleSaveJob(' + id + ')"><i class="fas fa-trash"></i></button></div>';
+      html += '</div>';
+    });
+    list.innerHTML = html;
+  }
+
+  window.viewJob = function(id) {
+    var job = JOBS_DATA.find(function(j) { return j.id === id; });
+    if (!job) return;
+    currentPage = Math.ceil((filteredJobs.indexOf(job) + 1) / pageSize) || 1;
+    renderJobs();
+    setTimeout(function() {
+      var el = document.getElementById("job-" + id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+  };
+
+  // ======================== FILTER & RENDER ========================
+  function getFilters() {
+    return {
+      search: document.getElementById("searchInput").value.trim().toLowerCase(),
+      country: document.getElementById("filterCountry").value,
+      remote: document.getElementById("filterRemote").checked,
+      salary: document.getElementById("filterSalary").value,
+      experience: document.getElementById("filterExperience").value
+    };
+  }
+
+  function filterJobs() {
+    var filters = getFilters();
+    filteredJobs = JOBS_DATA.filter(function(job) {
+      // Search
+      if (filters.search) {
+        var haystack = (job.title + " " + job.company + " " + job.description + " " + job.location).toLowerCase();
+        if (haystack.indexOf(filters.search) === -1) return false;
+      }
+      // Country
+      if (filters.country !== "all" && job.country !== filters.country) return false;
+      // Remote
+      if (filters.remote && job.tags.indexOf("remote") === -1 && job.tags.indexOf("hybrid") === -1) return false;
+      // Salary
+      if (filters.salary !== "all") {
+        var range = parseSalaryRange(filters.salary);
+        if (range && (job.salaryMax < range.min || job.salaryMin > range.max)) return false;
+      }
+      // Experience
+      if (filters.experience !== "all" && job.experience !== filters.experience) return false;
+      return true;
+    });
+    currentPage = 1;
+  }
+
+  function renderJobs() {
+    var container = document.getElementById("jobsContainer");
+    var pagination = document.getElementById("pagination");
+    var totalResults = document.getElementById("resultsCount");
+
+    filterJobs();
+    totalResults.textContent = filteredJobs.length;
+
+    if (filteredJobs.length === 0) {
+      container.innerHTML = '<div class="empty-state"><i class="fas fa-search"></i><h3>No jobs found</h3><p>Try adjusting your filters or search terms.</p></div>';
+      pagination.innerHTML = "";
+      return;
+    }
+
+    var totalPages = Math.ceil(filteredJobs.length / pageSize);
+    if (currentPage > totalPages) currentPage = totalPages;
+    var start = (currentPage - 1) * pageSize;
+    var end = Math.min(start + pageSize, filteredJobs.length);
+    var pageJobs = filteredJobs.slice(start, end);
+
+    var html = "";
+    pageJobs.forEach(function(job) {
+      var salaryStr = formatSalary(job.salaryMin, job.salaryMax, job.currency);
+      var saved = isJobSaved(job.id) ? "fas" : "far";
+      var expClass = getExpClass(job.experience);
+      var tagsHtml = "";
+      job.tags.forEach(function(tag) {
+        var tClass = getTagClass(tag);
+        var label = tag.charAt(0).toUpperCase() + tag.slice(1);
+        tagsHtml += '<span class="job-tag ' + tClass + '"><i class="fas fa-' + (tag === "remote" ? "wifi" : tag === "hybrid" ? "building" : tag === "fulltime" ? "clock" : "file-contract") + '"></i> ' + label + '</span>';
+      });
+
+      html += '<div class="job-card" id="job-' + job.id + '">';
+      html += '<div class="job-card-header">';
+      html += '<div><div class="job-title">' + esc(job.title) + '</div><div class="job-company"><i class="fas fa-building" style="color:var(--primary);width:16px"></i> ' + esc(job.company) + '</div></div>';
+      html += '<span class="experience-badge ' + expClass + '">' + job.experience + '</span>';
+      html += '</div>';
+      html += '<div class="job-meta">';
+      html += '<span><i class="fas fa-map-marker-alt" style="color:var(--primary)"></i> ' + esc(job.location) + '</span>';
+      html += '<span class="salary-range"><i class="fas fa-money-bill-wave" style="color:var(--success)"></i> ' + salaryStr + '</span>';
+      html += '<span class="posted-date"><i class="far fa-calendar-alt"></i> ' + timeAgo(job.posted) + '</span>';
+      html += '</div>';
+      html += '<div class="job-tags">' + tagsHtml + '</div>';
+      html += '<div class="job-description">' + esc(job.description) + '</div>';
+      html += '<div class="job-card-actions">';
+      html += '<button class="btn btn-sm btn-secondary" onclick="toggleSaveJob(' + job.id + ')"><i class="' + saved + ' fa-bookmark"></i> ' + (saved ? "Saved" : "Save Job") + '</button>';
+      html += '<button class="btn btn-sm btn-primary" onclick="window.open(\'#\',\'_blank\')"><i class="fas fa-external-link-alt"></i> View Details</button>';
+      html += '</div></div>';
+    });
+    container.innerHTML = html;
+
+    // Pagination
+    var phtml = "";
+    phtml += '<button onclick="goToPage(' + (currentPage - 1) + ')" ' + (currentPage <= 1 ? 'disabled' : '') + '><i class="fas fa-chevron-left"></i> Prev</button>';
+    phtml += '<span class="page-info">Page ' + currentPage + ' of ' + totalPages + '</span>';
+    phtml += '<button onclick="goToPage(' + (currentPage + 1) + ')" ' + (currentPage >= totalPages ? 'disabled' : '') + '>Next <i class="fas fa-chevron-right"></i></button>';
+    pagination.innerHTML = phtml;
+  }
+
+  window.goToPage = function(page) {
+    var totalPages = Math.ceil(filteredJobs.length / pageSize);
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    renderJobs();
+    window.scrollTo({ top: document.querySelector(".job-listing-section").offsetTop - 100, behavior: "smooth" });
+  };
+
+  // ======================== INIT ========================
+  function init() {
+    loadSavedJobs();
+
+    // Populate country filter
+    var sel = document.getElementById("filterCountry");
+    var countries = getCountryList();
+    countries.forEach(function(code) {
+      var opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = getCountryName(code);
+      sel.appendChild(opt);
+    });
+
+    // Event listeners
+    document.getElementById("searchInput").addEventListener("input", Utils ? Utils.debounce(renderJobs, 300) : function() { setTimeout(renderJobs, 300); });
+    document.getElementById("searchBtn").addEventListener("click", renderJobs);
+    document.getElementById("clearFiltersBtn").addEventListener("click", function() {
+      document.getElementById("searchInput").value = "";
+      document.getElementById("filterCountry").value = "all";
+      document.getElementById("filterRemote").checked = false;
+      document.getElementById("filterSalary").value = "all";
+      document.getElementById("filterExperience").value = "all";
+      renderJobs();
+    });
+    document.getElementById("filterCountry").addEventListener("change", renderJobs);
+    document.getElementById("filterRemote").addEventListener("change", renderJobs);
+    document.getElementById("filterSalary").addEventListener("change", renderJobs);
+    document.getElementById("filterExperience").addEventListener("change", renderJobs);
+
+    // Saved jobs toggle
+    document.getElementById("savedJobsToggle").addEventListener("click", function() {
+      var panel = document.getElementById("savedJobsPanel");
+      panel.classList.toggle("open");
+      renderSavedJobsPanel();
+    });
+
+    // Enter key on search
+    document.getElementById("searchInput").addEventListener("keyup", function(e) {
+      if (e.key === "Enter") renderJobs();
+    });
+
+    renderJobs();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computer Networks - Placement Prep - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Placement">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toast" class="toast-container"></div>
+
+  <main>
+    <section class="page-header glass">
+      <div class="header-content">
+        <h1><i class="fas fa-network-wired"></i> Computer Networks</h1>
+        <p>Networking fundamentals for interviews — OSI model, TCP/IP, protocols, and network security concepts.</p>
+        <div class="header-stats">
+          <span><i class="fas fa-layer-group"></i> 5 Modules</span>
+          <span><i class="fas fa-question-circle"></i> 20+ Questions</span>
+          <span><i class="fas fa-star"></i> High Priority</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="concepts-grid">
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-layers"></i></div>
+        <h3>OSI Model</h3>
+        <p>7-layer model: Physical, Data Link, Network, Transport, Session, Presentation, Application. Each layer handles specific networking functions.</p>
+        <div class="concept-example">
+          <code>Layer 7: HTTP/FTP/SMTP<br>Layer 4: TCP/UDP<br>Layer 3: IP/ICMP</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-globe"></i></div>
+        <h3>TCP/IP Suite</h3>
+        <p>4-layer model: Network Interface, Internet, Transport, Application. TCP (connection-oriented, reliable) vs UDP (connectionless, faster).</p>
+        <div class="concept-example">
+          <code>TCP: 3-way handshake<br>SYN -> SYN-ACK -> ACK</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-random"></i></div>
+        <h3>Network Protocols</h3>
+        <p>HTTP/HTTPS, DNS (port 53), DHCP (ports 67/68), FTP (21), SMTP (25), IMAP (143), ARP, ICMP, SNMP. Each serves a distinct purpose.</p>
+        <div class="concept-example">
+          <code>DNS: domain -> IP<br>ARP: IP -> MAC address</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Network Security</h3>
+        <p>Firewalls, IDS/IPS, VPNs, TLS/SSL, encryption (symmetric/asymmetric), digital signatures, certificates, and common attacks (DDoS, MITM).</p>
+        <div class="concept-example">
+          <code>TLS handshake: cipher suite<br>negotiation + cert verification</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes-section glass">
+      <h2><i class="fas fa-pen-alt"></i> Detailed Notes</h2>
+      <div class="notes-content">
+        <div class="note-block">
+          <h4>TCP Features</h4>
+          <p>Flow control (sliding window), congestion control (slow start, AIMD, fast retransmit), error detection (checksum), sequencing, and retransmission. Reliable data delivery.</p>
+        </div>
+        <div class="note-block">
+          <h4>IPv4 vs IPv6</h4>
+          <p>IPv4: 32-bit (4.3B addresses), dotted decimal, NAT needed. IPv6: 128-bit, hex notation, built-in security (IPsec), no NAT required. Transition via dual stack and tunneling.</p>
+        </div>
+        <div class="note-block">
+          <h4>Subnetting & CIDR</h4>
+          <p>Subnet mask divides network/host bits. CIDR notation (e.g., /24). VLSM allows variable subnet masks. Supernetting combines networks. Reduces routing table size.</p>
+        </div>
+        <div class="note-block">
+          <h4>Routing Protocols</h4>
+          <p>RIP (distance vector, hop count), OSPF (link-state, Dijkstra), BGP (path vector, internet backbone). Interior vs exterior gateway protocols.</p>
+        </div>
+        <div class="note-block">
+          <h4>HTTP Methods & Status Codes</h4>
+          <p>GET (read), POST (create), PUT (update), DELETE, PATCH. 1xx info, 2xx success, 3xx redirect, 4xx client error, 5xx server error. Common: 200, 301, 400, 401, 403, 404, 500.</p>
+        </div>
+        <div class="note-block">
+          <h4>Switching Techniques</h4>
+          <p>Circuit switching (telephone), packet switching (internet), message switching. Virtual circuit vs datagram. Store-and-forward vs cut-through switching.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interview-questions glass">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div class="questions-list">
+        <div class="question-item">
+          <h4>What happens when you type a URL in a browser?</h4>
+          <p>DNS lookup -> TCP connection (3-way handshake) -> HTTP request -> server processes -> HTTP response -> browser renders HTML/CSS/JS. Includes ARP, routing, and load balancers.</p>
+        </div>
+        <div class="question-item">
+          <h4>Explain the difference between TCP and UDP.</h4>
+          <p>TCP: connection-oriented, reliable, ordered, flow/congestion control, slower. UDP: connectionless, no guarantees, faster, lower overhead. TCP for web/email, UDP for streaming/DNS.</p>
+        </div>
+        <div class="question-item">
+          <h4>What is a subnet mask and how does it work?</h4>
+          <p>A 32-bit mask that separates IP into network and host portions. AND operation with IP yields network address. Used for routing and determining if destination is local/remote.</p>
+        </div>
+        <div class="question-item">
+          <h4>Explain the concept of NAT.</h4>
+          <p>Network Address Translation maps private IPs to a public IP. Enables multiple devices on a LAN to share one public IP. Types: static, dynamic, PAT (port address translation).</p>
+        </div>
+        <div class="question-item">
+          <h4>What is the difference between a switch and a router?</h4>
+          <p>Switch: Layer 2 device, uses MAC addresses, connects devices within same network. Router: Layer 3 device, uses IP addresses, connects different networks, performs routing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cheatsheet glass">
+      <h2><i class="fas fa-file-alt"></i> Cheat Sheet</h2>
+      <div class="cheatsheet-grid">
+        <div class="cheatsheet-item">
+          <span class="cs-term">OSI Model</span>
+          <span class="cs-def">7-layer network model</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">TCP</span>
+          <span class="cs-def">Reliable, connection-oriented</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">UDP</span>
+          <span class="cs-def">Fast, connectionless</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">DNS</span>
+          <span class="cs-def">Domain to IP resolution</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">HTTP</span>
+          <span class="cs-def">Web communication protocol</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">DHCP</span>
+          <span class="cs-def">Auto IP assignment</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">NAT</span>
+          <span class="cs-def">Private to public IP mapping</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">CIDR</span>
+          <span class="cs-def">Classless addressing</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

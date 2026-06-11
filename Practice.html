@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .practice-page .page-header { padding: 3rem 8% 1.5rem; }
+    .practice-section { padding: 2rem 8% 5rem; }
+
+    .login-gate-card {
+      padding: 2.5rem;
+      border-radius: var(--border-radius-xl);
+      background: var(--bg-card);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .login-gate-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+    .login-gate-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .login-gate-card p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .platform-card {
+      padding: 2rem;
+      border-radius: var(--border-radius-lg);
+      background: var(--bg-card);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .platform-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: var(--shadow-lg); background: var(--bg-card-hover); }
+    .platform-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .platform-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
+    .platform-card h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+    .platform-card .platform-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem; flex: 1; }
+    .platform-difficulty { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .platform-difficulty span { padding: 0.2rem 0.7rem; border-radius: 50px; font-size: 0.78rem; font-weight: 600; }
+    .diff-easy { background: rgba(34,197,94,0.15); color: #166534; }
+    .diff-medium { background: rgba(245,158,11,0.15); color: #92400e; }
+    .diff-hard { background: rgba(239,68,68,0.15); color: #991b1b; }
+    .platform-card .btn-connect { width: 100%; margin-top: auto; }
+
+    .platform-connected-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(34,197,94,0.15);
+      color: #166534;
+      margin-left: auto;
+    }
+    .platform-connected-badge i { font-size: 0.7rem; }
+    .platform-connected-name {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .progress-section { margin-top: 4rem; }
+    .progress-section .section-label { text-align: center; font-size: 2rem; margin-bottom: 2rem; color: var(--primary-dark); }
+    .progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+    .progress-card { padding: 1.5rem; border-radius: var(--border-radius-md); background: var(--bg-card); border: 1px solid var(--glass-border); text-align: center; }
+    .progress-card h3 { font-size: 2.2rem; color: var(--primary); margin-bottom: 0.3rem; }
+    .progress-card p { color: var(--text-muted); font-size: 0.9rem; }
+    .progress-bar-wrap { width: 100%; height: 8px; background: #e2e8f0; border-radius: 50px; overflow: hidden; margin-top: 0.8rem; }
+    .progress-bar-fill { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
+
+    .connected-platforms-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .connected-platform-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .connected-platform-chip i { font-size: 0.9rem; }
+
+    .activity-chart-placeholder {
+      padding: 3rem 2rem;
+      border-radius: var(--border-radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .activity-chart-placeholder i { font-size: 2.5rem; color: var(--text-light); margin-bottom: 0.8rem; }
+    .activity-chart-placeholder p { color: var(--text-muted); }
+
+    .connection-input-group { display: flex; gap: 0.8rem; margin: 1rem 0; }
+    .connection-input-group input { flex: 1; padding: 0.9rem 1.2rem; border: 2px solid #e2e8f0; border-radius: var(--border-radius-sm); font-size: 1rem; }
+
+    .auth-modal-text { text-align: center; margin-bottom: 1.5rem; }
+    .auth-modal-text i { font-size: 3rem; color: var(--primary); margin-bottom: 0.8rem; }
+    .auth-modal-text h3 { margin-bottom: 0.5rem; }
+
+    @media (max-width: 768px) { .practice-section { padding: 1.5rem 5% 3rem; } }
+  </style>
+</head>
+<body data-page="Practice">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html" class="active">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="practice-page">
+    <div class="page-header">
+      <h1>Practice Hub</h1>
+      <p>Sharpen your coding skills across top competitive programming platforms and track your progress.</p>
+    </div>
+
+    <section class="practice-section">
+      <div id="loginGate"></div>
+
+      <div class="platform-grid" id="platformGrid"></div>
+
+      <div class="progress-section" id="progressSection" style="display:none;">
+        <h2 class="section-label">Your Progress</h2>
+        <div class="progress-grid">
+          <div class="progress-card">
+            <h3 id="progProblems">0</h3>
+            <p>Problems Solved</p>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progBarProblems" style="width:0%"></div></div>
+          </div>
+          <div class="progress-card">
+            <h3 id="progPlatforms">0</h3>
+            <p>Platforms Connected</p>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progBarPlatforms" style="width:0%"></div></div>
+          </div>
+          <div class="progress-card">
+            <h3 id="progSync">--</h3>
+            <p>Last Sync</p>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progBarSync" style="width:0%"></div></div>
+          </div>
+          <div class="progress-card">
+            <h3 id="progStreak">0</h3>
+            <p>Day Streak</p>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progBarStreak" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <h3 style="text-align:center;margin-bottom:1rem;color:var(--primary-dark);">Connected Platforms</h3>
+          <div id="connectedPlatformsList" class="connected-platforms-list" style="justify-content:center;"></div>
+        </div>
+
+        <div id="activityOverviewContainer" style="margin-top:2rem">
+          <h3 style="margin-bottom:1rem;color:var(--primary-dark);"><i class="fas fa-chart-line"></i> Activity Overview</h3>
+          <div id="activityChartContent"></div>
+        </div>
+      </div>
+
+      <div class="practice-typing-card glass" style="margin-top:4rem;padding:3rem;border-radius:var(--border-radius-xl);background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(6,182,212,0.05));border:1px solid rgba(6,182,212,0.2);text-align:center;">
+        <h2 style="font-size:2rem;margin-bottom:0.8rem;"><i class="fas fa-keyboard"></i> Typing Lab</h2>
+        <p style="color:var(--text-secondary);max-width:600px;margin:0 auto 2rem;line-height:1.8;">Improve your typing speed and accuracy with coding-specific content. Practice daily to build muscle memory and boost productivity.</p>
+        <a href="index.html#typing-test" class="btn btn-primary btn-lg"><i class="fas fa-arrow-right"></i> Go to Typing Lab</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="connectionModal">
+    <div class="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <h3>Connect Platform</h3>
+        <button class="btn btn-ghost btn-sm" onclick="Utils.hideModal('connectionModal')"><i class="fas fa-times"></i></button>
+      </div>
+      <p style="color:var(--text-secondary);margin-bottom:1rem;">Enter your username on <strong id="connectPlatformName">Platform</strong> to link your account.</p>
+      <div class="connection-input-group">
+        <input type="text" id="connectUsername" placeholder="Your username" autocomplete="off">
+        <button class="btn btn-primary" id="connectSaveBtn" onclick="saveConnection()">Save</button>
+      </div>
+      <p id="connectError" style="color:var(--error);font-size:0.85rem;display:none;"></p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <div class="auth-modal-text">
+        <i class="fas fa-lock"></i>
+        <h3>Login Required</h3>
+        <p style="color:var(--text-secondary);">Please log in or create an account to connect coding platforms.</p>
+      </div>
+      <a href="auth/login.html" class="btn btn-primary btn-block" style="text-align:center;justify-content:center;">Log In</a>
+      <div style="margin-top:0.8rem;text-align:center;">
+        <span style="color:var(--text-muted);font-size:0.9rem;">Don't have an account? </span>
+        <a href="auth/register.html" style="color:var(--primary);font-weight:600;">Sign Up</a>
+      </div>
+      <div style="margin-top:1rem;text-align:center;">
+        <button class="btn btn-ghost btn-sm" onclick="Utils.hideModal('loginModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/learning.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/daily-goals.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const PLATFORMS = [
+      { id: 'leetcode', name: 'LeetCode', icon: 'fab fa-free-code-camp', color: '#ffa116', desc: 'Ace technical interviews with curated DSA problems and weekly contests.', easy: '60%', medium: '30%', hard: '10%', url: 'https://leetcode.com' },
+      { id: 'codeforces', name: 'Codeforces', icon: 'fas fa-trophy', color: '#1f8acb', desc: 'Compete in world-class programming contests with a vast problem set.', easy: '30%', medium: '40%', hard: '30%', url: 'https://codeforces.com' },
+      { id: 'codechef', name: 'CodeChef', icon: 'fas fa-utensils', color: '#5b4637', desc: 'Participate in monthly challenges and improve your competitive skills.', easy: '40%', medium: '35%', hard: '25%', url: 'https://codechef.com' },
+      { id: 'atcoder', name: 'AtCoder', icon: 'fas fa-flag', color: '#000000', desc: 'Japanese competitive platform with regular contests and high-quality problems.', easy: '35%', medium: '40%', hard: '25%', url: 'https://atcoder.jp' },
+      { id: 'cses', name: 'CSES', icon: 'fas fa-graduation-cap', color: '#4a90d9', desc: 'Comprehensive problem set covering algorithms and data structures.', easy: '25%', medium: '40%', hard: '35%', url: 'https://cses.fi' },
+      { id: 'euler', name: 'Project Euler', icon: 'fas fa-square-root-variable', color: '#098765', desc: 'Solve mathematical and computational problems with elegant solutions.', easy: '30%', medium: '35%', hard: '35%', url: 'https://projecteuler.net' },
+      { id: 'kaggle', name: 'Kaggle', icon: 'fas fa-brain', color: '#20beff', desc: 'Compete in data science challenges and build ML models on real datasets.', easy: '20%', medium: '40%', hard: '40%', url: 'https://kaggle.com' },
+      { id: 'hackerrank', name: 'HackerRank', icon: 'fas fa-chart-bar', color: '#00ea64', desc: 'Practice coding challenges across multiple domains and earn certificates.', easy: '50%', medium: '35%', hard: '15%', url: 'https://hackerrank.com' }
+    ];
+
+    let pendingPlatformId = null;
+
+    function isLoggedIn() {
+      return !!Utils.getStorage('coderio_user');
+    }
+
+    function getConnections() {
+      return Utils.getStorage('coderio_connections', []);
+    }
+
+    function isPlatformConnected(platformId) {
+      return getConnections().some(c => c.platform === platformId);
+    }
+
+    function getPlatformConnection(platformId) {
+      return getConnections().find(c => c.platform === platformId);
+    }
+
+    function renderLoginGate() {
+      const gate = document.getElementById('loginGate');
+      if (isLoggedIn()) {
+        gate.innerHTML = '';
+        return;
+      }
+      gate.innerHTML = `
+        <div class="login-gate-card glass">
+          <i class="fas fa-lock"></i>
+          <h3>Login to Track Your Progress</h3>
+          <p>Login to track your progress and connect coding platforms. Monitor your problem-solving journey across multiple platforms.</p>
+          <a href="auth/login.html" class="btn btn-primary btn-lg"><i class="fas fa-sign-in-alt"></i> Login</a>
+        </div>
+      `;
+    }
+
+    function renderPlatforms() {
+      const grid = document.getElementById('platformGrid');
+      const user = isLoggedIn();
+
+      grid.innerHTML = PLATFORMS.map(p => {
+        const connected = user ? isPlatformConnected(p.id) : false;
+        const connection = connected ? getPlatformConnection(p.id) : null;
+
+        return `
+          <div class="platform-card" data-platform="${p.id}">
+            <div class="platform-header">
+              <div class="platform-icon" style="background:${p.color}20;color:${p.color};">
+                <i class="${p.icon}"></i>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;gap:0.5rem;">
+                  <h3>${p.name}</h3>
+                  ${connected ? '<span class="platform-connected-badge"><i class="fas fa-check-circle"></i> Connected</span>' : ''}
+                </div>
+                ${connected && connection ? `<div class="platform-connected-name">@${connection.username}</div>` : ''}
+              </div>
+            </div>
+            <p class="platform-desc">${p.desc}</p>
+            <div class="platform-difficulty">
+              <span class="diff-easy">Easy ${p.easy}</span>
+              <span class="diff-medium">Medium ${p.medium}</span>
+              <span class="diff-hard">Hard ${p.hard}</span>
+            </div>
+            <button class="btn btn-${connected ? 'secondary' : 'primary'} btn-sm btn-connect" onclick="handleConnect('${p.id}')">
+              ${connected ? '<i class="fas fa-sync-alt"></i> Update' : '<i class="fas fa-link"></i> Connect'}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleConnect(platformId) {
+      pendingPlatformId = platformId;
+      if (!isLoggedIn()) {
+        Utils.showModal('loginModal');
+        return;
+      }
+      const platform = PLATFORMS.find(p => p.id === platformId);
+      document.getElementById('connectPlatformName').textContent = platform ? platform.name : 'Platform';
+      document.getElementById('connectUsername').value = '';
+      document.getElementById('connectError').style.display = 'none';
+      Utils.showModal('connectionModal');
+
+      const existing = getPlatformConnection(platformId);
+      if (existing) {
+        document.getElementById('connectUsername').value = existing.username;
+      }
+    }
+
+    function saveConnection() {
+      const username = document.getElementById('connectUsername').value.trim();
+      if (!username) {
+        const err = document.getElementById('connectError');
+        err.textContent = 'Please enter a username.';
+        err.style.display = 'block';
+        return;
+      }
+      const platform = PLATFORMS.find(p => p.id === pendingPlatformId);
+      if (!platform) return;
+
+      const connections = getConnections().filter(c => c.platform !== pendingPlatformId);
+      connections.push({
+        platform: pendingPlatformId,
+        username: username,
+        url: platform.url + '/u/' + username,
+        connectedAt: new Date().toISOString()
+      });
+      Utils.setStorage('coderio_connections', connections);
+
+      Utils.hideModal('connectionModal');
+      Utils.showToast('Connected to ' + platform.name + ' as @' + username, 'success');
+      renderPlatforms();
+      updateProgress();
+    }
+
+    function updateProgress() {
+      if (!isLoggedIn()) {
+        document.getElementById('progressSection').style.display = 'none';
+        return;
+      }
+      document.getElementById('progressSection').style.display = 'block';
+
+      const connections = getConnections();
+      const courseProgress = Utils.getStorage('course_progress', {});
+      const quizResults = Utils.getStorage('quiz_results', {});
+      const typingHistory = Utils.getStorage('typing_history', []);
+      const activities = Utils.getStorage('coderio_activity', []);
+
+      var totalLessons = 0;
+      var totalModules = 0;
+      Object.values(courseProgress).forEach(function(c) {
+        totalLessons += (c.lessonsCompleted || []).length;
+        totalModules += (c.modulesCompleted || []).length;
+      });
+
+      var totalQuizzes = 0;
+      var totalCorrect = 0;
+      var totalWrong = 0;
+      Object.values(quizResults).forEach(function(courseQuizzes) {
+        courseQuizzes.forEach(function(q) {
+          totalQuizzes++;
+          totalCorrect += q.score || 0;
+          totalWrong += (q.total || 0) - (q.score || 0);
+        });
+      });
+
+      var totalTyping = typingHistory.length;
+      var bestWpm = typingHistory.length > 0 ? Math.max.apply(null, typingHistory.map(function(t) { return t.wpm || 0; })) : 0;
+
+      var totalScore = totalLessons * 10 + totalModules * 25 + totalCorrect * 2 + totalTyping * 5;
+      var avgAccuracy = (totalCorrect + totalWrong) > 0 ? Math.round((totalCorrect / (totalCorrect + totalWrong)) * 100) : 0;
+
+      const activeDates = new Set();
+      activities.forEach(function(a) { if (a.time) activeDates.add(new Date(a.time).toDateString()); });
+      Object.values(quizResults).forEach(function(courseQuizzes) {
+        courseQuizzes.forEach(function(q) { if (q.date) activeDates.add(new Date(q.date).toDateString()); });
+      });
+      typingHistory.forEach(function(t) { if (t.date) activeDates.add(new Date(t.date).toDateString()); });
+      var today = new Date(); today.setHours(0,0,0,0);
+      var streak = 0;
+      var check = new Date(today);
+      while (activeDates.has(check.toDateString())) { streak++; check.setDate(check.getDate() - 1); }
+
+      document.getElementById('progProblems').textContent = totalLessons + totalModules;
+      document.getElementById('progPlatforms').textContent = connections.length;
+      document.getElementById('progSync').textContent = activities.length > 0 ? Utils.timeAgo(activities[activities.length - 1].time) : '--';
+      document.getElementById('progStreak').textContent = streak;
+
+      document.getElementById('progBarProblems').style.width = Math.min((totalLessons + totalModules) * 2, 100) + '%';
+      document.getElementById('progBarPlatforms').style.width = Math.min(connections.length * 20, 100) + '%';
+      document.getElementById('progBarSync').style.width = activities.length > 0 ? '75%' : '0%';
+      var streakPct = Math.min(streak * 3, 100);
+      document.getElementById('progBarStreak').style.width = streakPct + '%';
+
+      const list = document.getElementById('connectedPlatformsList');
+      if (connections.length === 0) {
+        list.innerHTML = '<p style="color:var(--text-muted);text-align:center;width:100%;">No platforms connected yet. Click Connect on a platform above to get started.</p>';
+      } else {
+        list.innerHTML = connections.map(function(c) {
+          var p = PLATFORMS.find(function(p) { return p.id === c.platform; });
+          return '<span class="connected-platform-chip"><i class="' + (p ? p.icon : 'fas fa-code') + '" style="color:' + (p ? p.color : 'var(--primary)') + ';"></i> ' + (p ? p.name : c.platform) + ': @' + c.username + '</span>';
+        }).join('');
+      }
+
+      var chartContainer = document.getElementById('activityChartContent');
+      if (chartContainer) {
+        var chartHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:1rem">'
+          + '<div class="glass" style="padding:1rem;text-align:center;border-radius:12px"><h3 style="font-size:1.5rem;color:var(--primary)">' + totalLessons + '</h3><p style="font-size:0.8rem;color:var(--text-muted)">Lessons Completed</p></div>'
+          + '<div class="glass" style="padding:1rem;text-align:center;border-radius:12px"><h3 style="font-size:1.5rem;color:var(--success)">' + totalModules + '</h3><p style="font-size:0.8rem;color:var(--text-muted)">Modules Completed</p></div>'
+          + '<div class="glass" style="padding:1rem;text-align:center;border-radius:12px"><h3 style="font-size:1.5rem;color:var(--warning)">' + totalQuizzes + '</h3><p style="font-size:0.8rem;color:var(--text-muted)">Quizzes Taken</p></div>'
+          + '<div class="glass" style="padding:1rem;text-align:center;border-radius:12px"><h3 style="font-size:1.5rem;color:var(--error)">' + (totalCorrect > 0 ? avgAccuracy + '%' : '0%') + '</h3><p style="font-size:0.8rem;color:var(--text-muted)">Avg Accuracy</p></div>'
+          + '</div>';
+        chartHtml += '<div style="display:flex;gap:1rem;flex-wrap:wrap">'
+          + '<div class="glass" style="padding:1rem;flex:1;min-width:200px;border-radius:12px"><h4 style="font-size:0.9rem;margin-bottom:0.5rem;color:var(--text-secondary)"><i class="fas fa-check-circle" style="color:var(--success)"></i> Correct Answers</h4><p style="font-size:1.3rem;font-weight:700;color:var(--success)">' + totalCorrect + '</p></div>'
+          + '<div class="glass" style="padding:1rem;flex:1;min-width:200px;border-radius:12px"><h4 style="font-size:0.9rem;margin-bottom:0.5rem;color:var(--text-secondary)"><i class="fas fa-times-circle" style="color:var(--error)"></i> Wrong Answers</h4><p style="font-size:1.3rem;font-weight:700;color:var(--error)">' + totalWrong + '</p></div>'
+          + '<div class="glass" style="padding:1rem;flex:1;min-width:200px;border-radius:12px"><h4 style="font-size:0.9rem;margin-bottom:0.5rem;color:var(--text-secondary)"><i class="fas fa-keyboard" style="color:var(--primary)"></i> Typing Tests</h4><p style="font-size:1.3rem;font-weight:700;color:var(--primary)">' + totalTyping + '</p></div>'
+          + '<div class="glass" style="padding:1rem;flex:1;min-width:200px;border-radius:12px"><h4 style="font-size:0.9rem;margin-bottom:0.5rem;color:var(--text-secondary)"><i class="fas fa-gauge-high" style="color:var(--warning)"></i> Best WPM</h4><p style="font-size:1.3rem;font-weight:700;color:var(--warning)">' + bestWpm + '</p></div>'
+          + '</div>';
+        chartContainer.innerHTML = chartHtml;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLoginGate();
+      renderPlatforms();
+      updateProgress();
+
+      document.getElementById('connectionModal').addEventListener('click', function(e) {
+        if (e.target === this) Utils.hideModal('connectionModal');
+      });
+      document.getElementById('loginModal').addEventListener('click', function(e) {
+        if (e.target === this) Utils.hideModal('loginModal');
+      });
+      document.getElementById('connectUsername').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') saveConnection();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="git">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Git & GitHub</h1>
+      <p>Git is the most widely used version control system in the world, created by Linus Torvalds in 2005. It tracks changes to files, enables collaboration, and provides a complete history of project evolution.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Beginner</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 6 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Git is a distributed version control system (DVCS) that allows every developer to have a full copy of the entire repository history on their local machine. Unlike centralized systems (SVN, CVS), Git does not require a server for basic operations - commits, diffs, branches, and history are all local operations. This makes Git incredibly fast and allows offline work.</p>
+      <p>Git works by taking snapshots of files at each commit, storing them as objects in a .git directory. It uses a directed acyclic graph (DAG) to represent history, with each commit pointing to its parent(s). Branches are lightweight pointers to specific commits, making branching and merging fast and cheap.</p>
+      <p>GitHub, GitLab, and Bitbucket are web-based hosting services that provide remote repositories, pull requests, code review, CI/CD, project management, and social features on top of Git. Mastering Git workflows like Git Flow, GitHub Flow, and trunk-based development is essential for professional software development.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Git?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-history" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Complete Version History</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Track every change ever made to your project. View who changed what, when, and why. Revert to any previous state instantly.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-code-branch" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Branching & Experimentation</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Create isolated branches for features, bug fixes, or experiments. Merge or discard changes without affecting the main codebase.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-users" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Team Collaboration</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Multiple developers work on the same codebase simultaneously. Resolve conflicts, review code via pull requests, and coordinate releases.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Backup & Safety Net</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">With distributed copies, every clone is a full backup. Never lose work again. Git ensures data integrity with SHA-1 hashing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Git is the industry standard for version control across all software development:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apple</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Every software company, from startups to FAANG, uses Git. GitHub alone hosts over 100 million repositories. Git is used for code, documentation, configuration (Infrastructure as Code), data science notebooks, game development, and open source projects. The Linux kernel, Kubernetes, VS Code, and TensorFlow are all developed with Git.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Basic command line knowledge, text editor, Git installed on your system</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-2)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Git init, add, commit, status, log, diff, .gitignore, basic branching</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 3-4)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Remote repos, push/pull/fetch, merge strategies, rebase, stash, tags</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 5-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Cherry-pick, revert, reset, bisect, hooks, reflog, submodules</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 7-8)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Git internals (objects, refs), custom commands, large file storage, workflow automation</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> Getting Started with Git</h3><p>Installing Git, configuring name/email, git init, git clone, the .git directory structure, first commit workflow.</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Basic Operations</h3><p>git add (staging), git commit (snapshot), git status (tracking), git log (history), git diff (changes), .gitignore patterns.</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Branching Basics</h3><p>git branch, git checkout/switch, creating branches, switching branches, branch naming conventions, branch listing.</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Merging</h3><p>git merge, fast-forward vs 3-way merge, merge commits, merge conflicts, resolving conflicts, merge tools.</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">5</span> Working with Remotes</h3><p>git remote add, git push, git pull, git fetch, upstream tracking, origin vs upstream, remote branches.</p></div>
+      <div class="module-card"><h3><span class="module-number">6</span> Rebasing</h3><p>git rebase, interactive rebase (reword, squash, fixup, drop), rebase vs merge, when to rebase, golden rule of rebasing.</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Stashing & Cleaning</h3><p>git stash push/pop, stash list, stash apply/drop, stashing untracked files, git clean, partial stashing.</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Tags & Releases</h3><p>git tag, lightweight vs annotated tags, semantic versioning, tag signing, pushing tags, release management.</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">9</span> Undoing Changes</h3><p>git revert (safe undo), git reset (soft/mixed/hard), git checkout for files, git restore, git clean -fd.</p></div>
+      <div class="module-card"><h3><span class="module-number">10</span> Cherry-Pick & Advanced Merging</h3><p>git cherry-pick, picking multiple commits, merge strategies (recursive, ours, theirs), merge options.</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Git Hooks</h3><p>Client-side hooks (pre-commit, pre-push, commit-msg), server-side hooks, husky for Node.js, automating linting/testing.</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> Reflog & Recovery</h3><p>git reflog (reference log), recovering lost commits, recovering deleted branches, git fsck for repository integrity.</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">13</span> Git Internals</h3><p>Blob, tree, commit, and tag objects; the .git/objects directory; SHA-1 hashing; packfiles; the index file.</p></div>
+      <div class="module-card"><h3><span class="module-number">14</span> GitHub Workflows</h3><p>Pull requests, code review, GitHub Actions CI/CD, GitHub Pages, project boards, issue templates, GitHub CLI.</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Git Workflows</h3><p>Git Flow (feature, develop, release, hotfix), GitHub Flow, trunk-based development, forking workflow, monorepo strategies.</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Advanced Git & Automation</h3><p>git submodules, git worktree, git bisect for debugging, custom Git commands, Git LFS, Git attributes.</p></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Git Configuration & Setup</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Git stores configuration at three levels: system (all users), global (your user), and local (per repository). User name and email are required for commits. Set up aliases for common commands to save time.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Configure identity
+git config --global user.name "Your Name"
+git config --global user.email "email@example.com"
+
+# Set default branch name
+git config --global init.defaultBranch main
+
+# Useful aliases
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.st status
+git config --global alias.lg "log --oneline --graph --all"
+
+# View configuration
+git config --list --global</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. The Three States of Git</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Files in Git have three main states: modified (changes not yet staged), staged (marked for commit), and committed (safely stored). The working directory, staging area (index), and repository (HEAD) represent these states.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Working Directory -> Staging Area
+git add file.txt          # Stage a specific file
+git add .                 # Stage all changes
+git add -p                # Stage interactively (hunk by hunk)
+
+# Staging Area -> Repository
+git commit -m "message"   # Commit staged changes
+git commit -a -m "msg"    # Stage and commit tracked files
+
+# Check states
+git status                # Show current state
+git diff                  # Working dir vs staging
+git diff --staged         # Staging vs last commit
+git diff HEAD             # Working dir vs last commit</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Branching & Merging</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Branches are lightweight pointers to commits. Creating a branch is instantaneous because Git only creates a 41-byte reference file. Merging combines branches, with fast-forward when no divergence exists and 3-way merge when branches have diverged.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Branch operations
+git branch feature-x       # Create branch
+git switch feature-x       # Switch to branch
+git checkout -b feature-x  # Create and switch
+
+# Merge feature-x into main
+git switch main
+git merge feature-x
+
+# If conflict occurs, resolve then:
+git add resolved-file.txt
+git commit                # Complete merge commit
+
+# List branches
+git branch -a              # All branches (local + remote)
+git branch -d feature-x    # Delete merged branch</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Working with Remote Repositories</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Remotes are URLs to remote copies of your repository. Origin is the default name for your forked/cloned remote. Upstream is often the original repository you forked from. Fetch gets changes without merging, pull fetches and merges.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Remote management
+git remote add origin https://github.com/user/repo.git
+git remote -v              # List remotes
+git remote remove upstream # Remove a remote
+
+# Syncing
+git fetch origin           # Get changes, don't merge
+git pull origin main       # Fetch + merge
+git push origin main       # Push to remote
+
+# Push to upstream and set tracking
+git push -u origin main    # -u sets upstream tracking
+
+# Pull with rebase instead of merge
+git pull --rebase origin main</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Interactive Rebase</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Interactive rebase (git rebase -i) allows rewriting commit history by squashing, rewording, dropping, reordering, or editing commits. Use it to clean up local history before pushing. Never rebase commits that others have based work on.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Rebase last 3 commits interactively
+git rebase -i HEAD~3
+
+# In the editor:
+# pick - use commit as-is
+# reword - change commit message
+# squash - combine with previous commit
+# fixup - squash but discard message
+# drop - remove commit
+# edit - stop to amend
+
+# Abort if things go wrong
+git rebase --abort
+
+# Continue after resolving conflicts
+git rebase --continue</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Git Revert vs Reset</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">git revert creates a new commit that undoes changes - safe for shared history. git reset moves the branch pointer and optionally modifies the staging area and working directory. Use reset only for local/private branches.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># Safe undo for shared history
+git revert HEAD            # Revert last commit
+git revert abc1234         # Revert specific commit
+
+# Reset modes (DANGER: rewrites history)
+git reset --soft HEAD~1    # Move pointer, keep changes staged
+git reset --mixed HEAD~1   # Move pointer, keep working changes
+git reset --hard HEAD~1    # Move pointer, DISCARD all changes
+
+# Recover from hard reset
+git reflog                 # Find lost commit hash
+git reset --hard abc1234   # Restore to that state</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Git Hooks with Husky</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Git hooks are scripts that run automatically before or after Git events like commit, push, or merge. Husky is a popular Node.js tool that makes managing hooks easier. Use hooks to enforce code quality and prevent bad commits.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// .husky/pre-commit
+// Run linter and tests before commit
+npx lint-staged
+npm test
+
+// .husky/commit-msg
+// Enforce conventional commit format
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+npx --no-install commitlint --edit "$1"
+
+// .husky/pre-push
+// Run full test suite before push
+npm run build
+npm run test:ci
+
+// package.json with lint-staged
+{
+  "lint-staged": {
+    "*.{js,ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.css": ["stylelint --fix"]
+  }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. GitHub Pull Requests & Collaboration</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Pull requests (PRs) are the core of GitHub collaboration. They propose changes from one branch to another, enabling code review, discussion, and automated checks before merging. A good PR is focused, well-described, and includes test coverage.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code># PR workflow with GitHub CLI
+gh pr create --title "Add user authentication" \
+  --body "Implements JWT-based auth with refresh tokens" \
+  --base main --head feature/auth
+
+gh pr review --approve
+gh pr merge --squash
+
+# PR best practices:
+# 1. Small, focused changes (under 400 lines)
+# 2. Descriptive title and description
+# 3. Link to related issues
+# 4. Include screenshots for UI changes
+# 5. Add tests for new functionality
+# 6. Keep commit history clean</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Feature Branch Workflow</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code># Start from updated main
+git checkout main
+git pull origin main
+
+# Create feature branch
+git checkout -b feature/user-profile
+
+# Work and commit
+echo "profile code" > profile.js
+git add profile.js
+git commit -m "feat: add user profile component"
+
+# Keep up with main during development
+git fetch origin
+git rebase origin/main
+
+# Push and create PR
+git push -u origin feature/user-profile
+gh pr create --title "feat: user profile" --body "Implements user profile page with avatar, bio, and settings"
+
+# After PR approval and merge, delete branch
+git checkout main
+git pull origin main
+git branch -d feature/user-profile</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Resolving Merge Conflicts</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code># When git merge produces a conflict:
+git merge feature/login
+# CONFLICT in src/auth.js
+
+# View conflicting file
+cat src/auth.js
+# <<<<<<< HEAD
+# const token = localStorage.getItem('token');
+# =======
+# const token = sessionStorage.getItem('token');
+# >>>>>>> feature/login
+
+# Fix by editing the file - choose one or combine:
+const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
+# Mark as resolved and complete merge
+git add src/auth.js
+git commit
+
+# Or abort the merge entirely
+git merge --abort
+
+# Use a merge tool
+git mergetool  # Opens configured tool (vscode, meld, kdiff3)</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Initialize a Repo</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a new directory, init Git, make commits, and view the log.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Branching Practice</h4><p style="color:var(--text-muted);font-size:0.85rem">Create branches, switch between them, make commits in each, and merge them back to main.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Resolve Merge Conflicts</h4><p style="color:var(--text-muted);font-size:0.85rem">Create two branches that edit the same file, merge them, and resolve the resulting conflict.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Interactive Rebase</h4><p style="color:var(--text-muted);font-size:0.85rem">Make multiple commits with messy messages, then squash and reword them with interactive rebase.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">GitHub Collaboration</h4><p style="color:var(--text-muted);font-size:0.85rem">Fork a repository, clone it, create a feature branch, push changes, and open a pull request.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Set Up Git Hooks</h4><p style="color:var(--text-muted);font-size:0.85rem">Configure Husky with pre-commit linting, commit message validation, and pre-push testing.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Git Bisect Debugging</h4><p style="color:var(--text-muted);font-size:0.85rem">Use git bisect to find the commit that introduced a bug by testing good/bad commits.</p></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Personal Dotfiles Repo</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Manage your shell configuration, aliases, and scripts with Git and share across machines.</p><span class="badge badge-primary">Git</span> <span class="badge badge-primary">Dotfiles</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Open Source Contribution</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Find a project on GitHub, understand the contribution workflow, submit a meaningful PR.</p><span class="badge badge-primary">Git</span> <span class="badge badge-primary">GitHub</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Automated CI/CD Pipeline</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Set up GitHub Actions for automated testing, linting, building, and deployment on push.</p><span class="badge badge-primary">Git</span> <span class="badge badge-primary">CI/CD</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Git Hook Suite</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Build a set of custom Git hooks that enforce code style, branch naming, and commit conventions.</p><span class="badge badge-primary">Git</span> <span class="badge badge-primary">Hooks</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Monorepo with Submodules</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Create a monorepo structure with shared libraries as submodules or subtrees.</p><span class="badge badge-primary">Git</span> <span class="badge badge-primary">Submodules</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Git Visualization Tool</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Build a CLI or web tool that visualizes the Git commit graph and branch structure.</p><span class="badge badge-primary">Git</span> <span class="badge badge-primary">Node.js</span></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=git&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+

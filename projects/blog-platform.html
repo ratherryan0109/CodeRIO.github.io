@@ -1,0 +1,607 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a full-featured blog platform with Next.js SSR, MDX content, comments system, tags, search, pagination, and SEO optimization. Complete engineering guide.">
+  <meta name="keywords" content="blog platform, Next.js, SSR, MDX, comments, tags, search, pagination, SEO, web development project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="Blog Platform - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a production-ready blog platform with Next.js.">
+  <meta property="og:type" content="website">
+  <title>Blog Platform - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/blog-platform.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="blog-platform">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Blog Platform</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Intermediate</span>
+        <span><i class="far fa-clock"></i> 10-15 hours</span>
+        <span><i class="fas fa-code-branch"></i> Next.js, MDX, Prisma, PostgreSQL</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A comprehensive engineering guide to building a production-ready blog platform with Next.js SSR/SSG, MDX content authoring, comments, tags taxonomy, full-text search, pagination, and SEO optimization.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This blog platform project builds a fully functional content management system using Next.js 14 App Router with hybrid rendering (SSR/SSG/ISR), MDX for rich content authoring, Prisma ORM for database access, and PostgreSQL for persistence. You will implement: a public-facing blog with beautiful typography, an admin dashboard for content management, a threaded comment system with moderation, tag/category taxonomy, full-text search, pagination, RSS feed generation, and comprehensive SEO optimization with structured data and auto-generated Open Graph images.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Content creators need a platform to publish and manage articles, but existing solutions fall into two categories: overly complex CMS platforms (WordPress, Contentful) with unnecessary features, or minimal static site generators that lack admin UIs and dynamic features. The challenge is building a platform that combines fast SSR/SSG performance for readers, a simple MDX-based authoring experience for writers, an admin dashboard for management, and built-in engagement features (comments, search, related posts). The platform must be SEO-optimized out of the box with automatic sitemaps, structured data, and optimized images.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Personal Blog:</strong> A developer writes technical tutorials using MDX with embedded code examples, interactive demos, and reusable components directly in blog posts.</li>
+          <li><strong>Company Engineering Blog:</strong> A tech company publishes articles with multiple authors, categories (frontend, backend, DevOps), and an editorial workflow with draft/review/publish states.</li>
+          <li><strong>Documentation Site:</strong> A product team uses the platform for versioned documentation with full-text search, community-contributed edits via comments, and RSS feeds for update notifications.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>Next.js is the most popular React framework, powering sites like TikTok, Twitch, and Hulu with over 5 million weekly npm downloads. MDX combines Markdown with JSX for rich interactive content. The architecture patterns you learn - hybrid rendering, Incremental Static Regeneration, API routes, middleware - apply directly to any content-heavy application. SEO techniques (structured data, Open Graph, sitemaps) are essential for production web apps. PostgreSQL full-text search is used by companies like Instagram and Uber for performant search at scale.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Build a Next.js 14 App Router application with hybrid rendering: SSG for blog posts, SSR for admin dashboard, and ISR for content updates without full rebuilds</li>
+          <li>Create and parse MDX content with custom components, syntax highlighting using rehype-pretty-code, and embedded React components via next-mdx-remote</li>
+          <li>Implement a threaded comment system with nested set model, moderation queue, spam detection, and email notifications</li>
+          <li>Build tag/category taxonomy with dynamic filtering, related posts algorithm using tag overlap scoring, and tag cloud visualization</li>
+          <li>Implement full-text search using PostgreSQL tsvector indexes with weighted ranking, result highlighting, and debounced client-side search</li>
+          <li>Generate dynamic RSS feeds, XML sitemaps, JSON-LD structured data, and server-side Open Graph images using @vercel/og</li>
+          <li>Build an admin dashboard with NextAuth.js authentication, role-based access control, MDX post editor with live preview, and analytics</li>
+          <li>Optimize Core Web Vitals with next/image, next/font font loading, dynamic imports, and React Server Components for zero client-side JavaScript</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fab fa-react"></i> Next.js 14</span>
+          <span class="badge-tech"><i class="fas fa-file-alt"></i> MDX</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> Prisma + PostgreSQL</span>
+          <span class="badge-tech"><i class="fab fa-js"></i> TypeScript</span>
+          <span class="badge-tech"><i class="fas fa-shield-alt"></i> NextAuth.js</span>
+          <span class="badge-tech"><i class="fas fa-search"></i> Full-Text Search</span>
+          <span class="badge-tech"><i class="fas fa-rss"></i> RSS/Sitemap</span>
+          <span class="badge-tech"><i class="fas fa-chart-line"></i> SEO (JSON-LD, OG)</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Solid React knowledge: components, hooks, props, state management with useState/useEffect</li>
+          <li>Experience with Next.js: pages, routing, getServerSideProps/getStaticProps patterns</li>
+          <li>TypeScript fundamentals: types, interfaces, generics, utility types</li>
+          <li>Understanding of SQL databases and basic query writing (SELECT, JOIN, WHERE, ORDER BY)</li>
+          <li>Comfortable with command line, npm/yarn/pnpm, and Git version control</li>
+          <li>Node.js 18+ and PostgreSQL installed locally (or Docker Compose)</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The application follows Next.js App Router architecture with clear separation between public and admin routes. Public routes (/, /blog, /blog/[slug], /tags, /about) use SSG with ISR for content updates. Admin routes (/admin, /admin/posts, /admin/comments) use dynamic SSR with authentication middleware. MDX content is stored in the database with raw frontmatter and body, rendered at request time using next-mdx-remote. Comments use a nested set model for threaded replies with eager loading for the first two levels. Search uses PostgreSQL tsvector with a GIN index for performant full-text search across titles, excerpts, and content with weighted ranking. Images are optimized through next/image with Cloudinary. The sitemap and RSS feed are auto-generated during build from published posts.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+blog-platform/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── blog/
+│   │   ├── page.tsx
+│   │   └── [slug]/page.tsx
+│   ├── tags/[tag]/page.tsx
+│   ├── admin/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── posts/
+│   │   └── comments/
+│   ├── api/
+│   │   ├── posts/
+│   │   ├── comments/
+│   │   ├── search/
+│   │   └── auth/[...nextauth]/
+│   ├── sitemap.ts
+│   └── rss.xml/route.ts
+├── components/
+│   ├── ui/ (Button, Card, Input, Modal)
+│   ├── blog/ (PostCard, TableOfContents, SearchBar)
+│   ├── admin/ (PostEditor, CommentModeration)
+│   └── mdx/ (MDXComponents, CodeBlock, Callout)
+├── lib/
+│   ├── db.ts (Prisma client singleton)
+│   ├── auth.ts (NextAuth config)
+│   └── mdx.ts (MDX serialization)
+├── prisma/schema.prisma
+├── public/
+├── types/index.ts
+├── .env
+├── next.config.mjs
+├── tsconfig.json
+└── package.json
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: Project Setup & Database Schema</h4>
+          <p>Initialize Next.js with TypeScript and App Router. Set up Prisma with PostgreSQL connection. Design the database schema: User (with role enum), Post (with published/publishedAt), Comment (self-referencing for threaded replies), Tag, Category, and PostTag junction table. Create seed data. Set up the base layout with navigation and footer.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: MDX Content Rendering</h4>
+          <p>Implement MDX rendering with next-mdx-remote. Set up custom components for code blocks (rehype-prism-plus), images (next/image with blur placeholder), info/warning/tip callouts, and embedded interactive demos. Create the blog post page with rich typography using Tailwind typography plugin. Implement reading time estimation and auto-generated table of contents from headings.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Comments & Engagement</h4>
+          <p>Build the comment system with Prisma nested set model for threaded replies. Implement comment form with email notification (SendGrid) for replies. Add comment moderation dashboard. Implement Bayesian spam detection with training mode. Add "like" heart button and bookmark feature for authenticated users.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Search & Taxonomy</h4>
+          <p>Implement PostgreSQL full-text search: add tsvector generated column with GIN index. Create search API route with ts_rank for weighted results and ts_headline for highlighted snippets. Build search UI with debounced input and keyboard navigation. Implement tag/category pages with pagination. Add related posts algorithm using tag overlap scoring.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: SEO, RSS & Admin Dashboard</h4>
+          <p>Generate sitemap.xml and RSS feed as route handlers. Add JSON-LD structured data (Article, BlogPosting, BreadcrumbList, Organization). Implement Open Graph image generation with @vercel/og. Build admin dashboard with NextAuth.js (Google + GitHub providers), post editor with MDX preview, comment moderation panel, and basic analytics (page views, popular posts).</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: Prisma Schema with PostgreSQL Full-Text Search</h4>
+          <p>Design the database schema with support for tagged posts, threaded comments, user roles, and full-text search using PostgreSQL tsvector.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>// prisma/schema.prisma
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+generator client { provider = "prisma-client-js" }
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(AUTHOR)
+  image     String?
+  bio       String?
+  posts     Post[]
+  comments  Comment[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+enum Role { ADMIN AUTHOR READER }
+
+model Post {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  excerpt     String?
+  content     String
+  coverImage  String?
+  published   Boolean   @default(false)
+  featured    Boolean   @default(false)
+  viewCount   Int       @default(0)
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  tags        PostTag[]
+  comments    Comment[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  publishedAt DateTime?
+
+  @@index([published, publishedAt])
+  @@index([slug])
+}
+
+model Tag { id String @id @default(cuid()) name String @unique slug String @unique posts PostTag[] }
+model PostTag { postId String tagId String post Post @relation(fields: [postId], references: [id], onDelete: Cascade) tag Tag @relation(fields: [tagId], references: [id], onDelete: Cascade) @@id([postId, tagId]) }
+model Category { id String @id @default(cuid()) name String @unique slug String @unique posts Post[] }
+
+model Comment {
+  id        String    @id @default(cuid())
+  content   String
+  postId    String
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User      @relation(fields: [authorId], references: [id])
+  parentId  String?
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  approved  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  @@index([postId, approved, createdAt])
+}
+
+// Custom migration for tsvector:
+// ALTER TABLE "Post" ADD COLUMN "searchVector" tsvector
+//   GENERATED ALWAYS AS (setweight(to_tsvector('english', coalesce(title,'')),'A') ||
+//   setweight(to_tsvector('english', coalesce(excerpt,'')),'B') ||
+//   setweight(to_tsvector('english', coalesce(content,'')),'C')) STORED;
+// CREATE INDEX post_search_idx ON "Post" USING GIN ("searchVector");</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: MDX with Custom Components</h4>
+          <p>Implement MDX rendering with custom remark/rehype plugins for syntax highlighting, responsive images, callouts, and reading time.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>// lib/mdx.ts
+import { serialize } from 'next-mdx-remote/serialize';
+import rehypePrism from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
+import readingTime from 'reading-time';
+
+export async function serializeMDX(content: string) {
+  const mdxSource = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeSlug, [rehypePrism, { showLineNumbers: true, ignoreMissing: true }]]
+    },
+    parseFrontmatter: true
+  });
+  const stats = readingTime(content);
+  return { mdxSource, readingTime: stats.text, frontmatter: mdxSource.frontmatter };
+}
+
+// components/mdx/MDXComponents.tsx
+const MDXComponents = {
+  Callout: ({ type = 'info', children }: { type: 'info'|'warning'|'tip'; children: React.ReactNode }) => (
+    <div className={`callout-${type} border-l-4 p-4 my-6 rounded-r-lg`}>{children}</div>
+  ),
+  img: ({ src, alt, ...props }: any) => (
+    <Image src={src} alt={alt || ''} width={800} height={450}
+      className="rounded-lg my-6" loading="lazy" {...props} />
+  )
+};
+
+// app/blog/[slug]/page.tsx
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await prisma.post.findUnique({
+    where: { slug: params.slug, published: true },
+    include: { author: true, tags: { include: { tag: true } }, category: true }
+  });
+  if (!post) notFound();
+  const { mdxSource, readingTime } = await serializeMDX(post.content);
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          '@context': 'https://schema.org', '@type': 'BlogPosting',
+          headline: post.title, description: post.excerpt,
+          author: { '@type': 'Person', name: post.author.name },
+          datePublished: post.publishedAt?.toISOString(), image: post.coverImage
+        })
+      }} />
+      <article><MDXRemote source={mdxSource} components={MDXComponents} /></article>
+    </>
+  );
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Full-Text Search with Weighted Ranking</h4>
+          <p>Implement PostgreSQL full-text search using tsvector with weighted ranking that prioritizes title matches over excerpt and body content.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>// app/api/search/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import prisma from '@/lib/db';
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const q = searchParams.get('q');
+  const page = parseInt(searchParams.get('page') || '1');
+  const limit = 10;
+  const offset = (page - 1) * limit;
+
+  if (!q || q.length < 2) {
+    return NextResponse.json({ results: [], total: 0 });
+  }
+
+  const sanitized = q.replace(/[^\w\s]/g, '').trim();
+  const tsquery = sanitized.split(/\s+/).map(w => w + ':*').join(' & ');
+
+  try {
+    const [results, totalResult] = await Promise.all([
+      prisma.$queryRaw`
+        SELECT id, title, excerpt, slug, cover_image,
+          ts_rank("searchVector", to_tsquery('english', ${tsquery}), 32) AS rank,
+          ts_headline('english', content, to_tsquery('english', ${tsquery}),
+            'MaxWords=30, MinWords=15, StartSel=<mark>, StopSel=</mark>') AS headline
+        FROM "Post"
+        WHERE "searchVector" @@ to_tsquery('english', ${tsquery}) AND published = true
+        ORDER BY rank DESC
+        LIMIT ${limit} OFFSET ${offset}
+      `,
+      prisma.$queryRaw`
+        SELECT COUNT(*)::int AS total FROM "Post"
+        WHERE "searchVector" @@ to_tsquery('english', ${tsquery}) AND published = true
+      `
+    ]);
+    return NextResponse.json({
+      results: results.map((r: any) => ({
+        id: r.id, title: r.title, excerpt: r.excerpt,
+        slug: r.slug, coverImage: r.cover_image,
+        rank: r.rank, headline: r.headline
+      })),
+      total: totalResult[0].total, page,
+      totalPages: Math.ceil(totalResult[0].total / limit)
+    });
+  } catch { return NextResponse.json({ error: 'Search failed' }, { status: 500 }); }
+}
+
+// Client-side debounced search
+function SearchBar() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [debouncedQuery] = useDebounce(query, 300);
+  useEffect(() => {
+    if (debouncedQuery.length < 2) { setResults([]); return; }
+    fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`)
+      .then(r => r.json()).then(d => setResults(d.results)).catch(() => setResults([]));
+  }, [debouncedQuery]);
+  return (
+    <div className="search-wrapper">
+      <input type="search" value={query} onChange={e => setQuery(e.target.value)}
+        placeholder="Search articles..." />
+      {results.length > 0 && (
+        <div className="search-results-dropdown">
+          {results.map(r => (
+            <Link key={r.id} href={`/blog/${r.slug}`} className="search-result-item">
+              <div className="font-semibold">{r.title}</div>
+              <div className="text-sm text-muted" dangerouslySetInnerHTML={{ __html: r.headline }} />
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Sitemap & RSS Generation</h4>
+          <p>Generate dynamic sitemap.xml and RSS feed using Next.js route handlers with all published posts and tag pages.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>// app/sitemap.ts
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://yourblog.com';
+  const [posts, tags] = await Promise.all([
+    prisma.post.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+    prisma.tag.findMany({ select: { slug: true }, where: { posts: { some: { post: { published: true } } } } })
+  ]);
+  return [
+    { url: baseUrl, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
+    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
+    ...posts.map(p => ({ url: `${baseUrl}/blog/${p.slug}`, lastModified: p.updatedAt, changeFrequency: 'monthly' as const, priority: 0.8 })),
+    ...tags.map(t => ({ url: `${baseUrl}/tags/${t.slug}`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.5 }))
+  ];
+}
+
+// app/rss.xml/route.ts
+export async function GET() {
+  const baseUrl = 'https://yourblog.com';
+  const posts = await prisma.post.findMany({
+    where: { published: true }, include: { author: true, tags: { include: { tag: true } } },
+    orderBy: { publishedAt: 'desc' }, take: 20
+  });
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Your Blog</title><link>${baseUrl}</link>
+    <description>Latest articles</description>
+    <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
+    ${posts.map(post => `
+    <item>
+      <title><![CDATA[${post.title}]]></title>
+      <link>${baseUrl}/blog/${post.slug}</link>
+      <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
+      <pubDate>${post.publishedAt?.toUTCString()}</pubDate>
+      <author>${post.author.email} (${post.author.name})</author>
+      <category>${post.tags.map(t => t.tag.name).join(', ')}</category>
+      <description><![CDATA[${post.excerpt || ''}]]></description>
+    </item>`).join('')}
+  </channel>
+</rss>`;
+  return new Response(rss, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>Rendering Testing:</strong> Build the site with `next build` and verify all pages are pre-rendered with correct HTML. Test ISR by publishing a post and confirming updated content appears within the revalidation window without full rebuild. Verify RSS and sitemap endpoints return valid XML.</p>
+        <p><strong>Search Testing:</strong> Create posts with specific keywords, search for exact and partial matches, verify results ranked by relevance. Test empty queries, special characters, and very long queries. Verify ts_headline highlighting correctly wraps matched terms in mark tags.</p>
+        <p><strong>Comment Testing:</strong> Submit a comment as logged-in user, verify it enters moderation queue. Approve and verify it appears on the post with correct threading. Test reply nesting depth. Submit spam content and verify Bayesian filter catches it. Test email notification delivery.</p>
+        <p><strong>SEO Testing:</strong> Use Google Rich Results Test for JSON-LD validation. Use Facebook Sharing Debugger for Open Graph tags. Run Lighthouse and verify 90+ SEO score. Verify all meta descriptions and canonical URLs are correct across pages.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>Vercel:</strong> Connect GitHub repo to Vercel. Set environment variables: DATABASE_URL (Supabase/Neon), NEXTAUTH_SECRET, NEXTAUTH_URL, CLOUDINARY_URL. Deploy automatically on push to main. Vercel automatically optimizes images and caches pages at edge with ISR.</p>
+        <p><strong>Database:</strong> Use Supabase (free tier with 500MB) or Railway for PostgreSQL with automated backups. Run `npx prisma migrate deploy` in Vercel build command. For local dev, use Docker Compose with PostgreSQL.</p>
+        <p><strong>Image Storage:</strong> Use Cloudinary, AWS S3, or Vercel Blob Storage. Configure next/image remotePatterns in next.config.mjs for your image CDN domain.</p>
+        <p><strong>Monitoring:</strong> Set up Sentry for error tracking, Vercel Analytics for page views, and Prisma Data Platform for database query monitoring. Configure uptime monitoring with Checkly or Better Uptime.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. MDX Serialization with Server Components</strong><br>
+          next-mdx-remote serializes MDX on the server but MDXRemote must be a client component. Using it directly in a Server Component causes hydration errors. Either render MDXRemote in a separate 'use client' wrapper, or use the new next-mdx-remote-client package that supports RSC. Always serialize in a Server Component and pass the serialized source as a prop to a Client Component.
+        </div>
+        <div class="challenge-card">
+          <strong>2. ISR Cache Not Invalidating After Content Updates</strong><br>
+          With ISR (revalidate), stale content may serve for the entire revalidation window. Use on-demand revalidation: call revalidatePath('/blog') or revalidateTag('posts') in your admin API after publishing. Set up a webhook endpoint that Vercel calls on deployment. Use `revalidate: false` in development to see changes immediately.
+        </div>
+        <div class="challenge-card">
+          <strong>3. SQL Injection in PostgreSQL Full-Text Search</strong><br>
+          Directly interpolating user input into to_tsquery() allows tsquery operators (&, |, !, *) to cause syntax errors. Always sanitize: remove special characters with /[^\w\s]/, split into words, and join with &. Use parameterized queries with prisma.$queryRaw template literals (they safely escape parameters). Validate minimum query length of 2 characters.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Missing Image Alt Text and Responsive Sizes</strong><br>
+          Blog images without alt text fail accessibility (WCAG) and SEO checks. Enforce alt text as required prop in your MDX Image component. Use next/image with explicit width/height to prevent CLS. Use the `sizes` attribute for responsive images: sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px". This ensures appropriate image resolution is downloaded for each viewport.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the difference and use cases for SSR, SSG, and ISR in Next.js.<br>
+          <strong>A:</strong> SSR renders pages on each request - use for personalized/dynamic content (dashboards, user profiles). SSG pre-renders at build time - use for content that rarely changes (blog posts, documentation, marketing pages). ISR combines SSG with periodic revalidation - pages are pre-rendered but can be updated after build without full rebuild. Use for content that changes periodically (news, e-commerce products). For our blog: SSG for most pages with ISR at 60-second revalidation for blog listing, plus on-demand revalidation triggered via API when posts are published.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How does PostgreSQL full-text search differ from LIKE queries?<br>
+          <strong>A:</strong> LIKE '%term%' does a sequential scan with pattern matching - slow on large tables, no ranking, no stemming (searches for exact substring). PostgreSQL tsvector full-text search: pre-processes text into lexemes (normalized words with stemming - "running", "ran", "runs" all match "run"), uses GIN indexes for fast lookups, supports weighted ranking (ts_rank), prefix matching (:*), boolean operators (& | !), and result highlighting (ts_headline). tsvector search can be thousands of times faster on large datasets and finds relevant results that LIKE would miss.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What is the purpose of NextAuth.js callbacks and how do you configure them?<br>
+          <strong>A:</strong> NextAuth.js callbacks allow you to control the authentication flow at different stages. jwt callback: customize the JWT token contents (add user role, permissions). session callback: customize what's exposed to the client session (include user id, role). signIn callback: control which users can sign in (domain whitelist, email verification). redirect callback: control redirect URLs after sign in/out. Example: async jwt({ token, user }) { if (user) token.role = user.role; return token; } and async session({ session, token }) { session.user.role = token.role; return session; }.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement a related posts feature?<br>
+          <strong>A:</strong> Use tag overlap scoring. For each post's tags, find other posts sharing the most tags. Score = number of shared tags / total unique tags across both posts. SQL: SELECT p.id, p.title, p.slug, COUNT(pt2.tagId) as shared_tags FROM posts p JOIN post_tags pt1 ON pt1.postId = currentPostId JOIN post_tags pt2 ON pt2.tagId = pt1.tagId AND pt2.postId = p.id WHERE p.id != currentPostId AND p.published = true GROUP BY p.id ORDER BY shared_tags DESC LIMIT 4. For better results, incorporate category match and recency as additional scoring factors.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> Describe strategies for optimizing Largest Contentful Paint (LCP) on a blog post page.<br>
+          <strong>A:</strong> (1) Use next/image for the hero image with priority prop to preload, explicit width/height to prevent CLS, and blur data URL placeholder. (2) Preload critical fonts with next/font and display:swap. (3) Minimize render-blocking resources: inline critical CSS, defer non-critical JS with async/defer. (4) Use SSG so HTML is served instantly from CDN edge. (5) Optimize the hero image to WebP/AVIF with appropriate quality (85%). (6) Use React Server Components for the post content to eliminate client-side JavaScript. (7) Set proper Cache-Control headers for static assets.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Architected a full-stack blog platform using Next.js 14 App Router with hybrid rendering (SSG/SSR/ISR), achieving sub-100ms TTFB through edge caching and incremental static regeneration with on-demand revalidation</li>
+          <li>Integrated MDX content authoring with rehype-prism-plus syntax highlighting, next-mdx-remote serialization, and custom React components for interactive blog content</li>
+          <li>Implemented PostgreSQL full-text search with tsvector GIN indexes, weighted ranking (ts_rank), and result highlighting (ts_headline), achieving sub-50ms search across 10,000+ articles</li>
+          <li>Built a threaded comment system with Prisma nested set model, Bayesian spam detection, moderation queue with email notifications, and like/bookmark engagement features</li>
+          <li>Generated dynamic sitemap.xml, RSS feed, and JSON-LD structured data (Article, BreadcrumbList, Organization schemas) for comprehensive SEO with rich search results</li>
+          <li>Created admin dashboard with NextAuth.js (Google/GitHub OAuth), role-based access control (Admin/AUTHOR/READER), MDX post editor with live preview, and comment moderation panel</li>
+          <li>Optimized Core Web Vitals achieving 95+ Lighthouse scores through next/image optimization, next/font font loading, React Server Components, and dynamic code splitting</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include architecture diagram, tech stack with badges, one-command setup (git clone, cp .env.example .env, npm install, npx prisma migrate dev, npm run dev), environment variables table, and link to live demo.</p>
+        <p><strong>Branch Strategy:</strong> main for production, develop for staging, feature/* for new features. Use semantic versioning with tags. Require PR reviews and passing CI checks before merging.</p>
+        <p><strong>GitHub Actions:</strong> Run ESLint, Prettier check, TypeScript typecheck (tsc --noEmit), build (next build), and test (vitest + @testing-library/react) on every PR. Deploy preview deployments to Vercel for each PR branch.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Newsletter Integration:</strong> Add Mailchimp/ConvertKit signup forms. Send automated digest emails for new posts using SendGrid or Resend. Implement subscriber segmentation by tags/categories and campaign analytics.</li>
+          <li><strong>Analytics Dashboard:</strong> Integrate Plausible or Umami for privacy-first analytics. Build custom admin dashboard showing page views over time, popular posts by traffic, referrer sources, reader geography, and scroll depth heatmaps.</li>
+          <li><strong>Multi-tenant Support:</strong> Transform into a hosted blogging platform where each user gets blog.yourplatform.com/username. Implement PostgreSQL row-level security for data isolation. Add custom domains with automatic SSL via Vercel domains.</li>
+          <li><strong>AI-Powered Features:</strong> Integrate OpenAI API for auto-generating meta descriptions, excerpt summarization, tag suggestions from content analysis, and grammar checking in the post editor. Implement AI-powered related article recommendations based on semantic similarity using embeddings.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://nextjs.org/docs" target="_blank">Next.js Documentation</a> - Official Next.js docs with App Router</li>
+          <li><a href="https://mdxjs.com/" target="_blank">MDX Documentation</a> - Markdown + JSX content authoring</li>
+          <li><a href="https://www.prisma.io/docs" target="_blank">Prisma Documentation</a> - Next-gen ORM for Node.js and TypeScript</li>
+          <li><a href="https://next-auth.js.org/" target="_blank">NextAuth.js Documentation</a> - Authentication for Next.js</li>
+          <li><a href="https://www.postgresql.org/docs/current/textsearch.html" target="_blank">PostgreSQL Full-Text Search</a> - Official documentation</li>
+          <li><a href="https://developers.google.com/search/docs/appearance/structured-data/article" target="_blank">Google Article Structured Data</a> - JSON-LD for blog content</li>
+          <li><a href="https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation" target="_blank">@vercel/og Image Generation</a> - Dynamic Open Graph images</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="chat-app.html" class="btn btn-ghost">Chat App</a>
+          <a href="movie-search.html" class="btn btn-ghost">Movie Search App</a>
+          <a href="social-dashboard.html" class="btn btn-ghost">Social Dashboard</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="chat-app.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: Chat App</a>
+        <a href="movie-search.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

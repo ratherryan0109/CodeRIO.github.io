@@ -1,0 +1,560 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a responsive personal portfolio website from scratch. Learn HTML5, CSS3, JavaScript, responsive design, dark mode, SEO, and accessibility in this comprehensive engineering guide.">
+  <meta name="keywords" content="portfolio website, HTML5, CSS3, JavaScript, responsive design, dark mode, frontend project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="Personal Portfolio Website - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a professional portfolio website.">
+  <meta property="og:type" content="website">
+  <title>Personal Portfolio Website - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/personal-portfolio.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="personal-portfolio">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Personal Portfolio Website</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Beginner</span>
+        <span><i class="far fa-clock"></i> 2-3 hours</span>
+        <span><i class="fas fa-code-branch"></i> HTML5, CSS3, JavaScript</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A complete engineering guide to building a professional, responsive, and accessible personal portfolio website from scratch using semantic HTML5, modern CSS3, and vanilla JavaScript.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>A personal portfolio website serves as your digital resume and professional showcase. This project walks you through building a fully responsive, accessible, and performant portfolio site that includes a hero section, about me, skills, project gallery, contact form, and dark mode toggle. You will master semantic HTML5 structuring, CSS custom properties for theming, Flexbox and Grid layouts, and JavaScript-powered interactivity including form validation and scroll animations.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Job seekers and freelancers need a professional online presence to showcase their work, skills, and experience. Pre-built portfolio templates are often bloated, not customizable, or costly. Developers need to build their own portfolio from scratch to demonstrate technical ability while having full control over design, performance, and accessibility. The challenge is creating a site that looks polished, works on all devices, loads fast, and is easy to maintain.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Job Applications:</strong> A developer applies for frontend roles and shares their portfolio link, which features live project demos and a downloadable resume.</li>
+          <li><strong>Freelance Client Acquisition:</strong> A web designer uses their portfolio to attract clients by showcasing previous work, testimonials, and a contact form.</li>
+          <li><strong>Personal Branding:</strong> A tech blogger creates a portfolio + blog hybrid to establish authority, share tutorials, and grow an audience.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>Portfolio websites are the #1 most recommended project for junior developers. In a survey of 500+ hiring managers, 78% said a strong portfolio increases a candidate's chances of getting an interview. The skills learned here - responsive design, accessibility, SEO, performance optimization - are directly applicable to professional frontend roles at companies of all sizes. Modern frameworks like Next.js and Gatsby build on these exact concepts.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Write semantic HTML5 with proper document structure, meta tags, and ARIA attributes for accessibility</li>
+          <li>Implement CSS custom properties for dynamic theming (light/dark mode) with smooth transitions</li>
+          <li>Build responsive layouts using CSS Flexbox, Grid, and media queries for mobile-first design</li>
+          <li>Create smooth CSS animations and keyframe-based entrance effects for visual polish</li>
+          <li>Handle form validation, localStorage persistence, and event listeners with vanilla JavaScript</li>
+          <li>Apply SEO best practices including Open Graph tags, meta descriptions, and semantic heading hierarchy</li>
+          <li>Optimize performance with lazy loading, minified assets, and efficient CSS selectors</li>
+          <li>Integrate Google Analytics and understand basic user behavior tracking</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS3</span>
+          <span class="badge-tech"><i class="fab fa-js"></i> JavaScript (ES6+)</span>
+          <span class="badge-tech"><i class="fab fa-font-awesome"></i> Font Awesome 6</span>
+          <span class="badge-tech"><i class="fas fa-chart-line"></i> Google Analytics</span>
+          <span class="badge-tech"><i class="fab fa-github"></i> GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Basic understanding of HTML tags (headings, paragraphs, links, images, forms)</li>
+          <li>Familiarity with CSS selectors, properties, the box model, and basic layout</li>
+          <li>Some exposure to JavaScript variables, functions, conditionals, and DOM selection</li>
+          <li>A code editor (VS Code recommended with Live Server extension)</li>
+          <li>Git installed locally for version control (basic add/commit/push)</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The portfolio follows a single-page application (SPA) pattern where all sections live in one HTML file for simplicity. The architecture is component-based using semantic section tags. CSS is organized with custom properties at the root for theming. JavaScript handles interactivity through event delegation and DOM manipulation. The contact form uses a static JSON endpoint (Formspree or similar) for submissions. The entire site is static and can be hosted on any static file server. Google Analytics is loaded asynchronously in the head with a noscript fallback.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+portfolio/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+├── assets/
+│   ├── images/
+│   │   ├── profile.jpg
+│   │   └── project-thumbnails/
+│   └── resume.pdf
+├── favicon.ico
+├── robots.txt
+├── sitemap.xml
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: HTML Structure & SEO</h4>
+          <p>Create the semantic skeleton with proper meta tags, Open Graph protocol for social sharing, canonical URL, and structured data using JSON-LD for rich search results. Add all sections: header, nav, hero, about, skills, projects, experience, testimonials, contact, footer.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: CSS Theming & Layout</h4>
+          <p>Define CSS custom properties for light and dark themes. Build the navbar with glassmorphism effect. Use CSS Grid for the project gallery and Flexbox for skill bars and testimonials. Implement mobile-first responsive design with breakpoints at 480px, 768px, and 1024px.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Interactive Features</h4>
+          <p>Implement dark mode toggle with localStorage persistence. Add smooth scrolling for anchor links. Create scroll-triggered reveal animations using Intersection Observer API. Build a typing effect for the hero headline. Add a back-to-top button that appears after scrolling.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Form Handling & Validation</h4>
+          <p>Build a contact form with real-time validation (email format, required fields). Add toast notification system for user feedback. Integrate with Formspree or EmailJS for form submissions without a backend. Add reCAPTCHA v3 for spam protection.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: Performance & Analytics</h4>
+          <p>Optimize images with WebP format and lazy loading. Minify CSS and JS. Add async Google Analytics tracking. Run Lighthouse audits to achieve 90+ scores. Create a sitemap.xml and robots.txt for search engines.</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: HTML5 Semantic Structure</h4>
+          <p>Use semantic HTML5 elements to build an accessible and SEO-friendly document structure. Each section should have a clear purpose with proper heading hierarchy (h1 -> h6).</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta name="description" content="Full-stack developer portfolio - projects, skills, and contact"&gt;
+  &lt;meta property="og:title" content="John Doe - Portfolio"&gt;
+  &lt;meta property="og:image" content="https://example.com/og-image.jpg"&gt;
+  &lt;link rel="canonical" href="https://johndoe.com/"&gt;
+  &lt;link rel="icon" type="image/x-icon" href="/favicon.ico"&gt;
+  &lt;title&gt;John Doe - Full Stack Developer&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;nav class="navbar" role="navigation" aria-label="Main navigation"&gt;
+      &lt;div class="logo"&gt;&lt;a href="/"&gt;JD&lt;/a&gt;&lt;/div&gt;
+      &lt;ul class="nav-links"&gt;
+        &lt;li&gt;&lt;a href="#about" aria-current="page"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;button id="theme-toggle" aria-label="Toggle dark mode"&gt;&lt;i class="fas fa-moon"&gt;&lt;/i&gt;&lt;/button&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;section id="hero"&gt;&lt;!-- hero content --&gt;&lt;/section&gt;
+    &lt;section id="about" aria-labelledby="about-heading"&gt;&lt;!-- about content --&gt;&lt;/section&gt;
+    &lt;section id="projects" aria-labelledby="projects-heading"&gt;&lt;!-- projects grid --&gt;&lt;/section&gt;
+    &lt;section id="contact" aria-labelledby="contact-heading"&gt;&lt;!-- contact form --&gt;&lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;&lt;!-- footer content --&gt;&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: CSS Custom Properties for Theming</h4>
+          <p>Define all colors, spacing, and typography as CSS custom properties. This allows instant theme switching by changing a single attribute on the document element.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>:root {
+  --primary: #6c63ff;
+  --primary-dark: #5a52d5;
+  --bg: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text: #1a1a2e;
+  --text-secondary: #64748b;
+  --card-bg: rgba(255,255,255,0.8);
+  --glass-border: rgba(255,255,255,0.2);
+  --shadow: 0 4px 6px rgba(0,0,0,0.07);
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f23;
+  --bg-secondary: #1a1a35;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --card-bg: rgba(30,30,60,0.8);
+  --glass-border: rgba(255,255,255,0.08);
+  --shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background var(--transition), color var(--transition);
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Responsive Navigation with Hamburger Menu</h4>
+          <p>Build a mobile-first navigation that collapses into a hamburger menu on small screens. Use JavaScript to toggle visibility and animate the menu icon.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  hamburger.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+  if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+  }
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Dark Mode Toggle with localStorage</h4>
+          <p>Persist the user's theme preference across sessions using localStorage. Apply the theme before page render to prevent FOUC (flash of unstyled content).</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>&lt;script&gt;
+  (function() {
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+&lt;/script&gt;
+
+const themeToggle = document.getElementById('theme-toggle');
+const icon = themeToggle.querySelector('i');
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 5: Form Validation & Submission</h4>
+          <p>Implement real-time validation with visual feedback. Use constraint validation API for email and required fields. Show success/error toasts.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const form = document.getElementById('contact-form');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const messageInput = document.getElementById('message');
+const nameError = document.getElementById('name-error');
+const emailError = document.getElementById('email-error');
+const messageError = document.getElementById('message-error');
+
+function validateField(input, errorEl, validator) {
+  const result = validator(input.value.trim());
+  if (!result.valid) {
+    errorEl.textContent = result.message;
+    errorEl.style.display = 'block';
+    input.classList.add('invalid');
+    return false;
+  }
+  errorEl.style.display = 'none';
+  input.classList.remove('invalid');
+  return true;
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+nameInput.addEventListener('blur', () => {
+  validateField(nameInput, nameError, (v) => ({
+    valid: v.length >= 2,
+    message: 'Name must be at least 2 characters'
+  }));
+});
+
+emailInput.addEventListener('blur', () => {
+  validateField(emailInput, emailError, (v) => ({
+    valid: isValidEmail(v),
+    message: 'Please enter a valid email address'
+  }));
+});
+
+messageInput.addEventListener('blur', () => {
+  validateField(messageInput, messageError, (v) => ({
+    valid: v.length >= 10,
+    message: 'Message must be at least 10 characters'
+  }));
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const isNameValid = validateField(nameInput, nameError, (v) => ({
+    valid: v.length >= 2, message: 'Name must be at least 2 characters'
+  }));
+  const isEmailValid = validateField(emailInput, emailError, (v) => ({
+    valid: isValidEmail(v), message: 'Please enter a valid email'
+  }));
+  const isMessageValid = validateField(messageInput, messageError, (v) => ({
+    valid: v.length >= 10, message: 'Message must be at least 10 characters'
+  }));
+  if (!isNameValid || !isEmailValid || !isMessageValid) return;
+  showToast('Sending message...', 'info');
+  try {
+    const response = await fetch('https://formspree.io/f/yourFormID', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        message: messageInput.value.trim()
+      })
+    });
+    if (response.ok) {
+      showToast('Message sent successfully!', 'success');
+      form.reset();
+    } else {
+      showToast('Failed to send message. Please try again.', 'error');
+    }
+  } catch {
+    showToast('Network error. Please check your connection.', 'error');
+  }
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 6: Intersection Observer Animations</h4>
+          <p>Use the Intersection Observer API to trigger entrance animations when elements scroll into view. This is more performant than scroll event listeners.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const observerOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* CSS */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>Manual Testing:</strong> Test the portfolio across Chrome, Firefox, Safari, and Edge. Use Chrome DevTools device emulation for mobile screens (iPhone SE, Pixel 5, iPad). Verify dark mode toggle persists on refresh. Submit the contact form with empty fields, invalid emails, and valid data. Test all anchor links navigate smoothly.</p>
+        <p><strong>Automated Testing:</strong> Use Lighthouse CI to generate reports. Validate HTML with W3C validator. Check contrast ratios with axe DevTools. Run Pa11y for accessibility audits. Use PageSpeed Insights for performance scoring.</p>
+        <p><strong>Accessibility Testing:</strong> Test with keyboard navigation (Tab, Enter, Escape). Use a screen reader (NVDA or VoiceOver) to verify ARIA labels and semantic structure. Ensure focus indicators are visible.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>GitHub Pages:</strong> Push the repository to GitHub, go to Settings > Pages, select the main branch and root folder, and your site is live at username.github.io/repo-name.</p>
+        <p><strong>Netlify:</strong> Drag and drop the project folder to Netlify Drop or connect your GitHub repo for automatic deploys on every push. Netlify provides HTTPS, a global CDN, and form handling without backend code.</p>
+        <p><strong>Vercel:</strong> Install Vercel CLI (<code>npm i -g vercel</code>), run <code>vercel</code> in the project root, and follow the prompts. Vercel automatically detects static sites and provides preview deployments for every branch.</p>
+        <p><strong>Custom Domain:</strong> Add a CNAME record pointing to your hosting provider. Configure SSL through Let's Encrypt (automatic on Netlify/Vercel). Update the canonical URL in meta tags.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. FOUC (Flash of Unstyled Content) with Dark Mode</strong><br>
+          Applying dark mode via JavaScript after the page renders causes a white flash. Always apply the theme in a script block in the &lt;head&gt; before the CSS loads, or use the &lt;html&gt; attribute approach with a blocking script.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Missing Meta Tags for SEO and Social Sharing</strong><br>
+          Many portfolios omit Open Graph tags, meta descriptions, and canonical URLs. This hurts search rankings and social media previews. Use the og:title, og:description, og:image, and og:url meta tags for every page.
+        </div>
+        <div class="challenge-card">
+          <strong>3. Non-Responsive Navigation</strong><br>
+          A navigation that works on desktop but breaks on mobile is a common oversight. Use a hamburger menu for mobile, test touch targets (minimum 44x44px), and ensure the menu closes when clicking outside or on a link.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Form Without Proper Error Handling</strong><br>
+          Forms that don't show inline validation errors or confirmation messages frustrate users. Implement real-time validation with clear error messages, show a loading state during submission, and handle both success and failure responses gracefully.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you make a website responsive without using a framework?<br>
+          <strong>A:</strong> Use CSS media queries with breakpoints based on content (not devices). Use relative units (rem, %, vw/vh) instead of pixels. Use Flexbox for 1D layouts and CSS Grid for 2D layouts. Implement a mobile-first approach where the base styles target mobile, and media queries add complexity for larger screens. Test with the built-in browser dev tools device emulation.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the difference between CSS Grid and Flexbox. When would you use each?<br>
+          <strong>A:</strong> Flexbox is one-dimensional (row OR column) and is ideal for distributing space along a single axis, like a navbar or a row of cards. CSS Grid is two-dimensional (rows AND columns simultaneously) and is better for page-level layouts like a full-page dashboard or a photo gallery. You can combine both: Grid for the overall page layout and Flexbox for components within grid cells.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you implement dark mode with proper user preference detection?<br>
+          <strong>A:</strong> Use the CSS media query prefers-color-scheme to detect the OS-level preference. Store the user's choice in localStorage. Apply the theme via a data-theme attribute on the html element. Add a script in the head to apply the saved theme before rendering to prevent FOUC. Provide a toggle button with a sun/moon icon that updates the attribute and saves the preference.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What are the key considerations for web accessibility in a portfolio?<br>
+          <strong>A:</strong> Use semantic HTML (nav, main, section, article, aside). Include ARIA labels where semantics are insufficient. Ensure color contrast ratios meet WCAG AA standards (4.5:1 for normal text). Support keyboard navigation with visible focus indicators. Add alt text to all images. Use a logical heading hierarchy (h1 > h2 > h3). Test with screen readers and automated tools like axe DevTools.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you optimize a portfolio website for performance?<br>
+          <strong>A:</strong> Optimize images with WebP format and responsive srcset. Lazy load below-the-fold images using loading="lazy". Minify CSS and JavaScript. Use a CDN for static assets. Defer non-critical JavaScript with the defer attribute. Reduce HTTP requests by inlining critical CSS. Use system fonts or a limited set of web fonts with font-display: swap. Run Lighthouse and aim for 90+ on all metrics.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Architected and developed a fully responsive personal portfolio website using semantic HTML5, CSS3 custom properties, and vanilla JavaScript ES6+</li>
+          <li>Implemented a dynamic dark/light mode theme toggle with localStorage persistence and OS-level preference detection via prefers-color-scheme</li>
+          <li>Built a client-side contact form with real-time validation, accessibility attributes, and async submission handling with toast notifications</li>
+          <li>Optimized for performance achieving 95+ Lighthouse scores through image optimization, lazy loading, CSS minification, and deferred JavaScript</li>
+          <li>Integrated Google Analytics for user behavior tracking and applied SEO best practices including Open Graph meta tags, JSON-LD structured data, and sitemap generation</li>
+          <li>Ensured WCAG AA accessibility compliance through semantic HTML, ARIA labels, keyboard navigation support, and screen reader testing</li>
+          <li>Deployed via GitHub Pages/Netlify with automated CI/CD pipeline and custom domain configuration</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include project title, description, live demo link, screenshots, tech stack badges, installation instructions, and a features list. Add a "Show your support" section with a star button.</p>
+        <p><strong>Commit Messages:</strong> Use conventional commits format: feat: add dark mode toggle, fix: correct form validation email regex, docs: update README with deployment guide, style: refine card hover animation.</p>
+        <p><strong>Repository Structure:</strong> Keep the root clean. Use a CHANGELOG.md for version history. Add a .gitignore for node_modules and .DS_Store. Include a LICENSE file (MIT recommended). Add issue templates for bug reports and feature requests.</p>
+        <p><strong>GitHub Actions:</strong> Set up a workflow to run Lighthouse CI on pull requests, deploy to Netlify on pushes to main, and check for broken links weekly.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Blog Integration:</strong> Add a blog section using markdown files parsed by a library like marked.js. Implement tag filtering and a search bar with full-text search using Lunr.js.</li>
+          <li><strong>CMS Backend:</strong> Integrate a headless CMS like Contentful or Sanity for dynamic content management. This allows non-technical users to update projects and blog posts through a dashboard.</li>
+          <li><strong>Multi-language Support:</strong> Implement i18n using a JSON-based translation system. Add a language switcher that changes all visible text. Use the Accept-Language header for automatic detection.</li>
+          <li><strong>Project Filtering:</strong> Add category tags to projects with a filter UI that uses CSS transitions to show/hide items. Add a search input that filters in real-time based on project title and description.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Reference</a> - Comprehensive CSS documentation</li>
+          <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">CSS-Tricks Flexbox Guide</a> - Complete Flexbox reference</li>
+          <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank">CSS-Tricks Grid Guide</a> - Complete CSS Grid reference</li>
+          <li><a href="https://web.dev/learn/design/" target="_blank">web.dev Responsive Design</a> - Google's responsive design course</li>
+          <li><a href="https://www.a11yproject.com/checklist/" target="_blank">A11y Project Checklist</a> - Accessibility checklist</li>
+          <li><a href="https://fonts.google.com/" target="_blank">Google Fonts</a> - Free web fonts</li>
+          <li><a href="https://undraw.co/" target="_blank">unDraw</a> - Open source illustrations</li>
+          <li><a href="https://formspree.io/" target="_blank">Formspree</a> - Form backend service</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="todo-list.html" class="btn btn-ghost">To-Do List App</a>
+          <a href="calculator.html" class="btn btn-ghost">Calculator</a>
+          <a href="weather-dashboard.html" class="btn btn-ghost">Weather Dashboard</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="../Projects.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        <a href="weather-dashboard.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="html">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>HTML</h1>
+      <p>HTML (HyperText Markup Language) is the foundation of all web pages. It provides the structure and meaning to content on the web. Master semantic HTML to build accessible, SEO-friendly websites that work across all devices.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Beginner</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 4 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>HTML, short for HyperText Markup Language, is the standard markup language used to create web pages and web applications. Conceived by Tim Berners-Lee in 1991, HTML has evolved through multiple versions — from HTML 2.0 in 1995 to HTML5 in 2014, which introduced semantic elements, native multimedia support, and powerful APIs.</p>
+      <p>HTML uses a system of tags enclosed in angle brackets to define elements such as headings, paragraphs, links, images, forms, and tables. These elements tell the browser how to structure and display content. Every web page on the internet relies on HTML as its foundational layer, with CSS enhancing presentation and JavaScript adding interactivity.</p>
+      <p>Modern HTML5 supports rich media embedding via <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code>, vector graphics with <code>&lt;svg&gt;</code> and <code>&lt;canvas&gt;</code>, offline storage through localStorage and sessionStorage, geolocation APIs, drag-and-drop, web workers, and semantic elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;footer&gt;</code> that improve accessibility and SEO.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn HTML?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-cubes" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Foundation of the Web</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Every website uses HTML. It's the first step in any web development journey.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-universal-access" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Accessibility & SEO</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Semantic HTML improves screen reader support and search engine rankings.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-bolt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Easy to Learn</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">HTML has a gentle learning curve with immediate visual results.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-users" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">High Demand</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">HTML skills are required for frontend, full-stack, and CMS development roles.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">HTML powers the web presence of virtually every company. Major tech companies rely on HTML for their platforms:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Real-world applications include e-commerce platforms, social media sites, news portals, educational platforms like Coursera and Udemy, CMS platforms like WordPress, and countless corporate websites. HTML emails, landing pages, and single-page applications all depend on HTML markup.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic computer skills, text editor (VS Code recommended), web browser</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Document structure, headings, paragraphs, links, images, lists, tables</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 3-4)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Forms, inputs, semantic HTML5, multimedia embedding, iframes</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 5-6)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Accessibility (ARIA), SEO, microdata, performance optimization, HTML APIs</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Weeks 7-8)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Canvas/SVG graphics, Web Components, template literals, custom elements, shadow DOM</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+      <p style="color:var(--text-secondary);margin-bottom:1.5rem;font-size:1.05rem">This comprehensive HTML curriculum is divided into <strong>14 modules</strong> across beginner, intermediate, and advanced levels. Start from module 1 and work your way up, or jump directly to any topic.</p>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+
+      <a href="../lesson.html?course=html&module=1" class="module-card" onclick="LearningTracker.startLesson('html-01')">
+        <h3><span class="module-number">1</span> Introduction to HTML</h3>
+        <p>History of HTML, how the web works, browsers, and development tools setup with VS Code and Live Server.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=2" class="module-card" onclick="LearningTracker.startLesson('html-02')">
+        <h3><span class="module-number">2</span> HTML Elements</h3>
+        <p>Understanding HTML tags, elements, attributes, nesting rules, and the document tree structure.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=3" class="module-card" onclick="LearningTracker.startLesson('html-03')">
+        <h3><span class="module-number">3</span> Attributes</h3>
+        <p>Global attributes like id, class, style, and data-*. Using href, src, alt, title, and custom attributes.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=4" class="module-card" onclick="LearningTracker.startLesson('html-04')">
+        <h3><span class="module-number">4</span> Headings</h3>
+        <p>h1-h6 hierarchy, proper document structure, accessibility implications, and SEO best practices for headings.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 25 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=5" class="module-card" onclick="LearningTracker.startLesson('html-05')">
+        <h3><span class="module-number">5</span> Paragraphs</h3>
+        <p>p, span, br, hr tags. Text formatting with strong, em, and whitespace handling in HTML documents.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 25 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=6" class="module-card" onclick="LearningTracker.startLesson('html-06')">
+        <h3><span class="module-number">6</span> Links</h3>
+        <p>Anchor tags, href attribute, absolute vs relative URLs, target, download, and internal page navigation.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=7" class="module-card" onclick="LearningTracker.startLesson('html-07')">
+        <h3><span class="module-number">7</span> Images</h3>
+        <p>img tag, srcset for responsive images, figure and figcaption, alt text, and image format optimization.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+
+      <a href="../lesson.html?course=html&module=8" class="module-card" onclick="LearningTracker.startLesson('html-08')">
+        <h3><span class="module-number">8</span> Lists</h3>
+        <p>Ordered (ol), unordered (ul), definition (dl) lists, nesting, and styling list elements with CSS.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=9" class="module-card" onclick="LearningTracker.startLesson('html-09')">
+        <h3><span class="module-number">9</span> Tables</h3>
+        <p>Table structure with thead, tbody, tfoot, colspan, rowspan, caption, and accessibility best practices.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=10" class="module-card" onclick="LearningTracker.startLesson('html-10')">
+        <h3><span class="module-number">10</span> Forms</h3>
+        <p>Form tag, action/method, input types (text, email, password, checkbox, radio), select, textarea, labels.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 50 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=11" class="module-card" onclick="LearningTracker.startLesson('html-11')">
+        <h3><span class="module-number">11</span> Semantic HTML</h3>
+        <p>header, nav, main, section, article, aside, footer, and semantic best practices for accessibility and SEO.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 40 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+
+      <a href="../lesson.html?course=html&module=12" class="module-card" onclick="LearningTracker.startLesson('html-12')">
+        <h3><span class="module-number">12</span> Accessibility</h3>
+        <p>WCAG guidelines, ARIA roles and attributes, keyboard navigation, screen reader compatibility, color contrast.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 45 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=13" class="module-card" onclick="LearningTracker.startLesson('html-13')">
+        <h3><span class="module-number">13</span> SEO Basics</h3>
+        <p>Meta tags, Open Graph protocol, Twitter Cards, JSON-LD structured data, and search engine optimization.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 35 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="../lesson.html?course=html&module=14" class="module-card" onclick="LearningTracker.startLesson('html-14')">
+        <h3><span class="module-number">14</span> HTML Projects</h3>
+        <p>Apply all HTML knowledge in real-world projects. Build portfolio pages, landing pages, and interactive sites.</p>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 60 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. HTML Document Structure</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Every HTML document follows a basic structure. The DOCTYPE declaration must be the first line, followed by the html element containing head and body sections.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Visible content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Semantic vs Non-Semantic Elements</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Semantic elements clearly describe their meaning to both the browser and developer. Non-semantic elements like div and span tell nothing about their content.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&lt;!-- Non-semantic --&gt;
+&lt;div class="header"&gt;...&lt;/div&gt;
+&lt;div class="nav"&gt;...&lt;/div&gt;
+
+&lt;!-- Semantic HTML5 --&gt;
+&lt;header&gt;...&lt;/header&gt;
+&lt;nav&gt;...&lt;/nav&gt;
+&lt;main&gt;...&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Forms and Input Types</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">HTML5 introduced many new input types that enable native validation and better user experience across devices.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&lt;form action="/submit" method="POST"&gt;
+  &lt;label for="email"&gt;Email:&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" required&gt;
+
+  &lt;label for="age"&gt;Age:&lt;/label&gt;
+  &lt;input type="number" id="age" name="age" min="1" max="120"&gt;
+
+  &lt;label for="country"&gt;Country:&lt;/label&gt;
+  &lt;select id="country" name="country"&gt;
+    &lt;option value="us"&gt;United States&lt;/option&gt;
+    &lt;option value="in"&gt;India&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. HTML5 Multimedia</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Native audio and video elements eliminate the need for Flash plugins. Multiple source formats ensure cross-browser compatibility.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&lt;video controls width="640"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  Your browser does not support video.
+&lt;/video&gt;
+
+&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;source src="audio.ogg" type="audio/ogg"&gt;
+  Your browser does not support audio.
+&lt;/audio&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Tables with Structure</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">HTML tables should use thead, tbody, and tfoot for proper structure and accessibility.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Age&lt;/th&gt;&lt;th&gt;City&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Alice&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;NYC&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Bob&lt;/td&gt;&lt;td&gt;34&lt;/td&gt;&lt;td&gt;London&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td colspan="3"&gt;2 records&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Data Attributes</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Custom data attributes store extra information in HTML elements, accessible via JavaScript.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&lt;article data-id="42" data-author="john" data-published="2024-01-15"&gt;
+  &lt;h2&gt;Article Title&lt;/h2&gt;
+  &lt;p&gt;Content here...&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;script&gt;
+  const article = document.querySelector('article');
+  console.log(article.dataset.id);      // "42"
+  console.log(article.dataset.author);  // "john"
+&lt;/script&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Responsive Images</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">The srcset and sizes attributes allow browsers to choose the optimal image based on viewport and device pixel ratio.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&lt;img src="image-640.jpg"
+     srcset="image-320.jpg 320w,
+             image-640.jpg 640w,
+             image-1280.jpg 1280w"
+     sizes="(max-width: 600px) 100vw,
+            (max-width: 1200px) 50vw,
+            33vw"
+     alt="Responsive example"&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. HTML Entities & Special Characters</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">HTML entities represent reserved characters and special symbols. They start with & and end with ;</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>&amp;lt;  = &lt;       &amp;gt;  = &gt;
+&amp;amp; = &amp;       &amp;quot; = "
+&amp;copy; = &copy;   &amp;reg; = &reg;
+&amp;nbsp; = non-breaking space
+&amp;#10003; = ✓    &amp;#9733; = ★</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Personal Portfolio Page</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A complete semantic HTML portfolio page structure.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;John Doe - Portfolio&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section id="about"&gt;
+      &lt;h1&gt;Hi, I'm John&lt;/h1&gt;
+      &lt;p&gt;A web developer passionate about building accessible websites.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section id="projects"&gt;
+      &lt;h2&gt;Projects&lt;/h2&gt;
+      &lt;article&gt;
+        &lt;h3&gt;Project One&lt;/h3&gt;
+        &lt;p&gt;Description of the project.&lt;/p&gt;
+      &lt;/article&gt;
+    &lt;/section&gt;
+
+    &lt;section id="contact"&gt;
+      &lt;h2&gt;Contact Me&lt;/h2&gt;
+      &lt;form action="/submit" method="POST"&gt;
+        &lt;label for="name"&gt;Name:&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" required&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input type="email" id="email" name="email" required&gt;
+        &lt;button type="submit"&gt;Send&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2025 John Doe&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Product Card with Data Attributes</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A product card using semantic elements and data attributes for JavaScript interaction.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>&lt;article class="product-card" data-id="101" data-category="electronics" data-price="29.99"&gt;
+  &lt;figure&gt;
+    &lt;img src="product.jpg" alt="Wireless Mouse"&gt;
+    &lt;figcaption&gt;Ergonomic Wireless Mouse&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;div class="product-info"&gt;
+    &lt;h3&gt;Wireless Mouse Pro&lt;/h3&gt;
+    &lt;p class="price"&gt;$29.99&lt;/p&gt;
+    &lt;ul class="features"&gt;
+      &lt;li&gt;Bluetooth 5.0&lt;/li&gt;
+      &lt;li&gt;6-month battery&lt;/li&gt;
+      &lt;li&gt;Silent clicks&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;button class="add-to-cart" data-product-id="101"&gt;Add to Cart&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Build a Recipe Page</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a recipe page with an ingredients list (ul), steps (ol), and a table for nutrition facts.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Create a Photo Gallery</h4><p style="color:var(--text-muted);font-size:0.85rem">Use figure and figcaption to create a responsive photo gallery with captions and alt text.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Design a Registration Form</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a sign-up form with input validation (email, password, phone, date of birth) using HTML5 attributes.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Create a Table of Contents</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a nested list as a TOC with anchor links to different sections of a long article.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Build a Pricing Table</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a comparison table for three pricing plans with features, prices, and a sign-up button.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Build a Music Player Interface</h4><p style="color:var(--text-muted);font-size:0.85rem">Embed audio files with custom controls, a playlist using ul, and progress indicators using meter elements.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Create a Dashboard Layout</h4><p style="color:var(--text-muted);font-size:0.85rem">Use semantic HTML to structure a dashboard page with sidebar, header stats, main content, and data tables.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Build a Multi-Step Form</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a multi-step registration form with progress indicator using fieldset and hidden sections.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Personal Resume Website</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A one-page resume with semantic HTML sections for education, work experience, skills, and a contact form.</p>
+          <span class="badge badge-primary">HTML</span> <span class="badge badge-primary">Semantic</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Product Landing Page</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A marketing landing page with hero, features grid, testimonials, pricing table, and newsletter signup form.</p>
+          <span class="badge badge-primary">HTML</span> <span class="badge badge-primary">Forms</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Blog Article Platform</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A blog with article listings, individual article pages with comments section, author bio, and related posts.</p>
+          <span class="badge badge-primary">HTML</span> <span class="badge badge-primary">Semantic</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Event Registration Portal</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Multi-page event registration with speaker list, schedule table, registration form, and confirmation page.</p>
+          <span class="badge badge-primary">HTML</span> <span class="badge badge-primary">Tables</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Knowledge Base / Wiki</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A documentation site with sidebar navigation, search box, article sections, and breadcrumb navigation.</p>
+          <span class="badge badge-primary">HTML</span> <span class="badge badge-primary">Navigation</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Restaurant Menu Website</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A restaurant site with menu categories, pricing tables, reservation form, location map embed, and reviews.</p>
+          <span class="badge badge-primary">HTML</span> <span class="badge badge-primary">Multimedia</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div id="interviewQuestionsContainer"></div>
+      </div>
+
+  </section>
+
+  <script src="../js/learning.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script>
+  <script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+

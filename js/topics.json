@@ -1,0 +1,154 @@
+{
+  "python": [
+    "Variables & Data Types",
+    "Control Flow",
+    "Functions & Scope",
+    "Data Structures",
+    "OOP in Python",
+    "Advanced Python"
+  ],
+  "javascript": [
+    "Core Concepts",
+    "DOM & Browser APIs",
+    "Async JavaScript",
+    "ES6+ Features",
+    "Advanced JavaScript",
+    "Node.js Basics"
+  ],
+  "java": [
+    "Core Java",
+    "Collections Framework",
+    "Concurrency",
+    "JVM & Memory",
+    "I/O & NIO",
+    "Modern Java (8+)"
+  ],
+  "react": [
+    "Core React",
+    "Hooks",
+    "State Management",
+    "Performance"
+  ],
+  "sql": [
+    "Query Fundamentals",
+    "Advanced Queries",
+    "Optimization & Indexing",
+    "Administration"
+  ],
+  "html": [
+    "HTML Basics",
+    "Accessibility & SEO",
+    "Modern HTML Features"
+  ],
+  "css": [
+    "Layout",
+    "Styling & Effects",
+    "Advanced CSS"
+  ],
+  "git": [
+    "Version Control",
+    "Advanced Git",
+    "Collaboration"
+  ],
+  "docker": [
+    "Containerization",
+    "Networking",
+    "Orchestration & Production"
+  ],
+  "dsa": [
+    "Data Structures",
+    "Algorithms",
+    "Complexity Analysis",
+    "Problem Solving Strategies"
+  ],
+  "cpp": [
+    "Core C++",
+    "Standard Library (STL)",
+    "Memory & Performance"
+  ],
+  "typescript": [
+    "Type System",
+    "Advanced Types",
+    "Tooling & Configuration"
+  ],
+  "go": [
+    "Concurrency",
+    "Language Features",
+    "Standard Library"
+  ],
+  "rust": [
+    "Ownership & Borrowing",
+    "Language Features",
+    "Memory Safety"
+  ],
+  "mysql": [
+    "Database Design",
+    "Querying",
+    "Administration"
+  ],
+  "linux": [
+    "System Administration",
+    "Networking",
+    "Shell Scripting"
+  ],
+  "mongodb": [
+    "NoSQL Concepts",
+    "Schema Design",
+    "Operations"
+  ],
+  "c": [
+    "Memory Management",
+    "Pointer & Function Concepts",
+    "Preprocessor & Compilation"
+  ],
+  "csharp": [
+    ".NET Framework",
+    "C# Language Features",
+    ".NET Ecosystem"
+  ],
+  "kotlin": [
+    "Kotlin Features",
+    "Interop & Tooling",
+    "Standard Library"
+  ],
+  "swift": [
+    "Swift Features",
+    "iOS Development Basics",
+    "Concurrency & Memory"
+  ],
+  "pandas": [
+    "Data Manipulation",
+    "Analysis & Visualization",
+    "Performance & Best Practices"
+  ],
+  "security": [
+    "Authentication & Authorization",
+    "Web Security",
+    "Cryptography & Network Security"
+  ],
+  "dbms": [
+    "Database Design & Modeling",
+    "Transaction Management",
+    "NoSQL & Distributed Databases"
+  ],
+  "oop": [
+    "Core OOP Principles",
+    "Design Patterns & Principles",
+    "UML & Object Modeling"
+  ],
+  "os": [
+    "Process & Thread Management",
+    "Memory Management",
+    "File Systems & I/O"
+  ],
+  "networks": [
+    "Network Layers & Protocols",
+    "Routing & Forwarding",
+    "Application Layer & Security"
+  ],
+  "system-design": [
+    "Scalability & Performance",
+    "Distributed Systems",
+    "Design Problem Patterns"
+  ]
+}

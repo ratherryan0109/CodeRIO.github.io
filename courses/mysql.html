@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MySQL Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="mysql">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>MySQL</h1>
+      <p>MySQL is the world's most popular open-source relational database management system. Developed originally by MySQL AB (founded by David Axmark, Allan Larsson, and Michael Widenius) and now owned by Oracle Corporation, MySQL powers millions of web applications, from personal blogs to large-scale enterprise systems.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Beginner</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 6 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 14 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>MySQL was first released in 1995 and has grown to become the de facto standard database for web applications, particularly in the LAMP (Linux, Apache, MySQL, PHP/Perl/Python) stack. It is known for its reliability, ease of use, and strong performance for read-heavy workloads. MySQL supports multiple storage engines, with InnoDB being the default since MySQL 5.5, providing ACID-compliant transactions and foreign key support.</p>
+      <p>MySQL uses a client-server architecture where the MySQL server manages databases, tables, and handles client connections. It supports standard SQL with extensions like LIMIT, INSERT ... ON DUPLICATE KEY UPDATE, and various storage-engine-specific features. MySQL excels in replication (master-slave, group replication), partitioning, and full-text search capabilities.</p>
+      <p>Major platforms built on MySQL include Facebook (for some of its core infrastructure), Twitter (originally), YouTube, WordPress (over 43% of the web), Drupal, Joomla, and Magento. MySQL's ecosystem includes tools like phpMyAdmin, MySQL Workbench for GUI management, Percona Toolkit for optimization, and proxies like ProxySQL for load balancing.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn MySQL?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-globe" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Most Popular Open-Source DB</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">MySQL powers the majority of web applications and CMS platforms worldwide.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-tachometer-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Excellent Performance</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Optimized for read-heavy workloads with caching, indexes, and query optimization.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Secure & Reliable</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">ACID compliance, replication, backup tools, and strong access control.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-users" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Huge Community</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Extensive documentation, forums, Stack Overflow answers, and third-party tools.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">MySQL is the backbone of countless web applications and enterprise systems:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">WordPress</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">MySQL is used by Facebook (user data, photos, messages), Twitter (core infrastructure), YouTube (video metadata), Netflix (some services), Uber (trip data), Airbnb (listings and bookings), Shopify (product and order data), and millions of WordPress sites. Cloud providers offer managed MySQL services including Amazon RDS, Google Cloud SQL, and Azure Database for MySQL.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic SQL knowledge, understanding of databases, command-line familiarity</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Installation, MySQL CLI, CREATE/ALTER/DROP tables, SELECT, INSERT, UPDATE, DELETE</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 3-4)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">JOINs, indexes, foreign keys, views, stored procedures, functions, triggers</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 5-6)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Query optimization with EXPLAIN, transactions, isolation levels, replication, partitioning</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Week 7+)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Performance schema, InnoDB internals, high availability, sharding, MySQL NDB cluster</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=mysql&module=1" class="module-card" onclick="LearningTracker.startLesson('mysql-01')">
+        <h3><span class="module-number">1</span> Installing & Configuring MySQL</h3>
+        <p>Downloading MySQL, installation on Windows/Mac/Linux, MySQL Workbench setup, CLI access, my.cnf configuration basics.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Setup</span> <span class="badge badge-primary">Configuration</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=2" class="module-card" onclick="LearningTracker.startLesson('mysql-02')">
+        <h3><span class="module-number">2</span> MySQL Data Types</h3>
+        <p>Numeric types (INT, DECIMAL, FLOAT), string types (VARCHAR, TEXT, BLOB), date/time types (DATE, DATETIME, TIMESTAMP), ENUM, SET, and JSON type.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Data Types</span> <span class="badge badge-primary">Schema</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=3" class="module-card" onclick="LearningTracker.startLesson('mysql-03')">
+        <h3><span class="module-number">3</span> Database & Table Operations</h3>
+        <p>CREATE DATABASE, USE, CREATE TABLE with constraints (NOT NULL, UNIQUE, DEFAULT), ALTER TABLE, DROP TABLE, TRUNCATE, and table options.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">DDL</span> <span class="badge badge-primary">Constraints</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=4" class="module-card" onclick="LearningTracker.startLesson('mysql-04')">
+        <h3><span class="module-number">4</span> CRUD Operations</h3>
+        <p>INSERT (single/multiple rows), SELECT with WHERE/ORDER BY/LIMIT, UPDATE with JOINs, DELETE with JOINs, and INSERT ... ON DUPLICATE KEY UPDATE.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">CRUD</span> <span class="badge badge-primary">DML</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=5" class="module-card" onclick="LearningTracker.startLesson('mysql-05')">
+        <h3><span class="module-number">5</span> MySQL Functions</h3>
+        <p>String functions (CONCAT, SUBSTRING, REPLACE, TRIM), numeric functions (ROUND, CEILING, FLOOR), date functions (NOW, DATE_FORMAT, DATEDIFF), and aggregate functions.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Functions</span> <span class="badge badge-primary">Aggregates</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=mysql&module=6" class="module-card" onclick="LearningTracker.startLesson('mysql-06')">
+        <h3><span class="module-number">6</span> Joins & Relationships</h3>
+        <p>INNER JOIN, LEFT/RIGHT JOIN, FULL JOIN simulation, CROSS JOIN, SELF JOIN, joining with USING/ON, and foreign key constraints with CASCADE.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">JOINs</span> <span class="badge badge-primary">Foreign Keys</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=7" class="module-card" onclick="LearningTracker.startLesson('mysql-07')">
+        <h3><span class="module-number">7</span> Indexing for Performance</h3>
+        <p>B-tree indexes, UNIQUE indexes, composite indexes (column order), FULLTEXT indexes for search, SPATIAL indexes, and index hints (USE INDEX, FORCE INDEX).</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Indexes</span> <span class="badge badge-primary">Performance</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=8" class="module-card" onclick="LearningTracker.startLesson('mysql-08')">
+        <h3><span class="module-number">8</span> Views & Derived Tables</h3>
+        <p>CREATE VIEW, updatable views, WITH CHECK OPTION, ALTER/REPLACE VIEW, VIEW metadata, and performance considerations of views.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Views</span> <span class="badge badge-primary">Virtual Tables</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=9" class="module-card" onclick="LearningTracker.startLesson('mysql-09')">
+        <h3><span class="module-number">9</span> Stored Procedures</h3>
+        <p>CREATE PROCEDURE, parameters (IN, OUT, INOUT), variables, DECLARE, cursors, loop constructs, and procedure management.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Procedures</span> <span class="badge badge-primary">Programming</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=10" class="module-card" onclick="LearningTracker.startLesson('mysql-10')">
+        <h3><span class="module-number">10</span> Functions & Triggers</h3>
+        <p>Creating stored functions, deterministic vs not deterministic, triggers (BEFORE/AFTER INSERT/UPDATE/DELETE), trigger limitations, and event scheduler.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Triggers</span> <span class="badge badge-primary">Events</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=mysql&module=11" class="module-card" onclick="LearningTracker.startLesson('mysql-11')">
+        <h3><span class="module-number">11</span> Transactions & Locking</h3>
+        <p>START TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT, isolation levels (READ UNCOMMITTED to SERIALIZABLE), row-level vs table-level locks, deadlocks.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Transactions</span> <span class="badge badge-primary">ACID</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=12" class="module-card" onclick="LearningTracker.startLesson('mysql-12')">
+        <h3><span class="module-number">12</span> Query Optimization & EXPLAIN</h3>
+        <p>EXPLAIN output, type (ALL, range, ref, eq_ref, const), key length, Extra info (Using index, Using filesort), slow query log, and optimizer hints.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">EXPLAIN</span> <span class="badge badge-primary">Optimization</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=13" class="module-card" onclick="LearningTracker.startLesson('mysql-13')">
+        <h3><span class="module-number">13</span> Replication & Backup</h3>
+        <p>Master-slave replication, binary logs, GTID replication, group replication, mysqldump, mysqlpump, XtraBackup, point-in-time recovery.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Replication</span> <span class="badge badge-primary">Backup</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=mysql&module=14" class="module-card" onclick="LearningTracker.startLesson('mysql-14')">
+        <h3><span class="module-number">14</span> MySQL Security & Administration</h3>
+        <p>User management (CREATE USER, GRANT, REVOKE), authentication plugins, SSL/TLS, firewall, auditing, MySQL Enterprise vs Community edition.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Security</span> <span class="badge badge-primary">Administration</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. MySQL Storage Engines</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MySQL supports multiple storage engines. InnoDB is the default and recommended engine for most workloads.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- Check available engines
+SHOW ENGINES;
+
+-- Specify engine at table creation
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
+-- InnoDB: ACID, transactions, foreign keys, row-level locking
+-- MyISAM: Full-text search, table-level locking, no transactions
+-- MEMORY: Data in RAM, fast but non-persistent</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. MySQL-Specific Syntax Extensions</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MySQL extends standard SQL with convenient syntax like INSERT ... ON DUPLICATE KEY UPDATE and REPLACE.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- INSERT or UPDATE if duplicate key
+INSERT INTO users (id, name, email)
+VALUES (1, 'Alice', 'alice@example.com')
+ON DUPLICATE KEY UPDATE
+    name = VALUES(name),
+    email = VALUES(email);
+
+-- REPLACE (deletes and re-inserts)
+REPLACE INTO users (id, name, email)
+VALUES (1, 'Bob', 'bob@example.com');
+
+-- INSERT IGNORE (silently skip duplicates)
+INSERT IGNORE INTO users (id, name) VALUES (1, 'Charlie');</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Full-Text Search</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MySQL supports full-text indexes for efficient text search on InnoDB and MyISAM tables.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- Create full-text index
+CREATE TABLE articles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200),
+    body TEXT,
+    FULLTEXT index ft_search (title, body)
+) ENGINE=InnoDB;
+
+-- Natural language mode (default)
+SELECT * FROM articles
+WHERE MATCH(title, body) AGAINST('database optimization');
+
+-- Boolean mode (operators: +, -, *, "")
+SELECT * FROM articles
+WHERE MATCH(title, body)
+AGAINST('+mysql -oracle' IN BOOLEAN MODE);</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. EXPLAIN Query Analysis</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Use EXPLAIN to understand how MySQL executes a query and identify performance bottlenecks.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>EXPLAIN SELECT u.name, COUNT(o.id) AS orders
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+WHERE u.created_at > '2024-01-01'
+GROUP BY u.id
+ORDER BY orders DESC
+LIMIT 10;
+
+-- Key columns in output:
+-- type: ALL (full scan) | range | ref | eq_ref | const
+-- key: which index was used
+-- rows: estimated rows examined
+-- Extra: Using where, Using index, Using filesort</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Window Functions in MySQL 8.0+</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MySQL 8.0 introduced window functions for analytics without collapsing rows.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>SELECT
+    name,
+    department,
+    salary,
+    ROW_NUMBER() OVER (PARTITION BY department
+                       ORDER BY salary DESC) AS rank_in_dept,
+    FIRST_VALUE(salary) OVER (PARTITION BY department
+                              ORDER BY salary DESC) AS top_salary,
+    LAG(salary, 1) OVER (PARTITION BY department
+                         ORDER BY salary) AS prev_salary,
+    AVG(salary) OVER (PARTITION BY department) AS dept_avg
+FROM employees;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. JSON Data Type</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MySQL's JSON type allows storing and querying JSON documents with specialized functions.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>CREATE TABLE products (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    attributes JSON
+);
+
+INSERT INTO products VALUES
+(1, 'Laptop', '{"color": "silver", "ram": 16, "ports": ["USB-C", "HDMI"]}'),
+(2, 'Mouse', '{"color": "black", "wireless": true}');
+
+-- JSON path queries
+SELECT name,
+       attributes->>'$.color' AS color,
+       attributes->>'$.ram' AS ram
+FROM products
+WHERE JSON_EXTRACT(attributes, '$.wireless') = true;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. CTEs and Recursive Queries</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MySQL 8.0+ supports common table expressions, including recursive CTEs for hierarchical data.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>WITH RECURSIVE org_chart AS (
+    -- Anchor: top-level employees
+    SELECT id, name, manager_id, 1 AS level
+    FROM employees
+    WHERE manager_id IS NULL
+
+    UNION ALL
+
+    -- Recursive: employees with managers
+    SELECT e.id, e.name, e.manager_id, oc.level + 1
+    FROM employees e
+    JOIN org_chart oc ON e.manager_id = oc.id
+)
+SELECT * FROM org_chart ORDER BY level, name;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Performance Schema</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">The performance_schema provides runtime metrics for monitoring MySQL's internal operations.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- Top queries by execution time
+SELECT DIGEST_TEXT, COUNT_STAR, SUM_TIMER_WAIT/1000000000 AS total_ms
+FROM performance_schema.events_statements_summary_by_digest
+ORDER BY SUM_TIMER_WAIT DESC
+LIMIT 10;
+
+-- Table I/O statistics
+SELECT OBJECT_SCHEMA, OBJECT_NAME,
+       COUNT_READ, COUNT_WRITE,
+       SUM_TIMER_READ/1000000000 AS read_ms
+FROM performance_schema.table_io_waits_summary_by_table
+ORDER BY SUM_TIMER_WAIT DESC
+LIMIT 10;</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: E-Commerce Schema & Queries</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A complete MySQL schema for an e-commerce platform with relevant queries.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    status ENUM('pending','shipped','delivered') DEFAULT 'pending',
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_name VARCHAR(200),
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+);
+
+-- Monthly revenue report
+SELECT DATE_FORMAT(order_date, '%Y-%m') AS month,
+       COUNT(DISTINCT o.id) AS orders,
+       SUM(oi.quantity * oi.price) AS revenue
+FROM orders o
+JOIN order_items oi ON o.id = oi.order_id
+WHERE o.status != 'cancelled'
+GROUP BY month
+ORDER BY month DESC;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Stored Procedure</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A stored procedure for paginated customer search with total count.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>DELIMITER $$
+
+CREATE PROCEDURE search_customers(
+    IN search_term VARCHAR(100),
+    IN page_num INT,
+    IN page_size INT
+)
+BEGIN
+    DECLARE offset_val INT;
+    SET offset_val = (page_num - 1) * page_size;
+
+    -- Total count
+    SELECT COUNT(*) AS total_records
+    FROM customers
+    WHERE name LIKE CONCAT('%', search_term, '%')
+       OR email LIKE CONCAT('%', search_term, '%');
+
+    -- Paginated results
+    SELECT id, name, email, created_at
+    FROM customers
+    WHERE name LIKE CONCAT('%', search_term, '%')
+       OR email LIKE CONCAT('%', search_term, '%')
+    ORDER BY name
+    LIMIT page_size OFFSET offset_val;
+END$$
+
+DELIMITER ;
+
+CALL search_customers('john', 1, 20);</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Create a Blog Database</h4><p style="color:var(--text-muted);font-size:0.85rem">Design tables for posts, comments, and tags. Use foreign keys and appropriate indexes.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">User Activity Log</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a query to show the last 10 login attempts for each user using window functions.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Inventory Alert System</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a trigger that automatically inserts into an alerts table when product stock falls below 10.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Optimize Slow Queries</h4><p style="color:var(--text-muted);font-size:0.85rem">Use EXPLAIN to analyze a poorly performing query and add the appropriate indexes.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Recursive Category Tree</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a recursive CTE to display a nested category hierarchy with indentation.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Implement Pagination with Total</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a stored procedure that returns paginated results along with total record count using SQL_CALC_FOUND_ROWS.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Leaderboard with Rankings</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a query that computes a game leaderboard with dense rank, ties, and pagination.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Full-Text Search Engine</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a product search with relevance ranking using MySQL full-text indexes in boolean mode.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">School Management System</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Schema for students, teachers, courses, enrollments, grades, and attendance with complex joins.</p>
+          <span class="badge badge-primary">Schema Design</span> <span class="badge badge-primary">JOINs</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Content Management System</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Build the MySQL backend for a CMS with users, posts, categories, tags, comments, and revisions.</p>
+          <span class="badge badge-primary">Relationships</span> <span class="badge badge-primary">Triggers</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">E-Commerce Backend</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Complete database for products, inventory, customers, orders, payments, and shipping tracking.</p>
+          <span class="badge badge-primary">Transactions</span> <span class="badge badge-primary">Indexes</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Real-Time Analytics Dashboard</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Use MySQL events and materialized views to aggregate data for a real-time dashboard.</p>
+          <span class="badge badge-primary">Events</span> <span class="badge badge-primary">Aggregation</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Multi-Tenant SaaS Database</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Design a multi-tenant schema with row-level security, tenant isolation, and shared vs silo approaches.</p>
+          <span class="badge badge-primary">Multi-tenant</span> <span class="badge badge-primary">Security</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Database Migration Tool</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Create a version-controlled migration system in MySQL using a schema_version table and stored procedures.</p>
+          <span class="badge badge-primary">Migrations</span> <span class="badge badge-primary">Procedures</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div id="interviewQuestionsContainer"></div>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

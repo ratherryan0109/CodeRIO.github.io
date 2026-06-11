@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypeScript Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="typescript">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>TypeScript</h1>
+      <p>TypeScript is a typed superset of JavaScript developed by Microsoft that compiles to plain JavaScript. It adds optional static typing, classes, interfaces, generics, and advanced tooling to catch errors before runtime.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 8 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>TypeScript was created by Anders Hejlsberg at Microsoft in 2012 to address the challenges of building large-scale JavaScript applications. It adds a powerful type system on top of JavaScript, enabling developers to catch type-related bugs at compile time rather than runtime. TypeScript code compiles to clean, readable JavaScript that runs anywhere JS runs.</p>
+      <p>The language supports all JavaScript syntax plus type annotations, interfaces, enums, tuples, generics, decorators, and advanced utility types. TypeScript's type system is structural (duck typing) rather than nominal, meaning compatibility is based on shape rather than explicit declarations. The compiler also supports modern ECMAScript features and downlevels them to older JS versions.</p>
+      <p>TypeScript has become the standard for professional JavaScript development. Major frameworks like React, Angular, Vue, and Node.js all have first-class TypeScript support. The type checker provides intelligent autocompletion, refactoring tools, and inline documentation in editors like VS Code, significantly improving developer productivity.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn TypeScript?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Catch Errors Early</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Type checking at compile time catches bugs before they reach production. Null pointer exceptions, undefined property access, and type mismatches are caught instantly.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-tools" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Better Tooling & IDE Support</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">TypeScript enables rich autocompletion, go-to-definition, find references, and safe refactoring. VS Code, WebStorm, and other editors provide first-class TS support.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-file-code" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Self-Documenting Code</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Type annotations serve as live documentation that never goes out of date. Interfaces and types clearly define the shape of data flowing through your application.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-users" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Industry Standard</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">TypeScript is used by 78% of professional JavaScript developers. It is required for Angular, recommended for React, and used by most enterprise JS projects.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">TypeScript powers the tech stacks of leading companies worldwide:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Figma</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">TypeScript is used in almost every modern JavaScript codebase. Examples include the VS Code editor (built in TS), Angular framework, Deno runtime, Next.js, Prisma ORM, and thousands of npm packages. Companies adopt TypeScript for large codebases to reduce bugs, improve developer experience, and enable confident refactoring.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Basic JavaScript knowledge, Node.js installed, a code editor (VS Code recommended)</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-2)</h4><p style="color:var(--text-secondary);font-size:0.9rem">TypeScript setup, primitive types, interfaces, type annotations, functions</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 3-4)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Generics, enums, unions, intersections, type guards, classes, access modifiers</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 5-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Mapped types, conditional types, template literal types, decorators, declaration files</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 7-8)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Type inference engine, advanced utility types, module augmentation, compiler API</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> TypeScript Setup & Basics</h3><p>Installing TypeScript, tsconfig.json configuration, compiling TS to JS, watching files, integrating with VS Code.</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Primitive Types & Annotations</h3><p>string, number, boolean, null, undefined, void, never, unknown, any, type annotations, and type inference.</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Interfaces & Type Aliases</h3><p>Defining interfaces, optional properties, readonly properties, index signatures, extending interfaces, type vs interface.</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Functions & Arrays</h3><p>Function type annotations, optional/default/rest parameters, overloads, typed arrays, tuples, and array methods.</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">5</span> Generics</h3><p>Generic functions, generic constraints, generic interfaces, generic classes, keyof, conditional types with generics.</p></div>
+      <div class="module-card"><h3><span class="module-number">6</span> Enums & Union/Intersection Types</h3><p>Numeric enums, string enums, const enums, union types, discriminated unions, intersection types, type narrowing.</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Classes & Access Modifiers</h3><p>public, private, protected, readonly, parameter properties, abstract classes, static members, implements.</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Modules & Namespaces</h3><p>ES modules import/export, namespace keyword, ambient declarations, module resolution, barrel exports.</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">9</span> Mapped & Conditional Types</h3><p>Mapped types (in keyof), conditional types (extends), infer keyword, distributive conditional types, template literal types.</p></div>
+      <div class="module-card"><h3><span class="module-number">10</span> Utility Types</h3><p>Partial, Required, Readonly, Pick, Omit, Record, Exclude, Extract, NonNullable, ReturnType, Parameters, Awaited.</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Decorators</h3><p>Class decorators, method decorators, property decorators, accessor decorators, parameter decorators, decorator factories.</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> Declaration Files & .d.ts</h3><p>Writing declaration files, ambient module declarations, triple-slash directives, publishing types, @types packages.</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">13</span> Advanced Type Inference</h3><p>Contextual typing, type widening, type narrowing, discriminated unions, assertion functions, type predicates.</p></div>
+      <div class="module-card"><h3><span class="module-number">14</span> Template Literal Types</h3><p>String literal interpolation, intrinsic string types (Uppercase, Lowercase, Capitalize, Uncapitalize), pattern matching.</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Module Augmentation & Declaration Merging</h3><p>Merging interfaces, augmenting external modules, global augmentation, namespace merging, enum merging.</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Compiler API & Custom Transforms</h3><p>TypeScript compiler architecture, AST traversal, custom transformers, programmatic compilation, ts-morph library.</p></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Basic Type Annotations</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Type annotations follow a colon syntax after variable names. TypeScript can also infer types automatically from the assigned value. Use type annotations when inference is not possible or when you want explicit documentation.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>let name: string = 'Alice';
+let age: number = 30;
+let isActive: boolean = true;
+
+// Type inference - TS knows this is a string
+let message = 'Hello';  // inferred as string
+
+// Union types
+let id: string | number = 'abc123';
+id = 456;  // valid</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Interfaces vs Type Aliases</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Interfaces and type aliases are similar but have key differences. Interfaces can be extended and merged, while type aliases can represent unions, intersections, and primitive types. Prefer interfaces for object shapes and types for complex compositions.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Interface - extends, implements, declaration merging
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+interface Admin extends User {
+  role: 'admin';
+}
+
+// Type alias - unions, intersections, primitives
+type Status = 'active' | 'inactive' | 'pending';
+type Result = { success: true; data: unknown }
+            | { success: false; error: string };</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Generics</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Generics allow creating reusable components that work with multiple types while preserving type safety. They act as type variables that capture the type passed in. Generics can be constrained with extends to limit acceptable types.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>function identity<T>(arg: T): T {
+  return arg;
+}
+
+const num = identity<number>(42);
+const str = identity('hello');  // inferred
+
+// Generic constraint
+function getLength<T extends { length: number }>(item: T): number {
+  return item.length;
+}
+
+// Generic interface
+interface Response<T> {
+  status: number;
+  data: T;
+  message: string;
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Type Guards & Narrowing</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Type narrowing is the process of refining a broader type to a more specific type within conditional blocks. TypeScript uses typeof, instanceof, discriminated unions, and custom type predicates for narrowing.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>function format(input: string | number) {
+  if (typeof input === 'string') {
+    return input.toUpperCase();  // TS knows it's string
+  }
+  return input.toFixed(2);  // TS knows it's number
+}
+
+// Discriminated union
+type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'square'; side: number };
+
+function area(shape: Shape): number {
+  if (shape.kind === 'circle') {
+    return Math.PI * shape.radius ** 2;
+  }
+  return shape.side ** 2;
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Mapped Types</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Mapped types allow transforming every property of an existing type using the in keyof syntax. They are the foundation for utility types like Partial, Readonly, and Pick. Combined with key remapping and as clauses.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>type Readonly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+type Optional<T> = {
+  [K in keyof T]?: T[K];
+};
+
+// Key remapping with as
+type Getters<T> = {
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];
+};
+
+interface Person { name: string; age: number; }
+// Result: { getName: () => string; getAge: () => number; }</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Conditional Types & infer</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Conditional types select between two types based on a condition using the extends ? : syntax. The infer keyword extracts types from within other types, enabling powerful type-level programming.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>type IsString<T> = T extends string ? 'yes' : 'no';
+type A = IsString<'hello'>;  // 'yes'
+type B = IsString<42>;       // 'no'
+
+// infer extracts the element type from an array
+type Unpack<T> = T extends Array<infer U> ? U : T;
+type Item = Unpack<string[]>;  // string
+
+// ReturnType built-in uses infer
+type ReturnType<T> =
+  T extends (...args: any[]) => infer R ? R : any;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Template Literal Types</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Template literal types use string literal interpolation to create complex string types. They can combine unions of string literals and are useful for event names, CSS properties, and API route patterns.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>type Color = 'red' | 'green' | 'blue';
+type Variant = 'light' | 'dark';
+type ColorVariant = `${Color}-${Variant}`;
+// 'red-light' | 'red-dark' | 'green-light' | ...
+
+type EventName = `on${Capitalize<string>}`;
+// 'onClick' | 'onChange' | 'onSubmit' | ...
+
+// Intrinsic string types
+type Upper = Uppercase<'hello'>;  // 'HELLO'
+type Lower = Lowercase<'WORLD'>;  // 'world'</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Declaration Files & Ambient Types</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Declaration files (.d.ts) describe the shape of JavaScript modules for TypeScript. They allow TS to understand libraries without source code. Ambient declarations use declare to describe values that exist at runtime.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// globals.d.ts
+declare const API_KEY: string;
+declare function fetchData(url: string): Promise<unknown>;
+
+// Module declaration for untyped JS library
+declare module 'my-library' {
+  export function doSomething(input: string): number;
+  export const version: string;
+}
+
+// Augment existing module
+declare module 'express' {
+  interface Request {
+    user?: { id: number; name: string };
+  }
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Type-safe API Client</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>interface ApiConfig {
+  baseUrl: string;
+  timeout?: number;
+  headers?: Record<string, string>;
+}
+
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+class ApiClient {
+  constructor(private config: ApiConfig) {}
+
+  async get<T>(path: string): Promise<ApiResponse<T>> {
+    const response = await fetch(`${this.config.baseUrl}${path}`, {
+      headers: this.config.headers,
+      signal: AbortSignal.timeout(this.config.timeout ?? 5000)
+    });
+    return response.json();
+  }
+}
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const api = new ApiClient({ baseUrl: 'https://api.example.com' });
+const user = await api.get<User>('/users/1');
+console.log(user.data.name);  // type-safe access</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Type-safe Event Emitter</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>type EventMap = {
+  userLogin: { userId: number; timestamp: Date };
+  pageView: { path: string; referrer: string | null };
+  error: { message: string; code: number };
+};
+
+class TypedEmitter<T extends Record<string, any>> {
+  private handlers = new Map<keyof T, Set<Function>>();
+
+  on<K extends keyof T>(
+    event: K,
+    handler: (data: T[K]) => void
+  ): void {
+    if (!this.handlers.has(event)) {
+      this.handlers.set(event, new Set());
+    }
+    this.handlers.get(event)!.add(handler);
+  }
+
+  emit<K extends keyof T>(event: K, data: T[K]): void {
+    this.handlers.get(event)?.forEach(handler => handler(data));
+  }
+}
+
+const emitter = new TypedEmitter<EventMap>();
+emitter.on('userLogin', data => {
+  console.log(data.userId);  // type-safe
+});</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Type Annotations Practice</h4><p style="color:var(--text-muted);font-size:0.85rem">Add type annotations to a set of JavaScript variables, functions, and objects.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Build an Interface</h4><p style="color:var(--text-muted);font-size:0.85rem">Define interfaces for a Product, Order, and Customer with proper types.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Generic Stack</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a generic Stack class with push, pop, peek, and isEmpty methods.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Discriminated Union Parser</h4><p style="color:var(--text-muted);font-size:0.85rem">Parse different message types using discriminated unions and type guards.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Utility Type Implementations</h4><p style="color:var(--text-muted);font-size:0.85rem">Reimplement Partial, Pick, and ReturnType from scratch using mapped and conditional types.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Type-safe Redux Store</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a typed Redux-like store with actions, reducers, and middleware types.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Deep Partial Type</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a DeepPartial type that makes all nested properties optional recursively.</p></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">CLI Todo App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A command-line todo manager with TypeScript, using enums, interfaces, and file I/O.</p><span class="badge badge-primary">TypeScript</span> <span class="badge badge-primary">Node.js</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">REST API with TypeScript</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A full CRUD API using Express and TypeScript with typed request/response handlers.</p><span class="badge badge-primary">TypeScript</span> <span class="badge badge-primary">Express</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">TypeScript React App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A React application with fully typed components, props, hooks, and state management.</p><span class="badge badge-primary">TypeScript</span> <span class="badge badge-primary">React</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">npm Package with Types</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Publish a typed npm package with declaration files, supporting both CJS and ESM.</p><span class="badge badge-primary">TypeScript</span> <span class="badge badge-primary">npm</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Data Validation Library</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A runtime type-checking and validation library using type guards and generics.</p><span class="badge badge-primary">TypeScript</span> <span class="badge badge-primary">Generics</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">GraphQL Code Generator</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A tool that generates TypeScript types from GraphQL schema using template literals and mapped types.</p><span class="badge badge-primary">TypeScript</span> <span class="badge badge-primary">GraphQL</span></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=typescript&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - CodeRio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="Blog">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon"><i class="fas fa-code"></i></span>
+            CodeRio
+        </div>
+        <button class="mobile-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Learn.html">Learn</a></li>
+            <li><a href="Practice.html">Practice</a></li>
+            <li><a href="Projects.html">Projects</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="auth/profile.html">Profile</a></li>
+        </ul>
+        <div class="nav-auth">
+            <a href="Login.html" class="btn btn-ghost btn-sm">Log In</a>
+            <a href="Register.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>CodeRio <span class="gradient-text">Blog</span></h1>
+                <p>Tutorials, career advice, and insights from the CodeRio team</p>
+            </div>
+        </section>
+
+        <section class="section blog-section">
+            <div class="container">
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-category="all">All</button>
+                    <button class="tab-btn" data-category="coding">Coding</button>
+                    <button class="tab-btn" data-category="career">Career</button>
+                    <button class="tab-btn" data-category="interview">Interview</button>
+                    <button class="tab-btn" data-category="projects">Projects</button>
+                    <button class="tab-btn" data-category="ai">AI</button>
+                </div>
+
+                <div class="blog-grid">
+                    <article class="blog-card glass-card" data-category="coding">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #61dafb, #20232a);">
+                            <span class="blog-category">Coding</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>Getting Started with React in 2026</h3>
+                            <p>A comprehensive guide to building modern web applications with React, including hooks, server components, and the latest ecosystem tools.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Sarah Chen</span>
+                                <span><i class="fas fa-calendar"></i> Jun 5, 2026</span>
+                                <span><i class="fas fa-clock"></i> 8 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="career">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <span class="blog-category">Career</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>Complete DSA Study Plan</h3>
+                            <p>A structured 6-month roadmap to master data structures and algorithms, with curated resources and practice problems for each topic.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Alex Rivera</span>
+                                <span><i class="fas fa-calendar"></i> Jun 3, 2026</span>
+                                <span><i class="fas fa-clock"></i> 12 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="interview">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            <span class="blog-category">Interview</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>How to Crack FAANG Interviews</h3>
+                            <p>Insider tips from engineers who've been on both sides of the table at Meta, Google, Amazon, Apple, and Netflix.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Priya Patel</span>
+                                <span><i class="fas fa-calendar"></i> Jun 1, 2026</span>
+                                <span><i class="fas fa-clock"></i> 15 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="ai">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                            <span class="blog-category">AI</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>Building Your First AI Application</h3>
+                            <p>Learn how to build and deploy a machine learning-powered application using Python, TensorFlow, and modern MLOps practices.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Marcus Johnson</span>
+                                <span><i class="fas fa-calendar"></i> May 28, 2026</span>
+                                <span><i class="fas fa-clock"></i> 10 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="coding">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #f54ea2, #ff7676);">
+                            <span class="blog-category">Coding</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>The Ultimate Git Guide</h3>
+                            <p>Master version control from basics to advanced workflows. Includes branching strategies, rebasing, and CI/CD integration.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Emily Watson</span>
+                                <span><i class="fas fa-calendar"></i> May 25, 2026</span>
+                                <span><i class="fas fa-clock"></i> 7 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="career">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                            <span class="blog-category">Career</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>Python vs JavaScript: Which to Learn First</h3>
+                            <p>An honest comparison of the two most popular programming languages to help beginners choose their first language.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> David Kim</span>
+                                <span><i class="fas fa-calendar"></i> May 22, 2026</span>
+                                <span><i class="fas fa-clock"></i> 6 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="interview">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">
+                            <span class="blog-category">Interview</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>System Design Interview Guide</h3>
+                            <p>A step-by-step framework for tackling system design interviews, with real examples from distributed systems and scalable architectures.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Rachel Zhao</span>
+                                <span><i class="fas fa-calendar"></i> May 19, 2026</span>
+                                <span><i class="fas fa-clock"></i> 20 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="coding">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #3b82f6, #2dd4bf);">
+                            <span class="blog-category">Coding</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>Understanding Docker and Kubernetes</h3>
+                            <p>Demystifying containerization and orchestration with practical examples and best practices for production deployments.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> James Wilson</span>
+                                <span><i class="fas fa-calendar"></i> May 16, 2026</span>
+                                <span><i class="fas fa-clock"></i> 14 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="projects">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #f2994a, #f2c94c);">
+                            <span class="blog-category">Projects</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>Top 10 VS Code Extensions</h3>
+                            <p>Boost your productivity with these essential VS Code extensions for 2026, from AI-powered coding assistants to advanced debugging tools.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Lisa Park</span>
+                                <span><i class="fas fa-calendar"></i> May 13, 2026</span>
+                                <span><i class="fas fa-clock"></i> 5 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="career">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <span class="blog-category">Career</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>How to Build a Portfolio That Gets You Hired</h3>
+                            <p>Learn what hiring managers actually look for in a developer portfolio and how to showcase your projects effectively.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Tom Henderson</span>
+                                <span><i class="fas fa-calendar"></i> May 10, 2026</span>
+                                <span><i class="fas fa-clock"></i> 9 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="projects">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                            <span class="blog-category">Projects</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>Learning Roadmap for Web Development</h3>
+                            <p>A complete guide to becoming a full-stack web developer in 2026, from HTML basics to deploying production applications.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Anita Sharma</span>
+                                <span><i class="fas fa-calendar"></i> May 7, 2026</span>
+                                <span><i class="fas fa-clock"></i> 11 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card glass-card" data-category="ai">
+                        <div class="blog-image" style="background: linear-gradient(135deg, #0c3483, #a2b6df);">
+                            <span class="blog-category">AI</span>
+                        </div>
+                        <div class="blog-body">
+                            <h3>The Future of AI in Software Engineering</h3>
+                            <p>How AI assistants, code generation, and automated testing are reshaping the role of software engineers and what it means for your career.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> Dr. Wei Zhang</span>
+                                <span><i class="fas fa-calendar"></i> May 4, 2026</span>
+                                <span><i class="fas fa-clock"></i> 13 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const category = btn.dataset.category;
+                document.querySelectorAll('.blog-card').forEach(card => {
+                    card.style.display = category === 'all' || card.dataset.category === category ? 'flex' : 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

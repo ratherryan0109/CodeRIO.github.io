@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a full-featured e-commerce store with React components, state management, cart logic, Stripe payment integration, and product filtering. Complete engineering guide.">
+  <meta name="keywords" content="ecommerce, React, state management, Stripe, cart, product filtering, checkout, frontend project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="E-Commerce Store - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a production-ready e-commerce storefront.">
+  <meta property="og:type" content="website">
+  <title>E-Commerce Store - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/ecommerce-store.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="ecommerce-store">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>E-Commerce Store</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Intermediate</span>
+        <span><i class="far fa-clock"></i> 8-12 hours</span>
+        <span><i class="fas fa-code-branch"></i> React, Context API, Stripe, Node.js</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A comprehensive engineering guide to building a production-ready e-commerce storefront with React components, state management, Stripe payment integration, and a complete checkout flow.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This e-commerce store project simulates a real production environment where you build a complete online storefront from scratch using React. You will implement a product catalog with categories and filters, a shopping cart with full CRUD operations, a multi-step checkout process, and Stripe payment integration. The project covers state management with React Context and useReducer, API integration with a mock backend (or Node.js/Express server), responsive product grids, image galleries, and order management. The architecture follows industry patterns used by companies like Shopify, BigCommerce, and Magento.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Building an e-commerce site involves complex state management (cart, user, products), secure payment processing, responsive product displays, and a smooth checkout flow. Many developers rely on platforms like Shopify or WooCommerce but don't understand the underlying architecture. The challenge is building a custom e-commerce solution that handles: concurrent cart updates, inventory management, tax calculations, shipping logic, payment gateway integration, order confirmation, and error recovery - all while providing a seamless user experience.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Small Business Storefront:</strong> A local boutique sells handmade products online with categories, size/color variants, and local pickup options.</li>
+          <li><strong>Digital Products Marketplace:</strong> A creator sells digital downloads (ebooks, templates, software) with instant delivery after payment and license key generation.</li>
+          <li><strong>Multi-vendor Platform:</strong> A marketplace connects multiple vendors with customers, each vendor managing their own inventory, pricing, and shipping profiles.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>Global e-commerce sales exceeded $5.7 trillion in 2025 and continue growing. Companies like Shopify, BigCommerce, and WooCommerce power millions of stores. Understanding e-commerce architecture is valuable for roles at any tech company that sells products online. React is used by 40%+ of professional developers and is the foundation for modern e-commerce frontends (Shopify Hydrogen, Next.js Commerce). Stripe processes payments for millions of businesses worldwide and has the most developer-friendly API in the payments industry.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Architect a React application with component hierarchy, reusable UI components, and container/presentational patterns</li>
+          <li>Implement complex state management using React Context API with useReducer for cart, auth, and checkout state</li>
+          <li>Integrate Stripe Elements for secure payment collection with client-side card validation and 3D Secure authentication</li>
+          <li>Build a multi-step checkout flow with form validation, shipping calculation, and order review</li>
+          <li>Implement product filtering with multiple criteria (category, price range, rating, attributes) using URL query parameters</li>
+          <li>Handle cart operations with optimistic updates, quantity management, and persistent cart via localStorage</li>
+          <li>Build a RESTful API backend with Node.js/Express for product management, order processing, and Stripe webhooks</li>
+          <li>Implement responsive product grids with image lazy loading, zoom functionality, and variant selection</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fab fa-react"></i> React 18</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> Context API + useReducer</span>
+          <span class="badge-tech"><i class="fab fa-stripe-s"></i> Stripe Elements</span>
+          <span class="badge-tech"><i class="fab fa-node-js"></i> Node.js/Express</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> MongoDB / PostgreSQL</span>
+          <span class="badge-tech"><i class="fas fa-shipping-fast"></i> Shipping API</span>
+          <span class="badge-tech"><i class="fab fa-font-awesome"></i> Font Awesome</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS Modules</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Solid React fundamentals: components, props, state, useEffect, custom hooks</li>
+          <li>Experience with React Router for client-side navigation and route parameters</li>
+          <li>Understanding of REST API concepts and HTTP methods (GET, POST, PUT, DELETE)</li>
+          <li>Node.js and npm/yarn installed locally</li>
+          <li>Basic understanding of asynchronous JavaScript and async/await</li>
+          <li>Stripe account (free) for API keys - sign up at stripe.com</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The application follows a microservices-inspired architecture with a React frontend and a Node.js/Express backend. The frontend uses React Router for client-side routing with pages for Home, Products, Product Detail, Cart, Checkout, and Order Confirmation. State management is split into contexts: CartContext (items, totals, quantity), AuthContext (user, token, login/logout), and UIContext (modals, notifications, loading states). The backend exposes RESTful endpoints: /api/products (CRUD with filtering), /api/cart (sync), /api/orders (create, history), /api/checkout (payment intent), and /api/webhooks/stripe (payment confirmation). Stripe Elements securely collects payment details without sensitive data touching the server. Product images are served from a CDN (Cloudinary or similar) with responsive srcset for different screen sizes.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+ecommerce-store/
+├── client/                  # React frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   │   ├── Layout/
+│   │   │   ├── Product/
+│   │   │   ├── Cart/
+│   │   │   └── Checkout/
+│   │   ├── contexts/        # State management
+│   │   │   ├── CartContext.js
+│   │   │   ├── AuthContext.js
+│   │   │   └── UIContext.js
+│   │   ├── hooks/           # Custom hooks
+│   │   ├── pages/           # Route pages
+│   │   ├── services/        # API calls
+│   │   ├── utils/           # Helpers
+│   │   └── App.js
+│   └── package.json
+├── server/                  # Node.js backend
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── config/
+│   └── server.js
+├── .env.example
+├── docker-compose.yml
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: Project Setup & Component Architecture</h4>
+          <p>Initialize React app with Create React App or Vite. Set up React Router with routes for all pages. Build the layout components (Navbar, Footer, Sidebar). Create the component hierarchy and establish the CSS module naming convention.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: State Management with Context + useReducer</h4>
+          <p>Implement CartContext with actions: ADD_ITEM, REMOVE_ITEM, UPDATE_QUANTITY, CLEAR_CART. Implement AuthContext with login/logout/register. Implement UIContext for modals, toasts, and loading states. Add localStorage persistence for cart and auth token.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Product Catalog & Filtering</h4>
+          <p>Build the product listing page with a responsive grid. Implement filtering by category, price range, rating, and attributes. Add sorting (price low/high, newest, rating). Implement the product detail page with image gallery, variant selection, and add-to-cart.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Cart & Checkout Flow</h4>
+          <p>Build the cart page with quantity controls, remove button, and price calculation. Implement the multi-step checkout: shipping info, payment method, order review. Add form validation with error messages. Implement the order confirmation page.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: Stripe Payment Integration</h4>
+          <p>Integrate Stripe Elements for card payment collection. Create a PaymentIntent on the server. Handle 3D Secure authentication. Implement Stripe webhooks for payment confirmation and order status updates. Test with Stripe test cards.</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: Cart Context with useReducer</h4>
+          <p>Implement a robust cart state management system using React Context and useReducer. The reducer handles all cart operations with immutability and supports both client-side and server-synced cart states.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const CartContext = createContext();
+
+const initialState = {
+  items: [],
+  shippingAddress: null,
+  paymentMethod: null,
+  couponCode: null,
+  discount: 0,
+  loading: false,
+  error: null
+};
+
+function cartReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_ITEM': {
+      const existingIndex = state.items.findIndex(
+        i => i.id === action.payload.id &&
+        i.variant === action.payload.variant
+      );
+      if (existingIndex >= 0) {
+        const updatedItems = [...state.items];
+        updatedItems[existingIndex] = {
+          ...updatedItems[existingIndex],
+          quantity: updatedItems[existingIndex].quantity + action.payload.quantity
+        };
+        return { ...state, items: updatedItems };
+      }
+      return { ...state, items: [...state.items, { ...action.payload }] };
+    }
+    case 'REMOVE_ITEM':
+      return { ...state, items: state.items.filter(i => i.id !== action.payload) };
+    case 'UPDATE_QUANTITY': {
+      const { id, quantity } = action.payload;
+      if (quantity <= 0) {
+        return { ...state, items: state.items.filter(i => i.id !== id) };
+      }
+      return {
+        ...state,
+        items: state.items.map(i => i.id === id ? { ...i, quantity } : i)
+      };
+    }
+    case 'CLEAR_CART':
+      return { ...initialState };
+    case 'APPLY_COUPON':
+      return { ...state, couponCode: action.payload.code, discount: action.payload.discount };
+    case 'SET_SHIPPING':
+      return { ...state, shippingAddress: action.payload };
+    case 'SET_PAYMENT':
+      return { ...state, paymentMethod: action.payload };
+    case 'SET_LOADING':
+      return { ...state, loading: action.payload };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload };
+    default:
+      return state;
+  }
+}
+
+export function CartProvider({ children }) {
+  const [state, dispatch] = useReducer(cartReducer, initialState, init => {
+    try {
+      const saved = localStorage.getItem('cart-state');
+      return saved ? { ...init, ...JSON.parse(saved) } : init;
+    } catch { return init; }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cart-state', JSON.stringify(state));
+  }, [state]);
+
+  const addItem = (product, quantity = 1, variant = null) => {
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0],
+        variant: variant || product.defaultVariant,
+        quantity,
+        maxQuantity: product.stock
+      }
+    });
+  };
+
+  const updateQuantity = (id, quantity) => {
+    dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
+  };
+
+  const removeItem = (id) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: id });
+  };
+
+  const clearCart = () => dispatch({ type: 'CLEAR_CART' });
+
+  const cartTotal = state.items.reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+  );
+  const cartCount = state.items.reduce((sum, item) => sum + item.quantity, 0);
+  const shipping = cartTotal >= 50 ? 0 : 5.99;
+  const tax = cartTotal * 0.08;
+  const total = cartTotal + shipping + tax - state.discount;
+
+  return (
+    <CartContext.Provider value={{
+      cart: state,
+      addItem, updateQuantity, removeItem, clearCart,
+      dispatch, cartTotal, cartCount, shipping, tax, total
+    }}>
+      {children}
+    </CartContext.Provider>
+  );
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: Stripe Payment Integration</h4>
+          <p>Integrate Stripe Elements for secure payment collection. Create a PaymentIntent on the server and handle the client-side confirmation with 3D Secure support.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
+function CheckoutForm({ amount, onSuccess }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    setProcessing(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/checkout/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: Math.round(amount * 100) })
+      });
+      const { clientSecret } = await response.json();
+
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card: elements.getElement(CardElement),
+            billing_details: { name: 'Customer Name' }
+          }
+        }
+      );
+
+      if (stripeError) {
+        setError(stripeError.message);
+        setProcessing(false);
+        return;
+      }
+
+      if (paymentIntent.status === 'succeeded') {
+        onSuccess(paymentIntent.id);
+      }
+    } catch (err) {
+      setError('Payment failed. Please try again.');
+      setProcessing(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <CardElement options={{
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#424770',
+            '::placeholder': { color: '#aab7c4' }
+          },
+          invalid: { color: '#9e2146' }
+        }
+      }} />
+      {error && <div className="error-message">{error}</div>}
+      <button type="submit" disabled={!stripe || processing}>
+        {processing ? 'Processing...' : `Pay $${amount.toFixed(2)}`}
+      </button>
+    </form>
+  );
+}
+
+// Server-side: PaymentIntent creation
+app.post('/api/checkout/create-payment-intent', async (req, res) => {
+  const { amount } = req.body;
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'usd',
+      automatic_payment_methods: { enabled: true },
+      metadata: { integration_check: 'accept_a_payment' }
+    });
+    res.json({ clientSecret: paymentIntent.client_secret });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Product Filtering with URL Params</h4>
+          <p>Implement a URL-based filtering system where filter state is stored in URL query parameters, enabling shareable filtered links and browser back/forward navigation.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>import { useSearchParams } from 'react-router-dom';
+
+function useProductFilters(products) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const filters = {
+    category: searchParams.get('category') || 'all',
+    minPrice: Number(searchParams.get('minPrice')) || 0,
+    maxPrice: Number(searchParams.get('maxPrice')) || Infinity,
+    rating: Number(searchParams.get('rating')) || 0,
+    sort: searchParams.get('sort') || 'newest',
+    search: searchParams.get('search') || '',
+    inStock: searchParams.get('inStock') === 'true'
+  };
+
+  const setFilter = (key, value) => {
+    setSearchParams(prev => {
+      if (value === null || value === '' || value === 'all' || value === 0) {
+        prev.delete(key);
+      } else {
+        prev.set(key, value);
+      }
+      return prev;
+    });
+  };
+
+  const clearFilters = () => setSearchParams({});
+
+  const filtered = useMemo(() => {
+    let result = [...products];
+    if (filters.category !== 'all') {
+      result = result.filter(p => p.category === filters.category);
+    }
+    result = result.filter(p => p.price >= filters.minPrice && p.price <= filters.maxPrice);
+    if (filters.rating > 0) {
+      result = result.filter(p => p.rating >= filters.rating);
+    }
+    if (filters.search) {
+      const q = filters.search.toLowerCase();
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.tags.some(t => t.toLowerCase().includes(q))
+      );
+    }
+    if (filters.inStock) {
+      result = result.filter(p => p.stock > 0);
+    }
+    switch (filters.sort) {
+      case 'price-asc': result.sort((a, b) => a.price - b.price); break;
+      case 'price-desc': result.sort((a, b) => b.price - a.price); break;
+      case 'rating': result.sort((a, b) => b.rating - a.rating); break;
+      case 'name': result.sort((a, b) => a.name.localeCompare(b.name)); break;
+      default: result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); break;
+    }
+    return result;
+  }, [products, filters]);
+
+  const categories = useMemo(() =>
+    [...new Set(products.map(p => p.category))],
+    [products]
+  );
+
+  return { filters, setFilter, clearFilters, filtered, categories };
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Multi-step Checkout</h4>
+          <p>Build a multi-step checkout form with React state management. Each step validates before advancing. The wizard pattern preserves data across steps and allows going back to edit.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const STEPS = ['Shipping', 'Payment', 'Review'];
+
+function Checkout() {
+  const [step, setStep] = useState(0);
+  const [formData, setFormData] = useState({
+    shipping: { firstName: '', lastName: '', address: '', city: '', state: '', zip: '', country: 'US' },
+    payment: { method: 'card' }
+  });
+  const [errors, setErrors] = useState({});
+
+  const validateStep = (stepIndex) => {
+    const newErrors = {};
+    if (stepIndex === 0) {
+      const s = formData.shipping;
+      if (!s.firstName.trim()) newErrors.firstName = 'Required';
+      if (!s.lastName.trim()) newErrors.lastName = 'Required';
+      if (!s.address.trim()) newErrors.address = 'Required';
+      if (!s.city.trim()) newErrors.city = 'Required';
+      if (!s.zip.trim()) newErrors.zip = 'Required';
+      if (s.zip.length < 5) newErrors.zip = 'Invalid ZIP code';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const nextStep = () => {
+    if (validateStep(step)) setStep(s => Math.min(s + 1, STEPS.length - 1));
+  };
+
+  const prevStep = () => setStep(s => Math.max(s - 1, 0));
+
+  const updateShipping = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      shipping: { ...prev.shipping, [field]: value }
+    }));
+    if (errors[field]) setErrors(prev => ({ ...prev, [field]: undefined }));
+  };
+
+  const renderStep = () => {
+    switch (step) {
+      case 0:
+        return <ShippingForm data={formData.shipping} onChange={updateShipping} errors={errors} />;
+      case 1:
+        return <PaymentForm method={formData.payment.method} onChange={(m) => setFormData(p => ({ ...p, payment: { ...p.payment, method: m } }))} />;
+      case 2:
+        return <OrderReview formData={formData} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="checkout-container">
+      <ProgressBar steps={STEPS} currentStep={step} />
+      {renderStep()}
+      <div className="checkout-actions">
+        {step > 0 && <button onClick={prevStep}>Back</button>}
+        {step < STEPS.length - 1
+          ? <button onClick={nextStep}>Continue</button>
+          : <PlaceOrderButton formData={formData} />
+        }
+      </div>
+    </div>
+  );
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>Cart Testing:</strong> Add items, update quantities, remove items, verify totals update correctly. Test with coupons and discount codes. Clear cart and verify empty state. Test cart persistence across page refreshes.</p>
+        <p><strong>Checkout Testing:</strong> Complete the full checkout flow with Stripe test card numbers: 4242424242424242 (success), 4000000000000002 (decline), 4000002500003155 (3D Secure required). Verify error handling for declined cards and network failures.</p>
+        <p><strong>Product Filtering:</strong> Apply each filter individually and in combination. Test sorting by each option. Share a filtered URL and verify filters load correctly. Test browser back/forward with filters.</p>
+        <p><strong>Responsive Testing:</strong> Test the product grid on mobile (1 column), tablet (2 columns), and desktop (4 columns). Verify the cart drawer works on small screens. Test touch interactions for image galleries.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>Frontend:</strong> Build the React app (npm run build) and deploy the build folder to Vercel, Netlify, or AWS S3 + CloudFront. Configure environment variables in the hosting dashboard.</p>
+        <p><strong>Backend:</strong> Deploy the Node.js server to Heroku, Railway, Render, or AWS Elastic Beanstalk. Use PM2 for process management. Set up a MongoDB Atlas cluster or PostgreSQL on RDS.</p>
+        <p><strong>Stripe Webhooks:</strong> Register your production webhook endpoint in the Stripe Dashboard. Listen for payment_intent.succeeded, payment_intent.payment_failed, and checkout.session.completed events. Use the Stripe CLI for local webhook testing.</p>
+        <p><strong>Domain & SSL:</strong> Set up a custom domain with your DNS provider. Configure SSL certificates through your hosting provider (automatic on Vercel/Netlify). Set up a CDN for product images (Cloudinary, imgix, or CloudFront).</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. Insecure Payment Data Handling</strong><br>
+          Never send raw credit card numbers to your server. Stripe Elements encrypts card data client-side and returns a token/payment method ID. Your server only receives this token. PCI DSS compliance requires that card data never touches your server. Always use Stripe's recommended integration pattern and never log payment details.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Cart State Desync Between Client and Server</strong><br>
+          When a user adds items to cart on one device, the cart isn't synced to their account. Implement cart merging on login: the server-side cart and client-side cart should merge, preferring server items for products that exist in both. Use the server's cart as the source of truth once authenticated.
+        </div>
+        <div class="challenge-card">
+          <strong>3. Missing Inventory Checks During Checkout</strong><br>
+          A user adds 10 items to cart but only 3 are in stock. Without real-time inventory checks, the order will fail after payment. Implement atomic inventory checks during checkout: lock inventory when the checkout process starts, release on timeout if not completed, and decrement on successful payment. Use database transactions for stock operations.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Not Handling Payment Webhook Idempotency</strong><br>
+          Stripe webhooks can be delivered multiple times (retry logic). Without idempotency, the same order can be processed twice. Store processed webhook event IDs in a database with a unique constraint. Check for duplicate events before processing. Use the Stripe-Signature header to verify webhook authenticity.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the difference between Context API and Redux. When would you use each?<br>
+          <strong>A:</strong> Context API is built into React and is suitable for small to medium applications with simple state (theme, auth, locale). Redux provides a more structured approach with middleware, devtools, time-travel debugging, and normalized state. Use Context for low-frequency updates and simple state. Use Redux for complex state with frequent updates, cross-cutting concerns, or when you need middleware (sagas, thunks). For e-commerce, Context + useReducer works well for cart state, but a global auth store might benefit from Redux if you need complex permission logic.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you optimize an e-commerce product listing page with 10,000+ products?<br>
+          <strong>A:</strong> Implement server-side pagination (20-50 products per page) with cursor-based or offset pagination. Use virtual scrolling (react-window or react-virtuoso) for the product grid. Implement server-side filtering and sorting to avoid loading all products. Use GraphQL to fetch only the fields needed (product name, price, image URL). Lazy load product images with Intersection Observer. Cache API responses with React Query or SWR. Prefetch the next page on hover/scroll.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> Describe the Stripe payment flow from checkout to order confirmation.<br>
+          <strong>A:</strong> (1) Client collects payment details via Stripe Elements (CardElement). (2) Client sends the total amount to the server. (3) Server creates a PaymentIntent with the amount, currency, and payment_method_types. (4) Server returns the client_secret to the client. (5) Client calls stripe.confirmCardPayment(client_secret) which handles 3D Secure if needed. (6) Stripe processes the payment and returns a result. (7) Server listens for payment_intent.succeeded webhook and updates the order status. (8) Client redirects to the order confirmation page with the payment status.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What is the difference between controlled and uncontrolled components in React?<br>
+          <strong>A:</strong> Controlled components have their state managed by React via useState/useReducer and onChange handlers. The input's value is always driven by React state. Uncontrolled components manage their own DOM state internally, accessed via refs. Controlled components give more control (instant validation, conditional disabling, format on input) but require more code. Uncontrolled are simpler but less flexible. In e-commerce, use controlled components for the checkout form (validation required) and uncontrolled for a search input (less critical).
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you implement optimistic updates in a cart system?<br>
+          <strong>A:</strong> Optimistic updates immediately apply changes to the UI before the server confirms, creating a faster user experience. Pattern: (1) Update local cart state immediately with the new item. (2) Send the API request to sync with the server. (3) If successful, keep the optimistic state. (4) If failed, rollback to the previous state and show an error toast. Use a snapshot of the previous state for rollback. Example: when adding to cart, immediately increment the cart badge count and add the item to the local cart, then POST to /api/cart/add. On error, revert to the snapshot.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Architected a full-stack e-commerce platform with React 18 frontend using Context API and useReducer for complex cart, auth, and UI state management across 15+ integrated components</li>
+          <li>Integrated Stripe Elements payment processing with PCI-compliant client-side card collection, PaymentIntent server API, 3D Secure authentication, and idempotent webhook handling for order fulfillment</li>
+          <li>Built a multi-step checkout wizard with progressive form validation, shipping calculation, tax estimation, and coupon discount application supporting complex business rules</li>
+          <li>Implemented URL-based product filtering system supporting category, price range, rating, availability, and search parameters with full browser history integration and shareable filtered URLs</li>
+          <li>Developed a Node.js/Express REST API with MongoDB for product catalog, order management, and user authentication with JWT tokens and refresh token rotation</li>
+          <li>Designed responsive product grids with lazy-loaded images, variant selection, zoom functionality, and skeleton loading states optimized for Core Web Vitals</li>
+          <li>Implemented optimistic cart updates with server synchronization, inventory locking during checkout, and cross-device cart merging on user authentication</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include architecture diagram, setup instructions for both client and server, environment variable documentation, Stripe test card numbers, and deployment guide. Add "Screenshots" section showing the store on desktop and mobile.</p>
+        <p><strong>Environment Variables:</strong> Document all variables in .env.example. Use different .env files for development, staging, and production. Never commit .env files. Use a CI/CD pipeline that injects environment variables during deployment.</p>
+        <p><strong>Commit Messages:</strong> feat: add Stripe payment intent creation, fix: prevent duplicate cart items on rapid clicks, refactor: extract checkout steps into custom hook, chore: add Docker configuration for development environment.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Admin Dashboard:</strong> Build an admin panel with product management (add/edit/delete), order management, inventory tracking, and analytics dashboard. Implement role-based access control with admin and staff roles.</li>
+          <li><strong>Wishlist & Comparisons:</strong> Add a wishlist feature with shareable public wishlists. Implement product comparison with a side-by-side view that highlights differences in specifications, prices, and ratings.</li>
+          <li><strong>Internationalization:</strong> Add multi-currency support with real-time exchange rate API. Implement multi-language (i18n) with react-intl. Add localized shipping rules, tax calculations, and payment methods based on the user's country.</li>
+          <li><strong>AI Product Recommendations:</strong> Implement a recommendation engine using collaborative filtering or matrix factorization. Show "You might also like" on product pages, "Frequently bought together" on cart, and personalized recommendations on the homepage.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://stripe.com/docs/payments/accept-a-payment" target="_blank">Stripe Payment Integration Guide</a> - Official Stripe documentation</li>
+          <li><a href="https://react.dev/reference/react/useReducer" target="_blank">React useReducer Docs</a> - State management with reducers</li>
+          <li><a href="https://reactrouter.com/en/main" target="_blank">React Router Documentation</a> - Client-side routing with URL parameters</li>
+          <li><a href="https://expressjs.com/" target="_blank">Express.js Documentation</a> - Node.js web framework</li>
+          <li><a href="https://www.mongodb.com/docs/" target="_blank">MongoDB Documentation</a> - NoSQL database for product/order data</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="chat-app.html" class="btn btn-ghost">Chat App</a>
+          <a href="social-dashboard.html" class="btn btn-ghost">Social Dashboard</a>
+          <a href="blog-platform.html" class="btn btn-ghost">Blog Platform</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="calculator.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: Calculator</a>
+        <a href="chat-app.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn Semantic HTML: header, nav, main, section, article, aside, footer, and why it matters">
+  <title>Semantic HTML – CodeRio</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/courses.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body data-page="Lesson" data-course="html" data-lesson="11">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../../index.html" class="logo">
+        <span class="logo-icon">&lt;/&gt;</span> CodeRio
+      </a>
+      <div class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../../Learn.html"><i class="fas fa-book"></i> Learn</a></li>
+        <li><a href="../../Practice.html"><i class="fas fa-code"></i> Practice</a></li>
+        <li><a href="../../Projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+        <li><a href="../../About.html"><i class="fas fa-info-circle"></i> About</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="../../login.html" class="btn btn-ghost">Log In</a>
+        <a href="../../signup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="toastContainer"></div>
+
+  <div class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-hero-content">
+        <h1>Semantic HTML</h1>
+        <div class="lesson-meta">
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="far fa-clock"></i> 50 min</span>
+          <span><i class="fas fa-list"></i> Module 11 of 14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-body">
+      <div class="lesson-section">
+        <h2><i class="fas fa-bullseye" style="color:var(--primary)"></i> Learning Objectives</h2>
+        <ul class="objective-list">
+          <li>Understand what semantic HTML means and why it matters</li>
+          <li>Use semantic elements like &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;aside&gt;, &lt;footer&gt;</li>
+          <li>Replace generic &lt;div&gt; elements with meaningful semantic tags</li>
+          <li>Learn how semantic HTML improves accessibility, SEO, and code readability</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-book-open" style="color:var(--primary)"></i> Semantic HTML Explained</h2>
+        <div class="analogy-box">
+          <i class="fas fa-lightbulb"></i>
+          <strong>Think of it like this:</strong>
+          <p>Imagine receiving a package with no labels — just a plain brown box. You have no idea what is inside or where it came from. That is what non-semantic HTML (<code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> everywhere) is like. Now imagine a box clearly labeled "FRAGILE — ELECTRONICS" with a return address and a contents list. That is <strong>semantic HTML</strong> — every element tells you something about its content. The browser, search engine, and screen reader all understand what each part of your page means.</p>
+        </div>
+        <p>Semantic HTML means using HTML elements that <strong>describe their meaning</strong> rather than just their appearance. For example, <code>&lt;nav&gt;</code> means "this is navigation," <code>&lt;article&gt;</code> means "this is a self-contained piece of content," and <code>&lt;footer&gt;</code> means "this is the footer of the page or section." Compare this to the generic <code>&lt;div&gt;</code> which means nothing — it is just a container. Semantic elements tell a story about your page structure.</p>
+        <p>Why does this matter? <strong>Accessibility:</strong> Screen readers use semantic elements to help users navigate. A visually impaired user can jump from <code>&lt;nav&gt;</code> to <code>&lt;main&gt;</code> to <code>&lt;footer&gt;</code> without hearing every word. <strong>SEO:</strong> Search engines give more weight to content inside <code>&lt;article&gt;</code> and <code>&lt;main&gt;</code> and use <code>&lt;nav&gt;</code> to understand your site structure. <strong>Readability:</strong> Other developers can look at your HTML and immediately understand the page layout without reading every line.</p>
+      </div>
+
+      <div class="lesson-section glass-card diagram-box">
+        <h2><i class="fas fa-diagram-project" style="color:var(--primary)"></i> Visual Diagram</h2>
+        <div class="diagram">
+          <div style="border:2px solid var(--primary);padding:1rem;border-radius:8px;">
+            <div style="background:var(--primary);color:#fff;padding:0.5rem;border-radius:4px;margin-bottom:0.5rem;text-align:center;">&lt;header&gt; — Logo, tagline</div>
+            <div style="background:var(--secondary);color:#fff;padding:0.5rem;border-radius:4px;margin-bottom:0.5rem;text-align:center;">&lt;nav&gt; — Links, menu</div>
+            <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem;">
+              <div style="background:var(--success);color:#fff;padding:0.5rem;border-radius:4px;flex:2;text-align:center;">&lt;main&gt;<br><small>&lt;article&gt; + &lt;section&gt;</small></div>
+              <div style="background:var(--warning);color:#000;padding:0.5rem;border-radius:4px;flex:1;text-align:center;">&lt;aside&gt;<br><small>Sidebar</small></div>
+            </div>
+            <div style="background:#6c757d;color:#fff;padding:0.5rem;border-radius:4px;text-align:center;">&lt;footer&gt; — Copyright, links</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-seedling" style="color:var(--success)"></i> Beginner Example</h2>
+        <pre><code>&lt;header&gt;
+  &lt;h1&gt;My Blog&lt;/h1&gt;
+  &lt;p&gt;Thoughts on web development&lt;/p&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;a href="/about"&gt;About&lt;/a&gt;
+  &lt;a href="/contact"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Why I Love HTML&lt;/h2&gt;
+    &lt;p&gt;HTML is the foundation of the web...&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2026 My Blog&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 1-4:</strong> <code>&lt;header&gt;</code> — introductory content for the page. Usually contains the site title, logo, and tagline.</li>
+            <li><strong>Lines 6-10:</strong> <code>&lt;nav&gt;</code> — a section with navigation links. Screen readers immediately announce "navigation" when reaching this element.</li>
+            <li><strong>Lines 12-16:</strong> <code>&lt;main&gt;</code> — the primary content of the page. There should be only one <code>&lt;main&gt;</code> per page. Inside it, <code>&lt;article&gt;</code> represents a self-contained piece of content.</li>
+            <li><strong>Lines 18-20:</strong> <code>&lt;footer&gt;</code> — contains copyright, contact info, or related links. Often repeated across pages.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--warning)"></i> Intermediate Example</h2>
+        <pre><code>&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;TechReview&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;a href="/"&gt;Home&lt;/a&gt;
+      &lt;a href="/reviews"&gt;Reviews&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;article&gt;
+      &lt;header&gt;
+        &lt;h2&gt;iPhone 16 Review&lt;/h2&gt;
+        &lt;time datetime="2026-03-15"&gt;March 15, 2026&lt;/time&gt;
+      &lt;/header&gt;
+      &lt;section&gt;
+        &lt;h3&gt;Design&lt;/h3&gt;
+        &lt;p&gt;The phone features a titanium frame...&lt;/p&gt;
+      &lt;/section&gt;
+      &lt;section&gt;
+        &lt;h3&gt;Camera&lt;/h3&gt;
+        &lt;p&gt;The new 48MP sensor captures stunning photos...&lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;h3&gt;Related Articles&lt;/h3&gt;
+      &lt;a href="#"&gt;Best Phones of 2026&lt;/a&gt;
+      &lt;a href="#"&gt;iOS 20 Features&lt;/a&gt;
+    &lt;/aside&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 TechReview&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 12-15:</strong> An <code>&lt;article&gt;</code> with its own <code>&lt;header&gt;</code> containing the article title and publication date using <code>&lt;time&gt;</code>.</li>
+            <li><strong>Lines 16-23:</strong> <code>&lt;section&gt;</code> elements divide the article into logical parts (Design, Camera). Each section has its own <code>&lt;h3&gt;</code> heading.</li>
+            <li><strong>Lines 25-29:</strong> <code>&lt;aside&gt;</code> contains content indirectly related to the main content — sidebars, related links, advertisements.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-crown" style="color:var(--primary)"></i> Advanced Example</h2>
+        <pre><code>&lt;body&gt;
+  &lt;header&gt;
+    &lt;hgroup&gt;
+      &lt;h1&gt;The Dev Daily&lt;/h1&gt;
+      &lt;p&gt;A developer's guide to modern web&lt;/p&gt;
+    &lt;/hgroup&gt;
+    &lt;nav aria-label="Main navigation"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/tutorials"&gt;Tutorials&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;article aria-labelledby="article-title"&gt;
+      &lt;h2 id="article-title"&gt;Understanding Flexbox&lt;/h2&gt;
+      &lt;p&gt;Flexbox is a CSS layout module...&lt;/p&gt;
+      &lt;section aria-label="Code Example"&gt;
+        &lt;h3&gt;Basic Flexbox Setup&lt;/h3&gt;
+        &lt;pre&gt;&lt;code&gt;.container { display: flex; }&lt;/code&gt;&lt;/pre&gt;
+      &lt;/section&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;nav aria-label="Table of contents"&gt;
+        &lt;h3&gt;In This Article&lt;/h3&gt;
+        &lt;ol&gt;
+          &lt;li&gt;&lt;a href="#intro"&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#setup"&gt;Setup&lt;/a&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/nav&gt;
+    &lt;/aside&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;address&gt;
+      Contact: &lt;a href="mailto:hello@devdaily.com"&gt;hello@devdaily.com&lt;/a&gt;
+    &lt;/address&gt;
+    &lt;small&gt;&amp;copy; 2026 The Dev Daily&lt;/small&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 3-6:</strong> <code>&lt;hgroup&gt;</code> groups multiple heading levels (h1 and p) as a single heading for the page.</li>
+            <li><strong>Lines 8, 29, 32:</strong> <code>aria-label</code> attributes provide accessible names for <code>&lt;nav&gt;</code> elements when there are multiple. This helps screen readers distinguish between "Main navigation" and "Table of contents."</li>
+            <li><strong>Line 30:</strong> <code>&lt;address&gt;</code> — a semantic element for contact information. It typically renders in italic.</li>
+            <li><strong>Line 31:</strong> <code>&lt;small&gt;</code> — represents side-comments like fine print or copyright.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-dumbbell" style="color:var(--primary)"></i> Exercises</h2>
+        <div class="exercise-list">
+          <div class="exercise-item">
+            <span class="exercise-number">1</span>
+            <p>Create a simple blog post layout using header, nav, main, article, and footer — no divs allowed.</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">2</span>
+            <p>Build a product page with a main section containing an article for the product description and an aside for related products.</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">3</span>
+            <p>Convert a page that currently uses only divs into a semantic HTML page. Identify at least 5 places where a div can be replaced with a semantic element.</p>
+            <span class="badge badge-info">Medium</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">4</span>
+            <p>Use an HTML outline checker (like the W3C validator) to check your page's heading and sectioning outline. Fix any issues.</p>
+            <span class="badge badge-warning">Challenging</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Quick Quiz</h2>
+        <div class="quiz-container">
+          <div class="quiz-question" data-q="0">
+            <p><strong>1. What is semantic HTML?</p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q0" value="a"> A) HTML that uses only div and span tags</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="b"> B) HTML that uses descriptive tags to convey meaning</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="c"> C) HTML with embedded JavaScript</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="d"> D) HTML that is written in lowercase</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="1">
+            <p><strong>2. Which element represents self-contained content that could be distributed independently?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q1" value="a"> A) &lt;section&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="b"> B) &lt;div&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="c"> C) &lt;article&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="d"> D) &lt;header&gt;</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="2">
+            <p><strong>3. How does semantic HTML help accessibility?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q2" value="a"> A) It makes text larger and easier to read</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="b"> B) It adds color-coded sections</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="c"> C) Screen readers use element roles to help users navigate</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="d"> D) It has no effect on accessibility</label>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="checkQuiz()">Check Answers</button>
+          <div id="quizResult" style="margin-top:1rem"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-tasks" style="color:var(--primary)"></i> Assignment</h2>
+        <p>Build a full "News Article" page using only semantic HTML elements (no divs or spans unless absolutely necessary). Your page must include: a header with site name and nav, a main area containing an article with a header (title + date), at least 3 sections with h3 headings, an aside with related links, and a footer with copyright and address. Add ARIA labels where you have multiple navigations. Add a figure with figcaption inside one of the sections. Validate your page with the W3C Nu HTML Checker. Save as <code>news-article.html</code>.</p>
+        <div class="assignment-hints">
+          <h4>Hints:</h4>
+          <ul>
+            <li>Use the W3C Nu Checker (validator.w3.org/nu/) to validate your HTML and check for semantic correctness.</li>
+            <li>You can nest <code>&lt;header&gt;</code> inside <code>&lt;article&gt;</code> — each sectioning element can have its own header.</li>
+            <li>Use <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> for images with captions inside sections.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-user-tie" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">Q: What is the difference between &lt;div&gt; and &lt;section&gt;? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>A <code>&lt;div&gt;</code> has no semantic meaning — it is a generic container for styling or scripting. A <code>&lt;section&gt;</code> represents a thematic grouping of content, typically with a heading. Use <code>&lt;section&gt;</code> when the content forms a distinct part of the document outline. Use <code>&lt;div&gt;</code> only when no other semantic element fits.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: Can you use multiple &lt;header&gt; or &lt;footer&gt; elements on one page? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>Yes. Each sectioning element (<code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;nav&gt;</code>) can have its own <code>&lt;header&gt;</code> and <code>&lt;footer&gt;</code>. For example, an <code>&lt;article&gt;</code> can have a header with its title and a footer with its publication date and author.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: What is the difference between &lt;article&gt; and &lt;section&gt;? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>An <code>&lt;article&gt;</code> is a self-contained composition that could be distributed independently (a blog post, news story, forum post). A <code>&lt;section&gt;</code> is a thematic grouping within a document. An <code>&lt;article&gt;</code> can contain multiple <code>&lt;section&gt;</code> elements, and a <code>&lt;section&gt;</code> can contain multiple <code>&lt;article&gt;</code> elements. Choose based on whether the content makes sense on its own.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <ul>
+          <li><strong>Using &lt;div&gt; for everything:</strong> Non-semantic "div soup" makes your code unreadable and inaccessible. Always ask "is there a better element for this?"</li>
+          <li><strong>Putting &lt;nav&gt; inside &lt;header&gt; unnecessarily:</strong> While common, a <code>&lt;nav&gt;</code> can exist outside the <code>&lt;header&gt;</code> — for example, a breadcrumb nav in the <code>&lt;main&gt;</code> area.</li>
+          <li><strong>Using &lt;main&gt; multiple times:</strong> There should be only one <code>&lt;main&gt;</code> element per page. It should not be inside other sectioning elements.</li>
+          <li><strong>Missing heading hierarchy in sections:</strong> Each <code>&lt;section&gt;</code> should ideally have a heading (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>) to describe its content.</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Additional Resources</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Semantics" target="_blank">MDN: Semantics Glossary</a></li>
+          <li><a href="https://www.w3schools.com/html/html5_semantic_elements.asp" target="_blank">W3Schools: HTML5 Semantic Elements</a></li>
+          <li><a href="https://web.dev/learn/html/semantic-html/" target="_blank">web.dev: Semantic HTML</a></li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-video" style="color:var(--primary)"></i> Recommended Videos</h2>
+        <div class="video-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg?start=3000" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>Semantic HTML and Page Structure</h4>
+              <p>freeCodeCamp • Beginner</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/kX3TfdUqguU" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>Why Semantic HTML Matters</h4>
+              <p>Kevin Powell • Beginner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-navigation">
+        <a href="10-forms.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous</a>
+        <a href="12-accessibility.html" class="btn btn-primary">Next <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../../index.html">Home</a></li><li><a href="../../Learn.html">Learn</a></li><li><a href="../../Practice.html">Practice</a></li><li><a href="../../Projects.html">Projects</a></li><li><a href="../../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../../faq.html">FAQ</a></li><li><a href="../../privacy-policy.html">Privacy Policy</a></li><li><a href="../../terms-of-service.html">Terms of Service</a></li><li><a href="../../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/learning.js"></script>
+
+  <script>
+    function checkQuiz() {
+      let score = 0;
+      if (document.querySelector('input[name="q0"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'c') score++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'c') score++;
+      let msg = 'You scored ' + score + '/3';
+      if (score === 3) msg += ' 🎉 Perfect!';
+      else if (score >= 2) msg += ' 👍 Good job!';
+      else msg += ' 💪 Keep practicing!';
+      document.getElementById('quizResult').innerHTML = '<div class="alert alert-info">' + msg + '</div>';
+    }
+
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        const isOpen = answer.style.maxHeight;
+        document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+        if (!isOpen) answer.style.maxHeight = answer.scrollHeight + 'px';
+      });
+    });
+  </script>
+</body>
+</html>

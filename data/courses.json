@@ -1,0 +1,468 @@
+[
+  {
+    "id": "html",
+    "title": "HTML",
+    "description": "Learn webpage structure and semantic design.",
+    "longDescription": "HTML (HyperText Markup Language) is the foundation of all web pages. It provides the structure and meaning to content on the web. Master semantic HTML to build accessible, SEO-friendly websites that work across all devices.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    "duration": "4 weeks",
+    "modules": [
+      { "title": "Introduction to HTML", "description": "Understanding what HTML is, its history, and how it works with other web technologies." },
+      { "title": "HTML Document Structure", "description": "Learning the basic structure of HTML documents including doctype, head, and body elements." },
+      { "title": "Text Elements & Headings", "description": "Working with headings, paragraphs, text formatting, and semantic text elements." },
+      { "title": "Links & Navigation", "description": "Creating hyperlinks, navigation menus, and understanding URL structures." },
+      { "title": "Images & Media", "description": "Embedding images, videos, audio, and other media content in web pages." },
+      { "title": "Lists & Tables", "description": "Building ordered lists, unordered lists, and data tables with proper semantics." },
+      { "title": "Forms & Inputs", "description": "Creating interactive forms with various input types, validation, and submission." },
+      { "title": "Semantic HTML5", "description": "Using modern semantic elements like header, nav, main, section, article, and footer." },
+      { "title": "Accessibility", "description": "Making HTML accessible with ARIA attributes, alt text, and proper semantics." },
+      { "title": "SEO Best Practices", "description": "Optimizing HTML for search engines with meta tags, structured data, and more." }
+    ],
+    "link": "/courses/html.html"
+  },
+  {
+    "id": "css",
+    "title": "CSS",
+    "description": "Build modern responsive beautiful interfaces.",
+    "longDescription": "CSS (Cascading Style Sheets) brings life to web pages with colors, layouts, animations, and responsive design. Learn to create stunning user interfaces that work beautifully across all devices.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    "duration": "6 weeks",
+    "modules": [
+      { "title": "CSS Fundamentals", "description": "Selectors, properties, values, and the cascade." },
+      { "title": "Box Model", "description": "Understanding margin, padding, border, and content areas." },
+      { "title": "Typography & Colors", "description": "Fonts, text styling, color systems, and gradients." },
+      { "title": "Layout with Flexbox", "description": "Building flexible layouts with Flexbox." },
+      { "title": "Layout with Grid", "description": "Creating complex grid-based layouts." },
+      { "title": "Responsive Design", "description": "Media queries, fluid layouts, and mobile-first design." },
+      { "title": "Animations & Transitions", "description": "CSS transitions, transforms, and keyframe animations." },
+      { "title": "CSS Preprocessors", "description": "Introduction to SASS/SCSS for more maintainable CSS." }
+    ],
+    "link": "/courses/css.html"
+  },
+  {
+    "id": "javascript",
+    "title": "JavaScript",
+    "description": "Add dynamic functionality to your websites.",
+    "longDescription": "JavaScript is the programming language of the web. It enables interactive web pages, dynamic content, and full-stack applications. Master the language that powers modern web development.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "JS Fundamentals", "description": "Variables, data types, operators, and basic syntax." },
+      { "title": "Control Flow", "description": "Conditionals, loops, and logical operations." },
+      { "title": "Functions & Scope", "description": "Function declarations, expressions, arrow functions, and scoping." },
+      { "title": "Arrays & Objects", "description": "Working with collections of data using arrays and objects." },
+      { "title": "DOM Manipulation", "description": "Selecting, creating, and modifying DOM elements." },
+      { "title": "Events", "description": "Event handling, propagation, and custom events." },
+      { "title": "ES6+ Features", "description": "Modern JavaScript features like destructuring, spread, and modules." },
+      { "title": "Async JavaScript", "description": "Promises, async/await, and handling asynchronous operations." },
+      { "title": "APIs & Fetch", "description": "Making HTTP requests and working with REST APIs." },
+      { "title": "Error Handling", "description": "Try/catch, error objects, and debugging techniques." }
+    ],
+    "link": "/courses/javascript.html"
+  },
+  {
+    "id": "python",
+    "title": "Python",
+    "description": "Learn automation, AI, scripting, and backend.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "Python Basics", "description": "Syntax, variables, and data types." },
+      { "title": "Control Structures", "description": "If/else, loops, and comprehensions." },
+      { "title": "Functions & Modules", "description": "Defining functions, importing modules, and packages." },
+      { "title": "Data Structures", "description": "Lists, tuples, sets, dictionaries, and their methods." },
+      { "title": "File I/O", "description": "Reading and writing files in Python." },
+      { "title": "OOP in Python", "description": "Classes, objects, inheritance, and polymorphism." },
+      { "title": "Libraries & Frameworks", "description": "NumPy, Pandas, Flask, and Django basics." },
+      { "title": "Working with APIs", "description": "Making HTTP requests and processing JSON data." }
+    ],
+    "link": "/courses/python.html"
+  },
+  {
+    "id": "java",
+    "title": "Java",
+    "description": "Learn object oriented programming concepts.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+    "duration": "10 weeks",
+    "modules": [
+      { "title": "Java Fundamentals", "description": "JVM, syntax, data types, and operators." },
+      { "title": "OOP Principles", "description": "Encapsulation, inheritance, polymorphism, abstraction." },
+      { "title": "Collections Framework", "description": "Lists, sets, maps, and their implementations." },
+      { "title": "Exception Handling", "description": "Try/catch, custom exceptions, and best practices." },
+      { "title": "Multithreading", "description": "Threads, synchronization, and concurrency." },
+      { "title": "File I/O & Serialization", "description": "Reading/writing files and object serialization." },
+      { "title": "JDBC & Databases", "description": "Connecting Java applications to databases." },
+      { "title": "Java 8+ Features", "description": "Streams, lambdas, functional interfaces, and optionals." }
+    ],
+    "link": "/courses/java.html"
+  },
+  {
+    "id": "c",
+    "title": "C",
+    "description": "Master programming fundamentals and memory.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "C Basics", "description": "Syntax, variables, and data types." },
+      { "title": "Pointers & Memory", "description": "Pointer arithmetic, dynamic memory allocation." },
+      { "title": "Arrays & Strings", "description": "Working with arrays and string manipulation." },
+      { "title": "Functions", "description": "Function pointers, recursion, and scope." },
+      { "title": "Structures & Unions", "description": "Creating custom data types." },
+      { "title": "File Handling", "description": "File operations in C." }
+    ],
+    "link": "/courses/c.html"
+  },
+  {
+    "id": "cpp",
+    "title": "C++",
+    "description": "Learn DSA, STL, and competitive coding.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+    "duration": "10 weeks",
+    "modules": [
+      { "title": "C++ Basics", "description": "Syntax, I/O, and basic constructs." },
+      { "title": "OOP in C++", "description": "Classes, inheritance, polymorphism, templates." },
+      { "title": "STL Containers", "description": "Vector, map, set, stack, queue, and algorithms." },
+      { "title": "Memory Management", "description": "Pointers, references, and RAII." },
+      { "title": "Advanced Topics", "description": "Move semantics, lambdas, and smart pointers." }
+    ],
+    "link": "/courses/cpp.html"
+  },
+  {
+    "id": "dsa",
+    "title": "DSA",
+    "description": "Learn algorithms, problem solving, and logic.",
+    "level": "advanced",
+    "icon": "https://cdn-icons-png.flaticon.com/512/2103/2103633.png",
+    "duration": "12 weeks",
+    "modules": [
+      { "title": "Complexity Analysis", "description": "Time and space complexity, Big O notation." },
+      { "title": "Arrays & Hashing", "description": "Array manipulation, hash maps, and sets." },
+      { "title": "Two Pointers", "description": "Two pointer technique and sliding window." },
+      { "title": "Stack & Queue", "description": "Stack and queue implementations and problems." },
+      { "title": "Linked Lists", "description": "Singly, doubly, and circular linked lists." },
+      { "title": "Trees & Graphs", "description": "BST, AVL, DFS, BFS, and graph algorithms." },
+      { "title": "Dynamic Programming", "description": "Memoization, tabulation, and DP patterns." },
+      { "title": "Greedy Algorithms", "description": "Greedy approach and interval problems." },
+      { "title": "Recursion & Backtracking", "description": "Recursive problem solving and backtracking." },
+      { "title": "Sorting & Searching", "description": "Sorting algorithms and binary search variations." }
+    ],
+    "link": "/courses/dsa.html"
+  },
+  {
+    "id": "sql",
+    "title": "SQL",
+    "description": "Learn database querying and data management.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+    "duration": "4 weeks",
+    "modules": [
+      { "title": "SQL Basics", "description": "SELECT, WHERE, and basic queries." },
+      { "title": "Joins", "description": "INNER, LEFT, RIGHT, and FULL JOINs." },
+      { "title": "Aggregation", "description": "GROUP BY, HAVING, and aggregate functions." },
+      { "title": "Subqueries", "description": "Nested queries and CTEs." },
+      { "title": "Indexes & Optimization", "description": "Database indexing and query performance." }
+    ],
+    "link": "/courses/sql.html"
+  },
+  {
+    "id": "nodejs",
+    "title": "Node.js",
+    "description": "Create fast scalable backend applications.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "Node.js Basics", "description": "Event loop, modules, and NPM." },
+      { "title": "Express.js", "description": "Routing, middleware, and REST APIs." },
+      { "title": "Database Integration", "description": "MongoDB, PostgreSQL, and ORMs." },
+      { "title": "Authentication", "description": "JWT, OAuth, and session management." },
+      { "title": "Deployment", "description": "Deploying Node.js applications." }
+    ],
+    "link": "/courses/nodejs.html"
+  },
+  {
+    "id": "go",
+    "title": "Go",
+    "description": "Build cloud-native and concurrent applications.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
+    "duration": "6 weeks",
+    "modules": [
+      { "title": "Go Basics", "description": "Syntax, types, and control structures." },
+      { "title": "Concurrency", "description": "Goroutines, channels, and select." },
+      { "title": "Interfaces & Structs", "description": "Type system and interfaces." },
+      { "title": "Web Development", "description": "Building web servers and APIs." }
+    ],
+    "link": "/courses/go.html"
+  },
+  {
+    "id": "rust",
+    "title": "Rust",
+    "description": "Create ultra-fast safe systems-level software.",
+    "level": "advanced",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg",
+    "duration": "10 weeks",
+    "modules": [
+      { "title": "Rust Fundamentals", "description": "Ownership, borrowing, and lifetimes." },
+      { "title": "Data Types", "description": "Primitives, structs, enums, and pattern matching." },
+      { "title": "Error Handling", "description": "Result, Option, and custom errors." },
+      { "title": "Concurrency", "description": "Threads, async/await, and Tokio." },
+      { "title": "Advanced Rust", "description": "Unsafe Rust, FFI, and macros." }
+    ],
+    "link": "/courses/rust.html"
+  },
+  {
+    "id": "csharp",
+    "title": "C#",
+    "description": "Build desktop apps, games, and backend APIs.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "C# Basics", "description": "Syntax, types, and .NET framework." },
+      { "title": "OOP in C#", "description": "Classes, inheritance, and interfaces." },
+      { "title": "LINQ & Collections", "description": "Language Integrated Query and collections." },
+      { "title": "ASP.NET Core", "description": "Building web APIs with .NET." },
+      { "title": "Entity Framework", "description": "ORM and database access." }
+    ],
+    "link": "/courses/csharp.html"
+  },
+  {
+    "id": "kotlin",
+    "title": "Kotlin",
+    "description": "Build Android apps with modern syntax.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+    "duration": "6 weeks",
+    "modules": [
+      { "title": "Kotlin Basics", "description": "Syntax, null safety, and type system." },
+      { "title": "Functions & Lambdas", "description": "Higher-order functions and lambdas." },
+      { "title": "Object-Oriented", "description": "Classes, data classes, and sealed classes." },
+      { "title": "Coroutines", "description": "Asynchronous programming with coroutines." },
+      { "title": "Android Development", "description": "Building Android apps with Kotlin." }
+    ],
+    "link": "/courses/kotlin.html"
+  },
+  {
+    "id": "swift",
+    "title": "Swift",
+    "description": "Develop modern iOS and Apple applications.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "Swift Basics", "description": "Syntax, optionals, and type inference." },
+      { "title": "Protocols & Extensions", "description": "Protocol-oriented programming." },
+      { "title": "SwiftUI", "description": "Building declarative UIs with SwiftUI." },
+      { "title": "iOS Development", "description": "Building complete iOS applications." }
+    ],
+    "link": "/courses/swift.html"
+  },
+  {
+    "id": "pandas",
+    "title": "Pandas",
+    "description": "Analyze and manipulate datasets efficiently.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
+    "duration": "4 weeks",
+    "modules": [
+      { "title": "DataFrames Basics", "description": "Creating and exploring DataFrames." },
+      { "title": "Data Cleaning", "description": "Handling missing data and duplicates." },
+      { "title": "Data Transformation", "description": "Grouping, merging, and reshaping data." },
+      { "title": "Time Series", "description": "Working with dates and time series data." },
+      { "title": "Visualization", "description": "Plotting with Pandas and Matplotlib." }
+    ],
+    "link": "/courses/pandas.html"
+  },
+  {
+    "id": "mysql",
+    "title": "MySQL",
+    "description": "Build and manage relational databases.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg",
+    "duration": "4 weeks",
+    "modules": [
+      { "title": "Database Design", "description": "ER diagrams and normalization." },
+      { "title": "CRUD Operations", "description": "Create, Read, Update, Delete in MySQL." },
+      { "title": "Advanced Queries", "description": "Joins, subqueries, and views." },
+      { "title": "Stored Procedures", "description": "Procedures, functions, and triggers." },
+      { "title": "Performance Tuning", "description": "Indexing, query optimization, and caching." }
+    ],
+    "link": "/courses/mysql.html"
+  },
+  {
+    "id": "typescript",
+    "title": "TypeScript",
+    "description": "TypeScript adds static typing, classes, interfaces, and advanced tooling to JavaScript.",
+    "longDescription": "TypeScript was created by Anders Hejlsberg at Microsoft to address the challenges of building large-scale JavaScript applications. It adds a powerful type system on top of JavaScript, enabling developers to catch type-related bugs at compile time rather than runtime.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "TypeScript Setup & Basics", "description": "Installing TypeScript, tsconfig.json configuration, compiling TS to JS, watching files, integrating with VS Code." },
+      { "title": "Primitive Types & Annotations", "description": "string, number, boolean, null, undefined, void, never, unknown, any, type annotations, and type inference." },
+      { "title": "Interfaces & Type Aliases", "description": "Defining interfaces, optional properties, readonly properties, index signatures, extending interfaces, type vs interface." },
+      { "title": "Functions & Arrays", "description": "Function type annotations, optional/default/rest parameters, overloads, typed arrays, tuples, and array methods." },
+      { "title": "Generics", "description": "Generic functions, generic constraints, generic interfaces, generic classes, keyof, conditional types with generics." },
+      { "title": "Enums & Union/Intersection Types", "description": "Numeric enums, string enums, const enums, union types, discriminated unions, intersection types, type narrowing." },
+      { "title": "Classes & Access Modifiers", "description": "public, private, protected, readonly, parameter properties, abstract classes, static members, implements." },
+      { "title": "Modules & Namespaces", "description": "ES modules import/export, namespace keyword, ambient declarations, module resolution, barrel exports." },
+      { "title": "Mapped & Conditional Types", "description": "Mapped types (in keyof), conditional types (extends), infer keyword, distributive conditional types, template literal types." },
+      { "title": "Utility Types", "description": "Partial, Required, Readonly, Pick, Omit, Record, Exclude, Extract, NonNullable, ReturnType, Parameters, Awaited." },
+      { "title": "Decorators", "description": "Class decorators, method decorators, property decorators, accessor decorators, parameter decorators, decorator factories." },
+      { "title": "Declaration Files & .d.ts", "description": "Writing declaration files, ambient module declarations, triple-slash directives, publishing types, @types packages." },
+      { "title": "Advanced Type Inference", "description": "Contextual typing, type widening, type narrowing, discriminated unions, assertion functions, type predicates." },
+      { "title": "Template Literal Types", "description": "String literal interpolation, intrinsic string types, pattern matching." },
+      { "title": "Module Augmentation & Declaration Merging", "description": "Merging interfaces, augmenting external modules, global augmentation, namespace merging, enum merging." },
+      { "title": "Compiler API & Custom Transforms", "description": "TypeScript compiler architecture, AST traversal, custom transformers, programmatic compilation, ts-morph library." }
+    ],
+    "link": "/courses/typescript.html"
+  },
+  {
+    "id": "react",
+    "title": "React",
+    "description": "Build dynamic user interfaces with components and a virtual DOM.",
+    "longDescription": "React was created by Jordan Walke at Facebook in 2011 and open-sourced in 2013. It introduced the concept of a virtual DOM, which minimizes direct DOM manipulation by computing diffs between component states and applying minimal updates.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "React Fundamentals & JSX", "description": "Setting up a React project with Vite, JSX syntax, rendering elements, React StrictMode, and project structure." },
+      { "title": "Components & Props", "description": "Functional components, component composition, props, children, default props, prop types, fragment shorthand." },
+      { "title": "Conditional Rendering & Lists", "description": "Ternary operators, logical &&, if-else patterns, map() for lists, list keys, key best practices." },
+      { "title": "Events & Forms", "description": "Event handling in React, synthetic events, form inputs, controlled components, uncontrolled refs, form validation." },
+      { "title": "State with useState", "description": "useState hook, state updates, immutability, state batching, derived state, lifting state up, colocation." },
+      { "title": "Side Effects with useEffect", "description": "useEffect hook, dependency arrays, cleanup functions, data fetching, subscriptions, timers, effect lifecycle." },
+      { "title": "Refs & DOM Manipulation", "description": "useRef hook, ref forwarding, imperative DOM access, measuring elements, storing mutable values, callback refs." },
+      { "title": "Component Communication", "description": "Props drilling, lifting state, callback props, children composition, context basics, compound components." },
+      { "title": "Context API & useContext", "description": "React.createContext, useContext hook, provider pattern, context performance, memoizing context values, nested contexts." },
+      { "title": "useReducer & State Management", "description": "useReducer hook, reducer pattern, dispatch actions, action types, complex state logic, combining with context." },
+      { "title": "Custom Hooks", "description": "Building custom hooks, hook composition, useLocalStorage, useDebounce, useFetch, useMediaQuery patterns." },
+      { "title": "React Router", "description": "React Router v6, BrowserRouter, Routes, Route, Link, NavLink, useParams, useNavigate, nested routes, lazy loading." },
+      { "title": "Performance Optimization", "description": "React.memo, useMemo, useCallback, lazy loading, Suspense, virtualization (react-window), bundle analysis." },
+      { "title": "Testing React Apps", "description": "React Testing Library, Jest, testing components, testing hooks, mocking API calls, user events, accessibility tests." },
+      { "title": "State Management (Redux/Zustand)", "description": "Redux Toolkit, createSlice, configureStore, Zustand, stores, selectors, actions, middleware, devtools." },
+      { "title": "Next.js & Full-Stack React", "description": "Next.js App Router, server components, server actions, data fetching, SSR/SSG/ISR, API routes, middleware." }
+    ],
+    "link": "/courses/react.html"
+  },
+  {
+    "id": "mongodb",
+    "title": "MongoDB",
+    "description": "Store and query data with a flexible NoSQL document database.",
+    "longDescription": "MongoDB was created by Dwight Merriman and Eliot Horowitz in 2007 to solve scalability issues with relational databases. It uses a document model where data is stored as BSON documents in collections, rather than rows in tables.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    "duration": "6 weeks",
+    "modules": [
+      { "title": "Introduction & Setup", "description": "Installing MongoDB, MongoDB Shell, MongoDB Compass GUI, connecting to local/Atlas instances, basic terminology." },
+      { "title": "CRUD Operations", "description": "insertOne/insertMany, find with filters, updateOne/updateMany/replaceOne, deleteOne/deleteMany, bulk writes." },
+      { "title": "Query Operators", "description": "Comparison, logical, element, array, and regex query operators." },
+      { "title": "Document Structure & Data Types", "description": "BSON types, ObjectId, embedded documents, arrays, dates, document size limits." },
+      { "title": "Indexing", "description": "Single field indexes, compound indexes, multikey indexes, text indexes, unique indexes, explain() for query analysis." },
+      { "title": "Aggregation Pipeline", "description": "$match, $group, $sort, $project, $lookup, $unwind, $bucket, $facet, aggregation expressions." },
+      { "title": "Schema Design & Data Modeling", "description": "Embedding vs referencing, one-to-one, one-to-many, many-to-many patterns, schema anti-patterns." },
+      { "title": "Mongoose ODM", "description": "Schemas, models, validation, middleware, virtuals, population, plugins, discriminators." },
+      { "title": "Replica Sets & High Availability", "description": "Primary/secondary/arbiter nodes, automatic failover, read preferences, write concerns." },
+      { "title": "Sharding & Horizontal Scaling", "description": "Shard keys, config servers, mongos routers, chunk splitting/migration, shard zones." },
+      { "title": "Transactions", "description": "Multi-document ACID transactions, session API, transaction lifetime, retry logic." },
+      { "title": "Security & Authentication", "description": "RBAC, SCRAM authentication, x.509 certificates, field-level encryption, audit logging." },
+      { "title": "Change Streams & Real-Time Data", "description": "Watching collections for changes, resume tokens, pipeline filtering." },
+      { "title": "GeoSpatial & Time-Series", "description": "GeoJSON objects, 2dsphere indexes, geospatial queries, time-series collections." },
+      { "title": "Backup, Restore & Maintenance", "description": "mongodump/mongorestore, Atlas backups, point-in-time recovery, compaction." },
+      { "title": "MongoDB Atlas & Cloud", "description": "Atlas clusters, serverless instances, Atlas Search, Data Lake, monitoring." }
+    ],
+    "link": "/courses/mongodb.html"
+  },
+  {
+    "id": "linux",
+    "title": "Linux",
+    "description": "Master the operating system powering servers, cloud, and DevOps.",
+    "longDescription": "Linux started as a personal project by Linus Torvalds in 1991. Today, the Linux kernel powers the majority of servers, cloud infrastructure, embedded systems, and supercomputers worldwide.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
+    "duration": "8 weeks",
+    "modules": [
+      { "title": "Getting Started with Linux", "description": "Choosing a distro, installation, desktop environment vs CLI, terminal basics, man pages." },
+      { "title": "Filesystem & Navigation", "description": "Linux filesystem hierarchy, ls, cd, pwd, mkdir, cp, mv, rm, find, locate." },
+      { "title": "File Operations & Permissions", "description": "cat, less, more, head, tail, wc, chmod, chown, chgrp, file types, symlinks, wildcards." },
+      { "title": "Users, Groups & Permissions", "description": "useradd/usermod/userdel, groupadd/groupmod, sudo, /etc/passwd, /etc/shadow." },
+      { "title": "Process Management", "description": "ps, top, htop, kill, nice/renice, bg/fg, jobs, nohup, systemd services." },
+      { "title": "Package Management", "description": "apt, dnf/yum, pacman, snap, flatpak, adding repos, dpkg/rpm basics." },
+      { "title": "Text Processing & Pipes", "description": "grep, sed, awk, cut, sort, uniq, tr, tee, xargs, pipelines, I/O redirection." },
+      { "title": "Shell Scripting Basics", "description": "Bash scripts, variables, conditionals, loops, functions, exit codes." },
+      { "title": "Networking", "description": "ip, ifconfig, ss, ping, traceroute, curl, wget, DNS, /etc/hosts, nmap." },
+      { "title": "SSH & Remote Access", "description": "ssh, ssh-keygen, authorized_keys, scp, rsync, sshd_config, port forwarding." },
+      { "title": "Systemd & Service Management", "description": "systemctl, journalctl, unit files, timers, targets, service dependencies." },
+      { "title": "Firewall & Security", "description": "iptables/nftables, ufw, firewalld, fail2ban, SELinux, AppArmor." },
+      { "title": "Storage & LVM", "description": "fdisk, parted, mkfs, mount, /etc/fstab, LVM, RAID, df, du." },
+      { "title": "Logging & Monitoring", "description": "rsyslog, logrotate, journald, Prometheus, Grafana." },
+      { "title": "Performance Tuning", "description": "vmstat, iostat, mpstat, sar, perf, strace, sysctl tuning." },
+      { "title": "Containers & Virtualization", "description": "Docker on Linux, LXC/LXD, KVM/qemu, Vagrant, cgroups, namespaces." }
+    ],
+    "link": "/courses/linux.html"
+  },
+  {
+    "id": "git",
+    "title": "Git & GitHub",
+    "description": "Track changes, collaborate, and manage code with version control.",
+    "longDescription": "Git is a distributed version control system created by Linus Torvalds in 2005. It tracks changes to files, enables collaboration, and provides a complete history of project evolution without requiring a server for basic operations.",
+    "level": "beginner",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    "duration": "6 weeks",
+    "modules": [
+      { "title": "Getting Started with Git", "description": "Installing Git, configuring name/email, git init, git clone, the .git directory structure." },
+      { "title": "Basic Operations", "description": "git add, git commit, git status, git log, git diff, .gitignore patterns." },
+      { "title": "Branching Basics", "description": "git branch, git checkout/switch, creating branches, switching branches, branch naming conventions." },
+      { "title": "Merging", "description": "git merge, fast-forward vs 3-way merge, merge commits, merge conflicts, resolving conflicts." },
+      { "title": "Working with Remotes", "description": "git remote add, git push, git pull, git fetch, upstream tracking, origin vs upstream." },
+      { "title": "Rebasing", "description": "git rebase, interactive rebase, rebase vs merge, golden rule of rebasing." },
+      { "title": "Stashing & Cleaning", "description": "git stash push/pop, stash list, stash apply/drop, git clean." },
+      { "title": "Tags & Releases", "description": "git tag, lightweight vs annotated tags, semantic versioning, release management." },
+      { "title": "Undoing Changes", "description": "git revert, git reset (soft/mixed/hard), git restore, git clean." },
+      { "title": "Cherry-Pick & Advanced Merging", "description": "git cherry-pick, merge strategies, merge options." },
+      { "title": "Git Hooks", "description": "Client-side hooks, server-side hooks, husky, automating linting/testing." },
+      { "title": "Reflog & Recovery", "description": "git reflog, recovering lost commits, recovering deleted branches, git fsck." },
+      { "title": "Git Internals", "description": "Blob, tree, commit, and tag objects; SHA-1 hashing; packfiles." },
+      { "title": "GitHub Workflows", "description": "Pull requests, code review, GitHub Actions CI/CD, GitHub Pages, GitHub CLI." },
+      { "title": "Git Workflows", "description": "Git Flow, GitHub Flow, trunk-based development, forking workflow." },
+      { "title": "Advanced Git & Automation", "description": "git submodules, git worktree, git bisect, Git LFS." }
+    ],
+    "link": "/courses/git.html"
+  },
+  {
+    "id": "docker",
+    "title": "Docker",
+    "description": "Containerize, ship, and run applications anywhere consistently.",
+    "longDescription": "Docker was launched in 2013 by Solomon Hykes. It popularized containerization by making it easy to create, deploy, and run containers using a simple CLI. Unlike virtual machines, containers share the host OS kernel, making them more lightweight and faster to start.",
+    "level": "intermediate",
+    "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    "duration": "6 weeks",
+    "modules": [
+      { "title": "Docker Fundamentals", "description": "Installing Docker, Docker architecture, containers vs VMs, Docker Desktop, first commands." },
+      { "title": "Working with Images & Containers", "description": "docker run, start/stop/rm, port mapping, environment variables, detached mode." },
+      { "title": "Dockerfiles", "description": "FROM, RUN, COPY, ADD, CMD, ENTRYPOINT, WORKDIR, EXPOSE, layers and caching, .dockerignore." },
+      { "title": "Volumes & Data Persistence", "description": "Bind mounts, named volumes, tmpfs mounts, sharing data between containers." },
+      { "title": "Docker Compose", "description": "docker-compose.yml, services, networks, volumes, environment, depends_on, ports." },
+      { "title": "Multi-Container Applications", "description": "Dockerizing web apps, databases, caching, reverse proxy with Docker Compose." },
+      { "title": "Docker Networking", "description": "Bridge, host, overlay networks; container DNS; network isolation; service discovery." },
+      { "title": "Multi-Stage Builds & Best Practices", "description": "Multi-stage Dockerfiles, layer caching optimization, security best practices." },
+      { "title": "Docker Swarm & Orchestration", "description": "Swarm init/join, services, stacks, replicas, rolling updates, Swarm networking." },
+      { "title": "Logging & Monitoring", "description": "docker logs, logging drivers, Docker metrics, Prometheus integration." },
+      { "title": "Security & Best Practices", "description": "Image scanning, secret management, user namespaces, rootless mode, content trust." },
+      { "title": "CI/CD with Docker", "description": "GitHub Actions Docker builds, GitLab CI, Jenkins with Docker, automated testing." },
+      { "title": "Kubernetes Basics", "description": "Pods, deployments, services, configmaps, secrets, ingress, kubectl, minikube." },
+      { "title": "Docker Registry & Distribution", "description": "Docker Hub, private registries, Harbor, image tags, multi-architecture images." },
+      { "title": "Docker API & SDK", "description": "Docker Engine API, Docker SDK for Python/Go/JS, programmatic container management." },
+      { "title": "Production Docker", "description": "Resource limits, health checks, graceful shutdowns, blue/green deployment." }
+    ],
+    "link": "/courses/docker.html"
+  }
+]

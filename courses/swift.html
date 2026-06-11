@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swift Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="swift">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="toast-container"></div>
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Swift</h1>
+      <p>Swift is a powerful, open-source programming language developed by Apple for building iOS, macOS, watchOS, tvOS, and visionOS applications. First released in 2014, it combines performance, safety, and modern language features with an expressive syntax.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 8 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 12 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift">
+    </div>
+  </section>
+  <section class="course-content">
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Swift was designed to be safer, faster, and more expressive than Objective-C. It features type inference, optionals, pattern matching, closures, protocol-oriented programming, and value semantics with structs and enums.</p>
+      <p>Swift uses ARC for memory, supports generics, and provides error handling with do/try/catch. The language emphasizes safety: variables are always initialized, arrays check for overflow, and memory is managed automatically.</p>
+      <p>Swift is used by Apple, Uber, Airbnb, LinkedIn, Slack, Lyft, and Khan Academy. It has grown beyond Apple with server-side frameworks like Vapor and Kitura, and AWS Lambda support.</p>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Swift?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fab fa-apple" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Apple Ecosystem Access</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Swift is the primary language for iOS, macOS, watchOS, tvOS, and visionOS.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Safety by Design</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Optionals eliminate null pointer crashes. ARC manages memory automatically.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-tachometer-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">High Performance</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Compiles to optimized native code via LLVM, comparable to C++ performance.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-server" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Server-Side Swift</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Frameworks like Vapor bring Swift to the backend with async/await.</p>
+        </div>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Swift powers millions of apps across the Apple ecosystem:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apple</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Major apps like WhatsApp, Instagram, Facebook, YouTube, Google Maps, Netflix, and Spotify all have iOS versions in Swift.</p>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic programming concepts: variables, functions, control flow</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Variables, data types, optionals, control flow, functions, closures</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 3-5)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Classes, structs, enums, protocols, extensions, error handling, generics</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 6-7)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">SwiftUI, Combine, async/await, CoreData, URLSession</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Week 8)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">MVVM architecture, XCTest, App Store deployment</p>
+        </div>
+      </div>
+    </div>
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=swift&module=1" class="module-card" onclick="LearningTracker.startLesson('swift-01')">
+        <h3><span class="module-number">1</span> Swift Fundamentals</h3>
+        <p>Xcode, Playgrounds, Hello World, basic syntax, REPL.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Setup</span> <span class="badge badge-primary">Syntax</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=2" class="module-card" onclick="LearningTracker.startLesson('swift-02')">
+        <h3><span class="module-number">2</span> Variables & Types</h3>
+        <p>let/var, type inference, basic types, string interpolation.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Variables</span> <span class="badge badge-primary">Types</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=3" class="module-card" onclick="LearningTracker.startLesson('swift-03')">
+        <h3><span class="module-number">3</span> Optionals</h3>
+        <p>Optional types, forced/optional unwrapping, nil-coalescing, chaining.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Optionals</span> <span class="badge badge-primary">Safety</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=4" class="module-card" onclick="LearningTracker.startLesson('swift-04')">
+        <h3><span class="module-number">4</span> Control Flow</h3>
+        <p>if/else, switch, for-in, while, guard, break/continue.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Control flow</span> <span class="badge badge-primary">Switch</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=5" class="module-card" onclick="LearningTracker.startLesson('swift-05')">
+        <h3><span class="module-number">5</span> Functions & Closures</h3>
+        <p>Parameters, return types, defaults, variadic params, closures.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Functions</span> <span class="badge badge-primary">Closures</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=swift&module=6" class="module-card" onclick="LearningTracker.startLesson('swift-06')">
+        <h3><span class="module-number">6</span> Classes & Structs</h3>
+        <p>Value vs reference semantics, properties, observers, lazy.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Classes</span> <span class="badge badge-primary">Structs</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=7" class="module-card" onclick="LearningTracker.startLesson('swift-07')">
+        <h3><span class="module-number">7</span> Enumerations</h3>
+        <p>Associated values, raw values, recursive enums, exhaustive matching.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Enums</span> <span class="badge badge-primary">Patterns</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=8" class="module-card" onclick="LearningTracker.startLesson('swift-08')">
+        <h3><span class="module-number">8</span> Protocols & Extensions</h3>
+        <p>Protocol definition, conformance, inheritance, extensions, POP.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Protocols</span> <span class="badge badge-primary">Extensions</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=9" class="module-card" onclick="LearningTracker.startLesson('swift-09')">
+        <h3><span class="module-number">9</span> Error Handling & Generics</h3>
+        <p>Throwing functions, do/catch, Error protocol, generics.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Errors</span> <span class="badge badge-primary">Generics</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=swift&module=10" class="module-card" onclick="LearningTracker.startLesson('swift-10')">
+        <h3><span class="module-number">10</span> SwiftUI</h3>
+        <p>View protocol, @State/@Binding, VStack/HStack/ZStack, NavigationView, List.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">SwiftUI</span> <span class="badge badge-primary">Declarative</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=11" class="module-card" onclick="LearningTracker.startLesson('swift-11')">
+        <h3><span class="module-number">11</span> Async/Await</h3>
+        <p>async/await, Task groups, actors, MainActor, structured concurrency.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Concurrency</span> <span class="badge badge-primary">Async</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=swift&module=12" class="module-card" onclick="LearningTracker.startLesson('swift-12')">
+        <h3><span class="module-number">12</span> App Architecture</h3>
+        <p>MVVM, dependency injection, XCTest, UI testing, App Store.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Architecture</span> <span class="badge badge-primary">Testing</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+  </section>
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+

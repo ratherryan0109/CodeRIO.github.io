@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node.js Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="nodejs">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Node.js</h1>
+      <p>Node.js is an open-source, cross-platform JavaScript runtime built on Chrome's V8 JavaScript engine. Created by Ryan Dahl in 2009, Node.js revolutionized server-side programming by bringing JavaScript to the backend. Its event-driven, non-blocking I/O model makes it ideal for building scalable network applications, real-time services, and microservices.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 8 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Node.js uses an event-driven, non-blocking I/O architecture that makes it efficient for handling many concurrent connections without the overhead of thread-based servers. Its core philosophy is that I/O operations (database, filesystem, network) are the bottleneck, so Node.js delegates them to background tasks and processes the callback when complete, never blocking the main event loop.</p>
+      <p>The Node.js ecosystem includes npm (Node Package Manager), the largest package registry in the world with over 2 million packages. Frameworks like Express.js (minimalist), NestJS (structured, TypeScript-first), Fastify (fast), and Socket.IO (real-time) provide building blocks for different application types. Node.js also supports TypeScript natively through ts-node or compilation.</p>
+      <p>Node.js powers critical infrastructure at Netflix (streaming optimization), LinkedIn (mobile backend), PayPal (payment processing), Uber (trip management), Walmart (e-commerce), and Medium (content delivery). Its versatility extends to serverless computing (AWS Lambda, Vercel), desktop applications (Electron), and command-line tools. The Node.js event loop, libuv library, and worker threads (added in Node 10.5) provide the concurrency model.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Node.js?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-bolt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">JavaScript Everywhere</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Use the same language for frontend and backend, reducing context switching.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-tachometer-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">High Performance</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Non-blocking I/O and the V8 engine deliver excellent throughput for I/O-heavy apps.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-cubes" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Vast Ecosystem</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">npm provides over 2 million packages for virtually any functionality.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-users" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Large Community</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Extensive learning resources, tutorials, and community support available.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Node.js is adopted by companies of all sizes for backend services:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">PayPal</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Node.js is used by LinkedIn (mobile API feeding all device platforms), Netflix (user experience and streaming optimization), PayPal (transaction processing), Uber (trip management and real-time tracking), Walmart (e-commerce backend), Medium (content serving), NASA (astronaut health monitoring), and Trello (real-time collaboration). Startups and enterprises alike use Node.js for prototyping and production.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">JavaScript fundamentals (ES6+), basic understanding of HTTP, terminal usage</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Node.js installation, REPL, modules (CommonJS/ESM), npm, basic file system, debugging</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 3-5)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Express.js, routing, middleware, RESTful APIs, environment variables, error handling</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 6-7)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Databases (MongoDB, PostgreSQL), authentication, WebSockets, file uploads, testing</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Week 8)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Streams, worker threads, clustering, microservices, Docker, deployment, performance</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=nodejs&module=1" class="module-card" onclick="LearningTracker.startLesson('nodejs-01')">
+        <h3><span class="module-number">1</span> Getting Started with Node.js</h3>
+        <p>Installing Node.js, Node REPL, running scripts, global vs local variables, process object, and understanding the event loop.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Setup</span> <span class="badge badge-primary">Runtime</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=2" class="module-card" onclick="LearningTracker.startLesson('nodejs-02')">
+        <h3><span class="module-number">2</span> Modules & npm</h3>
+        <p>CommonJS (require/module.exports), ES modules (import/export), package.json, semantic versioning, creating and publishing packages.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Modules</span> <span class="badge badge-primary">npm</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=3" class="module-card" onclick="LearningTracker.startLesson('nodejs-03')">
+        <h3><span class="module-number">3</span> File System & Paths</h3>
+        <p>fs module (sync/async/promises), reading/writing files, directories, streams, path module, and file watching with fs.watch.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">File I/O</span> <span class="badge badge-primary">fs</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=4" class="module-card" onclick="LearningTracker.startLesson('nodejs-04')">
+        <h3><span class="module-number">4</span> Event Emitter & Buffers</h3>
+        <p>EventEmitter pattern, custom events, EventEmitter vs DOM events, Buffer class for binary data, and TypedArrays.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Events</span> <span class="badge badge-primary">Buffers</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=5" class="module-card" onclick="LearningTracker.startLesson('nodejs-05')">
+        <h3><span class="module-number">5</span> Error Handling & Debugging</h3>
+        <p>Try/catch in async code, error-first callbacks, process.on('uncaughtException'), Node debugger, and VS Code debugging.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Errors</span> <span class="badge badge-primary">Debugging</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=nodejs&module=6" class="module-card" onclick="LearningTracker.startLesson('nodejs-06')">
+        <h3><span class="module-number">6</span> Express.js Framework</h3>
+        <p>Installing Express, application and router objects, request/response objects, route parameters, query strings, and static files.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Express</span> <span class="badge badge-primary">Routing</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=7" class="module-card" onclick="LearningTracker.startLesson('nodejs-07')">
+        <h3><span class="module-number">7</span> Middleware & Error Handling</h3>
+        <p>Application-level, router-level, and error-handling middleware, third-party middleware (morgan, cors, helmet), custom middleware.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Middleware</span> <span class="badge badge-primary">Express</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=8" class="module-card" onclick="LearningTracker.startLesson('nodejs-08')">
+        <h3><span class="module-number">8</span> RESTful API Development</h3>
+        <p>REST principles, CRUD endpoints, request validation, JSON responses, status codes, API versioning, and Postman/Insomnia testing.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">REST</span> <span class="badge badge-primary">API</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=9" class="module-card" onclick="LearningTracker.startLesson('nodejs-09')">
+        <h3><span class="module-number">9</span> Asynchronous Patterns</h3>
+        <p>Callbacks, Promises, async/await, Promise.all/race/allSettled, event loop phases (timers, poll, check), microtasks vs macrotasks.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Async</span> <span class="badge badge-primary">Event Loop</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=10" class="module-card" onclick="LearningTracker.startLesson('nodejs-10')">
+        <h3><span class="module-number">10</span> Testing Node.js Apps</h3>
+        <p>Jest/Mocha testing frameworks, unit tests, integration tests, supertest for HTTP tests, mocking, and test coverage.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Testing</span> <span class="badge badge-primary">Jest</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=nodejs&module=11" class="module-card" onclick="LearningTracker.startLesson('nodejs-11')">
+        <h3><span class="module-number">11</span> Database Integration</h3>
+        <p>MongoDB with Mongoose ODM, PostgreSQL with pg or Sequelize ORM, SQLite, connection pooling, migrations, and seeding.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Database</span> <span class="badge badge-primary">Mongoose</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=12" class="module-card" onclick="LearningTracker.startLesson('nodejs-12')">
+        <h3><span class="module-number">12</span> Authentication & Authorization</h3>
+        <p>Session-based auth (express-session), JWT tokens, OAuth2 (Passport.js), bcrypt for hashing, refresh tokens, and security best practices.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Auth</span> <span class="badge badge-primary">JWT</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=13" class="module-card" onclick="LearningTracker.startLesson('nodejs-13')">
+        <h3><span class="module-number">13</span> WebSockets & Real-Time</h3>
+        <p>WebSocket protocol, Socket.IO (server + client), rooms, namespaces, broadcasting, and building a real-time chat application.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">WebSocket</span> <span class="badge badge-primary">Socket.IO</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=14" class="module-card" onclick="LearningTracker.startLesson('nodejs-14')">
+        <h3><span class="module-number">14</span> Streams & File Handling</h3>
+        <p>Readable/Writable/Transform streams, piping, backpressure, zlib compression, crypto module, and processing large files efficiently.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Streams</span> <span class="badge badge-primary">Pipes</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <a href="../lesson.html?course=nodejs&module=15" class="module-card" onclick="LearningTracker.startLesson('nodejs-15')">
+        <h3><span class="module-number">15</span> Worker Threads & Clustering</h3>
+        <p>Worker threads for CPU-intensive tasks, cluster module for multi-core utilization, pm2 process manager, and load balancing.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Workers</span> <span class="badge badge-primary">Clusters</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=nodejs&module=16" class="module-card" onclick="LearningTracker.startLesson('nodejs-16')">
+        <h3><span class="module-number">16</span> Deployment & Production</h3>
+        <p>Environment configuration, Docker containerization, NGINX reverse proxy, PM2 process manager, CI/CD, logging (winston), monitoring (PM2, New Relic).</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Deployment</span> <span class="badge badge-primary">Docker</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. The Node.js Event Loop</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">The event loop is the core of Node.js async model. It processes phases in order: timers, pending callbacks, idle/prepare, poll, check, close callbacks.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const fs = require('fs');
+const start = Date.now();
+
+setTimeout(() => console.log('timer 1'), 0);
+setImmediate(() => console.log('immediate 1'));
+
+fs.readFile(__filename, () => {
+    console.log('I/O callback');
+    setTimeout(() => console.log('timer from I/O'), 0);
+    setImmediate(() => console.log('immediate from I/O'));
+});
+
+console.log('main thread');
+// Order: main thread, timer 1, immediate 1, I/O callback,
+//        immediate from I/O, timer from I/O</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Express Router & Middleware</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Express middleware functions execute in order. Routes can be modularized using Router.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const express = require('express');
+const router = express.Router();
+
+// Middleware - runs for all routes on this router
+router.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
+// Route handlers
+router.get('/users', async (req, res, next) => {
+    try {
+        const users = await db.findMany();
+        res.json(users);
+    } catch (err) {
+        next(err); // Pass to error handler
+    }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: err.message });
+});</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Async/Await Error Handling</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Proper error handling in async code requires try/catch blocks or a wrapper function to catch rejected promises.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Wrapper for async route handlers
+const asyncHandler = (fn) => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+app.get('/users/:id', asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+        return res.status(404).json({ error: 'Not found' });
+    }
+    res.json(user);
+}));
+
+// Alternative: try/catch in every handler
+app.get('/posts', async (req, res, next) => {
+    try {
+        const posts = await Post.find().sort('-createdAt');
+        res.json(posts);
+    } catch (err) {
+        next(err);
+    }
+});</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Streams for Large Data</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Streams process data piece by piece, avoiding loading entire files into memory. Perfect for large files or network responses.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const fs = require('fs');
+const zlib = require('zlib');
+const { Transform } = require('stream');
+
+// Chain streams: read -> transform -> compress -> write
+fs.createReadStream('input.txt')
+    .pipe(new Transform({
+        transform(chunk, encoding, callback) {
+            this.push(chunk.toString().toUpperCase());
+            callback();
+        }
+    }))
+    .pipe(zlib.createGzip())
+    .pipe(fs.createWriteStream('output.txt.gz'))
+    .on('finish', () => console.log('Done'));
+    .on('error', (err) => console.error(err));</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. JWT Authentication</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">JSON Web Tokens provide stateless authentication. The server signs a token that the client sends with each request.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const jwt = require('jsonwebtoken');
+const SECRET = process.env.JWT_SECRET;
+
+// Sign a token
+function generateToken(user) {
+    return jwt.sign(
+        { id: user.id, role: user.role },
+        SECRET,
+        { expiresIn: '7d' }
+    );
+}
+
+// Verify middleware
+function authenticate(req, res, next) {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ error: 'No token' });
+
+    try {
+        req.user = jwt.verify(token, SECRET);
+        next();
+    } catch (err) {
+        res.status(401).json({ error: 'Invalid token' });
+    }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. MongoDB with Mongoose</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Mongoose provides schema validation, middleware (hooks), and query building for MongoDB.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URI);
+
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true, trim: true },
+    email: { type: String, unique: true, lowercase: true },
+    age: { type: Number, min: 18, max: 120 },
+    createdAt: { type: Date, default: Date.now }
+});
+
+userSchema.pre('save', function(next) {
+    console.log(`Saving user: ${this.name}`);
+    next();
+});
+
+const User = mongoose.model('User', userSchema);
+
+// Usage
+const user = await User.findOne({ email: 'test@example.com' });
+user.name = 'Updated';
+await user.save();</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Socket.IO Real-Time</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Socket.IO enables real-time bidirectional communication between clients and servers with fallback to HTTP long-polling.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const io = require('socket.io')(server, {
+    cors: { origin: '*' }
+});
+
+io.on('connection', (socket) => {
+    console.log('User connected:', socket.id);
+
+    socket.on('join-room', (room) => {
+        socket.join(room);
+        socket.to(room).emit('user-joined', socket.id);
+    });
+
+    socket.on('send-message', (data) => {
+        // Broadcast to room except sender
+        socket.to(data.room).emit('new-message', {
+            user: socket.id,
+            text: data.text,
+            time: Date.now()
+        });
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected:', socket.id);
+    });
+});</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Worker Threads</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Worker threads run CPU-intensive JavaScript in parallel, offloading work from the main event loop.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// worker.js
+const { parentPort } = require('worker_threads');
+
+parentPort.on('message', (n) => {
+    const result = fibonacci(n);
+    parentPort.postMessage(result);
+});
+
+function fibonacci(n) {
+    return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// main.js
+const { Worker } = require('worker_threads');
+
+function runWorker(n) {
+    return new Promise((resolve, reject) => {
+        const worker = new Worker('./worker.js');
+        worker.postMessage(n);
+        worker.on('message', resolve);
+        worker.on('error', reject);
+    });
+}
+
+const result = await runWorker(40);
+console.log('Fibonacci:', result);</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Express REST API</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A complete CRUD API using Express and in-memory storage.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>const express = require('express');
+const app = express();
+app.use(express.json());
+
+let todos = [];
+let id = 1;
+
+app.get('/api/todos', (req, res) => {
+    const { completed } = req.query;
+    const filtered = completed !== undefined
+        ? todos.filter(t => t.completed === (completed === 'true'))
+        : todos;
+    res.json(filtered);
+});
+
+app.post('/api/todos', (req, res) => {
+    const { title } = req.body;
+    if (!title) return res.status(400).json({ error: 'Title required' });
+    const todo = { id: id++, title, completed: false };
+    todos.push(todo);
+    res.status(201).json(todo);
+});
+
+app.put('/api/todos/:id', (req, res) => {
+    const todo = todos.find(t => t.id === parseInt(req.params.id));
+    if (!todo) return res.status(404).json({ error: 'Not found' });
+    todo.completed = req.body.completed ?? todo.completed;
+    todo.title = req.body.title ?? todo.title;
+    res.json(todo);
+});
+
+app.delete('/api/todos/:id', (req, res) => {
+    const idx = todos.findIndex(t => t.id === parseInt(req.params.id));
+    if (idx === -1) return res.status(404).json({ error: 'Not found' });
+    todos.splice(idx, 1);
+    res.status(204).send();
+});
+
+app.listen(3000, () => console.log('Server on :3000'));</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: CLI Tool with Commander</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A command-line file search tool using the commander library.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>#!/usr/bin/env node
+const { program } = require('commander');
+const fs = require('fs/promises');
+const path = require('path');
+
+program
+    .name('file-search')
+    .description('Search files by pattern')
+    .argument('<pattern>', 'search pattern')
+    .option('-d, --dir <path>', 'directory to search', '.')
+    .option('-r, --recursive', 'search recursively')
+    .action(async (pattern, options) => {
+        const files = await searchFiles(options.dir, pattern, options.recursive);
+        files.forEach(f => console.log(f));
+    });
+
+async function searchFiles(dir, pattern, recursive) {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    const results = [];
+    for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isFile() && entry.name.includes(pattern)) {
+            results.push(fullPath);
+        } else if (entry.isDirectory() && recursive) {
+            results.push(...await searchFiles(fullPath, pattern, true));
+        }
+    }
+    return results;
+}
+
+program.parse();</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">File Server</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a Node.js server that serves files from a directory, supports directory listing, and handles 404 errors.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">CLI Calculator</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a command-line calculator with yargs or commander that supports add, subtract, multiply, and divide.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">URL Shortener API</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a REST API that creates short URLs, redirects to original URLs, and tracks click counts.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Real-Time Poll App</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a polling app using Socket.IO where users can create polls and vote in real-time.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Image Resize Service</h4><p style="color:var(--text-muted);font-size:0.85rem">Create an Express endpoint that accepts image uploads and resizes them using Sharp library.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Rate Limiter Middleware</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a sliding window rate limiter middleware using Redis or in-memory store.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">WebSocket Game Server</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a real-time multiplayer game server with Socket.IO rooms, game state, and event synchronization.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Streaming CSV Parser</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a streaming CSV parser that reads large CSV files line by line, transforms data, and writes to a database.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Task Management API</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A Trello-like API with boards, lists, cards, user authentication, and real-time updates via WebSockets.</p>
+          <span class="badge badge-primary">Express</span> <span class="badge badge-primary">MongoDB</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Chat Application</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Full real-time chat with rooms, private messages, file sharing, typing indicators, and message history.</p>
+          <span class="badge badge-primary">Socket.IO</span> <span class="badge badge-primary">React</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">E-Commerce Backend</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Complete e-commerce API with products, cart, orders, payments (Stripe), inventory, and admin dashboard.</p>
+          <span class="badge badge-primary">Express</span> <span class="badge badge-primary">PostgreSQL</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Content Management System</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Headless CMS with user roles, blog posts, media uploads, markdown editor, and REST/GraphQL APIs.</p>
+          <span class="badge badge-primary">NestJS</span> <span class="badge badge-primary">TypeORM</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">URL Shortener with Analytics</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">URL shortener with custom slugs, click analytics, geolocation tracking, QR code generation, and rate limiting.</p>
+          <span class="badge badge-primary">Express</span> <span class="badge badge-primary">Redis</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Real-Time Dashboard</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Real-time analytics dashboard with live data streaming, charts (Chart.js), WebSocket updates, and user authentication.</p>
+          <span class="badge badge-primary">Socket.IO</span> <span class="badge badge-primary">Charts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div id="interviewQuestionsContainer"></div>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

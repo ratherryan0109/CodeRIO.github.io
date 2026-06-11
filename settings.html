@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="Settings">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main class="settings-page">
+    <h1 style="margin-bottom:0.5rem;font-size:1.8rem"><i class="fas fa-cog" style="color:var(--primary)"></i> Settings</h1>
+    <p style="color:var(--text-muted);margin-bottom:2rem">Manage your account, preferences, and learning experience.</p>
+
+    <div class="settings-layout">
+      <aside class="settings-sidebar">
+        <div class="glass-card">
+          <nav class="settings-nav">
+            <button class="settings-nav-item active" data-section="settingsProfile"><i class="fas fa-user"></i> Profile</button>
+            <button class="settings-nav-item" data-section="settingsAccount"><i class="fas fa-id-card"></i> Account</button>
+            <button class="settings-nav-item" data-section="settingsSecurity"><i class="fas fa-shield-alt"></i> Security</button>
+            <button class="settings-nav-item" data-section="settingsLearningPrefs"><i class="fas fa-graduation-cap"></i> Learning</button>
+            <button class="settings-nav-item" data-section="settingsNotifications"><i class="fas fa-bell"></i> Notifications</button>
+            <button class="settings-nav-item" data-section="settingsAppearance"><i class="fas fa-palette"></i> Appearance</button>
+            <button class="settings-nav-item" data-section="settingsConnected"><i class="fas fa-link"></i> Connected</button>
+            <button class="settings-nav-item" data-section="settingsPrivacy"><i class="fas fa-lock"></i> Privacy</button>
+            <button class="settings-nav-item" data-section="settingsData"><i class="fas fa-database"></i> Data & Export</button>
+            <button class="settings-nav-item" data-section="settingsProgress"><i class="fas fa-chart-line"></i> Progress</button>
+            <button class="settings-nav-item" data-section="settingsSubscription"><i class="fas fa-crown"></i> Subscription</button>
+            <button class="settings-nav-item" data-section="settingsQuestionBanks"><i class="fas fa-database"></i> Question Banks</button>
+            <button class="settings-nav-item" data-section="settingsAdvanced"><i class="fas fa-flask"></i> Advanced</button>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="settings-content">
+        <!-- Profile -->
+        <section id="settingsProfile" class="settings-section active">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-user"></i><h3>Profile Information</h3></div>
+            <form id="settingsProfileForm">
+              <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem">
+                <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--primary),var(--primary-light));flex-shrink:0">
+                  <img id="settingsAvatarPreview" src="" alt="" style="width:100%;height:100%;object-fit:cover">
+                </div>
+                <div style="flex:1">
+                  <div class="input-group">
+                    <i class="fas fa-image input-icon"></i>
+                    <input type="url" id="settingsAvatar" placeholder="Avatar image URL">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label for="settingsName">Full Name</label><div class="input-group"><i class="fas fa-user input-icon"></i><input type="text" id="settingsName" placeholder="Your name" required></div></div>
+                <div class="form-group"><label for="settingsUsername">Username</label><div class="input-group"><i class="fas fa-at input-icon"></i><input type="text" id="settingsUsername" placeholder="username" disabled style="opacity:0.7"></div></div>
+              </div>
+              <div class="form-group" style="margin-bottom:1rem"><label for="settingsBio">Bio</label><div class="input-group"><i class="fas fa-pen input-icon"></i><textarea id="settingsBio" placeholder="Tell us about yourself..." rows="3"></textarea></div></div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Account -->
+        <section id="settingsAccount" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-id-card"></i><h3>Account Details</h3></div>
+            <div class="form-row">
+              <div class="form-group"><label for="settingsEmail">Email Address</label><input type="email" id="settingsEmail" placeholder="your@email.com" disabled style="opacity:0.7"></div>
+              <div class="form-group"><label>Account Created</label><input type="text" value="N/A (local)" disabled style="opacity:0.7"></div>
+            </div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem">Account details are synced with Supabase when connected.</p>
+          </div>
+        </section>
+
+        <!-- Security -->
+        <section id="settingsSecurity" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-shield-alt"></i><h3>Password & Authentication</h3></div>
+            <form id="settingsPasswordForm">
+              <div class="form-group"><label for="settingsCurrentPassword">Current Password</label><div class="input-group"><i class="fas fa-lock input-icon"></i><input type="password" id="settingsCurrentPassword" placeholder="Enter current password"></div></div>
+              <div class="form-row">
+                <div class="form-group"><label for="settingsNewPassword">New Password</label><div class="input-group"><i class="fas fa-key input-icon"></i><input type="password" id="settingsNewPassword" placeholder="Min 6 characters"></div></div>
+                <div class="form-group"><label for="settingsConfirmPassword">Confirm New Password</label><div class="input-group"><i class="fas fa-check-circle input-icon"></i><input type="password" id="settingsConfirmPassword" placeholder="Re-enter new password"></div></div>
+              </div>
+              <button type="submit" class="btn btn-primary">Update Password</button>
+            </form>
+          </div>
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-mobile-alt"></i><h3>Two-Factor Authentication</h3></div>
+            <div class="setting-toggle">
+              <div class="setting-toggle-info"><h4>Enable 2FA</h4><p>Add an extra layer of security to your account</p></div>
+              <label class="toggle-switch"><input type="checkbox" id="toggleMfa"><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-history"></i><h3>Sessions</h3></div>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.8rem">You are currently logged in on this device.</p>
+            <button class="btn btn-ghost" onclick="if(confirm('Sign out of all devices?')){localStorage.clear();window.location.href='index.html'}"><i class="fas fa-sign-out-alt"></i> Sign Out of All Devices</button>
+          </div>
+        </section>
+
+        <!-- Learning Preferences -->
+        <section id="settingsLearningPrefs" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-graduation-cap"></i><h3>Learning Preferences</h3></div>
+            <div class="learning-pref-grid">
+              <div class="pref-card selected"><i class="fas fa-book"></i><h4>Text-Based</h4><p style="font-size:0.8rem;color:var(--text-muted)">Read and learn at your own pace</p></div>
+              <div class="pref-card"><i class="fas fa-video"></i><h4>Video-First</h4><p style="font-size:0.8rem;color:var(--text-muted)">Watch video tutorials first</p></div>
+              <div class="pref-card"><i class="fas fa-code"></i><h4>Hands-On</h4><p style="font-size:0.8rem;color:var(--text-muted)">Jump straight into exercises</p></div>
+              <div class="pref-card"><i class="fas fa-gamepad"></i><h4>Gamified</h4><p style="font-size:0.8rem;color:var(--text-muted)">Learn through challenges and rewards</p></div>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-clock"></i><h3>Daily Goals</h3></div>
+            <div class="form-row">
+              <div class="form-group"><label for="dailyLessonGoal">Lessons per day</label><input type="number" id="dailyLessonGoal" value="3" min="1" max="20"></div>
+              <div class="form-group"><label for="dailyPracticeGoal">Practice minutes per day</label><input type="number" id="dailyPracticeGoal" value="30" min="5" max="180"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Notifications -->
+        <section id="settingsNotifications" class="settings-section notifications">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-bell"></i><h3>Notification Preferences</h3></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Email Notifications</h4><p>Receive updates via email</p></div><label class="toggle-switch"><input type="checkbox" id="notifEmail"><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Push Notifications</h4><p>Browser push notifications</p></div><label class="toggle-switch"><input type="checkbox" id="notifPush"><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Course Updates</h4><p>New lessons and course materials</p></div><label class="toggle-switch"><input type="checkbox" id="notifCourse" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Achievement Alerts</h4><p>When you earn a new achievement</p></div><label class="toggle-switch"><input type="checkbox" id="notifAchievement" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Weekly Report</h4><p>Weekly learning digest via email</p></div><label class="toggle-switch"><input type="checkbox" id="notifWeekly" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Marketing</h4><p>Product updates and offers</p></div><label class="toggle-switch"><input type="checkbox" id="notifMarketing"><span class="toggle-slider"></span></label></div>
+          </div>
+          <div class="glass-card" style="margin-top:1.5rem">
+            <div class="glass-card-header"><i class="fas fa-clock"></i><h3>Smart Reminders</h3></div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem">Get supportive reminders when you pause a course or miss a day of learning.</p>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Paused Course Reminders</h4><p>Remind you to resume paused courses after 7 days</p></div><label class="toggle-switch"><input type="checkbox" id="togglePausedReminders" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Streak Saver Reminders</h4><p>Remind you to come back if you miss 2+ days</p></div><label class="toggle-switch"><input type="checkbox" id="toggleStreakReminder" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Daily Goal Reminders</h4><p>Remind you to complete daily goals in the afternoon</p></div><label class="toggle-switch"><input type="checkbox" id="toggleDailyGoalReminder" checked><span class="toggle-slider"></span></label></div>
+            <div class="form-group" style="margin-top:1rem">
+              <label for="reminderInterval">Reminder Interval (days)</label>
+              <div class="input-group"><i class="fas fa-calendar input-icon"></i><select id="reminderInterval"><option value="3">Every 3 days</option><option value="5">Every 5 days</option><option value="7" selected>Every 7 days</option><option value="14">Every 14 days</option><option value="30">Monthly</option></select></div>
+            </div>
+          </div>
+          <div class="glass-card" style="margin-top:1.5rem">
+            <div class="glass-card-header"><i class="fas fa-sliders"></i><h3>Per-Course Reminder Settings</h3></div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem">Enable or disable reminders for individual courses. Disabled courses will not send pause or progress reminders.</p>
+            <div id="perCourseReminderList" style="display:flex;flex-direction:column;gap:0.5rem;max-height:300px;overflow-y:auto">
+              <p style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:1rem">Loading your enrolled courses...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Appearance -->
+        <section id="settingsAppearance" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-palette"></i><h3>Theme</h3></div>
+            <div class="appearance-grid">
+              <div class="theme-card" data-theme="light"><div class="theme-preview" style="background:linear-gradient(135deg,#ffffff,#f1f5f9);border:1px solid #e2e8f0"></div><h4>Light</h4><p>Clean and bright</p></div>
+              <div class="theme-card" data-theme="dark"><div class="theme-preview" style="background:linear-gradient(135deg,#1e293b,#0f172a)"></div><h4>Dark</h4><p>Easy on the eyes</p></div>
+              <div class="theme-card" data-theme="system"><div class="theme-preview" style="background:linear-gradient(135deg,#ffffff 50%,#1e293b 50%)"></div><h4>System</h4><p>Follows device setting</p></div>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-text-height"></i><h3>Font Size</h3></div>
+            <div class="form-row">
+              <div class="form-group"><label for="fontSizeSelect">Font Size</label><div class="input-group"><i class="fas fa-text-height input-icon"></i><select id="fontSizeSelect"><option value="small">Small</option><option value="medium" selected>Medium</option><option value="large">Large</option></select></div></div>
+              <div class="form-group"><label for="codeFontSelect">Code Font</label><div class="input-group"><i class="fas fa-code input-icon"></i><select id="codeFontSelect"><option value="monospace">Monospace</option><option value="fira" selected>Fira Code</option><option value="jetbrains">JetBrains Mono</option></select></div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Connected Accounts -->
+        <section id="settingsConnected" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-link"></i><h3>Connected Accounts</h3></div>
+            <div class="connected-account"><div class="ca-icon" style="background:#ffa11620;color:#ffa116"><i class="fab fa-free-code-camp"></i></div><div class="ca-info"><h4>LeetCode</h4><p>Connect your LeetCode profile</p></div><span class="ca-status disconnected">Not Connected</span><button class="btn btn-sm btn-ghost" data-platform="LeetCode">Connect</button></div>
+            <div class="connected-account"><div class="ca-icon" style="background:#1f8acb20;color:#1f8acb"><i class="fas fa-trophy"></i></div><div class="ca-info"><h4>Codeforces</h4><p>Connect your Codeforces profile</p></div><span class="ca-status disconnected">Not Connected</span><button class="btn btn-sm btn-ghost" data-platform="Codeforces">Connect</button></div>
+            <div class="connected-account"><div class="ca-icon" style="background:#00ea6420;color:#00ea64"><i class="fas fa-chart-bar"></i></div><div class="ca-info"><h4>HackerRank</h4><p>Connect your HackerRank profile</p></div><span class="ca-status disconnected">Not Connected</span><button class="btn btn-sm btn-ghost" data-platform="HackerRank">Connect</button></div>
+            <div class="connected-account"><div class="ca-icon" style="background:#33333320;color:#333333"><i class="fab fa-github"></i></div><div class="ca-info"><h4>GitHub</h4><p>Connect your GitHub account</p></div><span class="ca-status disconnected">Not Connected</span><button class="btn btn-sm btn-ghost" data-platform="GitHub">Connect</button></div>
+            <div class="connected-account"><div class="ca-icon" style="background:#1da1f220;color:#1da1f2"><i class="fab fa-twitter"></i></div><div class="ca-info"><h4>Twitter / X</h4><p>Connect your Twitter account</p></div><span class="ca-status disconnected">Not Connected</span><button class="btn btn-sm btn-ghost" data-platform="Twitter">Connect</button></div>
+            <div class="connected-account"><div class="ca-icon" style="background:#5865f220;color:#5865f2"><i class="fab fa-discord"></i></div><div class="ca-info"><h4>Discord</h4><p>Connect your Discord account</p></div><span class="ca-status disconnected">Not Connected</span><button class="btn btn-sm btn-ghost" data-platform="Discord">Connect</button></div>
+          </div>
+        </section>
+
+        <!-- Privacy -->
+        <section id="settingsPrivacy" class="settings-section privacy">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-lock"></i><h3>Privacy Settings</h3></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Public Profile</h4><p>Allow others to see your learning progress</p></div><label class="toggle-switch"><input type="checkbox" id="privacyPublic" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Show on Leaderboard</h4><p>Display your name on public leaderboards</p></div><label class="toggle-switch"><input type="checkbox" id="privacyLeaderboard" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Activity Visibility</h4><p>Show your recent activity to other users</p></div><label class="toggle-switch"><input type="checkbox" id="privacyActivity" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Analytics Collection</h4><p>Help us improve with usage data</p></div><label class="toggle-switch"><input type="checkbox" id="privacyAnalytics" checked><span class="toggle-slider"></span></label></div>
+          </div>
+        </section>
+
+        <!-- Data & Export -->
+        <section id="settingsData" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-download"></i><h3>Export Your Data</h3></div>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem">Download all your learning data, progress, and activity as a JSON file.</p>
+            <button class="btn btn-primary" id="exportDataBtn"><i class="fas fa-download"></i> Export Data</button>
+          </div>
+          <div class="glass-card" style="border:1px solid rgba(239,68,68,0.3)">
+            <div class="glass-card-header"><i class="fas fa-trash-alt" style="color:#ef4444!important"></i><h3 style="color:#ef4444">Delete Local Data</h3></div>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem">This removes all locally stored progress, activity, and preferences. Course data synced to Supabase will remain.</p>
+            <button class="btn btn-ghost" id="deleteDataBtn" style="color:#ef4444;border-color:rgba(239,68,68,0.3)"><i class="fas fa-trash-alt"></i> Delete Local Data</button>
+          </div>
+        </section>
+
+        <!-- Progress Settings -->
+        <section id="settingsProgress" class="settings-section progress">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-chart-line"></i><h3>Progress Tracking</h3></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Auto-track Progress</h4><p>Automatically track lesson and course completion</p></div><label class="toggle-switch"><input type="checkbox" id="progressAuto" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Typing History</h4><p>Save typing test results to your history</p></div><label class="toggle-switch"><input type="checkbox" id="progressTyping" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Activity Timeline</h4><p>Log your activities for the timeline view</p></div><label class="toggle-switch"><input type="checkbox" id="progressActivity" checked><span class="toggle-slider"></span></label></div>
+            <div class="setting-toggle"><div class="setting-toggle-info"><h4>Daily Streak Reminder</h4><p>Remind you to maintain your learning streak</p></div><label class="toggle-switch"><input type="checkbox" id="progressStreak" checked><span class="toggle-slider"></span></label></div>
+          </div>
+          <div class="glass-card" style="margin-top:1.5rem">
+            <div class="glass-card-header"><i class="fas fa-bullseye"></i><h3>Daily Goals</h3></div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem">Set your daily learning targets. Set to 0 to disable a goal type.</p>
+            <div class="learning-pref-grid">
+              <div class="form-group"><label>Lessons per Day</label><div class="input-group"><i class="fas fa-book input-icon"></i><input type="number" class="form-input" id="dgLessons" min="0" max="20" value="1"></div></div>
+              <div class="form-group"><label>Quiz Questions</label><div class="input-group"><i class="fas fa-question-circle input-icon"></i><input type="number" class="form-input" id="dgQuizQuestions" min="0" max="100" value="20"></div></div>
+              <div class="form-group"><label>Coding Problems</label><div class="input-group"><i class="fas fa-code input-icon"></i><input type="number" class="form-input" id="dgCodingProblems" min="0" max="50" value="5"></div></div>
+              <div class="form-group"><label>Typing Tests</label><div class="input-group"><i class="fas fa-keyboard input-icon"></i><input type="number" class="form-input" id="dgTypingTests" min="0" max="20" value="1"></div></div>
+              <div class="form-group"><label>Modules</label><div class="input-group"><i class="fas fa-layer-group input-icon"></i><input type="number" class="form-input" id="dgModules" min="0" max="20" value="1"></div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subscription -->
+        <section id="settingsSubscription" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-crown"></i><h3>Your Plan</h3></div>
+            <div class="subscription-card current">
+              <div style="text-align:center;min-width:120px"><div class="sc-price">$0<span>/mo</span></div><p style="font-size:0.85rem;color:var(--text-muted)">Free Plan</p></div>
+              <div class="sc-features"><h4 style="margin-bottom:0.5rem">Free</h4><ul><li><i class="fas fa-check"></i> Access to all free courses</li><li><i class="fas fa-check"></i> Basic typing tests</li><li><i class="fas fa-check"></i> Progress tracking</li><li><i class="fas fa-check"></i> Community access</li><li><i class="fas fa-times" style="color:var(--text-muted)"></i> Premium courses</li><li><i class="fas fa-times" style="color:var(--text-muted)"></i> Advanced analytics</li></ul></div>
+            </div>
+            <div class="subscription-card">
+              <div style="text-align:center;min-width:120px"><div class="sc-price">$9<span>/mo</span></div><p style="font-size:0.85rem;color:var(--text-muted)">Pro Plan</p></div>
+              <div class="sc-features"><h4 style="margin-bottom:0.5rem">Pro</h4><ul><li><i class="fas fa-check"></i> All free features</li><li><i class="fas fa-check"></i> All premium courses</li><li><i class="fas fa-check"></i> Advanced analytics</li><li><i class="fas fa-check"></i> Unlimited typing tests</li><li><i class="fas fa-check"></i> Priority support</li><li><i class="fas fa-check"></i> Certificate of completion</li></ul></div>
+              <button class="btn btn-primary" data-plan="Pro" style="align-self:center">Upgrade</button>
+            </div>
+            <div class="subscription-card">
+              <div style="text-align:center;min-width:120px"><div class="sc-price">$19<span>/mo</span></div><p style="font-size:0.85rem;color:var(--text-muted)">Premium Plan</p></div>
+              <div class="sc-features"><h4 style="margin-bottom:0.5rem">Premium</h4><ul><li><i class="fas fa-check"></i> All Pro features</li><li><i class="fas fa-check"></i> 1-on-1 mentoring</li><li><i class="fas fa-check"></i> Resume review</li><li><i class="fas fa-check"></i> Mock interviews</li><li><i class="fas fa-check"></i> API access</li><li><i class="fas fa-check"></i> Early access to new features</li></ul></div>
+              <button class="btn btn-ghost" data-plan="Premium" style="align-self:center">Upgrade</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Question Banks -->
+        <section id="settingsQuestionBanks" class="settings-section">
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-database"></i><h3>Question Bank Source</h3></div>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem">Each course has a generated question bank with 8000 questions across 4 difficulty levels and 7 question types. Questions are generated from real documentation concepts.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.8rem;margin-bottom:1.5rem" id="bankStatsContainer"></div>
+            <div style="display:flex;gap:0.8rem;flex-wrap:wrap">
+              <button class="btn btn-ghost" onclick="regenerateBanks()"><i class="fas fa-sync"></i> Regenerate All</button>
+              <button class="btn btn-ghost" onclick="clearBankCache()"><i class="fas fa-eraser"></i> Clear Cache</button>
+            </div>
+            <div id="bankStatus" style="margin-top:1rem;font-size:0.85rem;color:var(--text-muted)"></div>
+          </div>
+        </section>
+
+        <!-- Advanced -->
+        <section id="settingsAdvanced" class="settings-section">
+          <div class="glass-card settings-danger-zone">
+            <div class="glass-card-header"><i class="fas fa-exclamation-triangle"></i><h3>Danger Zone</h3></div>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem">These actions are irreversible. Please proceed with caution.</p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
+              <button class="btn btn-ghost" id="clearCacheBtn"><i class="fas fa-eraser"></i> Clear Cache</button>
+              <button class="btn btn-ghost" id="resetProgressBtn"><i class="fas fa-redo"></i> Reset All Progress</button>
+              <button class="btn danger-btn" id="deleteAccountBtn"><i class="fas fa-user-slash"></i> Delete Account</button>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="glass-card-header"><i class="fas fa-info-circle"></i><h3>System Information</h3></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+              <div><p style="font-size:0.85rem;color:var(--text-muted)">Version</p><p style="font-weight:600">2.0.0</p></div>
+              <div><p style="font-size:0.85rem;color:var(--text-muted)">Storage Used</p><p style="font-weight:600" id="storageUsed">Calculating...</p></div>
+              <div><p style="font-size:0.85rem;color:var(--text-muted)">Auth Provider</p><p style="font-weight:600">Supabase</p></div>
+              <div><p style="font-size:0.85rem;color:var(--text-muted)">Data Layer</p><p style="font-weight:600">localStorage + Supabase</p></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/learning.js"></script>
+  <script src="js/quiz-system.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/daily-goals.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/question-banks.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      var storageEl = document.getElementById('storageUsed');
+      if (storageEl) {
+        var total = 0;
+        for (var i = 0; i < localStorage.length; i++) {
+          var k = localStorage.key(i);
+          total += (localStorage.getItem(k) || '').length * 2;
+        }
+        storageEl.textContent = (total / 1024).toFixed(1) + ' KB';
+      }
+      try {
+        await initSettings();
+      } catch (e) {
+        console.error('Settings init error:', e);
+      }
+    });
+  </script>
+</body>
+</html>

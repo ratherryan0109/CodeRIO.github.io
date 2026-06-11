@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="javascript">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>JavaScript</h1>
+      <p>JavaScript is the programming language of the web, powering interactive experiences, dynamic content, and full-stack applications. Master JavaScript to build anything from simple scripts to complex web apps.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Beginner</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 10 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 20 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+    </div>
+  </section>
+
+  <section class="course-content">
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>JavaScript was created by Brendan Eich in 1995 at Netscape and has grown into one of the most popular and versatile programming languages in the world. It enables interactive web pages, server-side applications (Node.js), mobile apps (React Native), desktop apps (Electron), and even IoT device programming.</p>
+      <p>JavaScript is a high-level, interpreted, multi-paradigm language supporting object-oriented, functional, and event-driven programming styles. Its ecosystem includes powerful frameworks like React, Angular, and Vue.js for frontend, Express.js and Next.js for backend, and TypeScript for type safety.</p>
+      <p>Modern JavaScript (ES6+) introduced classes, arrow functions, template literals, destructuring, promises, async/await, modules, and more. The language continues to evolve yearly with new features that improve developer experience and code quality.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn JavaScript?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-globe" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Universal Language</h4><p style="color:var(--text-secondary);font-size:0.95rem">Runs everywhere: browsers, servers, mobile, desktop, and IoT.</p></div>
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-users" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Massive Community</h4><p style="color:var(--text-secondary);font-size:0.95rem">The largest developer community with millions of packages on npm.</p></div>
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-bolt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">High Demand</h4><p style="color:var(--text-secondary);font-size:0.95rem">Consistently top-ranked language for job openings worldwide.</p></div>
+        <div class="glass" style="padding:1.5rem"><i class="fas fa-rocket" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i><h4 style="margin-bottom:0.5rem">Fast Development</h4><p style="color:var(--text-secondary);font-size:0.95rem">Dynamic typing, immediate feedback, and rapid prototyping capabilities.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">React (Meta)</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Angular (Google)</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Node.js</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Netflix uses React for its UI, PayPal transitioned to Node.js for its backend, Airbnb relies on React Native for mobile, VS Code is built with Electron (JavaScript/TypeScript), and MongoDB uses JavaScript for its query language. From startups to FAANG companies, JavaScript powers the modern web.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">HTML basics, logical thinking, text editor and browser</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-3)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Variables, data types, operators, conditionals, loops, functions, arrays, objects</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 4-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">DOM manipulation, events, ES6+ features, promises, async/await, fetch API, error handling</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 7-9)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Closures, prototypes, this binding, classes, modules, design patterns, testing</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 10-12)</h4><p style="color:var(--text-secondary);font-size:0.9rem">TypeScript, performance optimization, Web Workers, service workers, build tools</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> JS Fundamentals</h3><p>Variables (var, let, const), data types (string, number, boolean, null, undefined), type coercion, console.log</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Operators & Conditionals</h3><p>Arithmetic, comparison, logical operators, if/else, switch, ternary operator, truthy/falsy values</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Loops & Iteration</h3><p>for, while, do-while, for...of, for...in, break, continue, iterating arrays and objects</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Functions</h3><p>Function declarations, expressions, arrow functions, parameters, return values, scope, hoisting</p></div>
+      <div class="module-card"><h3><span class="module-number">5</span> Arrays & Objects</h3><p>Array methods (push, pop, map, filter, reduce, find), object literals, property access, destructuring</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">6</span> DOM Manipulation</h3><p>querySelector, createElement, textContent, classList, style, appendChild, event listeners</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Events & Event Handling</h3><p>addEventListener, event object, event propagation (bubbling/capturing), event delegation, preventDefault</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> ES6+ Features</h3><p>Template literals, spread/rest, default parameters, destructuring, enhanced object literals, modules</p></div>
+      <div class="module-card"><h3><span class="module-number">9</span> Asynchronous JavaScript</h3><p>Callbacks, Promises, async/await, fetch API, setTimeout/setInterval, handling errors with try/catch</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">10</span> Closures & Scope</h3><p>Lexical scope, closure patterns, module pattern, IIFE, hoisting explained, temporal dead zone, this keyword</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Prototypes & Classes</h3><p>Prototypal inheritance, constructor functions, class syntax, extends, super, static methods, getters/setters</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> Error Handling & Debugging</h3><p>try/catch/finally, custom errors, Error object, stack traces, Chrome DevTools debugging, breakpoints</p></div>
+      <div class="module-card"><h3><span class="module-number">13</span> Design Patterns</h3><p>Module, singleton, observer, factory, pub/sub, MVC, proxy patterns in JavaScript</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">14</span> JavaScript & TypeScript</h3><p>TypeScript basics, interfaces, types, generics, enums, type guards, migrating JS to TS</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Performance Optimization</h3><p>Debouncing, throttling, lazy loading, memoization, Web Workers, requestAnimationFrame, memory leaks</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Testing JavaScript</h3><p>Unit testing with Jest, assertions, mocks, spies, TDD, integration tests, E2E testing with Cypress</p></div>
+      <div class="module-card"><h3><span class="module-number">17</span> Build Tools & Bundlers</h3><p>Webpack, Vite, Babel, ESLint, Prettier, npm scripts, module bundling, tree shaking, code splitting</p></div>
+      <div class="module-card"><h3><span class="module-number">18</span> Service Workers & PWAs</h3><p>Service worker lifecycle, caching strategies, offline support, push notifications, manifest.json, Workbox</p></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Closures</h4><p style="color:var(--text-secondary);font-size:0.95rem">A closure is a function that retains access to its outer scope even after the outer function has returned. Used for data privacy, function factories, and maintaining state.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>function counter() {
+  let count = 0;
+  return function() {
+    count++;
+    return count;
+  };
+}
+const myCounter = counter();
+console.log(myCounter()); // 1
+console.log(myCounter()); // 2</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Promises & Async/Await</h4><p style="color:var(--text-secondary);font-size:0.95rem">Promises represent values that may be available now, later, or never. async/await provides syntactic sugar over promises for cleaner asynchronous code.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Promise
+fetch('https://api.example.com/data')
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+
+// Async/Await
+async function getData() {
+  try {
+    const res = await fetch('https://api.example.com/data');
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. The this Keyword</h4><p style="color:var(--text-secondary);font-size:0.95rem">this refers to the execution context. In methods it refers to the object, in regular functions it's window/undefined (strict mode), arrow functions inherit this from parent scope.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const obj = {
+  name: 'Alice',
+  greet() { console.log(`Hi, I'm ${this.name}`); },
+  arrowGreet: () => console.log(`Hi, I'm ${this.name}`)
+};
+obj.greet();       // Hi, I'm Alice
+obj.arrowGreet();  // Hi, I'm undefined (arrow inherits from window)</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Prototypal Inheritance</h4><p style="color:var(--text-secondary);font-size:0.95rem">Every JS object has a prototype. Properties/methods are looked up through the prototype chain. ES6 classes are syntactic sugar over prototypes.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>function Animal(name) { this.name = name; }
+Animal.prototype.speak = function() {
+  return `${this.name} makes a sound.`;
+};
+
+class Dog extends Animal {
+  speak() { return `${this.name} barks!`; }
+}
+
+const dog = new Dog('Rex');
+console.log(dog.speak()); // Rex barks!</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Event Delegation</h4><p style="color:var(--text-secondary);font-size:0.95rem">Instead of adding event listeners to many child elements, add one listener to a parent and use event.target to identify which child triggered it. More efficient for dynamic lists.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>document.querySelector('ul').addEventListener('click', (e) => {
+  if (e.target.tagName === 'LI') {
+    console.log('Clicked:', e.target.textContent);
+  }
+});</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Array Methods (map, filter, reduce)</h4><p style="color:var(--text-secondary);font-size:0.95rem">These functional array methods replace traditional for loops for data transformation, filtering, and aggregation.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const nums = [1, 2, 3, 4, 5];
+const doubled = nums.map(n => n * 2);      // [2,4,6,8,10]
+const evens = nums.filter(n => n % 2 === 0); // [2,4]
+const sum = nums.reduce((acc, n) => acc + n, 0); // 15</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Modules (import/export)</h4><p style="color:var(--text-secondary);font-size:0.95rem">ES6 modules allow splitting code across files. Named exports for multiple exports, default exports for single main export.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// math.js
+export const PI = 3.14159;
+export function add(a, b) { return a + b; }
+export default class Calculator { ... }
+
+// app.js
+import Calculator, { PI, add } from './math.js';</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Truthy & Falsy Values</h4><p style="color:var(--text-secondary);font-size:0.95rem">Falsy values: false, 0, '' (empty string), null, undefined, NaN. Everything else is truthy. Important for conditionals and logical operators.</p><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const name = '';
+if (name) { console.log('Has name'); }
+else { console.log('No name'); } // No name
+
+// Short-circuit evaluation
+const config = { theme: 'dark' };
+const theme = config.theme || 'light'; // 'dark'</code></pre></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: To-Do List App</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>const todoInput = document.getElementById('todo-input');
+const todoList = document.getElementById('todo-list');
+
+function addTodo() {
+  const text = todoInput.value.trim();
+  if (!text) return;
+
+  const li = document.createElement('li');
+  li.textContent = text;
+  li.addEventListener('click', () => li.classList.toggle('done'));
+  li.addEventListener('dblclick', () => li.remove());
+
+  todoList.appendChild(li);
+  todoInput.value = '';
+}
+
+document.getElementById('add-btn').addEventListener('click', addTodo);
+todoInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') addTodo();
+});</code></pre></div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem"><h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Fetch API & Data Display</h4><pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>async function displayUsers() {
+  const container = document.getElementById('users');
+  container.innerHTML = '<p>Loading...</p>';
+
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/users');
+    const users = await res.json();
+
+    container.innerHTML = users.map(user => `
+      <div class="user-card">
+        <h3>${user.name}</h3>
+        <p>${user.email}</p>
+        <p>${user.company.name}</p>
+      </div>
+    `).join('');
+  } catch (err) {
+    container.innerHTML = `<p class="error">Error: ${err.message}</p>`;
+  }
+}
+
+displayUsers();</code></pre></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">FizzBuzz</h4><p style="color:var(--text-muted);font-size:0.85rem">Print numbers 1-100, replacing multiples of 3 with Fizz, 5 with Buzz, both with FizzBuzz.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Palindrome Checker</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a function that checks if a string is a palindrome (reads the same forwards and backwards).</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Array Chunking</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a function that splits an array into chunks of a given size. E.g., chunk([1,2,3,4], 2) -> [[1,2],[3,4]].</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Build a Stopwatch</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a stopwatch with start, stop, and reset functionality using DOM manipulation.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Debounce Function</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a debounce function that delays execution until after a specified wait time has elapsed.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Build an Autocomplete</h4><p style="color:var(--text-muted);font-size:0.85rem">Create an autocomplete search field with debounced API calls and dropdown suggestions.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Promise.all Implementation</h4><p style="color:var(--text-muted);font-size:0.85rem">Write your own Promise.all and Promise.race implementations.</p></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Weather App</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Fetch weather data from an API and display current conditions, forecast, and location search.</p><span class="badge badge-primary">JS</span> <span class="badge badge-primary">API</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Quiz Application</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Build a dynamic quiz with timer, scoring, multiple question types, and result summary.</p><span class="badge badge-primary">JS</span> <span class="badge badge-primary">DOM</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Expense Tracker</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">CRUD app with localStorage persistence, categories, charts, and budget management.</p><span class="badge badge-primary">JS</span> <span class="badge badge-primary">Storage</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Chat Application</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Real-time chat using WebSockets with message history, user list, and typing indicators.</p><span class="badge badge-primary">JS</span> <span class="badge badge-primary">WebSocket</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Markdown Previewer</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Real-time markdown editor with preview pane, syntax highlighting, and export functionality.</p><span class="badge badge-primary">JS</span> <span class="badge badge-primary">Parser</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Memory Card Game</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Classic memory matching game with timer, moves counter, animations, and difficulty levels.</p><span class="badge badge-primary">JS</span> <span class="badge badge-primary">Game</span></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=javascript&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+

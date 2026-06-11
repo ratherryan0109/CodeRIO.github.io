@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="css">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>CSS</h1>
+      <p>CSS (Cascading Style Sheets) brings life to web pages with colors, layouts, animations, and responsive design. Learn to create stunning user interfaces that work beautifully across all devices.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Beginner</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 6 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>CSS, or Cascading Style Sheets, is a stylesheet language used to describe the presentation of HTML documents. Created by Håkon Wium Lie in 1994, CSS separates content from design, allowing developers to control layout, colors, typography, spacing, and animations across entire websites from a single stylesheet.</p>
+      <p>CSS works on a cascade principle where styles are applied based on specificity, inheritance, and source order. The language has evolved through CSS1 (1996), CSS2 (1998), and CSS3 (modular approach from 1999 onwards), with modern CSS now including features like Flexbox, Grid, Custom Properties (variables), Container Queries, and CSS Layers.</p>
+      <p>With CSS you can create responsive layouts that adapt to any screen size, build complex animations without JavaScript, design dark/light themes using custom properties, and implement modern design patterns like glassmorphism, neumorphism, and fluid typography. CSS preprocessors like SASS, LESS, and PostCSS extend its capabilities with nesting, mixins, and functions.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn CSS?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-paint-brush" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Complete Visual Control</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Design every aspect of a website from layout to micro-interactions.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-mobile-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Responsive Design</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Build sites that work on any device using media queries and flexible layouts.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-film" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Animations & Effects</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Create smooth transitions, keyframe animations, and interactive hover effects.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-code-branch" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Essential Career Skill</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">CSS expertise is required for frontend, UI/UX, and full-stack developer roles.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">CSS is used by every company with a web presence. Here are major adopters:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Figma</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Sass (uses CSS)</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Bootstrap</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Tailwind CSS</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Real-world uses include designing e-commerce stores (Shopify, Amazon), social media interfaces (Instagram, LinkedIn), dashboard UIs (Stripe, GitHub), mobile app styling (React Native uses CSS-like syntax), email templates, and print stylesheets for documents.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Basic HTML knowledge, text editor, web browser with DevTools</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-2)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Selectors, properties, colors, typography, box model, background</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 3-4)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Flexbox, Grid, positioning, responsive design, media queries</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 5-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Animations, transitions, transforms, custom properties, preprocessors</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 7-8)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Container queries, CSS layers, has() selector, CSS architecture (BEM, SMACSS)</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> CSS Fundamentals</h3><p>Selectors (element, class, ID, universal), properties, values, the cascade, specificity, and inheritance.</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> Colors & Typography</h3><p>Named colors, hex, RGB, HSL, opacity, font-family, font-size, font-weight, line-height, text-align, text-decoration.</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Box Model</h3><p>Content, padding, border, margin, box-sizing, width/height, overflow, display block/inline/inline-block.</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Backgrounds & Images</h3><p>background-color, background-image, background-size, background-position, gradients, multiple backgrounds.</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">5</span> Flexbox</h3><p>display:flex, flex-direction, justify-content, align-items, flex-wrap, gap, flex-grow, flex-shrink, order.</p></div>
+      <div class="module-card"><h3><span class="module-number">6</span> CSS Grid</h3><p>display:grid, grid-template-columns/rows, grid-gap, grid-area, auto-fit, auto-fill, minmax, place-items.</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Positioning</h3><p>static, relative, absolute, fixed, sticky, z-index, stacking context, top/right/bottom/left.</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Responsive Design</h3><p>Media queries, mobile-first approach, breakpoints, responsive typography, viewport units (vw, vh, dvh).</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">9</span> Transitions & Transforms</h3><p>transition-property, transition-duration, timing functions, transform (scale, rotate, translate, skew).</p></div>
+      <div class="module-card"><h3><span class="module-number">10</span> Keyframe Animations</h3><p>@keyframes, animation-name, animation-duration, animation-iteration-count, animation-direction, steps().</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Custom Properties (Variables)</h3><p>--variable, var(), fallback values, scope, dynamic theming, @property for typed properties.</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> CSS Preprocessors</h3><p>SASS/SCSS nesting, variables, mixins, extends, functions, partials, imports, and compilation.</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">13</span> Modern CSS Features</h3><p>Container queries, @container, CSS nesting, :has() selector, accent-color, color-mix(), trigonometric functions.</p></div>
+      <div class="module-card"><h3><span class="module-number">14</span> CSS Architecture</h3><p>BEM methodology, SMACSS, OOCSS, CSS Modules, CSS-in-JS, design systems, CSS Layers (@layer).</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Performance & Optimization</h3><p>Critical CSS, CSS minification, unused CSS removal, will-change, contain, content-visibility, paint areas.</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> Print & Email CSS</h3><p>@media print, page-break properties, print-friendly styling, email client quirks, inline CSS requirements.</p></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. The Cascade & Specificity</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">CSS stands for Cascading Style Sheets because styles cascade from multiple sources. Specificity determines which rule wins: inline styles > IDs > classes/attributes/pseudo-classes > elements/pseudo-elements. The !important flag overrides all.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>/* Specificity: 0,0,1,0 */
+.highlight { color: yellow; }
+
+/* Specificity: 0,1,0,0 - wins over class */
+#special { color: red; }
+
+/* Specificity: 0,0,0,1 */
+p { color: blue; }
+
+/* Inline style: 1,0,0,0 - wins everything except !important */</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Flexbox Layout</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Flexbox is a one-dimensional layout model that distributes space along a main axis and cross axis. Perfect for navigation bars, centering, and responsive card layouts.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>.container {
+  display: flex;
+  justify-content: center; /* main axis */
+  align-items: center;     /* cross axis */
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.item {
+  flex: 1 1 300px; /* grow shrink basis */
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. CSS Grid</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Grid is a two-dimensional layout system that handles rows and columns simultaneously. Ideal for page layouts, image galleries, and complex responsive designs.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+
+.layout {
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Media Queries & Responsive Design</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Media queries allow CSS to apply styles based on viewport width, device type, orientation, and other characteristics. Mobile-first design starts with base styles for small screens, then adds breakpoints.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>/* Mobile-first: base styles for small screens */
+.container { grid-template-columns: 1fr; }
+
+/* Tablet */
+@media (min-width: 768px) {
+  .container { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Dark mode preference */
+@media (prefers-color-scheme: dark) {
+  body { background: #1a1a2e; color: #eee; }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Animations & Keyframes</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">CSS animations use @keyframes to define intermediate steps, then apply them with the animation property. Transitions handle smooth changes between two states.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>.button {
+  transition: all 0.3s ease;
+}
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+.animated {
+  animation: slideIn 0.5s ease-out forwards;
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. CSS Custom Properties (Variables)</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Custom properties store values that can be reused throughout the stylesheet. They support dynamic theming and can be changed via JavaScript.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>:root {
+  --primary: #06b6d4;
+  --primary-dark: #0891b2;
+  --spacing: 1rem;
+  --radius: 12px;
+  --shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  box-shadow: var(--shadow);
+  color: var(--text, #333); /* fallback value */
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Pseudo-Classes & Pseudo-Elements</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Pseudo-classes (:hover, :focus, :nth-child) style elements based on state or position. Pseudo-elements (::before, ::after) create virtual elements for decoration.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>/* Pseudo-classes */
+li:nth-child(odd) { background: #f0f0f0; }
+input:focus { border-color: var(--primary); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Pseudo-elements */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: var(--primary);
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Modern CSS: Container Queries & :has()</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Container queries allow elements to respond to their container's size rather than the viewport. The :has() selector selects parent elements containing specific children.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+@container card (min-width: 400px) {
+  .card { flex-direction: row; }
+}
+
+/* Select a form that has a valid email input */
+form:has(input[type="email"]:valid) {
+  border-color: green;
+}
+
+/* Style a card that contains an image */
+.card:has(img) {
+  grid-column: span 2;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: Responsive Navbar with Flexbox</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: #06b6d4; }
+
+.mobile-toggle { display: none; }
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+  }
+  .nav-links.open { display: flex; }
+  .mobile-toggle { display: block; }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Glassmorphism Card</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>.glass-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Style a Personal Page</h4><p style="color:var(--text-muted);font-size:0.85rem">Apply colors, fonts, and spacing to an HTML page using CSS selectors.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Build a Button System</h4><p style="color:var(--text-muted);font-size:0.85rem">Create primary, secondary, outline, and ghost button styles with hover effects.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Responsive Card Grid</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a responsive card grid that goes from 1 column to 3 columns using Grid.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Navigation Bar Layout</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a responsive navbar with logo, links, and hamburger menu using Flexbox.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Animated Loading Spinner</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a pure CSS loading spinner using keyframe animations and border tricks.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Build a Dashboard Layout</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a full dashboard layout with sidebar, header, main content, and data widgets.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">CSS Art Project</h4><p style="color:var(--text-muted);font-size:0.85rem">Create an illustration using only CSS divs, borders, shadows, and transforms.</p></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Responsive Portfolio</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A mobile-first portfolio with CSS Grid layout, animations, and dark mode toggle.</p><span class="badge badge-primary">CSS</span> <span class="badge badge-primary">Grid</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Landing Page Clone</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Clone a modern landing page using Flexbox, custom properties, and responsive design.</p><span class="badge badge-primary">CSS</span> <span class="badge badge-primary">Flexbox</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Component Library</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Build a reusable CSS component library with buttons, cards, modals, and forms.</p><span class="badge badge-primary">CSS</span> <span class="badge badge-primary">BEM</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">CSS Animation Showcase</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A gallery of CSS animations, transitions, and interactive hover effects.</p><span class="badge badge-primary">CSS</span> <span class="badge badge-primary">Animations</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">E-commerce Product Page</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A product detail page with image gallery, tabs, accordion, and responsive layout.</p><span class="badge badge-primary">CSS</span> <span class="badge badge-primary">Responsive</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Design System Documentation</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A living style guide documenting colors, typography, spacing, and components.</p><span class="badge badge-primary">CSS</span> <span class="badge badge-primary">Design System</span></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=css&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+

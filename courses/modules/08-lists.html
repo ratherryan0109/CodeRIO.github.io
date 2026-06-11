@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn HTML Lists: unordered, ordered, description lists, and nesting">
+  <title>HTML Lists – CodeRio</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/courses.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body data-page="Lesson" data-course="html" data-lesson="08">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../../index.html" class="logo">
+        <span class="logo-icon">&lt;/&gt;</span> CodeRio
+      </a>
+      <div class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../../Learn.html"><i class="fas fa-book"></i> Learn</a></li>
+        <li><a href="../../Practice.html"><i class="fas fa-code"></i> Practice</a></li>
+        <li><a href="../../Projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+        <li><a href="../../About.html"><i class="fas fa-info-circle"></i> About</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="../../login.html" class="btn btn-ghost">Log In</a>
+        <a href="../../signup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="toastContainer"></div>
+
+  <div class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-hero-content">
+        <h1>HTML Lists</h1>
+        <div class="lesson-meta">
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="far fa-clock"></i> 40 min</span>
+          <span><i class="fas fa-list"></i> Module 8 of 14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-body">
+      <div class="lesson-section">
+        <h2><i class="fas fa-bullseye" style="color:var(--primary)"></i> Learning Objectives</h2>
+        <ul class="objective-list">
+          <li>Create unordered lists with <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code></li>
+          <li>Create ordered lists with <code>&lt;ol&gt;</code> and <code>&lt;li&gt;</code></li>
+          <li>Use description lists with <code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code>, and <code>&lt;dd&gt;</code></li>
+          <li>Nest lists inside other lists for complex structures</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-book-open" style="color:var(--primary)"></i> Lists Explained</h2>
+        <div class="analogy-box">
+          <i class="fas fa-lightbulb"></i>
+          <strong>Think of it like this:</strong>
+          <p>HTML lists are like different types of <strong>shopping lists</strong>. An <strong>unordered list</strong> (<code>&lt;ul&gt;</code>) is a grocery list — the order of items does not matter, so each gets a bullet point. An <strong>ordered list</strong> (<code>&lt;ol&gt;</code>) is a recipe step list — order is critical, so each step gets a number. A <strong>description list</strong> (<code>&lt;dl&gt;</code>) is like a dictionary or FAQ — each term has a definition below it.</p>
+        </div>
+        <p>Lists are everywhere on the web: navigation menus, ingredient lists, top 10 rankings, FAQs, comment threads, and product features. The three list types cover almost every scenario. All lists are <strong>block-level</strong> and consist of a container element and child items. The <code>&lt;li&gt;</code> (list item) element is used for both <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code>.</p>
+        <p>Lists can be <strong>nested</strong> — placing one list inside an <code>&lt;li&gt;</code> of another list creates sub-lists. This is useful for outlines, multi-level navigation, or categorized items. You can also customize the bullet style for <code>&lt;ul&gt;</code> using the <code>list-style-type</code> CSS property (disc, circle, square, none) and the numbering style for <code>&lt;ol&gt;</code> (decimal, roman, alpha).</p>
+      </div>
+
+      <div class="lesson-section glass-card diagram-box">
+        <h2><i class="fas fa-diagram-project" style="color:var(--primary)"></i> Visual Diagram</h2>
+        <div class="diagram">
+          <div style="border:2px solid var(--primary);padding:1rem;border-radius:8px;">
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+              <div style="flex:1;min-width:150px;">
+                <strong style="display:block;text-align:center;">&lt;ul&gt; (Unordered)</strong>
+                <div style="background:#e8f5e9;padding:0.5rem;border-radius:4px;">
+                  <div>• Item 1</div>
+                  <div>• Item 2</div>
+                  <div style="margin-left:1rem;">◦ Sub-item</div>
+                  <div>• Item 3</div>
+                </div>
+              </div>
+              <div style="flex:1;min-width:150px;">
+                <strong style="display:block;text-align:center;">&lt;ol&gt; (Ordered)</strong>
+                <div style="background:#fff3e0;padding:0.5rem;border-radius:4px;">
+                  <div>1. First step</div>
+                  <div>2. Second step</div>
+                  <div>3. Third step</div>
+                </div>
+              </div>
+              <div style="flex:1;min-width:150px;">
+                <strong style="display:block;text-align:center;">&lt;dl&gt; (Description)</strong>
+                <div style="background:#f3e5f5;padding:0.5rem;border-radius:4px;">
+                  <div><strong>Term</strong></div>
+                  <div style="margin-left:0.5rem;">— Definition</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-seedling" style="color:var(--success)"></i> Beginner Example</h2>
+        <pre><code>&lt;h2&gt;Grocery List&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+  &lt;li&gt;Bread&lt;/li&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+  &lt;li&gt;Apples&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Top 3 Movies&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;The Matrix&lt;/li&gt;
+  &lt;li&gt;Inception&lt;/li&gt;
+  &lt;li&gt;Interstellar&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 2-7:</strong> <code>&lt;ul&gt;</code> creates a bulleted list. Each <code>&lt;li&gt;</code> becomes a bullet point. The order does not matter visually.</li>
+            <li><strong>Lines 10-14:</strong> <code>&lt;ol&gt;</code> creates a numbered list. The browser automatically numbers each <code>&lt;li&gt;</code> starting from 1.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--warning)"></i> Intermediate Example</h2>
+        <pre><code>&lt;h2&gt;Course Syllabus&lt;/h2&gt;
+&lt;ol type="I"&gt;
+  &lt;li&gt;Introduction
+    &lt;ul&gt;
+      &lt;li&gt;Welcome &amp; setup&lt;/li&gt;
+      &lt;li&gt;First HTML page&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;HTML Basics
+    &lt;ul&gt;
+      &lt;li&gt;Tags &amp; elements&lt;/li&gt;
+      &lt;li&gt;Attributes&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Line 2:</strong> <code>type="I"</code> changes the numbering to uppercase Roman numerals (I, II, III). You can also use <code>a</code>, <code>A</code>, <code>i</code>, or <code>1</code>.</li>
+            <li><strong>Lines 4-7:</strong> A <code>&lt;ul&gt;</code> nested inside an <code>&lt;li&gt;</code>. This creates a sub-list under "Introduction." The nested list is indented and uses a different bullet style.</li>
+            <li><strong>Lines 10-13:</strong> The same nesting pattern repeats. Each main topic has sub-topics in a bullet list.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-crown" style="color:var(--primary)"></i> Advanced Example</h2>
+        <pre><code>&lt;h2&gt;Web Development FAQ&lt;/h2&gt;
+&lt;dl&gt;
+  &lt;dt&gt;What is HTML?&lt;/dt&gt;
+  &lt;dd&gt;HyperText Markup Language — the structure of web pages.&lt;/dd&gt;
+
+  &lt;dt&gt;What is CSS?&lt;/dt&gt;
+  &lt;dd&gt;Cascading Style Sheets — controls the visual presentation.&lt;/dd&gt;
+
+  &lt;dt&gt;What is JavaScript?&lt;/dt&gt;
+  &lt;dd&gt;A programming language that adds interactivity to websites.&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;h2&gt;Multi-level Navigation&lt;/h2&gt;
+&lt;ul class="nav-menu"&gt;
+  &lt;li&gt;Home
+    &lt;ul&gt;
+      &lt;li&gt;Dashboard&lt;/li&gt;
+      &lt;li&gt;Activity&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Settings
+    &lt;ul&gt;
+      &lt;li&gt;Profile
+        &lt;ul&gt;
+          &lt;li&gt;Edit Avatar&lt;/li&gt;
+          &lt;li&gt;Change Password&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Privacy&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 3-10:</strong> <code>&lt;dl&gt;</code> (description list) pairs terms (<code>&lt;dt&gt;</code>) with definitions (<code>&lt;dd&gt;</code>). Browsers typically indent the <code>&lt;dd&gt;</code> text. This is perfect for glossaries, FAQs, or metadata.</li>
+            <li><strong>Lines 14-31:</strong> Three levels of nesting: main menu → sub-menu → sub-sub-menu. Each level is indented further and uses a different bullet style automatically.</li>
+            <li><strong>Line 16:</strong> <code>&lt;li&gt;Home</code> — the text "Home" is before the nested <code>&lt;ul&gt;</code>. This creates a parent item with expandable children, the foundation of dropdown menus.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-dumbbell" style="color:var(--primary)"></i> Exercises</h2>
+        <div class="exercise-list">
+          <div class="exercise-item">
+            <span class="exercise-number">1</span>
+            <p>Create a to-do list using an unordered list with 5 items. Mark one item as completed by wrapping it in <code>&lt;s&gt;</code> (strikethrough).</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">2</span>
+            <p>Create a "Top 10" ordered list of your favorite songs. Change the numbering to lowercase Roman numerals using <code>type="i"</code>.</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">3</span>
+            <p>Build a nested list: a main list of three hobbies, each with a sub-list of 2-3 related activities. For example: "Cooking → Pasta, Baking, Grilling."</p>
+            <span class="badge badge-info">Medium</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">4</span>
+            <p>Create a description list for a glossary of 5 programming terms. Use <code>&lt;dt&gt;</code> for the term and <code>&lt;dd&gt;</code> for the definition. Add a CSS class to style the terms in bold.</p>
+            <span class="badge badge-warning">Challenging</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Quick Quiz</h2>
+        <div class="quiz-container">
+          <div class="quiz-question" data-q="0">
+            <p><strong>1. Which tag creates an ordered (numbered) list?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q0" value="a"> A) &lt;ul&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="b"> B) &lt;ol&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="c"> C) &lt;dl&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="d"> D) &lt;li&gt;</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="1">
+            <p><strong>2. What does &lt;dt&gt; stand for in a description list?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q1" value="a"> A) Data title</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="b"> B) Definition term</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="c"> C) Description text</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="d"> D) Display tag</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="2">
+            <p><strong>3. What is the correct way to create a nested list?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q2" value="a"> A) Put a &lt;ul&gt; directly inside another &lt;ul&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="b"> B) Put a &lt;ul&gt; inside an &lt;li&gt; of the parent list</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="c"> C) Use the &lt;nest&gt; tag</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="d"> D) Lists cannot be nested</label>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="checkQuiz()">Check Answers</button>
+          <div id="quizResult" style="margin-top:1rem"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-tasks" style="color:var(--primary)"></i> Assignment</h2>
+        <p>Build a "Restaurant Menu" page. Use an unordered list for appetizers, an ordered list for the "Top 5 Main Courses," and a description list for the daily specials (name as term, description and price as definition). Include at least one nested list (e.g., main courses with dietary options like vegetarian/vegan as sub-lists). Style it so the menu looks presentable — use CSS classes or inline styles for spacing and fonts. Save as <code>menu.html</code>.</p>
+        <div class="assignment-hints">
+          <h4>Hints:</h4>
+          <ul>
+            <li>Use <code>&lt;ol start="10"&gt;</code> if you want numbering to start from a specific number.</li>
+            <li>For the description list, add multiple <code>&lt;dd&gt;</code> elements under a single <code>&lt;dt&gt;</code> for multiple definitions.</li>
+            <li>Use <code>&lt;li value="..."&gt;</code> on ordered lists to skip numbers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-user-tie" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">Q: When should you use &lt;ul&gt; vs &lt;ol&gt;? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>Use <code>&lt;ul&gt;</code> (unordered list) when the order of items does not matter — feature lists, navigation menus, ingredients. Use <code>&lt;ol&gt;</code> (ordered list) when sequence is important — step-by-step instructions, rankings, timelines. Semantically choosing the right list type helps screen readers convey the correct meaning.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: What is the purpose of the &lt;dl&gt; element? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>The <code>&lt;dl&gt;</code> (description list) element is used to group terms and their descriptions. It is ideal for glossaries, FAQs, dictionaries, or any key-value pair data. Each term uses <code>&lt;dt&gt;</code> and each definition uses <code>&lt;dd&gt;</code>. One <code>&lt;dt&gt;</code> can have multiple <code>&lt;dd&gt;</code>s and vice versa.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: How can you change the bullet style of an unordered list? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>Use the CSS <code>list-style-type</code> property. Common values: <code>disc</code> (default filled circle), <code>circle</code> (hollow circle), <code>square</code>, and <code>none</code>. You can also use custom images with <code>list-style-image: url('bullet.png')</code>. For ordered lists, you can use the <code>type</code> attribute (<code>1</code>, <code>A</code>, <code>a</code>, <code>I</code>, <code>i</code>).</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <ul>
+          <li><strong>Putting text directly inside &lt;ul&gt; or &lt;ol&gt;:</strong> All content must be inside <code>&lt;li&gt;</code> elements. <code>&lt;ul&gt;Text&lt;/ul&gt;</code> is invalid.</li>
+          <li><strong>Using &lt;br&gt; to create list items:</strong> Each item needs its own <code>&lt;li&gt;</code>. Do not put multiple items in one <code>&lt;li&gt;</code> separated by <code>&lt;br&gt;</code>.</li>
+          <li><strong>Incorrect nesting:</strong> A nested list must go <em>inside</em> an <code>&lt;li&gt;</code>, not directly inside another <code>&lt;ul&gt;</code>/<code>&lt;ol&gt;</code>.</li>
+          <li><strong>Forgetting that &lt;dl&gt; is not for indentation:</strong> Do not use <code>&lt;dl&gt;</code> just to indent text. It is a semantic element for term-definition pairs.</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Additional Resources</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul" target="_blank">MDN: &lt;ul&gt; Element</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol" target="_blank">MDN: &lt;ol&gt; Element</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl" target="_blank">MDN: &lt;dl&gt; Element</a></li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-video" style="color:var(--primary)"></i> Recommended Videos</h2>
+        <div class="video-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg?start=2100" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>HTML Lists Explained</h4>
+              <p>freeCodeCamp • Beginner</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/mJgBOIoGihA?start=900" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>HTML Lists Tutorial</h4>
+              <p>Traversy Media • Beginner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-navigation">
+        <a href="07-images.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous</a>
+        <a href="09-tables.html" class="btn btn-primary">Next <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../../index.html">Home</a></li><li><a href="../../Learn.html">Learn</a></li><li><a href="../../Practice.html">Practice</a></li><li><a href="../../Projects.html">Projects</a></li><li><a href="../../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../../faq.html">FAQ</a></li><li><a href="../../privacy-policy.html">Privacy Policy</a></li><li><a href="../../terms-of-service.html">Terms of Service</a></li><li><a href="../../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/learning.js"></script>
+
+  <script>
+    function checkQuiz() {
+      let score = 0;
+      if (document.querySelector('input[name="q0"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'b') score++;
+      let msg = 'You scored ' + score + '/3';
+      if (score === 3) msg += ' 🎉 Perfect!';
+      else if (score >= 2) msg += ' 👍 Good job!';
+      else msg += ' 💪 Keep practicing!';
+      document.getElementById('quizResult').innerHTML = '<div class="alert alert-info">' + msg + '</div>';
+    }
+
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        const isOpen = answer.style.maxHeight;
+        document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+        if (!isOpen) answer.style.maxHeight = answer.scrollHeight + 'px';
+      });
+    });
+  </script>
+</body>
+</html>

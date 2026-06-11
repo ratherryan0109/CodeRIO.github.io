@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="dsa">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="toast-container"></div>
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Data Structures & Algorithms</h1>
+      <p>Mastering DSA is essential for writing efficient code, acing technical interviews, and solving complex computational problems. This course covers everything from basic arrays to advanced graph algorithms and dynamic programming.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Advanced</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 12 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 12 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="DSA">
+    </div>
+  </section>
+  <section class="course-content">
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Data Structures & Algorithms form the foundation of computer science. Data structures organize data efficiently for access and modification, while algorithms are step-by-step procedures for solving computational problems. Together they determine the efficiency, scalability, and correctness of software systems.</p>
+      <p>DSAs are evaluated through time complexity (how fast an algorithm runs) and space complexity (how much memory it uses), both expressed using Big O notation. Understanding these concepts enables you to choose the right tool for any problem - from storing millions of user records to finding the shortest path in a navigation system.</p>
+      <p>DSA knowledge is critical for interviews at top tech companies (Google, Microsoft, Amazon, Meta, Apple). It is universally applicable across programming languages and domains - whether you build web apps, mobile apps, games, or distributed systems. Mastery of DSA separates novice programmers from senior engineers.</p>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn DSA?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-trophy" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Interview Success</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">FAANG and top tech companies test DSA extensively in coding interviews.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-brain" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Problem-Solving Skills</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">DSA trains you to think algorithmically and break down complex problems.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-tachometer-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Efficient Code</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Choose the right data structure to optimize time and memory usage.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-globe" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Language Agnostic</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">DSA concepts apply to any programming language you work with.</p>
+        </div>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">DSA powers the technology behind every major company and product:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apple</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Search engines use graph algorithms, social media uses hash maps and trees, navigation apps use shortest-path algorithms, e-commerce uses sorting and searching, and databases use B-trees. Every software engineer should know DSA regardless of their specialization.</p>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic programming in any language, loops, conditionals, functions</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-3)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Complexity analysis, arrays, strings, hash maps, sorting, binary search</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 4-7)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Linked lists, stacks, queues, trees, recursion, backtracking, two pointers</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 8-10)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Graphs, DFS/BFS, shortest paths, DP, greedy, union-find, tries</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Weeks 11-12)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Advanced DP patterns, segment trees, Fenwick trees, suffix arrays, LeetCode grind</p>
+        </div>
+      </div>
+    </div>
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=dsa&module=1" class="module-card" onclick="LearningTracker.startLesson('dsa-01')">
+        <h3><span class="module-number">1</span> Complexity Analysis</h3>
+        <p>Big O notation, time complexity, space complexity, best/average/worst case.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Big O</span> <span class="badge badge-primary">Analysis</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=2" class="module-card" onclick="LearningTracker.startLesson('dsa-02')">
+        <h3><span class="module-number">2</span> Arrays & Hashing</h3>
+        <p>Dynamic arrays, hash maps, hash sets, prefix sums, two-pointer technique.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Arrays</span> <span class="badge badge-primary">Hashing</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=3" class="module-card" onclick="LearningTracker.startLesson('dsa-03')">
+        <h3><span class="module-number">3</span> Sorting & Searching</h3>
+        <p>Bubble, selection, insertion, merge, quick sort. Linear and binary search.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Sorting</span> <span class="badge badge-primary">Search</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=dsa&module=4" class="module-card" onclick="LearningTracker.startLesson('dsa-04')">
+        <h3><span class="module-number">4</span> Linked Lists</h3>
+        <p>Singly, doubly, circular linked lists, fast & slow pointers, reversal, cycle detection.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Linked lists</span> <span class="badge badge-primary">Pointers</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=5" class="module-card" onclick="LearningTracker.startLesson('dsa-05')">
+        <h3><span class="module-number">5</span> Stack & Queue</h3>
+        <p>Stack (LIFO), queue (FIFO), deque, monotonic stack, priority queue, heap.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Stack</span> <span class="badge badge-primary">Queue</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=6" class="module-card" onclick="LearningTracker.startLesson('dsa-06')">
+        <h3><span class="module-number">6</span> Trees & Recursion</h3>
+        <p>Binary trees, BST, tree traversals, recursion fundamentals, backtracking.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Trees</span> <span class="badge badge-primary">Recursion</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=dsa&module=7" class="module-card" onclick="LearningTracker.startLesson('dsa-07')">
+        <h3><span class="module-number">7</span> Graphs</h3>
+        <p>Adjacency list/matrix, BFS, DFS, topological sort, connected components, bipartite.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Graphs</span> <span class="badge badge-primary">BFS/DFS</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=8" class="module-card" onclick="LearningTracker.startLesson('dsa-08')">
+        <h3><span class="module-number">8</span> Shortest Paths & MST</h3>
+        <p>Dijkstra, Bellman-Ford, Floyd-Warshall, Prim, Kruskal, union-find.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Dijkstra</span> <span class="badge badge-primary">MST</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=9" class="module-card" onclick="LearningTracker.startLesson('dsa-09')">
+        <h3><span class="module-number">9</span> Dynamic Programming</h3>
+        <p>Memoization, tabulation, 1D DP, 2D DP, LCS, LIS, knapSack, coin change.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">DP</span> <span class="badge badge-primary">Memoization</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=10" class="module-card" onclick="LearningTracker.startLesson('dsa-10')">
+        <h3><span class="module-number">10</span> Greedy & Intervals</h3>
+        <p>Greedy algorithms, interval scheduling, merge intervals, activity selection, Huffman coding.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Greedy</span> <span class="badge badge-primary">Intervals</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=11" class="module-card" onclick="LearningTracker.startLesson('dsa-11')">
+        <h3><span class="module-number">11</span> Advanced Data Structures</h3>
+        <p>Tries, segment trees, Fenwick trees, disjoint set union, LRU cache.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Trie</span> <span class="badge badge-primary">Segment tree</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=dsa&module=12" class="module-card" onclick="LearningTracker.startLesson('dsa-12')">
+        <h3><span class="module-number">12</span> Bit Manipulation</h3>
+        <p>Bitwise operators, bit masks, XOR tricks, power set, counting bits.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem">
+          <span class="badge badge-primary">Bit ops</span> <span class="badge badge-primary">XOR</span>
+        </div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card);border-left:4px solid var(--primary)">
+        <h4 style="color:var(--primary);margin-bottom:0.5rem">Big O Cheatsheet</h4>
+        <pre style="background:#1e293b;padding:1rem;border-radius:8px;overflow-x:auto;font-size:0.9rem;line-height:1.6"><code>Array        O(1) access  O(n) search  O(n) insert/delete
+Hash Map    O(1) average access/insert/delete
+BST         O(log n) average for all operations
+Heap        O(log n) insert  O(log n) delete  O(1) min/max
+Graph       O(V+E) BFS/DFS  O(E log V) Dijkstra
+Sorting     O(n log n) best comparison sorts</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card);border-left:4px solid var(--success)">
+        <h4 style="color:var(--success);margin-bottom:0.5rem">Recursion Template</h4>
+        <pre style="background:#1e293b;padding:1rem;border-radius:8px;overflow-x:auto;font-size:0.9rem;line-height:1.6"><code>function fn(n):
+    if baseCondition(n): return baseValue
+    return combine(fn(n-1), n)</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card);border-left:4px solid var(--warning)">
+        <h4 style="color:var(--warning);margin-bottom:0.5rem">DP Framework</h4>
+        <ol style="color:var(--text-secondary);padding-left:1.2rem;line-height:1.8">
+          <li>Define state (what does dp[i] represent?)</li>
+          <li>Find recurrence relation (how does dp[i] relate to previous?)</li>
+          <li>Set base cases</li>
+          <li>Iterate/recursively compute</li>
+          <li>Return final answer</li>
+        </ol>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Code Examples</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p style="color:var(--text-muted);margin-bottom:0.5rem">Binary Search (O(log n))</p>
+        <pre style="background:#1e293b;padding:1rem;border-radius:8px;overflow-x:auto;font-size:0.9rem;line-height:1.6"><code>def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target: return mid
+        elif arr[mid] < target: left = mid + 1
+        else: right = mid - 1
+    return -1</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p style="color:var(--text-muted);margin-bottom:0.5rem">DFS on Binary Tree</p>
+        <pre style="background:#1e293b;padding:1rem;border-radius:8px;overflow-x:auto;font-size:0.9rem;line-height:1.6"><code>class TreeNode:
+    def __init__(self, val=0): self.val = val; self.left = self.right = None
+
+def inorder(root):
+    if not root: return
+    inorder(root.left)
+    print(root.val)
+    inorder(root.right)</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p style="color:var(--text-muted);margin-bottom:0.5rem">Dijkstra Shortest Path</p>
+        <pre style="background:#1e293b;padding:1rem;border-radius:8px;overflow-x:auto;font-size:0.9rem;line-height:1.6"><code>import heapq
+def dijkstra(graph, start):
+    dist = {node: float("inf") for node in graph}
+    dist[start] = 0
+    pq = [(0, start)]
+    while pq:
+        d, u = heapq.heappop(pq)
+        if d > dist[u]: continue
+        for v, w in graph[u]:
+            if d + w < dist[v]:
+                dist[v] = d + w
+                heapq.heappush(pq, (dist[v], v))
+    return dist</code></pre>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p style="color:var(--text-muted);margin-bottom:0.5rem">Fibonacci with DP (tabulation)</p>
+        <pre style="background:#1e293b;padding:1rem;border-radius:8px;overflow-x:auto;font-size:0.9rem;line-height:1.6"><code>def fib(n):
+    if n <= 1: return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]</code></pre>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-pencil-alt"></i> Exercises</h2>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p><strong>1. Two Sum</strong> <span class="badge badge-primary">Easy</span></p>
+        <p style="color:var(--text-secondary)">Given an array of integers nums and a target, return indices of two numbers that add up to target.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p><strong>2. Valid Parentheses</strong> <span class="badge badge-primary">Easy</span></p>
+        <p style="color:var(--text-secondary)">Given a string containing (), {}, [], determine if brackets are balanced.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p><strong>3. Reverse Linked List</strong> <span class="badge badge-warning">Medium</span></p>
+        <p style="color:var(--text-secondary)">Reverse a singly linked list iteratively and recursively.</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p><strong>4. Course Schedule</strong> <span class="badge badge-warning">Medium</span></p>
+        <p style="color:var(--text-secondary)">Determine if you can finish all courses given prerequisite pairs (topological sort).</p>
+      </div>
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem;background:var(--bg-card)">
+        <p><strong>5. Longest Palindromic Substring</strong> <span class="badge badge-error">Hard</span></p>
+        <p style="color:var(--text-secondary)">Find the longest palindromic substring in a given string using expand around center or DP.</p>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-tasks"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4>Autocomplete System</h4>
+          <p style="color:var(--text-secondary);margin:0.5rem 0">Build a type-ahead search using a Trie. Insert words and return all words with a given prefix in O(L) time.</p>
+          <p><span class="badge badge-primary">Trie</span> <span class="badge badge-primary">DFS</span></p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4>Pathfinding Visualizer</h4>
+          <p style="color:var(--text-secondary);margin:0.5rem 0">Visualize BFS, DFS, Dijkstra, and A* on a grid. Show visited nodes and shortest path.</p>
+          <p><span class="badge badge-primary">Graphs</span> <span class="badge badge-primary">Dijkstra</span></p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4>LRU Cache</h4>
+          <p style="color:var(--text-secondary);margin:0.5rem 0">Implement an LRU cache using a doubly linked list + hash map for O(1) get and put.</p>
+          <p><span class="badge badge-primary">Linked list</span> <span class="badge badge-primary">Hash map</span></p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4>Social Network Analyzer</h4>
+          <p style="color:var(--text-secondary);margin:0.5rem 0">Find connected components, shortest path between users, and suggest friends using BFS.</p>
+          <p><span class="badge badge-primary">Graph</span> <span class="badge badge-primary">BFS</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      
+      </div>
+      
+      </div>
+      
+      </div>
+      
+      </div>
+      
+      </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-file-alt"></i> Cheat Sheet</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem;background:var(--bg-card)">
+          <h4 style="color:var(--primary);margin-bottom:0.5rem">Common Time Complexities</h4>
+          <ul style="color:var(--text-secondary);padding-left:1.2rem;line-height:1.8;font-size:0.9rem">
+            <li>O(1) Constant: hash map, array index</li>
+            <li>O(log n) Log: binary search, heap</li>
+            <li>O(n) Linear: array traversal, BFS</li>
+            <li>O(n log n): merge sort, heap sort</li>
+            <li>O(n^2): bubble/selection/insertion sort</li>
+            <li>O(2^n): recursive DP without memo</li>
+          </ul>
+        </div>
+        <div class="glass" style="padding:1.5rem;background:var(--bg-card)">
+          <h4 style="color:var(--warning);margin-bottom:0.5rem">Algorithm Paradigms</h4>
+          <ul style="color:var(--text-secondary);padding-left:1.2rem;line-height:1.8;font-size:0.9rem">
+            <li>Brute force: try all possibilities</li>
+            <li>Divide & conquer: split, solve, merge</li>
+            <li>Greedy: locally optimal choices</li>
+            <li>Dynamic programming: cached recursion</li>
+            <li>Backtracking: try, undo, try next</li>
+            <li>Sliding window: contiguous subarrays</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="course-section">
+      <h2><i class="fas fa-link"></i> Resources</h2>
+      <ul class="resource-list">
+        <li><a href="https://leetcode.com" target="_blank">LeetCode</a> - practice problems</li>
+        <li><a href="https://neetcode.io" target="_blank">NeetCode</a> - DSA roadmap</li>
+        <li><a href="https://www.geeksforgeeks.org" target="_blank">GeeksforGeeks</a> - tutorials</li>
+        <li><a href="https://www.youtube.com/c/WilliamFiset" target="_blank">William Fiset</a> - video series</li>
+        <li><a href="https://visualgo.net" target="_blank">VisuAlgo</a> - algorithm visualization</li>
+        <li><a href="https://www.algoexpert.io" target="_blank">AlgoExpert</a> - interview prep</li>
+      </ul>
+    </div>
+    
+      </div>
+      
+      </div>
+      
+      </div>
+      
+      </div>
+      
+      </div>
+    </div>
+  </section>
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+

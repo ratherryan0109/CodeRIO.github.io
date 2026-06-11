@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/courses.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .learn-page .page-header {
+      padding: 3rem 8% 1.5rem;
+    }
+    .learn-page .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 0.5rem;
+    }
+    .learn-page .page-header p {
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .learn-section {
+      padding: 2rem 8% 5rem;
+    }
+    .learn-section .tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      justify-content: center;
+    }
+    .learn-section .tab {
+      padding: 0.7rem 1.5rem;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius-sm);
+      background: var(--white);
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .learn-section .tab:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .learn-section .tab.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .course-grid .course-card {
+      display: block;
+    }
+    .course-card.hidden {
+      display: none;
+    }
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      grid-column: 1 / -1;
+    }
+    .no-results i {
+      font-size: 3rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    .no-results h3 {
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 768px) {
+      .learn-section {
+        padding: 1.5rem 5% 3rem;
+      }
+    }
+  </style>
+</head>
+<body data-page="Learn">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html" class="active">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="learn-page">
+    <div class="page-header">
+      <h1>Start Learning</h1>
+      <p>Choose from a wide range of programming courses designed to take you from beginner to expert.</p>
+    </div>
+
+    <section class="learn-section">
+      <div class="tabs" id="categoryTabs">
+        <button class="tab active" data-category="all">All</button>
+        <button class="tab" data-category="web">Web Development</button>
+        <button class="tab" data-category="languages">Programming Languages</button>
+        <button class="tab" data-category="data">Data</button>
+        <button class="tab" data-category="core">Core CS</button>
+      </div>
+
+      <div class="course-grid" id="courseGrid"></div>
+    </section>
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/courses.js"></script>
+  <script>
+    const categoryMap = {};
+    const CATEGORIES = {
+      web: 'Web Development', languages: 'Programming Languages',
+      data: 'Data', core: 'Core CS'
+    };
+
+    function assignCategory(course) {
+      const keywords = {
+        web: ['html', 'css', 'javascript', 'node', 'react', 'typescript', 'frontend', 'web'],
+        languages: ['python', 'java', 'c++', 'c#', 'go', 'rust', 'swift', 'kotlin', 'c ', 'c$', 'typescript'],
+        data: ['sql', 'mysql', 'pandas', 'mongodb', 'data', 'database'],
+        core: ['dsa', 'git', 'docker', 'linux', 'algorithm']
+      };
+      const id = course.id.toLowerCase();
+      for (const [cat, words] of Object.entries(keywords)) {
+        if (words.some(w => id.includes(w))) return cat;
+      }
+      return 'languages';
+    }
+
+    function renderCourses(category = 'all') {
+      const grid = document.getElementById('courseGrid');
+      if (!grid) return;
+
+      Utils.fetchJSON('/data/courses.json').then(data => {
+        if (!data) return;
+        data.forEach(c => { if (!c.category) c.category = assignCategory(c); });
+
+        const filtered = category === 'all' ? data : data.filter(c => c.category === category);
+        if (!filtered.length) {
+          grid.innerHTML = '<div class="no-results"><i class="fas fa-search"></i><h3>No courses found</h3><p>Try a different category.</p></div>';
+          return;
+        }
+
+        const levelColors = {
+          beginner: 'course-level-beginner', intermediate: 'course-level-intermediate', advanced: 'course-level-advanced'
+        };
+
+        grid.innerHTML = filtered.map(c => {
+          const level = (c.level || 'beginner').toLowerCase();
+          return `
+            <a href="courses/${c.id}.html" class="course-card">
+              <img src="${c.icon}" alt="${c.title}" loading="lazy">
+              <h2>${c.title}</h2>
+              <p>${c.description}</p>
+              <span class="course-level ${levelColors[level] || 'course-level-beginner'}">${level.charAt(0).toUpperCase() + level.slice(1)}</span>
+            </a>
+          `;
+        }).join('');
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCourses('all');
+      document.querySelectorAll('#categoryTabs .tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('#categoryTabs .tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          renderCourses(tab.dataset.category);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
+

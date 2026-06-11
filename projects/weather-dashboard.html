@@ -1,0 +1,654 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a weather dashboard using the OpenWeatherMap API. Learn async JavaScript, geolocation, chart visualization, error handling, and localStorage in this comprehensive project guide.">
+  <meta name="keywords" content="weather dashboard, OpenWeatherMap API, fetch, async-await, geolocation, Chart.js, JavaScript project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="Weather Dashboard - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a weather dashboard with real-time API data.">
+  <meta property="og:type" content="website">
+  <title>Weather Dashboard - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/weather-dashboard.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="weather-dashboard">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Weather Dashboard</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Beginner</span>
+        <span><i class="far fa-clock"></i> 3-4 hours</span>
+        <span><i class="fas fa-code-branch"></i> JavaScript, OpenWeatherMap API, Chart.js</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A complete engineering guide to building a real-time weather dashboard with OpenWeatherMap API integration, geolocation, interactive charts, and localStorage favorites.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This weather dashboard project teaches you how to integrate third-party REST APIs, handle asynchronous JavaScript with fetch and async/await, process JSON responses, and present data visually using Chart.js. Users can search for any city, view current conditions, see a 5-day forecast with interactive charts, save favorite cities to localStorage, and use their device geolocation for instant local weather. The project covers error handling, loading states, and responsive design for a polished user experience.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Weather data is essential for daily planning but accessing it typically requires visiting multiple websites or apps that are cluttered with ads and unnecessary features. Developers need to understand how to consume REST APIs, handle asynchronous data fetching, manage API keys securely, and present data in a clean, user-friendly dashboard. The challenge is building an app that handles API errors gracefully, works offline with cached data, and provides an intuitive UI for quick weather lookups.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Travel Planning:</strong> A traveler checks weather conditions for their destination city before packing. They save multiple cities to quickly compare forecasts.</li>
+          <li><strong>Event Coordination:</strong> An event planner monitors weather across multiple outdoor venue locations to make real-time backup decisions.</li>
+          <li><strong>Agricultural Monitoring:</strong> A farmer tracks temperature, humidity, and precipitation forecasts for crop management decisions across different fields.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>API integration is a core skill for modern web developers. The OpenWeatherMap API serves over 1 million developers and is used by companies like Microsoft and Airbnb for weather data. The concepts you learn - REST API consumption, async/await patterns, error handling, data visualization - are directly applicable to integrating any third-party service (payment gateways, social media APIs, mapping services). Chart.js is used by over 3 million projects on GitHub for data visualization.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Consume REST APIs using the Fetch API with async/await syntax for clean asynchronous code</li>
+          <li>Handle API errors, rate limits, and network failures with try/catch blocks and user-friendly error messages</li>
+          <li>Implement the Geolocation API to get the user's current position and reverse-geocode for city names</li>
+          <li>Render interactive charts using Chart.js for temperature trends, humidity, and wind speed visualizations</li>
+          <li>Persist user preferences (favorite cities, unit preference) using localStorage with CRUD operations</li>
+          <li>Manage API keys securely using environment variables and serverless functions</li>
+          <li>Build responsive weather cards with condition-based icons and dynamic background gradients</li>
+          <li>Implement debounced search with autocomplete suggestions for city names</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fab fa-js"></i> JavaScript ES6+</span>
+          <span class="badge-tech"><i class="fas fa-cloud"></i> OpenWeatherMap API</span>
+          <span class="badge-tech"><i class="fas fa-chart-bar"></i> Chart.js</span>
+          <span class="badge-tech"><i class="fas fa-map-marker-alt"></i> Geolocation API</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> localStorage</span>
+          <span class="badge-tech"><i class="fab fa-font-awesome"></i> Font Awesome</span>
+          <span class="badge-tech"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS3</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Solid understanding of JavaScript fundamentals (variables, functions, objects, arrays, promises)</li>
+          <li>Familiarity with DOM manipulation (querySelector, createElement, event listeners)</li>
+          <li>Basic understanding of JSON data format and REST API concepts</li>
+          <li>Knowledge of CSS Flexbox and Grid for responsive layouts</li>
+          <li>Node.js installed for local development (optional but recommended)</li>
+          <li>A free OpenWeatherMap API key (sign up at openweathermap.org/api)</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The application follows a modular architecture with separate concerns: API service layer handles all HTTP requests with interceptors for error handling; state management stores current weather data, forecast data, favorites, and UI state; the UI layer renders components using template functions. The app uses a facade pattern where the main controller coordinates between services and UI. API responses are cached in a Map object to reduce redundant network calls. Geolocation is requested on first load with a fallback to the last searched city. Chart.js instances are managed through a singleton pattern to prevent memory leaks.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+weather-dashboard/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   ├── api.js
+│   ├── ui.js
+│   ├── storage.js
+│   └── charts.js
+├── assets/
+│   └── icons/
+├── .env
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: API Setup & Data Fetching</h4>
+          <p>Sign up for OpenWeatherMap API, get your API key, and explore the endpoints (Current Weather Data, 5 Day / 3 Hour Forecast). Build the API service layer with fetch wrappers that handle authentication, rate limiting, and error responses. Test endpoints with Postman or curl.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: Core UI & City Search</h4>
+          <p>Build the search interface with autocomplete suggestions using the OpenWeatherMap Geocoding API. Display current weather conditions (temperature, humidity, wind speed, pressure, visibility) in styled glass cards. Add weather condition icons that map to Font Awesome icons.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Geolocation Integration</h4>
+          <p>Implement navigator.geolocation.getCurrentPosition() to detect the user's location. Use reverse geocoding to get the city name from coordinates. Handle permission denied and timeout errors gracefully. Add a "Use My Location" button as an alternative to search.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Charts & Forecast</h4>
+          <p>Install Chart.js from CDN and build interactive line charts for temperature trends over 5 days. Add additional charts for humidity and wind speed. Implement chart animation options and responsive resizing. Add a toggle between Celsius and Fahrenheit.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: Favorites & Persistence</h4>
+          <p>Build a favorites system using localStorage that allows users to save and remove cities. Display favorites as clickable chips in a sidebar. Persist the last searched city and temperature unit preference. Load favorites on app initialization.</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: API Service Layer</h4>
+          <p>Create a dedicated API service module that encapsulates all HTTP requests to OpenWeatherMap. This separation of concerns makes the code testable and maintainable.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const API_KEY = 'YOUR_API_KEY';
+const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const GEO_URL = 'https://api.openweathermap.org/geo/1.0';
+
+const WeatherAPI = {
+  async getCurrentWeather(city) {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'City not found');
+      }
+      return await response.json();
+    } catch (error) {
+      if (error.name === 'TypeError') {
+        throw new Error('Network error. Please check your connection.');
+      }
+      throw error;
+    }
+  },
+
+  async getForecast(city) {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`
+      );
+      if (!response.ok) throw new Error('Failed to fetch forecast');
+      return await response.json();
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getWeatherByCoords(lat, lon) {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+      );
+      if (!response.ok) throw new Error('Failed to fetch weather');
+      return await response.json();
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async searchCities(query) {
+    try {
+      const response = await fetch(
+        `${GEO_URL}/direct?q=${query}&limit=5&appid=${API_KEY}`
+      );
+      if (!response.ok) throw new Error('Search failed');
+      return await response.json();
+    } catch (error) {
+      throw error;
+    }
+  }
+};</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: Geolocation with Fallback</h4>
+          <p>Request the user's location on page load. If denied, fall back to the last searched city from localStorage or a default city. Handle all geolocation error states.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>function getUserLocation() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error('Geolocation is not supported by this browser'));
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
+      },
+      (error) => {
+        let message = 'Failed to get location';
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            message = 'Location access was denied by the user';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            message = 'Location information is unavailable';
+            break;
+          case error.TIMEOUT:
+            message = 'The request to get user location timed out';
+            break;
+        }
+        reject(new Error(message));
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+    );
+  });
+}
+
+async function initializeWeather() {
+  showLoadingState();
+  try {
+    const lastCity = Storage.getLastCity();
+    if (lastCity) {
+      await loadWeatherData(lastCity);
+    } else {
+      try {
+        const coords = await getUserLocation();
+        const data = await WeatherAPI.getWeatherByCoords(coords.lat, coords.lon);
+        await loadWeatherData(data.name);
+      } catch {
+        await loadWeatherData('London');
+      }
+    }
+  } catch (error) {
+    showError(error.message);
+  } finally {
+    hideLoadingState();
+  }
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Interactive Charts with Chart.js</h4>
+          <p>Build temperature, humidity, and wind speed line charts from the 5-day forecast data. Use Chart.js plugins for zoom and crosshair functionality.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>let tempChart, humidityChart, windChart;
+
+function createTemperatureChart(labels, temps, unit) {
+  const ctx = document.getElementById('tempChart').getContext('2d');
+  if (tempChart) tempChart.destroy();
+  tempChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: `Temperature (${unit === 'metric' ? '°C' : '°F'})`,
+        data: temps,
+        borderColor: '#6c63ff',
+        backgroundColor: 'rgba(108,99,255,0.1)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 4,
+        pointBackgroundColor: '#6c63ff',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, position: 'top' },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.parsed.y}°${unit === 'metric' ? 'C' : 'F'}`
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { maxRotation: 45 } },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: {
+            callback: (v) => `${v}°${unit === 'metric' ? 'C' : 'F'}`
+          }
+        }
+      },
+      animation: {
+        duration: 1000,
+        easing: 'easeInOutQuart'
+      }
+    }
+  });
+}
+
+function createHumidityChart(labels, humidityData) {
+  const ctx = document.getElementById('humidityChart').getContext('2d');
+  if (humidityChart) humidityChart.destroy();
+  humidityChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Humidity (%)',
+        data: humidityData,
+        backgroundColor: 'rgba(56,189,248,0.6)',
+        borderColor: '#38bdf8',
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: {
+        legend: { display: true }
+      }
+    }
+  });
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Favorites with localStorage CRUD</h4>
+          <p>Implement full CRUD operations for favorite cities in localStorage. Render favorites as removable chips with click-to-load functionality.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const Storage = {
+  getFavorites() {
+    try {
+      return JSON.parse(localStorage.getItem('weather-favorites')) || [];
+    } catch {
+      return [];
+    }
+  },
+
+  addFavorite(city) {
+    const favorites = this.getFavorites();
+    const normalized = city.trim().toLowerCase();
+    if (!favorites.some(f => f.toLowerCase() === normalized)) {
+      if (favorites.length >= 10) {
+        showToast('Maximum 10 favorites allowed', 'warning');
+        return false;
+      }
+      favorites.push(city.trim());
+      localStorage.setItem('weather-favorites', JSON.stringify(favorites));
+      return true;
+    }
+    return false;
+  },
+
+  removeFavorite(city) {
+    const favorites = this.getFavorites();
+    const filtered = favorites.filter(f => f.toLowerCase() !== city.toLowerCase());
+    localStorage.setItem('weather-favorites', JSON.stringify(filtered));
+    return filtered;
+  },
+
+  getLastCity() {
+    return localStorage.getItem('weather-last-city') || null;
+  },
+
+  setLastCity(city) {
+    localStorage.setItem('weather-last-city', city);
+  },
+
+  getUnit() {
+    return localStorage.getItem('weather-unit') || 'metric';
+  },
+
+  setUnit(unit) {
+    localStorage.setItem('weather-unit', unit);
+  }
+};</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 5: Debounced Search with Autocomplete</h4>
+          <p>Implement a search input with debouncing to reduce API calls. Show autocomplete suggestions from the Geocoding API with a dropdown menu.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>function debounce(fn, delay = 500) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+const searchInput = document.getElementById('search-input');
+const suggestionsContainer = document.getElementById('suggestions');
+
+const handleSearch = debounce(async (query) => {
+  if (query.length < 2) {
+    suggestionsContainer.classList.remove('active');
+    return;
+  }
+  try {
+    const cities = await WeatherAPI.searchCities(query);
+    renderSuggestions(cities);
+  } catch (error) {
+    console.error('Search failed:', error);
+  }
+}, 400);
+
+searchInput.addEventListener('input', (e) => {
+  handleSearch(e.target.value);
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const query = e.target.value.trim();
+    if (query) loadWeatherData(query);
+    suggestionsContainer.classList.remove('active');
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-wrapper')) {
+    suggestionsContainer.classList.remove('active');
+  }
+});
+
+function renderSuggestions(cities) {
+  suggestionsContainer.innerHTML = cities.map(city => `
+    <div class="suggestion-item" data-lat="${city.lat}" data-lon="${city.lon}">
+      <i class="fas fa-map-marker-alt"></i>
+      <span>${city.name}, ${city.state || ''} ${city.country}</span>
+    </div>
+  `).join('');
+  suggestionsContainer.classList.add('active');
+  suggestionsContainer.querySelectorAll('.suggestion-item').forEach(item => {
+    item.addEventListener('click', () => {
+      loadWeatherByCoords(
+        parseFloat(item.dataset.lat),
+        parseFloat(item.dataset.lon)
+      );
+      suggestionsContainer.classList.remove('active');
+      searchInput.value = item.querySelector('span').textContent.split(',')[0];
+    });
+  });
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>API Testing:</strong> Test with valid city names ("London", "Tokyo", "New York"), invalid names ("Xyzabc"), empty input, and special characters. Verify error messages are user-friendly. Test API key expiry by using an invalid key. Use browser network throttling to test slow connections.</p>
+        <p><strong>Geolocation Testing:</strong> Test with location enabled, denied, and unavailable. Use Chrome DevTools Sensors panel to simulate different locations. Verify the fallback mechanism works when geolocation fails.</p>
+        <p><strong>localStorage Testing:</strong> Add 10+ favorites to verify the limit. Remove all favorites and verify the empty state. Clear localStorage and confirm the app initializes with a default city. Test across browser private/incognito modes.</p>
+        <p><strong>Chart Testing:</strong> Verify charts render with data, handle empty data arrays gracefully, and resize correctly on window resize. Test unit toggle (C/F) and confirm chart labels and tooltips update.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>API Key Security:</strong> Never commit API keys to GitHub. Use a .env file locally and configure environment variables on the hosting platform. For static sites, use a serverless proxy (Netlify Functions, Vercel Edge Functions) to forward API requests with the key stored on the server.</p>
+        <p><strong>Netlify Deployment:</strong> Create a netlify/functions/proxy.js file that forwards requests to OpenWeatherMap. Set the API key as a Netlify environment variable. Deploy by connecting your GitHub repository.</p>
+        <p><strong>Vercel Deployment:</strong> Create an api/proxy.js serverless function. Use @vercel/node runtime. Set the API key in Vercel project settings under Environment Variables. Deploy with vercel CLI or GitHub integration.</p>
+        <p><strong>GitHub Pages:</strong> For GitHub Pages, use a CORS proxy service like cors-anywhere or create a simple Cloudflare Worker that adds your API key to requests. Note that exposing the API key in client-side code is a security risk; always use a proxy.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. Exposing API Keys in Client-Side Code</strong><br>
+          Hardcoding your OpenWeatherMap API key in JavaScript files makes it visible to anyone who views your site's source code. Always use a serverless proxy function or environment variables. If using a free API tier, restrict the API key to specific domains in the OpenWeatherMap dashboard.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Not Handling API Rate Limits and Errors</strong><br>
+          Free OpenWeatherMap API plans have rate limits (60 calls/minute). Without error handling, exceeding this limit causes silent failures. Implement retry logic with exponential backoff, show user-friendly error messages, and cache responses aggressively to minimize API calls.
+        </div>
+        <div class="challenge-card">
+          <strong>3. Memory Leaks from Chart Instances</strong><br>
+          Creating new Chart.js instances without destroying previous ones causes memory leaks and duplicate charts. Always call chart.destroy() before creating a new chart instance. Use a single chart manager that tracks active instances and cleans up on component unmount or data refresh.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Incorrect Temperature Unit Conversion</strong><br>
+          OpenWeatherMap returns temperatures in Kelvin by default. Many developers forget to specify units=metric or units=imperial in their API requests, or they do the conversion incorrectly (converting from Kelvin instead of Celsius). Always use the API's built-in unit parameter to avoid manual conversion errors.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the difference between Promise.then() and async/await. When would you use each?<br>
+          <strong>A:</strong> Both handle asynchronous operations but differ in syntax. .then() chains are better for simple sequential operations and parallel execution with Promise.all(). async/await provides a synchronous-looking syntax that's more readable for complex logic with multiple dependent async calls, error handling with try/catch, and loops. In practice, async/await is preferred for most modern code because it reduces nesting and makes error handling more intuitive.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement caching for API responses to reduce network calls?<br>
+          <strong>A:</strong> Use a Map or WeakMap to store responses keyed by the request URL + parameters. Set a TTL (time-to-live) for each cache entry (e.g., 10 minutes for weather data). Check the cache before making a network request. Implement a cache eviction strategy (LRU or time-based). For more advanced caching, use the Cache API in service workers for offline support. Example: cache.set(city, { data, timestamp: Date.now() }) and check if (Date.now() - cached.timestamp < TTL) before returning cached data.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you handle CORS errors when making API requests from the browser?<br>
+          <strong>A:</strong> CORS errors occur when the API server doesn't include the appropriate Access-Control-Allow-Origin headers. Solutions: Use a proxy server (your own backend or a CORS proxy like cors-anywhere), use JSONP if the API supports it (limited to GET requests), or use serverless functions (Netlify Functions, Vercel Edge) that make the request server-side where CORS doesn't apply. For OpenWeatherMap, CORS is enabled by default for all origins.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What is the difference between localStorage and sessionStorage? When would you use each?<br>
+          <strong>A:</strong> localStorage persists data indefinitely with no expiration, even after the browser is closed. sessionStorage persists data only for the duration of the page session and is cleared when the tab is closed. Use localStorage for user preferences (favorite cities, theme, temperature unit). Use sessionStorage for temporary state like the last searched city during a browsing session, or for caching API responses that don't need to persist across sessions.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you make a third-party API call from a static site without exposing your API key?<br>
+          <strong>A:</strong> Use a serverless function as a proxy. On Netlify: create netlify/functions/weather.js that reads the API key from environment variables and forwards the request. On Vercel: create api/weather.js. On Cloudflare: create a Worker that adds the API key. The client makes requests to your own domain (e.g., /api/weather?city=London) and the serverless function adds the API key before forwarding to the third-party API. This keeps the key server-side and allows you to set domain restrictions.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Engineered a real-time weather dashboard using OpenWeatherMap API with async/await fetch patterns, achieving sub-500ms response times through aggressive caching strategies</li>
+          <li>Integrated Chart.js to render interactive temperature, humidity, and wind speed trend visualizations from 5-day forecast data with responsive resizing and animated transitions</li>
+          <li>Implemented Geolocation API with graceful fallback chain, error state handling for all permission scenarios, and reverse geocoding for city name resolution</li>
+          <li>Built a client-side persistence layer using localStorage with full CRUD operations for favorite cities, supporting up to 10 saved locations with deduplication</li>
+          <li>Designed a debounced search system with autocomplete suggestions using the OpenWeatherMap Geocoding API, reducing API calls by 60% through input debouncing</li>
+          <li>Secured API keys using Netlify serverless proxy functions with environment variable injection, preventing client-side exposure of sensitive credentials</li>
+          <li>Architected modular JavaScript with separate service, UI, storage, and chart modules following separation of concerns principles for maintainability and testability</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include a demo GIF, live link, API setup instructions, environment variable documentation, tech stack badges, and screenshots of the dashboard on different devices. Add a "Getting Started" section with API key registration steps.</p>
+        <p><strong>.env.example:</strong> Provide a template file showing required environment variables (VITE_API_KEY=your_key_here) without actual values. Add .env to .gitignore.</p>
+        <p><strong>Commit Messages:</strong> feat: add 5-day forecast chart, fix: handle geolocation permission denied, refactor: extract API service layer, docs: add deployment guide with serverless proxy setup.</p>
+        <p><strong>CI/CD:</strong> Set up GitHub Actions to run ESLint checks, verify API response structure with mock tests, and deploy to Netlify on merge to main. Add a status badge to the README.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Weather Alerts:</strong> Integrate the OpenWeatherMap One Call API to get severe weather alerts. Implement push notifications using the Notification API to alert users of weather warnings for their saved cities.</li>
+          <li><strong>Historical Data:</strong> Use the OpenWeatherMap History API to display historical weather data. Add a date range picker and charts showing temperature trends over weeks or months. Store historical queries in IndexedDB for offline access.</li>
+          <li><strong>Air Quality Index:</strong> Integrate the OpenWeatherMap Air Pollution API to display AQI data alongside weather info. Add color-coded indicators (green for good, red for hazardous) and health recommendations based on AQI levels.</li>
+          <li><strong>Multi-language Support:</strong> Add i18n support using the language parameter in OpenWeatherMap API calls. Implement a language switcher that changes UI text and weather descriptions (the API returns descriptions in multiple languages).</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://openweathermap.org/api" target="_blank">OpenWeatherMap API Docs</a> - API reference with endpoints and parameters</li>
+          <li><a href="https://www.chartjs.org/docs/latest/" target="_blank">Chart.js Documentation</a> - Chart configuration and options</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API" target="_blank">MDN Geolocation API</a> - Browser geolocation reference</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">MDN localStorage</a> - Client-side storage API</li>
+          <li><a href="https://www.netlify.com/products/functions/" target="_blank">Netlify Functions</a> - Serverless functions for API proxying</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function" target="_blank">MDN async/await</a> - Async function reference</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="personal-portfolio.html" class="btn btn-ghost">Personal Portfolio</a>
+          <a href="todo-list.html" class="btn btn-ghost">To-Do List App</a>
+          <a href="chat-app.html" class="btn btn-ghost">Chat App</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="personal-portfolio.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: Personal Portfolio</a>
+        <a href="todo-list.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

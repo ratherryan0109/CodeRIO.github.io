@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - CodeRio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .faq-search { max-width: 600px; margin: 0 auto 2.5rem; }
+        .faq-search .search-wrapper { display: flex; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(99,102,241,0.25); border-radius: 12px; padding: 0.2rem 0.2rem 0.2rem 1rem; }
+        .faq-search .search-wrapper i { color: #64748b; }
+        .faq-search input { flex: 1; border: none; background: transparent; padding: 1rem 0.75rem; color: #f1f5f9; font-size: 1rem; outline: none; }
+        .faq-search input::placeholder { color: #64748b; }
+        .faq-categories { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
+        .faq-cat-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: #94a3b8; padding: 0.6rem 1.25rem; border-radius: 50px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
+        .faq-cat-btn:hover { border-color: rgba(99,102,241,0.3); color: #e2e8f0; }
+        .faq-cat-btn.active { background: rgba(99,102,241,0.15); border-color: #6366f1; color: #a5b4fc; }
+        .faq-list { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1.25rem 0; background: none; border: none; color: #e2e8f0; font-size: 1.05rem; text-align: left; cursor: pointer; transition: color 0.2s; }
+        .faq-question:hover { color: #818cf8; }
+        .faq-question i { transition: transform 0.3s; font-size: 0.85rem; color: #64748b; }
+        .faq-item.open .faq-question i { transform: rotate(180deg); color: #818cf8; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0; }
+        .faq-answer-inner { padding-bottom: 1.25rem; color: #94a3b8; line-height: 1.8; }
+        .no-results { text-align: center; padding: 3rem; color: #64748b; display: none; }
+        .no-results i { font-size: 3rem; margin-bottom: 1rem; display: block; }
+        .faq-category-section { margin-bottom: 2.5rem; }
+        .faq-category-section h3 { font-size: 1.3rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    </style>
+</head>
+<body data-page="FAQ">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon"><i class="fas fa-code"></i></span>
+            CodeRio
+        </div>
+        <button class="mobile-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Learn.html">Learn</a></li>
+            <li><a href="Practice.html">Practice</a></li>
+            <li><a href="Projects.html">Projects</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="auth/profile.html">Profile</a></li>
+        </ul>
+        <div class="nav-auth">
+            <a href="Login.html" class="btn btn-ghost btn-sm">Log In</a>
+            <a href="Register.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Frequently Asked <span class="gradient-text">Questions</span></h1>
+                <p>Find answers to common questions about CodeRio</p>
+            </div>
+        </section>
+
+        <section class="section faq-section">
+            <div class="container">
+                <div class="faq-search">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="faqSearch" placeholder="Search FAQs..." oninput="filterFAQ(this.value)">
+                        <button class="btn btn-primary" style="border-radius:8px;padding:0.6rem 1.2rem;" onclick="document.getElementById('faqSearch').value='';filterFAQ('')"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+
+                <div class="faq-categories">
+                    <button class="faq-cat-btn active" onclick="filterCategory('all', this)">All</button>
+                    <button class="faq-cat-btn" onclick="filterCategory('general', this)">General</button>
+                    <button class="faq-cat-btn" onclick="filterCategory('learning', this)">Learning</button>
+                    <button class="faq-cat-btn" onclick="filterCategory('technical', this)">Technical</button>
+                    <button class="faq-cat-btn" onclick="filterCategory('account', this)">Account</button>
+                    <button class="faq-cat-btn" onclick="filterCategory('dashboard', this)">Dashboard</button>
+                </div>
+
+                <div class="no-results" id="noResults">
+                    <i class="fas fa-search"></i>
+                    <p>No results found. Try a different search term.</p>
+                </div>
+
+                <div class="faq-list" id="faqList">
+                    <div class="faq-category-section" data-category="general">
+                        <h3><i class="fas fa-info-circle" style="color:#6366f1;"></i> General</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">What is CodeRio? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">CodeRio is an interactive coding education platform designed to help developers learn programming through hands-on courses, practice challenges, real-world projects, and a supportive community. Whether you're a beginner or an experienced developer, CodeRio provides structured learning paths, coding exercises, and mentorship opportunities to accelerate your growth.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Is CodeRio free to use? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes! CodeRio offers a generous free tier that includes access to introductory courses, practice challenges, community forums, and basic progress tracking. Premium subscriptions unlock advanced courses, unlimited practice, mentorship, offline access, and priority support. You can upgrade at any time from your account settings.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Who is CodeRio for? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">CodeRio is designed for learners of all levels: complete beginners starting their coding journey, students supplementing their computer science education, professionals looking to upskill or switch careers, and experienced developers wanting to stay current with new technologies. Our content ranges from HTML/CSS basics to advanced system design and AI/ML topics.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How is CodeRio different from other platforms? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">CodeRio combines structured courses with hands-on practice and real projects in a single platform. Our unique features include adaptive learning paths, a built-in typing lab for coding speed, peer collaboration on projects, mentorship programs, and gamification that makes learning engaging. We focus on practical, job-ready skills rather than just theory.</div></div>
+                        </div>
+                    </div>
+
+                    <div class="faq-category-section" data-category="learning">
+                        <h3><i class="fas fa-graduation-cap" style="color:#6366f1;"></i> Learning</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">How do learning paths work? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Learning paths are curated sequences of courses and challenges designed to take you from beginner to advanced in a specific domain. Each path is split into milestones with clear learning objectives. You can follow a path sequentially or jump to specific topics based on your existing knowledge. Your progress is saved automatically as you complete each step.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Can I switch between learning paths? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Absolutely! You can enroll in multiple learning paths simultaneously and switch between them at any time. Your progress is tracked independently for each path. We recommend focusing on one path at a time for best results, but you're free to explore different topics as your interests evolve.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How are courses structured? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Each course is divided into modules, which contain multiple lessons. Lessons include video content or readings, interactive code examples, and coding exercises. Modules end with quizzes, and courses culminate in a final project. You earn XP and badges as you complete each component.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Do you offer certificates? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes! Upon completing a course or learning path, you receive a certificate of completion that can be shared on LinkedIn or added to your resume. Premium subscribers receive verified certificates with unique credentials that employers can validate.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How much time should I spend daily? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">We recommend at least 30 minutes of focused practice daily for optimal progress. Our learning paths are designed with this in mind, with lessons typically taking 15-45 minutes to complete. Consistency matters more than duration, so even short daily sessions lead to significant progress over time.</div></div>
+                        </div>
+                    </div>
+
+                    <div class="faq-category-section" data-category="technical">
+                        <h3><i class="fas fa-cog" style="color:#6366f1;"></i> Technical</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">What programming languages are supported? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">CodeRio supports Python, JavaScript, TypeScript, Java, C++, C#, Go, Rust, Ruby, PHP, Swift, Kotlin, and SQL. Our code runner and interactive editor work with all supported languages. We regularly add new languages based on community demand.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Do I need to install anything? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">No installation is required for most features. Our in-browser code editor lets you write, run, and debug code directly in your browser. For project-based courses that require local development, we provide setup guides for your preferred operating system.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">What browsers are supported? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">CodeRio works best on the latest versions of Chrome, Firefox, Safari, and Edge. We recommend keeping your browser updated for the best experience. The platform is fully responsive and works on desktop, tablet, and mobile devices.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How does the code runner work? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Our code runner executes your code in secure, isolated containers on our servers. It supports standard input/output and includes common libraries and frameworks. Execution time is limited to ensure fair usage, with generous limits for most exercises. The runner provides detailed error messages to help you debug.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Is my code saved automatically? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes! Your code is automatically saved as you type in our editor. You can also manually save versions of your code. All your submissions and solutions are stored in your account and accessible from your code history dashboard.</div></div>
+                        </div>
+                    </div>
+
+                    <div class="faq-category-section" data-category="account">
+                        <h3><i class="fas fa-user" style="color:#6366f1;"></i> Account</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">How do I create an account? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Click the "Sign Up" button in the top right corner. You can register with your email address or use Google/GitHub OAuth for quick sign-up. Verify your email to activate your account. The entire process takes less than 2 minutes.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How do I reset my password? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Click "Log In" and then select "Forgot Password." Enter your registered email address, and we'll send you a password reset link. The link expires after 1 hour for security reasons. If you don't receive the email, check your spam folder.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Can I delete my account? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes. Go to your account settings and select "Delete Account." You'll be asked to confirm and provide a reason for leaving. After confirmation, your data will be permanently deleted within 30 days. Note that this action cannot be undone.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How do subscriptions work? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Subscriptions are billed monthly or annually. Premium plans unlock unlimited practice, advanced courses, mentorship, offline access, and priority support. You can upgrade, downgrade, or cancel anytime from your account settings. Annual plans offer a discount compared to monthly billing.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Can I change my email address? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes. Navigate to your profile settings and update your email address. You'll need to verify the new email before the change takes effect. Your account data and progress remain intact during the change.</div></div>
+                        </div>
+                    </div>
+
+                    <div class="faq-category-section" data-category="dashboard">
+                        <h3><i class="fas fa-chart-bar" style="color:#6366f1;"></i> Dashboard</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">How is my progress tracked? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Your dashboard tracks courses completed, challenges solved, projects built, XP earned, streak days, and skill proficiency across different domains. Each course shows lesson-by-lesson completion status. Progress data is updated in real-time as you learn.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">What are XP and streaks? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">XP (Experience Points) are earned by completing lessons, challenges, and projects. They contribute to your level and leaderboard ranking. Streaks track consecutive days you've completed at least one learning activity. Longer streaks unlock special badges and bonus XP multipliers.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">How do I view my skill radar? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Your skill radar chart is displayed on your dashboard. It visualizes your proficiency across categories like algorithms, data structures, web development, databases, and system design. The chart updates as you complete relevant exercises and assessments.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Can I compare my progress with others? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Yes! Your dashboard includes optional leaderboard features. You can compare XP, streaks, and challenge completion rates with friends or the global community. Leaderboard participation is opt-in, and you can set your privacy preferences in account settings.</div></div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">What are the achievement badges? <i class="fas fa-chevron-down"></i></button>
+                            <div class="faq-answer"><div class="faq-answer-inner">Badges are awarded for specific accomplishments: completing your first course, solving 100 challenges, maintaining a 30-day streak, helping other users in forums, and more. Badges appear on your profile and dashboard. Collecting all badges in a category unlocks a special trophy.</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const answer = q.nextElementSibling;
+                const isOpen = answer.style.maxHeight;
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    q.closest('.faq-item').classList.add('open');
+                }
+            });
+        });
+
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.faq-category-section').forEach(s => {
+                s.style.display = category === 'all' || s.dataset.category === category ? 'block' : 'none';
+            });
+            document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            document.getElementById('noResults').style.display = 'none';
+        }
+
+        function filterFAQ(query) {
+            const q = query.toLowerCase().trim();
+            let hasVisible = false;
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer-inner').textContent.toLowerCase();
+                const match = question.includes(q) || answer.includes(q);
+                item.style.display = match ? '' : 'none';
+                if (match) hasVisible = true;
+            });
+            document.querySelectorAll('.faq-category-section').forEach(s => {
+                const visibleItems = s.querySelectorAll('.faq-item[style*="display: none"]');
+                const total = s.querySelectorAll('.faq-item').length;
+                s.style.display = visibleItems.length === total ? 'none' : 'block';
+            });
+            document.getElementById('noResults').style.display = hasVisible ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>

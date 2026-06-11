@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn HTML Paragraphs: p tag, line breaks, horizontal rules, preformatted text">
+  <title>HTML Paragraphs – CodeRio</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/courses.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body data-page="Lesson" data-course="html" data-lesson="05">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../../index.html" class="logo">
+        <span class="logo-icon">&lt;/&gt;</span> CodeRio
+      </a>
+      <div class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../../Learn.html"><i class="fas fa-book"></i> Learn</a></li>
+        <li><a href="../../Practice.html"><i class="fas fa-code"></i> Practice</a></li>
+        <li><a href="../../Projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+        <li><a href="../../About.html"><i class="fas fa-info-circle"></i> About</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="../../login.html" class="btn btn-ghost">Log In</a>
+        <a href="../../signup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="toastContainer"></div>
+
+  <div class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-hero-content">
+        <h1>HTML Paragraphs</h1>
+        <div class="lesson-meta">
+          <span><i class="fas fa-signal"></i> Beginner</span>
+          <span><i class="far fa-clock"></i> 40 min</span>
+          <span><i class="fas fa-list"></i> Module 5 of 14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-body">
+      <div class="lesson-section">
+        <h2><i class="fas fa-bullseye" style="color:var(--primary)"></i> Learning Objectives</h2>
+        <ul class="objective-list">
+          <li>Use the <code>&lt;p&gt;</code> tag to create paragraphs</li>
+          <li>Add line breaks with <code>&lt;br&gt;</code> and horizontal rules with <code>&lt;hr&gt;</code></li>
+          <li>Preserve whitespace and formatting with <code>&lt;pre&gt;</code></li>
+          <li>Understand how the browser collapses whitespace in paragraphs</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-book-open" style="color:var(--primary)"></i> Paragraphs Explained</h2>
+        <div class="analogy-box">
+          <i class="fas fa-lightbulb"></i>
+          <strong>Think of it like this:</strong>
+          <p>A paragraph in HTML is like a <strong>paragraph in a book</strong>. It is a block of text that forms a complete thought. The <code>&lt;p&gt;</code> tag wraps that block. Just as a book has paragraphs separated by blank lines, your HTML paragraphs automatically get spacing between them. If you want a new line <em>within</em> the same paragraph (like a line in a poem), you use <code>&lt;br&gt;</code> — imagine that as pressing Shift+Enter in a word processor instead of Enter.</p>
+        </div>
+        <p>The <code>&lt;p&gt;</code> tag is one of the most commonly used HTML elements. It is a block-level element, meaning each paragraph starts on a new line and takes the full width available. Browsers automatically add margin above and below paragraphs to create visual separation. One common gotcha: HTML <strong>collapses whitespace</strong> — if you write ten spaces between words or add multiple blank lines in your code, the browser will only show one space. This is called <strong>whitespace collapsing</strong>.</p>
+        <p>To control text layout more precisely, HTML gives you two helper elements: <code>&lt;br&gt;</code> (line break) and <code>&lt;hr&gt;</code> (horizontal rule). The <code>&lt;br&gt;</code> tag forces a line break without starting a new paragraph — useful for addresses, poems, or song lyrics. The <code>&lt;hr&gt;</code> tag draws a thematic line across the page, signaling a shift in topic. Both are void elements (no closing tag). For text where spacing matters exactly as written, use <code>&lt;pre&gt;</code> (preformatted text) — it preserves every space, tab, and line break.</p>
+      </div>
+
+      <div class="lesson-section glass-card diagram-box">
+        <h2><i class="fas fa-diagram-project" style="color:var(--primary)"></i> Visual Diagram</h2>
+        <div class="diagram">
+          <div style="border:2px solid var(--primary);padding:1rem;border-radius:8px;">
+            <div style="background:#f0f4ff;padding:0.5rem;border-radius:4px;margin-bottom:0.5rem;">
+              <strong>&lt;p&gt;First paragraph&lt;/p&gt;</strong>
+              <div style="height:16px;background:transparent;border-left:2px dashed #ccc;margin:0.5rem 0;"></div>
+              <strong>&lt;p&gt;Second paragraph&lt;/p&gt;</strong>
+              <div style="display:flex;gap:1rem;align-items:center;margin-top:0.5rem;">
+                <span style="background:var(--warning);color:#000;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;">&lt;br&gt;</span>
+                <span style="font-size:0.8rem;color:var(--text-muted)">→ line break (no spacing)</span>
+              </div>
+              <div style="display:flex;gap:1rem;align-items:center;margin-top:0.3rem;">
+                <span style="background:var(--secondary);color:#fff;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;">&lt;hr&gt;</span>
+                <span style="font-size:0.8rem;color:var(--text-muted)">→ horizontal rule (thematic break)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-seedling" style="color:var(--success)"></i> Beginner Example</h2>
+        <pre><code>&lt;p&gt;This is a paragraph. It can contain multiple sentences. The browser will wrap the text automatically when it reaches the edge of the screen.&lt;/p&gt;
+&lt;p&gt;This is another paragraph. Notice the space between them.&lt;/p&gt;
+&lt;p&gt;This line has a &lt;br&gt; line break in the middle.&lt;/p&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 1-2:</strong> Two separate <code>&lt;p&gt;</code> elements. The browser adds vertical space between them automatically — no need for extra <code>&lt;br&gt;</code> tags.</li>
+            <li><strong>Line 3:</strong> A <code>&lt;br&gt;</code> inside a paragraph forces the text after it to the next line, but it stays within the same paragraph (no extra paragraph spacing).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--warning)"></i> Intermediate Example</h2>
+        <pre><code>&lt;p&gt;Here is an address:&lt;/p&gt;
+&lt;p&gt;
+  John Doe&lt;br&gt;
+  123 Main Street&lt;br&gt;
+  New York, NY 10001&lt;br&gt;
+  USA
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;This section discusses our services.&lt;/p&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 4-7:</strong> An address formatted with <code>&lt;br&gt;</code> after each line. Each line is part of the same paragraph but appears on its own line.</li>
+            <li><strong>Line 8:</strong> <code>&lt;hr&gt;</code> draws a horizontal line across the page and creates a thematic break between the address and the next section.</li>
+            <li><strong>Line 9:</strong> A new paragraph after the hr. The hr provides visual separation without needing to start a new section.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-crown" style="color:var(--primary)"></i> Advanced Example</h2>
+        <pre><code>&lt;p&gt;In JavaScript, you can define a function like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function greet(name) {
+    console.log("Hello, " + name + "!");
+    return true;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;Poem:&lt;/p&gt;
+&lt;p&gt;
+  The woods are lovely, dark and deep,&lt;br&gt;
+  But I have promises to keep,&lt;br&gt;
+  And miles to go before I sleep,&lt;br&gt;
+  And miles to go before I sleep.
+&lt;/p&gt;</code></pre>
+        <div class="code-explanation">
+          <h4>Line-by-Line Explanation:</h4>
+          <ul>
+            <li><strong>Lines 3-7:</strong> <code>&lt;pre&gt;</code> preserves the indentation, spaces, and line breaks exactly as written. The <code>&lt;code&gt;</code> inside marks it as computer code. Without <code>&lt;pre&gt;</code>, the indentation would be collapsed.</li>
+            <li><strong>Line 9:</strong> <code>&lt;hr&gt;</code> separates the code example from the poem — two completely different types of content.</li>
+            <li><strong>Lines 11-14:</strong> A poem using <code>&lt;br&gt;</code> for line breaks inside a single paragraph. Each line break is intentional and keeps the poem as one semantic block of text.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-dumbbell" style="color:var(--primary)"></i> Exercises</h2>
+        <div class="exercise-list">
+          <div class="exercise-item">
+            <span class="exercise-number">1</span>
+            <p>Write three paragraphs about your favorite TV show. Use separate <code>&lt;p&gt;</code> tags for each paragraph.</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">2</span>
+            <p>Create a "Contact Us" section with an address using <code>&lt;br&gt;</code> tags. Add an <code>&lt;hr&gt;</code> before and after the address.</p>
+            <span class="badge badge-success">Easy</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">3</span>
+            <p>Write a short poem (4 lines) inside a single <code>&lt;p&gt;</code> tag using <code>&lt;br&gt;</code> for each line break.</p>
+            <span class="badge badge-info">Medium</span>
+          </div>
+          <div class="exercise-item">
+            <span class="exercise-number">4</span>
+            <p>Use <code>&lt;pre&gt;</code> to display a simple ASCII art or a code snippet with proper indentation. Compare how it looks with and without the <code>&lt;pre&gt;</code> tag.</p>
+            <span class="badge badge-warning">Challenging</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Quick Quiz</h2>
+        <div class="quiz-container">
+          <div class="quiz-question" data-q="0">
+            <p><strong>1. What is whitespace collapsing in HTML?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q0" value="a"> A) The browser deletes all spaces and newlines</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="b"> B) Multiple spaces and newlines are reduced to a single space</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="c"> C) Only newlines are removed, spaces are kept</label>
+              <label class="quiz-option"><input type="radio" name="q0" value="d"> D) Spaces are converted to tabs</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="1">
+            <p><strong>2. Which tag preserves whitespace exactly as written?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q1" value="a"> A) &lt;p&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="b"> B) &lt;div&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="c"> C) &lt;pre&gt;</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="d"> D) &lt;span&gt;</label>
+            </div>
+          </div>
+          <div class="quiz-question" data-q="2">
+            <p><strong>3. What does the &lt;hr&gt; tag do?</strong></p>
+            <div class="quiz-options">
+              <label class="quiz-option"><input type="radio" name="q2" value="a"> A) Adds a line break</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="b"> B) Creates a horizontal rule (thematic break)</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="c"> C) Highlights text in red</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="d"> D) Creates a new paragraph</label>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="checkQuiz()">Check Answers</button>
+          <div id="quizResult" style="margin-top:1rem"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-tasks" style="color:var(--primary)"></i> Assignment</h2>
+        <p>Create an "About Our Company" page that demonstrates everything you learned about text formatting. Include: a welcome paragraph, a section with the company address (using br tags), a horizontal rule separating mission and vision, a code snippet inside pre tags showing your company's values in a creative format, and a closing paragraph. Use at least one br for a line break within a paragraph and one hr for a thematic break. Save as <code>about-company.html</code>.</p>
+        <div class="assignment-hints">
+          <h4>Hints:</h4>
+          <ul>
+            <li>Remember that <code>&lt;br&gt;</code> and <code>&lt;hr&gt;</code> are void elements — they have no closing tag.</li>
+            <li>You can use <code>&lt;pre&gt;</code> to create ASCII art, a styled quote, or a creative company motto with specific spacing.</li>
+            <li>To see the difference whitespace collapsing makes, write the same text in a <code>&lt;p&gt;</code> and a <code>&lt;pre&gt;</code> side by side.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-user-tie" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">Q: What is the difference between &lt;br&gt; and &lt;p&gt; for creating space between lines? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p><code>&lt;br&gt;</code> creates a line break within the same paragraph — it adds a new line but no extra spacing. <code>&lt;p&gt;</code> creates a new paragraph with top and bottom margins (spacing) applied by the browser. Use <code>&lt;p&gt;</code> for separate blocks of text and <code>&lt;br&gt;</code> for single-line breaks inside a block.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: Why does my text not show multiple spaces even though I typed them in HTML? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>HTML collapses whitespace — any sequence of spaces, tabs, or newlines in the source code is rendered as a single space in the browser. This is by design to let you format your code without affecting the visual output. Use <code>&amp;nbsp;</code> (non-breaking space) or <code>&lt;pre&gt;</code> if you need to preserve multiple spaces.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Q: When should I use &lt;hr&gt;? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><p>Use <code>&lt;hr&gt;</code> to indicate a thematic shift between sections of content. For example, between chapters in a story, between a blog post and its comments, or between different topics on a page. It is semantic, not just decorative. Do not use it purely for styling — that is what CSS borders are for.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <ul>
+          <li><strong>Using &lt;br&gt; to create space between paragraphs:</strong> Instead of <code>&lt;p&gt;A&lt;/p&gt;&lt;br&gt;&lt;br&gt;&lt;p&gt;B&lt;/p&gt;</code>, just use two separate <code>&lt;p&gt;</code> tags. The browser adds spacing automatically.</li>
+          <li><strong>Forgetting that &lt;br&gt; is a void element:</strong> Writing <code>&lt;br&gt;&lt;/br&gt;</code> is wrong. Just use <code>&lt;br&gt;</code>.</li>
+          <li><strong>Relying on &lt;hr&gt; for decoration:</strong> The <code>&lt;hr&gt;</code> tag is semantic — it represents a thematic break. For decorative lines, use CSS borders instead.</li>
+          <li><strong>Assuming &lt;pre&gt; is only for code:</strong> While <code>&lt;pre&gt;</code> is great for code, it can also display ASCII art, formatted letters, or any text where whitespace matters.</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Additional Resources</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p" target="_blank">MDN: &lt;p&gt; Element</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr" target="_blank">MDN: &lt;hr&gt; Element</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre" target="_blank">MDN: &lt;pre&gt; Element</a></li>
+        </ul>
+      </div>
+
+      <div class="lesson-section glass-card">
+        <h2><i class="fas fa-video" style="color:var(--primary)"></i> Recommended Videos</h2>
+        <div class="video-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg?start=1200" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>HTML Text Formatting</h4>
+              <p>freeCodeCamp • Beginner</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <iframe src="https://www.youtube.com/embed/mJgBOIoGihA?start=500" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <h4>HTML Paragraphs and Text Elements</h4>
+              <p>Traversy Media • Beginner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-navigation">
+        <a href="04-headings.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous</a>
+        <a href="06-links.html" class="btn btn-primary">Next <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../../index.html">Home</a></li><li><a href="../../Learn.html">Learn</a></li><li><a href="../../Practice.html">Practice</a></li><li><a href="../../Projects.html">Projects</a></li><li><a href="../../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../../faq.html">FAQ</a></li><li><a href="../../privacy-policy.html">Privacy Policy</a></li><li><a href="../../terms-of-service.html">Terms of Service</a></li><li><a href="../../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/learning.js"></script>
+
+  <script>
+    function checkQuiz() {
+      let score = 0;
+      if (document.querySelector('input[name="q0"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'c') score++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'b') score++;
+      let msg = 'You scored ' + score + '/3';
+      if (score === 3) msg += ' 🎉 Perfect!';
+      else if (score >= 2) msg += ' 👍 Good job!';
+      else msg += ' 💪 Keep practicing!';
+      document.getElementById('quizResult').innerHTML = '<div class="alert alert-info">' + msg + '</div>';
+    }
+
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        const isOpen = answer.style.maxHeight;
+        document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+        if (!isOpen) answer.style.maxHeight = answer.scrollHeight + 'px';
+      });
+    });
+  </script>
+</body>
+</html>

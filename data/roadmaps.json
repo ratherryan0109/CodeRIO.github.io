@@ -1,0 +1,162 @@
+[
+  {
+    "id": "frontend",
+    "title": "Frontend Development",
+    "description": "Complete roadmap to becoming a frontend developer. Learn HTML, CSS, JavaScript, frameworks, and modern tooling.",
+    "steps": [
+      { "title": "HTML Fundamentals", "description": "Learn semantic HTML5, document structure, forms, and accessibility best practices.", "resources": ["MDN Web Docs", "freeCodeCamp", "HTML.com"] },
+      { "title": "CSS Styling", "description": "Master CSS selectors, box model, flexbox, grid, animations, and responsive design.", "resources": ["CSS-Tricks", "Kevin Powell", "Web.dev"] },
+      { "title": "JavaScript Basics", "description": "Variables, functions, DOM manipulation, events, and ES6+ features.", "resources": ["JavaScript.info", "FreeCodeCamp", "Traversy Media"] },
+      { "title": "Version Control (Git)", "description": "Learn Git basics, branching, merging, pull requests, and GitHub workflows.", "resources": ["GitHub Skills", "Atlassian Git"] },
+      { "title": "Package Managers", "description": "NPM, Yarn, and package.json management.", "resources": ["npm docs", "Yarn docs"] },
+      { "title": "CSS Frameworks", "description": "Tailwind CSS, Bootstrap, or utility-first CSS approaches.", "resources": ["Tailwind Docs", "Bootstrap Docs"] },
+      { "title": "JavaScript Frameworks", "description": "React, Vue, or Angular - choose one framework and master it.", "resources": ["React Docs", "Vue Docs", "Angular Docs"] },
+      { "title": "State Management", "description": "Redux, Zustand, Pinia, or Context API for state management.", "resources": ["Redux Docs", "Zustand"] },
+      { "title": "Testing", "description": "Jest, React Testing Library, Cypress, and testing strategies.", "resources": ["Jest Docs", "Cypress Docs"] },
+      { "title": "Build Tools", "description": "Webpack, Vite, Babel, and modern build tooling.", "resources": ["Vite Docs", "Webpack Docs"] },
+      { "title": "TypeScript", "description": "Static typing, interfaces, generics, and TypeScript with React.", "resources": ["TypeScript Docs", "TypeScript Handbook"] },
+      { "title": "Performance Optimization", "description": "Lazy loading, code splitting, caching, and Core Web Vitals.", "resources": ["Web.dev", "Lighthouse"] },
+      { "title": "Deployment", "description": "Vercel, Netlify, CI/CD pipelines, and hosting.", "resources": ["Vercel Docs", "Netlify Docs"] },
+      { "title": "Build a Portfolio", "description": "Create a portfolio website showcasing your projects and skills." }
+    ]
+  },
+  {
+    "id": "backend",
+    "title": "Backend Development",
+    "description": "Complete roadmap to becoming a backend developer. Master server-side programming, databases, and APIs.",
+    "steps": [
+      { "title": "Programming Language", "description": "Choose a backend language: Node.js, Python, Java, Go, or Rust.", "resources": ["Node.js", "Python", "Java"] },
+      { "title": "Version Control", "description": "Git, GitHub, branching strategies, and collaboration workflows.", "resources": ["GitHub Skills"] },
+      { "title": "Databases", "description": "Learn SQL (PostgreSQL) and NoSQL (MongoDB) databases.", "resources": ["PostgreSQL Docs", "MongoDB Docs"] },
+      { "title": "APIs", "description": "RESTful API design, GraphQL, and API documentation.", "resources": ["REST API Tutorial", "GraphQL Docs"] },
+      { "title": "Authentication", "description": "JWT, OAuth, session management, and security best practices.", "resources": ["Auth0 Docs", "JWT.io"] },
+      { "title": "Caching", "description": "Redis, CDN caching, and caching strategies.", "resources": ["Redis Docs"] },
+      { "title": "Testing", "description": "Unit testing, integration testing, and TDD.", "resources": ["Jest", "Mocha"] },
+      { "title": "Docker & Containers", "description": "Containerization, Docker Compose, and container orchestration.", "resources": ["Docker Docs"] },
+      { "title": "CI/CD", "description": "Continuous integration and deployment pipelines.", "resources": ["GitHub Actions", "Jenkins"] },
+      { "title": "Cloud Services", "description": "AWS, GCP, or Azure fundamentals.", "resources": ["AWS Docs", "GCP Docs"] },
+      { "title": "Microservices", "description": "Microservices architecture, message queues, and service communication.", "resources": ["Microservices.io"] },
+      { "title": "Monitoring & Logging", "description": "Application monitoring, logging, and alerting.", "resources": ["Datadog", "Grafana"] }
+    ]
+  },
+  {
+    "id": "fullstack",
+    "title": "Full Stack Development",
+    "description": "Complete roadmap to becoming a full stack developer. Master both frontend and backend technologies.",
+    "steps": [
+      { "title": "Frontend Basics", "description": "HTML, CSS, and JavaScript fundamentals.", "resources": ["MDN Web Docs", "FreeCodeCamp"] },
+      { "title": "Frontend Framework", "description": "React, Vue, or Angular for building user interfaces.", "resources": ["React Docs", "Vue Docs"] },
+      { "title": "Backend Language", "description": "Node.js with Express or Python with Django/Flask.", "resources": ["Express Docs", "Django Docs"] },
+      { "title": "Databases", "description": "PostgreSQL and MongoDB - both SQL and NoSQL.", "resources": ["PostgreSQL Docs", "MongoDB Docs"] },
+      { "title": "Authentication", "description": "JWT, sessions, and social authentication.", "resources": ["Auth0", "NextAuth"] },
+      { "title": "APIs", "description": "REST and GraphQL API development.", "resources": ["REST API Tutorial", "GraphQL"] },
+      { "title": "Deployment", "description": "Vercel, Netlify, AWS, or Docker deployment.", "resources": ["Vercel", "Docker"] },
+      { "title": "Full Stack Project", "description": "Build a complete application with authentication, database, and deployment." }
+    ]
+  },
+  {
+    "id": "ai",
+    "title": "Artificial Intelligence",
+    "description": "Complete roadmap to learning AI development. Master machine learning, deep learning, and AI engineering.",
+    "steps": [
+      { "title": "Mathematics", "description": "Linear algebra, calculus, probability, and statistics.", "resources": ["Khan Academy", "3Blue1Brown"] },
+      { "title": "Python for AI", "description": "Python programming with NumPy, Pandas, and visualization libraries.", "resources": ["Python.org", "NumPy Docs"] },
+      { "title": "Machine Learning", "description": "Supervised, unsupervised learning, and model evaluation.", "resources": ["Scikit-learn Docs", "Coursera ML"] },
+      { "title": "Deep Learning", "description": "Neural networks, CNNs, RNNs, and transformers.", "resources": ["TensorFlow Docs", "PyTorch Docs"] },
+      { "title": "NLP", "description": "Natural language processing with transformers and LLMs.", "resources": ["Hugging Face", "NLP Course"] },
+      { "title": "Computer Vision", "description": "Image processing, object detection, and image generation.", "resources": ["OpenCV", "PyTorch Vision"] },
+      { "title": "MLOps", "description": "Model deployment, monitoring, and ML pipeline management.", "resources": ["MLflow", "Kubeflow"] },
+      { "title": "LLM Engineering", "description": "Prompt engineering, RAG, fine-tuning, and AI agents.", "resources": ["LangChain", "OpenAI Docs"] }
+    ]
+  },
+  {
+    "id": "datascience",
+    "title": "Data Science",
+    "description": "Complete roadmap to becoming a data scientist. Master data analysis, statistics, and machine learning.",
+    "steps": [
+      { "title": "Mathematics & Statistics", "description": "Statistical analysis, probability, and linear algebra.", "resources": ["Khan Academy", "StatQuest"] },
+      { "title": "Python Programming", "description": "Python with NumPy, Pandas, and visualization.", "resources": ["Python.org", "Pandas Docs"] },
+      { "title": "Data Wrangling", "description": "Data cleaning, transformation, and feature engineering.", "resources": ["Pandas Docs", "Kaggle"] },
+      { "title": "Data Visualization", "description": "Matplotlib, Seaborn, Plotly, and Tableau.", "resources": ["Matplotlib Docs", "Tableau"] },
+      { "title": "SQL for Data", "description": "Advanced SQL queries, aggregations, and window functions.", "resources": ["Mode SQL Tutorial"] },
+      { "title": "Machine Learning", "description": "Scikit-learn, model selection, and evaluation.", "resources": ["Scikit-learn Docs"] },
+      { "title": "Big Data Tools", "description": "Spark, Hadoop, and distributed computing.", "resources": ["Spark Docs"] },
+      { "title": "Data Engineering", "description": "ETL pipelines, data warehousing, and data lakes.", "resources": ["Airflow Docs"] }
+    ]
+  },
+  {
+    "id": "cybersecurity",
+    "title": "Cybersecurity",
+    "description": "Complete roadmap to becoming a cybersecurity professional. Master security fundamentals and advanced techniques.",
+    "steps": [
+      { "title": "Networking Basics", "description": "TCP/IP, DNS, HTTP, and network protocols.", "resources": ["Professor Messer", "NetworkChuck"] },
+      { "title": "Operating Systems", "description": "Linux and Windows security fundamentals.", "resources": ["Linux Journey", "TryHackMe"] },
+      { "title": "Security Fundamentals", "description": "CIA triad, cryptography, and security models.", "resources": ["Cybrary"] },
+      { "title": "Web Security", "description": "OWASP Top 10, XSS, SQL injection, and CSRF.", "resources": ["OWASP", "PortSwigger"] },
+      { "title": "Network Security", "description": "Firewalls, IDS/IPS, VPNs, and network monitoring.", "resources": ["Cisco NetAcad"] },
+      { "title": "Ethical Hacking", "description": "Penetration testing, vulnerability assessment, and tools.", "resources": ["TryHackMe", "HackTheBox"] },
+      { "title": "Digital Forensics", "description": "Incident response, forensic analysis, and evidence collection.", "resources": ["SANS"] },
+      { "title": "Compliance & Governance", "description": "GDPR, HIPAA, ISO 27001, and security policies.", "resources": ["NIST Framework"] }
+    ]
+  },
+  {
+    "id": "devops",
+    "title": "DevOps",
+    "description": "Complete roadmap to becoming a DevOps engineer. Master CI/CD, infrastructure, and automation.",
+    "steps": [
+      { "title": "Linux Fundamentals", "description": "Command line, shell scripting, and system administration.", "resources": ["Linux Journey", "Learn Linux"] },
+      { "title": "Version Control", "description": "Git, branching strategies, and collaboration workflows.", "resources": ["GitHub Skills"] },
+      { "title": "CI/CD", "description": "GitHub Actions, Jenkins, GitLab CI, and pipeline automation.", "resources": ["GitHub Actions Docs"] },
+      { "title": "Containerization", "description": "Docker, Docker Compose, and container best practices.", "resources": ["Docker Docs"] },
+      { "title": "Orchestration", "description": "Kubernetes, pods, services, and cluster management.", "resources": ["K8s Docs", "KodeKloud"] },
+      { "title": "Infrastructure as Code", "description": "Terraform, Ansible, and configuration management.", "resources": ["Terraform Docs", "Ansible Docs"] },
+      { "title": "Monitoring", "description": "Prometheus, Grafana, and observability.", "resources": ["Prometheus Docs", "Grafana"] },
+      { "title": "Cloud Platforms", "description": "AWS, GCP, or Azure DevOps services.", "resources": ["AWS Docs", "GCP Docs"] }
+    ]
+  },
+  {
+    "id": "android",
+    "title": "Android Development",
+    "description": "Complete roadmap to becoming an Android developer. Master Kotlin and modern Android development.",
+    "steps": [
+      { "title": "Kotlin Basics", "description": "Kotlin syntax, null safety, and functional programming.", "resources": ["Kotlin Docs", "Google Codelabs"] },
+      { "title": "Android Fundamentals", "description": "Activities, fragments, intents, and lifecycle.", "resources": ["Android Docs"] },
+      { "title": "UI Development", "description": "Jetpack Compose, layouts, and Material Design.", "resources": ["Compose Docs", "Material Design"] },
+      { "title": "Data Storage", "description": "Room database, SharedPreferences, and DataStore.", "resources": ["Room Docs"] },
+      { "title": "Networking", "description": "Retrofit, OkHttp, and REST API integration.", "resources": ["Retrofit Docs"] },
+      { "title": "Architecture", "description": "MVVM, clean architecture, and dependency injection.", "resources": ["Android Architecture"] },
+      { "title": "Testing", "description": "JUnit, Mockito, and UI testing with Compose.", "resources": ["Android Testing"] },
+      { "title": "Publishing", "description": "Google Play Store, app signing, and release management.", "resources": ["Play Console"] }
+    ]
+  },
+  {
+    "id": "competitive-programming",
+    "title": "Competitive Programming",
+    "description": "Complete roadmap to mastering competitive programming. Learn algorithms, data structures, and problem-solving.",
+    "steps": [
+      { "title": "Language Mastery", "description": "Master C++ with STL or Java with Collections.", "resources": ["C++ Reference", "Java Docs"] },
+      { "title": "Time Complexity", "description": "Big O notation and algorithm analysis.", "resources": ["CP Algorithms"] },
+      { "title": "Arrays & Strings", "description": "Two pointers, sliding window, and string algorithms.", "resources": ["LeetCode", "Codeforces"] },
+      { "title": "Data Structures", "description": "Stacks, queues, priority queues, and hash maps.", "resources": ["CP Algorithms"] },
+      { "title": "Trees & Graphs", "description": "DFS, BFS, Dijkstra, MST, and topological sort.", "resources": ["CP Algorithms"] },
+      { "title": "Dynamic Programming", "description": "DP patterns, optimization, and state compression.", "resources": ["AtCoder DP", "CSES"] },
+      { "title": "Advanced Topics", "description": "Segment trees, Fenwick trees, and SQRT decomposition.", "resources": ["CP Algorithms"] },
+      { "title": "Practice & Contests", "description": "Regular participation in Codeforces, AtCoder, and LeetCode contests.", "resources": ["Codeforces", "AtCoder", "LeetCode"] }
+    ]
+  },
+  {
+    "id": "cloud",
+    "title": "Cloud Computing",
+    "description": "Complete roadmap to mastering cloud computing. Learn AWS, Azure, or GCP.",
+    "steps": [
+      { "title": "Cloud Fundamentals", "description": "IaaS, PaaS, SaaS, and cloud deployment models.", "resources": ["AWS Docs", "Azure Docs"] },
+      { "title": "Compute Services", "description": "EC2, Lambda, Azure Functions, and serverless computing.", "resources": ["AWS Compute"] },
+      { "title": "Storage", "description": "S3, Blob Storage, and database services.", "resources": ["AWS S3 Docs"] },
+      { "title": "Networking", "description": "VPC, load balancers, DNS, and CDN.", "resources": ["AWS Networking"] },
+      { "title": "Security", "description": "IAM, encryption, and security groups.", "resources": ["AWS IAM Docs"] },
+      { "title": "Monitoring", "description": "CloudWatch, Azure Monitor, and logging.", "resources": ["AWS CloudWatch"] },
+      { "title": "Architecture", "description": "Microservices, event-driven, and distributed systems.", "resources": ["AWS Architecture"] },
+      { "title": "Certification", "description": "AWS Solutions Architect, Azure Administrator, or GCP Engineer.", "resources": ["AWS Training", "Azure Training"] }
+    ]
+  }
+]

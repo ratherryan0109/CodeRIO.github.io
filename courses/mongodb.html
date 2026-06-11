@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoDB Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="mongodb">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>MongoDB</h1>
+      <p>MongoDB is a leading NoSQL document database that stores data in flexible, JSON-like documents. Developed by MongoDB Inc., it provides high performance, horizontal scalability, and a rich query language for modern applications.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 6 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 16 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>MongoDB was created by Dwight Merriman and Eliot Horowitz in 2007 to solve scalability issues with relational databases. It uses a document model where data is stored as BSON (Binary JSON) documents in collections, rather than rows in tables. This schema-less design allows for flexible, evolvable data structures that can change over time without migrations.</p>
+      <p>MongoDB's document model maps naturally to object-oriented programming, reducing the need for ORMs and JOINs. Documents can contain nested objects, arrays, and even embedded documents, making it ideal for hierarchical data. The database supports rich queries including field queries, range queries, text search, geospatial queries, and aggregation pipelines.</p>
+      <p>Key features include replica sets for high availability (automatic failover), sharding for horizontal scaling, change streams for real-time data, transactions for multi-document atomicity (since v4.0), and Atlas for fully managed cloud deployments. MongoDB is used by companies like Uber, eBay, Google, and Cisco for applications requiring flexible data models and scale.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn MongoDB?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-database" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Flexible Document Model</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Store data as JSON documents with dynamic schemas. Add fields on the fly without migrations. Perfect for agile development and evolving requirements.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-rocket" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">High Performance</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">In-memory processing, indexed queries, and horizontal scaling provide sub-millisecond response times for read-heavy workloads and real-time applications.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-expand-arrows-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Horizontal Scalability</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Sharding distributes data across multiple servers automatically. Scale out by adding more machines, not by buying bigger hardware (vertical scaling).</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-users" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Rich Ecosystem & Community</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Mongoose ODM, Compass GUI, Atlas cloud, drivers for every language, and extensive documentation make MongoDB accessible.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">MongoDB powers applications across industries worldwide:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ebay/ebay-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">eBay</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cisco/cisco-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Cisco</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">MongoDB is used for content management systems, real-time analytics, IoT data storage, mobile app backends, catalogs, and user profiles. Forbes uses it for content management, MetLife for customer data, and The Guardian for their CMS. It's the most popular NoSQL database and the fifth most popular database overall.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)"><h4>Prerequisites</h4><p style="color:var(--text-secondary);font-size:0.9rem">Basic database concepts, JavaScript basics (for Mongoose), command line familiarity</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)"><h4>Beginner (Weeks 1-2)</h4><p style="color:var(--text-secondary);font-size:0.9rem">CRUD operations, document structure, query operators, indexing basics, MongoDB Shell</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)"><h4>Intermediate (Weeks 3-4)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Aggregation pipeline, schema design, indexing strategies, Mongoose ODM, data modeling</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)"><h4>Advanced (Weeks 5-6)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Replica sets, sharding, transactions, change streams, security, backup/restore</p></div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7"><h4>Expert (Weeks 7-8)</h4><p style="color:var(--text-secondary);font-size:0.9rem">Atlas cloud, performance tuning, GeoSpatial queries, time-series, Realm (serverless)</p></div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> Introduction & Setup</h3><p>Installing MongoDB, MongoDB Shell (mongosh), MongoDB Compass GUI, connecting to local/Atlas instances, basic terminology.</p></div>
+      <div class="module-card"><h3><span class="module-number">2</span> CRUD Operations</h3><p>insertOne/insertMany, find with filters, updateOne/updateMany/ replaceOne, deleteOne/deleteMany, bulk writes.</p></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Query Operators</h3><p>Comparison ($eq, $gt, $lt, $in), logical ($and, $or, $not), element ($exists, $type), array ($all, $elemMatch), regex.</p></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Document Structure & Data Types</h3><p>BSON types, ObjectId, embedded documents, arrays, dates, ObjectId generation, document size limits (16MB).</p></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">5</span> Indexing</h3><p>Single field indexes, compound indexes, multikey indexes, text indexes, unique indexes, explain() for query analysis.</p></div>
+      <div class="module-card"><h3><span class="module-number">6</span> Aggregation Pipeline</h3><p>$match, $group, $sort, $project, $lookup (JOINs), $unwind, $bucket, $facet, $addFields, aggregation expressions.</p></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Schema Design & Data Modeling</h3><p>Embedding vs referencing, one-to-one, one-to-many, many-to-many patterns, schema anti-patterns, polymorphic schemas.</p></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Mongoose ODM</h3><p>Schemas, models, validation, middleware (pre/post hooks), virtuals, population, plugins, discriminators.</p></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">9</span> Replica Sets & High Availability</h3><p>Primary/secondary/arbiter nodes, automatic failover, read preferences, write concerns, election process.</p></div>
+      <div class="module-card"><h3><span class="module-number">10</span> Sharding & Horizontal Scaling</h3><p>Shard keys, config servers, mongos routers, chunk splitting/migration, shard zones, hashed sharding.</p></div>
+      <div class="module-card"><h3><span class="module-number">11</span> Transactions</h3><p>Multi-document ACID transactions, session API, transaction lifetime, retry logic, transaction vs atomicity limitations.</p></div>
+      <div class="module-card"><h3><span class="module-number">12</span> Security & Authentication</h3><p>RBAC, SCRAM authentication, x.509 certificates, LDAP integration, field-level encryption, audit logging.</p></div>
+
+      <h3 style="color:#a855f7;margin:1.5rem 0 1rem"><i class="fas fa-crown"></i> Expert Level</h3>
+      <div class="module-card"><h3><span class="module-number">13</span> Change Streams & Real-Time Data</h3><p>Watching collections for changes, resume tokens, pipeline filtering, integration with Kafka/RabbitMQ.</p></div>
+      <div class="module-card"><h3><span class="module-number">14</span> GeoSpatial & Time-Series</h3><p>GeoJSON objects, 2dsphere indexes, $near/$geoNear queries, time-series collections, bucket aggregation.</p></div>
+      <div class="module-card"><h3><span class="module-number">15</span> Backup, Restore & Maintenance</h3><p>mongodump/mongorestore, Atlas backups, point-in-time recovery, compaction, data validation, index building.</p></div>
+      <div class="module-card"><h3><span class="module-number">16</span> MongoDB Atlas & Cloud</h3><p>Atlas clusters, serverless instances, Atlas Search, Data Lake, Realm Sync, Atlas App Services, monitoring.</p></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. CRUD Operations in MongoDB Shell</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MongoDB Shell (mongosh) is the CLI for interacting with MongoDB. Use it for prototyping, administration, and debugging. CRUD operations use collection methods that return a cursor or document.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Create
+db.users.insertOne({ name: 'Alice', email: 'alice@test.com', age: 30 })
+db.users.insertMany([{ name: 'Bob', age: 25 }, { name: 'Charlie', age: 35 }])
+
+// Read
+db.users.find({ age: { $gte: 25 } })
+db.users.findOne({ email: 'alice@test.com' })
+db.users.find().sort({ age: -1 }).limit(10).skip(20)
+
+// Update
+db.users.updateOne({ name: 'Alice' }, { $set: { age: 31 } })
+db.users.updateMany({}, { $inc: { loginCount: 1 } })
+
+// Delete
+db.users.deleteOne({ name: 'Charlie' })
+db.users.deleteMany({ age: { $lt: 18 } })</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Aggregation Pipeline</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">The aggregation pipeline processes documents through a sequence of stages. Each stage transforms the documents as they pass through. It's powerful for analytics, reporting, and data transformation.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>db.orders.aggregate([
+  // Stage 1: Filter
+  { $match: { status: 'completed' } },
+
+  // Stage 2: Group by customer, calculate totals
+  { $group: {
+    _id: '$customerId',
+    totalSpent: { $sum: '$amount' },
+    orderCount: { $sum: 1 },
+    avgOrder: { $avg: '$amount' }
+  }},
+
+  // Stage 3: Sort by total spent descending
+  { $sort: { totalSpent: -1 } },
+
+  // Stage 4: Limit to top 10
+  { $limit: 10 },
+
+  // Stage 5: Lookup customer details
+  { $lookup: {
+    from: 'customers',
+    localField: '_id',
+    foreignField: '_id',
+    as: 'customer'
+  }}
+])</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Indexing Strategy</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Indexes dramatically improve query performance by reducing the number of documents scanned. Use explain() to check if queries use indexes. Choose index fields based on query patterns, sort order, and selectivity.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Create indexes
+db.users.createIndex({ email: 1 }, { unique: true })
+db.orders.createIndex({ customerId: 1, createdAt: -1 })
+db.posts.createIndex({ title: 'text', content: 'text' })
+db.locations.createIndex({ coordinates: '2dsphere' })
+
+// Compound index rules:
+// 1. Equality fields first
+// 2. Sort fields next
+// 3. Range fields last
+db.orders.createIndex({ status: 1, createdAt: -1, total: 1 })
+
+// Check query execution
+db.users.find({ email: 'test@test.com' }).explain('executionStats')
+
+// Drop unused indexes
+db.users.dropIndex('email_1')</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Mongoose Schema & Models</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Mongoose is the most popular MongoDB ODM for Node.js. It provides a schema-based solution with built-in validation, casting, middleware, and population for referencing documents.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>const userSchema = new mongoose.Schema({
+  name:     { type: String, required: true, trim: true },
+  email:    { type: String, required: true, unique: true, lowercase: true },
+  age:      { type: Number, min: 13, max: 120 },
+  role:     { type: String, enum: ['user', 'admin'], default: 'user' },
+  address: {
+    street: String,
+    city:   String,
+    zip:    String
+  },
+  tags:     [String],
+  createdAt: { type: Date, default: Date.now }
+}, { timestamps: true });
+
+// Virtual property
+userSchema.virtual('isAdult').get(function() {
+  return this.age >= 18;
+});
+
+// Pre-save middleware
+userSchema.pre('save', async function(next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
+});
+
+module.exports = mongoose.model('User', userSchema);</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Data Modeling: Embedding vs Referencing</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Choose embedding when data is always accessed together, has one-to-few relationships, and doesn't grow unbounded. Choose referencing when data is large, shared across documents, or has one-to-many/many-to-many relationships.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Embedded (good for address in user)
+{
+  _id: ObjectId('...'),
+  name: 'Alice',
+  addresses: [
+    { street: '123 Main', city: 'NYC', type: 'home' },
+    { street: '456 Oak',  city: 'LA',  type: 'work' }
+  ]
+}
+
+// Referenced (good for orders in user)
+// User document
+{ _id: ObjectId('user1'), name: 'Alice' }
+
+// Order documents
+{ _id: ObjectId('order1'), userId: 'user1', total: 100 }
+{ _id: ObjectId('order2'), userId: 'user1', total: 200 }
+
+// In Mongoose, use populate to join
+const orders = await Order.find({ userId: 'user1' }).populate('items.productId')</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Transactions</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">MongoDB supports multi-document ACID transactions since v4.0. Use transactions for operations that require atomicity across multiple documents or collections. Always handle transaction errors and retry logic.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>async function transferMoney(fromId, toId, amount) {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const fromAccount = await Account.findById(fromId).session(session);
+    const toAccount = await Account.findById(toId).session(session);
+
+    if (fromAccount.balance < amount) {
+      throw new Error('Insufficient funds');
+    }
+
+    fromAccount.balance -= amount;
+    toAccount.balance += amount;
+
+    await fromAccount.save({ session });
+    await toAccount.save({ session });
+
+    await session.commitTransaction();
+    console.log('Transfer successful');
+  } catch (error) {
+    await session.abortTransaction();
+    console.error('Transfer failed:', error);
+  } finally {
+    session.endSession();
+  }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Change Streams</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Change streams allow applications to watch real-time changes in collections, databases, or deployments. They use the oplog (operations log) and provide resume tokens for fault-tolerant processing.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Watch all insert operations on orders collection
+const changeStream = db.collection('orders').watch([
+  { $match: { operationType: 'insert' } }
+]);
+
+changeStream.on('change', (change) => {
+  console.log('New order:', change.fullDocument);
+  // Send notification, update cache, trigger workflow
+});
+
+// Resume from a specific point
+const resumeToken = changeStream.resumeToken;
+// Store resume token for recovery
+const newStream = db.collection('orders').watch([], {
+  resumeAfter: resumeToken
+});
+
+// In Node.js with Mongoose
+const pipeline = [{ $match: { operationType: 'update' } }];
+const stream = Order.watch(pipeline);
+stream.on('change', (change) => console.log('Order updated:', change));</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Replica Sets</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">A replica set is a group of MongoDB servers that maintain the same data set. One primary accepts writes, secondaries replicate data. If the primary fails, an election promotes a secondary. This provides high availability and data redundancy.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Start mongod instances for replica set
+mongod --replSet rs0 --port 27017 --dbpath /data/rs0-1
+mongod --replSet rs0 --port 27018 --dbpath /data/rs0-2
+mongod --replSet rs0 --port 27019 --dbpath /data/rs0-3
+
+// Initiate replica set
+rs.initiate({
+  _id: 'rs0',
+  members: [
+    { _id: 0, host: 'localhost:27017' },
+    { _id: 1, host: 'localhost:27018' },
+    { _id: 2, host: 'localhost:27019', arbiterOnly: true }
+  ]
+})
+
+// Check replica set status
+rs.status()
+
+// Connection string for replica set
+mongoose.connect('mongodb://localhost:27017,localhost:27018,localhost:27019/mydb?replicaSet=rs0')</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: E-commerce Product Catalog API</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>const productSchema = new mongoose.Schema({
+  name:        { type: String, required: true },
+  slug:        { type: String, unique: true },
+  description: String,
+  price:       { type: Number, required: true, min: 0 },
+  category:    { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+  tags:        [String],
+  variants:    [{
+    name:   String,
+    sku:    { type: String, required: true },
+    price:  Number,
+    stock:  { type: Number, default: 0 }
+  }],
+  ratings: {
+    average: { type: Number, default: 0 },
+    count:   { type: Number, default: 0 }
+  },
+  isActive:    { type: Boolean, default: true }
+}, { timestamps: true });
+
+// Text search index
+productSchema.index({ name: 'text', description: 'text' });
+// Compound index for category queries
+productSchema.index({ category: 1, price: -1 });
+
+// Find active products in a category with pagination
+app.get('/api/products', async (req, res) => {
+  const { category, minPrice, maxPrice, page = 1, limit = 20 } = req.query;
+  const filter = { isActive: true };
+
+  if (category) filter.category = category;
+  if (minPrice || maxPrice) {
+    filter.price = {};
+    if (minPrice) filter.price.$gte = Number(minPrice);
+    if (maxPrice) filter.price.$lte = Number(maxPrice);
+  }
+
+  const products = await Product.find(filter)
+    .populate('category', 'name')
+    .sort({ createdAt: -1 })
+    .skip((page - 1) * limit)
+    .limit(Number(limit));
+
+  const total = await Product.countDocuments(filter);
+  res.json({ products, total, page, totalPages: Math.ceil(total / limit) });
+});</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Aggregation for Sales Dashboard</h4>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>db.sales.aggregate([
+  { $match: { date: { $gte: ISODate('2024-01-01'), $lt: ISODate('2025-01-01') } } },
+
+  // Group by month
+  { $group: {
+    _id: { $dateToString: { format: '%Y-%m', date: '$date' } },
+    totalSales: { $sum: '$amount' },
+    orderCount: { $sum: 1 },
+    avgOrderValue: { $avg: '$amount' }
+  }},
+
+  { $sort: { _id: 1 } },
+
+  // Calculate running total
+  { $setWindowFields: {
+    sortBy: { _id: 1 },
+    output: {
+      runningTotal: { $sum: '$totalSales', window: { documents: ['unbounded', 'current'] } }
+    }
+  }}
+])</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Basic CRUD</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a collection for books, insert sample data, and practice all CRUD operations.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-primary" style="flex-shrink:0">Easy</span><div><h4 style="font-size:0.95rem">Query Practice</h4><p style="color:var(--text-muted);font-size:0.85rem">Write queries using comparison, logical, and element operators on a sample dataset.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Aggregation Pipeline</h4><p style="color:var(--text-muted);font-size:0.85rem">Build an aggregation to group sales by product category with totals and averages.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Mongoose Models</h4><p style="color:var(--text-muted);font-size:0.85rem">Design Mongoose schemas for a blog with users, posts, comments, and tags with validation.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-warning" style="flex-shrink:0">Medium</span><div><h4 style="font-size:0.95rem">Index Optimization</h4><p style="color:var(--text-muted);font-size:0.85rem">Analyze slow queries with explain() and create optimal indexes for common query patterns.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Transaction Implementation</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a money transfer system with rollback using MongoDB transactions.</p></div></div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem"><span class="badge badge-error" style="flex-shrink:0">Hard</span><div><h4 style="font-size:0.95rem">Real-Time Dashboard</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a real-time analytics dashboard using change streams and aggregation.</p></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Blog Platform API</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A RESTful blog API with users, posts, comments, tags, and full-text search using MongoDB and Express.</p><span class="badge badge-primary">MongoDB</span> <span class="badge badge-primary">Express</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Real-Time Chat Backend</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A chat backend with message persistence, change streams for real-time delivery, and user presence.</p><span class="badge badge-primary">MongoDB</span> <span class="badge badge-primary">Socket.io</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">E-commerce Backend</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A full e-commerce backend with products, orders, cart, inventory management, and aggregation reports.</p><span class="badge badge-primary">MongoDB</span> <span class="badge badge-primary">Node.js</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Analytics Dashboard</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A sales analytics dashboard with MongoDB aggregation pipelines for real-time business insights.</p><span class="badge badge-primary">MongoDB</span> <span class="badge badge-primary">Aggregation</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Task Manager with MongoDB</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A task management app with projects, tasks, assignments, due dates, and status tracking.</p><span class="badge badge-primary">MongoDB</span> <span class="badge badge-primary">Mongoose</span></div>
+        <div class="glass" style="padding:1.5rem"><h4 style="margin-bottom:0.5rem">Geolocation Service</h4><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">A nearby places service using MongoDB's GeoSpatial queries with 2dsphere indexes.</p><span class="badge badge-primary">MongoDB</span> <span class="badge badge-primary">GeoJSON</span></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=mongodb&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .auth-card { position: relative; overflow: hidden; }
+    .social-login-divider { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; color: var(--text-muted); font-size: 0.85rem; }
+    .social-login-divider::before, .social-login-divider::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
+    .social-login-btn { display: flex; align-items: center; justify-content: center; gap: 0.7rem; padding: 0.85rem; border-radius: var(--border-radius-sm); border: 1px solid var(--glass-border); background: var(--white); font-weight: 600; font-size: 0.95rem; transition: var(--transition); cursor: pointer; width: 100%; }
+    .social-login-btn:hover { background: var(--bg-card); border-color: var(--primary); transform: translateY(-2px); }
+    .inline-error { color: var(--error); font-size: 0.82rem; margin-top: 0.3rem; display: none; }
+    .form-group.has-error input { border-color: var(--error); }
+    .spinner-sm { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; }
+    .forgot-link-wrap { text-align: right; margin-top: 0.3rem; }
+    .forgot-link-wrap a { font-size: 0.85rem; color: var(--primary); font-weight: 500; }
+    .forgot-link-wrap a:hover { text-decoration: underline; }
+
+    .password-strength { margin-top: 0.6rem; }
+    .password-strength-bar { height: 6px; border-radius: 50px; background: #e2e8f0; overflow: hidden; }
+    .password-strength-fill { height: 100%; border-radius: 50px; transition: width 0.3s ease, background 0.3s ease; width: 0; }
+    .password-strength-label { font-size: 0.8rem; margin-top: 0.3rem; font-weight: 600; }
+    .strength-weak { color: var(--error); }
+    .strength-fair { color: var(--warning); }
+    .strength-strong { color: #6366f1; }
+    .strength-very-strong { color: var(--success); }
+
+    .terms-check { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 1.2rem; }
+    .terms-check input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); margin-top: 0.2rem; flex-shrink: 0; }
+    .terms-check label { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; cursor: pointer; }
+    .terms-check a { color: var(--primary); font-weight: 600; }
+    .terms-check a:hover { text-decoration: underline; }
+    .terms-check.has-error label { color: var(--error); }
+
+    .password-input-wrap { position: relative; }
+    .password-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.3rem; font-size: 1rem; }
+    .password-toggle:hover { color: var(--text); }
+  </style>
+</head>
+<body data-page="Register">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <i class="fas fa-code"></i>
+        <h1>CodeRio</h1>
+      </div>
+      <h2>Create Account</h2>
+
+      <form id="registerForm" novalidate>
+        <div class="form-group" id="nameGroup">
+          <label for="registerName">Full Name</label>
+          <div class="input-group">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="registerName" placeholder="Enter your full name" required autocomplete="name">
+          </div>
+          <p class="inline-error" id="nameError">Please enter your name.</p>
+        </div>
+        <div class="form-group" id="emailGroup">
+          <label for="registerEmail">Email</label>
+          <div class="input-group">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" id="registerEmail" placeholder="Enter your email" required autocomplete="email">
+          </div>
+          <p class="inline-error" id="emailError">Please enter a valid email address.</p>
+        </div>
+        <div class="form-group" id="passwordGroup">
+          <label for="registerPassword">Password</label>
+          <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <div class="password-input-wrap" style="flex:1;border:none;background:transparent;padding:0;">
+              <input type="password" id="registerPassword" placeholder="Create a password" required autocomplete="new-password" style="border:none;background:transparent;padding-left:0;">
+              <button type="button" class="password-toggle" id="pwdToggle" tabindex="-1" aria-label="Toggle password visibility">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="password-strength">
+            <div class="password-strength-bar">
+              <div class="password-strength-fill" id="pwdStrengthFill"></div>
+            </div>
+            <div class="password-strength-label" id="pwdStrengthLabel"></div>
+          </div>
+          <p class="inline-error" id="passwordError">Password must be at least 6 characters.</p>
+        </div>
+        <div class="form-group" id="confirmGroup">
+          <label for="registerConfirm">Confirm Password</label>
+          <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="registerConfirm" placeholder="Confirm your password" required autocomplete="new-password">
+          </div>
+          <p class="inline-error" id="confirmError">Passwords do not match.</p>
+        </div>
+        <div class="terms-check" id="termsGroup">
+          <input type="checkbox" id="termsCheck">
+          <label for="termsCheck">I agree to the <a href="#" onclick="Utils.showToast('Terms of Service page coming soon.', 'info');return false;">Terms of Service</a> and <a href="#" onclick="Utils.showToast('Privacy Policy page coming soon.', 'info');return false;">Privacy Policy</a></label>
+        </div>
+        <div id="registerError" class="form-error" style="display:none"></div>
+        <button type="submit" id="registerSubmit" class="btn btn-primary btn-block">
+          <span id="registerBtnText">Create Account</span>
+          <span id="registerBtnSpinner" class="spinner-sm" style="display:none;"></span>
+        </button>
+      </form>
+      <div class="social-login-divider">
+        <span>or continue with</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+        <button type="button" class="social-login-btn" id="googleRegisterBtn">
+          <i class="fab fa-google" style="color:#ea4335;"></i> Google
+        </button>
+        <button type="button" class="social-login-btn" id="githubRegisterBtn">
+          <i class="fab fa-github"></i> GitHub
+        </button>
+      </div>
+
+
+      <div class="auth-links" style="justify-content:center;gap:0.5rem;flex-direction:column;align-items:center;">
+        <span style="color:var(--text-muted);font-size:0.9rem;">Already have an account?</span>
+        <a href="../auth/login.html" style="font-size:1rem;">Log in</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    function getPasswordStrength(password) {
+      let score = 0;
+      if (password.length >= 6) score += 1;
+      if (password.length >= 10) score += 1;
+      if (/[a-z]/.test(password)) score += 1;
+      if (/[A-Z]/.test(password)) score += 1;
+      if (/[0-9]/.test(password)) score += 1;
+      if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+      return score;
+    }
+
+    function getStrengthLabel(score) {
+      if (score <= 1) return { label: 'Weak', cls: 'strength-weak', pct: 20 };
+      if (score <= 2) return { label: 'Fair', cls: 'strength-fair', pct: 40 };
+      if (score <= 3) return { label: 'Fair', cls: 'strength-fair', pct: 50 };
+      if (score <= 4) return { label: 'Strong', cls: 'strength-strong', pct: 70 };
+      return { label: 'Very Strong', cls: 'strength-very-strong', pct: 100 };
+    }
+
+    function getStrengthColor(score) {
+      if (score <= 1) return 'var(--error)';
+      if (score <= 3) return 'var(--warning)';
+      if (score <= 4) return '#6366f1';
+      return 'var(--success)';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const nameInput = document.getElementById('registerName');
+      const emailInput = document.getElementById('registerEmail');
+      const passwordInput = document.getElementById('registerPassword');
+      const confirmInput = document.getElementById('registerConfirm');
+      const errorEl = document.getElementById('registerError');
+      const termsCheck = document.getElementById('termsCheck');
+      const termsGroup = document.getElementById('termsGroup');
+      const pwdToggle = document.getElementById('pwdToggle');
+
+      const nameGroup = document.getElementById('nameGroup');
+      const emailGroup = document.getElementById('emailGroup');
+      const passwordGroup = document.getElementById('passwordGroup');
+      const confirmGroup = document.getElementById('confirmGroup');
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+      const confirmError = document.getElementById('confirmError');
+
+      const strengthFill = document.getElementById('pwdStrengthFill');
+      const strengthLabel = document.getElementById('pwdStrengthLabel');
+
+      function clearFieldErrors() {
+        [nameGroup, emailGroup, passwordGroup, confirmGroup].forEach(g => g.classList.remove('has-error'));
+        [nameError, emailError, passwordError, confirmError].forEach(e => e.style.display = 'none');
+        termsGroup.classList.remove('has-error');
+      }
+
+      passwordInput.addEventListener('input', function() {
+        const val = this.value;
+        const score = getPasswordStrength(val);
+
+        if (val.length === 0) {
+          strengthFill.style.width = '0';
+          strengthLabel.textContent = '';
+        } else {
+          const info = getStrengthLabel(score);
+          strengthFill.style.width = info.pct + '%';
+          strengthFill.style.background = getStrengthColor(score);
+          strengthLabel.textContent = info.label;
+          strengthLabel.className = 'password-strength-label ' + info.cls;
+        }
+        passwordGroup.classList.remove('has-error');
+        passwordError.style.display = 'none';
+        if (errorEl) errorEl.style.display = 'none';
+      });
+
+      pwdToggle.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.querySelector('i').className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+      });
+
+      [nameInput, emailInput, confirmInput].forEach(function(inp) {
+        inp.addEventListener('input', function() {
+          clearFieldErrors();
+          if (errorEl) errorEl.style.display = 'none';
+        });
+      });
+
+      termsCheck.addEventListener('change', function() {
+        termsGroup.classList.remove('has-error');
+      });
+
+    });
+  </script>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+</body>
+</html>

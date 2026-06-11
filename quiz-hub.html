@@ -1,0 +1,526 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Hub - CodeRio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/navbar.css"><link rel="stylesheet" href="css/responsive.css">
+<style>
+.quiz-container { padding:2rem 8%; max-width:1000px; margin:0 auto }
+.quiz-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem }
+.quiz-timer { font-size:1.5rem; font-weight:700; color:var(--primary); display:flex; align-items:center; gap:0.5rem }
+.quiz-timer.warning { color:var(--warning) }
+.quiz-timer.danger { color:var(--error); animation:pulse 0.5s infinite }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.quiz-question-card { padding:2rem; border-radius:var(--border-radius-md); margin-bottom:1.5rem }
+.quiz-question-text { font-size:1.15rem; font-weight:600; margin-bottom:1.2rem; line-height:1.6 }
+.quiz-option { display:block; width:100%; padding:0.9rem 1.2rem; margin-bottom:0.6rem; border:2px solid #e2e8f0; border-radius:var(--border-radius-sm); background:var(--white); cursor:pointer; font-size:0.95rem; text-align:left; transition:all 0.2s }
+.quiz-option:hover { border-color:var(--primary); background:rgba(6,182,212,0.05) }
+.quiz-option.selected { border-color:var(--primary); background:rgba(6,182,212,0.1) }
+.quiz-option.correct { border-color:var(--success); background:rgba(34,197,94,0.1) }
+.quiz-option.wrong { border-color:var(--error); background:rgba(239,68,68,0.1) }
+.quiz-nav { display:flex; gap:0.8rem; margin-top:1.5rem }
+.leaderboard-entry { display:flex; align-items:center; gap:1rem; padding:0.7rem 1rem; border-bottom:1px solid var(--glass-border) }
+.leaderboard-rank { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; background:#f1f5f9; color:var(--text-secondary) }
+.leaderboard-rank.gold { background:#f59e0b; color:white }
+.leaderboard-rank.silver { background:#94a3b8; color:white }
+.leaderboard-rank.bronze { background:#d97706; color:white }
+.cooldown-notice { background:rgba(245,158,11,0.1); border:1px solid var(--warning); border-radius:12px; padding:1.5rem; text-align:center; margin:2rem 0 }
+.question-palette { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem }
+.q-palette-item { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:600; cursor:pointer; border:2px solid #e2e8f0; background:white; transition:all 0.2s }
+.q-palette-item.answered { border-color:var(--primary); background:var(--primary); color:white }
+.q-palette-item.current { border-color:var(--warning); box-shadow:0 0 0 2px var(--warning) }
+.q-palette-item.skipped { border-color:var(--text-muted); background:#f1f5f9; color:var(--text-muted) }
+.code-block { background:#1e293b; color:#e2e8f0; padding:1rem; border-radius:8px; font-family:'Fira Code','Cascadia Code',monospace; font-size:0.85rem; line-height:1.6; overflow-x:auto; white-space:pre-wrap; margin-bottom:1rem }
+.question-type-badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.7rem; font-weight:600; text-transform:uppercase; margin-left:0.5rem }
+.question-type-badge.mcq { background:#3b82f6; color:white }
+.question-type-badge.code { background:#8b5cf6; color:white }
+.question-type-badge.debug { background:#ef4444; color:white }
+.question-type-badge.scenario { background:#f59e0b; color:white }
+.question-type-badge.tf { background:#10b981; color:white }
+.question-type-badge.fill { background:#06b6d4; color:white }
+</style>
+</head>
+<body data-page="QuizHub">
+<div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div>
+<nav class="navbar">
+<div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span> CodeRio</div>
+<button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li><li><a href="auth/profile.html">Profile</a></li>
+</ul>
+<div class="nav-auth"></div>
+</nav>
+
+<section class="quiz-container">
+<div id="quizSetup">
+<h1 style="font-size:2rem;margin-bottom:2rem"><i class="fas fa-question-circle" style="color:var(--primary)"></i> Quiz Hub</h1>
+
+<div class="glass" style="padding:2rem;border-radius:var(--border-radius-lg);margin-bottom:2rem">
+<h3 style="margin-bottom:1.5rem">Configure Your Quiz</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem">
+<div>
+<label style="display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem">Course / Topic</label>
+<select id="quizCourseSelect" class="glass" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:8px;font-size:0.9rem;background:white">
+<option value="">Select a course...</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem">Difficulty</label>
+<select id="quizDifficultySelect" class="glass" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:8px;font-size:0.9rem;background:white">
+<option value="all">All Levels</option>
+<option value="Beginner">Beginner</option>
+<option value="Intermediate">Intermediate</option>
+<option value="Advanced">Advanced</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem">Questions</label>
+<select id="quizCountSelect" class="glass" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:8px;font-size:0.9rem;background:white">
+<option value="10">10 Questions</option>
+<option value="20">20 Questions</option>
+<option value="50" selected>50 Questions</option>
+<option value="100">100 Questions</option>
+</select>
+</div>
+</div>
+<button id="startQuizBtn" class="btn btn-primary" style="margin-top:1.5rem;width:100%" disabled><i class="fas fa-play-circle"></i> Start Quiz</button>
+</div>
+
+<div id="performanceSummary" class="glass" style="padding:2rem;border-radius:var(--border-radius-lg);display:none">
+<h3 style="margin-bottom:1.5rem"><i class="fas fa-chart-bar" style="color:var(--primary)"></i> Performance Summary</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin-bottom:1.5rem" id="perfStats"></div>
+<div id="leaderboardContainer"></div>
+</div>
+</div>
+
+<div id="quizActive" style="display:none">
+<div class="quiz-header">
+<h2 id="quizCourseTitle" style="font-size:1.3rem"></h2>
+<div class="quiz-timer" id="quizTimer"><i class="fas fa-hourglass-half"></i> <span id="timerDisplay">00:00</span></div>
+</div>
+<div style="display:flex;justify-content:space-between;margin-bottom:0.8rem;font-size:0.85rem;color:var(--text-muted)">
+<span id="quizProgress">Question 1 of 10</span>
+<span><span id="answeredCount">0</span> answered</span>
+</div>
+<div id="questionPalette" class="question-palette"></div>
+<div id="quizQuestionArea"></div>
+<div class="quiz-nav">
+<button id="skipBtn" class="btn btn-ghost"><i class="fas fa-forward"></i> Skip</button>
+<button id="nextBtn" class="btn btn-primary" style="display:none">Next <i class="fas fa-arrow-right"></i></button>
+<button id="submitQuizBtn" class="btn btn-success" style="display:none"><i class="fas fa-check-circle"></i> Submit Quiz</button>
+</div>
+</div>
+
+<div id="quizResult" style="display:none">
+<div class="glass" style="padding:2rem;border-radius:var(--border-radius-lg);text-align:center;margin-bottom:2rem">
+<div style="font-size:4rem;margin-bottom:1rem" id="resultIcon">🏆</div>
+<h2 style="font-size:1.8rem;margin-bottom:0.5rem" id="resultTitle">Quiz Complete!</h2>
+<p style="font-size:1.2rem;color:var(--text-secondary);margin-bottom:1.5rem" id="resultScore">You scored 0%</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;max-width:500px;margin:0 auto" id="resultStats"></div>
+<button id="reviewBtn" class="btn btn-ghost" style="margin-top:1.5rem"><i class="fas fa-eye"></i> Review Answers</button>
+<button id="newQuizBtn" class="btn btn-primary" style="margin-top:1rem"><i class="fas fa-redo"></i> New Quiz</button>
+<div id="cooldownNotice" class="cooldown-notice" style="display:none">
+<i class="fas fa-clock" style="font-size:1.5rem;margin-bottom:0.5rem;display:block"></i>
+<h4>Cooldown Active</h4>
+<p id="cooldownText">Please wait before starting another quiz.</p>
+</div>
+</div>
+</div>
+
+<div id="quizReviewArea" style="display:none">
+<button id="backToResultBtn" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Results</button>
+<div id="reviewQuestions"></div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+<div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+<div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+<div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+<div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+</div>
+<div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+</footer>
+
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/quiz-system.js"></script>
+<script src="js/daily-goals.js"></script>
+<script src="js/achievements.js"></script>
+<script src="js/main.js"></script>
+<script>
+var COOLDOWN_HOURS = 6;
+var quizInterval = null;
+var currentQuiz = null;
+
+function esc(s) { if (typeof s !== 'string') return String(s); return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;'); }
+
+function initQuizHub() {
+  populateCourseSelect();
+  setupEventListeners();
+  loadPerformanceSummary();
+  checkURLParams();
+}
+
+function populateCourseSelect() {
+  var sel = document.getElementById('quizCourseSelect');
+  var courses = QuizSystem.getAvailableCourses();
+  var stored = Utils.getStorage('courses_data', []);
+  courses.forEach(function(c) {
+    var opt = document.createElement('option');
+    opt.value = c.id;
+    var storedCourse = stored.find(function(s) { return s.id === c.id; });
+    opt.textContent = (storedCourse ? storedCourse.title : c.title) + ' (' + c.count + ' questions)';
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', function() {
+    document.getElementById('startQuizBtn').disabled = !this.value;
+  });
+}
+
+function setupEventListeners() {
+  document.getElementById('startQuizBtn').addEventListener('click', beginQuiz);
+  document.getElementById('skipBtn').addEventListener('click', skipCurrent);
+  document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+  document.getElementById('submitQuizBtn').addEventListener('click', submitQuiz);
+  document.getElementById('reviewBtn').addEventListener('click', showReview);
+  document.getElementById('newQuizBtn').addEventListener('click', resetToSetup);
+  document.getElementById('backToResultBtn').addEventListener('click', function() {
+    document.getElementById('quizReviewArea').style.display = 'none';
+    document.getElementById('quizResult').style.display = 'block';
+  });
+}
+
+function checkURLParams() {
+  var params = new URLSearchParams(window.location.search);
+  var course = params.get('course');
+  if (course) {
+    var sel = document.getElementById('quizCourseSelect');
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === course) { sel.value = course; break; }
+    }
+    document.getElementById('startQuizBtn').disabled = false;
+  }
+}
+
+function beginQuiz() {
+  var courseId = document.getElementById('quizCourseSelect').value;
+  var difficulty = document.getElementById('quizDifficultySelect').value;
+  var numQ = parseInt(document.getElementById('quizCountSelect').value);
+  if (!courseId) { Utils.showToast('Select a course first.', 'warning'); return; }
+  if (!Utils.getStorage('coderio_user')) { Utils.showToast('Please log in to take quizzes.', 'warning'); return; }
+
+  var lastQuizTime = Utils.getStorage('last_quiz_time_' + courseId, 0);
+  if (lastQuizTime && (Date.now() - lastQuizTime) < COOLDOWN_HOURS * 3600000) {
+    var remaining = Math.ceil((COOLDOWN_HOURS * 3600000 - (Date.now() - lastQuizTime)) / 60000);
+    if (!confirm('Cooldown active. ' + remaining + ' minutes remaining. Start anyway (no AP awarded)?')) return;
+  }
+
+  var quiz = QuizSystem.startQuiz(courseId, difficulty, numQ);
+  if (!quiz) { Utils.showToast('Not enough questions for this selection.', 'error'); return; }
+  currentQuiz = quiz;
+  document.getElementById('quizSetup').style.display = 'none';
+  document.getElementById('quizActive').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+  renderQuizQuestion();
+  startTimer();
+}
+
+function renderQuizQuestion() {
+  if (!currentQuiz) return;
+  var q = currentQuiz.questions[currentQuiz.currentIndex];
+  if (!q) return;
+  document.getElementById('quizCourseTitle').textContent = 'Course Quiz';
+  document.getElementById('quizProgress').textContent = 'Question ' + (currentQuiz.currentIndex + 1) + ' of ' + currentQuiz.questions.length;
+  var answered = currentQuiz.answers.filter(function(a) { return a !== undefined && a !== -1; }).length;
+  document.getElementById('answeredCount').textContent = answered;
+
+  var palette = document.getElementById('questionPalette');
+  palette.innerHTML = currentQuiz.questions.map(function(q, i) {
+    var cls = 'q-palette-item';
+    if (i === currentQuiz.currentIndex) cls += ' current';
+    else if (currentQuiz.answers[i] === -1) cls += ' skipped';
+    else if (currentQuiz.answers[i] !== undefined) cls += ' answered';
+    return '<div class="' + cls + '" onclick="jumpToQuestion(' + i + ')">' + (i + 1) + '</div>';
+  }).join('');
+
+  var area = document.getElementById('quizQuestionArea');
+  var answeredIdx = currentQuiz.answers[currentQuiz.currentIndex];
+  var qText = (currentQuiz.currentIndex + 1) + '. ' + esc(q.question);
+  qText = qText.replace(/\n/g, '<br>');
+  if (qText.indexOf('<br><br>') !== -1 || qText.indexOf('console.log') !== -1 || qText.indexOf('function') !== -1 || qText.indexOf('def ') !== -1 || qText.indexOf('class ') !== -1 || qText.indexOf('```') !== -1) {
+    qText = qText.replace(/<br>/g, '\n');
+    qText = '<pre class="code-block">' + esc(q.question) + '</pre>';
+  }
+
+  var isMulti = q.isMulti === true || q.type === 'multipleSelect';
+  var typeLabel = '';
+  var typeIcon = '';
+  if (q.type === 'codeOutput') { typeLabel = 'Code Output'; typeIcon = 'fas fa-terminal'; }
+  else if (q.type === 'debugging') { typeLabel = 'Debugging'; typeIcon = 'fas fa-bug'; }
+  else if (q.type === 'scenario') { typeLabel = 'Scenario'; typeIcon = 'fas fa-scroll'; }
+  else if (q.type === 'trueFalse') { typeLabel = 'True/False'; typeIcon = 'fas fa-check-circle'; }
+  else if (q.type === 'fillBlank') { typeLabel = 'Fill in Blank'; typeIcon = 'fas fa-pencil-alt'; }
+  else if (q.type === 'multipleSelect') { typeLabel = 'Multiple Select'; typeIcon = 'fas fa-list'; }
+  else { typeLabel = 'MCQ'; typeIcon = 'fas fa-question-circle'; }
+
+  var currentAnswer = currentQuiz.answers[currentQuiz.currentIndex];
+  var selectedArr = isMulti ? (Array.isArray(currentAnswer) ? currentAnswer : []) : [];
+
+  area.innerHTML = '<div class="quiz-question-card glass">'
+    + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem">'
+    + '<span><span class="badge badge-' + (q.difficulty === 'Beginner' ? 'success' : q.difficulty === 'Intermediate' ? 'warning' : 'error') + '">' + q.difficulty + '</span> <span class="question-type-badge ' + (q.type === 'codeOutput' ? 'code' : q.type === 'debugging' ? 'debug' : q.type === 'scenario' ? 'scenario' : q.type === 'trueFalse' ? 'tf' : q.type === 'fillBlank' ? 'fill' : 'mcq') + '"><i class="' + typeIcon + '"></i> ' + typeLabel + (isMulti ? ' (select all that apply)' : '') + '</span></span>'
+    + '<span style="font-size:0.8rem;color:var(--text-muted)">' + (q.subtopic || '') + '</span>'
+    + '</div>'
+    + '<div class="quiz-question-text">' + qText + '</div>'
+    + '<div>' + q.options.map(function(opt, oi) {
+      if (isMulti) {
+        var checked = selectedArr.indexOf(oi) !== -1;
+        return '<button class="quiz-option' + (checked ? ' selected' : '') + '" onclick="toggleMultiSelect(' + oi + ')" id="opt_' + oi + '">'
+          + '<span style="display:inline-flex;align-items:center;gap:0.6rem">'
+          + '<span style="width:20px;height:20px;border-radius:4px;border:2px solid ' + (checked ? 'var(--primary)' : '#cbd5e1') + ';display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;background:' + (checked ? 'var(--primary)' : 'transparent') + ';color:white">'
+          + (checked ? '<i class="fas fa-check"></i>' : '')
+          + '</span>'
+          + esc(opt) + '</span></button>';
+      }
+      var selected = (currentAnswer === oi || (Array.isArray(currentAnswer) && currentAnswer.indexOf(oi) !== -1)) ? ' selected' : '';
+      return '<button class="quiz-option' + selected + '" onclick="selectAnswer(' + oi + ')" id="opt_' + oi + '">' + esc(opt) + '</button>';
+    }).join('') + '</div>'
+    + (isMulti ? '<div style="margin-top:0.8rem;font-size:0.8rem;color:var(--text-muted)"><i class="fas fa-info-circle"></i> Click all correct answers, then click <strong>Next</strong> to proceed.</div>' : '')
+    + (q.documentation ? '<div style="margin-top:0.8rem;font-size:0.75rem;color:var(--text-muted)"><i class="fas fa-book"></i> <a href="' + esc(q.documentation) + '" target="_blank" style="color:var(--primary)">Documentation</a></div>' : '')
+    + '</div>';
+
+  var hasAnswer = answeredIdx !== undefined && answeredIdx !== -1;
+  var isLast = currentQuiz.currentIndex >= currentQuiz.questions.length - 1;
+  document.getElementById('skipBtn').style.display = hasAnswer ? 'none' : 'inline-flex';
+  document.getElementById('nextBtn').style.display = hasAnswer && !isLast ? 'inline-flex' : 'none';
+  document.getElementById('submitQuizBtn').style.display = hasAnswer && isLast ? 'inline-flex' : 'none';
+}
+
+function selectAnswer(oi) {
+  if (!currentQuiz) return;
+  var idx = currentQuiz.currentIndex;
+  var q = currentQuiz.questions[idx];
+  if (q && (q.isMulti === true || q.type === 'multipleSelect')) { toggleMultiSelect(oi); return; }
+  if (currentQuiz.answers[idx] !== undefined && currentQuiz.answers[idx] !== -1) return;
+  currentQuiz.answers[idx] = oi;
+  renderQuizQuestion();
+}
+
+function toggleMultiSelect(oi) {
+  if (!currentQuiz) return;
+  var idx = currentQuiz.currentIndex;
+  var current = currentQuiz.answers[idx];
+  var arr = Array.isArray(current) ? current.slice() : [];
+  var pos = arr.indexOf(oi);
+  if (pos !== -1) { arr.splice(pos, 1); }
+  else { arr.push(oi); arr.sort(function(a, b) { return a - b; }); }
+  if (arr.length === 0) { currentQuiz.answers[idx] = -1; }
+  else { currentQuiz.answers[idx] = arr; }
+  renderQuizQuestion();
+}
+
+function skipCurrent() {
+  if (!currentQuiz) return;
+  var idx = currentQuiz.currentIndex;
+  currentQuiz.answers[idx] = -1;
+  if (idx < currentQuiz.questions.length - 1) {
+    currentQuiz.currentIndex++;
+    renderQuizQuestion();
+  } else {
+    submitQuiz();
+  }
+}
+
+function nextQuestion() {
+  if (!currentQuiz) return;
+  var idx = currentQuiz.currentIndex;
+  var ans = currentQuiz.answers[idx];
+  if (ans === undefined || ans === -1 || (Array.isArray(ans) && ans.length === 0)) {
+    Utils.showToast('Select an answer first.', 'warning');
+    return;
+  }
+  currentQuiz.currentIndex++;
+  if (currentQuiz.currentIndex >= currentQuiz.questions.length) {
+    submitQuiz();
+  } else {
+    renderQuizQuestion();
+  }
+}
+
+function jumpToQuestion(idx) {
+  if (!currentQuiz) return;
+  if (idx >= 0 && idx < currentQuiz.questions.length) {
+    currentQuiz.currentIndex = idx;
+    renderQuizQuestion();
+  }
+}
+
+function submitQuiz() {
+  if (!currentQuiz) return;
+  var score = 0;
+  currentQuiz.questions.forEach(function(q, i) {
+    var userAns = currentQuiz.answers[i];
+    if (q.isMulti === true || q.type === 'multipleSelect') {
+      if (Array.isArray(userAns) && Array.isArray(q.answer)) {
+        var u = userAns.slice().sort();
+        var c = q.answer.slice().sort();
+        if (u.length === c.length && u.every(function(v, j) { return v === c[j]; })) score++;
+      }
+    } else {
+      if (userAns === q.answer) score++;
+    }
+  });
+  currentQuiz.score = score;
+  currentQuiz.status = 'completed';
+  currentQuiz.endTime = Date.now();
+  QuizSystem._saveResult(currentQuiz);
+  Utils.setStorage('active_quiz', currentQuiz);
+  finishQuiz();
+}
+
+function finishQuiz() {
+  if (quizInterval) { clearInterval(quizInterval); quizInterval = null; }
+  var courseId = currentQuiz.courseId;
+  Utils.setStorage('last_quiz_time_' + courseId, Date.now());
+  document.getElementById('quizActive').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'block';
+  displayResult();
+  loadPerformanceSummary();
+}
+
+function startTimer() {
+  if (quizInterval) clearInterval(quizInterval);
+  var elapsed = 0;
+  var totalSecs = currentQuiz ? currentQuiz.questions.length * QuizSystem.TIME_PER_QUESTION : 600;
+  quizInterval = setInterval(function() {
+    elapsed++;
+    var remaining = Math.max(0, totalSecs - elapsed);
+    var mins = Math.floor(remaining / 60);
+    var secs = remaining % 60;
+    document.getElementById('timerDisplay').textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+    var timerEl = document.getElementById('quizTimer');
+    timerEl.className = 'quiz-timer';
+    if (remaining < 30) timerEl.classList.add('danger');
+    else if (remaining < 60) timerEl.classList.add('warning');
+    if (remaining <= 0 && currentQuiz && currentQuiz.status === 'in_progress') {
+      clearInterval(quizInterval);
+      for (var i = 0; i < currentQuiz.questions.length; i++) {
+        if (currentQuiz.answers[i] === undefined) currentQuiz.answers[i] = -1;
+      }
+      submitQuiz();
+    }
+  }, 1000);
+}
+
+function displayResult() {
+  if (!currentQuiz) return;
+  var total = currentQuiz.questions.length;
+  var score = currentQuiz.score || 0;
+  var pct = total > 0 ? Math.round((score / total) * 100) : 0;
+  var timediff = currentQuiz.endTime - currentQuiz.startTime;
+  var timeStr = formatTime(Math.floor(timediff / 1000));
+
+  document.getElementById('resultScore').textContent = 'You scored ' + pct + '% (' + score + '/' + total + ')';
+  if (pct >= 80) { document.getElementById('resultTitle').textContent = 'Outstanding!'; document.getElementById('resultIcon').textContent = '🏆'; }
+  else if (pct >= 60) { document.getElementById('resultTitle').textContent = 'Good Job!'; document.getElementById('resultIcon').textContent = '⭐'; }
+  else if (pct >= 40) { document.getElementById('resultTitle').textContent = 'Keep Practicing!'; document.getElementById('resultIcon').textContent = '💪'; }
+  else { document.getElementById('resultTitle').textContent = 'Review and Try Again'; document.getElementById('resultIcon').textContent = '📚'; }
+
+  document.getElementById('resultStats').innerHTML = ''
+    + '<div class="glass" style="padding:0.8rem;border-radius:8px"><div style="font-size:1.5rem;font-weight:700;color:var(--success)">' + score + '/' + total + '</div><div style="font-size:0.8rem;color:var(--text-muted)">Correct</div></div>'
+    + '<div class="glass" style="padding:0.8rem;border-radius:8px"><div style="font-size:1.5rem;font-weight:700;color:var(--primary)">' + pct + '%</div><div style="font-size:0.8rem;color:var(--text-muted)">Accuracy</div></div>'
+    + '<div class="glass" style="padding:0.8rem;border-radius:8px"><div style="font-size:1.5rem;font-weight:700;color:var(--warning)">' + timeStr + '</div><div style="font-size:0.8rem;color:var(--text-muted)">Time Taken</div></div>';
+
+  var cooldownEnd = Date.now() + COOLDOWN_HOURS * 3600000;
+  var cooldownNotice = document.getElementById('cooldownNotice');
+  cooldownNotice.style.display = 'block';
+  document.getElementById('cooldownText').textContent = 'Next quiz available at ' + new Date(cooldownEnd).toLocaleTimeString();
+}
+
+function showReview() {
+  if (!currentQuiz) return;
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizReviewArea').style.display = 'block';
+
+  var container = document.getElementById('reviewQuestions');
+  container.innerHTML = currentQuiz.questions.map(function(q, i) {
+    var userAnswer = currentQuiz.answers[i];
+    var isMulti = q.isMulti === true || q.type === 'multipleSelect';
+    var isCorrect;
+    if (isMulti) {
+      var u = Array.isArray(userAnswer) ? userAnswer.slice().sort() : [];
+      var c = Array.isArray(q.answer) ? q.answer.slice().sort() : [];
+      isCorrect = u.length === c.length && u.every(function(v, j) { return v === c[j]; });
+    } else {
+      isCorrect = userAnswer === q.answer;
+    }
+    var isSkipped = userAnswer === -1 || userAnswer === undefined || (Array.isArray(userAnswer) && userAnswer.length === 0);
+    var qText = esc(q.question).replace(/\n/g, '<br>');
+    if (qText.indexOf('<br><br>') !== -1 || qText.indexOf('console.log') !== -1 || qText.indexOf('function') !== -1) {
+      qText = '<pre class="code-block">' + esc(q.question) + '</pre>';
+    }
+    var correctAnsText = '';
+    if (isMulti && Array.isArray(q.answer)) {
+      correctAnsText = q.answer.map(function(ai) { return esc(q.options[ai]); }).join(', ');
+    } else {
+      correctAnsText = esc(q.options[q.answer]);
+    }
+    return '<div class="glass" style="padding:1.5rem;border-radius:var(--border-radius-md);margin-bottom:1rem;border-left:4px solid ' + (isCorrect ? 'var(--success)' : isSkipped ? 'var(--text-muted)' : 'var(--error)') + '">'
+      + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">'
+      + '<span style="font-weight:600">Q' + (i + 1) + ': ' + qText + '</span>'
+      + '<span class="badge badge-' + (isCorrect ? 'success' : isSkipped ? 'secondary' : 'error') + '">' + (isCorrect ? 'Correct' : isSkipped ? 'Skipped' : 'Wrong') + '</span>'
+      + '</div>'
+      + '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem"><strong>Correct answer:</strong> ' + correctAnsText + '</div>'
+      + (q.explanation ? '<div style="font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-info-circle"></i> ' + esc(q.explanation) + '</div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+function resetToSetup() {
+  if (quizInterval) { clearInterval(quizInterval); quizInterval = null; }
+  currentQuiz = null;
+  document.getElementById('quizActive').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizReviewArea').style.display = 'none';
+  document.getElementById('quizSetup').style.display = 'block';
+  loadPerformanceSummary();
+}
+
+function loadPerformanceSummary() {
+  var container = document.getElementById('performanceSummary');
+  var stats = QuizSystem.getOverallStats();
+  if (stats.totalQuestions === 0) { container.style.display = 'none'; return; }
+  container.style.display = 'block';
+
+  document.getElementById('perfStats').innerHTML = ''
+    + '<div class="glass" style="padding:0.8rem;border-radius:8px;text-align:center"><div style="font-size:1.3rem;font-weight:700;color:var(--primary)">' + stats.totalQuestions + '</div><div style="font-size:0.75rem;color:var(--text-muted)">Total Questions</div></div>'
+    + '<div class="glass" style="padding:0.8rem;border-radius:8px;text-align:center"><div style="font-size:1.3rem;font-weight:700;color:var(--success)">' + stats.correctAnswers + '</div><div style="font-size:0.75rem;color:var(--text-muted)">Correct</div></div>'
+    + '<div class="glass" style="padding:0.8rem;border-radius:8px;text-align:center"><div style="font-size:1.3rem;font-weight:700;color:var(--warning)">' + stats.accuracy + '%</div><div style="font-size:0.75rem;color:var(--text-muted)">Accuracy</div></div>'
+    + '<div class="glass" style="padding:0.8rem;border-radius:8px;text-align:center"><div style="font-size:1.3rem;font-weight:700;color:var(--primary-dark)">' + stats.courses + '</div><div style="font-size:0.75rem;color:var(--text-muted)">Courses</div></div>';
+
+  var lb = document.getElementById('leaderboardContainer');
+  var byCourse = QuizSystem.getPerformanceByCourse();
+  var lbHtml = '<h4 style="margin-bottom:1rem;margin-top:1.5rem"><i class="fas fa-trophy" style="color:var(--warning)"></i> Per-Course Performance</h4>';
+  var entries = Object.keys(byCourse).sort(function(a, b) { return byCourse[b].average - byCourse[a].average; });
+  if (entries.length === 0) lbHtml += '<p style="color:var(--text-muted)">No quiz data yet.</p>';
+  else {
+    entries.forEach(function(cid, i) {
+      var d = byCourse[cid];
+      var rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+      lbHtml += '<div class="leaderboard-entry"><div class="leaderboard-rank ' + rankClass + '">' + (i + 1) + '</div><div style="flex:1"><strong>' + cid.toUpperCase() + '</strong></div><div>' + d.average + '% avg</div><div style="color:var(--success);font-weight:600">' + d.best + '% best</div><div style="font-size:0.8rem;color:var(--text-muted)">' + d.attempts + ' attempt' + (d.attempts !== 1 ? 's' : '') + '</div></div>';
+    });
+  }
+  lb.innerHTML = lbHtml;
+}
+
+function formatTime(secs) {
+  var m = Math.floor(secs / 60);
+  var s = secs % 60;
+  return m > 0 ? m + 'm ' + s + 's' : s + 's';
+}
+
+document.addEventListener('DOMContentLoaded', initQuizHub);
+</script>
+</body>
+</html>

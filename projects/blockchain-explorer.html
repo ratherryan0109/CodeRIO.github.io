@@ -1,0 +1,1464 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blockchain Explorer - CodeRio Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; position: relative; z-index: 1; }
+    .project-detail-hero { margin-bottom: 3rem; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-detail-hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 1000px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3.5rem; background: var(--glass-bg); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-body .section h2 { margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1.6rem; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.75rem; }
+    .project-body .section h3 { margin: 1.5rem 0 0.75rem; color: var(--primary); }
+    .project-body .section h4 { margin: 1rem 0 0.5rem; color: var(--text-secondary); }
+    .structure-tree { background: #1a1d2e; padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; line-height: 2; border: 1px solid var(--glass-border); overflow-x: auto; }
+    .code-block { background: #0f111a; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(245,158,11,0.2); position: relative; }
+    .code-block::before { content: attr(data-lang); position: absolute; top: 0.5rem; right: 0.75rem; font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.06); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1.2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); text-align: center; backdrop-filter: blur(4px); }
+    .feature-item i { font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-danger { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .badge-warning { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .badge-tech { background: rgba(99,102,241,0.15); color: #818cf8; }
+    .qa-card { background: rgba(99,102,241,0.04); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.75rem 0; }
+    .qa-card strong { color: var(--primary); }
+    .mistake-card { background: rgba(239,68,68,0.04); border-left: 4px solid #ef4444; padding: 1rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 0.75rem 0; }
+    .diagram-box { background: #1a1d2e; border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; font-family: 'Fira Code', monospace; font-size: 0.8rem; line-height: 1.6; overflow-x: auto; margin: 1rem 0; white-space: pre; color: #e2e8f0; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .table-wrap th, .table-wrap td { border: 1px solid var(--glass-border); padding: 0.6rem 0.8rem; text-align: left; }
+    .table-wrap th { background: rgba(99,102,241,0.1); color: var(--primary); font-weight: 600; }
+    .table-wrap tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 4% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } .project-body .section { padding: 1.2rem; } }
+  </style>
+</head>
+<body data-page="Project">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Blockchain Explorer</h1>
+      <div class="meta">
+        <span class="badge badge-warning">Intermediate</span>
+        <span><i class="far fa-clock"></i> 45-60 hours</span>
+        <span><i class="fas fa-code-branch"></i> 7 technologies</span>
+        <span><i class="fas fa-star"></i> Capstone</span>
+      </div>
+    </div>
+
+    <div class="project-body">
+
+      <div class="section">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>Build a comprehensive blockchain explorer that visualizes and analyzes blockchain data in real-time. This project covers block propagation, transaction tracking, smart contract analysis, network statistics, and wallet monitoring. You will build a full-stack application with a Node.js/Python backend that connects to Ethereum (via Web3.js/ethers.js), a React frontend with real-time data visualization, and a PostgreSQL database for indexing historical data. The explorer will support multiple networks (Ethereum mainnet, Goerli testnet, Polygon), provide advanced search capabilities, gas fee estimation, and token analytics. Deploy as a public-facing explorer similar to Etherscan but with customizable dashboards and alerting features.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
+        <p>Blockchain networks generate massive amounts of on-chain data — blocks, transactions, logs, internal transactions, token transfers, and contract state changes. While public explorers like Etherscan exist, they offer limited customization, no programmatic access for power users, and no real-time alerting. Developers building on blockchain need: (1) Real-time transaction monitoring with custom filters, (2) Smart contract verification and interaction tools, (3) Gas price analytics for optimal transaction timing, (4) Portfolio tracking across multiple addresses and networks, (5) WebSocket-based push notifications for on-chain events. The goal is to build an extensible, self-hosted blockchain explorer that provides deep insights into blockchain data with a modern, responsive UI and a comprehensive REST + WebSocket API.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-briefcase" style="color:var(--success)"></i> Real World Use Cases</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fas fa-chart-bar"></i><h4>DeFi Portfolio Tracker</h4><p>Monitor wallet addresses in real-time for token transfers, DeFi protocol interactions (Uniswap swaps, Aave deposits), and yield farming positions. Alerts via webhook/email when significant transactions occur.</p></div>
+          <div class="feature-item"><i class="fas fa-shield-alt"></i><h4>Smart Contract Auditor</h4><p>Analyze contract bytecode, verify source code, trace internal transactions, and detect suspicious patterns (honeypots, rug pulls, hidden mint functions). Used by security auditors before launching contracts.</p></div>
+          <div class="feature-item"><i class="fas fa-search-dollar"></i><h4>Gas Optimization Tool</h4><p>Track historical gas prices across ETH, Polygon, and BSC. Predict optimal gas prices using ML models. Create automated transaction submission at predicted low-gas times. Save 20-30% on gas fees.</p></div>
+          <div class="feature-item"><i class="fas fa-network-wired"></i><h4>Network Health Monitor</h4><p>Track validator activity, block propagation times, mempool size, uncle/orphan block rates, and chain reorganization events. Critical for infrastructure providers running nodes.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>The blockchain analytics market is projected to reach $15B by 2028, driven by DeFi expansion, institutional adoption, and regulatory requirements. Companies like Etherscan (10M+ monthly users), Dune Analytics (acquired for $250M), and Nansen ($200M valuation) demonstrate the demand for blockchain data tools. Key trends: (1) Multi-chain explorers supporting 50+ networks, (2) Real-time streaming analytics with sub-second latency, (3) AI-powered transaction tagging and anomaly detection, (4) Regulatory compliance tools for transaction tracking, (5) NFT-specific analytics with floor price tracking and rarity analysis. This project builds skills directly applicable to blockchain data engineering roles at companies like Coinbase, Chainalysis, and ConsenSys.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-check-circle" style="color:var(--success)"></i> Learning Outcomes</h2>
+        <ul>
+          <li><strong>Blockchain Fundamentals:</strong> Deep understanding of block structure, transaction lifecycle, consensus mechanisms (PoW, PoS), gas mechanics, and smart contract execution across multiple EVM-compatible chains.</li>
+          <li><strong>Web3 Integration:</strong> Master ethers.js and Web3.js for interacting with blockchain nodes via JSON-RPC. Implement event subscriptions, contract calls, and transaction simulations.</li>
+          <li><strong>Real-Time Data Indexing:</strong> Build scalable data pipelines that ingest blockchain data (blocks, txs, logs) and index them in PostgreSQL with proper sharding and partitioning strategies.</li>
+          <li><strong>Search & Full-Text Indexing:</strong> Implement Elasticsearch-based search across blocks, transactions, addresses, and contracts with fuzzy matching and auto-complete.</li>
+          <li><strong>Data Visualization:</strong> Create interactive charts (TradingView Lightweight Charts, Recharts) for gas prices, network activity, token prices, and wallet portfolio values.</li>
+          <li><strong>WebSocket Push Architecture:</strong> Design real-time notification system using WebSocket rooms for per-address monitoring with configurable alert thresholds.</li>
+          <li><strong>Smart Contract Verification:</strong> Implement contract source code verification using bytecode comparison and Solidity compilation with multiple compiler versions.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-layer-group" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fab fa-node-js"></i><h4>Node.js 20</h4><span class="badge badge-tech">20 LTS</span><p>Backend with Express.js</p></div>
+          <div class="feature-item"><i class="fab fa-ethereum"></i><h4>ethers.js</h4><span class="badge badge-tech">6.10</span><p>Ethereum JSON-RPC client</p></div>
+          <div class="feature-item"><i class="fas fa-database"></i><h4>PostgreSQL</h4><span class="badge badge-tech">16</span><p>Primary data store</p></div>
+          <div class="feature-item"><i class="fas fa-search"></i><h4>Elasticsearch</h4><span class="badge badge-tech">8.12</span><p>Full-text search engine</p></div>
+          <div class="feature-item"><i class="fab fa-react"></i><h4>React 18</h4><span class="badge badge-tech">18.2</span><p>Frontend SPA</p></div>
+          <div class="feature-item"><i class="fas fa-chart-line"></i><h4>TradingView Charts</h4><span class="badge badge-tech">2.8</span><p>Real-time charting</p></div>
+          <div class="feature-item"><i class="fas fa-plug"></i><h4>WebSocket (Socket.io)</h4><span class="badge badge-tech">4.7</span><p>Real-time push</p></div>
+          <div class="feature-item"><i class="fas fa-docker"></i><h4>Docker</h4><span class="badge badge-tech">24.0</span><p>Containerization</p></div>
+          <div class="feature-item"><i class="fas fa-brain"></i><h4>Redis</h4><span class="badge badge-tech">7.2</span><p>Caching + job queue</p></div>
+          <div class="feature-item"><i class="fas fa-code"></i><h4>Solidity</h4><span class="badge badge-tech">0.8.24</span><p>Smart contract verification</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-clipboard-list" style="color:var(--warning)"></i> Prerequisites</h2>
+        <ul>
+          <li><strong>JavaScript/TypeScript Proficiency:</strong> Strong Node.js skills including async/await, streams, event emitters. TypeScript is strongly recommended for type safety with blockchain data structures.</li>
+          <li><strong>Database Design:</strong> Experience with PostgreSQL including indexing strategies, query optimization, and materialized views. Understanding of time-series data patterns is essential.</li>
+          <li><strong>React & State Management:</strong> Solid React knowledge including hooks, context, and component lifecycle. Experience with Recharts or D3.js for data visualization.</li>
+          <li><strong>Blockchain Concepts:</strong> Basic understanding of how blockchain works — blocks, transactions, wallets, gas, smart contracts. Familiarity with Ethereum's architecture is a plus.</li>
+          <li><strong>WebSocket Knowledge:</strong> Understanding of WebSocket protocol, Socket.io patterns (rooms, namespaces), and reconnection strategies.</li>
+          <li><strong>DevOps Basics:</strong> Docker containerization, basic Linux administration, and experience with cloud deployment (AWS/GCP).</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <div class="diagram-box">
++------------------------------------------------------------------+
+|                    BLOCKCHAIN EXPLORER ARCHITECTURE               |
++------------------------------------------------------------------+
+|                                                                   |
+|  +--------------------+       +-----------------------------+    |
+|  | Ethereum Node      |&lt;------| INDEXER SERVICE           |    |
+|  | (Infura/Alchemy)   | JSON-  | - Block listener          |    |
+|  | wss://mainnet.eth  | RPC   | - Transaction fetcher      |    |
+|  +--------------------+       | - Log/event parser         |    |
+|                               | - Token transfer decoder   |    |
+|                               | - Internal tx tracer       |    |
+|                               | - Reorg handler            |    |
+|                               +-----------+----------------+    |
+|                                           |                      |
+|                               +-----------+----------------+    |
+|                               |    DATA LAYER              |    |
+|                               |  +----------------------+  |    |
+|                               |  | PostgreSQL (Primary)  |  |    |
+|                               |  | - blocks             |  |    |
+|                               |  | - transactions       |  |    |
+|                               |  | - logs               |  |    |
+|                               |  | - token_transfers    |  |    |
+|                               |  | - internal_txs       |  |    |
+|                               |  | - contracts          |  |    |
+|                               |  +----------------------+  |    |
+|                               |  +----------------------+  |    |
+|                               |  | Elasticsearch       |  |    |
+|                               |  | (Full-text search)   |  |    |
+|                               |  +----------------------+  |    |
+|                               |  +----------------------+  |    |
+|                               |  | Redis (Cache/Queue)  |  |    |
+|                               |  +----------------------+  |    |
+|                               +-----------+----------------+    |
+|                                           |                      |
+|                               +-----------+----------------+    |
+|                               |   API GATEWAY              |    |
+|                               |   - REST API (Express)     |    |
+|                               |   - WebSocket (Socket.io)  |    |
+|                               |   - Auth middleware         |    |
+|                               |   - Rate limiting           |    |
+|                               |   - Request caching         |    |
+|                               +-----------+----------------+    |
+|                                           |                      |
+|                               +-----------+----------------+    |
+|                               |   FRONTEND (React SPA)     |    |
+|                               |  +----------------------+  |    |
+|                               |  | Dashboard            |  |    |
+|                               |  | - Latest blocks       |  |    |
+|                               |  | - Mempool monitor     |  |    |
+|                               |  | - Gas tracker         |  |    |
+|                               |  +----------------------+  |    |
+|                               |  +----------------------+  |    |
+|                               |  | Explorer             |  |    |
+|                               |  | - Block detail        |  |    |
+|                               |  | - Transaction detail  |  |    |
+|                               |  | - Address viewer      |  |    |
+|                               |  | - Contract interact   |  |    |
+|                               |  +----------------------+  |    |
+|                               |  +----------------------+  |    |
+|                               |  | Analytics            |  |    |
+|                               |  | - Network stats       |  |    |
+|                               |  | - Gas history         |  |    |
+|                               |  | - Token analytics     |  |    |
+|                               |  | - Whale tracking      |  |    |
+|                               |  +----------------------+  |    |
+|                               +-----------------------------+    |
++------------------------------------------------------------------+
+        </div>
+        <p><strong>Data Flow:</strong> (1) Indexer connects to Ethereum via WebSocket JSON-RPC, subscribing to new block headers. (2) On each new block, indexer fetches full block + transaction data + receipts + logs. (3) Data is normalized, enriched (token transfer decoding, internal tx tracing), and stored in PostgreSQL. (4) Relevant data is also indexed in Elasticsearch for search. (5) Updated data is pushed to Redis pub/sub, which the API gateway subscribes to. (6) WebSocket connections relay real-time updates to connected frontend clients. (7) Frontend displays data with automatic re-rendering via React state subscriptions.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-database" style="color:var(--primary)"></i> Database Design</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Table</th><th>Columns</th><th>Description</th><th>Indexes</th></tr></thead>
+            <tbody>
+              <tr><td>blocks</td><td>number (BIGINT PK), hash (CHAR(66)), parent_hash, timestamp, miner, gas_used, gas_limit, base_fee, size, tx_count, difficulty, total_difficulty, extra_data, state_root, receipts_root, logs_bloom, sha3_uncles, nonce, created_at</td><td>Block headers with consensus data</td><td>hash, number DESC, timestamp, miner</td></tr>
+              <tr><td>transactions</td><td>hash (CHAR(66) PK), block_number, from, to, value, gas_limit, gas_price, max_fee, max_priority_fee, input_data, nonce, transaction_index, v, r, s, type, chain_id, status, block_hash, cumulative_gas, effective_gas_price, created_at</td><td>Transaction data with EIP-1559 fields</td><td>hash, block_number, from, to, block_number + tx_index</td></tr>
+              <tr><td>logs</td><td>id (BIGSERIAL PK), transaction_hash, block_number, log_index, address, topic0, topic1, topic2, topic3, data, removed, created_at</td><td>Event logs from contract execution</td><td>address + block_number, transaction_hash, (topic0, topic1)</td></tr>
+              <tr><td>token_transfers</td><td>id (BIGSERIAL PK), transaction_hash, log_index, token_address, from_address, to_address, value (NUMERIC), token_type (erc20/erc721/erc1155), token_id, created_at</td><td>Decoded token transfer events</td><td>from_address + created_at, to_address + created_at, token_address + block_number</td></tr>
+              <tr><td>internal_transactions</td><td>id (BIGSERIAL PK), transaction_hash, block_number, trace_index, type (call/create/selfdestruct), from, to, value, input, output, gas, gas_used, error, created_at</td><td>Internal calls via debug_traceTransaction</td><td>transaction_hash, block_number, from, to</td></tr>
+              <tr><td>contracts</td><td>address (CHAR(42) PK), creator_address, creation_tx_hash, block_number, bytecode, source_code, compiler_version, optimization, abi (JSONB), name, verified (BOOLEAN), verified_at, created_at</td><td>Verified smart contract info</td><td>creator_address, verified, block_number</td></tr>
+              <tr><td>address_labels</td><td>address (CHAR(42) PK), label, entity_type (exchange/nft/defi/bridge/whale), risk_score, tags (TEXT[]), created_at, updated_at</td><td>Labeled addresses for enrichment</td><td>entity_type, risk_score</td></tr>
+              <tr><td>gas_prices</td><td>id (BIGSERIAL PK), timestamp, safe_low, standard, fast, base_fee, priority_fee_avg, block_number</td><td>Historical gas price snapshots</td><td>timestamp DESC, block_number</td></tr>
+              <tr><td>network_stats</td><td>id (BIGSERIAL PK), timestamp, block_number, tps, avg_gas_price, avg_block_time, active_addresses_24h, total_txs_24h, avg_tx_value, uncle_rate</td><td>Network statistics snapshots</td><td>timestamp DESC</td></tr>
+              <tr><td>watched_addresses</td><td>id (BIGSERIAL PK), user_id, address, label, webhook_url, alert_on (TEXT[]), min_value, created_at</td><td>User-subscribed address monitoring</td><td>user_id, address</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-plug" style="color:var(--primary)"></i> API Structure</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>/api/blocks?limit=&offset=</td><td>GET</td><td>List recent blocks with pagination</td></tr>
+              <tr><td>/api/blocks/:hashOrNumber</td><td>GET</td><td>Get block details including transactions</td></tr>
+              <tr><td>/api/transactions?block=&from=&to=&limit=</td><td>GET</td><td>Search transactions with filters</td></tr>
+              <tr><td>/api/transactions/:hash</td><td>GET</td><td>Get transaction details with logs and internal txs</td></tr>
+              <tr><td>/api/address/:address</td><td>GET</td><td>Get address overview (balance, tx count, first/last seen)</td></tr>
+              <tr><td>/api/address/:address/transactions</td><td>GET</td><td>Get transactions for an address</td></tr>
+              <tr><td>/api/address/:address/token-balances</td><td>GET</td><td>Get ERC20/721/1155 token balances</td></tr>
+              <tr><td>/api/address/:address/internal-txs</td><td>GET</td><td>Get internal transactions for an address</td></tr>
+              <tr><td>/api/tokens/:address</td><td>GET</td><td>Get token details and metadata</td></tr>
+              <tr><td>/api/tokens/:address/transfers</td><td>GET</td><td>Get token transfer history</td></tr>
+              <tr><td>/api/contracts/:address</td><td>GET</td><td>Get verified contract source and ABI</td></tr>
+              <tr><td>/api/contracts/verify</td><td>POST</td><td>Submit contract source code for verification</td></tr>
+              <tr><td>/api/gas/current</td><td>GET</td><td>Get current gas prices (safe, standard, fast)</td></tr>
+              <tr><td>/api/gas/history?range=</td><td>GET</td><td>Get historical gas prices for charting</td></tr>
+              <tr><td>/api/stats/network</td><td>GET</td><td>Get current network statistics</td></tr>
+              <tr><td>/api/stats/overview</td><td>GET</td><td>Get overview stats (total blocks, txs, addresses)</td></tr>
+              <tr><td>/api/search?q=</td><td>GET</td><td>Unified search (blocks, txs, addresses, tokens)</td></tr>
+              <tr><td>/api/mempool</td><td>GET</td><td>Get pending transactions from mempool</td></tr>
+              <tr><td>/api/watch</td><td>POST/GET/DELETE</td><td>Manage watched addresses for alerts</td></tr>
+              <tr><td>/api/price/:token</td><td>GET</td><td>Get current token price (via DEX/oracle)</td></tr>
+              <tr><td>/ws/updates</td><td>WebSocket</td><td>Real-time updates: new blocks, txs, mempool, alerts</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
+        <div class="structure-tree">
+blockchain-explorer/
+├── docker-compose.yml
+├── README.md
+├── indexer/
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── Dockerfile
+│   ├── src/
+│   │   ├── index.ts                    # Entry point
+│   │   ├── config.ts                   # Network config, RPC endpoints
+│   │   ├── listeners/
+│   │   │   ├── blockListener.ts        # New block subscription
+│   │   │   ├── mempoolListener.ts      # Pending tx subscription
+│   │   │   └── reorgHandler.ts         # Chain reorganization handler
+│   │   ├── processors/
+│   │   │   ├── blockProcessor.ts       # Full block processing pipeline
+│   │   │   ├── txProcessor.ts          # Transaction parsing and enrichment
+│   │   │   ├── logProcessor.ts         # Event log parsing
+│   │   │   ├── tokenProcessor.ts       # ERC20/721/1155 transfer decoding
+│   │   │   └── internalTxProcessor.ts  # debug_traceTransaction parsing
+│   │   ├── services/
+│   │   │   ├── ethService.ts           # JSON-RPC client (ethers.js)
+│   │   │   ├── dbService.ts            # PostgreSQL via Prisma
+│   │   │   ├── searchService.ts        # Elasticsearch indexing
+│   │   │   ├── cacheService.ts         # Redis caching
+│   │   │   └── notificationService.ts  # Alert dispatch
+│   │   ├── models/
+│   │   │   ├── block.ts
+│   │   │   ├── transaction.ts
+│   │   │   ├── log.ts
+│   │   │   ├── tokenTransfer.ts
+│   │   │   └── internalTx.ts
+│   │   ├── utils/
+│   │   │   ├── decoder.ts              # ABI decoding utilities
+│   │   │   ├── formatter.ts            # Data normalization
+│   │   │   ├── retry.ts                # Retry with exponential backoff
+│   │   │   └── logger.ts               # Structured logging
+│   │   └── tests/
+│   │       ├── blockProcessor.test.ts
+│   │       ├── tokenProcessor.test.ts
+│   │       └── reorgHandler.test.ts
+├── api/
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── src/
+│   │   ├── index.ts                    # Express app entry
+│   │   ├── app.ts                      # App setup, middleware
+│   │   ├── routes/
+│   │   │   ├── blocks.ts
+│   │   │   ├── transactions.ts
+│   │   │   ├── addresses.ts
+│   │   │   ├── tokens.ts
+│   │   │   ├── contracts.ts
+│   │   │   ├── gas.ts
+│   │   │   ├── stats.ts
+│   │   │   ├── search.ts
+│   │   │   ├── mempool.ts
+│   │   │   └── watch.ts
+│   │   ├── middleware/
+│   │   │   ├── auth.ts                 # API key / JWT auth
+│   │   │   ├── rateLimiter.ts          # Express rate limit
+│   │   │   ├── cache.ts                # Response caching
+│   │   │   └── validator.ts            # Request validation
+│   │   ├── websocket/
+│   │   │   ├── socketServer.ts         # Socket.io server setup
+│   │   │   ├── rooms.ts                # Per-address WebSocket rooms
+│   │   │   └── events.ts               # Event mapping constants
+│   │   ├── services/
+│   │   │   ├── blockService.ts
+│   │   │   ├── txService.ts
+│   │   │   ├── addressService.ts
+│   │   │   ├── tokenService.ts
+│   │   │   ├── contractService.ts
+│   │   │   ├── gasService.ts
+│   │   │   ├── searchService.ts
+│   │   │   └── statsService.ts
+│   │   └── types/
+│   │       └── api.ts                  # TypeScript interfaces
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   ├── public/
+│   │   └── workers/
+│   │       └── search.worker.js
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   ├── store/
+│   │   │   ├── blockStore.ts
+│   │   │   ├── txStore.ts
+│   │   │   ├── addressStore.ts
+│   │   │   ├── gasStore.ts
+│   │   │   ├── searchStore.ts
+│   │   │   └── websocketStore.ts
+│   │   ├── components/
+│   │   │   ├── Layout.tsx
+│   │   │   ├── Header.tsx
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── BlockList.tsx
+│   │   │   ├── BlockDetail.tsx
+│   │   │   ├── TransactionList.tsx
+│   │   │   ├── TransactionDetail.tsx
+│   │   │   ├── AddressView.tsx
+│   │   │   ├── TokenBalances.tsx
+│   │   │   ├── TokenTransfers.tsx
+│   │   │   ├── ContractVerification.tsx
+│   │   │   ├── GasTracker.tsx
+│   │   │   ├── GasChart.tsx
+│   │   │   ├── NetworkStats.tsx
+│   │   │   ├── MempoolView.tsx
+│   │   │   ├── SearchBar.tsx
+│   │   │   ├── SearchResults.tsx
+│   │   │   ├── WatchList.tsx
+│   │   │   ├── PortFolioView.tsx
+│   │   │   └── AlertConfig.tsx
+│   │   ├── hooks/
+│   │   │   ├── useWebSocket.ts
+│   │   │   ├── useBlockSubscription.ts
+│   │   │   ├── useAddressMonitor.ts
+│   │   │   └── useGasData.ts
+│   │   ├── services/
+│   │   │   ├── api.ts
+│   │   │   ├── ws.ts
+│   │   │   └── formatters.ts
+│   │   ├── utils/
+│   │   │   ├── constants.ts
+│   │   │   ├── address.ts
+│   │   │   ├── time.ts
+│   │   │   └── web3.ts
+│   │   └── styles/
+│   │       ├── explorer.css
+│   │       ├── dashboard.css
+│   │       └── charts.css
+│   └── tests/
+│       ├── BlockList.test.tsx
+│       └── GasTracker.test.tsx
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/
+├── scripts/
+│   ├── seed_labels.sql
+│   ├── backfill_blocks.sh
+│   └── validate_db.sh
+└── .env.example
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-paint-brush" style="color:var(--primary)"></i> UI/UX Design Strategy</h2>
+        <p>The explorer follows a data-dense design philosophy — showing maximum information at a glance without overwhelming the user:</p>
+        <ul>
+          <li><strong>Dashboard as Landing:</strong> The home page shows a live dashboard with: latest blocks (auto-scrolling list), gas price gauge with trend arrow, mempool size indicator, daily transaction count chart, and top tokens by transfer volume. All charts update in real-time via WebSocket.</li>
+          <li><strong>Search-First Navigation:</strong> A prominent search bar accepts any input (address, tx hash, block number, domain name) and auto-detects the type. Results appear in a dropdown with instant preview. Use Elasticsearch's auto-complete with fuzzy matching.</li>
+          <li><strong>Detail Pages with Tabbed Layout:</strong> Transaction detail shows tabs: Overview (value, gas, status), Logs (decoded event list), Internal Txs (call trace tree), and Transfers (tokens moved). Each tab is independently scrollable with copy buttons for important values.</li>
+          <li><strong>Address View with Portfolio:</strong> Address pages show: ETH balance + USD value, token holdings with current prices, recent transactions (filterable by incoming/outgoing), internal transactions, and contract interactions. Whale addresses get special badges.</li>
+          <li><strong>Color Coding:</strong> Transactions color-coded by status (success=green, failed=red, pending=yellow). Gas prices shown with heat colors (low=green, medium=yellow, high=red, extreme=purple). Token transfers show direction arrows (inward=blue, outward=red).</li>
+          <li><strong>Responsive Data Tables:</strong> All lists use virtualized scrolling for performance. Columns are configurable and sortable. Clicking a row navigates to the detail page. Copy-to-clipboard buttons for hashes and addresses.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card"><h4>Phase 1: Core Indexer (Week 1-2)</h4><p>Set up Node.js project with TypeScript. Implement WebSocket connection to Ethereum node via ethers.js. Build block listener that subscribes to 'block' events. Implement block processor that fetches full block data, transactions, and receipts. Store in PostgreSQL via Prisma ORM. Handle chain reorganizations (reorgs up to 6 blocks deep). Create Docker environment with postgres + redis.</p></div>
+        <div class="phase-card"><h4>Phase 2: Transaction Enrichment (Week 3-4)</h4><p>Build transaction processor that analyzes each tx for: token transfers (decode ERC20 Transfer events), internal transactions (via debug_traceTransaction), contract creation detection, and log parsing. Implement ABI decoding for common standards (ERC20, ERC721, ERC1155, Uniswap, OpenSea). Create token transfer table and internal transaction table.</p></div>
+        <div class="phase-card"><h4>Phase 3: Search & Indexing (Week 5-6)</h4><p>Set up Elasticsearch cluster (single node for dev). Index blocks, transactions, addresses, and tokens with appropriate mappings. Implement unified search endpoint that queries all indices and ranks results by relevance. Add auto-complete suggestions. Build fuzzy search for addresses (Levenshtein distance on last 4 chars).</p></div>
+        <div class="phase-card"><h4>Phase 4: API Gateway (Week 7-8)</h4><p>Build Express.js REST API with all endpoints. Implement caching layer with Redis (cache blocks/txs for 12 seconds = one block time). Add rate limiting (100 req/min for free tier, 1000 for premium). Set up Socket.io with Redis adapter for horizontal scaling. Create WebSocket rooms for address monitoring.</p></div>
+        <div class="phase-card"><h4>Phase 5: Frontend Dashboard (Week 9-10)</h4><p>Create React app with Vite. Build dashboard with real-time block list, gas tracker, and network stats. Implement search bar with auto-complete. Build block detail, transaction detail, and address view pages. Add token transfer tables and internal transaction tree views.</p></div>
+        <div class="phase-card"><h4>Phase 6: Smart Contracts & Verification (Week 11-12)</h4><p>Implement contract verification system: accept source code + compiler version + settings, compile with Solidity compiler, compare bytecode against on-chain code. Store verified sources and ABIs. Build contract interaction page with read/write function calls using ethers.js.</p></div>
+        <div class="phase-card"><h4>Phase 7: Watch Lists & Alerts (Week 13-14)</h4><p>Build user authentication (JWT). Create watched address CRUD with webhook notifications. Implement alert evaluation engine: check each new transaction against watch rules (min value, specific tokens, counterparty filtering). Send alerts via webhook, email (SendGrid), and WebSocket push.</p></div>
+        <div class="phase-card"><h4>Phase 8: Analytics & Polish (Week 15-16)</h4><p>Build analytics pipeline with materialized views for: daily active addresses, TPS history, gas price distribution, top tokens by volume, whale movement tracking. Add TradingView charts for gas history. Implement portfolio tracker with USD value calculation. Load testing with k6. Production deployment with PM2 cluster mode.</p></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cogs" style="color:var(--primary)"></i> Implementation Guide</h2>
+
+        <h3>Step 1: Blockchain Indexer Core</h3>
+        <div class="code-block" data-lang="typescript"><code>// indexer/src/listeners/blockListener.ts
+import { ethers } from 'ethers';
+import { EventEmitter } from 'events';
+import { BlockProcessor } from '../processors/blockProcessor';
+import { logger } from '../utils/logger';
+import { config } from '../config';
+
+export class BlockListener extends EventEmitter {
+  private provider: ethers.WebSocketProvider;
+  private processor: BlockProcessor;
+  private latestBlock: number = 0;
+  private isSyncing: boolean = false;
+
+  constructor() {
+    super();
+    this.provider = new ethers.WebSocketProvider(config.RPC_WS_URL);
+    this.processor = new BlockProcessor(this.provider);
+  }
+
+  async start() {
+    // Subscribe to new block headers
+    this.provider.on('block', async (blockNumber: number) => {
+      logger.info(`New block detected: ${blockNumber}`);
+      this.latestBlock = blockNumber;
+      
+      if (!this.isSyncing) {
+        this.isSyncing = true;
+        try {
+          await this.processor.processBlock(blockNumber);
+          this.emit('blockProcessed', blockNumber);
+        } catch (error) {
+          logger.error(`Failed to process block ${blockNumber}:`, error);
+          // Queue for retry
+          await this.queueForRetry(blockNumber);
+        } finally {
+          this.isSyncing = false;
+        }
+      }
+    });
+
+    // Handle reconnections
+    this.provider.on('error', (error) => {
+      logger.error('WebSocket error:', error);
+      this.reconnect();
+    });
+  }
+
+  private async queueForRetry(blockNumber: number) {
+    // Store failed blocks in Redis for retry
+    await config.redis.lpush('failed:blocks', blockNumber.toString());
+  }
+
+  private async reconnect() {
+    logger.info('Attempting WebSocket reconnection...');
+    this.provider.removeAllListeners();
+    this.provider = new ethers.WebSocketProvider(config.RPC_WS_URL);
+    
+    // Backfill missed blocks
+    const current = await this.provider.getBlockNumber();
+    for (let i = this.latestBlock + 1; i <= current; i++) {
+      await this.processor.processBlock(i);
+    }
+    
+    await this.start();
+  }
+
+  async backfill(fromBlock: number, toBlock: number) {
+    logger.info(`Backfilling blocks ${fromBlock} to ${toBlock}`);
+    for (let i = fromBlock; i <= toBlock; i++) {
+      await this.processor.processBlock(i);
+      if (i % 100 === 0) logger.info(`Backfill progress: ${i - fromBlock}/${toBlock - fromBlock}`);
+    }
+  }
+}</code></div>
+
+        <h3>Step 2: Block Processor</h3>
+        <div class="code-block" data-lang="typescript"><code>// indexer/src/processors/blockProcessor.ts
+import { ethers } from 'ethers';
+import { prisma } from '../services/dbService';
+import { searchService } from '../services/searchService';
+import { cacheService } from '../services/cacheService';
+import { TxProcessor } from './txProcessor';
+import { logger } from '../utils/logger';
+
+export class BlockProcessor {
+  private provider: ethers.Provider;
+  private txProcessor: TxProcessor;
+
+  constructor(provider: ethers.Provider) {
+    this.provider = provider;
+    this.txProcessor = new TxProcessor(provider);
+  }
+
+  async processBlock(blockNumber: number) {
+    const startTime = Date.now();
+    
+    // Fetch full block with transactions
+    const block = await this.provider.getBlock(blockNumber, true);
+    if (!block) throw new Error(`Block ${blockNumber} not found`);
+
+    // Check for reorg
+    const existing = await prisma.block.findUnique({ where: { number: blockNumber } });
+    if (existing && existing.hash !== block.hash) {
+      logger.warn(`Reorg detected at block ${blockNumber}: ${existing.hash} -> ${block.hash}`);
+      await this.handleReorg(blockNumber);
+    }
+
+    // Upsert block
+    await prisma.block.upsert({
+      where: { number: blockNumber },
+      update: {
+        hash: block.hash,
+        parentHash: block.parentHash,
+        timestamp: new Date(block.timestamp * 1000),
+        miner: block.miner,
+        gasUsed: block.gasUsed.toString(),
+        gasLimit: block.gasLimit.toString(),
+        baseFee: block.baseFeePerGas?.toString(),
+        size: block.size,
+        txCount: block.transactions.length,
+        difficulty: block.difficulty.toString(),
+        nonce: block.nonce,
+      },
+      create: {
+        number: blockNumber,
+        hash: block.hash,
+        parentHash: block.parentHash,
+        timestamp: new Date(block.timestamp * 1000),
+        miner: block.miner,
+        gasUsed: block.gasUsed.toString(),
+        gasLimit: block.gasLimit.toString(),
+        baseFee: block.baseFeePerGas?.toString(),
+        size: block.size,
+        txCount: block.transactions.length,
+        difficulty: block.difficulty.toString(),
+        extraData: block.extraData,
+        stateRoot: block.stateRoot,
+        receiptsRoot: block.receiptsRoot,
+        nonce: block.nonce,
+      },
+    });
+
+    // Process each transaction
+    const receipts = await Promise.all(
+      block.transactions.map(tx => this.provider.getTransactionReceipt(tx.hash))
+    );
+
+    for (let i = 0; i < block.transactions.length; i++) {
+      const tx = block.transactions[i];
+      const receipt = receipts[i];
+      if (receipt) {
+        await this.txProcessor.processTransaction(tx as ethers.TransactionResponse, receipt);
+      }
+    }
+
+    // Index block in Elasticsearch
+    await searchService.indexBlock(block);
+
+    // Cache block
+    await cacheService.set(`block:${blockNumber}`, block, 15);
+
+    // Update network stats
+    await this.updateNetworkStats(block);
+
+    const duration = Date.now() - startTime;
+    logger.info(`Block ${blockNumber} processed in ${duration}ms (${block.transactions.length} txs)`);
+
+    // Publish to Redis for real-time updates
+    await cacheService.publish('blocks:new', JSON.stringify({
+      number: blockNumber,
+      hash: block.hash,
+      txCount: block.transactions.length,
+      timestamp: block.timestamp,
+    }));
+  }
+
+  private async handleReorg(blockNumber: number) {
+    // Delete block and all associated data
+    await prisma.$transaction([
+      prisma.internalTransaction.deleteMany({ where: { blockNumber } }),
+      prisma.tokenTransfer.deleteMany({ where: { blockNumber } }),
+      prisma.log.deleteMany({ where: { blockNumber } }),
+      prisma.transaction.deleteMany({ where: { blockNumber } }),
+      prisma.block.delete({ where: { number: blockNumber } }),
+    ]);
+    
+    // Notify frontend about reorg
+    await cacheService.publish('system:reorg', JSON.stringify({ blockNumber }));
+  }
+
+  private async updateNetworkStats(block: ethers.Block) {
+    const recentBlocks = await prisma.block.findMany({
+      orderBy: { number: 'desc' },
+      take: 100,
+    });
+
+    if (recentBlocks.length >= 2) {
+      const timeSpan = (recentBlocks[0].timestamp.getTime() - recentBlocks[recentBlocks.length - 1].timestamp.getTime()) / 1000;
+      const avgBlockTime = timeSpan / (recentBlocks.length - 1);
+      const totalGasUsed = recentBlocks.reduce((sum, b) => sum + BigInt(b.gasUsed), BigInt(0));
+      const avgGasPrice = totalGasUsed / BigInt(recentBlocks.length);
+
+      await prisma.networkStat.create({
+        data: {
+          timestamp: new Date(),
+          blockNumber: block.number,
+          tps: recentBlocks.reduce((sum, b) => sum + b.txCount, 0) / timeSpan,
+          avgGasPrice: avgGasPrice.toString(),
+          avgBlockTime,
+          totalTxs24h: await this.getTxCount24h(),
+          activeAddresses24h: await this.getActiveAddresses24h(),
+        },
+      });
+    }
+  }
+
+  private async getTxCount24h(): Promise<number> {
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    return prisma.transaction.count({ where: { createdAt: { gte: since } } });
+  }
+
+  private async getActiveAddresses24h(): Promise<number> {
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const [fromCount, toCount] = await Promise.all([
+      prisma.transaction.groupBy({ by: ['from'], where: { createdAt: { gte: since } }, _count: true }),
+      prisma.transaction.groupBy({ by: ['to'], where: { createdAt: { gte: since } }, _count: true }),
+    ]);
+    return new Set([...fromCount.map(r => r.from), ...toCount.map(r => r.to)]).size;
+  }
+}</code></div>
+
+        <h3>Step 3: Token Transfer Decoder</h3>
+        <div class="code-block" data-lang="typescript"><code>// indexer/src/processors/tokenProcessor.ts
+import { ethers } from 'ethers';
+import { prisma } from '../services/dbService';
+import { logger } from '../utils/logger';
+
+const ERC20_TRANSFER_TOPIC = ethers.id('Transfer(address,address,uint256)');
+const ERC721_TRANSFER_TOPIC = ethers.id('Transfer(address,address,uint256)');
+const ERC1155_TRANSFER_SINGLE_TOPIC = ethers.id('TransferSingle(address,address,address,uint256,uint256)');
+const ERC1155_TRANSFER_BATCH_TOPIC = ethers.id('TransferBatch(address,address,address,uint256[],uint256[])');
+
+export class TokenProcessor {
+  async processLogs(logs: ethers.Log[], transactionHash: string, blockNumber: number) {
+    const transfers: any[] = [];
+
+    for (const log of logs) {
+      try {
+        if (log.topics[0] === ERC20_TRANSFER_TOPIC && log.topics.length >= 3) {
+          const decoded = this.decodeERC20Transfer(log);
+          transfers.push({ ...decoded, tokenType: 'erc20' });
+        } else if (log.topics[0] === ERC721_TRANSFER_TOPIC && log.topics.length >= 4) {
+          const decoded = this.decodeERC721Transfer(log);
+          transfers.push({ ...decoded, tokenType: 'erc721' });
+        } else if (log.topics[0] === ERC1155_TRANSFER_SINGLE_TOPIC) {
+          const decoded = this.decodeERC1155Single(log);
+          transfers.push({ ...decoded, tokenType: 'erc1155' });
+        } else if (log.topics[0] === ERC1155_TRANSFER_BATCH_TOPIC) {
+          const decoded = this.decodeERC1155Batch(log);
+          transfers.push(...decoded.map(d => ({ ...d, tokenType: 'erc1155' })));
+        }
+      } catch (error) {
+        logger.warn(`Failed to decode log at tx ${transactionHash} index ${log.index}:`, error);
+      }
+    }
+
+    if (transfers.length > 0) {
+      await prisma.tokenTransfer.createMany({
+        data: transfers.map(t => ({
+          transactionHash,
+          logIndex: t.logIndex,
+          tokenAddress: t.tokenAddress,
+          fromAddress: t.from,
+          toAddress: t.to,
+          value: t.value,
+          tokenType: t.tokenType,
+          tokenId: t.tokenId?.toString(),
+          blockNumber,
+        })),
+      });
+    }
+
+    return transfers;
+  }
+
+  private decodeERC20Transfer(log: ethers.Log) {
+    const abi = ['event Transfer(address indexed from, address indexed to, uint256 value)'];
+    const iface = new ethers.Interface(abi);
+    const parsed = iface.parseLog({ topics: [...log.topics], data: log.data });
+    return {
+      logIndex: log.index,
+      tokenAddress: log.address,
+      from: parsed!.args[0],
+      to: parsed!.args[1],
+      value: parsed!.args[2].toString(),
+    };
+  }
+
+  private decodeERC721Transfer(log: ethers.Log) {
+    const abi = ['event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)'];
+    const iface = new ethers.Interface(abi);
+    const parsed = iface.parseLog({ topics: [...log.topics], data: log.data });
+    return {
+      logIndex: log.index,
+      tokenAddress: log.address,
+      from: parsed!.args[0],
+      to: parsed!.args[1],
+      tokenId: parsed!.args[2],
+      value: '1',
+    };
+  }
+
+  private decodeERC1155Single(log: ethers.Log) {
+    const abi = ['event TransferSingle(address indexed operator, address indexed from, address indexed to, uint256 id, uint256 value)'];
+    const iface = new ethers.Interface(abi);
+    const parsed = iface.parseLog({ topics: [...log.topics], data: log.data });
+    return {
+      logIndex: log.index,
+      tokenAddress: log.address,
+      from: parsed!.args[1],
+      to: parsed!.args[2],
+      tokenId: parsed!.args[3],
+      value: parsed!.args[4].toString(),
+    };
+  }
+
+  private decodeERC1155Batch(log: ethers.Log) {
+    const abi = ['event TransferBatch(address indexed operator, address indexed from, address indexed to, uint256[] ids, uint256[] values)'];
+    const iface = new ethers.Interface(abi);
+    const parsed = iface.parseLog({ topics: [...log.topics], data: log.data });
+    const ids = parsed!.args[3];
+    const values = parsed!.args[4];
+    return ids.map((id: bigint, i: number) => ({
+      logIndex: log.index,
+      tokenAddress: log.address,
+      from: parsed!.args[1],
+      to: parsed!.args[2],
+      tokenId: id,
+      value: values[i].toString(),
+    }));
+  }
+}</code></div>
+
+        <h3>Step 4: Elasticsearch Search Service</h3>
+        <div class="code-block" data-lang="typescript"><code>// indexer/src/services/searchService.ts
+import { Client } from '@elastic/elasticsearch';
+import { ethers } from 'ethers';
+import { config } from '../config';
+
+const esClient = new Client({ node: config.ELASTICSEARCH_URL });
+
+export const searchService = {
+  async indexBlock(block: ethers.Block) {
+    await esClient.index({
+      index: 'blocks',
+      id: block.hash,
+      body: {
+        number: block.number,
+        hash: block.hash,
+        parentHash: block.parentHash,
+        timestamp: block.timestamp,
+        miner: block.miner,
+        txCount: block.transactions.length,
+        gasUsed: block.gasUsed.toString(),
+        gasLimit: block.gasLimit.toString(),
+      },
+    });
+  },
+
+  async indexTransaction(tx: ethers.TransactionResponse, receipt: ethers.TransactionReceipt) {
+    await esClient.index({
+      index: 'transactions',
+      id: tx.hash,
+      body: {
+        hash: tx.hash,
+        blockNumber: tx.blockNumber,
+        from: tx.from,
+        to: tx.to,
+        value: tx.value.toString(),
+        gasPrice: tx.gasPrice?.toString(),
+        gasUsed: receipt.gasUsed.toString(),
+        status: receipt.status,
+        timestamp: (await tx.getBlock()).timestamp,
+        methodSignature: tx.data.slice(0, 10),
+        inputLength: tx.data.length,
+      },
+    });
+  },
+
+  async indexAddress(address: string, label?: string) {
+    await esClient.index({
+      index: 'addresses',
+      id: address,
+      body: {
+        address,
+        label,
+        tags: [],
+        lastSeen: Date.now(),
+      },
+    });
+  },
+
+  async unifiedSearch(query: string, page: number = 1, size: number = 20) {
+    // Detect query type
+    const isAddress = /^0x[a-fA-F0-9]{40}$/.test(query);
+    const isTxHash = /^0x[a-fA-F0-9]{64}$/.test(query);
+    const isBlockNumber = /^\d+$/.test(query);
+
+    if (isAddress) return this.searchByAddress(query);
+    if (isTxHash) return this.searchByTxHash(query);
+    if (isBlockNumber) return this.searchByBlockNumber(parseInt(query));
+
+    return this.fullTextSearch(query, page, size);
+  },
+
+  private async fullTextSearch(query: string, page: number, size: number) {
+    const from = (page - 1) * size;
+    
+    const [blocksResult, txsResult, addressesResult] = await Promise.all([
+      esClient.search({
+        index: 'blocks',
+        from: 0,
+        size: 5,
+        query: {
+          multi_match: {
+            query,
+            fields: ['hash^3', 'miner^2', 'number'],
+            fuzziness: 'AUTO',
+          },
+        },
+      }),
+      esClient.search({
+        index: 'transactions',
+        from: 0,
+        size: 10,
+        query: {
+          multi_match: {
+            query,
+            fields: ['hash^3', 'from^2', 'to^2', 'methodSignature'],
+            fuzziness: 'AUTO',
+          },
+        },
+      }),
+      esClient.search({
+        index: 'addresses',
+        from: 0,
+        size: 5,
+        query: {
+          multi_match: {
+            query,
+            fields: ['address^3', 'label', 'tags'],
+            fuzziness: 'AUTO',
+          },
+        },
+      }),
+    ]);
+
+    return {
+      blocks: blocksResult.hits.hits.map(h => h._source),
+      transactions: txsResult.hits.hits.map(h => h._source),
+      addresses: addressesResult.hits.hits.map(h => h._source),
+      total: blocksResult.hits.total + txsResult.hits.total + addressesResult.hits.total,
+    };
+  },
+
+  async searchByAddress(address: string) {
+    // Get address summary from DB
+    const [txCount, balance, tokenBalances] = await Promise.all([
+      prisma.transaction.count({ where: { OR: [{ from: address }, { to: address }] } }),
+      this.getEthBalance(address),
+      this.getTokenBalances(address),
+    ]);
+
+    return {
+      type: 'address',
+      address,
+      txCount,
+      balance: ethers.formatEther(balance),
+      tokenBalances,
+      recentTransactions: await prisma.transaction.findMany({
+        where: { OR: [{ from: address }, { to: address }] },
+        orderBy: { blockNumber: 'desc' },
+        take: 25,
+      }),
+    };
+  },
+
+  private async getEthBalance(address: string): Promise<bigint> {
+    const response = await fetch(config.RPC_HTTP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'eth_getBalance',
+        params: [address, 'latest'],
+        id: 1,
+      }),
+    });
+    const data = await response.json();
+    return BigInt(data.result);
+  },
+
+  private async getTokenBalances(address: string): Promise<any[]> {
+    const transfers = await prisma.tokenTransfer.findMany({
+      where: { toAddress: address },
+      distinct: ['tokenAddress'],
+      take: 50,
+    });
+    return transfers.map(t => ({ tokenAddress: t.tokenAddress, tokenType: t.tokenType }));
+  },
+};</code></div>
+
+        <h3>Step 5: WebSocket Real-time Updates</h3>
+        <div class="code-block" data-lang="typescript"><code>// api/src/websocket/socketServer.ts
+import { Server as HTTPServer } from 'http';
+import { Server } from 'socket.io';
+import { Redis } from 'ioredis';
+
+const redisPub = new Redis(process.env.REDIS_URL!);
+const redisSub = new Redis(process.env.REDIS_URL!);
+
+export function setupSocketServer(httpServer: HTTPServer) {
+  const io = new Server(httpServer, {
+    cors: { origin: '*', methods: ['GET', 'POST'] },
+    transports: ['websocket', 'polling'],
+    pingInterval: 10000,
+    pingTimeout: 5000,
+  });
+
+  // Subscribe to Redis channels for cross-process communication
+  redisSub.subscribe('blocks:new', 'txs:new', 'mempool:update', 'system:reorg', 'alerts:new');
+  
+  redisSub.on('message', (channel, message) => {
+    const data = JSON.parse(message);
+    
+    switch (channel) {
+      case 'blocks:new':
+        io.to('blocks').emit('newBlock', data);
+        break;
+      case 'txs:new':
+        io.to('transactions').emit('newTransaction', data);
+        // Also send to address-specific rooms
+        if (data.from) io.to(`address:${data.from}`).emit('newTx', data);
+        if (data.to) io.to(`address:${data.to}`).emit('newTx', data);
+        break;
+      case 'mempool:update':
+        io.to('mempool').emit('mempoolUpdate', data);
+        break;
+      case 'system:reorg':
+        io.emit('reorg', data);
+        break;
+      case 'alerts:new':
+        io.to(`user:${data.userId}`).emit('alert', data);
+        break;
+    }
+  });
+
+  io.on('connection', (socket) => {
+    console.log(`Client connected: ${socket.id}`);
+
+    // Join rooms based on client request
+    socket.on('subscribe', (rooms: string[]) => {
+      rooms.forEach(room => {
+        socket.join(room);
+        console.log(`Socket ${socket.id} joined room: ${room}`);
+      });
+    });
+
+    socket.on('subscribeAddress', (address: string) => {
+      if (/^0x[a-fA-F0-9]{40}$/.test(address)) {
+        socket.join(`address:${address}`);
+        socket.emit('subscribed', address);
+      }
+    });
+
+    socket.on('unsubscribeAddress', (address: string) => {
+      socket.leave(`address:${address}`);
+    });
+
+    // Authenticate for user-specific rooms
+    socket.on('authenticate', (token: string) => {
+      try {
+        const user = jwt.verify(token, process.env.JWT_SECRET!);
+        socket.join(`user:${user.id}`);
+        socket.data.userId = user.id;
+        socket.emit('authenticated', user.id);
+      } catch {
+        socket.emit('authError', 'Invalid token');
+      }
+    });
+
+    socket.on('disconnect', () => {
+      console.log(`Client disconnected: ${socket.id}`);
+    });
+  });
+
+  return io;
+}</code></div>
+
+        <h3>Step 6: Gas Tracker Service</h3>
+        <div class="code-block" data-lang="typescript"><code>// api/src/services/gasService.ts
+import { ethers } from 'ethers';
+import { prisma } from './dbService';
+import { redis } from './cacheService';
+
+export class GasService {
+  private provider: ethers.Provider;
+
+  constructor() {
+    this.provider = new ethers.JsonRpcProvider(process.env.RPC_HTTP_URL);
+  }
+
+  async getCurrentGasPrices() {
+    // Check cache first
+    const cached = await redis.get('gas:current');
+    if (cached) return JSON.parse(cached);
+
+    const [block, feeData, pendingTxs] = await Promise.all([
+      this.provider.getBlock('latest'),
+      this.provider.getFeeData(),
+      this.getPendingTxGasPrices(),
+    ]);
+
+    const baseFee = Number(block!.baseFeePerGas);
+    const priorityFees = pendingTxs
+      .map(tx => tx.maxPriorityFeePerGas ? Number(tx.maxPriorityFeePerGas) : 0)
+      .filter(fee => fee > 0)
+      .sort((a, b) => a - b);
+
+    const result = {
+      timestamp: Date.now(),
+      blockNumber: block!.number,
+      baseFee: ethers.formatUnits(baseFee, 'gwei'),
+      safeLow: ethers.formatUnits(baseFee + this.percentile(priorityFees, 10), 'gwei'),
+      standard: ethers.formatUnits(baseFee + this.percentile(priorityFees, 30), 'gwei'),
+      fast: ethers.formatUnits(baseFee + this.percentile(priorityFees, 60), 'gwei'),
+      instant: ethers.formatUnits(baseFee + this.percentile(priorityFees, 90), 'gwei'),
+      suggestedBaseFee: ethers.formatUnits(
+        BigInt(Math.ceil(baseFee * 1.125)), // 12.5% buffer for next block
+        'gwei'
+      ),
+    };
+
+    // Cache for 10 seconds
+    await redis.setex('gas:current', 10, JSON.stringify(result));
+    return result;
+  }
+
+  private async getPendingTxGasPrices(): Promise<ethers.TransactionRequest[]> {
+    const response = await fetch(process.env.RPC_HTTP_URL!, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'txpool_content',
+        params: [],
+        id: 1,
+      }),
+    });
+    const data = await response.json();
+    if (!data.result) return [];
+    
+    const pending = data.result.pending || {};
+    return Object.values(pending).flatMap((nonceMap: any) => 
+      Object.values(nonceMap)
+    );
+  }
+
+  async getGasHistory(range: '24h' | '7d' | '30d' = '24h') {
+    const since = new Date();
+    switch (range) {
+      case '24h': since.setHours(since.getHours() - 24); break;
+      case '7d': since.setDate(since.getDate() - 7); break;
+      case '30d': since.setDate(since.getDate() - 30); break;
+    }
+
+    const records = await prisma.gasPrice.findMany({
+      where: { timestamp: { gte: since } },
+      orderBy: { timestamp: 'asc' },
+      take: 1000,
+    });
+
+    return records.map(r => ({
+      timestamp: r.timestamp,
+      baseFee: r.baseFee,
+      standard: r.standard,
+      fast: r.fast,
+    }));
+  }
+
+  private percentile(sorted: number[], p: number): number {
+    if (sorted.length === 0) return 0;
+    const index = Math.ceil((p / 100) * sorted.length) - 1;
+    return sorted[Math.max(0, index)];
+  }
+}</code></div>
+
+        <h3>Step 7: Contract Verification</h3>
+        <div class="code-block" data-lang="typescript"><code>// api/src/services/contractService.ts
+import solc from 'solc';
+import { ethers } from 'ethers';
+import { prisma } from './dbService';
+
+const COMPILER_VERSIONS = [
+  '0.8.24', '0.8.23', '0.8.22', '0.8.21', '0.8.20',
+  '0.8.19', '0.8.18', '0.8.17', '0.8.16', '0.8.15',
+  '0.8.14', '0.8.13', '0.8.12', '0.8.11', '0.8.10',
+  '0.8.9', '0.8.8', '0.8.7', '0.8.6', '0.8.5',
+  '0.8.4', '0.8.3', '0.8.2', '0.8.1', '0.8.0',
+];
+
+export class ContractService {
+  async verifyContract(
+    address: string,
+    sourceCode: string,
+    compilerVersion: string,
+    optimization: boolean,
+    optimizationRuns: number,
+    constructorArgs: string = '',
+    contractName: string = ''
+  ): Promise<{ verified: boolean; error?: string }> {
+    // Fetch on-chain bytecode
+    const provider = new ethers.JsonRpcProvider(process.env.RPC_HTTP_URL!);
+    const onChainBytecode = await provider.getCode(address);
+    
+    if (onChainBytecode === '0x') {
+      return { verified: false, error: 'No code at this address' };
+    }
+
+    // Compile with specified compiler version
+    const compilerPath = `https://binaries.soliditylang.org/bin/solc-${compilerVersion}.js`;
+    // In production, load from solc-bin cache
+    
+    const input = {
+      language: 'Solidity',
+      sources: { 'contract.sol': { content: sourceCode } },
+      settings: {
+        optimizer: { enabled: optimization, runs: optimizationRuns },
+        outputSelection: { '*': { '*': ['evm.bytecode.object'] } },
+      },
+    };
+
+    const output = JSON.parse(solc.compile(JSON.stringify(input)));
+    
+    if (output.errors) {
+      const errors = output.errors.filter(e => e.severity === 'error');
+      if (errors.length > 0) {
+        return { verified: false, error: errors[0].message };
+      }
+    }
+
+    // Extract compiled bytecode
+    const compiledBytecode = output.contracts['contract.sol'][contractName || address]?.evm?.bytecode?.object;
+    if (!compiledBytecode) {
+      return { verified: false, error: 'Contract name not found in sources' };
+    }
+
+    // Handle constructor arguments
+    let expectedBytecode = '0x' + compiledBytecode;
+    if (constructorArgs) {
+      const encodedArgs = ethers.AbiCoder.defaultAbiCoder().encode(
+        [], // In production, parse constructor ABI
+        []
+      );
+      expectedBytecode += encodedArgs.slice(2);
+    }
+
+    // Compare bytecodes (ignore metadata hash)
+    const normalizedOnChain = this.normalizeBytecode(onChainBytecode);
+    const normalizedCompiled = this.normalizeBytecode(expectedBytecode);
+
+    if (normalizedOnChain !== normalizedCompiled) {
+      return { verified: false, error: 'Bytecode mismatch. Check compiler version, optimizations, or constructor arguments.' };
+    }
+
+    // Store verified contract
+    const abi = output.contracts['contract.sol'][contractName || address]?.abi;
+    await prisma.contract.upsert({
+      where: { address },
+      update: {
+        sourceCode,
+        compilerVersion,
+        optimization,
+        optimizationRuns,
+        abi,
+        name: contractName,
+        verified: true,
+        verifiedAt: new Date(),
+      },
+      create: {
+        address,
+        creatorAddress: await this.getCreatorAddress(address),
+        creationTxHash: await this.getCreationTx(address),
+        sourceCode,
+        compilerVersion,
+        optimization,
+        optimizationRuns,
+        abi,
+        name: contractName,
+        verified: true,
+        verifiedAt: new Date(),
+      },
+    });
+
+    return { verified: true };
+  }
+
+  private normalizeBytecode(bytecode: string): string {
+    // Remove metadata hash (last 53 bytes: 0x00 + 2x32byte hash)
+    return bytecode.replace(/a264697066735822[0-9a-f]*64736f6c6343[0-9a-f]*0033$/, '');
+  }
+
+  private async getCreatorAddress(address: string): Promise<string> {
+    const tx = await prisma.transaction.findFirst({
+      where: {
+        OR: [
+          { to: null, contractAddress: address },
+          { contractAddress: address },
+        ],
+      },
+      select: { from: true },
+    });
+    return tx?.from || 'unknown';
+  }
+
+  private async getCreationTx(address: string): Promise<string | null> {
+    const tx = await prisma.transaction.findFirst({
+      where: { contractAddress: address },
+      select: { hash: true },
+    });
+    return tx?.hash || null;
+  }
+}</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-brain" style="color:var(--primary)"></i> Blockchain Fundamentals</h2>
+        <p><strong>Block Structure:</strong> An Ethereum block contains: (1) Block header: parentHash, ommersHash, beneficiary (miner), stateRoot, transactionsRoot, receiptsRoot, logsBloom, difficulty, number, gasLimit, gasUsed, timestamp, extraData, mixHash, nonce, baseFeePerGas (EIP-1559). (2) Transaction list: array of signed transactions. (3) Uncle (ommer) headers: for PoW consensus.</p>
+        <p><strong>Mining (PoW):</strong> Miners solve a computational puzzle by varying the nonce until the block hash is below the target difficulty. The difficulty adjusts every 1024 blocks to maintain ~13-second block time. With The Merge (Sep 2022), Ethereum switched to Proof of Stake — validators propose blocks based on their staked ETH.</p>
+        <p><strong>Transaction Lifecycle:</strong> (1) User signs transaction with private key → (2) Transaction broadcast to mempool → (3) Validators/miners pick transactions based on priority fee → (4) Transaction included in a block → (5) Block propagated to network → (6) After 12 confirmations (~2 minutes), transaction considered final.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-exchange-alt" style="color:var(--primary)"></i> Transaction Pools (Mempool)</h2>
+        <p>The mempool contains all pending transactions that haven't been included in a block yet. Key implementation details:</p>
+        <ul><li>Subscribe to 'pending' transactions via WebSocket JSON-RPC</li><li>Store pending txs in Redis with TTL of 5 minutes (or until mined)</li><li>Track: gas price, transaction age, sender nonce, contract interaction</li><li>Frontend shows real-time mempool with gas price sorting and search</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-file-contract" style="color:var(--primary)"></i> Smart Contracts</h2>
+        <p>Smart contracts are immutable programs deployed on the blockchain. Our explorer provides: (1) Source code verification (bytecode comparison), (2) ABI decoding for read/write function calls, (3) Event log parsing with named parameters, (4) Internal transaction tracing for contract-to-contract calls, (5) Security analysis: check for known vulnerability patterns (reentrancy, timestamp dependency, unchecked calls).</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cubes" style="color:var(--primary)"></i> Web3 Integration</h2>
+        <p>The explorer uses ethers.js v6 as the primary Web3 library. Key integration points: (1) WebSocket provider for real-time block/tx subscriptions, (2) JSON-RPC for historical data queries, (3) Contract class for interacting with verified contracts, (4) Wallet class for signing transactions (used in contract write interface), (5) EIP-1193 provider injection for MetaMask integration on the frontend.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-chart-network" style="color:var(--primary)"></i> Network Statistics</h2>
+        <p>Real-time network statistics calculated every block: TPS (transactions per second over last 100 blocks), average block time, gas price distribution, active addresses per 24h, total transactions per 24h, uncle rate, average transaction value, top gas consumers (contracts), and MEV activity estimation. Displayed as live-updating charts on the dashboard.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-balance-scale" style="color:var(--primary)"></i> Consensus Mechanisms</h2>
+        <p><strong>Proof of Work (PoW):</strong> Used by Ethereum pre-Merge. Miners compete to find a nonce such that hash(block_header) &lt; target. Difficulty adjusts dynamically. Energy-intensive but proven secure.</p>
+        <p><strong>Proof of Stake (PoS):</strong> Used by Ethereum post-Merge and Polygon. Validators stake 32 ETH to propose blocks. Slashing conditions penalize misbehavior. Energy-efficient (~99.95% less energy than PoW). Finality achieved after two epochs (~12.8 minutes) via Casper FFG.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-gas-pump" style="color:var(--primary)"></i> Gas and Fee Estimation</h2>
+        <p>EIP-1559 introduced a base fee (burned) + priority fee (tip to validator). Our gas estimator: (1) Tracks last 20 blocks base fees, (2) Predicts next block base fee using exponential moving average with 12.5% max increase, (3) Samples top 25% of pending tx priority fees, (4) Provides 4 tiers: safe (&lt;30min wait), standard (&lt;5min), fast (&lt;1min), instant (next block), (5) Shows USD cost estimation using ETH/USD oracle price.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <div class="code-block" data-lang="typescript"><code>// indexer/tests/blockProcessor.test.ts
+import { describe, it, expect, jest } from '@jest/globals';
+import { BlockProcessor } from '../src/processors/blockProcessor';
+
+jest.mock('../src/services/dbService');
+jest.mock('../src/services/searchService');
+
+describe('BlockProcessor', () => {
+  it('should process a block and store transactions', async () => {
+    const provider = { getBlock: jest.fn(), getTransactionReceipt: jest.fn() } as any;
+    const processor = new BlockProcessor(provider);
+
+    provider.getBlock.mockResolvedValue(mockBlock);
+    provider.getTransactionReceipt.mockResolvedValue(mockReceipt);
+
+    await processor.processBlock(18400000);
+    expect(prisma.block.upsert).toHaveBeenCalled();
+    expect(prisma.transaction.createMany).toHaveBeenCalled();
+  });
+
+  it('should handle chain reorganizations', async () => {
+    const provider = { getBlock: jest.fn() } as any;
+    const processor = new BlockProcessor(provider);
+
+    prisma.block.findUnique.mockResolvedValue({ number: 100, hash: '0xold' });
+    provider.getBlock.mockResolvedValue({ number: 100, hash: '0xnew' } as any);
+
+    await processor.processBlock(100);
+    expect(prisma.$transaction).toHaveBeenCalled();
+  });
+});</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>Docker Compose:</strong> Deploy indexer, API, PostgreSQL, Elasticsearch, Redis, and frontend using docker-compose. Use PM2 in cluster mode for the Node.js services. For production: (1) Use managed PostgreSQL (RDS), Elasticsearch (Elastic Cloud), and Redis (ElastiCache). (2) Deploy indexer on EC2 with auto-scaling. (3) API on ECS Fargate behind ALB with WebSocket support. (4) Frontend on Vercel/Netlify with environment variables for API URLs. (5) Set up CloudFront CDN for static assets with 1-hour cache TTL.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-shield-alt" style="color:var(--primary)"></i> Security Considerations</h2>
+        <ul><li><strong>API Key Authentication:</strong> All endpoints require valid API key in header. Keys are hashed with bcrypt before storage. Support key rotation with multiple active keys per user.</li><li><strong>Rate Limiting:</strong> 100 requests/min per API key. Implement token bucket algorithm with Redis. Premium tier gets 1000 requests/min.</li><li><strong>WebSocket Connection Limits:</strong> Max 50 concurrent connections per user. Max 100 address subscriptions per connection.</li><li><strong>Input Validation:</strong> Strict validation on all blockchain addresses (checksum validation), transaction hashes, and block numbers. Sanitize search queries to prevent injection.</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-tachometer-alt" style="color:var(--primary)"></i> Performance Optimization</h2>
+        <ul><li><strong>Materialized Views:</strong> Pre-compute network stats, daily aggregates, and token analytics using PostgreSQL materialized views refreshed every block.</li><li><strong>Connection Pooling:</strong> Use PgBouncer for PostgreSQL. Max 20 connections per service instance. Reserve 5 connections for admin queries.</li><li><strong>Elasticsearch Tuning:</strong> Use filter cache for frequent queries (address lookups). Enable searchable snapshots for cold data. Index templates with appropriate analyzers for address hashes.</li><li><strong>Redis Caching:</strong> Cache blocks (15s TTL), gas prices (10s), address balances (30s), and popular search results (60s). Use Redis Cluster for sharding in production.</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-chart-line" style="color:var(--primary)"></i> Scaling Considerations</h2>
+        <ul><li><strong>Indexer Scaling:</strong> Multiple indexer instances, each responsible for different block ranges. Use Redis for distributed coordination (which instance handles which range). Leader election for backfill jobs.</li><li><strong>Database Sharding:</strong> Partition blocks and transactions tables by month for query performance. Use Citus (PostgreSQL extension) for distributed sharding across nodes.</li><li><strong>API Horizontal Scaling:</strong> Stateless API behind ALB. Redis-based sessions for WebSocket affinity. Socket.io with Redis adapter for cross-instance events.</li><li><strong>Multi-Chain Support:</strong> Separate indexer instances per chain. Unified API gateway that routes based on chain_id parameter. Cross-chain search in Elasticsearch with chain_id filter.</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="mistake-card"><strong>1. Not handling chain reorganizations:</strong> Blocks can be reorged (typically 1-2 blocks deep, up to 6 for large reorgs). Always check parent hash consistency. Store block hash and validate before processing transactions.</div>
+        <div class="mistake-card"><strong>2. Rate limiting RPC calls:</strong> Infura/Alchemy have strict rate limits. Implement request queuing with exponential backoff. Cache responses aggressively. Use batch JSON-RPC requests where possible.</div>
+        <div class="mistake-card"><strong>3. Ignoring gas price fluctuations:</strong> Gas prices can spike 10x during NFT mints or market volatility. Always show gas prices in both Gwei and USD. Warn users when submitting transactions during high congestion.</div>
+        <div class="mistake-card"><strong>4. Inefficient database queries:</strong> Blockchain data is append-only and grows unboundedly. Always use pagination with cursor-based (not offset-based) pagination. Archive old data to cold storage. Use TimescaleDB for time-series data.</div>
+        <div class="mistake-card"><strong>5. Missing ABI decoding for contract interactions:</strong> Raw transaction input data is opaque hex. Always attempt ABI decoding using known contract ABIs (OpenZeppelin, Uniswap, etc.) and function signature databases (4byte.directory).</div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card"><strong>Q1:</strong> Explain how Ethereum blocks are structured and what changes EIP-1559 introduced.<br><strong>A:</strong> Every block has a header (parentHash, stateRoot, transactionsRoot, receiptsRoot, logsBloom, difficulty, number, gasLimit, gasUsed, timestamp, extraData, baseFeePerGas). EIP-1559 introduced a base fee that gets burned (reducing ETH supply) and a priority fee (tip to validator). Blocks now have a target gas size of 15M with a max of 30M. Base fee adjusts: if block &gt;50% full, base fee increases by max 12.5%; if &lt;50%, it decreases.</div>
+        <div class="qa-card"><strong>Q2:</strong> How would you design a system to detect chain reorganizations in real-time?<br><strong>A:</strong> Store (block_number, block_hash) pairs in Redis with a TTL of 100 blocks. On each new block, check if parent_hash matches the stored hash of (block_number - 1). If mismatch, walk back ancestors until finding the common ancestor. Delete reorged blocks from DB, re-fetch from common ancestor. For deep reorgs (&gt;6 blocks), pause processing and alert operators.</div>
+        <div class="qa-card"><strong>Q3:</strong> Compare WebSocket vs polling for blockchain data ingestion.<br><strong>A:</strong> WebSocket (eth_subscribe): real-time, lower latency, fewer RPC calls, but requires reconnection handling and can miss events during disconnection. Polling: simpler, deterministic, easier to backfill, but higher latency (12s block time) and more RPC calls. Best practice: use WebSocket for live tracking with polling fallback for missed blocks during reconnection.</div>
+        <div class="qa-card"><strong>Q4:</strong> How do you decode ERC20 Transfer events from raw logs?<br><strong>A:</strong> The Transfer event has signature `Transfer(address indexed from, address indexed to, uint256 value)`, generating topic0 = keccak256('Transfer(...)'). Topics[1] = from (indexed), topics[2] = to (indexed). Data field = hex-encoded uint256 value. Use ethers.js Interface to parse: `const iface = new ethers.Interface(['event Transfer(address indexed from, address indexed to, uint256 value)'])` then `iface.parseLog({ topics, data })`.</div>
+        <div class="qa-card"><strong>Q5:</strong> Design a gas price prediction system.<br><strong>A:</strong> (1) Historical data: store last 24h gas prices in PostgreSQL. (2) Feature engineering: time of day, day of week, pending tx count, mempool congestion, upcoming NFT mints/events. (3) Model: LightGBM or XGBoost with rolling window features. (4) Prediction: output 4 percentiles for safe/standard/fast/instant. (5) Fallback: exponential moving average of last 20 blocks when model is unavailable. (6) Update: retrain model daily with new data.</div>
+        <div class="qa-card"><strong>Q6:</strong> How would you implement full-text search across millions of transactions and addresses?<br><strong>A:</strong> Use Elasticsearch with optimized mappings: (1) Blocks: index number, hash, miner, timestamp. (2) Transactions: index hash (keyword), from, to, value, method_signature (first 4 bytes of input data). (3) Addresses: index address, label, tags. Use multi_match queries with field boosting (hash^3, from^2). Implement auto-complete using edge_ngram tokenizer on addresses. Use search_as_you_type for instant suggestions. Separate index per chain for multi-chain support.</div>
+        <div class="qa-card"><strong>Q7:</strong> Explain the difference between internal transactions and regular transactions.<br><strong>A:</strong> Regular transactions are signed by an EOA (externally owned account) and appear in the block's transaction list. Internal transactions are calls made by contracts during execution — they're not signed and don't appear in the block. Examples: (1) Contract A calls Contract B's function, (2) ETH transfers during contract execution, (3) Contract creation via CREATE/CREATE2 opcode. Internal transactions are obtained via debug_traceTransaction (requires archival node) or by parsing execution traces.</div>
+        <div class="qa-card"><strong>Q8:</strong> How do you handle blockchain data storage costs?<br><strong>A:</strong> (1) Tiered storage: hot data (last 7 days) on NVMe SSD, warm (7-90 days) on standard SSD, cold (&gt;90 days) on S3 Glacier. (2) Compression: use PostgreSQL column compression for large TEXT fields (input_data, bytecode). (3) Partitioning: partition blocks and transactions by month with automatic partition creation. (4) Archival: move blocks older than 1 year to a separate archive database. (5) Sampling: for analytics, store aggregated data (hourly/daily) instead of raw transactions.</div>
+        <div class="qa-card"><strong>Q9:</strong> How would you add support for a new blockchain (e.g., Solana)?<br><strong>A:</strong> (1) Create new RPC client adapter for Solana's JSON-RPC (different API, different data structures). (2) Implement Solana-specific block/transaction/token processors (SPL tokens instead of ERC20). (3) Create unified data model that maps Solana concepts to our generic schema (account → address, instruction → transaction, token program → token transfer). (4) Add chain_id to all tables for multi-tenant storage. (5) New frontend components for Solana-specific features (stake accounts, vote instructions).</div>
+        <div class="qa-card"><strong>Q10:</strong> Describe the architecture of a production blockchain explorer handling 100+ TPS.<br><strong>A:</strong> (1) Distributed indexer fleet: 3-5 instances behind load balancer, each assigned block ranges via Redis coordinator. (2) Write-ahead log (Kafka) for blockchain events before DB write. (3) PostgreSQL with Citus extension sharded by block_number range. (4) Elasticsearch cluster with 3 nodes for search. (5) Redis cluster for caching with read-replicas. (6) API layer: 10+ instances behind ALB with WebSocket stickiness. (7) CDN (CloudFront) for API responses with short TTL. (8) Monitoring: Prometheus + Grafana for indexer lag, DB query latency, RPC call success rates.</div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Architected and deployed a production blockchain explorer ingesting 1M+ transactions/day across Ethereum mainnet and testnets with sub-2-second block-to-display latency</li>
+          <li>Built real-time block indexer using ethers.js WebSocket subscriptions processing 15+ TPS with chain reorg detection and automatic backfill recovery</li>
+          <li>Designed PostgreSQL + Elasticsearch data pipeline for 50M+ blocks/transactions with 200ms query P99 and full-text search across addresses, hashes, and contract data</li>
+          <li>Implemented ERC20/721/1155 token transfer decoder supporting all major token standards with ABI auto-detection and custom event signature matching</li>
+          <li>Created smart contract verification system supporting 20+ Solidity compiler versions with bytecode comparison, metadata hash stripping, and constructor argument handling</li>
+          <li>Built WebSocket-based real-time alerting system for 10K+ watched addresses with sub-block latency push notifications and webhook delivery</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <ul><li><strong>README:</strong> Architecture diagram, API documentation, quick start, environment setup, indexing performance benchmarks, multi-chain configuration guide.</li><li><strong>CI/CD:</strong> GitHub Actions: lint + typecheck on PR, integration tests on merge to main, Docker build and push to ECR on release tag. SonarCloud for code quality.</li><li><strong>Issue Templates:</strong> Bug: provide tx hash / block number for reproduction. Feature request: describe blockchain data use case. Performance: include query times and explain plans.</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul><li><strong>NFT Analytics Dashboard:</strong> Track floor prices, sales volume, whale accumulation, rarity analysis, and wash trading detection across major NFT marketplaces (OpenSea, Blur, LooksRare).</li><li><strong>DeFi Protocol Tracker:</strong> Monitor TVL (Total Value Locked), APY, swap volumes, and liquidation events for top DeFi protocols (Uniswap, Aave, Compound, Curve).</li><li><strong>MEV (Miner Extractable Value) Explorer:</strong> Detect sandwich attacks, frontrunning, and backrunning transactions. Visualize MEV opportunities and bot activity.</li><li><strong>Cross-Chain Bridge Monitor:</strong> Track token bridging activity between chains. Detect bridge exploit attempts. Monitor bridge contract health and TVL.</li><li><strong>Blockchain Forensics Tool:</strong> Track fund flow across addresses with Sankey diagrams. Cluster addresses by common ownership. Link addresses with known entities (exchanges, mixers).</li></ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-trophy" style="color:var(--warning)"></i> Advanced Challenges</h2>
+        <div class="challenge-card"><strong>Challenge 1: Real-time Mempool Visualizer</strong> Build a mempool explorer that shows pending transactions in real-time with: animated gas price heat map, tx type classification (simple transfer, contract interaction, token swap), and large transaction alerts (>100 ETH). Handle 1000+ pending txs/second with WebGL rendering.</div>
+        <div class="challenge-card"><strong>Challenge 2: Internal Transaction Tracing</strong> Implement debug_traceTransaction to extract full internal call trees. Parse each call frame (CALL, STATICCALL, DELEGATECALL, CREATE, SELFDESTRUCT). Show gas consumption per internal call as a flame graph. Visualize contract-to-contract interactions as interactive graphs.</div>
+        <div class="challenge-card"><strong>Challenge 3: Multi-Chain Unified Explorer</strong> Support Ethereum, Polygon, BSC, Arbitrum, and Optimism simultaneously. Create a unified data model that normalizes chain-specific concepts. Show cross-chain transaction pairs (bridges). Implement chain selector UI with per-chain search and stats.</div>
+        <div class="challenge-card"><strong>Challenge 4: Smart Contract Security Scanner</strong> Add static analysis for common vulnerabilities: reentrancy, unchecked external calls, integer overflow, tx.origin usage, timestamp dependency, frontrunning vulnerability, and flash loan attacks. Integrate Slither (Python) analysis results. Show vulnerability scores per contract.</div>
+        <div class="challenge-card"><strong>Challenge 5: Whale Tracking & Alert System</strong> Build real-time whale monitoring: detect large transactions (>100 ETH or >$100K), track accumulation/dump patterns across addresses, identify exchange deposits/withdrawals, send Telegram/Discord alerts with tx details, and maintain whale watchlist with historical activity charts.</div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="video-platform.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous Project</a>
+        <a href="collaboration-tool.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,1483 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collaboration Tool - CodeRio Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; position: relative; z-index: 1; }
+    .project-detail-hero { margin-bottom: 3rem; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-detail-hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 1000px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3.5rem; background: var(--glass-bg); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 2rem; }
+    .project-body .section h2 { margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem; font-size: 1.6rem; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.75rem; }
+    .project-body .section h3 { margin: 1.5rem 0 0.75rem; color: var(--primary); }
+    .project-body .section h4 { margin: 1rem 0 0.5rem; color: var(--text-secondary); }
+    .structure-tree { background: #1a1d2e; padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; line-height: 2; border: 1px solid var(--glass-border); overflow-x: auto; }
+    .code-block { background: #0f111a; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(16,185,129,0.2); position: relative; }
+    .code-block::before { content: attr(data-lang); position: absolute; top: 0.5rem; right: 0.75rem; font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.06); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1.2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); text-align: center; backdrop-filter: blur(4px); }
+    .feature-item i { font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-success { background: rgba(16,185,129,0.15); color: #10b981; }
+    .badge-danger { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .badge-tech { background: rgba(99,102,241,0.15); color: #818cf8; }
+    .qa-card { background: rgba(99,102,241,0.04); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.75rem 0; }
+    .qa-card strong { color: var(--primary); }
+    .mistake-card { background: rgba(239,68,68,0.04); border-left: 4px solid #ef4444; padding: 1rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 0.75rem 0; }
+    .diagram-box { background: #1a1d2e; border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; font-family: 'Fira Code', monospace; font-size: 0.8rem; line-height: 1.6; overflow-x: auto; margin: 1rem 0; white-space: pre; color: #e2e8f0; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .table-wrap th, .table-wrap td { border: 1px solid var(--glass-border); padding: 0.6rem 0.8rem; text-align: left; }
+    .table-wrap th { background: rgba(99,102,241,0.1); color: var(--primary); font-weight: 600; }
+    .table-wrap tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 4% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } .project-body .section { padding: 1.2rem; } }
+  </style>
+</head>
+<body data-page="Project">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Real-Time Collaboration Tool</h1>
+      <div class="meta">
+        <span class="badge badge-danger">Advanced</span>
+        <span><i class="far fa-clock"></i> 55-75 hours</span>
+        <span><i class="fas fa-code-branch"></i> 8 technologies</span>
+        <span><i class="fas fa-star"></i> Capstone</span>
+      </div>
+    </div>
+
+    <div class="project-body">
+
+      <div class="section">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>Build a real-time collaborative editing platform similar to Google Docs or Notion, supporting simultaneous multi-user editing with conflict resolution, presence awareness, version history, and rich text formatting. This project implements both Operational Transform (OT) and Conflict-free Replicated Data Types (CRDT) for synchronization, WebSocket-based real-time communication, and a robust undo/redo system. The backend is built with Node.js + TypeScript using a custom WebSocket server (or Socket.io), Redis for pub/sub and state management, and PostgreSQL for document persistence. The frontend uses React with ProseMirror (or Slate.js) for rich text editing, and Canvas-based cursor rendering for multi-user presence. You will implement a custom sync engine, differential sync algorithm, and a scalable WebSocket room architecture supporting thousands of concurrent editors per document.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
+        <p>Real-time collaboration introduces fundamental distributed systems challenges: (1) Multiple users editing the same document simultaneously creates conflicts that must be resolved without data loss. (2) Network latency (50-300ms) means users see stale states and make edits on diverged versions. (3) Cursor positions, selections, and scroll positions must be synchronized across users. (4) Undo/redo becomes exponentially complex — should Alice undoing affect Bob's edits? (5) Scaling from 2 to 1000 editors per document requires fundamentally different architectures. Existing solutions (Google Docs, Notion, Coda) are proprietary or rely on Google's OT implementation. The challenge is to build a production-grade collaboration engine that handles all these concerns with sub-100ms operation propagation, offline editing support, and conflict resolution that never loses user data.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-briefcase" style="color:var(--success)"></i> Real World Use Cases</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fas fa-file-alt"></i><h4>Collaborative Document Editing</h4><p>Team writes proposals, reports, and documentation together. Features: comments, suggestions mode, version history with branching, and approval workflows. Used by product and engineering teams.</p></div>
+          <div class="feature-item"><i class="fas fa-code"></i><h4>Pair Programming IDE</h4><p>Two or more developers edit code simultaneously. Language-specific features: AST-aware diffing, syntax highlighting synchronization, terminal sharing, and language server protocol integration via WebSocket.</p></div>
+          <div class="feature-item"><i class="fas fa-chalkboard"></i><h4>Whiteboard & Diagramming</h4><p>Real-time collaborative whiteboard with sticky notes, flowcharts, wireframes, and mind maps. Uses CRDT for canvas object synchronization with conflict resolution for overlapping edits.</p></div>
+          <div class="feature-item"><i class="fas fa-tasks"></i><h4>Project Management Board</h4><p>Kanban boards with real-time card updates, drag-and-drop synchronization across users, and live notifications. Each card position is a CRDT element in a 2D space.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>The real-time collaboration tools market is valued at $45B+ with Microsoft 365, Google Workspace, and Notion leading. Figma's $20B valuation proved that real-time collaboration is essential for modern software. Key trends: (1) Local-first software — CRDT enables offline editing with sync-on-reconnect (Linear, Obsidian), (2) AI-powered collaboration — real-time suggestions and auto-completion with awareness of other users' edits, (3) Decentralized collaboration — peer-to-peer sync without central servers using CRDT, (4) Collaborative code editing — VS Code Live Share, Replit Multiplayer, (5) Embedded collaboration — adding real-time editing to any web app. This project directly builds skills for roles at Figma, Google Docs, Notion, Microsoft 365, and Coda.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-check-circle" style="color:var(--success)"></i> Learning Outcomes</h2>
+        <ul>
+          <li><strong>Operational Transform (OT):</strong> Deep understanding of OT algorithms — transform operations against each other to maintain consistency. Implement client-server OT with acknowledgement (OT-with-server-control) and understand why OT is hard to scale to multiple users.</li>
+          <li><strong>CRDT (Conflict-free Replicated Data Types):</strong> Master CRDT theory and implementation — specifically RGA (Replicated Growable Array) for ordered sequences and LWW-Register for last-writer-wins semantics. Understand how CRDT achieves eventual consistency without a central server.</li>
+          <li><strong>WebSocket Architecture:</strong> Design scalable WebSocket infrastructure with rooms, namespaces, sticky sessions, and Redis pub/sub for horizontal scaling. Handle backpressure, reconnection, and message ordering.</li>
+          <li><strong>Presence Systems:</strong> Implement real-time presence — cursors (position, color, name), selections (ranges), online/offline status, and typing indicators. Use Canvas overlay for cursor rendering over the editing surface.</li>
+          <li><strong>Version History & Diffing:</strong> Build a version tree with branching (like Git for documents). Implement efficient diff algorithms (Myers' diff, patience diff) and snapshot compression.</li>
+          <li><strong>Conflict Resolution:</strong> Design conflict resolution strategies for different data types: text (OT/CRDT), rich text (formatting + text), objects (field-level merge), and lists (position-based merge).</li>
+          <li><strong>Scalability:</strong> Design a system supporting 1000+ concurrent editors per document using operation batching, incremental snapshots, and connection pooling.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-layer-group" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fab fa-node-js"></i><h4>Node.js 20</h4><span class="badge badge-tech">20 LTS</span><p>Backend sync server</p></div>
+          <div class="feature-item"><i class="fas fa-plug"></i><h4>Socket.io</h4><span class="badge badge-tech">4.7</span><p>WebSocket + fallback transport</p></div>
+          <div class="feature-item"><i class="fab fa-react"></i><h4>React 18</h4><span class="badge badge-tech">18.2</span><p>Frontend framework</p></div>
+          <div class="feature-item"><i class="fas fa-pen"></i><h4>ProseMirror / Slate.js</h4><span class="badge badge-tech">6.3</span><p>Rich text editor</p></div>
+          <div class="feature-item"><i class="fas fa-database"></i><h4>PostgreSQL</h4><span class="badge badge-tech">16</span><p>Document persistence</p></div>
+          <div class="feature-item"><i class="fas fa-bolt"></i><h4>Redis</h4><span class="badge badge-tech">7.2</span><p>Pub/sub + ephemeral state</p></div>
+          <div class="feature-item"><i class="fas fa-layer-group"></i><h4>CRDT (yjs/automerge)</h4><span class="badge badge-tech">13.6</span><p>Conflict resolution</p></div>
+          <div class="feature-item"><i class="fas fa-code-branch"></i><h4>diff-match-patch</h4><span class="badge badge-tech">1.1</span><p>Diff algorithm</p></div>
+          <div class="feature-item"><i class="fas fa-docker"></i><h4>Docker</h4><span class="badge badge-tech">24.0</span><p>Containerized deployment</p></div>
+          <div class="feature-item"><i class="fas fa-chart-line"></i><h4>Prometheus</h4><span class="badge badge-tech">2.50</span><p>Metrics + monitoring</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-clipboard-list" style="color:var(--warning)"></i> Prerequisites</h2>
+        <ul>
+          <li><strong>TypeScript Mastery:</strong> Strong TypeScript skills including generics, union types, discriminated unions, and advanced patterns. The sync engine uses complex generics to type operations across different data types.</li>
+          <li><strong>Node.js & Event-Driven Programming:</strong> Deep understanding of Node.js event loop, streams, EventEmitter patterns, and async error handling. The sync server handles thousands of concurrent operations per second.</li>
+          <li><strong>React & Immutable State:</strong> Experience with immutable state patterns (Immer.js or Immutable.js). Understanding of React's reconciliation and rendering optimization for real-time updates (100+ updates/second).</li>
+          <li><strong>Data Structures:</strong> Strong fundamentals in trees (RGA uses a linked-list tree), arrays (operation transforms), and graphs (version history DAG). Understanding of vector clocks and Lamport timestamps.</li>
+          <li><strong>Database & Caching:</strong> Experience with PostgreSQL and Redis. Understanding of transactional integrity for document saves and cache invalidation patterns for real-time data.</li>
+          <li><strong>Networking:</strong> Understanding of WebSocket protocol, HTTP/2, TCP vs UDP tradeoffs, and latency/bandwidth constraints for real-time systems.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <div class="diagram-box">
++------------------------------------------------------------------+
+|                  COLLABORATION ENGINE ARCHITECTURE                |
++------------------------------------------------------------------+
+|                                                                   |
+|  CLIENT A (React)           CLIENT B (React)     CLIENT C (React) |
+|  +------------------+       +------------------+  +--------------+ |
+|  | ProseMirror      |       | ProseMirror      |  | ProseMirror  | |
+|  | Editor           |       | Editor           |  | Editor       | |
+|  | + Sync Engine    |       | + Sync Engine    |  | + Sync Engine| |
+|  | + Presence       |       | + Presence       |  | + Presence   | |
+|  | + OT Client      |       | + OT Client      |  | + OT Client  | |
+|  +--------+---------+       +--------+---------+  +------+-------+ |
+|           |                         |                      |       |
+|           |  WebSocket (wss)        |  WebSocket           |       |
+|           +-------------------------+----------------------+       |
+|                                     |                              |
+|  +----------------------------------------------------------------+|
+|  |              SYNC SERVER (Node.js + Socket.io)                  ||
+|  |  +--------------+  +--------------+  +----------------------+  ||
+|  |  | OT Transform |  | CRDT Merge   |  | Operation Log        |  ||
+|  |  | Engine       |  | Engine       |  | (Append-only, Redis) |  ||
+|  |  +--------------+  +--------------+  +----------------------+  ||
+|  |  +--------------+  +--------------+  +----------------------+  ||
+|  |  | Presence     |  | Auth + Auth  |  | Document Manager     |  ||
+|  |  | Hub          |  | Middleware   |  | (Version tree, snap) |  ||
+|  |  +--------------+  +--------------+  +----------------------+  ||
+|  |  +-----------------------------------------------------------+ ||
+|  |  | Redis Pub/Sub (cross-instance message relay)              | ||
+|  |  +-----------------------------------------------------------+ ||
+|  +----------------------------------------------------------------+|
+|                                     |                              |
+|  +----------------------------------------------------------------+|
+|  |              DATA LAYER                                        | |
+|  |  +------------------+  +------------------+  +--------------+  ||
+|  |  | PostgreSQL       |  | Redis Cache      |  | S3/Blob     |  ||
+|  |  | - Documents      |  | - Current state  |  | Storage     |  ||
+|  |  | - Versions       |  | - Active edits   |  | (Images,    |  ||
+|  |  | - Users          |  | - Session data   |  |  attachments)|  ||
+|  |  | - Comments       |  | - Pub/sub queues |  |              |  ||
+|  |  +------------------+  +------------------+  +--------------+  ||
+|  +----------------------------------------------------------------+|
++------------------------------------------------------------------+
+        </div>
+        <p><strong>Data Flow:</strong> (1) User types → ProseMirror captures local operation. (2) Operation sent to sync engine which applies OT transformation against pending concurrent operations. (3) Transformed operation sent via WebSocket to server. (4) Server receives operation, applies server-side OT, broadcasts to all other clients. (5) Other clients receive operation, transform against their pending local operations, and apply to their ProseMirror document. (6) Presence data (cursor position) is sent separately at lower priority (every 50ms vs operations which are sent immediately).</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-database" style="color:var(--primary)"></i> Database Design</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Table</th><th>Columns</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>documents</td><td>id (UUID PK), title, owner_id, team_id, created_at, updated_at, last_edited_by, version (INT), snapshot (JSONB), checksum</td><td>Document metadata with current state snapshot</td></tr>
+              <tr><td>document_versions</td><td>id (BIGSERIAL PK), document_id (FK), version_number, parent_version, operations (JSONB[]), snapshot (JSONB), author_id, created_at, checksum</td><td>Version tree with operation log and full snapshot at each version</td></tr>
+              <tr><td>operations</td><td>id (BIGSERIAL PK), document_id, version, client_id, operation_type (insert/delete/format), position, length, text, attributes (JSONB), server_timestamp, client_timestamp</td><td>Append-only log of all operations for audit and replay</td></tr>
+              <tr><td>comments</td><td>id (UUID PK), document_id, anchor_position (INT), anchor_length (INT), text, author_id, resolved (BOOL), parent_comment_id, created_at, updated_at</td><td>Document comments anchored to specific text ranges</td></tr>
+              <tr><td>sessions</td><td>id (UUID PK), document_id, user_id, joined_at, last_activity, cursor_position (JSONB), selection (JSONB), is_active (BOOL)</td><td>Active editing sessions for presence tracking</td></tr>
+              <tr><td>users</td><td>id (UUID PK), email, name, avatar_url, color (for cursor display), created_at</td><td>User accounts</td></tr>
+              <tr><td>teams</td><td>id (UUID PK), name, owner_id, created_at, plan_type</td><td>Team/organization for document sharing</td></tr>
+              <tr><td>document_permissions</td><td>id (UUID PK), document_id, user_id/team_id, permission_level (view/edit/comment/admin), granted_by, created_at</td><td>Access control with granular permissions</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-plug" style="color:var(--primary)"></i> API Structure</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>/ws/doc/:docId</td><td>WebSocket</td><td>Main collaboration WebSocket for document editing</td></tr>
+              <tr><td>/ws/presence/:docId</td><td>WebSocket</td><td>Separate channel for presence updates (lower priority)</td></tr>
+              <tr><td>/api/documents</td><td>GET/POST</td><td>List/create documents</td></tr>
+              <tr><td>/api/documents/:id</td><td>GET/PUT/DELETE</td><td>Document CRUD</td></tr>
+              <tr><td>/api/documents/:id/snapshot</td><td>GET</td><td>Get current document state (JSON)</td></tr>
+              <tr><td>/api/documents/:id/versions</td><td>GET</td><td>List version history (pagination)</td></tr>
+              <tr><td>/api/documents/:id/versions/:v</td><td>GET</td><td>Restore to specific version</td></tr>
+              <tr><td>/api/documents/:id/versions/:v/diff</td><td>GET</td><td>Get diff between two versions</td></tr>
+              <tr><td>/api/documents/:id/comments</td><td>GET/POST</td><td>List/add comments</td></tr>
+              <tr><td>/api/documents/:id/comments/:cid</td><td>PUT/DELETE</td><td>Update/resolve/delete comment</td></tr>
+              <tr><td>/api/documents/:id/permissions</td><td>GET/POST</td><td>List/add permissions</td></tr>
+              <tr><td>/api/users/me</td><td>GET</td><td>Current user profile</td></tr>
+              <tr><td>/api/teams/:id/members</td><td>GET</td><td>Team members list</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
+        <div class="structure-tree">
+collaboration-tool/
+├── docker-compose.yml
+├── README.md
+├── server/
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── Dockerfile
+│   ├── src/
+│   │   ├── index.ts                    # Entry point
+│   │   ├── app.ts                      # Express + Socket.io setup
+│   │   ├── config.ts                   # Environment config
+│   │   ├── sync/
+│   │   │   ├── index.ts
+│   │   │   ├── SyncServer.ts           # Main sync server class
+│   │   │   ├── operation.ts            # Operation types and interfaces
+│   │   │   ├── transform.ts            # OT transform functions
+│   │   │   ├── compose.ts              # Operation composition
+│   │   │   └── crdt/
+│   │   │       ├── RGA.ts              # Replicated Growable Array
+│   │   │       ├── LWWRegister.ts      # Last-Writer-Wins Register
+│   │   │       ├── CmRDT.ts            # Commutative Replicated Data Type
+│   │   │       └── merge.ts            # CRDT merge logic
+│   │   ├── presence/
+│   │   │   ├── PresenceManager.ts      # Presence tracking hub
+│   │   │   ├── CursorTracker.ts        # Cursor position sync
+│   │   │   └── TypingIndicator.ts      # Typing status management
+│   │   ├── websocket/
+│   │   │   ├── SocketServer.ts         # Socket.io initialization
+│   │   │   ├── DocumentRoom.ts         # Per-document WebSocket room
+│   │   │   ├── PresenceChannel.ts      # Presence WebSocket channel
+│   │   │   └── adapters/
+│   │   │       └── RedisAdapter.ts     # Redis pub/sub for horizontal scaling
+│   │   ├── api/
+│   │   │   ├── routes/
+│   │   │   │   ├── documents.ts
+│   │   │   │   ├── versions.ts
+│   │   │   │   ├── comments.ts
+│   │   │   │   ├── permissions.ts
+│   │   │   │   └── users.ts
+│   │   │   ├── middleware/
+│   │   │   │   ├── auth.ts
+│   │   │   │   ├── rateLimiter.ts
+│   │   │   │   └── validation.ts
+│   │   │   └── services/
+│   │   │       ├── DocumentService.ts
+│   │   │       ├── VersionService.ts
+│   │   │       ├── CommentService.ts
+│   │   │       └── PermissionService.ts
+│   │   ├── storage/
+│   │   │   ├── postgres.ts             # PostgreSQL client + queries
+│   │   │   ├── redis.ts                # Redis client
+│   │   │   └── s3.ts                   # S3 for attachments
+│   │   ├── models/
+│   │   │   ├── Document.ts
+│   │   │   ├── Version.ts
+│   │   │   ├── Operation.ts
+│   │   │   ├── Comment.ts
+│   │   │   └── User.ts
+│   │   └── utils/
+│   │       ├── diff.ts                 # Text diff algorithms
+│   │       ├── merge.ts                # Document merge logic
+│   │       ├── idgen.ts                # UUID v7 generation for ordering
+│   │       └── logger.ts
+├── client/
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   ├── editor/
+│   │   │   ├── Editor.tsx              # ProseMirror editor wrapper
+│   │   │   ├── EditorPlugins.tsx        # ProseMirror plugin setup
+│   │   │   ├── collaborationPlugin.ts   # Custom collab plugin
+│   │   │   ├── cursors.ts               # Cursor overlay rendering
+│   │   │   ├── highlights.ts            # Selection highlights
+│   │   │   └── menus.ts                 # Toolbar and context menus
+│   │   ├── sync/
+│   │   │   ├── SyncClient.ts           # Client-side sync engine
+│   │   │   ├── OTClient.ts             # Client-side OT (local + server ack)
+│   │   │   ├── CRDTClient.ts           # Client-side CRDT integration
+│   │   │   ├── operationBuffer.ts      # Pending operation buffer
+│   │   │   └── reconnection.ts         # Reconnection + state recovery
+│   │   ├── presence/
+│   │   │   ├── PresenceClient.ts        # Client presence sender
+│   │   │   ├── CursorOverlay.tsx        # React cursor overlay
+│   │   │   └── Avatars.tsx             # User avatar display
+│   │   ├── components/
+│   │   │   ├── DocumentList.tsx
+│   │   │   ├── DocumentView.tsx
+│   │   │   ├── Toolbar.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── CommentSidebar.tsx
+│   │   │   ├── VersionHistory.tsx
+│   │   │   ├── VersionDiff.tsx
+│   │   │   ├── SharingDialog.tsx
+│   │   │   ├── UserMenu.tsx
+│   │   │   └── ConnectionStatus.tsx
+│   │   ├── hooks/
+│   │   │   ├── useSync.ts
+│   │   │   ├── usePresence.ts
+│   │   │   ├── useDocument.ts
+│   │   │   └── useConnectionStatus.ts
+│   │   ├── services/
+│   │   │   ├── api.ts
+│   │   │   ├── ws.ts
+│   │   │   └── offline.ts              # Offline queue and sync
+│   │   └── styles/
+│   │       ├── editor.css
+│   │       ├── cursors.css
+│   │       └── layout.css
+│   └── tests/
+│       ├── OTClient.test.ts
+│       ├── SyncEngine.test.ts
+│       └── CursorOverlay.test.tsx
+├── shared/
+│   ├── types.ts                         # Shared operation types
+│   ├── constants.ts                     # Protocol constants
+│   └── serialization.ts                 # Binary serialization (CBOR)
+├── scripts/
+│   ├── seed.ts
+│   └── benchmark.ts                     # Load testing script
+└── .env.example
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-paint-brush" style="color:var(--primary)"></i> UI/UX Design Strategy</h2>
+        <p>The collaboration tool's design focuses on making multiuser editing feel natural and uncluttered:</p>
+        <ul>
+          <li><strong>Cursor Presence:</strong> Each user gets a uniquely colored cursor with their name label. Cursors animate smoothly between positions using CSS transforms. Selection ranges shown as translucent colored highlights behind text. Cursor position updates at 20fps to balance bandwidth and smoothness.</li>
+          <li><strong>Minimal Interference:</strong> Remote cursors are visible but non-interactive — they don't interfere with clicking, selecting, or typing. Cursors fade out after 5 seconds of inactivity. User list in the header shows active editors with colored dots.</li>
+          <li><strong>Typing Indicators:</strong> When a user is typing, a small bubble appears in the margin showing their name and a typing animation. Prevents accidental interruption of someone who is actively typing.</li>
+          <li><strong>Conflict Awareness:</strong> When a conflict occurs that can't be automatically resolved, affected text is highlighted with a yellow background and a merge tool UI appears. Users can choose "accept mine", "accept theirs", or "view diff".</li>
+          <li><strong>Version History Timeline:</strong> A sidebar timeline shows all versions with author avatars, timestamps, and a visual diff preview. Users can click any version to see a side-by-side diff. Version names are auto-generated "Alice edited paragraph 3".</li>
+          <li><strong>Offline Indicator:</strong> When connection drops, a subtle banner appears: "Working offline — changes will sync when reconnected." Offline edits are queued and applied with operational transform when reconnecting.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card"><h4>Phase 1: Single-User Editor (Week 1-2)</h4><p>Set up project scaffold with Vite + React + TypeScript. Integrate ProseMirror with basic text editing. Implement rich text formatting (bold, italic, headings, lists, links). Build toolbar UI with formatting buttons. Save/load documents from PostgreSQL.</p></div>
+        <div class="phase-card"><h4>Phase 2: WebSocket Infrastructure (Week 3-4)</h4><p>Set up Node.js + Socket.io server. Implement WebSocket connection with authentication. Create DocumentRoom abstraction — each document gets a Socket.io room. Build heartbeat/ping-pong for connection health. Implement reconnection logic with exponential backoff.</p></div>
+        <div class="phase-card"><h4>Phase 3: Operational Transform (Week 5-7)</h4><p>Implement OT transform functions for insert/delete/format operations. Build client-side pending operation buffer. Implement server-side OT with acknowledgement. Handle edge cases: concurrent insert at same position, concurrent delete of overlapping ranges. Write comprehensive tests for transform properties (TP1, TP2).</p></div>
+        <div class="phase-card"><h4>Phase 4: Presence System (Week 8-9)</h4><p>Implement cursor position tracking and broadcasting. Build Canvas overlay for rendering remote cursors. Add selection highlighting with user colors. Implement typing indicators. Optimize: throttle cursor updates to 20fps, batch presence events.</p></div>
+        <div class="phase-card"><h4>Phase 5: CRDT Integration (Week 10-12)</h4><p>Implement RGA (Replicated Growable Array) for the document text. Implement LWW-Register for document metadata. Replace OT with CRDT for text operations. Implement CRDT merge on reconnection. Handle offline editing with CRDT's natural merge properties. Benchmark OT vs CRDT performance.</p></div>
+        <div class="phase-card"><h4>Phase 6: Version History (Week 13-14)</h4><p>Implement version snapshots (every 50 operations or 5 minutes). Build version tree with parent pointers. Implement diff computation between versions (Myers diff). Create version history UI with timeline, diffs, and restore functionality. Implement retention policy: keep every 10th version after 1000 versions.</p></div>
+        <div class="phase-card"><h4>Phase 7: Comments & Collaboration Features (Week 15-16)</h4><p>Implement anchored comments (comment attached to specific text range, moves with edits). Add suggestion mode (tracked changes). Implement real-time comment notifications. Build sharing dialog with permission levels (view/comment/edit). Add activity log feed.</p></div>
+        <div class="phase-card"><h4>Phase 8: Scaling & Production Readiness (Week 17-18)</h4><p>Implement Redis pub/sub for cross-instance message relay. Set up Socket.io Redis adapter. Load test with 1000 concurrent connections. Optimize memory usage (document snapshots, operation buffers). Implement rate limiting and connection limits. Add monitoring dashboards.</p></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cogs" style="color:var(--primary)"></i> Implementation Guide</h2>
+
+        <h3>Step 1: OT Core — Operation Types & Transform</h3>
+        <div class="code-block" data-lang="typescript"><code>// server/src/sync/operation.ts
+export enum OperationType {
+  Insert = 'insert',
+  Delete = 'delete',
+  Retain = 'retain',
+  Format = 'format',
+}
+
+export interface InsertOp {
+  type: OperationType.Insert;
+  position: number;
+  text: string;
+  attributes?: Record<string, any>;
+  clientId: string;
+  seq: number;
+}
+
+export interface DeleteOp {
+  type: OperationType.Delete;
+  position: number;
+  length: number;
+  clientId: string;
+  seq: number;
+}
+
+export interface FormatOp {
+  type: OperationType.Format;
+  position: number;
+  length: number;
+  attributes: Record<string, any>;
+  clientId: string;
+  seq: number;
+}
+
+export type Operation = InsertOp | DeleteOp | FormatOp;
+
+export interface OperationBatch {
+  documentId: string;
+  operations: Operation[];
+  baseVersion: number;
+  clientId: string;
+}
+</code></div>
+
+        <div class="code-block" data-lang="typescript"><code>// server/src/sync/transform.ts
+import { Operation, OperationType } from './operation';
+
+/**
+ * OT Function f(op1, op2) -> [op1', op2']
+ * Transforms op1 against op2 so they can be applied in either order
+ */
+export function transform(op1: Operation, op2: Operation): [Operation, Operation] {
+  // TP1: If ops are from the same client, they're already ordered
+  if (op1.clientId === op2.clientId) {
+    return [op1, op2];
+  }
+
+  // Insert vs Insert
+  if (op1.type === OperationType.Insert && op2.type === OperationType.Insert) {
+    return transformInsertInsert(op1, op2);
+  }
+
+  // Delete vs Delete
+  if (op1.type === OperationType.Delete && op2.type === OperationType.Delete) {
+    return transformDeleteDelete(op1, op2);
+  }
+
+  // Insert vs Delete
+  if (op1.type === OperationType.Insert && op2.type === OperationType.Delete) {
+    return transformInsertDelete(op1, op2);
+  }
+
+  if (op1.type === OperationType.Delete && op2.type === OperationType.Insert) {
+    const [op2Prime, op1Prime] = transformInsertDelete(op2, op1);
+    return [op1Prime, op2Prime];
+  }
+
+  // For format operations, treat like retains
+  return transformRetainRetain(op1, op2);
+}
+
+function transformInsertInsert(op1: InsertOp, op2: InsertOp): [InsertOp, InsertOp] {
+  // If at same position, use clientId as tiebreaker
+  if (op1.position === op2.position) {
+    if (op1.clientId < op2.clientId) {
+      // op1 goes first, op2 shifts right by op1 text length
+      return [
+        op1,
+        { ...op2, position: op2.position + op1.text.length },
+      ];
+    } else {
+      // op2 goes first, op1 shifts right
+      return [
+        { ...op1, position: op1.position + op2.text.length },
+        op2,
+      ];
+    }
+  }
+
+  if (op1.position < op2.position) {
+    // op1 is before op2, op2 shifts right
+    return [
+      op1,
+      { ...op2, position: op2.position + op1.text.length },
+    ];
+  } else {
+    // op2 is before op1, op1 shifts right
+    return [
+      { ...op1, position: op1.position + op2.text.length },
+      op2,
+    ];
+  }
+}
+
+function transformDeleteDelete(op1: DeleteOp, op2: DeleteOp): [DeleteOp, DeleteOp] {
+  const o1End = op1.position + op1.length;
+  const o2End = op2.position + op2.length;
+
+  // No overlap
+  if (o1End <= op2.position) {
+    // op1 is entirely before op2, no transform needed for op1
+    // op2 shifts left by op1.length
+    return [
+      op1,
+      { ...op2, position: op2.position - op1.length },
+    ];
+  }
+
+  if (o2End <= op1.position) {
+    // op2 is entirely before op1
+    return [
+      { ...op1, position: op1.position - op2.length },
+      op2,
+    ];
+  }
+
+  // Partial/complete overlap
+  if (op1.position <= op2.position) {
+    // op1 starts first or same
+    const overlapLen = Math.min(o1End, o2End) - op2.position;
+    const op1Len = op1.length - (op2.position - op1.position);
+    const effectiveDelete1 = overlapLen;
+
+    return [
+      { ...op1, length: op1Len - overlapLen },
+      { ...op2, position: op1.position, length: op2.length - effectiveDelete1 },
+    ];
+  } else {
+    // op2 starts first
+    const overlapLen = Math.min(o2End, o1End) - op1.position;
+    return [
+      { ...op1, position: op2.position, length: op1.length - overlapLen },
+      { ...op2, length: op2.length - overlapLen },
+    ];
+  }
+}
+
+function transformInsertDelete(op1: InsertOp, op2: DeleteOp): [InsertOp, DeleteOp] {
+  // Where is the insert relative to the delete?  
+  if (op1.position <= op2.position) {
+    // Insert before delete, delete shifts right
+    return [op1, { ...op2, position: op2.position + op1.text.length }];
+  } else if (op1.position >= op2.position + op2.length) {
+    // Insert after delete, insert shifts left
+    return [
+      { ...op1, position: op1.position - op2.length },
+      op2,
+    ];
+  } else {
+    // Insert inside delete range — tricky
+    // The insert survives (we keep it), but the delete splits around it
+    // We split the delete into two: before insert and after insert
+    // For simplicity, we keep the delete for the part before the insert
+    const beforeLen = op1.position - op2.position;
+    return [
+      { ...op1, position: op2.position + beforeLen },
+      { ...op2, length: beforeLen },
+    ];
+  }
+}
+
+/**
+ * Compose: apply op1 then op2 = compose(op1, op2)
+ */
+export function compose(a: Operation, b: Operation): Operation {
+  // Simplified compose — in production, handle all combinations
+  if (a.type === OperationType.Insert && b.type === OperationType.Delete) {
+    if (b.position >= a.position && b.position + b.length <= a.position + a.text.length) {
+      // Deleting some of what was just inserted
+      const keepStart = b.position - a.position;
+      const keepEnd = (a.position + a.text.length) - (b.position + b.length);
+      const newText = a.text.slice(0, keepStart) + a.text.slice(a.text.length - keepEnd);
+      return { ...a, text: newText, position: a.position + keepStart };
+    }
+  }
+  // Default: just apply both (b already accounts for a's effect)
+  return b;
+}</code></div>
+
+        <h3>Step 2: CRDT — Replicated Growable Array (RGA)</h3>
+        <div class="code-block" data-lang="typescript"><code>// server/src/sync/crdt/RGA.ts
+import { v7 as uuidv7 } from 'uuid';
+
+interface RGANode {
+  id: string;            // Unique ID (UUID v7 for time-ordered)
+  value: string | null;  // null = tombstone (deleted)
+  createdAt: number;     // Lamport timestamp or hybrid logical clock
+  creator: string;       // Client ID that created this node
+  next: string | null;   // ID of next node in sequence
+}
+
+/**
+ * RGA (Replicated Growable Array)
+ * A CRDT for ordered sequences with eventual consistency.
+ * Each character/operation is a node in a linked list.
+ * Conflicts resolved by: insert position (parent), then creator ID, then timestamp.
+ */
+export class RGA {
+  private nodes: Map<string, RGANode> = new Map();
+  private head: string | null = null;  // ID of first node
+  private clock: number = 0;
+
+  constructor() {
+    // Initialize with empty document head
+    // In practice, the document is a sequence of RGA nodes
+  }
+
+  /**
+   * Local insert: create a new node at the given position after the target node
+   */
+  localInsert(afterId: string | null, value: string, creator: string): RGANode {
+    this.clock++;
+    const node: RGANode = {
+      id: uuidv7(),
+      value,
+      createdAt: this.clock,
+      creator,
+      next: null,
+    };
+
+    if (afterId === null) {
+      // Insert at beginning
+      node.next = this.head;
+      this.head = node.id;
+    } else {
+      const afterNode = this.nodes.get(afterId);
+      if (!afterNode) throw new Error(`Node ${afterId} not found`);
+      node.next = afterNode.next;
+      afterNode.next = node.id;
+    }
+
+    this.nodes.set(node.id, node);
+    return node;
+  }
+
+  /**
+   * Remote insert: merge an insert operation from another client
+   * Conflict resolution: find the right position based on causal ordering
+   */
+  remoteInsert(node: RGANode): void {
+    this.clock = Math.max(this.clock, node.createdAt) + 1;
+
+    if (!this.nodes.has(node.id)) {
+      this.nodes.set(node.id, node);
+      this.mergeInsert(node);
+    }
+  }
+
+  private mergeInsert(newNode: RGANode): void {
+    // Find the correct position by finding where this node would have been inserted
+    // We need to walk from head and find the right spot based on causal history
+    if (this.head === null) {
+      this.head = newNode.id;
+      newNode.next = null;
+      return;
+    }
+
+    // If this node was inserted at position 0 (no predecessor)
+    // Try to determine position from causal relationships
+    let prev: string | null = null;
+    let current = this.head;
+
+    while (current !== null) {
+      const currentNode = this.nodes.get(current)!;
+
+      // Check if new node should go before current node
+      if (this.shouldPrecede(newNode, currentNode)) {
+        if (prev === null) {
+          newNode.next = this.head;
+          this.head = newNode.id;
+        } else {
+          const prevNode = this.nodes.get(prev)!;
+          newNode.next = prevNode.next;
+          prevNode.next = newNode.id;
+        }
+        return;
+      }
+
+      prev = current;
+      current = currentNode.next;
+    }
+
+    // Append to end
+    const lastNode = this.nodes.get(prev!)!;
+    lastNode.next = newNode.id;
+    newNode.next = null;
+  }
+
+  /**
+   * Determine if node a should come before node b
+   * Rules: (1) If a is a descendant of b's predecessor, a goes after b
+   *         (2) Otherwise, compare by creator ID, then timestamp
+   */
+  private shouldPrecede(a: RGANode, b: RGANode): boolean {
+    if (a.creator < b.creator) return true;
+    if (a.creator > b.creator) return false;
+    return a.createdAt < b.createdAt;
+  }
+
+  /**
+   * Delete a node (mark as tombstone)
+   */
+  localDelete(nodeId: string): boolean {
+    const node = this.nodes.get(nodeId);
+    if (!node || node.value === null) return false;
+    node.value = null; // Tombstone
+    return true;
+  }
+
+  /**
+   * Get the full document text (skip tombstones)
+   */
+  getText(): string {
+    let result = '';
+    let current = this.head;
+    while (current !== null) {
+      const node = this.nodes.get(current)!;
+      if (node.value !== null) {
+        result += node.value;
+      }
+      current = node.next;
+    }
+    return result;
+  }
+
+  /**
+   * Get all non-tombstone nodes as an array
+   */
+  getNodes(): RGANode[] {
+    const result: RGANode[] = [];
+    let current = this.head;
+    while (current !== null) {
+      const node = this.nodes.get(current)!;
+      if (node.value !== null) {
+        result.push(node);
+      }
+      current = node.next;
+    }
+    return result;
+  }
+
+  /**
+   * Serialize for network transfer
+   */
+  toJSON() {
+    return {
+      head: this.head,
+      nodes: Array.from(this.nodes.entries()).map(([id, node]) => ({
+        id,
+        value: node.value,
+        createdAt: node.createdAt,
+        creator: node.creator,
+        next: node.next,
+      })),
+      clock: this.clock,
+    };
+  }
+
+  static fromJSON(data: any): RGA {
+    const rga = new RGA();
+    rga.head = data.head;
+    rga.clock = data.clock;
+    for (const nodeData of data.nodes) {
+      rga.nodes.set(nodeData.id, {
+        id: nodeData.id,
+        value: nodeData.value,
+        createdAt: nodeData.createdAt,
+        creator: nodeData.creator,
+        next: nodeData.next,
+      });
+    }
+    return rga;
+  }
+}</code></div>
+
+        <h3>Step 3: Sync Engine — Client-Side OT</h3>
+        <div class="code-block" data-lang="typescript"><code>// client/src/sync/OTClient.ts
+import { Socket } from 'socket.io-client';
+import { Operation, OperationType, InsertOp, DeleteOp, FormatOp, OperationBatch } from '../../../shared/types';
+import { transform, compose } from './transform';
+
+type State = 'synchronized' | 'awaiting_ack' | 'awaiting_ack_with_buffer';
+
+export class OTClient {
+  private socket: Socket;
+  private docId: string;
+  private state: State = 'synchronized';
+  private pendingOp: Operation | null = null;
+  private buffer: Operation[] = [];
+  private version: number = 0;
+  private onApplyRemote: (op: Operation) => void;
+  private onAcknowledge: (op: Operation) => void;
+
+  constructor(
+    socket: Socket,
+    docId: string,
+    onApplyRemote: (op: Operation) => void,
+    onAcknowledge: (op: Operation) => void
+  ) {
+    this.socket = socket;
+    this.docId = docId;
+    this.onApplyRemote = onApplyRemote;
+    this.onAcknowledge = onAcknowledge;
+
+    this.socket.on('doc:operation', this.handleRemoteOperation);
+    this.socket.on('doc:ack', this.handleAck);
+  }
+
+  /**
+   * Send a local operation to the server
+   */
+  sendOperation(op: Operation): void {
+    switch (this.state) {
+      case 'synchronized':
+        this.state = 'awaiting_ack';
+        this.pendingOp = op;
+        this.socket.emit('doc:operation', {
+          documentId: this.docId,
+          operation: op,
+          baseVersion: this.version,
+        });
+        break;
+
+      case 'awaiting_ack':
+        this.state = 'awaiting_ack_with_buffer';
+        // Buffer new operation, but first transform it against pending
+        const [transformedOp, newPending] = transform(op, this.pendingOp!);
+        this.pendingOp = newPending;
+        this.buffer.push(transformedOp);
+        break;
+
+      case 'awaiting_ack_with_buffer':
+        // Transform against pending, then against all buffered
+        let opToBuffer = op;
+        for (const buffered of this.buffer) {
+          const [tOp, _] = transform(opToBuffer, buffered);
+          opToBuffer = tOp;
+        }
+        this.buffer.push(opToBuffer);
+        break;
+    }
+  }
+
+  /**
+   * Handle operation received from server (broadcast from another client)
+   */
+  private handleRemoteOperation = (data: { operation: Operation; version: number }) => {
+    const { operation: remoteOp } = data;
+
+    switch (this.state) {
+      case 'synchronized':
+        // Apply remote directly
+        this.onApplyRemote(remoteOp);
+        this.version++;
+        break;
+
+      case 'awaiting_ack':
+        // Transform pending operation against remote, apply remote first
+        const [pendingPrime, remotePrime] = transform(this.pendingOp!, remoteOp);
+        this.pendingOp = pendingPrime;
+        this.onApplyRemote(remotePrime);
+        this.version++;
+        break;
+
+      case 'awaiting_ack_with_buffer':
+        // Transform all pending ops against remote
+        const [pendingPrime2, remotePrime2] = transform(this.pendingOp!, remoteOp);
+        this.pendingOp = pendingPrime2;
+        
+        const newBuffer: Operation[] = [];
+        for (const buffered of this.buffer) {
+          const [bufferedPrime, _] = transform(buffered, remotePrime2);
+          newBuffer.push(bufferedPrime);
+        }
+        this.buffer = newBuffer;
+        
+        this.onApplyRemote(remotePrime2);
+        this.version++;
+        break;
+    }
+  };
+
+  /**
+   * Handle acknowledgement from server (our operation was committed)
+   */
+  private handleAck = () => {
+    switch (this.state) {
+      case 'synchronized':
+        // Shouldn't happen
+        break;
+
+      case 'awaiting_ack':
+        this.onAcknowledge(this.pendingOp!);
+        this.pendingOp = null;
+        this.state = 'synchronized';
+        this.version++;
+        break;
+
+      case 'awaiting_ack_with_buffer':
+        this.onAcknowledge(this.pendingOp!);
+        // Send oldest buffered operation
+        const nextOp = this.buffer.shift()!;
+        this.pendingOp = nextOp;
+        this.socket.emit('doc:operation', {
+          documentId: this.docId,
+          operation: nextOp,
+          baseVersion: this.version,
+        });
+        this.version++;
+        
+        if (this.buffer.length === 0) {
+          this.state = 'awaiting_ack';
+        }
+        break;
+    }
+  };
+
+  /**
+   * Clean up on unmount
+   */
+  disconnect(): void {
+    this.socket.off('doc:operation', this.handleRemoteOperation);
+    this.socket.off('doc:ack', this.handleAck);
+  }
+}</code></div>
+
+        <h3>Step 4: WebSocket Document Room</h3>
+        <div class="code-block" data-lang="typescript"><code>// server/src/websocket/DocumentRoom.ts
+import { Socket, Server as SocketIOServer } from 'socket.io';
+import { Redis } from 'ioredis';
+import { SyncServer } from '../sync/SyncServer';
+import { PresenceManager } from '../presence/PresenceManager';
+import { DocumentService } from '../api/services/DocumentService';
+import { logger } from '../utils/logger';
+
+export class DocumentRoom {
+  private io: SocketIOServer;
+  private syncServer: SyncServer;
+  private presenceManager: PresenceManager;
+  private documentService: DocumentService;
+  private redis: Redis;
+  private activeSockets: Map<string, Set<string>> = new Map(); // docId -> Set<socketId>
+
+  constructor(
+    io: SocketIOServer,
+    syncServer: SyncServer,
+    presenceManager: PresenceManager,
+    documentService: DocumentService,
+    redis: Redis
+  ) {
+    this.io = io;
+    this.syncServer = syncServer;
+    this.presenceManager = presenceManager;
+    this.documentService = documentService;
+    this.redis = redis;
+  }
+
+  /**
+   * Handle client joining a document room
+   */
+  async handleJoin(socket: Socket, docId: string, userId: string) {
+    try {
+      // Verify user has access to document
+      const hasAccess = await this.documentService.checkPermission(docId, userId, 'edit');
+      if (!hasAccess) {
+        socket.emit('error', { code: 'FORBIDDEN', message: 'No access to this document' });
+        return;
+      }
+
+      // Get current document state
+      const docState = await this.syncServer.getCurrentState(docId);
+
+      // Join Socket.io room
+      socket.join(`doc:${docId}`);
+
+      // Track active sockets
+      if (!this.activeSockets.has(docId)) {
+        this.activeSockets.set(docId, new Set());
+      }
+      this.activeSockets.get(docId)!.add(socket.id);
+
+      // Send current state to client
+      socket.emit('doc:state', {
+        documentId: docId,
+        version: docState.version,
+        content: docState.content,
+        operations: docState.recentOperations,
+      });
+
+      // Register presence
+      await this.presenceManager.userJoined(docId, userId, socket.id);
+      
+      // Broadcast user joined to room
+      socket.to(`doc:${docId}`).emit('presence:join', {
+        userId,
+        user: await this.documentService.getUserInfo(userId),
+      });
+
+      // Send active users to joining client
+      const activeUsers = await this.presenceManager.getActiveUsers(docId);
+      socket.emit('presence:active', activeUsers);
+
+      logger.info(`User ${userId} joined document ${docId}`);
+
+      // Set up event handlers for this socket
+      this.setupSocketHandlers(socket, docId, userId);
+    } catch (error) {
+      logger.error(`Join error for doc ${docId}:`, error);
+      socket.emit('error', { code: 'INTERNAL', message: 'Failed to join document' });
+    }
+  }
+
+  private setupSocketHandlers(socket: Socket, docId: string, userId: string) {
+    // Handle operations from client
+    socket.on('doc:operation', async (data: { operation: any; baseVersion: number }) => {
+      try {
+        const result = await this.syncServer.handleOperation(
+          docId,
+          userId,
+          data.operation,
+          data.baseVersion
+        );
+
+        // Broadcast to other clients in room (with transformation applied)
+        socket.to(`doc:${docId}`).emit('doc:operation', {
+          operation: result.transformedOp,
+          version: result.newVersion,
+          userId,
+        });
+
+        // Acknowledge to sender
+        socket.emit('doc:ack', {
+          version: result.newVersion,
+          serverTimestamp: result.timestamp,
+        });
+
+        // Persist operation
+        await this.documentService.persistOperation(docId, result);
+      } catch (error) {
+        logger.error(`Operation error:`, error);
+        socket.emit('error', { code: 'OP_FAILED', message: 'Operation rejected' });
+      }
+    });
+
+    // Handle presence updates
+    socket.on('presence:update', (data: { cursor?: any; selection?: any }) => {
+      this.presenceManager.updatePresence(docId, userId, {
+        cursor: data.cursor,
+        selection: data.selection,
+        lastActivity: Date.now(),
+      });
+      
+      socket.to(`doc:${docId}`).emit('presence:update', {
+        userId,
+        cursor: data.cursor,
+        selection: data.selection,
+      });
+    });
+
+    // Handle cursor updates (high frequency, separate throttling)
+    socket.on('presence:cursor', (data: { position: any }) => {
+      socket.to(`doc:${docId}`).emit('presence:cursor', {
+        userId,
+        position: data.position,
+      });
+    });
+
+    // Handle typing indicator
+    socket.on('presence:typing', (isTyping: boolean) => {
+      socket.to(`doc:${docId}`).emit('presence:typing', {
+        userId,
+        isTyping,
+      });
+    });
+
+    // Handle disconnect
+    socket.on('disconnect', async () => {
+      await this.handleDisconnect(socket, docId, userId);
+    });
+  }
+
+  private async handleDisconnect(socket: Socket, docId: string, userId: string) {
+    const sockets = this.activeSockets.get(docId);
+    if (sockets) {
+      sockets.delete(socket.id);
+      
+      // Check if user has any other sockets connected to this doc
+      const userSockets = Array.from(sockets).filter(sid => {
+        // In production, track userId per socket
+        return true;
+      });
+
+      if (userSockets.length === 0) {
+        await this.presenceManager.userLeft(docId, userId);
+        
+        this.io.to(`doc:${docId}`).emit('presence:leave', {
+          userId,
+        });
+      }
+    }
+  }
+
+  /**
+   * Scale: broadcast to other instances via Redis pub/sub
+   */
+  private async broadcastToOtherInstances(docId: string, event: string, data: any) {
+    await this.redis.publish(`collab:${docId}`, JSON.stringify({
+      event,
+      data,
+      instanceId: process.env.INSTANCE_ID || 'default',
+    }));
+  }
+}</code></div>
+
+        <h3>Step 5: Cursor Overlay</h3>
+        <div class="code-block" data-lang="typescript"><code>// client/src/editor/cursors.ts
+import { EditorView } from 'prosemirror-view';
+import { UserPresence } from '../presence/PresenceClient';
+
+interface RemoteCursor {
+  userId: string;
+  name: string;
+  color: string;
+  position: { from: number; to: number };
+  lastUpdate: number;
+}
+
+export class CursorOverlay {
+  private view: EditorView;
+  private cursors: Map<string, RemoteCursor> = new Map();
+  private overlayElement: HTMLElement;
+  private animationFrame: number | null = null;
+  private userColors: string[] = [
+    '#6366f1', '#ef4444', '#22c55e', '#f59e0b',
+    '#3b82f6', '#ec4899', '#14b8a6', '#f97316',
+  ];
+  private colorIndex: number = 0;
+
+  constructor(view: EditorView) {
+    this.view = view;
+    this.overlayElement = this.createOverlay();
+    document.body.appendChild(this.overlayElement);
+  }
+
+  private createOverlay(): HTMLElement {
+    const overlay = document.createElement('div');
+    overlay.className = 'remote-cursors-overlay';
+    overlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    `;
+    return overlay;
+  }
+
+  /**
+   * Update a cursor position from remote user
+   */
+  updateCursor(userId: string, name: string, position: { from: number; to: number }) {
+    const existing = this.cursors.get(userId);
+    
+    if (!existing) {
+      const color = this.userColors[this.colorIndex % this.userColors.length];
+      this.colorIndex++;
+      
+      this.cursors.set(userId, {
+        userId,
+        name,
+        color,
+        position,
+        lastUpdate: Date.now(),
+      });
+    } else {
+      existing.position = position;
+      existing.lastUpdate = Date.now();
+    }
+
+    // Request animation frame if not already queued
+    if (!this.animationFrame) {
+      this.animationFrame = requestAnimationFrame(() => this.render());
+    }
+  }
+
+  /**
+   * Remove cursor when user leaves
+   */
+  removeCursor(userId: string) {
+    this.cursors.delete(userId);
+    
+    // Remove cursor DOM elements
+    const element = this.overlayElement.querySelector(`[data-user-id="${userId}"]`);
+    if (element) element.remove();
+  }
+
+  private render() {
+    this.animationFrame = null;
+    
+    // Clean stale cursors (>10 seconds old)
+    const now = Date.now();
+    for (const [userId, cursor] of this.cursors) {
+      if (now - cursor.lastUpdate > 10000) {
+        this.removeCursor(userId);
+      }
+    }
+
+    // Get editor's scroll and position info
+    const editorRect = this.view.dom.getBoundingClientRect();
+    const scrollTop = this.view.dom.scrollTop || 0;
+
+    // Render each cursor
+    for (const [userId, cursor] of this.cursors) {
+      const fromPos = this.view.coordsAtPos(cursor.position.from);
+      if (!fromPos) continue;
+
+      let cursorElement = this.overlayElement.querySelector(
+        `[data-user-id="${userId}"]`
+      ) as HTMLElement;
+
+      if (!cursorElement) {
+        cursorElement = this.createCursorElement(userId, cursor);
+        this.overlayElement.appendChild(cursorElement);
+      }
+
+      // Position cursor
+      const x = fromPos.left - editorRect.left;
+      const y = fromPos.top - editorRect.top + scrollTop;
+
+      cursorElement.style.transform = `translate(${x}px, ${y}px)`;
+
+      // Render selection if present
+      if (cursor.position.to > cursor.position.from) {
+        const toPos = this.view.coordsAtPos(cursor.position.to);
+        if (toPos) {
+          const selectionEl = cursorElement.querySelector('.cursor-selection') as HTMLElement;
+          if (selectionEl) {
+            const selX = fromPos.left - editorRect.left;
+            const selWidth = toPos.right - fromPos.left;
+            selectionEl.style.width = `${selWidth}px`;
+            selectionEl.style.height = `${fromPos.bottom - fromPos.top}px`;
+          }
+        }
+      }
+    }
+  }
+
+  private createCursorElement(userId: string, cursor: RemoteCursor): HTMLElement {
+    const el = document.createElement('div');
+    el.dataset.userId = userId;
+    el.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 0.1s ease-out;
+      pointer-events: none;
+    `;
+
+    // Cursor line (2px wide vertical bar)
+    const cursorLine = document.createElement('div');
+    cursorLine.style.cssText = `
+      width: 2px;
+      height: 1.2em;
+      background: ${cursor.color};
+      position: absolute;
+      top: 0;
+      left: 0;
+    `;
+
+    // Selection highlight (if range)
+    const selection = document.createElement('div');
+    selection.className = 'cursor-selection';
+    selection.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: ${cursor.color}33;
+      border-radius: 2px;
+    `;
+
+    // Name label
+    const label = document.createElement('div');
+    label.textContent = cursor.name;
+    label.style.cssText = `
+      position: absolute;
+      top: -1.5em;
+      left: 0;
+      background: ${cursor.color};
+      color: white;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      white-space: nowrap;
+      font-weight: 600;
+    `;
+
+    el.appendChild(cursorLine);
+    el.appendChild(selection);
+    el.appendChild(label);
+
+    return el;
+  }
+
+  destroy() {
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+    }
+    this.overlayElement.remove();
+  }
+}</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-network-wired" style="color:var(--primary)"></i> WebSocket Fundamentals</h2>
+        <p>WebSocket provides full-duplex communication over a single TCP connection. For collaboration tools, WebSocket is superior to HTTP polling because: (1) Sub-50ms message latency vs 200-500ms for polling, (2) Server can push updates without client request, (3) Persistent connection reduces TLS handshake overhead, (4) Binary framing reduces overhead vs HTTP headers. Key considerations: (1) Socket.io provides automatic fallback to long-polling when WebSocket is blocked, (2) Use sticky sessions for horizontal scaling (or Redis adapter), (3) Heartbeat interval of 25s to detect stale connections, (4) Message ordering guarantees — Socket.io preserves order within a single transport, (5) Backpressure handling — if client is too slow, server should buffer or drop presence updates.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-sync-alt" style="color:var(--primary)"></i> Operational Transform (OT) Concepts</h2>
+        <p>OT is the foundational technology behind Google Docs and many collaborative editors. Core principles:</p>
+        <ul>
+          <li><strong>Operation:</strong> A unit of change (insert N chars at position P, delete M chars at position P). Operations are small, composable, and transformable.</li>
+          <li><strong>Transform Property 1 (TP1):</strong> If op1 and op2 are concurrent, then applying op1 then op2' (op2 transformed against op1) produces the same result as applying op2 then op1'.</li>
+          <li><strong>Transform Property 2 (TP2):</strong> If op1, op2, op3 are concurrent, transform(op1, transform(op2, op3)) = transform(transform(op1, op2), op3).</li>
+          <li><strong>Client-Server Model:</strong> Client sends operation to server. Server transforms against concurrent ops from other clients, applies, and broadcasts. Client receives ack with transformed version of own op.</li>
+          <li><strong>Limitations:</strong> OT becomes exponentially complex with multiple simultaneous editors. Each new concurrent op requires transformation against all others. This is why Google Docs limits to ~100 editors.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-cubes" style="color:var(--primary)"></i> CRDT (Conflict-free Replicated Data Types)</h2>
+        <p>CRDT provides eventual consistency without a central server. Each character is a unique node with a globally unique ID. When conflicts occur (same position), CRDT uses deterministic rules (timestamp, creator ID) to decide order — no transformation needed. Benefits over OT: (1) No central server required for correctness, (2) Naturally handles offline editing — just merge on reconnect, (3) Scales to thousands of concurrent editors, (4) Simpler implementation (no transform functions). Trade-offs: (1) Larger metadata overhead (unique IDs per character), (2) Tombstones for deleted elements consume memory, (3) Less mature ecosystem. Libraries: yjs (used by Roam Research, Obsidian), automerge (used byJupyter Notebooks).</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-users" style="color:var(--primary)"></i> Presence Systems</h2>
+        <p>Presence tracking has different performance characteristics than document sync: (1) Cursor updates are ephemeral — if lost, the next update will correct position, (2) Can tolerate higher latency (50-100ms vs 10-50ms for ops), (3) Higher frequency (20fps cursor updates vs 1-5 ops/sec typing), (4) Use separate WebSocket channel to avoid head-of-line blocking. Implementation: Presence updates sent every 50ms on a dedicated channel. Server broadcasts to room without persistence. Client renders with requestAnimationFrame for smooth animation. Fade out after 10 seconds of inactivity.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-history" style="color:var(--primary)"></i> Version History and Diffing</h2>
+        <p>Version history is implemented as a directed acyclic graph (DAG) of document states. Each version stores: (1) Incremental operations since parent, (2) A full snapshot every 50 versions (checkpoint), (3) Author, timestamp, and auto-generated description. Diff between versions uses Myers' O(ND) diff algorithm. For rich text, we diff the underlying plain text and apply formatting overlays. The version tree supports branching (collaborators can diverge and merge) — displayed as a visual timeline with branch indicators.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-handshake" style="color:var(--primary)"></i> Conflict Resolution Strategies</h2>
+        <ul>
+          <li><strong>Text (OT/CRDT):</strong> Automatic — characters never conflict because each has a unique ID. Simultaneous inserts at same position are ordered deterministically.</li>
+          <li><strong>Rich Text Formatting:</strong> Last-writer-wins for formatting attributes. If Alice bolds "hello" and Bob underlines "hello", both formats are applied.</li>
+          <li><strong>Object Fields:</strong> Last-writer-wins per field. If Alice edits title and Bob edits body, both changes are preserved.</li>
+          <li><strong>List Items:</strong> Position-based conflict resolution using fractional indexing (Figma's approach) or CRDT list.</li>
+          <li><strong>Unresolvable:</strong> When automatic resolution isn't possible (e.g., incompatible changes to same data), show merge UI similar to Git conflict markers. Users see both versions and pick the desired outcome.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-expand-arrows-alt" style="color:var(--primary)"></i> Scalability with WebSocket Rooms</h2>
+        <p>Horizontal scaling for WebSocket connections: (1) Use Socket.io Redis adapter — broadcasts are published to Redis, each server instance subscribes and forwards to connected clients, (2) Each document is a room — operations are only sent to clients in that room, (3) For 1000+ editors per document, use hierarchical rooms: doc:123:section:A, doc:123:section:B — clients only sync the section they're viewing, (4) Load balancer with sticky sessions (WebSocket affinity), (5) Separate read-only replicas for viewers who don't need to edit.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <div class="code-block" data-lang="typescript"><code>// server/tests/OT.test.ts
+import { describe, it, expect } from '@jest/globals';
+import { transform, compose } from '../src/sync/transform';
+import { OperationType } from '../src/sync/operation';
+
+describe('Operational Transform', () => {
+  it('should transform insert before insert', () => {
+    const op1 = { type: OperationType.Insert, position: 5, text: 'AB', clientId: 'a', seq: 1 };
+    const op2 = { type: OperationType.Insert, position: 10, text: 'CD', clientId: 'b', seq: 1 };
+    const [op1Prime, op2Prime] = transform(op1, op2);
+    expect(op1Prime.position).toBe(5);
+    expect(op2Prime.position).toBe(12); // Shifted by 2
+  });
+
+  it('should handle concurrent inserts at same position (tiebreak by clientId)', () => {
+    const op1 = { type: OperationType.Insert, position: 5, text: 'A', clientId: 'a', seq: 1 };
+    const op2 = { type: OperationType.Insert, position: 5, text: 'B', clientId: 'b', seq: 1 };
+    const [op1Prime, op2Prime] = transform(op1, op2);
+    // 'a' < 'b', so op1 keeps position 5, op2 shifts to 6
+    expect(op1Prime.position).toBe(5);
+    expect(op2Prime.position).toBe(6);
+  });
+
+  it('should transform delete against insert', () => {
+    const insert = { type: OperationType.Insert, position: 3, text: 'X', clientId: 'a', seq: 1 };
+    const del = { type: OperationType.Delete, position: 5, length: 2, clientId: 'b', seq: 1 };
+    const [insPrime, delPrime] = transform(insert, del);
+    expect(delPrime.position).toBe(6); // Shifted by insert
+  });
+
+  it('should satisfy TP1 property', () => {
+    const op1 = { type: OperationType.Insert, position: 3, text: 'X', clientId: 'a', seq: 1 };
+    const op2 = { type: OperationType.Delete, position: 5, length: 1, clientId: 'b', seq: 1 };
+    const [op1Prime, op2Prime] = transform(op1, op2);
+    // Apply op1 then op2' vs op2 then op1' — same result
+    const doc1 = applyOps('hello', [op1, op2Prime]);
+    const doc2 = applyOps('hello', [op2, op1Prime]);
+    expect(doc1).toBe(doc2);
+  });
+});</code></div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>Docker Compose:</strong> Deploy sync server (3+ instances), PostgreSQL (RDS), Redis (ElastiCache), and frontend (Vercel). Use AWS ECS with Fargate for the sync server. Load balancer with proxy protocol v2 for WebSocket support. Socket.io Redis adapter for cross-instance communication. Auto-scaling based on active connections (target: 1000 connections per instance). Monitor: (1) Operation latency P50/P95/P99, (2) Active connections per instance, (3) Redis pub/sub message rate, (4) Document state memory usage.</p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="mistake-card"><strong>1. Not handling concurrent operations correctly:</strong> OT transform functions must maintain TP1/TP2 properties. Many implementations handle 80% of cases but fail on edge cases like overlapping deletes or insert+delete at same position. Write property-based tests using fast-check to discover edge cases.</div>
+        <div class="mistake-card"><strong>2. Mixing up operation ordering:</strong> The sequence of operations matters critically. Always include baseVersion in operation messages. Use vector clocks or version vectors to detect concurrent operations. Never assume operations arrive in causal order.</div>
+        <div class="mistake-card"><strong>3. Ignoring memory usage:</strong> CRDT tombstones and operation buffers grow unboundedly. Implement snapshot compression — periodically create a full document snapshot and discard operations before it. Use Redis with maxmemory-policy for ephemeral state.</div>
+        <div class="mistake-card"><strong>4. Blocking the main thread:</strong> CRDT merge operations on large documents (10K+ nodes) can take 10-100ms. Run heavy merge operations in a Web Worker on the client and a worker thread on the server. Use requestIdleCallback for non-critical updates.</div>
+        <div class="mistake-card"><strong>5. No offline support in MVP:</strong> Users expect to work offline. Implement an offline queue using IndexedDB that stores pending operations. On reconnect, send all queued ops through OT transformation. Handle conflicts that arise from divergent offline edits.</div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card"><strong>Q1:</strong> Explain the difference between OT and CRDT for collaborative editing.<br><strong>A:</strong> OT transforms operations against each other so they can be applied in any order, requiring a central server to coordinate. CRDT gives each character a unique ID, so concurrent inserts naturally converge without transformation. OT is more mature (Google Docs), has less metadata overhead, but is harder to scale. CRDT is simpler for offline/peer-to-peer, handles arbitrary number of users, but uses more memory (tombstones, IDs per character).</div>
+        <div class="qa-card"><strong>Q2:</strong> How does Google Docs handle real-time collaboration at scale?<br><strong>A:</strong> Google Docs uses OT with a central server. Each client sends operations to Google's servers, which transform against concurrent ops from other clients. They use a custom binary protocol over WebSocket. For scaling, they: (1) Share nothing between server instances (state in memory per document), (2) Use consistent hashing to route a document to a specific server, (3) Spawn per-document processes for isolation, (4) Limit concurrent editors to ~100 for performance.</div>
+        <div class="qa-card"><strong>Q3:</strong> Design a system supporting 1000 simultaneous editors on one document.<br><strong>A:</strong> (1) Use CRDT (yjs/automerge) instead of OT for better scalability. (2) Implement virtual document sections — only sync the section each user is viewing. (3) Hierarchical WebSocket rooms: doc:123:section:5. (4) Dedicated server per document with connection pooling. (5) Operation batching — coalesce multiple operations into one message. (6) Throttle presence updates to 10fps. (7) Use Redis Streams for persistent operation log with consumer groups.</div>
+        <div class="qa-card"><strong>Q4:</strong> How do you implement undo in a collaborative editor?<br><strong>A:</strong> Undo is complex because "undoing" Alice's edit shouldn't undo Bob's subsequent edit. Approach: (1) Each user has a local undo stack of their own operations. (2) When user triggers undo, generate an "inverse operation" (insert becomes delete, delete becomes insert). (3) The inverse operation is sent through OT like any other operation. (4) However, if another user's concurrent edit overlaps, the inverse might not restore the original state. (5) Better approach: selective undo — show a list of the user's recent operations and let them choose which to revert. Google Docs uses a "version history" approach instead of traditional undo.</div>
+        <div class="qa-card"><strong>Q5:</strong> Explain how cursor synchronization works in a collaborative editor.<br><strong>A:</strong> Each client broadcasts their cursor position (character offset, selection start/end) at ~20fps. Position is relative to the current document state. When remote operations are applied, the cursor position must be transformed accordingly — if Alice inserts 10 chars before Bob's cursor, Bob's cursor shifts right by 10. This transformation uses the same OT transform functions. Cursors are rendered as Canvas overlays positioned using ProseMirror's coordsAtPos() — which maps document position to screen coordinates even after scrolling.</div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-trophy" style="color:var(--warning)"></i> Advanced Challenges</h2>
+        <div class="challenge-card"><strong>Challenge 1: Decentralized P2P Collaboration</strong> Implement peer-to-peer collaboration using WebRTC + CRDT without a central server. Use a signalling server for discovery, then direct peer-to-peer WebRTC data channels for operation sync. Handle NAT traversal with STUN/TURN. Implement mesh topology for up to 10 peers and selective forwarding for larger groups.</div>
+        <div class="challenge-card"><strong>Challenge 2: Real-Time Rich Text with Images</strong> Extend the editor to support embedded images, tables, and embeds (YouTube, Twitter). Images are uploaded to S3 during editing, and the CRDT stores the image URL with a unique content-addressed hash. Handle concurrent image uploads and deletions. Implement lazy loading for images outside the viewport.</div>
+        <div class="challenge-card"><strong>Challenge 3: Git-Like Branching & Merging</strong> Implement document branching — users can create branches for experimental edits. Show a visual branch graph similar to Git. Implement three-way merge when branches are consolidated. Allow merge requests with review workflow. This is used by Notion's "Document versions" and Coda's "Sync pages".</div>
+        <div class="challenge-card"><strong>Challenge 4: AI-Powered Collaboration Features</strong> Integrate an LLM that: (1) Suggests completions aware of other users' edits (don't suggest deleting something Bob just wrote), (2) Generates paragraph summaries for version history, (3) Detects and resolves merge conflicts by suggesting combined edits, (4) Provides inline suggestions that multiple users can review before applying.</div>
+        <div class="challenge-card"><strong>Challenge 5: Collaborative Code Editor</strong> Build a VS Code-style collaborative code editor. Challenges vs text editing: (1) AST-aware diffs — formatting changes shouldn't trigger full re-sync, (2) LSP integration — share language server results across users, (3) Terminal sharing — multiplex terminal I/O across WebSocket, (4) Dependency sync — ensure all users have the same packages installed, (5) Build output sharing — share compilation errors and test results in real-time.</div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="blockchain-explorer.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous Project</a>
+        <a href="video-platform.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+
+

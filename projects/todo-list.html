@@ -1,0 +1,703 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a full-featured to-do list app with CRUD operations, drag-and-drop, localStorage persistence, filtering, and category management. Complete JavaScript project guide.">
+  <meta name="keywords" content="todo app, CRUD, JavaScript, drag and drop, localStorage, categories, filtering, frontend project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="To-Do List App - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a full-featured to-do list application.">
+  <meta property="og:type" content="website">
+  <title>To-Do List App - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/todo-list.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="todo-list">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>To-Do List App</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Beginner</span>
+        <span><i class="far fa-clock"></i> 2-3 hours</span>
+        <span><i class="fas fa-code-branch"></i> JavaScript, HTML5, CSS3, localStorage</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A complete engineering guide to building a full-featured to-do list application with CRUD operations, drag-and-drop reordering, localStorage persistence, filtering, categories, and due date management.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This to-do list application goes beyond basic CRUD by implementing drag-and-drop reordering, category tagging, due dates with visual warnings, full-text search, and filtered views (all, active, completed, by category). You will learn how to manage application state, persist data with localStorage, implement the HTML5 Drag and Drop API, and build an intuitive user interface with smooth animations. The app is designed mobile-first with touch support for drag-and-drop on mobile devices.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Task management is a universal need, but existing to-do apps are either too simplistic (single list, no categories) or too complex (full project management suites). Users need a lightweight, customizable task manager that works offline, persists data across sessions, and provides essential features like categorization, due dates, search, and visual priority indicators. The challenge is building an app that feels snappy, works without a server, and handles the complexity of state management with real-time UI updates.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Personal Task Management:</strong> A student tracks homework assignments with due dates, categorizes by subject, and filters by priority to manage their study schedule.</li>
+          <li><strong>Team Collaboration:</strong> A small team uses a shared to-do list (synced via a backend) to track project tasks, assign owners, and monitor progress with status categories (To Do, In Progress, Done).</li>
+          <li><strong>Shopping Planning:</strong> A user creates categorized shopping lists (groceries, household items, electronics) with checkboxes and sorts items by aisle location using drag-and-drop.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>CRUD (Create, Read, Update, Delete) is the most fundamental pattern in software development, used in virtually every application. Mastering CRUD with local state management transfers directly to React/Vue/Angular state management with libraries like Redux, Zustand, or Pinia. The drag-and-drop pattern is used in Kanban boards (Trello, Jira), email clients, and file managers. localStorage patterns are the foundation for offline-first applications and progressive web apps (PWAs).</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Implement full CRUD operations (Create, Read, Update, Delete) with real-time DOM updates</li>
+          <li>Manage application state with a centralized store pattern using JavaScript classes and event emitters</li>
+          <li>Persist and restore application state using localStorage with JSON serialization and error handling</li>
+          <li>Implement the HTML5 Drag and Drop API for task reordering with touch event fallbacks for mobile</li>
+          <li>Build a filtering and search system with multiple criteria (status, category, priority, text search)</li>
+          <li>Handle date formatting and relative time displays using the Intl.DateTimeFormat API</li>
+          <li>Create a tagging/category system with color coding and dynamic filter generation</li>
+          <li>Implement undo/redo functionality using a command pattern with an operation history stack</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fab fa-js"></i> JavaScript ES6+</span>
+          <span class="badge-tech"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS3</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> localStorage</span>
+          <span class="badge-tech"><i class="fas fa-arrows-alt"></i> Drag & Drop API</span>
+          <span class="badge-tech"><i class="fab fa-font-awesome"></i> Font Awesome</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Comfortable with JavaScript arrays, objects, functions, and ES6+ syntax (arrow functions, destructuring, spread operator)</li>
+          <li>Experience with DOM manipulation: creating, updating, and removing elements dynamically</li>
+          <li>Understanding of event listeners, event objects, and event propagation (bubbling/capturing)</li>
+          <li>Basic knowledge of CSS transitions, transforms, and animations</li>
+          <li>Familiarity with JSON.parse and JSON.stringify for data serialization</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The application uses a Model-View-Controller (MVC) pattern adapted for client-side JavaScript. The Store class manages all application state (tasks, categories, filters) and emits events when state changes. The View layer subscribes to store events and updates the DOM accordingly. The Controller handles user input and calls Store methods. Drag-and-drop is handled through a dedicated DnDManager that normalizes mouse and touch events. State persistence is automatic - every store mutation triggers a debounced save to localStorage. The category system uses a separate store with predefined defaults and allows custom creation.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+todo-list/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   ├── store.js
+│   ├── todoView.js
+│   ├── dndManager.js
+│   └── utils.js
+├── assets/
+│   └── icons/
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: Data Model & Store</h4>
+          <p>Design the Task data model with fields: id, title, description, completed, createdAt, dueDate, priority, category, order. Build the Store class with methods for CRUD, filtering, sorting, and event emission. Implement localStorage persistence with debounced saves.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: Core UI & CRUD</h4>
+          <p>Build the main UI: task input form, task list, action buttons (edit, delete, complete). Implement all CRUD operations with smooth CSS transitions. Add empty states and loading states. Build the inline edit mode with auto-save on blur.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Categories & Priority</h4>
+          <p>Create a category system with predefined categories (Work, Personal, Shopping, Health, Finance) and custom category creation. Add priority levels (Low, Medium, High, Urgent) with color-coded badges. Implement category and priority filters.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Drag & Drop Reordering</h4>
+          <p>Implement HTML5 Drag and Drop API for task reordering. Add visual drag indicators (ghost element, drop zone highlighting). Handle touch events for mobile support. Persist the new order after each drag operation.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: Search, Filtering & Due Dates</h4>
+          <p>Build a search bar that filters tasks in real-time by title and description. Add filter buttons (All, Active, Completed, Overdue, Today). Implement date picker for due dates with visual warnings for approaching/overdue tasks. Add task counter and progress bar.</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: Store Class with Event System</h4>
+          <p>Build a centralized store that holds all application state and emits events when data changes. The View layer subscribes to these events to update the UI efficiently.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class Store {
+  constructor() {
+    this.listeners = new Map();
+    this.state = this.loadState();
+  }
+
+  getState() {
+    return this.state;
+  }
+
+  subscribe(event, callback) {
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, []);
+    }
+    this.listeners.get(event).push(callback);
+    return () => {
+      const callbacks = this.listeners.get(event);
+      const index = callbacks.indexOf(callback);
+      if (index > -1) callbacks.splice(index, 1);
+    };
+  }
+
+  emit(event, data) {
+    if (this.listeners.has(event)) {
+      this.listeners.get(event).forEach(cb => cb(data));
+    }
+    this.saveState();
+  }
+
+  addTask(taskData) {
+    const task = {
+      id: crypto.randomUUID(),
+      title: taskData.title.trim(),
+      description: taskData.description?.trim() || '',
+      completed: false,
+      createdAt: new Date().toISOString(),
+      dueDate: taskData.dueDate || null,
+      priority: taskData.priority || 'medium',
+      category: taskData.category || 'general',
+      order: this.state.tasks.length
+    };
+    this.state.tasks.push(task);
+    this.emit('task:added', task);
+    this.emit('state:changed', this.state);
+    return task;
+  }
+
+  updateTask(id, updates) {
+    const index = this.state.tasks.findIndex(t => t.id === id);
+    if (index === -1) return null;
+    const oldTask = { ...this.state.tasks[index] };
+    this.state.tasks[index] = { ...this.state.tasks[index], ...updates };
+    this.emit('task:updated', { oldTask, newTask: this.state.tasks[index] });
+    this.emit('state:changed', this.state);
+    return this.state.tasks[index];
+  }
+
+  deleteTask(id) {
+    const index = this.state.tasks.findIndex(t => t.id === id);
+    if (index === -1) return false;
+    const deleted = this.state.tasks.splice(index, 1)[0];
+    this.emit('task:deleted', deleted);
+    this.emit('state:changed', this.state);
+    return true;
+  }
+
+  toggleTask(id) {
+    const task = this.state.tasks.find(t => t.id === id);
+    if (!task) return;
+    task.completed = !task.completed;
+    task.completedAt = task.completed ? new Date().toISOString() : null;
+    this.emit('task:toggled', task);
+    this.emit('state:changed', this.state);
+  }
+
+  reorderTasks(taskId, newIndex) {
+    const currentIndex = this.state.tasks.findIndex(t => t.id === taskId);
+    if (currentIndex === -1) return;
+    const [task] = this.state.tasks.splice(currentIndex, 1);
+    this.state.tasks.splice(newIndex, 0, task);
+    this.state.tasks.forEach((t, i) => t.order = i);
+    this.emit('task:reordered', this.state.tasks);
+    this.emit('state:changed', this.state);
+  }
+
+  getFilteredTasks(filters = {}) {
+    let tasks = [...this.state.tasks];
+    if (filters.search) {
+      const q = filters.search.toLowerCase();
+      tasks = tasks.filter(t => t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q));
+    }
+    if (filters.status === 'active') tasks = tasks.filter(t => !t.completed);
+    if (filters.status === 'completed') tasks = tasks.filter(t => t.completed);
+    if (filters.status === 'overdue') tasks = tasks.filter(t => !t.completed && t.dueDate && new Date(t.dueDate) < new Date());
+    if (filters.category) tasks = tasks.filter(t => t.category === filters.category);
+    if (filters.priority) tasks = tasks.filter(t => t.priority === filters.priority);
+    return tasks.sort((a, b) => a.order - b.order);
+  }
+
+  loadState() {
+    try {
+      const saved = localStorage.getItem('todo-state');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object' && Array.isArray(parsed.tasks)) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to load state, starting fresh:', e);
+    }
+    return { tasks: [], categories: ['general', 'work', 'personal', 'shopping', 'health'] };
+  }
+
+  saveState() {
+    try {
+      localStorage.setItem('todo-state', JSON.stringify(this.state));
+    } catch (e) {
+      if (e.name === 'QuotaExceededError') {
+        console.warn('localStorage quota exceeded');
+      }
+    }
+  }
+
+  clearCompleted() {
+    const completed = this.state.tasks.filter(t => t.completed);
+    this.state.tasks = this.state.tasks.filter(t => !t.completed);
+    this.emit('tasks:cleared', completed);
+    this.emit('state:changed', this.state);
+  }
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: Drag and Drop with Touch Support</h4>
+          <p>Implement a unified drag-and-drop manager that works with both mouse and touch events. The HTML5 Drag and Drop API needs touch event polyfilling for mobile browsers.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class DnDManager {
+  constructor(container, onDrop) {
+    this.container = container;
+    this.onDrop = onDrop;
+    this.dragItem = null;
+    this.dragGhost = null;
+    this.init();
+  }
+
+  init() {
+    this.container.addEventListener('dragstart', this.handleDragStart.bind(this));
+    this.container.addEventListener('dragover', this.handleDragOver.bind(this));
+    this.container.addEventListener('dragend', this.handleDragEnd.bind(this));
+    this.container.addEventListener('drop', this.handleDrop.bind(this));
+    this.container.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+    this.container.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+    this.container.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
+  }
+
+  handleDragStart(e) {
+    const item = e.target.closest('.todo-item');
+    if (!item) return;
+    this.dragItem = item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', item.dataset.id);
+  }
+
+  handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const target = e.target.closest('.todo-item');
+    if (!target || target === this.dragItem) return;
+    const rect = target.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    const placeholder = this.container.querySelector('.drop-placeholder');
+    if (e.clientY < midY) {
+      target.parentNode.insertBefore(placeholder, target);
+    } else {
+      target.parentNode.insertBefore(placeholder, target.nextSibling);
+    }
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text/plain');
+    const placeholder = this.container.querySelector('.drop-placeholder');
+    if (placeholder && id) {
+      const newIndex = Array.from(this.container.children).indexOf(placeholder);
+      placeholder.remove();
+      this.onDrop(id, newIndex);
+    }
+    this.clearDragState();
+  }
+
+  handleDragEnd() {
+    this.clearDragState();
+  }
+
+  handleTouchStart(e) {
+    const item = e.target.closest('.todo-item');
+    if (!item) return;
+    this.dragItem = item;
+    const touch = e.touches[0];
+    this.touchStartY = touch.clientY;
+    this.touchOffset = touch.clientY - item.getBoundingClientRect().top;
+    this.dragGhost = item.cloneNode(true);
+    this.dragGhost.style.position = 'fixed';
+    this.dragGhost.style.opacity = '0.8';
+    this.dragGhost.style.pointerEvents = 'none';
+    this.dragGhost.style.width = item.offsetWidth + 'px';
+    this.dragGhost.style.zIndex = '9999';
+    this.dragGhost.style.transform = 'rotate(3deg) scale(1.02)';
+    document.body.appendChild(this.dragGhost);
+    this.updateGhostPosition(touch);
+  }
+
+  handleTouchMove(e) {
+    if (!this.dragItem) return;
+    e.preventDefault();
+    const touch = e.touches[0];
+    this.updateGhostPosition(touch);
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    const item = target?.closest('.todo-item');
+    if (item && item !== this.dragItem) {
+      const rect = item.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      const placeholder = this.container.querySelector('.drop-placeholder') || document.createElement('div');
+      placeholder.className = 'drop-placeholder';
+      placeholder.style.height = this.dragItem.offsetHeight + 'px';
+      if (touch.clientY < midY) {
+        item.parentNode.insertBefore(placeholder, item);
+      } else {
+        item.parentNode.insertBefore(placeholder, item.nextSibling);
+      }
+    }
+  }
+
+  handleTouchEnd(e) {
+    if (!this.dragItem) return;
+    const placeholder = this.container.querySelector('.drop-placeholder');
+    if (placeholder) {
+      const newIndex = Array.from(this.container.children).indexOf(placeholder);
+      placeholder.remove();
+      this.onDrop(this.dragItem.dataset.id, newIndex);
+    }
+    if (this.dragGhost) {
+      this.dragGhost.remove();
+      this.dragGhost = null;
+    }
+    this.dragItem.classList.remove('dragging');
+    this.dragItem = null;
+  }
+
+  updateGhostPosition(touch) {
+    if (this.dragGhost) {
+      this.dragGhost.style.left = (touch.clientX - this.dragGhost.offsetWidth / 2) + 'px';
+      this.dragGhost.style.top = (touch.clientY - this.touchOffset) + 'px';
+    }
+  }
+
+  clearDragState() {
+    if (this.dragItem) {
+      this.dragItem.classList.remove('dragging');
+      this.dragItem = null;
+    }
+    const placeholder = this.container.querySelector('.drop-placeholder');
+    if (placeholder) placeholder.remove();
+  }
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Rendering Tasks with Virtual DOM Approach</h4>
+          <p>Build an efficient rendering function that only updates changed tasks rather than re-rendering the entire list. Use document fragments for batch DOM updates.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>function createTaskElement(task) {
+  const li = document.createElement('li');
+  li.className = `todo-item priority-${task.priority} ${task.completed ? 'completed' : ''}`;
+  li.dataset.id = task.id;
+  li.draggable = true;
+  const dueDate = task.dueDate ? new Date(task.dueDate) : null;
+  const isOverdue = dueDate && dueDate < new Date() && !task.completed;
+  const isDueSoon = dueDate && !isOverdue && !task.completed && dueDate < new Date(Date.now() + 86400000 * 2);
+  li.innerHTML = `
+    <div class="todo-checkbox">
+      <input type="checkbox" ${task.completed ? 'checked' : ''} aria-label="Mark as complete">
+      <span class="checkmark"></span>
+    </div>
+    <div class="todo-content">
+      <div class="todo-title">${escapeHtml(task.title)}</div>
+      ${task.description ? `<div class="todo-desc">${escapeHtml(task.description)}</div>` : ''}
+      <div class="todo-meta">
+        <span class="todo-category" style="--cat-color: ${getCategoryColor(task.category)}">${task.category}</span>
+        <span class="todo-priority priority-${task.priority}">${task.priority}</span>
+        ${dueDate ? `<span class="todo-date ${isOverdue ? 'overdue' : isDueSoon ? 'due-soon' : ''}">
+          <i class="far fa-calendar-alt"></i> ${formatDate(dueDate)}</span>` : ''}
+      </div>
+    </div>
+    <div class="todo-actions">
+      <button class="btn-icon edit-btn" title="Edit task"><i class="fas fa-pen"></i></button>
+      <button class="btn-icon delete-btn" title="Delete task"><i class="fas fa-trash"></i></button>
+    </div>
+  `;
+  li.querySelector('.edit-btn').addEventListener('click', () => enterEditMode(li, task));
+  li.querySelector('.delete-btn').addEventListener('click', () => store.deleteTask(task.id));
+  li.querySelector('input[type="checkbox"]').addEventListener('change', () => store.toggleTask(task.id));
+  return li;
+}
+
+function renderTasks(tasks) {
+  const list = document.getElementById('todo-list');
+  const fragment = document.createDocumentFragment();
+  tasks.forEach(task => fragment.appendChild(createTaskElement(task)));
+  list.innerHTML = '';
+  list.appendChild(fragment);
+  updateCounter(tasks);
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function formatDate(date) {
+  const now = new Date();
+  const diff = date - now;
+  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  if (days < 0) return `${Math.abs(days)} days ago`;
+  if (days === 0) return 'Today';
+  if (days === 1) return 'Tomorrow';
+  if (days < 7) return `${days} days left`;
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Search and Filter System</h4>
+          <p>Build a filtering system that combines multiple criteria: text search, status, category, and priority. Updates are debounced for performance.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const filters = {
+  search: '',
+  status: 'all',
+  category: 'all',
+  priority: 'all'
+};
+
+function applyFilters() {
+  const filtered = store.getFilteredTasks(filters);
+  renderTasks(filtered);
+  updateActiveFilterCount(filtered.length);
+}
+
+const debouncedSearch = debounce((value) => {
+  filters.search = value;
+  applyFilters();
+}, 300);
+
+document.getElementById('search-input').addEventListener('input', (e) => {
+  debouncedSearch(e.target.value);
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelector('.filter-btn.active')?.classList.remove('active');
+    btn.classList.add('active');
+    filters.status = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+document.getElementById('category-filter').addEventListener('change', (e) => {
+  filters.category = e.target.value;
+  applyFilters();
+});
+
+document.getElementById('priority-filter').addEventListener('change', (e) => {
+  filters.priority = e.target.value;
+  applyFilters();
+});</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>CRUD Testing:</strong> Create tasks with special characters and long titles. Edit tasks by clicking the pen icon and verify inline editing works. Delete tasks and verify undo functionality. Toggle completion and check the visual state change.</p>
+        <p><strong>Drag and Drop:</strong> Drag tasks to reorder and verify the new order persists after page refresh. Test on touch devices. Try dragging rapidly to check for race conditions. Test with a single task in the list.</p>
+        <p><strong>Persistence:</strong> Create tasks, refresh the page, and verify all data is restored. Clear localStorage and verify the app initializes with default state. Test with localStorage quota exceeded (store large data).</p>
+        <p><strong>Filtering:</strong> Apply each filter and verify the correct tasks are shown. Test combined filters (search + category + priority). Verify the "Overdue" filter only shows uncompleted past-due tasks. Test the "Clear Completed" action.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>GitHub Pages:</strong> Push to a GitHub repository, enable Pages from the main branch. The app is fully client-side so no build step is needed. Ensure all asset paths are relative.</p>
+        <p><strong>Netlify:</strong> Connect your GitHub repo or drag-drop the project folder. Netlify automatically detects static sites. Add a _redirects file for SPA routing if needed.</p>
+        <p><strong>PWA Support:</strong> Add a manifest.json and a service worker to make the app installable and work offline. Cache all static assets in the service worker install event. The app already works offline for data via localStorage persistence.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. Corrupted localStorage Data</strong><br>
+          If the JSON structure in localStorage gets corrupted (e.g., from a previous version of the app), JSON.parse will throw and all data will be lost. Always wrap parsing in a try/catch, validate the parsed structure, and provide a fallback to default state. Version your localStorage key (e.g., 'todo-state-v2') to handle schema migrations.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Drag and Drop Touch Event Conflicts</strong><br>
+          The HTML5 Drag and Drop API doesn't support touch events natively on mobile browsers. Without touch event handling, drag-and-drop silently fails on iPads and iPhones. Implement touch event polyfilling with touchstart, touchmove, touchend, and use preventDefault() to avoid scrolling while dragging.
+        </div>
+        <div class="challenge-card">
+          <strong>3. Performance Issues with Large Lists</strong><br>
+          Re-rendering the entire task list on every state change causes noticeable lag with 100+ tasks. Use a smarter rendering approach: track individual task changes and only update the affected DOM nodes. Use document.createDocumentFragment() for batch inserts. For very large lists, consider virtual scrolling with a windowing technique.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Missing Undo/Redo for Destructive Actions</strong><br>
+          Deleting a task without undo capability leads to data loss frustration. Implement a simple action history stack that stores deleted tasks. Show a toast with an "Undo" button that restores the last removed task and its original position in the list.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the event loop and how it relates to asynchronous operations in JavaScript.<br>
+          <strong>A:</strong> The event loop is JavaScript's mechanism for handling asynchronous operations. The call stack executes synchronous code. Async operations (setTimeout, fetch, DOM events) are handled by Web APIs and their callbacks are placed in the task queue (macrotask) or microtask queue. The event loop continuously checks if the call stack is empty, then processes microtasks first, followed by the next macrotask. This is why Promise.then() callbacks execute before setTimeout callbacks - Promises use the microtask queue.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What is event delegation and why is it useful?<br>
+          <strong>A:</strong> Event delegation is a pattern where you attach a single event listener to a parent element instead of individual listeners on each child. It works because events bubble up through the DOM tree. Benefits: better memory usage (fewer listeners), works for dynamically added elements, and cleaner code. In our to-do app, we could listen for clicks on the task list container and use event.target to determine which action was clicked, rather than attaching listeners to each task's edit and delete buttons.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How does localStorage work and what are its limitations?<br>
+          <strong>A:</strong> localStorage is a key-value store that persists data across browser sessions. Data is stored as strings (use JSON.stringify/parse for objects). Limitations: 5-10MB storage limit per origin, synchronous API (blocks the main thread), only stores strings, no built-in expiration, not accessible by service workers (use Cache API instead), and data is not encrypted. For larger data, use IndexedDB. For sensitive data, never use localStorage.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> Describe the differences between a class and a factory function in JavaScript.<br>
+          <strong>A:</strong> Both create objects but have different patterns. Classes use the `new` keyword, support inheritance via `extends`, and define methods on the prototype (memory efficient). Factory functions are regular functions that return an object, don't require `new`, support closures for private variables, and are more flexible for composition over inheritance. Classes are better for large-scale OOP patterns; factory functions are better for simpler cases and when you need true private state.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement undo/redo functionality in a web application?<br>
+          <strong>A:</strong> Implement a command pattern with two stacks: undoStack and redoStack. Each action (add, delete, update, reorder) creates a command object with execute() and undo() methods. Performing an action pushes to undoStack and clears redoStack. Undo pops from undoStack, calls undo(), and pushes to redoStack. For the to-do app, the delete command stores the deleted task and its index for restoration. The command pattern also enables action grouping (e.g., "Clear completed" as a single undoable action).
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Developed a full-featured task management application with CRUD operations supporting over 10,000 concurrent task items through efficient DOM rendering and state management</li>
+          <li>Implemented HTML5 Drag and Drop API with custom touch event polyfill for mobile reordering, achieving seamless cross-device user experience</li>
+          <li>Built a centralized state management Store with event-driven architecture supporting real-time UI updates, undo/redo operations, and debounced localStorage persistence</li>
+          <li>Designed a multi-criteria filtering system combining text search, status, category, and priority filters with debounced input handling for optimal performance</li>
+          <li>Created a category and priority tagging system with color-coded visual indicators, due date tracking with overdue warnings, and progress statistics dashboard</li>
+          <li>Engineered offline-first architecture with automatic state persistence, corruption-resistant JSON parsing with schema validation, and PWA-ready service worker integration</li>
+          <li>Implemented inline editing, batch operations (complete all, clear completed), and keyboard shortcuts for power users, improving task management efficiency</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Showcase the app with a demo GIF. Include a feature list with checkmarks, tech stack badges, and a "Try it out" link to the live demo. Add instructions for running locally (just open index.html).</p>
+        <p><strong>Commit Messages:</strong> feat: implement drag-and-drop reordering, fix: prevent duplicate tasks on rapid submit, refactor: extract store class from app.js, style: add dark mode support with CSS variables.</p>
+        <p><strong>Issues:</strong> Use GitHub issue templates for bug reports and feature requests. Tag issues with labels like "enhancement", "bug", "good first issue". Create a project board for tracking development progress.</p>
+        <p><strong>Code Quality:</strong> Run ESLint with a consistent style guide. Use JSDoc comments for public API methods. Add unit tests for the Store class using Jest.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Backend Sync:</strong> Add a Node.js/Express backend with MongoDB or PostgreSQL for multi-device sync. Implement WebSocket-based real-time updates for collaborative task management. Add user authentication with JWT tokens.</li>
+          <li><strong>Kanban Board View:</strong> Add an alternative Kanban layout where tasks are organized in columns by status (To Do, In Progress, Done). Implement drag-and-drop between columns with status updates. Use CSS Grid for the column layout.</li>
+          <li><strong>Pomodoro Timer Integration:</strong> Integrate a Pomodoro timer that starts when a task is selected. Track focus time per task and display statistics. Use the Notification API to alert when focus sessions end. Store time tracking data in IndexedDB.</li>
+          <li><strong>Data Export/Import:</strong> Add export to JSON, CSV, and Markdown formats. Implement import from Todoist and Trello JSON formats. Add a print-friendly view of the task list with categories and due dates.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API" target="_blank">MDN Drag and Drop API</a> - Complete drag and drop reference</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">MDN localStorage</a> - Client-side storage API documentation</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target="_blank">MDN JavaScript Classes</a> - Class syntax and inheritance</li>
+          <li><a href="https://javascript.info/event-delegation" target="_blank">JavaScript.info Event Delegation</a> - Event delegation pattern guide</li>
+          <li><a href="https://philipwalton.com/articles/idle-until-urgent/" target="_blank">Idle Until Urgent</a> - Performance optimization patterns</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="calculator.html" class="btn btn-ghost">Calculator</a>
+          <a href="personal-portfolio.html" class="btn btn-ghost">Personal Portfolio</a>
+          <a href="movie-search.html" class="btn btn-ghost">Movie Search App</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="weather-dashboard.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: Weather Dashboard</a>
+        <a href="calculator.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

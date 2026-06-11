@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .analytics-toggle { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap:wrap }
+    .analytics-toggle button { padding: 0.5rem 1.2rem; border: 2px solid #e2e8f0; border-radius: 10px; background: var(--white); font-weight: 600; cursor: pointer; transition: var(--transition); font-size:0.85rem }
+    .analytics-toggle button.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .charts-grid .chart-container-full { grid-column: 1 / -1; }
+    .chart-container { background: var(--white); border-radius: var(--border-radius-md); padding: 1.5rem; border: 1px solid #e2e8f0; }
+    .chart-container h3 { margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .chart-container canvas { max-height: 250px; }
+    .streak-display { text-align: center; padding: 1.5rem; }
+    .streak-display .streak-number { font-size: 3.5rem; font-weight: 800; color: var(--primary); line-height: 1; }
+    .streak-display .streak-label { color: var(--text-muted); margin-top: 0.3rem; }
+    .streak-days { display: flex; gap: 0.4rem; justify-content: center; margin-top: 1rem; }
+    .streak-day { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+    .streak-day.active { background: var(--primary); color: white; }
+    .streak-day.inactive { background: #f1f5f9; color: #cbd5e1; }
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .achievement-item { text-align: center; padding: 1rem; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; transition: var(--transition); }
+    .achievement-item.earned { border-color: var(--warning); background: rgba(245,158,11,0.08); }
+    .achievement-item.locked { opacity: 0.5; }
+    .achievement-item i { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    .achievement-item.earned i { color: var(--warning); }
+    .achievement-item.locked i { color: var(--text-light); }
+    .achievement-item span { font-size: 0.8rem; font-weight: 600; display: block; }
+    .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .quick-action-btn { display: flex; align-items: center; gap: 0.8rem; padding: 1.2rem; border-radius: var(--border-radius-sm); border: 1px solid #e2e8f0; background: var(--white); font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 1rem; }
+    .quick-action-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .quick-action-btn i { font-size: 1.3rem; color: var(--primary); }
+    .recent-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .dash-stats-extended { display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem }
+    .dash-stat-sm { padding:1rem;border-radius:12px;background:var(--white);border:1px solid #e2e8f0;text-align:center }
+    .dash-stat-sm .stat-value { font-size:1.2rem;font-weight:700;color:var(--primary) }
+    .dash-stat-sm .stat-label { font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem }
+    .daily-goals-widget { padding:1rem }
+    .daily-goals-widget .dg-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem }
+    .daily-goals-widget .dg-pct { font-size:1.2rem;font-weight:700;color:var(--primary) }
+    .daily-goals-widget .dg-list { display:flex;flex-direction:column;gap:0.6rem }
+    .daily-goals-widget .dg-item-header { display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;margin-bottom:0.3rem }
+    .daily-goals-widget .dg-item-header .dg-count { margin-left:auto;font-weight:600;color:var(--primary) }
+    @media (max-width: 768px) { .charts-grid { grid-template-columns: 1fr; } .recent-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page="Dashboard">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="toast-container"></div>
+
+  <main class="dashboard">
+    <aside class="dashboard-sidebar">
+      <h3>Menu</h3>
+      <a href="dashboard.html" class="dash-nav-item active"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="my-courses.html" class="dash-nav-item"><i class="fas fa-book"></i> My Courses</a>
+      <a href="bookmarks.html" class="dash-nav-item"><i class="fas fa-bookmark"></i> Bookmarks</a>
+      <a href="notes.html" class="dash-nav-item"><i class="fas fa-sticky-note"></i> Notes</a>
+      <a href="../Practice.html" class="dash-nav-item"><i class="fas fa-keyboard"></i> Typing History</a>
+      <a href="achievements.html" class="dash-nav-item"><i class="fas fa-trophy"></i> Achievements</a>
+      <a href="../career-insights.html" class="dash-nav-item"><i class="fas fa-chart-bar"></i> Career Insights</a>
+      <a href="../job-hub.html" class="dash-nav-item"><i class="fas fa-briefcase"></i> Job Hub</a>
+      <a href="../settings.html" class="dash-nav-item"><i class="fas fa-cog"></i> Settings</a>
+      <a href="#" class="dash-nav-item" style="margin-top:1rem;color:var(--error)" id="dashLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </aside>
+
+    <section class="dashboard-main">
+      <div class="dash-header">
+        <div>
+          <h1 id="dashGreeting">Good Morning</h1>
+          <p class="dash-welcome">Welcome back, <span id="dashUserName">User</span></p>
+        </div>
+      </div>
+
+      <div class="dash-stats">
+        <div class="dash-stat">
+          <div class="dash-stat-header">
+            <div class="dash-stat-icon blue"><i class="fas fa-graduation-cap"></i></div>
+          </div>
+          <div class="dash-stat-value" id="statLearningProgress">0%</div>
+          <div class="dash-stat-label">Learning Progress</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-header">
+            <div class="dash-stat-icon green"><i class="fas fa-book-open"></i></div>
+          </div>
+          <div class="dash-stat-value" id="statActiveCourses">0</div>
+          <div class="dash-stat-label">Active Courses</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-header">
+            <div class="dash-stat-icon purple"><i class="fas fa-check-circle"></i></div>
+          </div>
+          <div class="dash-stat-value" id="statCompletedCourses">0</div>
+          <div class="dash-stat-label">Completed Courses</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-header">
+            <div class="dash-stat-icon orange"><i class="fas fa-trophy"></i></div>
+          </div>
+          <div class="dash-stat-value" id="statAP">0</div>
+          <div class="dash-stat-label">Achievement Points</div>
+        </div>
+      </div>
+
+      <div class="dash-stats-extended">
+        <div class="dash-stat-sm"><div class="stat-value" id="statTotalLessons">0</div><div class="stat-label">Modules Done</div></div>
+        <div class="dash-stat-sm"><div class="stat-value" id="statAvgAccuracy">0%</div><div class="stat-label">Quiz Accuracy</div></div>
+        <div class="dash-stat-sm"><div class="stat-value" id="statTypingTests">0</div><div class="stat-label">Typing Tests</div></div>
+        <div class="dash-stat-sm"><div class="stat-value" id="statTotalTime">0m</div><div class="stat-label">Time Spent</div></div>
+      </div>
+
+      <div class="analytics-toggle">
+        <button data-period="today" id="toggleToday"><i class="fas fa-clock"></i> Today</button>
+        <button class="active" data-period="weekly" id="toggleWeekly"><i class="fas fa-calendar-week"></i> Weekly</button>
+        <button data-period="monthly" id="toggleMonthly"><i class="fas fa-calendar-alt"></i> Monthly</button>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-container chart-container-full">
+          <h3><i class="fas fa-chart-line" style="color:var(--primary)"></i> Weekly Activity</h3>
+          <canvas id="weeklyChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3><i class="fas fa-chart-pie" style="color:var(--primary)"></i> Course Progress</h3>
+          <canvas id="courseChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3><i class="fas fa-keyboard" style="color:var(--primary)"></i> Typing Speed</h3>
+          <canvas id="typingChart"></canvas>
+        </div>
+      </div>
+
+      <div class="recent-grid">
+        <div class="recent-card">
+          <h3><i class="fas fa-clock" style="color:var(--primary)"></i> Recent Activity</h3>
+          <div id="activityList" class="activity-list"></div>
+        </div>
+
+        <div>
+          <div class="recent-card" style="margin-bottom:1.5rem">
+            <h3><i class="fas fa-fire" style="color:var(--primary)"></i> Current Streak</h3>
+            <div class="streak-display">
+              <div class="streak-number" id="streakCount">0</div>
+              <div class="streak-label">Day Streak</div>
+              <div class="streak-days" id="streakDays"></div>
+            </div>
+          </div>
+          <div class="recent-card">
+            <h3><i class="fas fa-bullseye" style="color:var(--primary)"></i> Daily Goals</h3>
+            <div id="dailyGoalsWidget" class="daily-goals-widget"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-card mb-2">
+        <h3><i class="fas fa-trophy" style="color:var(--warning)"></i> Achievements</h3>
+        <div id="achievementsContainer" class="achievements-grid"></div>
+      </div>
+
+      <div class="recent-card">
+        <h3><i class="fas fa-bolt" style="color:var(--primary)"></i> Quick Actions</h3>
+        <div class="quick-actions">
+          <button class="quick-action-btn" onclick="window.location.href='../Learn.html'"><i class="fas fa-play-circle"></i> Continue Learning</button>
+          <button class="quick-action-btn" onclick="window.location.href='../Practice.html'"><i class="fas fa-question-circle"></i> Take Quiz</button>
+          <button class="quick-action-btn" onclick="window.location.href='../Practice.html'"><i class="fas fa-keyboard"></i> Typing Test</button>
+          <button class="quick-action-btn" onclick="window.location.href='../interview-prep.html'"><i class="fas fa-user-tie"></i> Interview Prep</button>
+          <button class="quick-action-btn" onclick="window.location.href='../career-insights.html'"><i class="fas fa-globe"></i> Career Insights</button>
+          <button class="quick-action-btn" onclick="window.location.href='../job-hub.html'"><i class="fas fa-briefcase"></i> Job Hub</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/learning.js"></script>
+  <script src="../js/achievements.js"></script>
+  <script src="../js/daily-goals.js"></script>
+  <script src="../js/reminders.js"></script>
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    (async function() {
+      await requireAuth();
+      const dashLogoutBtn = document.getElementById('dashLogoutBtn');
+      if (dashLogoutBtn) {
+        dashLogoutBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          signOut();
+        });
+      }
+    })();
+  </script>
+
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+</body>
+</html>

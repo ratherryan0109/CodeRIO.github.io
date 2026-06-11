@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge Arena - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .arena-header { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem }
+    .arena-timer { font-size:1.5rem;font-weight:700;font-family:monospace;color:var(--primary) }
+    .arena-timer.warning { color:var(--warning) }
+    .arena-timer.danger { color:var(--danger);animation:pulse 1s infinite }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .arena-progress { height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden;margin-bottom:2rem }
+    .arena-progress-bar { height:100%;background:var(--primary);border-radius:4px;transition:width 0.3s }
+    .arena-question { margin-bottom:2rem }
+    .arena-question h2 { font-size:1.2rem;margin-bottom:0.5rem }
+    .arena-question .q-meta { font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem }
+    .arena-options { display:flex;flex-direction:column;gap:0.6rem }
+    .arena-option { padding:0.8rem 1rem;border:2px solid var(--glass-border-light);border-radius:12px;cursor:pointer;transition:all 0.2s;background:var(--glass-bg) }
+    .arena-option:hover { border-color:var(--primary);background:var(--glass-bg-hover) }
+    .arena-option.selected { border-color:var(--primary);background:rgba(6,182,212,0.1) }
+    .arena-option.correct { border-color:var(--success);background:rgba(34,197,94,0.1) }
+    .arena-option.wrong { border-color:var(--danger);background:rgba(239,68,68,0.1) }
+    .arena-nav { display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--glass-border-light) }
+    .question-palette { display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem }
+    .q-palette-item { width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;cursor:pointer;border:2px solid var(--glass-border-light);background:transparent;transition:all 0.2s }
+    .q-palette-item.answered { border-color:var(--primary);background:rgba(6,182,212,0.15);color:var(--primary) }
+    .q-palette-item.current { border-color:var(--primary);background:var(--primary);color:#fff }
+    .q-palette-item:hover { border-color:var(--primary) }
+    .arena-result { text-align:center;padding:2rem }
+    .arena-result .score-circle { width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;font-weight:700 }
+    .arena-result .score-circle.pass { background:rgba(34,197,94,0.15);color:var(--success) }
+    .arena-result .score-circle.fail { background:rgba(239,68,68,0.15);color:var(--danger) }
+    .result-stats { display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:2rem 0 }
+    .result-stat { padding:1rem;border-radius:12px;background:var(--glass-bg);border:1px solid var(--glass-border-light) }
+    .result-stat .stat-value { font-size:1.5rem;font-weight:700 }
+    .result-stat .stat-label { font-size:0.8rem;color:var(--text-muted) }
+    .leaderboard-after { margin-top:3rem;padding:2rem;border-radius:16px;background:var(--glass-bg);border:1px solid var(--glass-border-light) }
+  </style>
+</head>
+<body data-page="ChallengeArena">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Learn.html">Learn</a></li>
+      <li><a href="Practice.html">Practice</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="About.html">About</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main style="padding:2rem 8%;min-height:70vh;max-width:1000px;margin:0 auto">
+    <div id="arenaContainer">
+      <div style="text-align:center;padding:3rem">
+        <i class="fas fa-hourglass-half" style="font-size:3rem;color:var(--primary);margin-bottom:1rem;display:block"></i>
+        <p>Loading challenge...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      requireAuth();
+      renderArena();
+    });
+
+    function renderArena() {
+      var container = document.getElementById('arenaContainer');
+      var challenge = Utils.getStorage('active_challenge', null);
+
+      if (!challenge || !challenge.questions || challenge.questions.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:3rem"><i class="fas fa-exclamation-triangle" style="font-size:3rem;color:var(--warning);margin-bottom:1rem;display:block"></i><h3>No Active Challenge</h3><p style="color:var(--text-muted);margin-bottom:1.5rem">Start a challenge from a course page first.</p><a href="Learn.html" class="btn btn-primary">Browse Courses</a></div>';
+        return;
+      }
+
+      var state = {
+        challenge: challenge,
+        currentIndex: 0,
+        answers: challenge.answers || [],
+        timeLeft: challenge.timeLimit || 1800000,
+        finished: false,
+        result: null,
+        timerId: null
+      };
+
+      var elapsed = Date.now() - (challenge.startTime || Date.now());
+      state.timeLeft = Math.max(0, (challenge.timeLimit || 1800000) - elapsed);
+
+      function renderQuestion() {
+        if (state.finished) return renderResult();
+
+        var q = state.challenge.questions[state.currentIndex];
+        var total = state.challenge.questions.length;
+        var answered = state.answers.length;
+        var pct = Math.round(((state.currentIndex + 1) / total) * 100);
+
+        var existingAnswer = state.answers.find(function(a) { return a.index === state.currentIndex; });
+
+        var paletteHtml = '<div class="question-palette">';
+        for (var i = 0; i < total; i++) {
+          var isAnswered = state.answers.some(function(a) { return a.index === i; });
+          var cls = 'q-palette-item';
+          if (i === state.currentIndex) cls += ' current';
+          else if (isAnswered) cls += ' answered';
+          paletteHtml += '<div class="' + cls + '" onclick="goToQuestion(' + i + ')">' + (i + 1) + '</div>';
+        }
+        paletteHtml += '</div>';
+
+        var optionsHtml = '';
+        var hasOptions = q.options && Array.isArray(q.options);
+
+        if (hasOptions) {
+          q.options.forEach(function(opt, oi) {
+            var selected = existingAnswer && String(existingAnswer.answer) === String(opt) ? ' selected' : '';
+            optionsHtml += '<div class="arena-option' + selected + '" onclick="selectOption(' + oi + ')">' + Utils.sanitize(opt) + '</div>';
+          });
+        } else {
+          optionsHtml += '<div class="form-group"><textarea class="form-textarea" id="freeTextAnswer" placeholder="Type your answer..." style="min-height:100px">' + (existingAnswer ? Utils.sanitize(existingAnswer.answer) : '') + '</textarea></div>';
+        }
+
+        var timerClass = 'arena-timer';
+        if (state.timeLeft < 120000) timerClass += ' danger';
+        else if (state.timeLeft < 300000) timerClass += ' warning';
+
+        container.innerHTML = '<div class="arena-header">'
+          + '<div><h1><i class="fas fa-swords" style="color:var(--primary)"></i> Challenge Arena</h1>'
+          + '<p style="color:var(--text-muted)">' + Utils.sanitize(state.challenge.courseTitle || '') + ' &middot; Question ' + (state.currentIndex + 1) + ' of ' + total + '</p></div>'
+          + '<div class="' + timerClass + '" id="arenaTimer">' + formatTime(state.timeLeft) + '</div></div>'
+          + '<div class="arena-progress"><div class="arena-progress-bar" style="width:' + pct + '%"></div></div>'
+          + paletteHtml
+          + '<div class="arena-question"><h2>' + Utils.sanitize(q.question || '') + '</h2>'
+          + '<div class="q-meta">Question ' + (state.currentIndex + 1) + '</div>'
+          + '<div class="arena-options">' + optionsHtml + '</div></div>'
+          + '<div class="arena-nav"><button class="btn btn-ghost" onclick="prevQuestion()" ' + (state.currentIndex === 0 ? 'disabled style="opacity:0.5"' : '') + '><i class="fas fa-arrow-left"></i> Previous</button>'
+          + '<span style="color:var(--text-muted);font-size:0.85rem">' + answered + ' answered</span>'
+          + '<button class="btn ' + (state.currentIndex === total - 1 ? 'btn-success' : 'btn-primary') + '" onclick="nextQuestion()">' + (state.currentIndex === total - 1 ? '<i class="fas fa-check"></i> Finish' : 'Next <i class="fas fa-arrow-right"></i>') + '</button></div>';
+
+        initAnswerListeners(total);
+      }
+
+      window.selectOption = function(oi) {
+        var q = state.challenge.questions[state.currentIndex];
+        var val = q.options[oi];
+        var answers = state.answers;
+        var idx = answers.findIndex(function(a) { return a.index === state.currentIndex; });
+        if (idx !== -1) answers[idx].answer = val;
+        else answers.push({ index: state.currentIndex, answer: val });
+        state.answers = answers;
+        state.challenge.answers = answers;
+        Utils.setStorage('active_challenge', state.challenge);
+        renderQuestion();
+      };
+
+      window.prevQuestion = function() {
+        if (state.currentIndex > 0) {
+          state.currentIndex--;
+          renderQuestion();
+        }
+      };
+
+      window.nextQuestion = function() {
+        var total = state.challenge.questions.length;
+        var q = state.challenge.questions[state.currentIndex];
+
+        if (q.options && Array.isArray(q.options)) {
+          var hasAnswer = state.answers.some(function(a) { return a.index === state.currentIndex; });
+          if (!hasAnswer) {
+            Utils.showToast('Please answer this question first.', 'warning');
+            return;
+          }
+        } else {
+          var freeText = document.getElementById('freeTextAnswer');
+          if (freeText) {
+            var val = freeText.value.trim();
+            var idx = state.answers.findIndex(function(a) { return a.index === state.currentIndex; });
+            if (idx !== -1) state.answers[idx].answer = val;
+            else state.answers.push({ index: state.currentIndex, answer: val });
+            state.challenge.answers = state.answers;
+            Utils.setStorage('active_challenge', state.challenge);
+          }
+        }
+
+        if (state.currentIndex === total - 1) {
+          finishChallenge();
+        } else {
+          state.currentIndex++;
+          renderQuestion();
+        }
+      };
+
+      window.goToQuestion = function(idx) {
+        state.currentIndex = idx;
+        renderQuestion();
+      };
+
+      function finishChallenge() {
+        if (typeof ChallengeCenter !== 'undefined') {
+          state.result = ChallengeCenter.finishChallenge();
+        } else {
+          state.result = localFinishChallenge();
+        }
+        state.finished = true;
+        clearInterval(state.timerId);
+        renderResult();
+      }
+
+      function localFinishChallenge() {
+        var correct = 0;
+        var total = state.challenge.questions.length;
+        var attempted = 0;
+
+        state.challenge.questions.forEach(function(q, i) {
+          var userAnswer = state.answers ? state.answers.find(function(a) { return a.index === i; }) : null;
+          if (userAnswer && userAnswer.answer !== undefined && userAnswer.answer !== null && userAnswer.answer !== '') {
+            attempted++;
+            if (String(userAnswer.answer).trim().toLowerCase() === String(q.answer).trim().toLowerCase()) {
+              correct++;
+            }
+          }
+        });
+
+        var accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+        var score = Math.round(accuracy * (attempted / total) * 10);
+
+        var result = {
+          courseId: state.challenge.courseId,
+          courseTitle: state.challenge.courseTitle,
+          correct: correct,
+          total: total,
+          attempted: attempted,
+          accuracy: accuracy,
+          timeTaken: Math.floor(((state.challenge.timeLimit || 1800000) - state.timeLeft) / 1000),
+          score: score,
+          date: new Date().toISOString()
+        };
+
+        Utils.removeStorage('active_challenge');
+        var history = Utils.getStorage('challenge_history', []);
+        history.push(result);
+        Utils.setStorage('challenge_history', history);
+
+        return result;
+      }
+
+      function renderResult() {
+        var r = state.result;
+        if (!r) return;
+
+        var pass = r.accuracy >= 60;
+        var timeStr = formatTime(r.timeTaken || 0);
+
+        container.innerHTML = '<div class="arena-result">'
+          + '<div class="score-circle ' + (pass ? 'pass' : 'fail') + '">' + r.accuracy + '%</div>'
+          + '<h2>' + (pass ? 'Challenge Complete!' : 'Keep Practicing!') + '</h2>'
+          + '<p style="color:var(--text-muted)">' + (pass ? 'Great work on the ' + Utils.sanitize(r.courseTitle || '') + ' challenge!' : 'Review the material and try again for a higher score.') + '</p>'
+          + '<div class="result-stats">'
+          + '<div class="result-stat"><div class="stat-value">' + r.correct + '/' + r.total + '</div><div class="stat-label">Correct</div></div>'
+          + '<div class="result-stat"><div class="stat-value">' + r.attempted + '</div><div class="stat-label">Attempted</div></div>'
+          + '<div class="result-stat"><div class="stat-value">' + r.accuracy + '%</div><div class="stat-label">Accuracy</div></div>'
+          + '<div class="result-stat"><div class="stat-value">' + timeStr + '</div><div class="stat-label">Time Taken</div></div>'
+          + '<div class="result-stat"><div class="stat-value">' + r.score + '</div><div class="stat-label">Score</div></div>'
+          + '</div>'
+          + '<div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">'
+          + '<a href="Learn.html" class="btn btn-primary"><i class="fas fa-book"></i> Browse Courses</a>'
+          + '<button class="btn btn-ghost" onclick="viewHistory()"><i class="fas fa-history"></i> View History</button>'
+          + '</div></div>'
+          + '<div class="leaderboard-after"><h3><i class="fas fa-ranking-star"></i> Your Best Scores</h3>'
+          + '<div id="scoreHistory"><p style="color:var(--text-muted)">Loading...</p></div></div>';
+
+        renderScoreHistory();
+      }
+
+      function renderScoreHistory() {
+        var historyEl = document.getElementById('scoreHistory');
+        if (!historyEl) return;
+        var history = Utils.getStorage('challenge_history', []);
+        var courseHistory = history.filter(function(h) { return h.courseId === state.challenge.courseId; }).slice(-5).reverse();
+
+        if (courseHistory.length === 0) {
+          historyEl.innerHTML = '<p style="color:var(--text-muted)">No previous attempts for this course.</p>';
+          return;
+        }
+
+        var html = '<div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem">';
+        courseHistory.forEach(function(h, i) {
+          var pass = h.accuracy >= 60;
+          html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 1rem;border-radius:8px;background:var(--glass-bg);border:1px solid var(--glass-border-light)">'
+            + '<span>Attempt ' + (i + 1) + '</span>'
+            + '<span style="font-weight:600;color:' + (pass ? 'var(--success)' : 'var(--danger)') + '">' + h.accuracy + '%</span>'
+            + '<span style="color:var(--text-muted);font-size:0.85rem">' + h.correct + '/' + h.total + ' correct</span>'
+            + '<span style="color:var(--text-muted);font-size:0.85rem">Score: ' + h.score + '</span></div>';
+        });
+        html += '</div>';
+        historyEl.innerHTML = html;
+      }
+
+      window.viewHistory = function() {
+        var history = Utils.getStorage('challenge_history', []);
+        var allHtml = '<div style="margin-top:1rem"><h3><i class="fas fa-history"></i> All Challenge History</h3>';
+        if (history.length === 0) {
+          allHtml += '<p style="color:var(--text-muted)">No challenge history yet.</p>';
+        } else {
+          allHtml += '<div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem">';
+          history.slice().reverse().forEach(function(h, i) {
+            var pass = h.accuracy >= 60;
+            allHtml += '<div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 1rem;border-radius:8px;background:var(--glass-bg);border:1px solid var(--glass-border-light)">'
+              + '<span style="font-size:0.85rem">' + Utils.sanitize(h.courseTitle || '') + '</span>'
+              + '<span style="font-weight:600;color:' + (pass ? 'var(--success)' : 'var(--danger)') + '">' + h.accuracy + '%</span>'
+              + '<span style="color:var(--text-muted);font-size:0.85rem">' + h.correct + '/' + h.total + '</span>'
+              + '<span style="color:var(--text-muted);font-size:0.85rem">' + formatTime(h.timeTaken || 0) + '</span></div>';
+          });
+          allHtml += '</div>';
+        }
+        allHtml += '<button class="btn btn-ghost" onclick="renderArena()" style="margin-top:1rem"><i class="fas fa-arrow-left"></i> Back</button></div>';
+        document.getElementById('arenaContainer').innerHTML = allHtml;
+      };
+
+      function formatTime(ms) {
+        var totalSec = Math.floor(ms / 1000);
+        var m = Math.floor(totalSec / 60);
+        var s = totalSec % 60;
+        return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      }
+
+      function initAnswerListeners(total) {
+        var freeText = document.getElementById('freeTextAnswer');
+        if (freeText) {
+          freeText.addEventListener('input', function() {
+            var val = this.value.trim();
+            var idx = state.answers.findIndex(function(a) { return a.index === state.currentIndex; });
+            if (idx !== -1) state.answers[idx].answer = val;
+            else state.answers.push({ index: state.currentIndex, answer: val });
+            state.challenge.answers = state.answers;
+            Utils.setStorage('active_challenge', state.challenge);
+          });
+        }
+      }
+
+      function startTimer() {
+        state.timerId = setInterval(function() {
+          state.timeLeft -= 1000;
+          var timerEl = document.getElementById('arenaTimer');
+          if (timerEl) {
+            timerEl.textContent = formatTime(state.timeLeft);
+            if (state.timeLeft < 120000) {
+              timerEl.className = 'arena-timer danger';
+            } else if (state.timeLeft < 300000) {
+              timerEl.className = 'arena-timer warning';
+            }
+          }
+          if (state.timeLeft <= 0) {
+            clearInterval(state.timerId);
+            finishChallenge();
+          }
+        }, 1000);
+      }
+
+      renderQuestion();
+      startTimer();
+    }
+  </script>
+</body>
+</html>

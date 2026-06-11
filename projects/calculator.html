@@ -1,0 +1,737 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a fully functional calculator with DOM manipulation, event delegation, keyboard support, expression evaluation, history, and theme toggle. Complete JavaScript project guide.">
+  <meta name="keywords" content="calculator, JavaScript, DOM manipulation, event delegation, keyboard support, expression evaluation, math.js, frontend project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="Calculator - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a scientific calculator with advanced features.">
+  <meta property="og:type" content="website">
+  <title>Calculator - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/calculator.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  
+  
+  
+  </style>
+</head>
+<body data-page="Project" data-project="calculator">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Calculator App</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Beginner</span>
+        <span><i class="far fa-clock"></i> 2-3 hours</span>
+        <span><i class="fas fa-code-branch"></i> JavaScript, HTML5, CSS3</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A complete engineering guide to building a fully functional calculator with DOM manipulation, event delegation, keyboard support, expression evaluation, calculation history, and theme toggling.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This calculator project goes far beyond a basic arithmetic tool. You will build a scientific-grade calculator featuring a multi-line expression display, operator precedence parsing, keyboard shortcuts, an interactive calculation history panel, and a theme toggle. You will learn advanced DOM manipulation techniques, event delegation patterns, expression parsing algorithms (Shunting Yard), and state management. The calculator supports basic operations, percentages, square roots, exponents, parentheses, and memory functions (MC, MR, M+, M-).</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Most calculator tutorials teach building a calculator that evaluates expressions using `eval()`, which is dangerous and insecure. Developers need to understand how to safely parse and evaluate mathematical expressions, handle operator precedence, manage state across operations, and build an intuitive UI that works with both mouse and keyboard input. The challenge is creating a calculator that handles edge cases like division by zero, consecutive operators, decimal precision, and large numbers while providing a smooth, native-app-like user experience.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Everyday Calculations:</strong> A student uses the calculator for homework, switching between basic and scientific modes for algebra and trigonometry problems.</li>
+          <li><strong>Financial Planning:</strong> A user tracks expenses with running totals, uses memory functions to store recurring amounts, and reviews the calculation history at the end of the month.</li>
+          <li><strong>Engineering Estimates:</strong> An engineer performs quick unit conversions and formula calculations, using the expression history to verify previous results without re-entering data.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>Expression parsing is a fundamental computer science concept used in compilers, interpreters, spreadsheet software, and formula editors. The Shunting Yard algorithm you'll implement was developed by Edsger Dijkstra and is still used in modern applications like Excel, Google Sheets, and Wolfram Alpha. Event delegation patterns are critical for building performant web applications with many interactive elements. Keyboard shortcut handling is essential for power users and accessibility compliance.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Implement the Shunting Yard algorithm for converting infix expressions to postfix (RPN) notation for safe evaluation</li>
+          <li>Build a robust expression parser that handles operator precedence, parentheses, functions (sqrt, pow, sin, cos), and constants (PI, E)</li>
+          <li>Use event delegation pattern to handle all button clicks with a single event listener on the parent container</li>
+          <li>Implement full keyboard support with keydown/keyup event handling for numbers, operators, Enter/Escape, and backspace</li>
+          <li>Manage calculator state including current expression, history, memory, and theme using a state machine pattern</li>
+          <li>Handle floating-point precision issues using Number.EPSILON comparisons and toFixed for display purposes</li>
+          <li>Build an animated calculation history panel with localStorage persistence and the ability to reuse previous results</li>
+          <li>Implement CSS custom property theming for light/dark mode with smooth transitions on all interactive elements</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fab fa-js"></i> JavaScript ES6+</span>
+          <span class="badge-tech"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS3</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> localStorage</span>
+          <span class="badge-tech"><i class="fab fa-font-awesome"></i> Font Awesome</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Proficient in JavaScript fundamentals: functions, objects, arrays, string manipulation</li>
+          <li>Understanding of event listeners and event object properties (key, target, type)</li>
+          <li>Basic knowledge of CSS Grid for button layout and CSS transitions for animations</li>
+          <li>Familiarity with recursion and stack data structures (helpful but not required)</li>
+          <li>Understanding of floating-point arithmetic limitations in binary systems</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The calculator follows a state machine architecture with three main states: INPUT (user is typing an expression), EVALUATE (expression is being computed), and DISPLAY (result is shown). The core evaluation engine uses the Shunting Yard algorithm: the infix expression is tokenized, converted to Reverse Polish Notation using a stack-based algorithm, then evaluated using another stack. Button clicks are handled through a single event delegation listener on the calculator body, with each button's data-action attribute determining the behavior. Keyboard events are normalized to the same action map. The history is stored as an array of { expression, result, timestamp } objects in localStorage with a maximum of 50 entries.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+calculator/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   ├── calculator.js
+│   ├── parser.js
+│   ├── history.js
+│   └── theme.js
+├── assets/
+│   └── icons/
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: Button Layout & Event Delegation</h4>
+          <p>Build the calculator grid layout with CSS Grid (4 columns for basic, expand to more for scientific mode). Implement event delegation on a single container element. Each button has a data-action attribute (number, operator, function, memory, clear, equals, backspace, decimal).</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: Expression Builder</h4>
+          <p>Build the expression builder that handles number input, decimal points (prevent multiple dots in one number), operator chaining, parentheses auto-completion, and display formatting with commas. Manage cursor position for editing.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Expression Parser & Evaluator</h4>
+          <p>Implement the tokenizer that splits the expression into numbers, operators, functions, and parentheses. Implement the Shunting Yard algorithm. Implement the RPN evaluator. Handle error cases: division by zero, invalid expressions, overflow, and NaN results.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Keyboard Support</h4>
+          <p>Map keyboard events to calculator actions. Numbers and operators type directly. Enter = equals, Escape = clear, Backspace = delete last character, Delete = clear all. Shift+( = open paren, Shift+) = close paren. Percentage sign, asterisk for multiply, slash for divide.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: History & Theme</h4>
+          <p>Build the history panel that slides in from the right or appears as a dropdown. Each history item shows the expression, result, and timestamp. Click to reuse a result. Store history in localStorage. Add theme toggle with CSS custom properties. Persist theme preference.</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: Shunting Yard Algorithm Implementation</h4>
+          <p>The Shunting Yard algorithm converts human-readable infix expressions (e.g., "3 + 4 * 2") to postfix notation ("3 4 2 * +") which is easy to evaluate with a stack. This avoids the security risks of eval().</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const PRECEDENCE = {
+  '+': 2, '-': 2, '*': 3, '/': 3, '%': 3,
+  '^': 4, 'sqrt': 4, 'sin': 5, 'cos': 5, 'tan': 5
+};
+
+const ASSOCIATIVITY = {
+  '+': 'L', '-': 'L', '*': 'L', '/': 'L',
+  '%': 'L', '^': 'R', 'sqrt': 'R'
+};
+
+function tokenize(expr) {
+  const tokens = [];
+  let i = 0;
+  while (i < expr.length) {
+    if (/\s/.test(expr[i])) { i++; continue; }
+    if (/[0-9.]/.test(expr[i])) {
+      let num = '';
+      while (i < expr.length && /[0-9.]/.test(expr[i])) {
+        num += expr[i++];
+      }
+      const n = parseFloat(num);
+      if (isNaN(n)) throw new Error('Invalid number: ' + num);
+      tokens.push({ type: 'number', value: n, raw: num });
+      continue;
+    }
+    if (/[+\-*/%^()]/.test(expr[i])) {
+      if (expr[i] === '-' && (tokens.length === 0 || tokens[tokens.length - 1].type === 'operator' || tokens[tokens.length - 1].value === '(')) {
+        tokens.push({ type: 'unary', value: '-' });
+      } else {
+        tokens.push({ type: 'operator', value: expr[i] });
+      }
+      i++;
+      continue;
+    }
+    if (/[a-zA-Z]/.test(expr[i])) {
+      let name = '';
+      while (i < expr.length && /[a-zA-Z]/.test(expr[i])) name += expr[i++];
+      if (name === 'pi' || name === 'PI') tokens.push({ type: 'number', value: Math.PI });
+      else if (name === 'e' || name === 'E') tokens.push({ type: 'number', value: Math.E });
+      else tokens.push({ type: 'function', value: name.toLowerCase() });
+      continue;
+    }
+    throw new Error('Unexpected character: ' + expr[i]);
+  }
+  return tokens;
+}
+
+function shuntingYard(tokens) {
+  const output = [];
+  const opStack = [];
+  for (const token of tokens) {
+    if (token.type === 'number') {
+      output.push(token);
+    } else if (token.type === 'function') {
+      opStack.push(token);
+    } else if (token.type === 'unary') {
+      opStack.push(token);
+    } else if (token.value === '(') {
+      opStack.push(token);
+    } else if (token.value === ')') {
+      while (opStack.length > 0 && opStack[opStack.length - 1].value !== '(') {
+        output.push(opStack.pop());
+      }
+      if (opStack.length === 0) throw new Error('Mismatched parentheses');
+      opStack.pop();
+      if (opStack.length > 0 && opStack[opStack.length - 1].type === 'function') {
+        output.push(opStack.pop());
+      }
+    } else if (token.type === 'operator') {
+      while (
+        opStack.length > 0 &&
+        opStack[opStack.length - 1].type !== 'function' &&
+        opStack[opStack.length - 1].value !== '(' &&
+        (PRECEDENCE[opStack[opStack.length - 1].value] > PRECEDENCE[token.value] ||
+          (PRECEDENCE[opStack[opStack.length - 1].value] === PRECEDENCE[token.value] &&
+            ASSOCIATIVITY[token.value] === 'L'))
+      ) {
+        output.push(opStack.pop());
+      }
+      opStack.push(token);
+    }
+  }
+  while (opStack.length > 0) {
+    const op = opStack.pop();
+    if (op.value === '(' || op.value === ')') throw new Error('Mismatched parentheses');
+    output.push(op);
+  }
+  return output;
+}
+
+function evaluateRPN(tokens) {
+  const stack = [];
+  for (const token of tokens) {
+    if (token.type === 'number') {
+      stack.push(token.value);
+    } else if (token.type === 'unary') {
+      const a = stack.pop();
+      if (a === undefined) throw new Error('Insufficient operands');
+      stack.push(-a);
+    } else if (token.type === 'function') {
+      const a = stack.pop();
+      if (a === undefined) throw new Error('Insufficient operands');
+      switch (token.value) {
+        case 'sqrt': stack.push(Math.sqrt(a)); break;
+        case 'sin': stack.push(Math.sin(a)); break;
+        case 'cos': stack.push(Math.cos(a)); break;
+        case 'tan': stack.push(Math.tan(a)); break;
+        case 'abs': stack.push(Math.abs(a)); break;
+        case 'round': stack.push(Math.round(a)); break;
+        case 'floor': stack.push(Math.floor(a)); break;
+        case 'ceil': stack.push(Math.ceil(a)); break;
+        default: throw new Error('Unknown function: ' + token.value);
+      }
+    } else if (token.type === 'operator') {
+      const b = stack.pop();
+      const a = stack.pop();
+      if (a === undefined || b === undefined) throw new Error('Insufficient operands');
+      switch (token.value) {
+        case '+': stack.push(a + b); break;
+        case '-': stack.push(a - b); break;
+        case '*': stack.push(a * b); break;
+        case '/':
+          if (Math.abs(b) < Number.EPSILON) throw new Error('Division by zero');
+          stack.push(a / b);
+          break;
+        case '%': stack.push(a % b); break;
+        case '^': stack.push(Math.pow(a, b)); break;
+        default: throw new Error('Unknown operator: ' + token.value);
+      }
+    }
+  }
+  if (stack.length !== 1) throw new Error('Invalid expression');
+  return stack[0];
+}
+
+function evaluate(expression) {
+  const tokens = tokenize(expression);
+  const rpn = shuntingYard(tokens);
+  const result = evaluateRPN(rpn);
+  if (!isFinite(result)) throw new Error('Result is not finite');
+  return result;
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: Event Delegation for Button Grid</h4>
+          <p>Use a single event listener on the calculator container to handle all button clicks. Each button's data-action attribute determines the handler.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const calculator = document.getElementById('calculator');
+
+const actions = {
+  number: (value) => appendNumber(value),
+  operator: (value) => appendOperator(value),
+  decimal: () => appendDecimal(),
+  clear: () => clearAll(),
+  backspace: () => deleteLast(),
+  equals: () => calculate(),
+  percent: () => percent(),
+  negate: () => negate(),
+  memory_clear: () => memoryClear(),
+  memory_recall: () => memoryRecall(),
+  memory_add: () => memoryAdd(),
+  memory_subtract: () => memorySubtract(),
+  sqrt: () => appendFunction('sqrt('),
+  square: () => appendOperator('^').then(() => appendNumber(2)),
+  reciprocal: () => calculate().then(() => appendOperator('/').then(() => appendNumber(1))),
+  history: () => toggleHistory(),
+  theme: () => toggleTheme()
+};
+
+calculator.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const button = e.target.closest('.calc-btn');
+  if (!button || button.disabled) return;
+  const action = button.dataset.action;
+  const value = button.dataset.value;
+  if (actions[action]) {
+    actions[action](value);
+    updateDisplay();
+    buttonFeedback(button);
+  }
+});
+
+function buttonFeedback(btn) {
+  btn.classList.add('pressed');
+  setTimeout(() => btn.classList.remove('pressed'), 100);
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Keyboard Support Mapping</h4>
+          <p>Map keyboard events to the same action system used by button clicks. Handle both standard keys and numpad keys.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const keyMap = {
+  '0': ['number', '0'], '1': ['number', '1'],
+  '2': ['number', '2'], '3': ['number', '3'],
+  '4': ['number', '4'], '5': ['number', '5'],
+  '6': ['number', '6'], '7': ['number', '7'],
+  '8': ['number', '8'], '9': ['number', '9'],
+  '.': ['decimal'], ',': ['decimal'],
+  '+': ['operator', '+'], '-': ['operator', '-'],
+  '*': ['operator', '*'], '/': ['operator', '/'],
+  '%': ['percent'], '^': ['operator', '^'],
+  '(': ['paren', '('], ')': ['paren', ')'],
+  'Enter': ['equals'], '=': ['equals'],
+  'Escape': ['clear'], 'Backspace': ['backspace'],
+  'Delete': ['clear'],
+  'c': ['clear'], 'C': ['clear']
+};
+
+const numpadMap = {
+  'Numpad0': ['number', '0'], 'Numpad1': ['number', '1'],
+  'Numpad2': ['number', '2'], 'Numpad3': ['number', '3'],
+  'Numpad4': ['number', '4'], 'Numpad5': ['number', '5'],
+  'Numpad6': ['number', '6'], 'Numpad7': ['number', '7'],
+  'Numpad8': ['number', '8'], 'Numpad9': ['number', '9'],
+  'NumpadDecimal': ['decimal'],
+  'NumpadAdd': ['operator', '+'],
+  'NumpadSubtract': ['operator', '-'],
+  'NumpadMultiply': ['operator', '*'],
+  'NumpadDivide': ['operator', '/'],
+  'NumpadEnter': ['equals'],
+};
+
+document.addEventListener('keydown', (e) => {
+  e.preventDefault();
+  const mapping = numpadMap[e.code] || keyMap[e.key];
+  if (mapping) {
+    const [action, value] = mapping;
+    if (actions[action]) {
+      actions[action](value);
+      updateDisplay();
+      const btn = document.querySelector(`[data-action="${action}"][data-value="${value || ''}"]`) ||
+                  document.querySelector(`[data-action="${action}"]`);
+      if (btn) buttonFeedback(btn);
+    }
+  }
+  if (e.shiftKey && e.key === '(') {
+    appendParen('(');
+    updateDisplay();
+  }
+  if (e.shiftKey && e.key === ')') {
+    appendParen(')');
+    updateDisplay();
+  }
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: History Panel with localStorage</h4>
+          <p>Build a history panel that stores calculation results with timestamps and allows reusing previous results.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const HISTORY_KEY = 'calc-history';
+const MAX_HISTORY = 50;
+
+const History = {
+  getAll() {
+    try {
+      return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+    } catch { return []; }
+  },
+
+  add(expression, result) {
+    const history = this.getAll();
+    history.unshift({
+      id: Date.now(),
+      expression,
+      result: formatNumber(result),
+      timestamp: new Date().toLocaleString()
+    });
+    if (history.length > MAX_HISTORY) history.pop();
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    return history;
+  },
+
+  clear() {
+    localStorage.removeItem(HISTORY_KEY);
+  },
+
+  delete(id) {
+    const history = this.getAll().filter(h => h.id !== id);
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    return history;
+  }
+};
+
+function renderHistory() {
+  const panel = document.getElementById('history-panel');
+  const history = History.getAll();
+  if (history.length === 0) {
+    panel.innerHTML = '<div class="history-empty"><i class="fas fa-history"></i><p>No calculations yet</p></div>';
+    return;
+  }
+  panel.innerHTML = history.map(item => `
+    <div class="history-item" data-id="${item.id}">
+      <div class="history-expr">${escapeHtml(item.expression)}</div>
+      <div class="history-result">= ${item.result}</div>
+      <div class="history-meta">
+        <span class="history-time">${item.timestamp}</span>
+        <button class="history-reuse" title="Use this result"><i class="fas fa-arrow-right"></i></button>
+        <button class="history-delete" title="Delete"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+  `).join('');
+  panel.querySelectorAll('.history-reuse').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      const result = history[i].result.replace(/,/g, '');
+      setExpression(result);
+      closeHistory();
+    });
+  });
+  panel.querySelectorAll('.history-delete').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      History.delete(history[i].id);
+      renderHistory();
+    });
+  });
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 5: Expression Display with Formatting</h4>
+          <p>Build the display system that shows the expression with proper formatting and the current result in a separate line. Handle overflow with font-size reduction.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const state = {
+  expression: '',
+  result: null,
+  memory: 0,
+  newExpression: true,
+  justEvaluated: false
+};
+
+function updateDisplay() {
+  const exprEl = document.getElementById('calc-expression');
+  const resultEl = document.getElementById('calc-result');
+  exprEl.textContent = state.expression || '0';
+  if (state.result !== null) {
+    resultEl.textContent = '= ' + formatNumber(state.result);
+    resultEl.style.display = 'block';
+  } else {
+    resultEl.style.display = 'none';
+  }
+  adjustFontSize(exprEl);
+  adjustFontSize(resultEl);
+}
+
+function adjustFontSize(el) {
+  const maxWidth = el.parentElement.clientWidth - 40;
+  let fontSize = 2;
+  el.style.fontSize = fontSize + 'rem';
+  while (el.scrollWidth > maxWidth && fontSize > 0.8) {
+    fontSize -= 0.1;
+    el.style.fontSize = fontSize + 'rem';
+  }
+}
+
+function formatNumber(num) {
+  if (!isFinite(num)) return 'Error';
+  if (Math.abs(num) >= 1e15 || (Math.abs(num) < 1e-10 && num !== 0)) {
+    return num.toExponential(6);
+  }
+  const parts = num.toFixed(10).replace(/\.?0+$/, '').split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
+}
+
+function appendNumber(value) {
+  if (state.justEvaluated) {
+    state.expression = '';
+    state.result = null;
+    state.justEvaluated = false;
+  }
+  state.expression += value;
+  state.result = null;
+}
+
+function appendOperator(op) {
+  if (state.justEvaluated) {
+    state.justEvaluated = false;
+  }
+  const lastChar = state.expression.slice(-1);
+  if (/[+\-*/^]/.test(lastChar)) {
+    state.expression = state.expression.slice(0, -1);
+  }
+  state.expression += op;
+  state.result = null;
+}
+
+function calculate() {
+  try {
+    const result = evaluate(state.expression);
+    History.add(state.expression, result);
+    state.result = result;
+    state.expression = formatNumber(result);
+    state.justEvaluated = true;
+  } catch (error) {
+    showError(error.message);
+    state.result = null;
+  }
+}
+
+function clearAll() {
+  state.expression = '';
+  state.result = null;
+  state.justEvaluated = false;
+}
+
+function deleteLast() {
+  if (state.justEvaluated) {
+    clearAll();
+    return;
+  }
+  state.expression = state.expression.slice(0, -1);
+  state.result = null;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>Basic Operations:</strong> Test 2+2=4, 10-5=5, 3*7=21, 15/3=5. Test decimal operations: 0.1+0.2=0.3 (verify floating-point handling). Test negative numbers: -5+3=-2.</p>
+        <p><strong>Operator Precedence:</strong> Test 2+3*4=14 (not 20). Test (2+3)*4=20. Test 2^3^2=512 (right-associative). Test sqrt(16)=4, 5%=0.05.</p>
+        <p><strong>Error Handling:</strong> Test division by zero, invalid expressions (2++2), unmatched parentheses, overflow (999999^999999). Verify user-friendly error messages appear.</p>
+        <p><strong>Keyboard Testing:</strong> Test all number keys, operators, Enter, Escape, Backspace. Test numpad keys. Test shift+( and shift+). Verify keyboard doesn't interfere with other page interactions.</p>
+        <p><strong>History Testing:</strong> Perform calculations and verify they appear in history. Reuse a history item. Delete individual items. Clear all history. Verify history persists across page refreshes.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p>This is a fully client-side application. Deploy to any static hosting: GitHub Pages (enable from main branch), Netlify (drag-drop or connect repo), Vercel (vercel CLI or import), or any web server. No build step is required - the calculator works out of the box. Ensure all paths are relative for subdirectory deployment.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. Using eval() for Expression Evaluation</strong><br>
+          eval() executes arbitrary JavaScript code, making it a severe security risk. If a user types "2+alert('xss')", eval() will execute the alert. Always use a proper parser like the Shunting Yard algorithm. If you must use eval (e.g., for very complex math), sanitize the input rigorously with a whitelist regex: /^[\d+\-*/().%^,\s]+$/.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Floating-Point Precision Issues</strong><br>
+          0.1 + 0.2 in JavaScript equals 0.30000000000000004 due to IEEE 754 binary representation. Never compare floating-point numbers directly with ===. Use Number.EPSILON for comparisons. For display, use toFixed() or toPrecision() with appropriate rounding. For financial calculations, use integer arithmetic (cents instead of dollars).
+        </div>
+        <div class="challenge-card">
+          <strong>3. Operator Precedence and Associativity Mistakes</strong><br>
+          Many calculator implementations get operator precedence wrong, especially for exponentiation (which is right-associative: 2^3^2 = 512, not 64). Unary operators (negation) should have higher precedence than binary operators. Parentheses must be properly tracked with a counter to detect mismatches. Test with edge cases like consecutive operators, leading operators, and trailing operators.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Keyboard Event Conflicts with Browser Shortcuts</strong><br>
+          Without proper handling, keyboard shortcuts like Ctrl+W (close tab), Ctrl+T (new tab), or browser back/forward (Alt+Left) can interfere with calculator input. Use e.preventDefault() to stop default browser behavior for handled keys. Avoid overriding system-level shortcuts. Check for modifier keys (ctrlKey, metaKey, altKey) before handling key events.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the Shunting Yard algorithm and its use cases beyond calculators.<br>
+          <strong>A:</strong> The Shunting Yard algorithm, developed by Edsger Dijkstra, converts infix notation (human-readable: "3 + 4") to postfix/RPN notation (machine-evaluable: "3 4 +"). It uses two stacks: one for operators and one for output. Operators are moved to the output stack based on precedence and associativity rules. Beyond calculators, it's used in: SQL query parsers, spreadsheet formula engines (Excel), mathematical typesetting (LaTeX), programming language compilers, and any system that needs to evaluate mathematical or logical expressions.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you handle floating-point precision in JavaScript?<br>
+          <strong>A:</strong> JavaScript uses IEEE 754 double-precision binary representation, causing precision issues with decimal fractions (0.1 + 0.2 !== 0.3). Strategies: use toFixed(n) for display rounding; multiply by a power of 10 to work with integers; use a library like decimal.js for arbitrary precision; use Number.EPSILON for approximate equality checks; for currency, always use integer cents. Never use === for floating-point comparison. Example: Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What is event delegation and why would you use it for a calculator with 30+ buttons?<br>
+          <strong>A:</strong> Event delegation means attaching a single event listener to a parent element and using event.target to determine which child triggered it. For a calculator with 30+ buttons, this avoids 30+ separate event listeners, reducing memory usage and setup code. It automatically handles dynamically added buttons. The pattern: parent.addEventListener('click', (e) => { const btn = e.target.closest('.calc-btn'); if (!btn) return; handleAction(btn.dataset.action, btn.dataset.value); }).
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement undo functionality for a calculator?<br>
+          <strong>A:</strong> Implement a state history stack that stores snapshots of the calculator state (expression, result, memory) after each action. The undo action pops the last state and restores it. Limit the stack to 50 entries to prevent memory issues. For a simpler approach, maintain an expression history array and a pointer to the current expression index, allowing both undo and redo by moving the pointer forward and backward through history.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the difference between prefix, infix, and postfix notation.<br>
+          <strong>A:</strong> Infix: operator between operands (3 + 4), requires parentheses and precedence rules, used in everyday math. Prefix (Polish): operator before operands (+ 3 4), no parentheses needed, used in Lisp dialects. Postfix (Reverse Polish): operator after operands (3 4 +), no parentheses or precedence needed, easy to evaluate with a stack, used in old HP calculators and stack-based virtual machines. RPN evaluation is O(n) with a single pass using a stack, making it efficient for expression evaluation.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Engineered a scientific-grade calculator web application with safe expression evaluation using the Shunting Yard algorithm, supporting unary/binary operators, functions, and constant parsing</li>
+          <li>Implemented a tokenizer and RPN evaluator handling operator precedence, parenthetical grouping, and floating-point precision with Number.EPSILON-based comparisons</li>
+          <li>Architected an event delegation system processing 30+ calculator actions through a single event listener, reducing memory footprint and enabling unified keyboard/mouse input handling</li>
+          <li>Built a full keyboard support system with key mapping for standard keys, numpad, and modifier combinations, including browser shortcut conflict prevention</li>
+          <li>Developed a persistent calculation history panel with localStorage CRUD operations, one-click result reuse, and timestamp tracking with a 50-entry limit</li>
+          <li>Implemented CSS custom property theming with smooth transitions across all interactive elements and persisted user preference via localStorage</li>
+          <li>Designed a memory management system (MC/MR/M+/M-) enabling multi-value storage and recall during complex calculation workflows</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include screenshots of both themes, a live demo link, feature list with scientific functions, and a "Try it!" section with keyboard shortcut cheat sheet.</p>
+        <p><strong>Commit Messages:</strong> feat: implement Shunting Yard expression parser, fix: handle unary negation operator precedence, refactor: extract keyboard handler to separate module, test: add unit tests for parser edge cases.</p>
+        <p><strong>Testing:</strong> Write Jest unit tests for the parser module (tokenize, shuntingYard, evaluateRPN). Test with edge cases: empty input, division by zero, nested parentheses, unary minus, and large numbers. Use GitHub Actions to run tests on every PR.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Scientific Mode:</strong> Add trigonometric functions (sin, cos, tan with degree/radian toggle), logarithms (log, ln), factorial, and constants (PI, E, Euler's constant). Add a mode toggle button that expands the grid to show scientific buttons.</li>
+          <li><strong>Graphing Calculator:</strong> Add a canvas-based graph panel where users enter a function expression (e.g., "sin(x)") and see it plotted in real-time. Implement zoom, pan, and trace features. Use requestAnimationFrame for smooth rendering.</li>
+          <li><strong>Unit Converter:</strong> Add a unit conversion module alongside the calculator. Support common conversions: length (meters/feet), temperature (C/F/K), weight (kg/lbs), currency (with live exchange rate API), and data storage (MB/GB/TB).</li>
+          <li><strong>Voice Input:</strong> Integrate the Web Speech API for voice-controlled calculations. Users can say "two plus three times four" and see the expression and result. Add voice feedback that reads the result aloud.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Shunting_yard_algorithm" target="_blank">Wikipedia: Shunting Yard Algorithm</a> - Algorithm explanation with examples</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" target="_blank">MDN Event Delegation</a> - Event listener patterns</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent" target="_blank">MDN KeyboardEvent</a> - Keyboard event reference</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON" target="_blank">MDN Number.EPSILON</a> - Floating-point precision guide</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout" target="_blank">MDN CSS Grid Layout</a> - Grid layout reference for button placement</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="todo-list.html" class="btn btn-ghost">To-Do List App</a>
+          <a href="personal-portfolio.html" class="btn btn-ghost">Personal Portfolio</a>
+          <a href="weather-dashboard.html" class="btn btn-ghost">Weather Dashboard</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="todo-list.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: To-Do List</a>
+        <a href="ecommerce-store.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kotlin Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    a.module-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .module-card .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .module-arrow {
+      color: var(--primary);
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    a.module-card:hover .module-arrow {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body data-page="Course" data-course="kotlin">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>Kotlin</h1>
+      <p>Kotlin is a modern, cross-platform, statically typed programming language developed by JetBrains. First released in 2016, Kotlin is fully interoperable with Java and has become the preferred language for Android development (officially supported by Google since 2017). It combines functional and object-oriented programming paradigms with a concise syntax.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Intermediate</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 8 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 14 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>Kotlin was designed to be a "better Java" - addressing Java's verbosity, null safety issues, and lack of functional programming features while maintaining full compatibility with the Java ecosystem. Kotlin compiles to JVM bytecode, JavaScript, and native binaries (via Kotlin/Native), making it versatile for Android, backend, web frontend, and iOS development.</p>
+      <p>Kotlin's key features include null safety (types explicitly mark nullability), data classes (auto-generating equals, hashCode, toString), extension functions (adding methods to existing classes), coroutines for asynchronous programming, sealed classes for restricted class hierarchies, and smart casts that eliminate redundant type checking. The Kotlin standard library provides rich collection operations with functional APIs.</p>
+      <p>Kotlin is used by Google (Android development), Netflix (server-side applications), Pinterest (Android app), Trello (Android app), Evernote (Android), Corda (blockchain), and Spring Framework (official Kotlin support). The language has quickly become the default choice for new Android projects and is increasingly adopted for backend microservices with Spring Boot and Ktor.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn Kotlin?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-mobile-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Official Android Language</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Google officially supports Kotlin as the #1 language for Android development.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-shield-alt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Null Safety Built-In</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Types explicitly distinguish nullable and non-null, eliminating NPEs at compile time.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-code" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Concise Syntax</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Kotlin reduces boilerplate by up to 40% compared to Java while remaining readable.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-cogs" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Java Interoperable</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Use any Java library, framework, or tool from Kotlin with zero migration cost.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Kotlin is adopted by major companies for Android and server-side development:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pinterest/pinterest-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Pinterest</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Trello</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">Kotlin powers the Android apps of Pinterest, Trello, Evernote, Uber, Twitter/X, Reddit, Flipboard, and many more. On the server side, Netflix uses Kotlin for streaming services, JetBrains builds all its tools in Kotlin, and Spring Boot has had first-class Kotlin support since Spring 5. Kotlin Multiplatform is increasingly used for sharing business logic across iOS and Android.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic programming knowledge, familiarity with Java or OOP concepts</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic syntax, variables, types, control flow, functions, null safety</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 3-5)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Classes, OOP, inheritance, data classes, collections, lambdas, extensions</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 6-7)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Generics, coroutines, sequences, sealed classes, delegation, DSLs</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Week 8)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Android development, Spring Boot, Ktor, Kotlin Multiplatform, testing</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <a href="../lesson.html?course=kotlin&module=1" class="module-card" onclick="LearningTracker.startLesson('kotlin-01')">
+        <h3><span class="module-number">1</span> Kotlin Basics</h3>
+        <p>Installing Kotlin, Hello World, basic syntax, fun keyword, main function, REPL with Kotlin playground, and IntelliJ IDEA setup.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Setup</span> <span class="badge badge-primary">Syntax</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=2" class="module-card" onclick="LearningTracker.startLesson('kotlin-02')">
+        <h3><span class="module-number">2</span> Variables & Types</h3>
+        <p>val vs var, type inference, basic types (Int, Long, Double, Float, Boolean, Char, String), type conversion, and string templates.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Variables</span> <span class="badge badge-primary">Types</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=3" class="module-card" onclick="LearningTracker.startLesson('kotlin-03')">
+        <h3><span class="module-number">3</span> Null Safety</h3>
+        <p>Nullable types (?), safe call operator (?.), Elvis operator (?:), not-null assertion (!!), safe casts (as?), and let/apply/run scope functions.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Null safety</span> <span class="badge badge-primary">Scope functions</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=4" class="module-card" onclick="LearningTracker.startLesson('kotlin-04')">
+        <h3><span class="module-number">4</span> Control Flow</h3>
+        <p>if as expression, when (replacement for switch), for loops, while loops, ranges (1..10), and break/continue labels.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Control flow</span> <span class="badge badge-primary">When</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=5" class="module-card" onclick="LearningTracker.startLesson('kotlin-05')">
+        <h3><span class="module-number">5</span> Functions & Lambdas</h3>
+        <p>Function syntax, default and named parameters, varargs, single-expression functions, lambda syntax, higher-order functions, and inline functions.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Functions</span> <span class="badge badge-primary">Lambdas</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <a href="../lesson.html?course=kotlin&module=6" class="module-card" onclick="LearningTracker.startLesson('kotlin-06')">
+        <h3><span class="module-number">6</span> Classes & Objects</h3>
+        <p>Class declaration, constructors (primary/secondary), init blocks, properties, getters/setters, open classes, and abstract classes.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Classes</span> <span class="badge badge-primary">OOP</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=7" class="module-card" onclick="LearningTracker.startLesson('kotlin-07')">
+        <h3><span class="module-number">7</span> Inheritance & Interfaces</h3>
+        <p>Open keyword for inheritance, overriding methods, interface definition and implementation, properties in interfaces, and multiple interface inheritance.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Inheritance</span> <span class="badge badge-primary">Interfaces</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=8" class="module-card" onclick="LearningTracker.startLesson('kotlin-08')">
+        <h3><span class="module-number">8</span> Data Classes & Sealed Classes</h3>
+        <p>Data class auto-generation (equals, hashCode, toString, copy, componentN), destructuring declarations, sealed classes for restricted hierarchies.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Data classes</span> <span class="badge badge-primary">Sealed</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=9" class="module-card" onclick="LearningTracker.startLesson('kotlin-09')">
+        <h3><span class="module-number">9</span> Collections & Functional API</h3>
+        <p>List, Set, Map (mutable vs immutable), filter, map, flatMap, reduce, fold, groupBy, sortedBy, chunked, and sequence (lazy evaluation).</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Collections</span> <span class="badge badge-primary">Functional</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=10" class="module-card" onclick="LearningTracker.startLesson('kotlin-10')">
+        <h3><span class="module-number">10</span> Extension Functions & Properties</h3>
+        <p>Adding methods to existing classes, extension properties, companion object extensions, and scope functions (let, apply, run, also, takeIf).</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Extensions</span> <span class="badge badge-primary">Scope</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <a href="../lesson.html?course=kotlin&module=11" class="module-card" onclick="LearningTracker.startLesson('kotlin-11')">
+        <h3><span class="module-number">11</span> Generics & Delegation</h3>
+        <p>Generic classes and functions, variance (in/out), reified type parameters, class delegation (by keyword), and property delegation (lazy, observable).</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Generics</span> <span class="badge badge-primary">Delegation</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=12" class="module-card" onclick="LearningTracker.startLesson('kotlin-12')">
+        <h3><span class="module-number">12</span> Coroutines & Concurrency</h3>
+        <p>Coroutines basics (launch, async), suspend functions, coroutine scopes (GlobalScope, viewModelScope), dispatchers, channels, and flow.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Coroutines</span> <span class="badge badge-primary">Async</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=13" class="module-card" onclick="LearningTracker.startLesson('kotlin-13')">
+        <h3><span class="module-number">13</span> DSLs & Type Safety</h3>
+        <p>Building type-safe DSLs with lambda with receiver, @DslMarker, invoke operator, and practical DSL examples for HTML or testing.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">DSL</span> <span class="badge badge-primary">Type-safe</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="../lesson.html?course=kotlin&module=14" class="module-card" onclick="LearningTracker.startLesson('kotlin-14')">
+        <h3><span class="module-number">14</span> Testing with Kotlin</h3>
+        <p>JUnit 5 with Kotlin, Kotlin Test assertions, property-based testing with Kotest, mocking with MockK, and coroutine testing.</p>
+        <div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Testing</span> <span class="badge badge-primary">MockK</span></div>
+        <div class="module-footer">
+          <span class="badge badge-primary"><i class="far fa-clock"></i> 30 min</span>
+          <span class="module-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Null Safety in Kotlin</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Kotlin eliminates null pointer exceptions by making types non-null by default. Nullable types are marked with ?.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>var name: String = "Alice"    // Non-null
+// name = null               // Compile error!
+
+var nullableName: String? = "Bob"
+nullableName = null           // OK
+
+// Safe call - returns null instead of NPE
+val length = nullableName?.length
+
+// Elvis operator - provide default
+val len = nullableName?.length ?: 0
+
+// Not-null assertion (use carefully!)
+val forced = nullableName!!.length
+
+// Safe let - execute only if non-null
+nullableName?.let {
+    println("Name is $it, length: ${it.length}")
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. Data Classes</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Data classes automatically generate equals, hashCode, toString, copy, and componentN functions.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>data class User(
+    val id: Int,
+    val name: String,
+    val email: String = ""
+)
+
+val user1 = User(1, "Alice", "alice@example.com")
+val user2 = User(1, "Alice", "alice@example.com")
+
+println(user1)                     // User(id=1, name=Alice, email=alice@example.com)
+println(user1 == user2)            // true (structural equality)
+println(user1 === user2)           // false (referential identity)
+
+// Copy with modifications
+val updated = user1.copy(email = "new@example.com")
+
+// Destructuring
+val (id, name, email) = user1
+println("$name has id $id")</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. Extension Functions</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Extension functions add new methods to existing classes without modifying their source code.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>// Extension function on String
+fun String.isValidEmail(): Boolean {
+    return this.contains("@") && this.contains(".")
+}
+
+// Extension property
+val String.wordCount: Int
+    get() = this.split("\\s+".toRegex()).size
+
+// Usage
+val email = "test@example.com"
+println(email.isValidEmail())  // true
+
+val text = "Hello Kotlin World"
+println(text.wordCount)        // 3
+
+// Extension on generic type
+fun <T> List<T>.secondOrNull(): T? {
+    return if (size >= 2) this[1] else null
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. Scope Functions</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Scope functions execute a block of code within the context of an object. let, apply, run, with, and also each serve different purposes.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>data class Person(var name: String, var age: Int)
+
+// apply: configure object, returns the object
+val person = Person("Alice", 25).apply {
+    name = "Bob"    // this.name
+    age = 30        // this.age
+}
+
+// let: transform result, returns lambda result
+val email = person.name.let {
+    "$it@example.com"
+}
+
+// run: like let but uses 'this'
+val greeting = person.run {
+    "Hello, I'm $name and I'm $age years old"
+}
+
+// also: side effects, returns the object
+person.also {
+    println("Created: ${it.name}")
+    it.age += 1
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Coroutines Basics</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Coroutines provide a way to write asynchronous code sequentially. They are lightweight threads managed by the Kotlin runtime.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>import kotlinx.coroutines.*
+
+suspend fun fetchUserData(): String {
+    delay(1000)  // Simulates network call
+    return "User data"
+}
+
+suspend fun fetchPosts(): String {
+    delay(500)
+    return "Posts data"
+}
+
+fun main() = runBlocking {
+    // Sequential
+    val user = fetchUserData()
+    val posts = fetchPosts()
+    println("$user, $posts")
+
+    // Concurrent
+    val (user2, posts2) = async { fetchUserData() } to
+                        async { fetchPosts() }
+    println("${user2.await()}, ${posts2.await()}")
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Sealed Classes & When</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Sealed classes define restricted class hierarchies. When used with when expressions, the compiler ensures exhaustive coverage.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>sealed class Result<out T> {
+    data class Success<T>(val data: T) : Result<T>()
+    data class Error(val message: String, val code: Int) : Result<Nothing>()
+    object Loading : Result<Nothing>()
+}
+
+fun handleResult(result: Result<String>) {
+    when (result) {
+        is Result.Success -> println("Data: ${result.data}")
+        is Result.Error -> println("Error ${result.code}: ${result.message}")
+        Result.Loading -> println("Loading...")
+        // No else needed - exhaustive
+    }
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Collection Operations</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Kotlin's standard library provides a rich set of functional operations on collections, supporting method chaining.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+val result = numbers
+    .filter { it % 2 == 0 }          // [2, 4, 6, 8, 10]
+    .map { it * it }                 // [4, 16, 36, 64, 100]
+    .chunked(2)                      // [[4, 16], [36, 64], [100]]
+    .flatMap { it }                  // [4, 16, 36, 64, 100]
+    .reduce { acc, i -> acc + i }    // 220
+
+// Sequences for lazy evaluation
+val largeList = (1..1_000_000).toList()
+val lazy = largeList.asSequence()
+    .filter { it % 2 == 0 }
+    .map { it * it }
+    .take(5)
+    .toList()</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. DSL (Domain Specific Language)</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Kotlin's lambda with receiver enables building type-safe DSLs. This is widely used for HTML templating, testing, and build configuration.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>class HTML {
+    private val elements = mutableListOf<String>()
+    fun body(init: BODY.() -> Unit) {
+        val body = BODY()
+        body.init()
+        elements.add(body.toString())
+    }
+    override fun toString() = "<html>${elements.joinToString("")}</html>"
+}
+
+class BODY {
+    private val children = mutableListOf<String>()
+    fun h1(text: String) { children.add("<h1>$text</h1>") }
+    fun p(text: String) { children.add("<p>$text</p>") }
+    override fun toString() = "<body>${children.joinToString("")}</body>"
+}
+
+fun html(init: HTML.() -> Unit): HTML {
+    val html = HTML()
+    html.init()
+    return html
+}
+
+// Usage
+val page = html {
+    body {
+        h1("Welcome")
+        p("This is a Kotlin DSL example")
+    }
+}
+println(page)</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: REST API with Ktor</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A simple RESTful API using the Ktor framework.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.routing.*
+import io.ktor.server.response.*
+import io.ktor.server.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.plugins.contentnegotiation.*
+
+data class Item(val id: Int, val name: String, val price: Double)
+
+val items = mutableListOf(
+    Item(1, "Laptop", 999.99),
+    Item(2, "Mouse", 29.99)
+)
+
+fun main() {
+    embeddedServer(Netty, port = 8080) {
+        install(ContentNegotiation) {
+            json()
+        }
+        routing {
+            get("/items") {
+                call.respond(items)
+            }
+            get("/items/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                val item = items.find { it.id == id }
+                if (item != null) call.respond(item)
+                else call.respondText("Not found", status = HttpStatusCode.NotFound)
+            }
+        }
+    }.start(wait = true)
+}</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Android ViewModel with Coroutines</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">A ViewModel for Android that fetches data using coroutines and exposes state via StateFlow.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>class UserViewModel : ViewModel() {
+
+    private val repository = UserRepository()
+
+    private val _users = MutableStateFlow<List<User>>(emptyList())
+    val users: StateFlow<List<User>> = _users.asStateFlow()
+
+    private val _loading = MutableStateFlow(false)
+    val loading: StateFlow<Boolean> = _loading.asStateFlow()
+
+    init {
+        loadUsers()
+    }
+
+    fun loadUsers() {
+        viewModelScope.launch {
+            _loading.value = true
+            try {
+                val result = repository.fetchUsers()
+                _users.value = result
+            } catch (e: Exception) {
+                // Handle error
+            } finally {
+                _loading.value = false
+            }
+        }
+    }
+}
+
+class UserRepository {
+    suspend fun fetchUsers(): List<User> {
+        delay(1000) // Simulate network
+        return listOf(User(1, "Alice"), User(2, "Bob"))
+    }
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">FizzBuzz in Kotlin</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement FizzBuzz using a when expression and ranges for a functional, idiomatic solution.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">String Reversal Extension</h4><p style="color:var(--text-muted);font-size:0.85rem">Write an extension function on String that reverses each word while keeping word order intact.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Sealed Class State Machine</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a download manager state machine using sealed classes with Loading, Downloading, Paused, Completed, and Error states.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Coroutine Pipeline</h4><p style="color:var(--text-muted);font-size:0.85rem">Create a data processing pipeline using Flow that fetches, transforms, and saves data concurrently.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Type-Safe HTML Builder</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a DSL for generating HTML that supports nested elements, attributes, and text content.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Custom Delegate</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement a custom property delegate that validates values (e.g., non-empty string or positive number).</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Reactive Calculator</h4><p style="color:var(--text-muted);font-size:0.85rem">Build a reactive calculator using StateFlow where operations emit new results reactively.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Multiplatform HTTP Client</h4><p style="color:var(--text-muted);font-size:0.85rem">Use Ktor client in a Kotlin Multiplatform module to share networking code between Android and iOS.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Weather App (Android)</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Android app using Jetpack Compose, Retrofit, coroutines, and a weather API with location-based forecasts.</p>
+          <span class="badge badge-primary">Compose</span> <span class="badge badge-primary">Retrofit</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Spring Boot REST API</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Backend microservice with Spring Boot, JPA/Hibernate, PostgreSQL, and Kotlin coroutines in controllers.</p>
+          <span class="badge badge-primary">Spring Boot</span> <span class="badge badge-primary">JPA</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Note-Taking App with Ktor</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Full-stack note app with Ktor backend, MongoDB, and a Kotlin/JS frontend sharing data models.</p>
+          <span class="badge badge-primary">Ktor</span> <span class="badge badge-primary">MongoDB</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Chat App with WebSockets</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Real-time chat using Ktor WebSockets on the backend and Android client with coroutines and StateFlow.</p>
+          <span class="badge badge-primary">WebSocket</span> <span class="badge badge-primary">Coroutines</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">GitHub Client (KMP)</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Kotlin Multiplatform app sharing API client, data models, and business logic between Android and iOS.</p>
+          <span class="badge badge-primary">KMP</span> <span class="badge badge-primary">Ktor Client</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Tic-Tac-Toe with Compose</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Desktop/Android game built with Jetpack Compose Desktop, using sealed classes for game state.</p>
+          <span class="badge badge-primary">Compose</span> <span class="badge badge-primary">Desktop</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div id="interviewQuestionsContainer"></div>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,855 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a movie search app using the TMDB API with search debouncing, infinite scroll, favorites, ratings display, and trailer modals. Complete JavaScript engineering guide.">
+  <meta name="keywords" content="movie search, TMDB API, infinite scroll, debouncing, favorites, trailer, JavaScript project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="Movie Search App - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a movie search application with TMDB API integration.">
+  <meta property="og:type" content="website">
+  <title>Movie Search App - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/movie-search.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="movie-search">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Movie Search App</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Intermediate</span>
+        <span><i class="far fa-clock"></i> 6-8 hours</span>
+        <span><i class="fas fa-code-branch"></i> TMDB API, JavaScript, Infinite Scroll</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A comprehensive engineering guide to building a movie search application with TMDB API integration, debounced search, infinite scroll, favorites, ratings, and trailer modal previews.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This movie search application leverages The Movie Database (TMDB) API to provide a rich movie discovery experience. Users can search for movies with debounced input, browse trending/popular movies, view detailed information including ratings, genres, cast, and runtime, watch trailers in a modal, save favorites to localStorage, and scroll infinitely through search results. The project teaches API integration patterns, performance optimization through debouncing, intersection observer for infinite scroll, state management with localStorage, and responsive card layouts with lazy-loaded images.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Movie databases contain millions of titles, making it challenging for users to discover content efficiently. Existing movie apps are often slow, cluttered with ads, or require paid subscriptions. Developers need to understand how to work with complex REST APIs (multiple endpoints for search, details, credits, videos), handle API rate limits, implement performant search with debouncing, manage large result sets with infinite scroll, and create an engaging UI with trailers and ratings. The challenge is building an app that feels native, loads quickly, and provides a seamless browsing experience.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Movie Night Planning:</strong> A user searches for movies by genre, checks ratings and reviews, watches trailers, and saves favorites for movie night decisions.</li>
+          <li><strong>Film Research:</strong> A student researches films for a project, browsing by director, cast, or release year, reading overviews and saving relevant titles.</li>
+          <li><strong>Content Discovery:</strong> A streaming service aggregator uses the TMDB API to build a cross-platform movie discovery tool showing where each title is available to stream.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>TMDB is the largest community-built movie database, serving over 10 billion API requests monthly to companies like Netflix, Spotify, and IMDb. The integration patterns you learn apply to any REST API (Spotify, YouTube, GitHub). Debounced search is used by every major search product (Google, Algolia, Elasticsearch). Infinite scroll powers social feeds (Twitter, Instagram, TikTok) and content browsing. Intersection Observer is the standard for lazy loading and scroll-based interactions, supported in all modern browsers.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Integrate the TMDB API with multiple endpoints (search, trending, details, credits, videos) using fetch with async/await and error handling</li>
+          <li>Implement debounced search input that reduces API calls by 80%+ while maintaining responsive UI feedback</li>
+          <li>Build infinite scroll using Intersection Observer API for progressive loading without pagination controls</li>
+          <li>Create a favorites system with localStorage that supports add/remove operations and a dedicated favorites view</li>
+          <li>Display movie ratings with visual star indicators and color-coded vote average badges</li>
+          <li>Implement trailer modals using the TMDB videos endpoint with YouTube iframe embedding</li>
+          <li>Build responsive movie card grids with lazy-loaded images, skeleton loading states, and hover effects</li>
+          <li>Handle API errors gracefully with retry logic, user-friendly messages, and fallback content</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fab fa-js"></i> JavaScript ES6+</span>
+          <span class="badge-tech"><i class="fas fa-film"></i> TMDB API v3</span>
+          <span class="badge-tech"><i class="fas fa-search"></i> Debounced Search</span>
+          <span class="badge-tech"><i class="fas fa-eye"></i> Intersection Observer</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> localStorage</span>
+          <span class="badge-tech"><i class="fab fa-youtube"></i> YouTube IFrame API</span>
+          <span class="badge-tech"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS3</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Solid JavaScript with async/await, Promises, fetch API, and ES6 array methods (map, filter, find)</li>
+          <li>DOM manipulation: creating elements, setting attributes, event listeners, CSS class manipulation</li>
+          <li>Understanding of CSS Grid/Flexbox for responsive card layouts</li>
+          <li>Basic knowledge of REST APIs and JSON data format</li>
+          <li>A free TMDB API key (sign up at themoviedb.org/settings/api)</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The application follows a service-oriented architecture. The TMDB service layer encapsulates all API calls with caching, rate limiting awareness, and error normalization. The search manager handles debouncing with a 400ms delay, maintains a request queue, and aborts in-flight requests when new searches are issued (using AbortController). The intersection observer triggers page loading when the sentinel element is 200px from the viewport. Movie data flows through a pipeline: raw API response -> data normalizer -> renderer. The normalizer maps TMDB's snake_case fields to camelCase, computes derived values (star ratings from vote_average), and resolves image URLs. Favorites are managed separately with a localStorage-backed store that emits custom events for cross-component communication. Trailer modals use the YouTube IFrame API for embedding with auto-play and responsive sizing.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+movie-search/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   ├── tmdb.js          # TMDB API service
+│   ├── search.js        # Debounced search manager
+│   ├── scroll.js        # Infinite scroll handler
+│   ├── favorites.js     # localStorage favorites
+│   ├── trailer.js       # YouTube modal manager
+│   ├── renderer.js      # DOM rendering
+│   └── utils.js         # Helpers
+├── assets/
+│   └── icons/
+├── .env
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: TMDB API Integration</h4>
+          <p>Register for a TMDB API key. Explore the API endpoints: /search/movie, /trending/movie/week, /movie/{id}, /movie/{id}/credits, /movie/{id}/videos. Build the API service module with fetch wrappers, error handling, and response normalization. Test each endpoint with console logging.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: Search with Debouncing</h4>
+          <p>Build the search input with debounced onChange handler. Implement AbortController to cancel in-flight requests when the user continues typing. Display search results in a responsive card grid. Show loading skeleton while fetching. Handle empty results and error states.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Infinite Scroll</h4>
+          <p>Implement Intersection Observer on a sentinel element at the bottom of the results grid. Load the next page of results when the sentinel becomes visible. Append new results to the existing grid. Track the current page and total pages from API response. Handle the end of results state.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Movie Details & Trailers</h4>
+          <p>Build the movie detail modal/page showing: poster, backdrop, title, tagline, overview, rating, runtime, genres, release date, cast (first 10), and director. Implement trailer modal using TMDB videos endpoint filtered by type (Trailer) and official=true. Embed YouTube player with auto-play on open.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: Favorites & Ratings</h4>
+          <p>Implement favorites with localStorage CRUD operations. Add heart/favorite button on each movie card and detail view. Build a dedicated favorites page/grid. Implement star rating display using vote_average with visual stars and color coding (green >7, yellow >5, red <5).</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: TMDB API Service with Caching</h4>
+          <p>Build a robust API service layer with request caching, rate limit awareness, and AbortController support for cancelable requests.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const TMDB = {
+  BASE: 'https://api.themoviedb.org/3',
+  IMG: 'https://image.tmdb.org/t/p',
+  KEY: 'YOUR_TMDB_API_KEY',
+  cache: new Map(),
+
+  async fetch(endpoint, params = {}, signal = null) {
+    const query = new URLSearchParams({ api_key: this.KEY, ...params });
+    const url = `${this.BASE}${endpoint}?${query}`;
+    const cacheKey = url;
+
+    if (this.cache.has(cacheKey)) {
+      const cached = this.cache.get(cacheKey);
+      if (Date.now() - cached.timestamp < 300000) { // 5 min cache
+        return cached.data;
+      }
+      this.cache.delete(cacheKey);
+    }
+
+    try {
+      const response = await fetch(url, { signal });
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new Error(error.status_message || `HTTP ${response.status}`);
+      }
+      const data = await response.json();
+      this.cache.set(cacheKey, { data, timestamp: Date.now() });
+      return data;
+    } catch (error) {
+      if (error.name === 'AbortError') throw error;
+      throw new Error(`TMDB API error: ${error.message}`);
+    }
+  },
+
+  searchMovies(query, page = 1, signal = null) {
+    return this.fetch('/search/movie', { query, page, include_adult: false }, signal);
+  },
+
+  getTrending(timeWindow = 'week', page = 1) {
+    return this.fetch(`/trending/movie/${timeWindow}`, { page });
+  },
+
+  getMovieDetails(id) {
+    return this.fetch(`/movie/${id}`, { append_to_response: 'credits,videos,recommendations' });
+  },
+
+  getMovieCredits(id) {
+    return this.fetch(`/movie/${id}/credits`);
+  },
+
+  getMovieVideos(id) {
+    return this.fetch(`/movie/${id}/videos`);
+  },
+
+  getImageUrl(path, size = 'w500') {
+    if (!path) return 'https://via.placeholder.com/300x450?text=No+Poster';
+    return `${this.IMG}/${size}${path}`;
+  },
+
+  getBackdropUrl(path, size = 'original') {
+    if (!path) return null;
+    return `${this.IMG}/${size}${path}`;
+  },
+
+  getRatingColor(voteAverage) {
+    if (voteAverage >= 7) return '#22c55e';
+    if (voteAverage >= 5) return '#eab308';
+    return '#ef4444';
+  },
+
+  getStarRating(voteAverage) {
+    const stars = Math.round(voteAverage / 2);
+    return '★'.repeat(stars) + '☆'.repeat(5 - stars);
+  },
+
+  clearCache() { this.cache.clear(); }
+};</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: Debounced Search with AbortController</h4>
+          <p>Implement a debounced search that cancels previous in-flight requests when the user continues typing, preventing race conditions and reducing API calls.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class SearchManager {
+  constructor(onResult) {
+    this.query = '';
+    this.page = 1;
+    this.totalPages = 0;
+    this.onResult = onResult;
+    this.abortController = null;
+    this.pendingRequest = false;
+  }
+
+  debounce(fn, delay = 400) {
+    let timeoutId;
+    return (...args) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
+  async executeSearch(query, page = 1) {
+    // Cancel previous request
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+
+    if (!query.trim()) {
+      this.onResult({ results: [], page: 1, totalPages: 0, query: '' });
+      return;
+    }
+
+    this.pendingRequest = true;
+    showLoadingState();
+
+    try {
+      const data = await TMDB.searchMovies(query, page, this.abortController.signal);
+      this.page = data.page;
+      this.totalPages = data.total_pages;
+      this.pendingRequest = false;
+      hideLoadingState();
+      this.onResult({
+        results: data.results.map(normalizeMovie),
+        page: data.page,
+        totalPages: data.total_pages,
+        query,
+        totalResults: data.total_results
+      });
+    } catch (error) {
+      if (error.name === 'AbortError') return; // Ignore aborted requests
+      this.pendingRequest = false;
+      hideLoadingState();
+      showError('Failed to search movies. Please try again.');
+    }
+  }
+
+  search = this.debounce(function(query) {
+    this.query = query;
+    this.page = 1;
+    this.executeSearch(query, 1);
+  }, 400);
+
+  loadNextPage() {
+    if (this.pendingRequest || this.page >= this.totalPages) return;
+    this.executeSearch(this.query, this.page + 1);
+  }
+
+  reset() {
+    this.query = '';
+    this.page = 1;
+    this.totalPages = 0;
+    if (this.abortController) this.abortController.abort();
+  }
+}
+
+function normalizeMovie(movie) {
+  return {
+    id: movie.id,
+    title: movie.title,
+    overview: movie.overview,
+    posterPath: movie.poster_path,
+    backdropPath: movie.backdrop_path,
+    releaseDate: movie.release_date,
+    releaseYear: movie.release_date?.split('-')[0] || 'N/A',
+    voteAverage: movie.vote_average,
+    voteCount: movie.vote_count,
+    genreIds: movie.genre_ids || [],
+    popularity: movie.popularity,
+    originalLanguage: movie.original_language
+  };
+}
+
+// Usage
+const searchInput = document.getElementById('search-input');
+const searchManager = new SearchManager((result) => renderMovies(result));
+
+searchInput.addEventListener('input', (e) => {
+  searchManager.search(e.target.value);
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    searchManager.search(e.target.value);
+  }
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Infinite Scroll with Intersection Observer</h4>
+          <p>Implement infinite scroll using Intersection Observer API that loads more results when the user scrolls near the bottom of the page.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class InfiniteScroll {
+  constructor(loadMoreCallback, options = {}) {
+    this.loadMore = loadMoreCallback;
+    this.options = {
+      root: null,
+      rootMargin: '200px',
+      threshold: 0.1,
+      ...options
+    };
+    this.sentinel = null;
+    this.observer = null;
+    this.isLoading = false;
+    this.hasMore = true;
+    this.init();
+  }
+
+  init() {
+    this.sentinel = document.createElement('div');
+    this.sentinel.className = 'scroll-sentinel';
+    this.sentinel.innerHTML = '<div class="scroll-loader"><i class="fas fa-spinner fa-spin"></i></div>';
+    document.querySelector('.results-grid').after(this.sentinel);
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && this.hasMore && !this.isLoading) {
+          this.loadMoreContent();
+        }
+      });
+    }, this.options);
+
+    this.observer.observe(this.sentinel);
+  }
+
+  async loadMoreContent() {
+    this.isLoading = true;
+    this.sentinel.querySelector('.scroll-loader').style.display = 'flex';
+    try {
+      await this.loadMore();
+    } catch (error) {
+      console.error('Infinite scroll load failed:', error);
+    } finally {
+      this.isLoading = false;
+      this.sentinel.querySelector('.scroll-loader').style.display = 'none';
+    }
+  }
+
+  setHasMore(hasMore) {
+    this.hasMore = hasMore;
+    if (!hasMore) {
+      this.sentinel.innerHTML = '<div class="scroll-end">You\'ve reached the end</div>';
+    }
+  }
+
+  destroy() {
+    if (this.observer) {
+      this.observer.unobserve(this.sentinel);
+      this.observer.disconnect();
+    }
+    if (this.sentinel) this.sentinel.remove();
+  }
+}
+
+// Usage with search manager
+const infiniteScroll = new InfiniteScroll(async () => {
+  if (searchManager.page < searchManager.totalPages) {
+    await searchManager.loadNextPage();
+  } else {
+    infiniteScroll.setHasMore(false);
+  }
+});
+
+// After each render, check if there are more pages
+function renderMovies(result) {
+  const grid = document.querySelector('.results-grid');
+  if (result.page === 1) grid.innerHTML = '';
+  result.results.forEach(movie => grid.appendChild(createMovieCard(movie)));
+  infiniteScroll.setHasMore(result.page < result.totalPages);
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Favorites System with localStorage</h4>
+          <p>Implement a favorites management system with CRUD operations, custom events for real-time UI updates, and a dedicated favorites view.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class FavoritesManager {
+  constructor() {
+    this.storageKey = 'movie-favorites';
+    this.favorites = this.load();
+  }
+
+  load() {
+    try {
+      return JSON.parse(localStorage.getItem(this.storageKey)) || [];
+    } catch { return []; }
+  }
+
+  save() {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.favorites));
+    this.emitChange();
+  }
+
+  add(movie) {
+    if (!this.favorites.some(f => f.id === movie.id)) {
+      this.favorites.push({
+        id: movie.id,
+        title: movie.title,
+        posterPath: movie.posterPath,
+        voteAverage: movie.voteAverage,
+        releaseYear: movie.releaseYear,
+        addedAt: Date.now()
+      });
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
+  remove(movieId) {
+    this.favorites = this.favorites.filter(f => f.id !== movieId);
+    this.save();
+  }
+
+  isFavorite(movieId) {
+    return this.favorites.some(f => f.id === movieId);
+  }
+
+  getAll() {
+    return this.favorites;
+  }
+
+  getCount() {
+    return this.favorites.length;
+  }
+
+  emitChange() {
+    const event = new CustomEvent('favorites:changed', {
+      detail: { count: this.favorites.length, favorites: this.favorites }
+    });
+    document.dispatchEvent(event);
+  }
+
+  onChanged(callback) {
+    document.addEventListener('favorites:changed', callback);
+    return () => document.removeEventListener('favorites:changed', callback);
+  }
+}
+
+const favorites = new FavoritesManager();
+
+// Favorite button on movie card
+function createMovieCard(movie) {
+  const card = document.createElement('div');
+  card.className = 'movie-card glass-card';
+  card.dataset.id = movie.id;
+  const isFav = favorites.isFavorite(movie.id);
+  card.innerHTML = `
+    <div class="movie-poster">
+      <img src="${TMDB.getImageUrl(movie.posterPath)}" alt="${movie.title}"
+        loading="lazy" onerror="this.src='https://via.placeholder.com/300x450?text=No+Poster'">
+      <div class="movie-rating ${getRatingClass(movie.voteAverage)}">
+        ${TMDB.getStarRating(movie.voteAverage)} ${movie.voteAverage.toFixed(1)}
+      </div>
+      <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${movie.id}">
+        <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+      </button>
+    </div>
+    <div class="movie-info">
+      <h3 class="movie-title">${movie.title}</h3>
+      <div class="movie-meta">
+        <span>${movie.releaseYear}</span>
+        <span class="vote-badge" style="background:${TMDB.getRatingColor(movie.voteAverage)}">
+          ${movie.voteAverage.toFixed(1)}
+        </span>
+      </div>
+    </div>
+  `;
+  card.querySelector('.movie-poster').addEventListener('click', () => showMovieDetail(movie.id));
+  card.querySelector('.fav-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const btn = e.currentTarget;
+    const icon = btn.querySelector('i');
+    if (favorites.isFavorite(movie.id)) {
+      favorites.remove(movie.id);
+      btn.classList.remove('active');
+      icon.className = 'far fa-heart';
+    } else {
+      favorites.add(movie);
+      btn.classList.add('active');
+      icon.className = 'fas fa-heart';
+    }
+  });
+  return card;
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 5: Trailer Modal with YouTube IFrame</h4>
+          <p>Build a modal system for displaying movie trailers from the TMDB videos endpoint, embedded via the YouTube IFrame Player API.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class TrailerModal {
+  constructor() {
+    this.modal = document.getElementById('trailer-modal');
+    this.overlay = document.getElementById('modal-overlay');
+    this.playerContainer = document.getElementById('youtube-player');
+    this.player = null;
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    this.overlay?.addEventListener('click', () => this.close());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') this.close();
+    });
+  }
+
+  async open(movieId) {
+    this.modal?.classList.add('active');
+    this.overlay?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    if (!this.playerContainer) return;
+
+    try {
+      const videos = await TMDB.getMovieVideos(movieId);
+      const trailer = videos.results.find(
+        v => v.type === 'Trailer' && v.official === true && v.site === 'YouTube'
+      ) || videos.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+
+      if (trailer) {
+        this.playerContainer.innerHTML = '';
+        this.player = new YT.Player('youtube-player', {
+          height: '100%',
+          width: '100%',
+          videoId: trailer.key,
+          playerVars: {
+            autoplay: 1,
+            modestbranding: 1,
+            rel: 0,
+            showinfo: 0
+          },
+          events: {
+            onReady: (event) => event.target.playVideo(),
+            onError: () => this.showFallback()
+          }
+        });
+      } else {
+        this.showFallback();
+      }
+    } catch {
+      this.showFallback();
+    }
+  }
+
+  showFallback() {
+    this.playerContainer.innerHTML = `
+      <div class="trailer-fallback">
+        <i class="fas fa-film" style="font-size:3rem;color:var(--text-secondary)"></i>
+        <p>No trailer available for this movie</p>
+      </div>
+    `;
+  }
+
+  close() {
+    this.modal?.classList.remove('active');
+    this.overlay?.classList.remove('active');
+    document.body.style.overflow = '';
+    if (this.player) {
+      this.player.stopVideo();
+      this.player.destroy();
+      this.player = null;
+    }
+    if (this.playerContainer) this.playerContainer.innerHTML = '';
+  }
+}
+
+// Load YouTube IFrame API asynchronously
+function loadYouTubeAPI() {
+  return new Promise((resolve) => {
+    if (window.YT) { resolve(); return; }
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScript = document.getElementsByTagName('script')[0];
+    firstScript.parentNode.insertBefore(tag, firstScript);
+    window.onYouTubeIframeAPIReady = resolve;
+  });
+}
+
+// Movie detail modal with trailer button
+async function showMovieDetail(movieId) {
+  const trailerModal = new TrailerModal();
+  const movie = await TMDB.getMovieDetails(movieId);
+  const detailModal = document.getElementById('detail-modal');
+  detailModal.querySelector('.detail-content').innerHTML = `
+    <div class="detail-header" style="background-image:url('${TMDB.getBackdropUrl(movie.backdrop_path, 'w1280')}')">
+      <img src="${TMDB.getImageUrl(movie.poster_path, 'w342')}" alt="${movie.title}" class="detail-poster">
+      <div class="detail-info">
+        <h2>${movie.title}</h2>
+        <span class="tagline">${movie.tagline || ''}</span>
+        <div class="detail-meta">
+          <span>${movie.release_date?.split('-')[0]}</span>
+          <span>${movie.runtime} min</span>
+          <span class="vote" style="color:${TMDB.getRatingColor(movie.vote_average)}">
+            ${TMDB.getStarRating(movie.vote_average)} ${movie.vote_average.toFixed(1)}
+          </span>
+        </div>
+        <div class="genres">${movie.genres.map(g => `<span class="genre-tag">${g.name}</span>`).join('')}</div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <h3>Overview</h3>
+      <p>${movie.overview || 'No overview available.'}</p>
+      <h3>Cast</h3>
+      <div class="cast-grid">
+        ${movie.credits?.cast?.slice(0, 10).map(actor => `
+          <div class="cast-card">
+            <img src="${TMDB.getImageUrl(actor.profile_path, 'w185')}" alt="${actor.name}"
+              onerror="this.src='https://via.placeholder.com/185x278?text=No+Photo'">
+            <p class="actor-name">${actor.name}</p>
+            <p class="character-name">${actor.character}</p>
+          </div>
+        `).join('') || 'No cast information available.'}
+      </div>
+      <button class="btn btn-primary watch-trailer-btn">
+        <i class="fas fa-play"></i> Watch Trailer
+      </button>
+    </div>
+  `;
+  detailModal.classList.add('active');
+  detailModal.querySelector('.watch-trailer-btn').addEventListener('click', () => {
+    trailerModal.open(movieId);
+  });
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>Search Testing:</strong> Type "Inception" and verify the movie appears. Type a partial match "ince" and verify debouncing works (only one API call after 400ms). Type a nonsense query "xyzabc123" and verify the empty state is shown. Type very rapidly and verify abort controller prevents stale results from appearing out of order.</p>
+        <p><strong>Infinite Scroll:</strong> Search for a common term like "the" (many results). Scroll to the bottom and verify a new page loads. Verify the sentinel disappears when all pages are loaded. Rapid scrolling should not trigger multiple simultaneous requests.</p>
+        <p><strong>Favorites:</strong> Click the heart icon on a movie card and verify it turns solid. Reload the page and verify the favorite persists. Click the heart again to unfavorite. Verify the favorites count updates. Test with network throttling to ensure localStorage operations don't block.</p>
+        <p><strong>Trailer Modal:</strong> Click "Watch Trailer" on a movie detail and verify the YouTube iframe loads and auto-plays. Close the modal and verify the video stops. Test with a movie that has no trailer and verify the fallback message appears.</p>
+        <p><strong>Responsive Testing:</strong> Test the card grid on mobile (2 columns), tablet (3 columns), and desktop (4-5 columns). Verify images lazy load correctly. Test the detail modal on small screens.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p><strong>GitHub Pages:</strong> Push to a repository, enable Pages from main branch. The app is fully client-side. Note: TMDB API key will be exposed in client-side code. For a production app, use a Netlify Function or Vercel Edge Function as a proxy.</p>
+        <p><strong>Netlify:</strong> Connect your GitHub repo. Create netlify/functions/tmdb-proxy.js that forwards requests with the API key stored as an environment variable. Deploy with automatic HTTPS and CDN caching.</p>
+        <p><strong>API Key Security:</strong> For the static version, restrict the API key to your domain in the TMDB dashboard (Settings > API). This prevents other sites from using your key. Never commit the API key to GitHub - use environment variables.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. Race Conditions with Search Results</strong><br>
+          When the user types quickly, multiple API requests are fired. Without AbortController, a slow response from an earlier query can arrive after a faster response from a later query, causing incorrect results to display. Always cancel the previous request before making a new one. Use AbortController and check if the request was aborted before updating the UI. Additionally, track a request counter and ignore responses that don't match the latest query.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Memory Leaks from Infinite Scroll</strong><br>
+          Loading unlimited pages creates thousands of DOM elements, causing memory issues and slow scrolling. Implement a virtual scrolling technique (react-window) or limit the total number of loaded pages (e.g., max 50 pages). Remove off-screen elements from the DOM when they are far from the viewport. Use DOM node pooling to reuse card elements instead of creating new ones.
+        </div>
+        <div class="challenge-card">
+          <strong>3. Broken Images from Missing TMDB Paths</strong><br>
+          TMDB returns null for poster_path and backdrop_path for some movies (especially lesser-known titles). Without fallback handling, users see broken image icons. Always check for null paths and provide a placeholder image. Use the onerror event handler on img elements to replace broken images with a placeholder. Consider showing a gradient fallback with the movie title as an alternative.
+        </div>
+        <div class="challenge-card">
+          <strong>4. YouTube IFrame API Loading Issues</strong><br>
+          The YouTube IFrame API loads asynchronously and may not be ready when the user clicks "Watch Trailer". Always wait for onYouTubeIframeAPIReady before creating players. Handle cases where YouTube is blocked by corporate firewalls or ad-blockers. Provide a non-YouTube fallback (e.g., just show a "Watch on YouTube" link with the video URL). Destroy the player when the modal closes to free memory.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> How does debouncing differ from throttling? When would you use each?<br>
+          <strong>A:</strong> Debouncing delays execution until after a specified quiet period - if events keep firing, the timer resets. Use for search inputs (wait until user stops typing), window resize handlers, and auto-save. Throttling limits execution to at most once per specified interval - events during the cooldown are ignored. Use for scroll handlers, resize events where you need periodic updates, and button click prevention. Key difference: debounce fires once at the end of a burst, throttle fires periodically during the burst.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the Intersection Observer API and its advantages over scroll event listeners.<br>
+          <strong>A:</strong> IntersectionObserver observes when a target element intersects with a root element (usually the viewport). Advantages: runs off the main thread (no scroll jank), doesn't fire on every scroll pixel (configurable threshold), works with iframes cross-origin, and has built-in rootMargin for triggering before the element is visible. Use for lazy loading images, infinite scroll, animation triggers, and tracking ad/viewport visibility. Performance: IntersectionObserver uses 0-2% CPU vs scroll listeners which fire at 60fps.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement an autocomplete search with movie suggestions?<br>
+          <strong>A:</strong> Use a debounced search that queries the TMDB search endpoint. Display suggestions in a dropdown positioned below the input. Handle keyboard navigation (arrow keys, Enter, Escape). Click outside the dropdown to close. Use AbortController to cancel stale requests. Highlight matching text in suggestions using substring matching. Cache recent suggestions in a Map with TTL. For better UX, show movie posters alongside titles in suggestions. Limit to 5-8 suggestions with a "View all results" option at the bottom.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> What strategies can you use to optimize image loading for a grid with hundreds of movie posters?<br>
+          <strong>A:</strong> (1) Lazy loading: loading="lazy" attribute + Intersection Observer to load images when they enter the viewport. (2) Responsive images: use TMDB's size variants (w185, w342, w500) based on card size using srcset. (3) Blur placeholder: show a tiny blurred version (20px wide) as a base64 data URL while the full image loads. (4) Progressive JPEGs load in increasing quality passes. (5) CDN caching: TMDB images are served from a CDN with proper Cache-Control headers. (6) Preload the first visible images with fetchpriority="high" or preload links. (7) Use WebP format if the browser supports it (TMDB returns WebP automatically).
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement offline support for the movie search app?<br>
+          <strong>A:</strong> Use a service worker with the Cache API. Cache API responses in the service worker fetch event using a cache-first strategy for images and a network-first strategy for search results (falling back to cached results). Store recently viewed movie details in IndexedDB for offline access. Cache the app shell (HTML, CSS, JS) during the install event. Show a banner when offline and disable search (or search cached results). For favorites, localStorage already works offline. Add a manifest.json for PWA installability.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Engineered a responsive movie discovery application using the TMDB API v3 with multi-endpoint integration (search, trending, details, credits, videos) and response normalization pipeline</li>
+          <li>Implemented debounced search with AbortController-based request cancellation, reducing API calls by 80% and preventing race conditions during rapid user input</li>
+          <li>Built an Intersection Observer-based infinite scroll system with sentinel element and progressive page loading, supporting seamless browsing of 500+ result pages</li>
+          <li>Developed a localStorage-backed favorites system with custom event emission for real-time UI synchronization across search results and favorites view</li>
+          <li>Integrated YouTube IFrame Player API for trailer modal with auto-play, responsive sizing, error fallback handling, and player cleanup on modal close</li>
+          <li>Architected a modular JavaScript service layer with in-memory request caching (5-min TTL), error normalization, and image URL resolution for TMDB assets</li>
+          <li>Implemented responsive movie card grid with lazy-loaded images, skeleton loading states, color-coded rating badges, and hover preview effects</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include a demo GIF of the app in action, API setup instructions (TMDB registration + key), environment variable documentation, and a "Try it now" link to live demo. Add a feature list with screenshots of search results, movie detail, and trailer modal.</p>
+        <p><strong>Commit Messages:</strong> feat: implement TMDB search with debouncing, fix: prevent stale search results with AbortController, perf: add image lazy loading with Intersection Observer, refactor: extract TMDB service layer, docs: add API setup guide to README.</p>
+        <p><strong>Testing:</strong> Use Jest for unit testing the TMDB service layer (mock fetch responses). Use Playwright for end-to-end testing: search for a movie, scroll to load more, add favorite, verify it persists on refresh, open trailer modal.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Streaming Availability:</strong> Integrate the TMDB watch providers endpoint to show where each movie is available to stream (Netflix, Hulu, Prime, Disney+). Add filter by streaming service. Display pricing and subscription requirements.</li>
+          <li><strong>Personalized Recommendations:</strong> Implement a recommendation engine based on favorite movies. Find similar movies using TMDB's /movie/{id}/recommendations endpoint. Build a "Because you liked X" section on the home page using collaborative filtering with localStorage favorites.</li>
+          <li><strong>Social Features:</strong> Add user reviews and ratings (independent of TMDB). Implement shareable movie lists (public URLs with query params). Add a "Friends' Recommendations" feature using a simple social graph stored in IndexedDB. Integrate with Twitter/WhatsApp sharing for individual movies.</li>
+          <li><strong>Advanced Search Filters:</strong> Add search filters for genre (multi-select), year range (slider), minimum rating, language, and adult content toggle. Implement URL-based filter state for shareable filtered searches. Add sort options: popularity, rating, release date, title.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://developers.themoviedb.org/3/getting-started" target="_blank">TMDB API Documentation</a> - Complete API reference</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" target="_blank">MDN Intersection Observer</a> - Observer API documentation</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController" target="_blank">MDN AbortController</a> - Cancelable fetch requests</li>
+          <li><a href="https://developers.google.com/youtube/iframe_api_reference" target="_blank">YouTube IFrame Player API</a> - Embedding YouTube videos</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading" target="_blank">MDN Lazy Loading</a> - Performance optimization guide</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">MDN localStorage</a> - Client-side storage</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="weather-dashboard.html" class="btn btn-ghost">Weather Dashboard</a>
+          <a href="chat-app.html" class="btn btn-ghost">Chat App</a>
+          <a href="social-dashboard.html" class="btn btn-ghost">Social Dashboard</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="blog-platform.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: Blog Platform</a>
+        <a href="social-dashboard.html" class="btn btn-primary">Next Project <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

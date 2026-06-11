@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .profile-page { padding: 2rem 8%; min-height: 70vh; max-width: 1200px; margin: 0 auto; }
+    .profile-grid { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; }
+    .profile-sidebar-sticky { position: sticky; top: 100px; align-self: start; }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-lg);
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+    .glass-card:hover { background: var(--bg-card-hover); box-shadow: var(--shadow-md); }
+    .glass-card-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .glass-card-header i { font-size: 1.3rem; color: var(--primary); width: 32px; text-align: center; }
+    .glass-card-header h3 { font-size: 1.15rem; color: var(--primary-dark); }
+
+    .avatar-edit-wrap { text-align: center; margin-bottom: 1.5rem; }
+    .profile-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-light)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 3rem; color: white; overflow: hidden; cursor: pointer; transition: var(--transition); position: relative; }
+    .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-avatar .avatar-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); border-radius: 50%; color: white; font-size: 1rem; font-weight: 600; }
+    .profile-avatar:hover .avatar-overlay { opacity: 1; }
+
+    .stat-chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border-radius: 50px; background: var(--bg-card); border: 1px solid var(--glass-border); font-size: 0.85rem; font-weight: 500; }
+
+    .stat-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .stat-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .stat-item { text-align: center; padding: 1.2rem 0.8rem; border-radius: var(--border-radius-sm); background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border-light); }
+    .stat-item .stat-number { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+    .stat-item .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .stat-item .stat-icon { font-size: 1.4rem; color: var(--primary); margin-bottom: 0.4rem; }
+
+    .badge-grid { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .badge-item { width: 60px; height: 60px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); gap: 0.2rem; }
+    .badge-item i { font-size: 1.4rem; color: var(--warning); }
+    .badge-item span { font-size: 0.6rem; color: var(--text-muted); text-align: center; line-height: 1.2; }
+
+    .saved-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; }
+    .saved-item { padding: 1rem; border-radius: var(--border-radius-sm); background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border-light); text-align: center; transition: var(--transition); cursor: pointer; }
+    .saved-item:hover { background: var(--bg-card-hover); transform: translateY(-3px); }
+    .saved-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.4rem; }
+    .saved-item .saved-title { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+    .saved-item .saved-count { font-size: 0.7rem; color: var(--text-muted); }
+
+    .typing-stat-card { text-align: center; }
+    .typing-stat-card .typing-number { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+    .typing-stat-card .typing-label { font-size: 0.85rem; color: var(--text-muted); }
+
+    .platform-progress-item { display: flex; align-items: center; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--glass-border-light); }
+    .platform-progress-item:last-child { border-bottom: none; }
+    .platform-progress-item .pp-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .platform-progress-item .pp-info { flex: 1; }
+    .platform-progress-item .pp-info .pp-name { font-weight: 600; font-size: 0.9rem; }
+    .platform-progress-item .pp-info .pp-user { font-size: 0.78rem; color: var(--text-muted); }
+
+    .streak-display { display: flex; align-items: center; gap: 1.5rem; justify-content: center; padding: 0.5rem 0; }
+    .streak-display .streak-fire { font-size: 2.5rem; color: var(--warning); }
+    .streak-display .streak-info { text-align: center; }
+    .streak-display .streak-info .streak-days { font-size: 2rem; font-weight: 800; color: var(--primary-dark); }
+    .streak-display .streak-info .streak-label { font-size: 0.85rem; color: var(--text-muted); }
+
+    .inline-error { color: var(--error); font-size: 0.82rem; margin-top: 0.3rem; display: none; }
+    .form-group.has-error input { border-color: var(--error); }
+
+    @media (max-width: 900px) { .profile-grid { grid-template-columns: 1fr; } .profile-sidebar-sticky { position: static; } }
+    @media (max-width: 500px) { .stat-grid-2, .stat-grid-3 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page="Profile">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main class="profile-page" id="profileApp">
+    <div class="profile-grid">
+      <div class="profile-sidebar-sticky">
+        <div class="glass-card">
+          <div class="avatar-edit-wrap">
+            <div class="profile-avatar" id="avatarPreview" onclick="document.getElementById('avatarUrlInput').focus()">
+              <div class="avatar-overlay"><i class="fas fa-camera"></i></div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <input type="url" id="avatarUrlInput" placeholder="Avatar image URL" style="width:100%;padding:0.6rem 0.8rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.85rem;text-align:center;">
+            </div>
+          </div>
+
+          <form id="profileForm">
+            <div class="form-group" id="nameGroup">
+              <label for="profileName">Full Name</label>
+              <input type="text" id="profileName" placeholder="Your name" required style="padding-left:10px;border-radius:1px;">
+              <p class="inline-error" id="nameError">Name is required.</p>
+            </div>
+            <div class="form-group">
+              <label for="profileEmail">Email</label>
+              <input type="email" id="profileEmail" placeholder="Your email" disabled style="opacity:0.7;padding-left:10px ;">
+            </div>
+            <div class="form-group">
+              <label for="profileBio">Bio</label>
+              <textarea id="profileBio" placeholder="Tell us about yourself..." rows="3" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.9rem;resize:vertical;font-family:inherit;"></textarea>
+            </div>
+            <button type="submit" id="profileSave" class="btn btn-primary btn-block">Save Changes</button>
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <i class="fas fa-fire"></i>
+            <h3>Streaks</h3>
+          </div>
+          <div class="streak-display">
+            <div class="streak-fire"><i class="fas fa-fire"></i></div>
+            <div class="streak-info">
+              <div class="streak-days" id="streakDays">0</div>
+              <div class="streak-label">Day Streak</div>
+            </div>
+            <div style="text-align:center;border-left:1px solid var(--glass-border);padding-left:1.5rem;">
+              <div style="font-size:1.5rem;font-weight:800;color:var(--primary);" id="streakLongest">0</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);">Longest Streak</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>Learning Progress</h3>
+          </div>
+          <div class="stat-grid-3">
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+              <div class="stat-number" id="coursesStarted">0</div>
+              <div class="stat-label">Courses Started</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-check-double"></i></div>
+              <div class="stat-number" id="modulesCompleted">0</div>
+              <div class="stat-label">Modules Done</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-pencil-alt"></i></div>
+              <div class="stat-number" id="quizzesTaken">0</div>
+              <div class="stat-label">Quizzes Taken</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <i class="fas fa-road"></i>
+            <h3>Roadmap Progress</h3>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="flex:1;">
+              <div style="font-size:1.8rem;font-weight:800;color:var(--primary);" id="roadmapsCompleted">0</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);">Roadmaps Completed</div>
+            </div>
+            <div style="flex:1;" id="roadmapList">
+              <p style="color:var(--text-muted);font-size:0.85rem;">No roadmaps completed yet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <i class="fas fa-keyboard"></i>
+            <h3>Typing Statistics</h3>
+          </div>
+          <div class="stat-grid-2">
+            <div class="stat-item typing-stat-card">
+              <div class="typing-number" id="bestWpm">0</div>
+              <div class="typing-label">Best WPM</div>
+            </div>
+            <div class="stat-item typing-stat-card">
+              <div class="typing-number" id="testsTaken">0</div>
+              <div class="typing-label">Tests Taken</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <i class="fas fa-link"></i>
+            <h3>Coding Platform Statistics</h3>
+          </div>
+          <div id="platformStatsContent">
+            <p style="color:var(--text-muted);font-size:0.9rem;">No coding platforms connected. <a href="/Practice.html" style="color:var(--primary);font-weight:600;">Connect now</a></p>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/learning.js"></script>
+  <script src="../js/achievements.js"></script>
+  <script src="../js/daily-goals.js"></script>
+  <script src="../js/reminders.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const user = await requireAuth();
+      if (!user) return;
+
+      const profileName = document.getElementById('profileName');
+      const profileEmail = document.getElementById('profileEmail');
+      const profileBio = document.getElementById('profileBio');
+      const avatarPreview = document.getElementById('avatarPreview');
+      const avatarUrlInput = document.getElementById('avatarUrlInput');
+
+      profileName.value = user.name || '';
+      profileEmail.value = user.email || '';
+      profileBio.value = user.bio || '';
+
+      function renderAvatar(url) {
+        const src = url || user.avatar || '';
+        if (src) {
+          avatarPreview.innerHTML = '<img src="' + Utils.sanitize(src) + '" alt="Avatar" onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<i class=\\\\\'fas fa-user\\\\\'></i>\'"><div class="avatar-overlay"><i class="fas fa-camera"></i></div>';
+        } else {
+          avatarPreview.innerHTML = '<i class="fas fa-user"></i><div class="avatar-overlay"><i class="fas fa-camera"></i></div>';
+        }
+      }
+      renderAvatar();
+
+      avatarUrlInput.addEventListener('change', function() {
+        if (this.value.trim()) renderAvatar(this.value.trim());
+      });
+      avatarUrlInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && this.value.trim()) renderAvatar(this.value.trim());
+      });
+
+      const nameGroup = document.getElementById('nameGroup');
+      const nameError = document.getElementById('nameError');
+      profileName.addEventListener('input', function() {
+        nameGroup.classList.remove('has-error');
+        nameError.style.display = 'none';
+      });
+
+      document.getElementById('profileForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        nameGroup.classList.remove('has-error');
+        nameError.style.display = 'none';
+
+        const name = Utils.sanitize(profileName.value.trim());
+        const bio = Utils.sanitize(profileBio.value.trim());
+        const avatar = avatarUrlInput.value.trim() || user.avatar || '';
+
+        if (!name) { nameGroup.classList.add('has-error'); nameError.style.display = 'block'; return; }
+
+        try {
+          const sb = getSupabase();
+          if (sb) {
+            await sb.auth.updateUser({ data: { full_name: name, bio: bio, avatar_url: avatar } });
+          }
+          const updatedUser = { ...user, name, bio, avatar };
+          localStorage.setItem('coderio_user', JSON.stringify(updatedUser));
+          Utils.showToast('Profile updated successfully!', 'success');
+        } catch (err) {
+          Utils.showToast('Failed to update profile.', 'error');
+        }
+      });
+
+      function loadLearningProgress() {
+        const courseProgress = Utils.getStorage('course_progress', {});
+        const courseIds = Object.keys(courseProgress);
+        const moduleCount = courseIds.reduce((sum, cid) => sum + (courseProgress[cid].completed || []).length, 0);
+        const quizResults = Utils.getStorage('quiz_results', {});
+        const quizCount = Object.values(quizResults).reduce((sum, arr) => sum + arr.length, 0);
+        document.getElementById('coursesStarted').textContent = courseIds.length || 0;
+        document.getElementById('modulesCompleted').textContent = moduleCount || 0;
+        document.getElementById('quizzesTaken').textContent = quizCount || 0;
+      }
+
+      function loadRoadmapProgress() {
+        const roadmaps = Utils.getStorage('roadmaps_completed', []);
+        document.getElementById('roadmapsCompleted').textContent = roadmaps.length || 0;
+        const list = document.getElementById('roadmapList');
+        if (roadmaps.length > 0) {
+          list.innerHTML = roadmaps.map(function(r) { return '<span class="stat-chip" style="margin:0.2rem;"><i class="fas fa-check-circle" style="color:var(--success);"></i> ' + Utils.sanitize(r.title || r) + '</span>'; }).join('');
+        } else {
+          list.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;">No roadmaps completed yet.</p>';
+        }
+      }
+
+      function loadTypingStats() {
+        const history = Utils.getStorage('typing_history', []);
+        let bestWpm = 0;
+        if (history.length > 0) {
+          bestWpm = Math.max.apply(null, history.map(function(h) { return h.wpm || 0; }));
+        }
+        document.getElementById('bestWpm').textContent = bestWpm || 0;
+        document.getElementById('testsTaken').textContent = history.length || 0;
+      }
+
+      function loadPlatformStats() {
+        const connections = Utils.getStorage('coderio_connections', []);
+        const container = document.getElementById('platformStatsContent');
+        if (connections.length === 0) {
+          container.innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem;">No coding platforms connected. <a href="/Practice.html" style="color:var(--primary);font-weight:600;">Connect now</a></p>';
+          return;
+        }
+        const platformIcons = { leetcode: 'fab fa-free-code-camp', codeforces: 'fas fa-trophy', codechef: 'fas fa-utensils', atcoder: 'fas fa-flag', cses: 'fas fa-graduation-cap', euler: 'fas fa-square-root-variable', kaggle: 'fas fa-brain', hackerrank: 'fas fa-chart-bar' };
+        const platformColors = { leetcode: '#ffa116', codeforces: '#1f8acb', codechef: '#5b4637', atcoder: '#000000', cses: '#4a90d9', euler: '#098765', kaggle: '#20beff', hackerrank: '#00ea64' };
+        container.innerHTML = '<div style="margin-bottom:1rem;"><span style="font-weight:700;font-size:1.2rem;color:var(--primary);">' + connections.length + '</span> <span style="color:var(--text-muted);">Platform' + (connections.length > 1 ? 's' : '') + ' Connected</span></div><div>' + connections.map(function(c) {
+          var icon = platformIcons[c.platform] || 'fas fa-code';
+          var color = platformColors[c.platform] || 'var(--primary)';
+          return '<div class="platform-progress-item"><div class="pp-icon" style="background:' + color + '20;color:' + color + ';"><i class="' + icon + '"></i></div><div class="pp-info"><div class="pp-name">' + (c.platform.charAt(0).toUpperCase() + c.platform.slice(1)) + '</div><div class="pp-user">@' + Utils.sanitize(c.username || '') + '</div></div></div>';
+        }).join('') + '</div>';
+      }
+
+      function loadStreaks() {
+        const activities = Utils.getStorage('coderio_activity', []);
+        const quizResults = Utils.getStorage('quiz_results', {});
+        const typingHistory = Utils.getStorage('typing_history', []);
+        const activeDates = new Set();
+        activities.forEach(function(a) { if (a.time) activeDates.add(new Date(a.time).toDateString()); });
+        Object.values(quizResults).forEach(function(arr) {
+          arr.forEach(function(q) { if (q.date) activeDates.add(new Date(q.date).toDateString()); });
+        });
+        typingHistory.forEach(function(t) { if (t.date) activeDates.add(new Date(t.date).toDateString()); });
+        var today = new Date(); today.setHours(0,0,0,0);
+        var streak = 0;
+        var check = new Date(today);
+        while (activeDates.has(check.toDateString())) { streak++; check.setDate(check.getDate() - 1); }
+        document.getElementById('streakDays').textContent = streak || 0;
+        document.getElementById('streakLongest').textContent = streak || 0;
+      }
+
+      loadLearningProgress();
+      loadRoadmapProgress();
+      loadTypingStats();
+      loadPlatformStats();
+      loadStreaks();
+    });
+  </script>
+</body>
+</html>

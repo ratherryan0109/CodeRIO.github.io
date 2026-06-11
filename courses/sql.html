@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Course - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/courses.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Course" data-course="sql">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <div class="toast-container"></div>
+
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <h1>SQL</h1>
+      <p>SQL (Structured Query Language) is the universal language for managing and querying relational databases. Developed in the 1970s at IBM, SQL has become the industry standard for data storage, retrieval, and manipulation. Mastering SQL is essential for backend developers, data analysts, and anyone working with data-driven applications.</p>
+      <div class="course-meta">
+        <div class="course-meta-item"><i class="fas fa-signal"></i> Beginner</div>
+        <div class="course-meta-item"><i class="fas fa-clock"></i> 6 Weeks</div>
+        <div class="course-meta-item"><i class="fas fa-book-open"></i> 14 Modules</div>
+      </div>
+    </div>
+    <div class="course-hero-image">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL">
+    </div>
+  </section>
+
+  <section class="course-content">
+
+    <div class="course-section">
+      <h2><i class="fas fa-info-circle"></i> Overview</h2>
+      <p>SQL was originally developed by Donald Chamberlin and Raymond Boyce at IBM in the early 1970s as SEQUEL (Structured English Query Language). It was later standardized by ANSI in 1986 and ISO in 1987. Today, SQL is supported by virtually every relational database management system (RDBMS) including PostgreSQL, MySQL, SQL Server, SQLite, and Oracle Database.</p>
+      <p>SQL operates on tables composed of rows and columns. It provides commands for data definition (DDL: CREATE, ALTER, DROP), data manipulation (DML: SELECT, INSERT, UPDATE, DELETE), data control (DCL: GRANT, REVOKE), and transaction management (TCL: BEGIN, COMMIT, ROLLBACK). Modern SQL extends to window functions, common table expressions (CTEs), and full-text search capabilities.</p>
+      <p>SQL underpins the data layer of most web applications, enterprise software, financial systems, and analytics platforms. With the rise of big data, SQL has evolved to work with distributed systems like Apache Spark, Google BigQuery, Amazon Redshift, and Snowflake. Even NoSQL databases like Cassandra and MongoDB offer SQL-like query interfaces.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-star"></i> Why Learn SQL?</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-database" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Universal Data Access</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">SQL works with all major databases. Knowledge transfers across platforms.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-chart-bar" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Data Analysis Skills</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">SQL is the #1 skill for data analysts, scientists, and business intelligence roles.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-code" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">Backend Foundation</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Every backend developer needs SQL to build data-driven applications.</p>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <i class="fas fa-bolt" style="font-size:1.8rem;color:var(--primary);margin-bottom:0.8rem"></i>
+          <h4 style="margin-bottom:0.5rem">High Performance</h4>
+          <p style="color:var(--text-secondary);font-size:0.95rem">Well-written SQL queries outperform application-level data processing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-building"></i> Industry Usage</h2>
+      <p style="margin-bottom:1.5rem;color:var(--text-secondary)">SQL powers the data infrastructure of nearly every organization of any size:</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Oracle</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">PostgreSQL</p></div>
+      </div>
+      <p style="color:var(--text-secondary)">SQL is used in banking systems (transaction processing), e-commerce platforms (product catalogs, orders), healthcare (patient records), social media (user data, feeds), logistics (inventory tracking), CRM systems (customer data), and analytics platforms (reporting dashboards). Nearly every mobile and web application uses SQL to persist and query data.</p>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-road"></i> Learning Roadmap</h2>
+      <div style="display:flex;flex-direction:column;gap:0.8rem">
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--primary)">
+          <h4>Prerequisites</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Basic computer skills, logical thinking, familiarity with spreadsheets or data</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--success)">
+          <h4>Beginner (Weeks 1-2)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">SELECT queries, filtering with WHERE, sorting with ORDER BY, LIMIT, basic functions</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--warning)">
+          <h4>Intermediate (Weeks 3-4)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">JOINs (INNER, LEFT, RIGHT), GROUP BY, HAVING, aggregate functions, subqueries</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid var(--error)">
+          <h4>Advanced (Weeks 5-6)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Window functions, CTEs, indexes, query optimization, database design, normalization</p>
+        </div>
+        <div class="glass" style="padding:1.2rem;border-left:4px solid #a855f7">
+          <h4>Expert (Week 7+)</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Transactions, concurrency control, stored procedures, triggers, performance tuning</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section" id="courseModules">
+      <h2><i class="fas fa-layer-group"></i> Modules</h2>
+
+      <h3 style="color:var(--success);margin:1.5rem 0 1rem"><i class="fas fa-seedling"></i> Beginner Level</h3>
+      <div class="module-card"><h3><span class="module-number">1</span> Introduction to Databases</h3><p>Relational database concepts, tables, rows, columns, primary keys, foreign keys, and installing PostgreSQL/MySQL/SQLite.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">RDBMS</span> <span class="badge badge-primary">Setup</span></div></div>
+      <div class="module-card"><h3><span class="module-number">2</span> SELECT Queries</h3><p>SELECT syntax, selecting specific columns, SELECT DISTINCT, column aliases, CASE expressions, and limiting results.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">SELECT</span> <span class="badge badge-primary">Aliases</span></div></div>
+      <div class="module-card"><h3><span class="module-number">3</span> Filtering with WHERE</h3><p>WHERE clause, comparison operators, AND/OR/NOT, IN, BETWEEN, LIKE pattern matching, IS NULL, and date filtering.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">WHERE</span> <span class="badge badge-primary">Filtering</span></div></div>
+      <div class="module-card"><h3><span class="module-number">4</span> Sorting & Limiting</h3><p>ORDER BY with ASC/DESC, sorting by multiple columns, LIMIT/OFFSET for pagination, and FETCH FIRST clauses.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">ORDER BY</span> <span class="badge badge-primary">LIMIT</span></div></div>
+      <div class="module-card"><h3><span class="module-number">5</span> Scalar Functions</h3><p>String functions (UPPER, LOWER, LENGTH, SUBSTRING, TRIM, CONCAT), numeric functions (ROUND, ABS, CEIL), date functions (EXTRACT, DATE_TRUNC).</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Functions</span> <span class="badge badge-primary">Strings</span></div></div>
+
+      <h3 style="color:var(--warning);margin:1.5rem 0 1rem"><i class="fas fa-rocket"></i> Intermediate Level</h3>
+      <div class="module-card"><h3><span class="module-number">6</span> JOIN Operations</h3><p>INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN, CROSS JOIN, self-joins, and joining multiple tables.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">JOIN</span> <span class="badge badge-primary">Relationships</span></div></div>
+      <div class="module-card"><h3><span class="module-number">7</span> Grouping & Aggregation</h3><p>GROUP BY, aggregate functions (COUNT, SUM, AVG, MIN, MAX), HAVING clause, ROLLUP, CUBE extensions.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">GROUP BY</span> <span class="badge badge-primary">Aggregates</span></div></div>
+      <div class="module-card"><h3><span class="module-number">8</span> Subqueries</h3><p>Scalar subqueries, correlated subqueries, EXISTS/NOT EXISTS, subqueries in SELECT/FROM/WHERE, ANY/ALL operators.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Subqueries</span> <span class="badge badge-primary">EXISTS</span></div></div>
+      <div class="module-card"><h3><span class="module-number">9</span> Set Operations</h3><p>UNION, UNION ALL, INTERSECT, EXCEPT/MINUS, set operation rules, and combining results from multiple queries.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">UNION</span> <span class="badge badge-primary">Set theory</span></div></div>
+      <div class="module-card"><h3><span class="module-number">10</span> Data Modification</h3><p>INSERT INTO, UPDATE with WHERE, DELETE, INSERT...SELECT, UPSERT (MERGE / ON CONFLICT), and RETURNING clause.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">INSERT</span> <span class="badge badge-primary">UPDATE</span></div></div>
+
+      <h3 style="color:var(--error);margin:1.5rem 0 1rem"><i class="fas fa-fire"></i> Advanced Level</h3>
+      <div class="module-card"><h3><span class="module-number">11</span> Database Design & Normalization</h3><p>Entity-relationship modeling, 1NF, 2NF, 3NF, BCNF, denormalization trade-offs, and ER diagrams.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Normalization</span> <span class="badge badge-primary">ERD</span></div></div>
+      <div class="module-card"><h3><span class="module-number">12</span> Indexes & Performance</h3><p>B-tree indexes, composite indexes, EXPLAIN/ANALYZE query plans, index-only scans, and query optimization strategies.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Indexes</span> <span class="badge badge-primary">EXPLAIN</span></div></div>
+      <div class="module-card"><h3><span class="module-number">13</span> Window Functions</h3><p>ROW_NUMBER, RANK, DENSE_RANK, LEAD/LAG, FIRST_VALUE/LAST_VALUE, NTILE, frame clauses (ROWS, RANGE, GROUPS).</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Window functions</span> <span class="badge badge-primary">Analytics</span></div></div>
+      <div class="module-card"><h3><span class="module-number">14</span> Transactions & Concurrency</h3><p>BEGIN, COMMIT, ROLLBACK, SAVEPOINT, isolation levels (READ COMMITTED, SERIALIZABLE), MVCC, locks, deadlocks.</p><div style="margin-left:3.2rem;margin-top:0.5rem"><span class="badge badge-primary">Transactions</span> <span class="badge badge-primary">ACID</span></div></div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">1. Basic SELECT Query</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">The SELECT statement retrieves data from a table. You can select specific columns or all columns with *.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- Select all columns
+SELECT * FROM users;
+
+-- Select specific columns
+SELECT id, name, email FROM users;
+
+-- With aliases
+SELECT first_name || ' ' || last_name AS full_name
+FROM employees;
+
+-- Distinct values
+SELECT DISTINCT city FROM customers;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">2. WHERE Clause Filtering</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Filter rows based on conditions using WHERE. Combine multiple conditions with AND/OR.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>SELECT name, price, category
+FROM products
+WHERE price > 50
+  AND category IN ('Electronics', 'Books')
+  AND stock > 0
+ORDER BY price DESC;
+
+-- Pattern matching
+SELECT * FROM users
+WHERE email LIKE '%@gmail.com';
+
+-- NULL checks
+SELECT * FROM orders
+WHERE shipped_date IS NULL;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">3. JOIN Operations</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">JOINs combine rows from two or more tables based on related columns. Understanding JOINs is critical for working with normalized databases.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- INNER JOIN: only matching rows
+SELECT o.id, u.name, o.total
+FROM orders o
+INNER JOIN users u ON o.user_id = u.id;
+
+-- LEFT JOIN: all from left, matching from right
+SELECT u.name, COUNT(o.id) AS order_count
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+GROUP BY u.name;
+
+-- Self join: employees and their managers
+SELECT e.name AS employee,
+       m.name AS manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.id;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">4. GROUP BY and Aggregation</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Group rows and apply aggregate functions. HAVING filters groups after aggregation.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>SELECT category,
+       COUNT(*) AS product_count,
+       AVG(price) AS avg_price,
+       MAX(price) AS max_price,
+       SUM(stock) AS total_stock
+FROM products
+GROUP BY category
+HAVING COUNT(*) > 5
+ORDER BY product_count DESC;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">5. Subqueries</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">A subquery is a query nested inside another query. Can be used in SELECT, FROM, or WHERE clauses.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- Subquery in WHERE
+SELECT name, price
+FROM products
+WHERE price > (SELECT AVG(price) FROM products);
+
+-- Correlated subquery
+SELECT e.name, e.salary
+FROM employees e
+WHERE e.salary > (
+    SELECT AVG(salary)
+    FROM employees
+    WHERE department_id = e.department_id
+);
+
+-- Subquery in FROM (derived table)
+SELECT dept_name, avg_salary
+FROM (
+    SELECT d.name AS dept_name,
+           AVG(e.salary) AS avg_salary
+    FROM employees e
+    JOIN departments d ON e.dept_id = d.id
+    GROUP BY d.name
+) AS dept_stats
+WHERE avg_salary > 70000;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">6. Window Functions</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Window functions perform calculations across a set of rows related to the current row without collapsing them into a single output row.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>SELECT name,
+       department,
+       salary,
+       RANK() OVER (PARTITION BY department
+                    ORDER BY salary DESC) AS dept_rank,
+       LAG(salary) OVER (PARTITION BY department
+                         ORDER BY salary) AS prev_salary,
+       AVG(salary) OVER (PARTITION BY department) AS dept_avg
+FROM employees;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">7. Common Table Expressions (CTE)</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">CTEs provide a way to write named temporary result sets that can be referenced within a main query, improving readability and enabling recursion.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>WITH high_value_customers AS (
+    SELECT user_id, SUM(total) AS lifetime_value
+    FROM orders
+    GROUP BY user_id
+    HAVING SUM(total) > 1000
+)
+SELECT u.name, u.email, hvc.lifetime_value
+FROM users u
+JOIN high_value_customers hvc ON u.id = hvc.user_id
+ORDER BY hvc.lifetime_value DESC;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">8. Indexes for Performance</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem">Indexes speed up data retrieval at the cost of slower writes. Understanding when to create indexes is key to database performance.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;margin-top:0.5rem;overflow-x:auto;font-size:0.85rem"><code>-- Single column index
+CREATE INDEX idx_users_email ON users(email);
+
+-- Composite index (column order matters)
+CREATE INDEX idx_orders_user_date
+ON orders(user_id, order_date DESC);
+
+-- Partial index
+CREATE INDEX idx_active_users
+ON users(email) WHERE active = true;
+
+-- Explain query plan
+EXPLAIN ANALYZE
+SELECT * FROM users WHERE email = 'test@example.com';</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-code"></i> Examples</h2>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 1: E-Commerce Database Queries</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">Common queries for an e-commerce application.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>-- Top 10 customers by total spending
+SELECT u.name, SUM(oi.quantity * oi.price) AS total_spent
+FROM users u
+JOIN orders o ON u.id = o.user_id
+JOIN order_items oi ON o.id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY u.id, u.name
+ORDER BY total_spent DESC
+LIMIT 10;
+
+-- Monthly sales report
+SELECT DATE_TRUNC('month', o.order_date) AS month,
+       COUNT(DISTINCT o.id) AS order_count,
+       SUM(oi.quantity * oi.price) AS revenue
+FROM orders o
+JOIN order_items oi ON o.id = oi.order_id
+GROUP BY month
+ORDER BY month DESC;
+
+-- Products that need restocking (low stock with pending orders)
+SELECT p.name, p.stock, COUNT(oi.id) AS pending_orders
+FROM products p
+LEFT JOIN order_items oi ON p.id = oi.product_id
+JOIN orders o ON oi.order_id = o.id
+WHERE o.status = 'pending'
+  AND p.stock < 10
+GROUP BY p.id, p.name, p.stock;</code></pre>
+      </div>
+
+      <div class="glass" style="padding:1.5rem;margin-bottom:1rem">
+        <h4 style="color:var(--primary-dark);margin-bottom:0.5rem">Example 2: Schema Design</h4>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:0.5rem">Creating a normalized database schema for a blog platform.</p>
+        <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem"><code>CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    title VARCHAR(255) NOT NULL,
+    body TEXT NOT NULL,
+    published BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_posts_user_id ON posts(user_id);
+CREATE INDEX idx_posts_created ON posts(created_at DESC);</code></pre>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-dumbbell"></i> Exercises</h2>
+
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Customer List</h4><p style="color:var(--text-muted);font-size:0.85rem">Write a query to list all customers who signed up in the last 30 days, ordered by signup date descending.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-primary" style="flex-shrink:0">Easy</span>
+        <div><h4 style="font-size:0.95rem">Product Search</h4><p style="color:var(--text-muted);font-size:0.85rem">Search for products with price between $10 and $50, in stock, and containing the word "wireless" in the name.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Sales by Category</h4><p style="color:var(--text-muted);font-size:0.85rem">Calculate total revenue per product category for the current year, showing only categories with over $10k in sales.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Employee Hierarchy</h4><p style="color:var(--text-muted);font-size:0.85rem">Use a recursive CTE to build an employee org chart showing each employee's reporting chain up to the CEO.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-warning" style="flex-shrink:0">Medium</span>
+        <div><h4 style="font-size:0.95rem">Session Duration Analysis</h4><p style="color:var(--text-muted);font-size:0.85rem">Calculate average session duration per user using LAG to compute time between consecutive page views.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Inventory Optimization</h4><p style="color:var(--text-muted);font-size:0.85rem">Find products that have been in stock for over 90 days without a sale, using window functions for aging analysis.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Fraud Detection</h4><p style="color:var(--text-muted);font-size:0.85rem">Identify users with multiple accounts sharing the same IP or billing address using self-joins and GROUP BY.</p></div>
+      </div>
+      <div class="glass" style="padding:1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem">
+        <span class="badge badge-error" style="flex-shrink:0">Hard</span>
+        <div><h4 style="font-size:0.95rem">Pagination with Total Count</h4><p style="color:var(--text-muted);font-size:0.85rem">Implement efficient pagination that returns page results plus total count using window functions or CTEs.</p></div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+      <div class="grid grid-2">
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Library Management System</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Design a schema for books, members, loans, and fines. Write queries for overdue books, popular titles, and member history.</p>
+          <span class="badge badge-primary">Schema Design</span> <span class="badge badge-primary">JOINs</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">E-Commerce Analytics Dashboard</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Build SQL queries for revenue trends, customer segmentation, product performance, and sales funnel analysis.</p>
+          <span class="badge badge-primary">Window Functions</span> <span class="badge badge-primary">Aggregation</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Social Media Data Model</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Design tables for users, posts, comments, likes, and follows. Write queries for feed generation and friend recommendations.</p>
+          <span class="badge badge-primary">Relationships</span> <span class="badge badge-primary">Subqueries</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Hospital Management System</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Schema for patients, doctors, appointments, prescriptions, and billing. Complex queries for scheduling and reporting.</p>
+          <span class="badge badge-primary">JOINs</span> <span class="badge badge-primary">CTEs</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Ride-Sharing Database</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Model riders, drivers, trips, payments, and ratings. Write queries for surge pricing and driver availability.</p>
+          <span class="badge badge-primary">Transactions</span> <span class="badge badge-primary">Indexes</span>
+        </div>
+        <div class="glass" style="padding:1.5rem">
+          <h4 style="margin-bottom:0.5rem">Data Warehouse Star Schema</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Design a dimensional model with fact and dimension tables for sales analytics with time, product, and geography dimensions.</p>
+          <span class="badge badge-primary">Star Schema</span> <span class="badge badge-primary">ETL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-section">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div id="interviewQuestionsContainer"></div>
+      </div>
+
+  </section>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/course-init.js"></script><script src="../js/main.js"></script>
+  
+</body>
+</html>
+<script>
+document.querySelectorAll('.module-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const num = this.querySelector('.module-number')?.textContent.trim() || '1';
+    window.location.href = '../lesson.html?course=sql&module=' + num;
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+

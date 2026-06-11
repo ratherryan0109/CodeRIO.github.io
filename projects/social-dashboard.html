@@ -1,0 +1,921 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a social media analytics dashboard with Chart.js, data fetching, date range filtering, export functionality, responsive charts, and dark mode. Complete engineering guide.">
+  <meta name="keywords" content="social dashboard, Chart.js, analytics, data visualization, charting, export, dark mode, JavaScript project">
+  <meta name="author" content="CodeRio">
+  <meta property="og:title" content="Social Media Dashboard - CodeRio Projects">
+  <meta property="og:description" content="Complete engineering guide to building a social media analytics dashboard with Chart.js.">
+  <meta property="og:type" content="website">
+  <title>Social Media Dashboard - CodeRio Projects</title>
+  <link rel="canonical" href="https://codrio.com/projects/social-dashboard.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .project-detail-page { padding: 2rem 8% 5rem; }
+    .project-detail-hero { margin-bottom: 3rem; }
+    .project-detail-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-detail-hero .meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text-secondary); }
+    .project-body { max-width: 900px; margin: 0 auto; }
+    .project-body .section { margin-bottom: 3rem; }
+    .project-body .section h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .structure-tree { background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius-lg); font-family: monospace; line-height: 2; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--border-radius-lg); overflow-x: auto; margin: 1rem 0; }
+    .code-block code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; line-height: 1.7; }
+    .challenge-card { background: rgba(245,158,11,0.08); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .feature-item { padding: 1rem; background: var(--bg-card); border-radius: var(--border-radius-md); text-align: center; }
+    .feature-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin: 1.5rem 0; }
+    .phase-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+    .glass-card { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-lg); padding: 1.5rem; margin: 1rem 0; }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .badge-tech { background: rgba(108,99,255,0.15); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; }
+    .qa-card { background: var(--bg-card); border-radius: var(--border-radius-md); padding: 1rem; margin: 0.8rem 0; border-left: 3px solid var(--success); }
+    .qa-card strong { color: var(--primary); }
+    .tip-card { background: rgba(16,185,129,0.08); border-left: 4px solid var(--success); padding: 1.2rem; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; margin: 1rem 0; }
+    @media (max-width: 768px) { .project-detail-page { padding: 1.5rem 5% 3rem; } .project-detail-hero h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body data-page="Project" data-project="social-dashboard">
+  <div id="blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div id="toast-container"></div>
+    <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div class="project-detail-page">
+    <div class="project-detail-hero glass-card">
+      <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <h1>Social Media Dashboard</h1>
+      <div class="meta">
+        <span class="badge badge-primary">Intermediate</span>
+        <span><i class="far fa-clock"></i> 6-10 hours</span>
+        <span><i class="fas fa-code-branch"></i> Chart.js, JavaScript, localStorage, Canvas</span>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-secondary)">A comprehensive engineering guide to building a social media analytics dashboard with Chart.js data visualizations, date range filtering, data export, responsive charts, and dark mode.</p>
+    </div>
+
+    <div class="project-body">
+      <div class="section glass-card">
+        <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
+        <p>This social media analytics dashboard simulates a real-world analytics tool used by social media managers, marketers, and content creators to track performance across platforms. Users can view key metrics (followers, engagement, impressions, reach), visualize trends with multiple chart types (line, bar, doughnut, radar), filter data by date range, export reports as CSV/PNG, toggle between light and dark themes, and compare performance across different social platforms (Twitter, Instagram, LinkedIn, YouTube, TikTok). The project covers Chart.js integration, data normalization, responsive canvas management, and accessibility in data visualization.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-circle" style="color:var(--warning)"></i> Problem Statement</h2>
+        <p>Social media managers need to track KPIs across multiple platforms, identify trends, and generate reports - but native analytics tools are fragmented across platforms with different UIs, data formats, and export capabilities. Building a unified dashboard requires: aggregating mock or real data from multiple sources, rendering multiple chart types responsively, implementing date range filtering that updates all charts simultaneously, providing export functionality for reporting, and maintaining a clean UI that works in both light and dark environments. The challenge is creating a single-pane-of-glass dashboard that gives actionable insights at a glance.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-briefcase" style="color:var(--primary)"></i> Real World Use Cases</h2>
+        <ul>
+          <li><strong>Social Media Manager:</strong> A manager tracks weekly engagement rates across Twitter, Instagram, and LinkedIn, identifies top-performing content types, and exports monthly reports for stakeholders.</li>
+          <li><strong>Marketing Agency:</strong> An agency monitors client accounts across platforms, compares month-over-month growth, filters by campaign periods, and generates branded PDF reports.</li>
+          <li><strong>Content Creator:</strong> A YouTuber analyzes video performance, audience retention, subscriber growth trends, and determines optimal posting times using engagement heatmaps.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
+        <p>Data visualization is a critical skill in modern web development. Chart.js is the most popular open-source charting library with over 65,000 GitHub stars, used by companies like Google, Apple, and Facebook. Dashboard architecture (KPIs + charts + filters) is the foundation for analytics products across every industry: marketing (Google Analytics, HubSpot), DevOps (Datadog, Grafana), finance (Bloomberg, Robinhood), and healthcare (Epic, Cerner). The ability to build responsive, accessible, and exportable data visualizations is a highly sought-after skill.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-graduation-cap" style="color:var(--primary)"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Integrate Chart.js with multiple chart types (Line, Bar, Doughnut, Radar, Polar Area) for diverse data representations</li>
+          <li>Build a date range filtering system that reactively updates all dashboard charts and KPI cards simultaneously</li>
+          <li>Implement data export to CSV for raw data and Canvas-to-PNG for chart screenshots using html2canvas</li>
+          <li>Create responsive charts that resize correctly across viewport changes using Chart.js responsive + maintainAspectRatio options</li>
+          <li>Implement dark/light theme toggle with CSS custom properties that dynamically update Chart.js grid and text colors</li>
+          <li>Generate mock social media data with realistic patterns (growth trends, seasonal variations, random noise)</li>
+          <li>Build KPI summary cards with trend indicators (up/down arrows, percentage change) and animated counter transitions</li>
+          <li>Implement dashboard layout with CSS Grid for responsive widget arrangement and drag-and-drop widget reordering</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-microchip" style="color:var(--primary)"></i> Technologies Used</h2>
+        <div class="badge-list">
+          <span class="badge-tech"><i class="fas fa-chart-bar"></i> Chart.js 4</span>
+          <span class="badge-tech"><i class="fab fa-js"></i> JavaScript ES6+</span>
+          <span class="badge-tech"><i class="fas fa-database"></i> localStorage</span>
+          <span class="badge-tech"><i class="fas fa-file-export"></i> html2canvas</span>
+          <span class="badge-tech"><i class="fas fa-palette"></i> CSS Custom Properties</span>
+          <span class="badge-tech"><i class="fab fa-html5"></i> HTML5 Canvas</span>
+          <span class="badge-tech"><i class="fab fa-css3-alt"></i> CSS Grid</span>
+          <span class="badge-tech"><i class="fab fa-font-awesome"></i> Font Awesome</span>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-check-double" style="color:var(--success)"></i> Prerequisites</h2>
+        <ul>
+          <li>Intermediate JavaScript: arrays, objects, map/reduce/filter, spread operator, destructuring</li>
+          <li>DOM manipulation and event handling for interactive controls</li>
+          <li>CSS Grid for layout and CSS custom properties for theming</li>
+          <li>Basic understanding of Canvas API (helpful but not required)</li>
+          <li>Familiarity with date manipulation (Date object, date-fns or similar)</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-sitemap" style="color:var(--primary)"></i> Architecture Overview</h2>
+        <p>The dashboard follows a component-based architecture with a central data store, chart manager, filter system, and export service. The DataGenerator produces realistic mock data with configurable parameters (platform mix, growth rate, seasonality). The ChartManager is a singleton that creates, updates, and destroys Chart.js instances, handling responsive resize events and theme changes. The FilterController manages date range selections and broadcasts filter changes to all subscribers (charts + KPI cards + export). The ThemeManager toggles CSS custom properties and updates Chart.js default colors. The ExportService handles CSV generation from raw data and PNG capture from canvas elements using html2canvas. Widget positions are persisted in localStorage for drag-and-drop reordering. The dashboard is organized in a CSS Grid layout with defined template areas for KPI cards, charts, and data tables.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
+        <div class="structure-tree">
+social-dashboard/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   ├── data.js          # Mock data generator
+│   ├── charts.js        # Chart.js manager
+│   ├── filters.js       # Date range filtering
+│   ├── kpi.js           # KPI card renderer
+│   ├── export.js        # CSV + PNG export
+│   ├── theme.js         # Dark/light theme toggle
+│   └── grid.js          # Drag-and-drop widget grid
+├── assets/
+│   └── icons/
+├── .gitignore
+└── README.md
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
+        <div class="phase-card">
+          <h4>Phase 1: Data Generation & KPI Cards</h4>
+          <p>Build the mock data generator that produces realistic social media metrics (followers, likes, comments, shares, impressions, reach, engagement rate) for multiple platforms over configurable time ranges. Create animated KPI cards showing current values, percentage changes, and trend arrows.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 2: Chart.js Integration</h4>
+          <p>Install Chart.js from CDN. Build the chart manager that creates and manages multiple chart instances. Implement: line chart for followers over time, bar chart for engagement metrics, doughnut chart for platform distribution, radar chart for cross-platform comparison, and area chart for impressions/reach trends.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 3: Date Range Filtering</h4>
+          <p>Build the date range filter with preset buttons (7D, 30D, 90D, 1Y, All) and custom date picker. Implement the filter event system that broadcasts date range changes to all charts, KPI cards, and the data table. All dashboard components update reactively when the filter changes.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 4: Export Functionality</h4>
+          <p>Implement CSV export that generates downloadable files from the current filtered data. Implement chart export as PNG images using the Canvas API (chartInstance.toBase64Image()). Build a combined report export option that captures the entire dashboard as a single PNG using html2canvas.</p>
+        </div>
+        <div class="phase-card">
+          <h4>Phase 5: Theme & Responsive Design</h4>
+          <p>Implement dark/light theme toggle with CSS custom properties. Update Chart.js configuration dynamically on theme change (grid lines, text colors, backgrounds). Make all charts responsive with resize handlers. Implement widget drag-and-drop using HTML5 DnD API with localStorage persistence.</p>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-code" style="color:var(--primary)"></i> Implementation Guide</h2>
+        <div class="phase-card">
+          <h4>Step 1: Mock Data Generator with Realistic Patterns</h4>
+          <p>Generate realistic social media metrics with growth trends, weekly seasonality, and random noise. Data covers multiple platforms and metrics.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>const PLATFORMS = ['twitter', 'instagram', 'linkedin', 'youtube', 'tiktok'];
+const METRICS = ['followers', 'likes', 'comments', 'shares', 'impressions', 'reach', 'engagementRate'];
+
+function generateMockData(days = 365) {
+  const data = [];
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+
+  PLATFORMS.forEach(platform => {
+    const growthRate = getGrowthRate(platform);
+    const baseFollowers = getBaseFollowers(platform);
+
+    for (let day = 0; day < days; day++) {
+      const date = new Date(startDate);
+      date.setDate(date.getDate() + day);
+      const weekdayFactor = getWeekdayFactor(date.getDay(), platform);
+      const seasonalFactor = getSeasonalFactor(date.getMonth());
+      const trendFactor = 1 + (growthRate * day / days);
+      const noise = 1 + (Math.random() - 0.5) * 0.1;
+
+      const followers = Math.round(baseFollowers * trendFactor * noise);
+      const impressions = Math.round(followers * (3 + Math.random() * 5) * weekdayFactor * seasonalFactor);
+      const reach = Math.round(impressions * (0.3 + Math.random() * 0.3));
+      const engagementRate = (0.02 + Math.random() * 0.06) * seasonalFactor;
+      const likes = Math.round(reach * engagementRate * (0.4 + Math.random() * 0.2));
+      const comments = Math.round(likes * (0.05 + Math.random() * 0.1));
+      const shares = Math.round(likes * (0.1 + Math.random() * 0.15));
+
+      data.push({
+        date: date.toISOString().split('T')[0],
+        platform,
+        followers,
+        likes,
+        comments,
+        shares,
+        impressions,
+        reach,
+        engagementRate: +(engagementRate * 100).toFixed(2)
+      });
+    }
+  });
+  return data;
+}
+
+function getGrowthRate(platform) {
+  const rates = { twitter: 0.15, instagram: 0.25, linkedin: 0.12, youtube: 0.20, tiktok: 0.40 };
+  return rates[platform] || 0.15;
+}
+
+function getBaseFollowers(platform) {
+  const bases = { twitter: 5000, instagram: 3500, linkedin: 2500, youtube: 800, tiktok: 2000 };
+  return bases[platform] || 3000;
+}
+
+function getWeekdayFactor(day, platform) {
+  if (platform === 'linkedin') return day >= 1 && day <= 5 ? 1.2 : 0.6;
+  if (platform === 'tiktok') return [5, 6].includes(day) ? 1.4 : 0.9;
+  return [0, 6].includes(day) ? 1.1 : 1.0;
+}
+
+function getSeasonalFactor(month) {
+  // Higher engagement in Q1 and Q4, lower in summer
+  if (month >= 9 && month <= 11) return 1.2; // Q4 holiday season
+  if (month >= 0 && month <= 2) return 1.1;  // Q1 new year
+  if (month >= 5 && month <= 7) return 0.85; // Summer slump
+  return 1.0;
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 2: Chart.js Manager with Multiple Chart Types</h4>
+          <p>Build a chart manager that creates, updates, and destroys Chart.js instances. Handles responsive resizing and theme changes.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class ChartManager {
+  constructor() {
+    this.charts = new Map();
+    this.defaultColors = {
+      twitter: '#1DA1F2',
+      instagram: '#E4405F',
+      linkedin: '#0A66C2',
+      youtube: '#FF0000',
+      tiktok: '#000000'
+    };
+  }
+
+  createLineChart(canvasId, labels, datasets, options = {}) {
+    this.destroyChart(canvasId);
+    const ctx = document.getElementById(canvasId)?.getContext('2d');
+    if (!ctx) return;
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { usePointStyle: true } },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } },
+          y: { beginAtZero: true, grid: { color: getComputedStyle(document.documentElement).getPropertyValue('--chart-grid-color') || 'rgba(0,0,0,0.05)' } }
+        },
+        interaction: { mode: 'nearest', axis: 'x', intersect: false },
+        ...options
+      }
+    });
+    this.charts.set(canvasId, chart);
+    return chart;
+  }
+
+  createDoughnutChart(canvasId, labels, data, colors) {
+    this.destroyChart(canvasId);
+    const ctx = document.getElementById(canvasId)?.getContext('2d');
+    if (!ctx) return;
+    const chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels,
+        datasets: [{
+          data,
+          backgroundColor: colors || ['#1DA1F2', '#E4405F', '#0A66C2', '#FF0000', '#00f2ea'],
+          borderWidth: 2,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                const pct = ((ctx.parsed / total) * 100).toFixed(1);
+                return `${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`;
+              }
+            }
+          }
+        },
+        cutout: '65%',
+        animation: { animateRotate: true }
+      }
+    });
+    this.charts.set(canvasId, chart);
+    return chart;
+  }
+
+  createBarChart(canvasId, labels, datasets) {
+    this.destroyChart(canvasId);
+    const ctx = document.getElementById(canvasId)?.getContext('2d');
+    if (!ctx) return;
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } }
+        }
+      }
+    });
+    this.charts.set(canvasId, chart);
+    return chart;
+  }
+
+  createRadarChart(canvasId, labels, datasets) {
+    this.destroyChart(canvasId);
+    const ctx = document.getElementById(canvasId)?.getContext('2d');
+    if (!ctx) return;
+    const chart = new Chart(ctx, {
+      type: 'radar',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          r: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255,255,255,0.1)' },
+            pointLabels: { font: { size: 12 } }
+          }
+        }
+      }
+    });
+    this.charts.set(canvasId, chart);
+    return chart;
+  }
+
+  updateChartColors(theme) {
+    const gridColor = theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+    this.charts.forEach(chart => {
+      chart.options.scales?.y?.grid && (chart.options.scales.y.grid.color = gridColor);
+      chart.options.scales?.x?.grid && (chart.options.scales.x.grid.color = 'transparent');
+      chart.options.scales?.r?.grid && (chart.options.scales.r.grid.color = gridColor);
+      chart.update('none');
+    });
+  }
+
+  resizeAll() {
+    this.charts.forEach(chart => chart.resize());
+  }
+
+  destroyChart(id) {
+    if (this.charts.has(id)) {
+      this.charts.get(id).destroy();
+      this.charts.delete(id);
+    }
+  }
+
+  destroyAll() {
+    this.charts.forEach(chart => chart.destroy());
+    this.charts.clear();
+  }
+}
+
+const chartManager = new ChartManager();</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 3: Date Range Filtering with Reactive Updates</h4>
+          <p>Build a filter system that allows presets and custom date ranges, broadcasting changes to all dashboard components via custom events.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class FilterController {
+  constructor() {
+    this.dateRange = this.getDefaultRange();
+    this.callbacks = [];
+    this.init();
+  }
+
+  getDefaultRange() {
+    const end = new Date();
+    const start = new Date();
+    start.setDate(start.getDate() - 30);
+    return { start, end, preset: '30D' };
+  }
+
+  init() {
+    const presetBtns = document.querySelectorAll('.preset-btn');
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        presetBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.setPreset(btn.dataset.range);
+      });
+    });
+    const startInput = document.getElementById('date-start');
+    const endInput = document.getElementById('date-end');
+    startInput?.addEventListener('change', (e) => {
+      this.dateRange.start = new Date(e.target.value);
+      this.dateRange.preset = 'custom';
+      this.apply();
+    });
+    endInput?.addEventListener('change', (e) => {
+      this.dateRange.end = new Date(e.target.value);
+      this.dateRange.preset = 'custom';
+      this.apply();
+    });
+  }
+
+  setPreset(preset) {
+    const end = new Date();
+    const start = new Date();
+    switch (preset) {
+      case '7D': start.setDate(start.getDate() - 7); break;
+      case '30D': start.setDate(start.getDate() - 30); break;
+      case '90D': start.setDate(start.getDate() - 90); break;
+      case '1Y': start.setFullYear(start.getFullYear() - 1); break;
+      case 'ALL': start.setFullYear(2020, 0, 1); break;
+      default: start.setDate(start.getDate() - 30);
+    }
+    this.dateRange = { start, end, preset };
+    document.getElementById('date-start').value = start.toISOString().split('T')[0];
+    document.getElementById('date-end').value = end.toISOString().split('T')[0];
+    this.apply();
+  }
+
+  filterData(data) {
+    return data.filter(d => {
+      const date = new Date(d.date);
+      return date >= this.dateRange.start && date <= this.dateRange.end;
+    });
+  }
+
+  onChange(callback) {
+    this.callbacks.push(callback);
+    return () => {
+      this.callbacks = this.callbacks.filter(c => c !== callback);
+    };
+  }
+
+  apply() {
+    const event = new CustomEvent('filter:changed', { detail: { ...this.dateRange } });
+    document.dispatchEvent(event);
+    this.callbacks.forEach(cb => cb(this.dateRange));
+  }
+}
+
+const filters = new FilterController();
+
+// KPI Card component that updates on filter change
+class KPICard {
+  constructor(containerId, config) {
+    this.container = document.getElementById(containerId);
+    this.config = config; // { title, metric, platform, format }
+    this.init();
+  }
+
+  init() {
+    filters.onChange((range) => this.update(range));
+    this.update(filters.dateRange);
+  }
+
+  update(range) {
+    const filtered = filters.filterData(window.mockData);
+    const current = this.calculateMetric(filtered, range);
+    const previous = this.calculateMetric(filtered, this.getPreviousRange(range));
+    const change = previous > 0 ? ((current - previous) / previous * 100) : 0;
+    this.render(current, change);
+  }
+
+  calculateMetric(data, range) {
+    const filtered = data.filter(d => {
+      const date = new Date(d.date);
+      return date >= range.start && date <= range.end;
+    });
+    if (this.config.platform) {
+      const platformData = filtered.filter(d => d.platform === this.config.platform);
+      const values = platformData.map(d => d[this.config.metric]);
+      return values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+    }
+    const values = filtered.map(d => d[this.config.metric]);
+    return values.length > 0 ? values.reduce((a, b) => a + b, 0) : 0;
+  }
+
+  getPreviousRange(current) {
+    const diff = current.end - current.start;
+    return { start: new Date(current.start.getTime() - diff), end: new Date(current.start) };
+  }
+
+  render(value, change) {
+    const formatted = this.config.format === 'pct'
+      ? value.toFixed(2) + '%'
+      : value >= 1000000
+        ? (value / 1000000).toFixed(1) + 'M'
+        : value >= 1000
+          ? (value / 1000).toFixed(1) + 'K'
+          : Math.round(value).toLocaleString();
+    const up = change >= 0;
+    this.container.innerHTML = `
+      <div class="kpi-header">
+        <span class="kpi-title">${this.config.title}</span>
+        <i class="fas fa-${this.config.icon || 'chart-line'}"></i>
+      </div>
+      <div class="kpi-value">${formatted}</div>
+      <div class="kpi-change ${up ? 'positive' : 'negative'}">
+        <i class="fas fa-${up ? 'arrow-up' : 'arrow-down'}"></i>
+        ${Math.abs(change).toFixed(1)}% vs previous period
+      </div>
+    `;
+  }
+}</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 4: Data Export to CSV and PNG</h4>
+          <p>Implement export functionality for CSV (raw data) and PNG (chart images and full dashboard screenshots).</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class ExportService {
+  exportCSV(data, filename = 'social-media-report.csv') {
+    if (!data || data.length === 0) {
+      showToast('No data to export', 'warning');
+      return;
+    }
+    const headers = Object.keys(data[0]);
+    const csvRows = [
+      headers.join(','),
+      ...data.map(row =>
+        headers.map(h => {
+          const val = row[h];
+          return typeof val === 'string' && val.includes(',')
+            ? `"${val}"` : val;
+        }).join(',')
+      )
+    ];
+    const csvContent = csvRows.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    showToast('CSV exported successfully', 'success');
+  }
+
+  exportChartPNG(chartId, filename = 'chart.png') {
+    const chart = chartManager.charts.get(chartId);
+    if (!chart) {
+      showToast('Chart not found', 'error');
+      return;
+    }
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = chart.toBase64Image('image/png', 1);
+    link.click();
+    showToast('Chart exported as PNG', 'success');
+  }
+
+  async exportFullDashboardPNG(filename = 'dashboard-report.png') {
+    showToast('Generating dashboard screenshot...', 'info');
+    try {
+      const dashboard = document.getElementById('dashboard');
+      const canvas = await html2canvas(dashboard, {
+        backgroundColor: getComputedStyle(document.documentElement)
+          .getPropertyValue('--bg').trim() || '#ffffff',
+        scale: 2,
+        useCORS: true,
+        logging: false
+      });
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('Dashboard exported as PNG', 'success');
+    } catch (error) {
+      showToast('Failed to export dashboard: ' + error.message, 'error');
+    }
+  }
+
+  exportCombinedReport() {
+    const data = filters.filterData(window.mockData);
+    this.exportCSV(data);
+    setTimeout(() => this.exportFullDashboardPNG(), 500);
+  }
+}
+
+const exporter = new ExportService();
+
+// Button handlers
+document.getElementById('export-csv').addEventListener('click', () => {
+  const filtered = filters.filterData(window.mockData);
+  exporter.exportCSV(filtered);
+});
+
+document.getElementById('export-png').addEventListener('click', () => {
+  exporter.exportFullDashboardPNG();
+});
+
+document.getElementById('export-chart').addEventListener('click', () => {
+  exporter.exportChartPNG('followers-chart', 'followers-trend.png');
+});</code></pre>
+        </div>
+        <div class="phase-card">
+          <h4>Step 5: Dark Mode Theme with Chart.js Synchronization</h4>
+          <p>Implement a theme toggle that switches between light and dark modes, updating both CSS custom properties and Chart.js configuration synchronously.</p>
+          <pre style="background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6"><code>class ThemeManager {
+  constructor() {
+    this.theme = localStorage.getItem('dashboard-theme') || 'light';
+    this.apply(this.theme);
+    this.init();
+  }
+
+  init() {
+    const toggle = document.getElementById('theme-toggle');
+    toggle?.addEventListener('click', () => {
+      this.toggle();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 't' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        this.toggle();
+      }
+    });
+  }
+
+  toggle() {
+    this.theme = this.theme === 'light' ? 'dark' : 'light';
+    this.apply(this.theme);
+  }
+
+  apply(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('dashboard-theme', theme);
+
+    // Update Chart.js defaults
+    const isDark = theme === 'dark';
+    Chart.defaults.color = isDark ? '#94a3b8' : '#64748b';
+    Chart.defaults.borderColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+
+    // Update grid colors on existing charts
+    chartManager.updateChartColors(theme);
+
+    // Update toggle icon
+    const icon = document.getElementById('theme-toggle')?.querySelector('i');
+    if (icon) {
+      icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    // Add transition class for smooth theme change
+    document.body.classList.add('theme-transitioning');
+    clearTimeout(this.transitionTimer);
+    this.transitionTimer = setTimeout(() => {
+      document.body.classList.remove('theme-transitioning');
+    }, 300);
+  }
+}
+
+const themeManager = new ThemeManager();
+
+// Detect system preference
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+prefersDark.addEventListener('change', (e) => {
+  if (!localStorage.getItem('dashboard-theme')) {
+    themeManager.apply(e.matches ? 'dark' : 'light');
+  }
+});
+
+// Initialize dashboard with all components
+document.addEventListener('DOMContentLoaded', async () => {
+  window.mockData = generateMockData(365);
+
+  // Render KPI cards
+  const kpiConfigs = [
+    { containerId: 'kpi-followers', title: 'Total Followers', metric: 'followers', icon: 'users' },
+    { containerId: 'kpi-engagement', title: 'Avg Engagement Rate', metric: 'engagementRate', format: 'pct', icon: 'chart-line' },
+    { containerId: 'kpi-impressions', title: 'Total Impressions', metric: 'impressions', icon: 'eye' },
+    { containerId: 'kpi-reach', title: 'Total Reach', metric: 'reach', icon: 'bullseye' }
+  ];
+  kpiConfigs.forEach(cfg => new KPICard(cfg.containerId, cfg));
+
+  // Create charts
+  function updateCharts(range) {
+    const filtered = filters.filterData(window.mockData);
+    // Aggregate by date
+    const byDate = {};
+    filtered.forEach(d => {
+      if (!byDate[d.date]) byDate[d.date] = {};
+      byDate[d.date][d.platform] = d;
+    });
+    const dates = Object.keys(byDate).sort();
+    const labels = dates.map(d => {
+      const date = new Date(d);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    });
+
+    // Followers line chart
+    chartManager.createLineChart('followers-chart', labels, PLATFORMS.map(p => ({
+      label: p.charAt(0).toUpperCase() + p.slice(1),
+      data: dates.map(d => byDate[d][p]?.followers || 0),
+      borderColor: chartManager.defaultColors[p],
+      backgroundColor: chartManager.defaultColors[p] + '20',
+      fill: true,
+      tension: 0.4
+    })));
+
+    // Platform doughnut chart
+    const totals = PLATFORMS.map(p => {
+      const platformData = filtered.filter(d => d.platform === p);
+      return platformData.reduce((sum, d) => sum + d.followers, 0);
+    });
+    chartManager.createDoughnutChart('platform-chart',
+      PLATFORMS.map(p => p.charAt(0).toUpperCase() + p.slice(1)),
+      totals,
+      PLATFORMS.map(p => chartManager.defaultColors[p])
+    );
+
+    // Engagement bar chart
+    const engagementByPlatform = PLATFORMS.map(p => {
+      const platformData = filtered.filter(d => d.platform === p);
+      const avg = platformData.reduce((sum, d) => sum + d.engagementRate, 0) / platformData.length;
+      return +avg.toFixed(2);
+    });
+    chartManager.createBarChart('engagement-chart',
+      PLATFORMS.map(p => p.charAt(0).toUpperCase() + p.slice(1)),
+      [{
+        label: 'Engagement Rate (%)',
+        data: engagementByPlatform,
+        backgroundColor: PLATFORMS.map(p => chartManager.defaultColors[p] + '80'),
+        borderColor: PLATFORMS.map(p => chartManager.defaultColors[p]),
+        borderWidth: 2,
+        borderRadius: 6
+      }]
+    );
+  }
+
+  filters.onChange(updateCharts);
+  updateCharts(filters.dateRange);
+});</code></pre>
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-vial" style="color:var(--success)"></i> Testing Guide</h2>
+        <p><strong>Chart Testing:</strong> Verify all five chart types render correctly with data. Test responsive resizing by dragging the browser window. Change the date range and verify all charts update simultaneously. Toggle dark mode and verify chart colors update correctly.</p>
+        <p><strong>KPI Cards:</strong> Verify numbers display in correct format (1.2K, 3.5M, 4.56%). Check trend arrows and percentage changes are calculated correctly by comparing with manual calculations. Verify animated counter transitions work.</p>
+        <p><strong>Date Range Filtering:</strong> Test each preset button (7D, 30D, 90D, 1Y, All). Set a custom date range with the date pickers. Verify the active preset button is highlighted. Switch between presets rapidly and verify no race conditions.</p>
+        <p><strong>Export Testing:</strong> Click CSV export and verify the file downloads with correct data. Test chart PNG export and verify the image quality. Test full dashboard export with html2canvas and verify it captures all visible content. Test export with no data and verify the error message.</p>
+        <p><strong>Theme Testing:</strong> Toggle between light and dark mode. Verify all text, backgrounds, and chart elements update. Refresh the page and verify the theme persists. Verify the toggle icon (moon/sun) matches the current theme.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-rocket" style="color:var(--primary)"></i> Deployment Guide</h2>
+        <p>This is a fully client-side application with no backend dependencies. Deploy to any static hosting: GitHub Pages (enable from main branch), Netlify (drag-drop or connect repo), Vercel (import project), or any web server. The app uses Chart.js CDN, html2canvas CDN, and Font Awesome CDN - ensure these are loaded. All data is generated client-side (mock data) and stored in localStorage. For production, connect to real API endpoints (Twitter API, Instagram Graph API, LinkedIn API) via serverless functions.</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
+        <div class="challenge-card">
+          <strong>1. Chart.js Canvas Memory Leaks</strong><br>
+          Creating new Chart.js instances without destroying old ones causes canvas elements to accumulate in memory. Charts continue to run animation frames and event listeners even when off-screen. Always call chart.destroy() before creating a new chart on the same canvas element. Use a chart manager that tracks all instances and provides a centralized destroy method. On page navigation or theme change, destroy all charts before recreating them.
+        </div>
+        <div class="challenge-card">
+          <strong>2. Responsive Chart Sizing Issues</strong><br>
+          Charts that don't resize properly when the window changes or when a sidebar toggles. Always set responsive: true and maintainAspectRatio: false for fluid sizing. Charts need a parent container with explicit height (use CSS height or aspect-ratio). Without a defined height, charts collapse to 0px. Use ResizeObserver to detect container size changes and call chart.resize(). For dashboards with drag-and-drop widgets, charts need forced resize after reordering.
+        </div>
+        <div class="challenge-card">
+          <strong>3. Incorrect Date Range Filtering Logic</strong><br>
+          Date comparisons using JavaScript Date objects can be tricky - start and end boundaries inclusive/exclusive logic is often wrong. Always use start of day (setHours(0,0,0,0)) for start dates and end of day (setHours(23,59,59,999)) for end dates to capture full days. When calculating previous period comparisons, ensure the previous range has the same duration as the current range. Use date libraries (date-fns, dayjs) for reliable date arithmetic.
+        </div>
+        <div class="challenge-card">
+          <strong>4. Theme Changes Not Reflecting on Existing Charts</strong><br>
+          CSS custom properties change instantly but Chart.js doesn't automatically re-evaluate them. When switching themes, you must manually update Chart.js options (scales grid color, ticks color, legend labels color) and call chart.update('none') (with 'none' to prevent animation delay). Store the current theme's color values in CSS custom properties and read them with getComputedStyle when updating charts. Chart.defaults.color should also be updated for new chart instances.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
+        <div class="qa-card">
+          <strong>Q:</strong> How does Chart.js handle canvas rendering and when should you use the 'none' update mode?<br>
+          <strong>A:</strong> Chart.js uses the HTML5 Canvas API for rendering. The chart.update() method re-renders the chart with new data/options. The mode parameter controls animation: 'default' animates transitions, 'none' skips animation (useful for rapid updates like theme changes or resize), 'reset' resets to initial state, and 'show' shows hidden datasets. Use 'none' for theme changes (no animation needed), resize events (prevent janky animations), and data updates that happen faster than the animation duration.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> Explain the difference between Canvas and SVG for data visualization. When would you use each?<br>
+          <strong>A:</strong> Canvas uses pixel-based rendering on a bitmap grid. SVG uses vector-based XML elements. Canvas advantages: better performance for large datasets (10,000+ points), easier for pixel manipulation and animations. SVG advantages: sharp at any resolution, accessible (screen readers can read text elements), CSS-stylable, smaller file size for simple graphics, and supports event handling per element. For dashboards: use Canvas/Chart.js for complex charts with lots of data points, SVG/D3.js for simpler infographics, interactive maps, and charts where individual element interactivity is critical.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you make chart data accessible to screen readers?<br>
+          <strong>A:</strong> Canvas-based charts are inherently inaccessible. Strategies: (1) Provide an aria-label describing the chart type and summary of the data. (2) Include a data table below or alongside the chart with the same data (use role="table" for screen readers). (3) Use Chart.js built-in accessibility features: turn on accessibility plugin, provide descriptive labels, use patterns/hatching in addition to colors for data distinction. (4) For SVG charts, add role="img", aria-label, and title/desc elements. (5) Ensure color contrast meets WCAG AA standards (4.5:1 for text on charts).
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How would you implement real-time data updates on a dashboard (e.g., live social media metrics)?<br>
+          <strong>A:</strong> (1) Use WebSockets (Socket.io) for push-based updates from the server, listening for 'metrics:update' events. (2) On new data, push to the existing data array and remove old data to maintain a sliding window (e.g., last 24 hours). (3) Call chart.update('none') for instantaneous updates without animation delay. (4) Implement throttling (max 1 update per second) to prevent chart flickering during high-frequency updates. (5) Show a "Live" indicator with a pulsing dot. (6) For KPI cards, use requestAnimationFrame for smooth number transitions. (7) Pause updates when the tab is hidden (Page Visibility API) to save resources.
+        </div>
+        <div class="qa-card">
+          <strong>Q:</strong> How do you handle large datasets in Chart.js without performance degradation?<br>
+          <strong>A:</strong> (1) Data decimation: reduce the number of data points by sampling (e.g., take every 10th point for 10,000+ datasets). (2) Use the Chart.js decimation plugin which automatically reduces data shown based on chart width. (3) Disable animations and transitions for large datasets. (4) Use stepped line charts instead of smooth (tension: 0.4) which requires more rendering calculations. (5) Enable the dataset's segment property to skip drawing invisible segments. (6) For real-time data, implement a sliding window of the last N points. (7) Consider using WebGL-based charting (Chart.js with WebGL renderer or deck.gl) for millions of data points.
+        </div>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-file-alt" style="color:var(--primary)"></i> Resume Description</h2>
+        <ul>
+          <li>Architected a multi-platform social media analytics dashboard using Chart.js with 5+ chart types (line, bar, doughnut, radar, polar) handling 10,000+ data points with responsive resizing and dark mode support</li>
+          <li>Implemented a reactive date range filtering system with preset buttons and custom date pickers that synchronously updates all charts, KPI cards, and data tables via a custom event-driven architecture</li>
+          <li>Built a Chart.js manager singleton with lifecycle management (create/update/destroy/resize) preventing canvas memory leaks across theme changes and data updates</li>
+          <li>Developed export functionality for CSV data download and PNG image capture of individual charts and full dashboard using html2canvas with high-DPI scaling</li>
+          <li>Created a mock data generator producing realistic social media metrics with growth trends, weekday seasonality, and platform-specific patterns for five major platforms</li>
+          <li>Implemented dark/light theme toggle with CSS custom properties synchronized with Chart.js configuration (grid colors, text colors, legend styles) and prefers-color-scheme OS-level detection</li>
+          <li>Designed KPI summary cards with animated counter transitions, percentage change indicators, and trend arrows that update reactively on filter changes</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fab fa-github" style="color:var(--primary)"></i> GitHub Best Practices</h2>
+        <p><strong>README.md:</strong> Include dashboard screenshots in both themes, feature highlights with icons, live demo link, and a "Quick Start" section. Add a mock data documentation explaining the data generation patterns and how to replace with real API data.</p>
+        <p><strong>Commit Messages:</strong> feat: implement Chart.js line chart for follower trends, feat: add CSV and PNG export functionality, fix: prevent chart memory leaks on theme change, perf: optimize chart rendering with 'none' update mode on resize, refactor: extract chart manager into singleton module.</p>
+        <p><strong>Code Quality:</strong> Use ESLint with the airbnb config. Document Chart.js configuration with JSDoc comments explaining the visual design decisions (why specific colors, tensions, and scales were chosen).</p>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Extension Ideas</h2>
+        <ul>
+          <li><strong>Real API Integration:</strong> Replace mock data with real API calls to Twitter API (v2), Instagram Graph API, LinkedIn API, YouTube Data API, and TikTok API. Implement OAuth 2.0 authentication flow. Add rate limiting awareness and automatic token refresh.</li>
+          <li><strong>AI-Powered Insights:</strong> Integrate with OpenAI or Anthropic APIs to generate natural language insights from the data (e.g., "Your Instagram engagement increased 15% this week, driven by Reels content. Best posting time is 6-8 PM on weekdays."). Display insights as a scrolling ticker or cards.</li>
+          <li><strong>Scheduled Reports:</strong> Add a feature to schedule automated email reports. Users configure frequency (weekly, monthly) and recipients. Generate PDF reports using Puppeteer on the server. Send via SendGrid or AWS SES. Include performance benchmarks and competitor analysis.</li>
+          <li><strong>Widget Builder:</strong> Create a drag-and-drop widget builder where users can customize their dashboard layout, choose which metrics to display, configure chart types, and set custom thresholds for alerts. Persist layouts per user in IndexedDB or sync to a backend.</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-external-link-alt" style="color:var(--primary)"></i> Resources</h2>
+        <ul>
+          <li><a href="https://www.chartjs.org/docs/latest/" target="_blank">Chart.js Documentation</a> - Official documentation with examples</li>
+          <li><a href="https://html2canvas.hertzen.com/" target="_blank">html2canvas Documentation</a> - Screenshot capture library</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank">MDN CSS Custom Properties</a> - Theming with CSS variables</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank">MDN Canvas API</a> - HTML5 Canvas reference</li>
+          <li><a href="https://date-fns.org/docs/Getting-Started" target="_blank">date-fns Documentation</a> - Date utility library</li>
+        </ul>
+      </div>
+
+      <div class="section glass-card">
+        <h2><i class="fas fa-project-diagram" style="color:var(--primary)"></i> Related Projects</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+          <a href="weather-dashboard.html" class="btn btn-ghost">Weather Dashboard</a>
+          <a href="ecommerce-store.html" class="btn btn-ghost">E-Commerce Store</a>
+          <a href="movie-search.html" class="btn btn-ghost">Movie Search App</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
+        <a href="movie-search.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Previous: Movie Search</a>
+        <a href="../Projects.html" class="btn btn-primary">Back to Projects <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+      <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+

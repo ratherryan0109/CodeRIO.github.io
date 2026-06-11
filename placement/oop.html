@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OOP Concepts - Placement Prep - CodeRio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-page="Placement">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      CodeRio
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../Learn.html">Learn</a></li>
+      <li><a href="../Practice.html">Practice</a></li>
+      <li><a href="../Projects.html">Projects</a></li>
+      <li><a href="../About.html">About</a></li>
+      <li><a href="../auth/profile.html">Profile</a></li>
+    </ul>
+    <div class="nav-auth"></div>
+  </nav>
+
+  <div id="toast" class="toast-container"></div>
+
+  <main>
+    <section class="page-header glass">
+      <div class="header-content">
+        <h1><i class="fas fa-cubes"></i> Object-Oriented Programming</h1>
+        <p>Master OOP concepts essential for coding interviews at top tech companies.</p>
+        <div class="header-stats">
+          <span><i class="fas fa-book"></i> 4 Pillars</span>
+          <span><i class="fas fa-question-circle"></i> 20+ Questions</span>
+          <span><i class="fas fa-star"></i> High Priority</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="concepts-grid">
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-lock"></i></div>
+        <h3>Encapsulation</h3>
+        <p>Binding data and methods together while restricting direct access to internal state. Achieved via access modifiers (private, protected, public).</p>
+        <div class="concept-example">
+          <code>class BankAccount {<br>&nbsp;&nbsp;private double balance;<br>&nbsp;&nbsp;public void deposit(double amt) { ... }<br>}</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-code-branch"></i></div>
+        <h3>Inheritance</h3>
+        <p>Creating new classes from existing ones, promoting code reuse. Supports single, multilevel, hierarchical, and hybrid inheritance patterns.</p>
+        <div class="concept-example">
+          <code>class Dog extends Animal {<br>&nbsp;&nbsp;void bark() { ... }<br>}</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-shapes"></i></div>
+        <h3>Polymorphism</h3>
+        <p>Objects taking many forms — compile-time (method overloading) and runtime (method overriding). Enables flexible and extensible code.</p>
+        <div class="concept-example">
+          <code>Animal a = new Dog();<br>a.sound(); // Dog's sound</code>
+        </div>
+      </div>
+      <div class="concept-card glass">
+        <div class="concept-icon"><i class="fas fa-eye"></i></div>
+        <h3>Abstraction</h3>
+        <p>Hiding implementation details and showing only essential features. Achieved via abstract classes and interfaces.</p>
+        <div class="concept-example">
+          <code>interface Drawable {<br>&nbsp;&nbsp;void draw();<br>}</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes-section glass">
+      <h2><i class="fas fa-pen-alt"></i> Detailed Notes</h2>
+      <div class="notes-content">
+        <div class="note-block">
+          <h4>Class vs Object</h4>
+          <p>A class is a blueprint; an object is an instance. Classes define attributes (fields) and behaviors (methods). Objects occupy memory and have state.</p>
+        </div>
+        <div class="note-block">
+          <h4>Constructor Types</h4>
+          <p>Default, parameterized, copy constructors. Constructors initialize object state. In Java/C++, destructors clean up; Python uses <code>__init__</code> and <code>__del__</code>.</p>
+        </div>
+        <div class="note-block">
+          <h4>this / self Keyword</h4>
+          <p>Refers to the current instance. Used to resolve name conflicts, call other constructors, and pass the current object as a parameter.</p>
+        </div>
+        <div class="note-block">
+          <h4>Static Members</h4>
+          <p>Static fields/methods belong to the class, not instances. Shared across all objects. Utility methods and constants are often static.</p>
+        </div>
+        <div class="note-block">
+          <h4>Interfaces vs Abstract Classes</h4>
+          <p>Interfaces define contracts (pure virtual); abstract classes provide partial implementation. Java 8+ interfaces have default methods. Multiple inheritance is possible via interfaces.</p>
+        </div>
+        <div class="note-block">
+          <h4>SOLID Principles</h4>
+          <p>S: Single Responsibility, O: Open/Closed, L: Liskov Substitution, I: Interface Segregation, D: Dependency Inversion. Foundation of clean OOP design.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interview-questions glass">
+      <h2><i class="fas fa-question-circle"></i> Interview Questions</h2>
+      <div class="questions-list">
+        <div class="question-item">
+          <h4>What is the diamond problem in inheritance?</h4>
+          <p>Occurs when a class inherits from two classes that have a common ancestor. Leads to ambiguity in method resolution. Java avoids it via interfaces; C++ uses virtual inheritance.</p>
+        </div>
+        <div class="question-item">
+          <h4>Explain method overloading vs overriding.</h4>
+          <p>Overloading: same name, different parameters (compile-time). Overriding: subclass redefines parent method (runtime). Overriding requires same signature and return type (covariant allowed).</p>
+        </div>
+        <div class="question-item">
+          <h4>What is a virtual function?</h4>
+          <p>A function whose behavior can be overridden in a derived class. In C++, declared with <code>virtual</code>. Enables runtime polymorphism via vtable dispatch.</p>
+        </div>
+        <div class="question-item">
+          <h4>Difference between composition and inheritance?</h4>
+          <p>Composition: "has-a" relationship (object contains other objects). Inheritance: "is-a" relationship. Favor composition over inheritance for flexibility.</p>
+        </div>
+        <div class="question-item">
+          <h4>What are access modifiers?</h4>
+          <p>Control visibility: <code>public</code> (anywhere), <code>protected</code> (subclasses + same package), <code>private</code> (same class), default/package-private (Java).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cheatsheet glass">
+      <h2><i class="fas fa-file-alt"></i> Cheat Sheet</h2>
+      <div class="cheatsheet-grid">
+        <div class="cheatsheet-item">
+          <span class="cs-term">Class</span>
+          <span class="cs-def">Blueprint for objects</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Object</span>
+          <span class="cs-def">Instance of a class</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Encapsulation</span>
+          <span class="cs-def">Data hiding + methods</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Inheritance</span>
+          <span class="cs-def">Parent -> Child reuse</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Polymorphism</span>
+          <span class="cs-def">Many forms (overload/override)</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Abstraction</span>
+          <span class="cs-def">Hide complexity, show essentials</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Interface</span>
+          <span class="cs-def">Contract without implementation</span>
+        </div>
+        <div class="cheatsheet-item">
+          <span class="cs-term">Abstract Class</span>
+          <span class="cs-def">Partial implementation base</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <footer class="footer">
+    <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
+      <div class="footer-col"><h4>CodeRio</h4><p style="color:var(--text-muted);font-size:0.9rem">Empowering developers through interactive learning.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="../faq.html">FAQ</a></li><li><a href="../privacy-policy.html">Privacy Policy</a></li><li><a href="../terms-of-service.html">Terms of Service</a></li><li><a href="../documentation.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fab fa-github"></i> GitHub</a></li><li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li><li><a href="#"><i class="fab fa-discord"></i> Discord</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="text-align:center;padding:1rem 8%;border-top:1px solid var(--glass-border-light);color:var(--text-muted);font-size:0.85rem">&copy; 2026 CodeRio. All rights reserved.</div>
+  </footer>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
+
