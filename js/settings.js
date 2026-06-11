@@ -95,26 +95,22 @@ function initSecuritySection() {
       if (newPass.length < 6) { Utils.showToast('Password must be at least 6 characters.', 'error'); return; }
       if (newPass !== confirm) { Utils.showToast('Passwords do not match.', 'error'); return; }
       try {
-        const sb = getSupabase();
-        if (sb) {
-          const user = Utils.getStorage('coderio_user', {});
-          const { error: reAuthError } = await sb.auth.signInWithPassword({
-            email: user.email,
-            password: current
-          });
-          if (reAuthError) {
-            Utils.showToast('Current password is incorrect.', 'error');
-            return;
-          }
-          const { error } = await sb.auth.updateUser({ password: newPass });
-          if (error) throw error;
+        const userFirebase = firebase.auth().currentUser;
+        if (userFirebase) {
+          const credential = firebase.auth.EmailAuthProvider.credential(userFirebase.email, current);
+          await userFirebase.reauthenticateWithCredential(credential);
+          await userFirebase.updatePassword(newPass);
         } else {
-          Utils.showToast('Supabase not available. Password not saved to server.', 'warning');
+          Utils.showToast('Firebase not available. Password not saved.', 'warning');
         }
         Utils.showToast('Password updated!', 'success');
         form.reset();
       } catch (err) {
-        Utils.showToast(err.message || 'Failed to update password.', 'error');
+        if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+          Utils.showToast('Current password is incorrect.', 'error');
+        } else {
+          Utils.showToast(err.message || 'Failed to update password.', 'error');
+        }
       }
     });
   }

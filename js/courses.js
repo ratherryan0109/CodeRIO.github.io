@@ -24,15 +24,12 @@ async function loadHomeCourses() {
 
   const levelBadge = { beginner: 'badge-primary', intermediate: 'badge-warning', advanced: 'badge-error' };
   const levelLabel = l => l.charAt(0).toUpperCase() + l.slice(1);
-  const durationLabel = d => {
-    const n = parseInt(d);
-    return n ? n + (d.includes('week') ? ' Weeks' : ' modules') : 'Ongoing';
-  };
 
-  grid.innerHTML = data.map(course => {
+  const shown = data.slice(0, 10);
+  grid.innerHTML = shown.map(course => {
     const modCount = course.modules ? course.modules.length : 0;
     return `
-      <a href="${course.link || '/courses/' + course.id + '.html'}" class="course-card">
+      <a href="${course.link || 'courses/' + course.id + '.html'}" class="course-card">
         <div class="course-card-header">
           <img src="${course.icon}" alt="${course.title}" loading="lazy">
           <div class="course-card-header-text">
@@ -54,6 +51,8 @@ async function loadHomeCourses() {
       </a>
     `;
   }).join('');
+
+  grid.insertAdjacentHTML('afterend', '<div style="text-align:center;margin-top:2rem"><a href="Learn.html" style="color:var(--primary);font-weight:600">View More Courses <i class="fas fa-arrow-right"></i></a></div>');
 }
 
 function initCoursePage() {

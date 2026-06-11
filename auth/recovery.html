@@ -118,7 +118,8 @@
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-auth-compat.js"></script>
   <script src="../js/utils.js"></script>
   <script src="../js/auth.js"></script>
   <script src="../js/main.js"></script>
@@ -148,32 +149,18 @@
     }
 
     document.addEventListener('DOMContentLoaded', async function() {
-      const sb = getSupabase();
-      if (!sb) {
+      if (typeof firebase === 'undefined') {
         document.getElementById('recoveryFormContainer').style.display = 'none';
         document.getElementById('recoveryInvalid').style.display = 'block';
-        document.querySelector('#recoveryInvalid p').textContent = 'Supabase client not available. Please check your internet connection.';
+        document.querySelector('#recoveryInvalid p').textContent = 'Firebase client not available. Please check your internet connection.';
         return;
       }
 
-      const hashParams = new URLSearchParams(window.location.hash.replace('#', '?'));
-      const accessToken = hashParams.get('access_token');
-      const type = hashParams.get('type');
-      const refreshToken = hashParams.get('refresh_token');
+      const params = new URLSearchParams(window.location.search);
+      const oobCode = params.get('oobCode');
+      const mode = params.get('mode');
 
-      if (type === 'recovery' && accessToken) {
-        try {
-          const { error } = await sb.auth.setSession({
-            access_token: accessToken,
-            refresh_token: refreshToken || accessToken
-          });
-          if (error) throw error;
-        } catch (err) {
-          document.getElementById('recoveryFormContainer').style.display = 'none';
-          document.getElementById('recoveryInvalid').style.display = 'block';
-          return;
-        }
-      } else {
+      if (mode !== 'resetPassword' || !oobCode) {
         document.getElementById('recoveryFormContainer').style.display = 'none';
         document.getElementById('recoveryInvalid').style.display = 'block';
         return;
@@ -227,8 +214,7 @@
         btnSpinner.style.display = 'inline-block';
 
         try {
-          const { error } = await sb.auth.updateUser({ password: password });
-          if (error) throw error;
+          await firebase.auth().confirmPasswordReset(oobCode, password);
           form.style.display = 'none';
           document.getElementById('recoverySuccess').style.display = 'block';
           Utils.showToast('Password reset successfully!', 'success');

@@ -1,58 +1,62 @@
-const SUPABASE_CONFIG = {
-  url: window.SUPABASE_URL || 'https://dzvsxlufiryiaerejqeb.supabase.co',
-  key: window.SUPABASE_ANON_KEY || 'sb_publishable_ep1fi8taYk_xsvcOaiGt3g_wSgt_p-6',
-  siteUrl: window.location.origin
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCOOsgmrRhyb11aPbnTXe7L4t6MTUIYAgs",
+  authDomain: "coderio-88084.firebaseapp.com",
+  projectId: "coderio-88084",
+  storageBucket: "coderio-88084.firebasestorage.app",
+  messagingSenderId: "361678330344",
+  appId: "1:361678330344:web:ff47d67e6a5e26c74a2c5d"
 };
 
-let supabaseClient = null;
-let supabaseReady = false;
+let firebaseApp = null;
+let firebaseReady = false;
 
-function getSupabase() {
-  if (supabaseClient) return supabaseClient;
-  if (typeof supabase === 'undefined') return null;
-  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.key) return null;
+function getFirebase() {
+  if (firebaseApp) return firebaseApp;
+  if (typeof firebase === 'undefined') return null;
   try {
-    supabaseClient = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key, {
-      auth: { flowType: 'pkce' }
-    });
-    supabaseReady = true;
+    firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
+    firebaseReady = true;
   } catch (e) {
-    console.error('Supabase init error:', e);
+    console.error('Firebase init error:', e);
     return null;
   }
-  return supabaseClient;
+  return firebaseApp;
 }
 
-getSupabase();
+getFirebase();
 
-function handleSupabaseError(error) {
+function handleFirebaseError(error) {
   if (!error) return 'An unexpected error occurred.';
-  const msg = error.message || '';
   const code = error.code || '';
-  if (msg.includes('Invalid login credentials')) return 'Invalid email or password.';
-  if (msg.includes('Email not confirmed')) return 'Please confirm your email before logging in. Check your inbox or configure Auto Confirm in Supabase Dashboard.';
-  if (msg.includes('User already registered')) return 'An account with this email already exists.';
-  if (msg.includes('rate limit')) return 'Too many attempts. Please try again later.';
-  if (msg.includes('Password should be at least 6 characters')) return 'Password must be at least 6 characters.';
-  if (msg.includes('Error sending confirmation email') || code === 'unexpected_failure') return 'Supabase email service is not configured. Go to Supabase Dashboard → Authentication → Settings → set "Confirm email" to OFF or configure SMTP.';
-  if (msg.includes('to send email')) return 'Supabase email service is not configured. Configure SMTP in Supabase Dashboard to enable email features.';
-  return msg || 'Authentication failed. Check Supabase Dashboard configuration.';
+  const msg = error.message || '';
+  if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential')
+    return 'Invalid email or password.';
+  if (code === 'auth/email-already-in-use') return 'An account with this email already exists.';
+  if (code === 'auth/weak-password') return 'Password must be at least 6 characters.';
+  if (code === 'auth/too-many-requests') return 'Too many attempts. Please try again later.';
+  if (code === 'auth/user-disabled') return 'This account has been disabled.';
+  if (code === 'auth/invalid-email') return 'Invalid email address.';
+  if (code === 'auth/operation-not-allowed') return 'This sign-in method is not enabled. Please contact support.';
+  if (code === 'auth/requires-recent-login') return 'Please log out and log in again before making this change.';
+  if (code === 'auth/popup-closed-by-user') return 'Sign-in popup was closed before completing.';
+  if (code === 'auth/network-request-failed') return 'Network error. Check your internet connection.';
+  return msg || 'Authentication failed.';
 }
 
-function saveUserSession(user) {
-  if (!user) return;
+function saveUserSession(firebaseUser) {
+  if (!firebaseUser) return;
   const userData = {
-    id: user.id,
-    email: user.email,
-    name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
-    avatar: user.user_metadata?.avatar_url || ''
+    id: firebaseUser.uid,
+    email: firebaseUser.email,
+    name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'User',
+    avatar: firebaseUser.photoURL || ''
   };
   localStorage.setItem('coderio_user', JSON.stringify(userData));
   Utils.migrateStorage();
 }
 
-function onSignInSuccess(user) {
-  saveUserSession(user);
+function onSignInSuccess(firebaseUser) {
+  saveUserSession(firebaseUser);
   const activity = Utils.getStorage('coderio_activity', []);
   activity.unshift({ text: 'Logged in to CodeRio', time: new Date().toISOString(), type: 'blue' });
   Utils.setStorage('coderio_activity', activity.slice(0, 50));
@@ -85,9 +89,9 @@ async function initLoginPage() {
   const googleBtn = document.getElementById('googleLoginBtn');
   const githubBtn = document.getElementById('githubLoginBtn');
 
-  if (!supabaseReady || typeof supabase === 'undefined') {
+  if (!firebaseReady || typeof firebase === 'undefined') {
     if (errorEl) {
-      errorEl.textContent = 'Supabase client library not loaded. Check your internet connection.';
+      errorEl.textContent = 'Firebase client library not loaded. Check your internet connection.';
       errorEl.style.display = 'block';
     }
     return;
@@ -112,17 +116,14 @@ async function initLoginPage() {
     if (btnText) btnText.textContent = 'Logging in...';
     if (btnSpinner) btnSpinner.style.display = 'inline-block';
     try {
-      const sb = getSupabase();
-      if (!sb) throw new Error('Supabase client not available.');
-      const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      if (data.user) {
-        onSignInSuccess(data.user);
-        Utils.showToast('Welcome back, ' + (data.user.user_metadata?.full_name || data.user.email?.split('@')[0] || 'User') + '!', 'success');
+      const result = await firebase.auth().signInWithEmailAndPassword(email, password);
+      if (result.user) {
+        onSignInSuccess(result.user);
+        Utils.showToast('Welcome back, ' + (result.user.displayName || result.user.email?.split('@')[0] || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       }
     } catch (err) {
-      if (errorEl) { errorEl.textContent = handleSupabaseError(err); errorEl.style.display = 'block'; }
+      if (errorEl) { errorEl.textContent = handleFirebaseError(err); errorEl.style.display = 'block'; }
       if (submitBtn) submitBtn.disabled = false;
       if (btnText) btnText.textContent = 'Log In';
       if (btnSpinner) btnSpinner.style.display = 'none';
@@ -132,22 +133,32 @@ async function initLoginPage() {
   if (googleBtn) {
     googleBtn.addEventListener('click', async () => {
       try {
-        const sb = getSupabase();
-        if (!sb) { Utils.showToast('Supabase not configured.', 'error'); return; }
-        const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: SUPABASE_CONFIG.siteUrl + '/dashboard/dashboard.html' } });
-        if (error) Utils.showToast(handleSupabaseError(error), 'error');
-      } catch (err) { Utils.showToast(handleSupabaseError(err), 'error'); }
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
+        onSignInSuccess(result.user);
+        Utils.showToast('Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
+        window.location.href = '../dashboard/dashboard.html';
+      } catch (err) {
+        if (err.code !== 'auth/popup-closed-by-user') {
+          Utils.showToast(handleFirebaseError(err), 'error');
+        }
+      }
     });
   }
 
   if (githubBtn) {
     githubBtn.addEventListener('click', async () => {
       try {
-        const sb = getSupabase();
-        if (!sb) { Utils.showToast('Supabase not configured.', 'error'); return; }
-        const { error } = await sb.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: SUPABASE_CONFIG.siteUrl + '/dashboard/dashboard.html' } });
-        if (error) Utils.showToast(handleSupabaseError(error), 'error');
-      } catch (err) { Utils.showToast(handleSupabaseError(err), 'error'); }
+        const provider = new firebase.auth.GithubAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
+        onSignInSuccess(result.user);
+        Utils.showToast('Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
+        window.location.href = '../dashboard/dashboard.html';
+      } catch (err) {
+        if (err.code !== 'auth/popup-closed-by-user') {
+          Utils.showToast(handleFirebaseError(err), 'error');
+        }
+      }
     });
   }
 }
@@ -166,9 +177,9 @@ async function initRegisterPage() {
   const githubBtn = document.getElementById('githubRegisterBtn');
   const termsCheck = document.getElementById('termsCheck');
 
-  if (!supabaseReady || typeof supabase === 'undefined') {
+  if (!firebaseReady || typeof firebase === 'undefined') {
     if (errorEl) {
-      errorEl.textContent = 'Supabase client library not loaded. Check your internet connection.';
+      errorEl.textContent = 'Firebase client library not loaded. Check your internet connection.';
       errorEl.style.display = 'block';
     }
     return;
@@ -192,31 +203,15 @@ async function initRegisterPage() {
     if (btnText) btnText.textContent = 'Creating account...';
     if (btnSpinner) btnSpinner.style.display = 'inline-block';
     try {
-      const sb = getSupabase();
-      if (!sb) throw new Error('Supabase client not available.');
-      const { data, error } = await sb.auth.signUp({
-        email,
-        password,
-        options: { data: { full_name: name } }
-      });
-      if (error) throw error;
-      if (data.user) {
-        if (data.user.identities && data.user.identities.length === 0) {
-          if (errorEl) {
-            errorEl.textContent = 'An account with this email already exists. Try logging in.';
-            errorEl.style.display = 'block';
-          }
-          if (submitBtn) submitBtn.disabled = false;
-          if (btnText) btnText.textContent = 'Create Account';
-          if (btnSpinner) btnSpinner.style.display = 'none';
-          return;
-        }
-        onSignInSuccess(data.user);
+      const result = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      if (result.user) {
+        await result.user.updateProfile({ displayName: name });
+        onSignInSuccess(result.user);
         Utils.showToast('Account created! You are now logged in.', 'success');
         setTimeout(() => window.location.href = '../dashboard/dashboard.html', 1500);
       }
     } catch (err) {
-      if (errorEl) { errorEl.textContent = handleSupabaseError(err); errorEl.style.display = 'block'; }
+      if (errorEl) { errorEl.textContent = handleFirebaseError(err); errorEl.style.display = 'block'; }
       if (submitBtn) submitBtn.disabled = false;
       if (btnText) btnText.textContent = 'Create Account';
       if (btnSpinner) btnSpinner.style.display = 'none';
@@ -226,22 +221,32 @@ async function initRegisterPage() {
   if (googleBtn) {
     googleBtn.addEventListener('click', async () => {
       try {
-        const sb = getSupabase();
-        if (!sb) { Utils.showToast('Supabase not configured.', 'error'); return; }
-        const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: SUPABASE_CONFIG.siteUrl + '/dashboard/dashboard.html' } });
-        if (error) Utils.showToast(handleSupabaseError(error), 'error');
-      } catch (err) { Utils.showToast(handleSupabaseError(err), 'error'); }
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
+        onSignInSuccess(result.user);
+        Utils.showToast('Account created! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
+        window.location.href = '../dashboard/dashboard.html';
+      } catch (err) {
+        if (err.code !== 'auth/popup-closed-by-user') {
+          Utils.showToast(handleFirebaseError(err), 'error');
+        }
+      }
     });
   }
 
   if (githubBtn) {
     githubBtn.addEventListener('click', async () => {
       try {
-        const sb = getSupabase();
-        if (!sb) { Utils.showToast('Supabase not configured.', 'error'); return; }
-        const { error } = await sb.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: SUPABASE_CONFIG.siteUrl + '/dashboard/dashboard.html' } });
-        if (error) Utils.showToast(handleSupabaseError(error), 'error');
-      } catch (err) { Utils.showToast(handleSupabaseError(err), 'error'); }
+        const provider = new firebase.auth.GithubAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
+        onSignInSuccess(result.user);
+        Utils.showToast('Account created! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
+        window.location.href = '../dashboard/dashboard.html';
+      } catch (err) {
+        if (err.code !== 'auth/popup-closed-by-user') {
+          Utils.showToast(handleFirebaseError(err), 'error');
+        }
+      }
     });
   }
 }
@@ -254,12 +259,12 @@ async function initForgotPasswordPage() {
   const btnText = document.getElementById('forgotBtnText');
   const btnSpinner = document.getElementById('forgotBtnSpinner');
 
-  if (!supabaseReady || typeof supabase === 'undefined') {
+  if (!firebaseReady || typeof firebase === 'undefined') {
     const container = form ? form.parentNode : document.querySelector('.auth-card');
     if (container) {
       const msg = document.createElement('div');
       msg.className = 'form-error';
-      msg.textContent = 'Supabase client library not loaded. Check your internet connection.';
+      msg.textContent = 'Firebase client library not loaded. Check your internet connection.';
       msg.style.marginBottom = '1rem';
       container.insertBefore(msg, form);
     }
@@ -276,17 +281,14 @@ async function initForgotPasswordPage() {
     if (btnText) btnText.textContent = 'Sending...';
     if (btnSpinner) btnSpinner.style.display = 'inline-block';
     try {
-      const sb = getSupabase();
-      if (!sb) throw new Error('Supabase client not available.');
-      const { error } = await sb.auth.resetPasswordForEmail(email, {
-        redirectTo: SUPABASE_CONFIG.siteUrl + '/auth/recovery.html'
+      await firebase.auth().sendPasswordResetEmail(email, {
+        url: window.location.origin + '/auth/recovery.html'
       });
-      if (error) throw error;
       if (form) form.style.display = 'none';
       if (successEl) successEl.style.display = 'block';
       Utils.showToast('Password reset link sent to your email.', 'success');
     } catch (err) {
-      Utils.showToast(handleSupabaseError(err), 'error');
+      Utils.showToast(handleFirebaseError(err), 'error');
       if (submitBtn) submitBtn.disabled = false;
       if (btnText) btnText.textContent = 'Send Reset Link';
       if (btnSpinner) btnSpinner.style.display = 'none';
@@ -326,6 +328,10 @@ function initProfilePage() {
       user.bio = newBio;
       user.avatar = newAvatar;
       Utils.setStorage('coderio_user', user);
+      const currentUser = firebase.auth().currentUser;
+      if (currentUser) {
+        currentUser.updateProfile({ displayName: newName, photoURL: newAvatar || null }).catch(() => {});
+      }
       if (avatarPreview) {
         avatarPreview.innerHTML = newAvatar
           ? '<img src="' + Utils.sanitize(newAvatar) + '" alt="Avatar" onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<i class=\\\\\\\'fas fa-user\\\\\\\'></i>\'"><div class="avatar-overlay"><i class="fas fa-camera"></i></div>'
@@ -359,8 +365,7 @@ function initProfilePage() {
 
 async function signOut() {
   try {
-    const sb = getSupabase();
-    if (sb) await sb.auth.signOut();
+    await firebase.auth().signOut();
   } catch (err) { /* ignore */ }
   localStorage.removeItem('coderio_user');
   Utils.showToast('Logged out successfully', 'success');
@@ -368,21 +373,15 @@ async function signOut() {
 }
 
 async function requireAuth() {
-  const sb = getSupabase();
-  if (!sb) {
-    const user = Utils.getStorage('coderio_user');
-    if (!user) { window.location.href = '../auth/login.html'; return null; }
-    return user;
+  const user = firebase.auth().currentUser;
+  if (user) {
+    saveUserSession(user);
+    return Utils.getStorage('coderio_user');
   }
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session) {
-    const localUser = Utils.getStorage('coderio_user');
-    if (localUser) return localUser;
-    window.location.href = '../auth/login.html';
-    return null;
-  }
-  saveUserSession(session.user);
-  return Utils.getStorage('coderio_user');
+  const localUser = Utils.getStorage('coderio_user');
+  if (localUser) return localUser;
+  window.location.href = '../auth/login.html';
+  return null;
 }
 
 function detectUserLocation() {
@@ -403,23 +402,15 @@ function detectUserLocation() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const sb = getSupabase();
-  if (sb) {
-    sb.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        if (event === 'SIGNED_IN' || event === 'USER_UPDATED' || event === 'INITIAL_SESSION') {
-          saveUserSession(session.user);
-        }
-        if (event === 'SIGNED_IN') {
-          const isAuthPage = window.location.pathname.includes('/auth/login.html') || window.location.pathname.includes('/auth/register.html');
-          const isOAuthCallback = window.location.search.includes('code=') || window.location.hash.includes('access_token');
-          if (isAuthPage && isOAuthCallback) {
-            window.location.href = '../dashboard/dashboard.html';
-          }
-        }
-      } else if (event === 'SIGNED_OUT') {
-        localStorage.removeItem('coderio_user');
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      saveUserSession(user);
+      const isAuthPage = window.location.pathname.includes('/auth/login.html') || window.location.pathname.includes('/auth/register.html');
+      if (isAuthPage) {
+        window.location.href = '../dashboard/dashboard.html';
       }
-    });
-  }
+    } else {
+      localStorage.removeItem('coderio_user');
+    }
+  });
 });

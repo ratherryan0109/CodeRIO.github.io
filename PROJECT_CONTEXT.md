@@ -16,5 +16,9 @@
 - Session persistence: this file loaded as opencode instructions
 - Auth migration: will use Firebase compat CDN (not modular ESM)
 
+### Fixes Applied
+- **Course cards not showing**: added `courses.js` script to `index.html` + added `loadHomeCourses()` call on DOMContentLoaded
+- **Broken fetch paths on GitHub Pages**: changed `/data/courses.json` → `data/courses.json` (and `roadmaps.json`) — leading `/` resolves to domain root, not the subdirectory
+
 ### Next Steps
 - Firebase migration: replace Supabase CDN + rewrite auth.js
