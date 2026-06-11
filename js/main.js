@@ -34,7 +34,7 @@ function initNavbar() {
     var quizLi = document.createElement('li');
     var quizA = document.createElement('a');
     quizA.href = (window.location.pathname.includes('/dashboard/') || window.location.pathname.includes('/auth/') ? '../' : '') + 'quiz-hub.html';
-    quizA.innerHTML = '<i class="fas fa-question-circle"></i> Quiz';
+    quizA.innerHTML = 'Quiz';
     quizLi.appendChild(quizA);
     var practiceLink = navLinks.querySelector('a[href*="Practice"]');
     if (practiceLink && practiceLink.parentElement) {
