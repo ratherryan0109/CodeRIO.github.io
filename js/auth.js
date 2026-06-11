@@ -369,7 +369,8 @@ async function signOut() {
   } catch (err) { /* ignore */ }
   localStorage.removeItem('coderio_user');
   Utils.showToast('Logged out successfully', 'success');
-  setTimeout(() => window.location.href = '../index.html', 1000);
+  const dirs = window.location.pathname.split('/').filter(s => s && !s.includes('.'));
+  setTimeout(() => window.location.href = '../'.repeat(dirs.length) + 'index.html', 1000);
 }
 
 async function requireAuth() {
@@ -380,7 +381,8 @@ async function requireAuth() {
   }
   const localUser = Utils.getStorage('coderio_user');
   if (localUser) return localUser;
-  window.location.href = '../auth/login.html';
+  const dirs = window.location.pathname.split('/').filter(s => s && !s.includes('.'));
+  window.location.href = '../'.repeat(dirs.length) + 'auth/login.html';
   return null;
 }
 
