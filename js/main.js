@@ -30,7 +30,7 @@ function initNavbar() {
     }, 100));
   }
 
-  if (navLinks) {
+  if (navLinks && Utils.getStorage('coderio_user')) {
     var quizLi = document.createElement('li');
     var quizA = document.createElement('a');
     quizA.href = (window.location.pathname.includes('/dashboard/') || window.location.pathname.includes('/auth/') ? '../' : '') + 'quiz-hub.html';
@@ -143,6 +143,28 @@ function checkAchievements() {
   });
 
   Utils.setStorage('coderio_achievements', earned);
+}
+
+function initTerms() {
+  initScrollSidebar('tos-sidebar', 'tos-card');
+}
+function initPrivacy() {
+  initScrollSidebar('pp-sidebar', 'pp-card');
+}
+function initScrollSidebar(sidebarClass, cardClass) {
+  var sidebar = document.querySelector('.' + sidebarClass);
+  if (!sidebar) return;
+  var links = sidebar.querySelectorAll('a');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        links.forEach(function(l) { l.classList.remove('active'); });
+        var link = sidebar.querySelector('a[href="#' + entry.target.id + '"]');
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-100px 0px -60% 0px' });
+  document.querySelectorAll('.' + cardClass).forEach(function(s) { observer.observe(s); });
 }
 
 function updateCopyrightYear() {

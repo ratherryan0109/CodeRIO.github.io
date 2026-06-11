@@ -40,6 +40,7 @@ function handleFirebaseError(error) {
   if (code === 'auth/requires-recent-login') return 'Please log out and log in again before making this change.';
   if (code === 'auth/popup-closed-by-user') return 'Sign-in popup was closed before completing.';
   if (code === 'auth/network-request-failed') return 'Network error. Check your internet connection.';
+  if (code === 'auth/account-exists-with-different-credential') return 'An account with this email already exists using a different sign-in method. Sign in with the original provider to link accounts.';
   return msg || 'Authentication failed.';
 }
 
@@ -139,7 +140,9 @@ async function initLoginPage() {
         Utils.showToast('Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        if (err.code === 'auth/account-exists-with-different-credential') {
+          await handleAccountLinking(err);
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -155,7 +158,9 @@ async function initLoginPage() {
         Utils.showToast('Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        if (err.code === 'auth/account-exists-with-different-credential') {
+          await handleAccountLinking(err);
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -227,7 +232,9 @@ async function initRegisterPage() {
         Utils.showToast('Account created! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        if (err.code === 'auth/account-exists-with-different-credential') {
+          await handleAccountLinking(err);
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -243,7 +250,9 @@ async function initRegisterPage() {
         Utils.showToast('Account created! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        if (err.code === 'auth/account-exists-with-different-credential') {
+          await handleAccountLinking(err);
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -384,6 +393,109 @@ async function requireAuth() {
   const dirs = window.location.pathname.split('/').filter(s => s && !s.includes('.'));
   window.location.href = '../'.repeat(dirs.length) + 'auth/login.html';
   return null;
+}
+
+async function handleAccountLinking(err) {
+  var email = err.email;
+  var pendingCred = err.credential;
+  if (!email || !pendingCred) return;
+
+  var methods = await firebase.auth().fetchSignInMethodsForEmail(email);
+  if (!methods.length) return;
+
+  return new Promise(function(resolve) {
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);';
+
+    var modal = document.createElement('div');
+    modal.style.cssText = 'background:var(--bg-card);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid var(--glass-border);border-radius:var(--border-radius-lg);padding:2rem;max-width:440px;width:100%;box-shadow:var(--shadow-lg);';
+    modal.innerHTML = '\
+      <div style="text-align:center;margin-bottom:1.5rem">\
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(245,158,11,0.1);color:var(--warning);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem"><i class="fas fa-link"></i></div>\
+        <h3 style="font-size:1.2rem;color:var(--text);margin-bottom:0.3rem">Link Account</h3>\
+        <p style="color:var(--text-secondary);font-size:0.9rem">An account already exists with <strong>' + Utils.sanitize(email) + '</strong>. Sign in with the original method to link your accounts.</p>\
+      </div>\
+      <div id="linkProviders" style="display:flex;flex-direction:column;gap:0.7rem"></div>\
+      <div id="linkPasswordForm" style="display:none;margin-top:0.5rem">\
+        <input type="email" id="linkEmail" value="' + Utils.sanitize(email) + '" readonly style="width:100%;padding:0.7rem 1rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--bg);color:var(--text-muted);margin-bottom:0.5rem;font-size:0.9rem">\
+        <input type="password" id="linkPassword" placeholder="Enter your password" style="width:100%;padding:0.7rem 1rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--bg);color:var(--text);margin-bottom:0.5rem;font-size:0.9rem">\
+        <button id="linkPasswordBtn" class="btn btn-primary" style="width:100%;justify-content:center">Sign In & Link</button>\
+      </div>\
+      <button id="linkCancel" style="margin-top:1rem;width:100%;padding:0.6rem;background:none;border:1px solid var(--glass-border);border-radius:10px;color:var(--text-muted);cursor:pointer;font-size:0.85rem">Cancel</button>\
+    ';
+
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    var providersDiv = modal.querySelector('#linkProviders');
+    var passwordForm = modal.querySelector('#linkPasswordForm');
+
+    methods.forEach(function(m) {
+      if (m === 'google.com') {
+        var btn = document.createElement('button');
+        btn.className = 'btn btn-ghost';
+        btn.style.cssText = 'width:100%;justify-content:center';
+        btn.innerHTML = '<i class="fab fa-google"></i> Sign in with Google';
+        btn.onclick = async function() {
+          try {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            var result = await firebase.auth().signInWithPopup(provider);
+            await result.user.linkWithCredential(pendingCred);
+            overlay.remove();
+            onSignInSuccess(result.user);
+            Utils.showToast('Accounts linked! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
+            window.location.href = '../dashboard/dashboard.html';
+          } catch (e) {
+            if (e.code === 'auth/popup-closed-by-user' || e.code === 'auth/popup-blocked') return;
+            Utils.showToast(handleFirebaseError(e), 'error');
+          }
+        };
+        providersDiv.appendChild(btn);
+      } else if (m === 'github.com') {
+        var btn = document.createElement('button');
+        btn.className = 'btn btn-ghost';
+        btn.style.cssText = 'width:100%;justify-content:center';
+        btn.innerHTML = '<i class="fab fa-github"></i> Sign in with GitHub';
+        btn.onclick = async function() {
+          try {
+            var provider = new firebase.auth.GithubAuthProvider();
+            var result = await firebase.auth().signInWithPopup(provider);
+            await result.user.linkWithCredential(pendingCred);
+            overlay.remove();
+            onSignInSuccess(result.user);
+            Utils.showToast('Accounts linked! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
+            window.location.href = '../dashboard/dashboard.html';
+          } catch (e) {
+            if (e.code === 'auth/popup-closed-by-user' || e.code === 'auth/popup-blocked') return;
+            Utils.showToast(handleFirebaseError(e), 'error');
+          }
+        };
+        providersDiv.appendChild(btn);
+      } else if (m === 'password') {
+        passwordForm.style.display = 'block';
+      }
+    });
+
+    modal.querySelector('#linkPasswordBtn').onclick = async function() {
+      var pwd = modal.querySelector('#linkPassword').value;
+      if (!pwd) { Utils.showToast('Please enter your password.', 'error'); return; }
+      try {
+        var result = await firebase.auth().signInWithEmailAndPassword(email, pwd);
+        await result.user.linkWithCredential(pendingCred);
+        overlay.remove();
+        onSignInSuccess(result.user);
+        Utils.showToast('Accounts linked! Welcome back!', 'success');
+        window.location.href = '../dashboard/dashboard.html';
+      } catch (e) {
+        Utils.showToast(handleFirebaseError(e), 'error');
+      }
+    };
+
+    modal.querySelector('#linkCancel').onclick = function() {
+      overlay.remove();
+      resolve();
+    };
+  });
 }
 
 function detectUserLocation() {

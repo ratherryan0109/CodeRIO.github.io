@@ -11,23 +11,23 @@
     <style>
         .faq-search { max-width: 600px; margin: 0 auto 2.5rem; }
         .faq-search .search-wrapper { display: flex; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(99,102,241,0.25); border-radius: 12px; padding: 0.2rem 0.2rem 0.2rem 1rem; }
-        .faq-search .search-wrapper i { color: #64748b; }
-        .faq-search input { flex: 1; border: none; background: transparent; padding: 1rem 0.75rem; color: #f1f5f9; font-size: 1rem; outline: none; }
-        .faq-search input::placeholder { color: #64748b; }
+        .faq-search .search-wrapper i { color: var(--text-muted); }
+        .faq-search input { flex: 1; border: none; background: transparent; padding: 1rem 0.75rem; color: var(--text); font-size: 1rem; outline: none; }
+        .faq-search input::placeholder { color: var(--text-muted); }
         .faq-categories { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
-        .faq-cat-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: #94a3b8; padding: 0.6rem 1.25rem; border-radius: 50px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
-        .faq-cat-btn:hover { border-color: rgba(99,102,241,0.3); color: #e2e8f0; }
-        .faq-cat-btn.active { background: rgba(99,102,241,0.15); border-color: #6366f1; color: #a5b4fc; }
+        .faq-cat-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary); padding: 0.6rem 1.25rem; border-radius: 50px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
+        .faq-cat-btn:hover { border-color: rgba(99,102,241,0.3); color: var(--text); }
+        .faq-cat-btn.active { background: rgba(99,102,241,0.15); border-color: var(--primary); color: var(--primary-light); }
         .faq-list { max-width: 800px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
         .faq-item:last-child { border-bottom: none; }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1.25rem 0; background: none; border: none; color: #e2e8f0; font-size: 1.05rem; text-align: left; cursor: pointer; transition: color 0.2s; }
-        .faq-question:hover { color: #818cf8; }
-        .faq-question i { transition: transform 0.3s; font-size: 0.85rem; color: #64748b; }
-        .faq-item.open .faq-question i { transform: rotate(180deg); color: #818cf8; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1.25rem 0; background: none; border: none; color: var(--text); font-size: 1.05rem; text-align: left; cursor: pointer; transition: color 0.2s; }
+        .faq-question:hover { color: var(--primary); }
+        .faq-question i { transition: transform 0.3s; font-size: 0.85rem; color: var(--text-muted); }
+        .faq-item.open .faq-question i { transform: rotate(180deg); color: var(--primary); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0; }
-        .faq-answer-inner { padding-bottom: 1.25rem; color: #94a3b8; line-height: 1.8; }
-        .no-results { text-align: center; padding: 3rem; color: #64748b; display: none; }
+        .faq-answer-inner { padding-bottom: 1.25rem; color: var(--text-secondary); line-height: 1.8; }
+        .no-results { text-align: center; padding: 3rem; color: var(--text-muted); display: none; }
         .no-results i { font-size: 3rem; margin-bottom: 1rem; display: block; }
         .faq-category-section { margin-bottom: 2.5rem; }
         .faq-category-section h3 { font-size: 1.3rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -95,7 +95,7 @@
 
                 <div class="faq-list" id="faqList">
                     <div class="faq-category-section" data-category="general">
-                        <h3><i class="fas fa-info-circle" style="color:#6366f1;"></i> General</h3>
+                        <h3><i class="fas fa-info-circle" style="color:var(--primary);"></i> General</h3>
                         <div class="faq-item">
                             <button class="faq-question">What is CodeRio? <i class="fas fa-chevron-down"></i></button>
                             <div class="faq-answer"><div class="faq-answer-inner">CodeRio is an interactive coding education platform designed to help developers learn programming through hands-on courses, practice challenges, real-world projects, and a supportive community. Whether you're a beginner or an experienced developer, CodeRio provides structured learning paths, coding exercises, and mentorship opportunities to accelerate your growth.</div></div>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="faq-category-section" data-category="learning">
-                        <h3><i class="fas fa-graduation-cap" style="color:#6366f1;"></i> Learning</h3>
+                        <h3><i class="fas fa-graduation-cap" style="color:var(--primary);"></i> Learning</h3>
                         <div class="faq-item">
                             <button class="faq-question">How do learning paths work? <i class="fas fa-chevron-down"></i></button>
                             <div class="faq-answer"><div class="faq-answer-inner">Learning paths are curated sequences of courses and challenges designed to take you from beginner to advanced in a specific domain. Each path is split into milestones with clear learning objectives. You can follow a path sequentially or jump to specific topics based on your existing knowledge. Your progress is saved automatically as you complete each step.</div></div>
@@ -139,7 +139,7 @@
                     </div>
 
                     <div class="faq-category-section" data-category="technical">
-                        <h3><i class="fas fa-cog" style="color:#6366f1;"></i> Technical</h3>
+                        <h3><i class="fas fa-cog" style="color:var(--primary);"></i> Technical</h3>
                         <div class="faq-item">
                             <button class="faq-question">What programming languages are supported? <i class="fas fa-chevron-down"></i></button>
                             <div class="faq-answer"><div class="faq-answer-inner">CodeRio supports Python, JavaScript, TypeScript, Java, C++, C#, Go, Rust, Ruby, PHP, Swift, Kotlin, and SQL. Our code runner and interactive editor work with all supported languages. We regularly add new languages based on community demand.</div></div>
@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="faq-category-section" data-category="account">
-                        <h3><i class="fas fa-user" style="color:#6366f1;"></i> Account</h3>
+                        <h3><i class="fas fa-user" style="color:var(--primary);"></i> Account</h3>
                         <div class="faq-item">
                             <button class="faq-question">How do I create an account? <i class="fas fa-chevron-down"></i></button>
                             <div class="faq-answer"><div class="faq-answer-inner">Click the "Sign Up" button in the top right corner. You can register with your email address or use Google/GitHub OAuth for quick sign-up. Verify your email to activate your account. The entire process takes less than 2 minutes.</div></div>
@@ -187,7 +187,7 @@
                     </div>
 
                     <div class="faq-category-section" data-category="dashboard">
-                        <h3><i class="fas fa-chart-bar" style="color:#6366f1;"></i> Dashboard</h3>
+                        <h3><i class="fas fa-chart-bar" style="color:var(--primary);"></i> Dashboard</h3>
                         <div class="faq-item">
                             <button class="faq-question">How is my progress tracked? <i class="fas fa-chevron-down"></i></button>
                             <div class="faq-answer"><div class="faq-answer-inner">Your dashboard tracks courses completed, challenges solved, projects built, XP earned, streak days, and skill proficiency across different domains. Each course shows lesson-by-lesson completion status. Progress data is updated in real-time as you learn.</div></div>
