@@ -165,7 +165,7 @@
       const grid = document.getElementById('courseGrid');
       if (!grid) return;
 
-      Utils.fetchJSON('/data/courses.json').then(data => {
+      Utils.fetchJSON('data/courses.json').then(data => {
         if (!data) return;
         data.forEach(c => { if (!c.category) c.category = assignCategory(c); });
 

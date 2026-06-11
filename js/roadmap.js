@@ -2,7 +2,7 @@ async function loadRoadmap(roadmapId) {
   const container = document.getElementById('roadmapContainer');
   if (!container) return;
 
-  const data = await Utils.fetchJSON('/data/roadmaps.json');
+  const data = await Utils.fetchJSON('data/roadmaps.json');
   if (!data) return;
 
   const roadmap = data.find(r => r.id === roadmapId);

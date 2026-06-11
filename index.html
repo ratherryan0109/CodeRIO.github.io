@@ -158,10 +158,12 @@
   </footer>
 
   <script src="js/utils.js"></script>
+  <script src="js/courses.js"></script>
   <script src="js/main.js"></script>
   <script src="js/typing.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      if (typeof loadHomeCourses === 'function') loadHomeCourses();
       if (typeof initTypingTest === 'function') initTypingTest();
 
       const observer = new IntersectionObserver((entries) => {

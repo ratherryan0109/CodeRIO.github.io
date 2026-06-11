@@ -2,7 +2,7 @@ async function loadCourses() {
   const grid = document.getElementById('courseGrid');
   if (!grid) return;
 
-  const data = await Utils.fetchJSON('/data/courses.json');
+  const data = await Utils.fetchJSON('data/courses.json');
   if (!data) return;
 
   grid.innerHTML = data.map(course => `
@@ -19,7 +19,7 @@ async function loadHomeCourses() {
   const grid = document.getElementById('homeCourseGrid');
   if (!grid) return;
 
-  const data = await Utils.fetchJSON('/data/courses.json');
+  const data = await Utils.fetchJSON('data/courses.json');
   if (!data) return;
 
   const levelBadge = { beginner: 'badge-primary', intermediate: 'badge-warning', advanced: 'badge-error' };
@@ -64,7 +64,7 @@ function initCoursePage() {
 }
 
 async function loadCourseData(courseId) {
-  const data = await Utils.fetchJSON('/data/courses.json');
+  const data = await Utils.fetchJSON('data/courses.json');
   if (!data) return;
 
   const course = data.find(c => c.id === courseId);
