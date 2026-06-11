@@ -29,8 +29,8 @@ function handleFirebaseError(error) {
   if (!error) return 'An unexpected error occurred.';
   const code = error.code || '';
   const msg = error.message || '';
-  if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential')
-    return 'Invalid email or password.';
+  if (code === 'auth/user-not-found') return 'No account was found under this email. Create a new one.';
+  if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') return 'Wrong email or password.';
   if (code === 'auth/email-already-in-use') return 'An account with this email already exists.';
   if (code === 'auth/weak-password') return 'Password must be at least 6 characters.';
   if (code === 'auth/too-many-requests') return 'Too many attempts. Please try again later.';
@@ -139,7 +139,7 @@ async function initLoginPage() {
         Utils.showToast('Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user') {
+        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -155,7 +155,7 @@ async function initLoginPage() {
         Utils.showToast('Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user') {
+        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -227,7 +227,7 @@ async function initRegisterPage() {
         Utils.showToast('Account created! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user') {
+        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -243,7 +243,7 @@ async function initRegisterPage() {
         Utils.showToast('Account created! Welcome, ' + (result.user.displayName || 'User') + '!', 'success');
         window.location.href = '../dashboard/dashboard.html';
       } catch (err) {
-        if (err.code !== 'auth/popup-closed-by-user') {
+        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
