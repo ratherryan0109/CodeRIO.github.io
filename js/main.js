@@ -61,8 +61,8 @@ function initCurrentPage() {
 }
 
 function rel(path) {
-  const depth = window.location.pathname.split('/').length - 2;
-  return '../'.repeat(Math.max(0, depth)) + path;
+  const dirs = window.location.pathname.split('/').filter(s => s && !s.includes('.'));
+  return '../'.repeat(dirs.length) + path.replace(/^\.\.\//, '');
 }
 
 function initAuthCheck() {
