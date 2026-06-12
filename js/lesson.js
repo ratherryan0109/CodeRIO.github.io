@@ -147,9 +147,9 @@ function renderModuleList(course, activeId, allData) {
 
   container.innerHTML = html;
 
-  // Remove old handler and re-attach with a capture-phase guard
-  if (window._sidebarClickHandler) document.removeEventListener('click', window._sidebarClickHandler, true);
-  window._sidebarClickHandler = function(e) {
+  // Click-outside handler (mousedown fires before click and before navigation)
+  if (window._sidebarMouseHandler) document.removeEventListener('mousedown', window._sidebarMouseHandler);
+  window._sidebarMouseHandler = function(e) {
     var sidebar = document.querySelector('.lesson-sidebar');
     if (sidebar && !sidebar.contains(e.target)) {
       document.querySelectorAll('.course-modules:not(.current-course)').forEach(function(el) {
@@ -160,28 +160,25 @@ function renderModuleList(course, activeId, allData) {
       });
     }
   };
-  document.addEventListener('click', window._sidebarClickHandler, true);
+  document.addEventListener('mousedown', window._sidebarMouseHandler);
 
-  setTimeout(function() {
-    var activeEl = container.querySelector('.module-active');
-    if (activeEl) {
-      var containerRect = container.getBoundingClientRect();
-      var elRect = activeEl.getBoundingClientRect();
-      container.scrollTop = elRect.top - containerRect.top + container.scrollTop - 20;
-    }
-  }, 50);
+  // Auto-scroll to active module (multiple attempts for layout timing)
+  function scrollToActive() {
+    var el = container.querySelector('.module-active');
+    if (el) { try { el.scrollIntoView({ block: 'nearest', behavior: 'instant' }); } catch(e) {} }
+  }
+  setTimeout(scrollToActive, 100);
+  setTimeout(scrollToActive, 500);
 }
 
 function toggleCourse(courseId) {
   var list = document.getElementById('cm-' + courseId);
   if (!list) return;
-  var hidden = list.style.display === 'none' || list.style.display === '';
+  var computed = window.getComputedStyle(list);
+  var hidden = list.style.display === 'none' || computed.display === 'none';
   list.style.display = hidden ? '' : 'none';
-  var header = document.querySelector('#ch-' + courseId);
-  if (header) {
-    var icon = header.querySelector('i');
-    if (icon) icon.style.transform = hidden ? 'rotate(90deg)' : 'rotate(0deg)';
-  }
+  var icon = document.querySelector('#ch-' + courseId + ' i');
+  if (icon) icon.style.transform = hidden ? 'rotate(90deg)' : 'rotate(0deg)';
 }
 
 function renderObjectives(objectives) {
