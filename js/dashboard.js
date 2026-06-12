@@ -1,3 +1,14 @@
+var sessionStart = Date.now();
+window.addEventListener('beforeunload', function() {
+  var spent = Date.now() - sessionStart;
+  if (spent > 0) {
+    try {
+      var old = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
+      localStorage.setItem('coderio_total_time', String(old + spent));
+    } catch(e) {}
+  }
+});
+
 async function initDashboard() {
   var user = Utils.getStorage('coderio_user');
   if (!user) return;

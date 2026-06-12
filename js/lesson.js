@@ -41,34 +41,26 @@ async function loadLesson(courseId, moduleId) {
   renderNavigation(course, moduleId);
   loadLessonNotes();
 
-  // Track time spent on this lesson
-  var sessionStart = Date.now();
-
-  function saveTime(spent) {
-    if (spent <= 0) return;
-    // Per-course timeSpent (for My Courses view)
+  // Per-course time tracking for My Courses view
+  var lessonStart = Date.now();
+  var timeInterval = setInterval(function() {
+    var now = Date.now();
+    var spent = now - lessonStart;
+    lessonStart = now;
     var p = Utils.getStorage('course_progress', {});
     if (!p[courseId]) p[courseId] = { timeSpent: 0 };
     p[courseId].timeSpent = (p[courseId].timeSpent || 0) + spent;
     Utils.setStorage('course_progress', p);
-    // Flat total counter (immune to scope issues)
-    try {
-      var old = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
-      localStorage.setItem('coderio_total_time', String(old + spent));
-    } catch(e) {}
-  }
-
-  // Auto-save every 30s (crash safety)
-  var timeInterval = setInterval(function() {
-    var now = Date.now();
-    saveTime(now - sessionStart);
-    sessionStart = now;
   }, 30000);
-
-  // Save on page leave
   window.addEventListener('beforeunload', function() {
     clearInterval(timeInterval);
-    saveTime(Date.now() - sessionStart);
+    var spent = Date.now() - lessonStart;
+    if (spent > 0) {
+      var p = Utils.getStorage('course_progress', {});
+      if (!p[courseId]) p[courseId] = { timeSpent: 0 };
+      p[courseId].timeSpent = (p[courseId].timeSpent || 0) + spent;
+      Utils.setStorage('course_progress', p);
+    }
   });
 }
 
