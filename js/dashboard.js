@@ -232,9 +232,12 @@ function loadAchievements() {
 }
 
 function initDailyGoals() {
-  if (typeof DailyGoals !== 'undefined') {
-    DailyGoals.renderWidget('dailyGoalsWidget');
-  }
+  if (typeof DailyGoals === 'undefined') return;
+  DailyGoals.renderWidget('dailyGoalsWidget');
+  // Re-render on tab focus (user returns from lesson/quiz page)
+  window.addEventListener('focus', function() { DailyGoals.renderWidget('dailyGoalsWidget'); });
+  // Periodically re-render to catch progress from other tabs
+  setInterval(function() { DailyGoals.renderWidget('dailyGoalsWidget'); }, 30000);
 }
 
 async function initCharts() {

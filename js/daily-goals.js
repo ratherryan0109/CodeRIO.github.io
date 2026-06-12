@@ -158,8 +158,7 @@ var DailyGoals = {
     var p = this.progress();
     var pct = this.pct();
 
-    var html = '<div class="daily-goals-widget">'
-      + '<div class="dg-header"><h3><i class="fas fa-bullseye" style="color:var(--primary)"></i> Daily Goals</h3>'
+    var html = '<div class="dg-header"><h3><i class="fas fa-bullseye" style="color:var(--primary)"></i> Daily Goals</h3>'
       + '<span class="dg-pct">' + pct + '%</span></div>'
       + '<div style="height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden;margin-bottom:1rem">'
       + '<div style="height:100%;width:' + pct + '%;background:var(--primary);border-radius:3px;transition:width 0.5s"></div></div>'
@@ -180,7 +179,7 @@ var DailyGoals = {
         + '<div style="height:100%;width:' + bar + '%;background:' + color + ';border-radius:2px;transition:width 0.3s"></div></div></div>';
     }
 
-    html += '</div></div>';
+    html += '</div>';
     el.innerHTML = html;
   },
 
