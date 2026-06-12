@@ -1,4 +1,4 @@
-function initDashboard() {
+async function initDashboard() {
   var user = Utils.getStorage('coderio_user');
   if (!user) return;
 
@@ -11,7 +11,7 @@ function initDashboard() {
   loadRecentActivity();
   loadAchievements();
   initDailyGoals();
-  initCharts();
+  await initCharts();
   initAnalyticsToggle();
 }
 
@@ -166,10 +166,10 @@ function initDailyGoals() {
   }
 }
 
-function initCharts() {
+async function initCharts() {
   if (typeof Chart === 'undefined') return;
   initWeeklyChart();
-  initCourseChart();
+  await initCourseChart();
   initTypingChart();
 }
 
@@ -224,13 +224,17 @@ function initWeeklyChart() {
   });
 }
 
-function initCourseChart() {
+async function initCourseChart() {
   var canvas = document.getElementById('courseChart');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
 
   var courseProgress = Utils.getStorage('course_progress', {});
   var courseIds = Object.keys(courseProgress);
+
+  var courseData = await Utils.fetchJSON('data/courses.json');
+  var totalCourses = courseData ? courseData.length : courseIds.length;
+
   var completed = courseIds.filter(function(cid) {
     return courseProgress[cid].status === 'completed';
   }).length;
@@ -240,16 +244,16 @@ function initCourseChart() {
   var paused = courseIds.filter(function(cid) {
     return courseProgress[cid].status === 'paused';
   }).length;
-  var notStarted = courseIds.length - completed - active - paused;
+  var notStarted = Math.max(0, totalCourses - completed - active - paused);
 
   var labels = [];
   var data = [];
   var colors = [];
 
-  if (completed > 0) { labels.push('Completed'); data.push(completed); colors.push('#22c55e'); }
+  if (notStarted > 0) { labels.push('Not Started'); data.push(notStarted); colors.push('#94a3b8'); }
   if (active > 0) { labels.push('Active'); data.push(active); colors.push('#06b6d4'); }
   if (paused > 0) { labels.push('Paused'); data.push(paused); colors.push('#eab308'); }
-  if (notStarted > 0) { labels.push('Not Started'); data.push(notStarted); colors.push('#94a3b8'); }
+  if (completed > 0) { labels.push('Completed'); data.push(completed); colors.push('#22c55e'); }
 
   if (data.length === 0) {
     labels = ['No Courses'];
