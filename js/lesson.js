@@ -47,14 +47,16 @@ async function loadLesson(courseId, moduleId) {
 
   function _saveTime(ms) {
     if (ms <= 0) return;
-    // Per-course timeSpent
+    // Per-course timeSpent (writes first — safe, Utils.setStorage has try/catch)
     var p = Utils.getStorage('course_progress', {});
     if (!p[courseId]) p[courseId] = { timeSpent: 0 };
     p[courseId].timeSpent = (p[courseId].timeSpent || 0) + ms;
     Utils.setStorage('course_progress', p);
-    // Redundant flat total counter (immune to scope/course_progress issues)
-    var total = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
-    localStorage.setItem('coderio_total_time', String(total + ms));
+    // Redundant flat total counter (wrap in try/catch in case localStorage is restricted)
+    try {
+      var total = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
+      localStorage.setItem('coderio_total_time', String(total + ms));
+    } catch(e) {}
   }
 
   var timeInterval = setInterval(function() {

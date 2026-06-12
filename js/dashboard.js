@@ -27,7 +27,8 @@ function getTotalTimeSpent() {
   var cp = Utils.getStorage('course_progress', {});
   var total = Object.keys(cp).reduce(function(sum, cid) { return sum + (cp[cid].timeSpent || 0); }, 0);
   // Fallback: flat counter (immune to scope/course_progress overwrite issues)
-  var flat = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
+  var flat = 0;
+  try { flat = parseInt(localStorage.getItem('coderio_total_time') || '0', 10); } catch(e) {}
   return Math.max(total, flat);
 }
 
