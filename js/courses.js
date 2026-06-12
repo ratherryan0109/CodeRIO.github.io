@@ -53,6 +53,7 @@ async function loadHomeCourses() {
   }).join('');
 
   grid.insertAdjacentHTML('afterend', '<div style="text-align:center;margin-top:2rem"><a href="Learn.html" style="color:var(--primary);font-weight:600">View More Courses <i class="fas fa-arrow-right"></i></a></div>');
+  if (typeof updateCourseCardProgress === 'function') updateCourseCardProgress();
 }
 
 function initCoursePage() {

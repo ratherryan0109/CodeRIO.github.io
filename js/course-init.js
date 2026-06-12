@@ -41,6 +41,18 @@ function initCoursePage() {
       actionBtn.innerHTML = '<i class="fas fa-check-circle"></i> Completed';
       actionBtn.disabled = true;
       actionBtn.style.opacity = '0.7';
+      var retryBtn = document.createElement('button');
+      retryBtn.className = 'btn btn-ghost';
+      retryBtn.innerHTML = '<i class="fas fa-redo"></i> Retry Course';
+      retryBtn.style.cssText = 'color:var(--primary);border-color:rgba(6,182,212,0.3);font-size:0.85rem';
+      retryBtn.addEventListener('click', function() {
+        if (!confirm('Retry this course? Your progress will be reset.')) return;
+        var progress = Utils.getStorage('course_progress', {});
+        delete progress[courseId];
+        Utils.setStorage('course_progress', progress);
+        window.location.href = '../lesson.html?course=' + courseId + '&module=1';
+      });
+      actionsDiv.appendChild(retryBtn);
     }
   } else {
     actionBtn.innerHTML = '<i class="fas fa-play-circle"></i> Start Learning';

@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCurrentPage();
   initAuthCheck();
   checkAchievements();
-  updateCourseCardProgress();
   updateCopyrightYear();
 });
 

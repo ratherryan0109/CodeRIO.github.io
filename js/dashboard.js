@@ -58,7 +58,8 @@ function updateStats() {
     setStat('statTotalLessons', totalCompleted || '0');
     setStat('statAvgAccuracy', accuracy);
     setStat('statTypingTests', typingHistory.length || '0');
-    setStat('statTotalTime', '0m');
+    var totalTime = courseIds.reduce(function(sum, cid) { return sum + (courseProgress[cid].timeSpent || 0); }, 0);
+    setStat('statTotalTime', formatTimeSpent(totalTime));
     setStat('statAP', typeof AchievementSystem !== 'undefined' ? AchievementSystem.getUserAP() : 0);
     return;
   }
@@ -256,6 +257,8 @@ function initCourseChart() {
     colors = ['rgba(6,182,212,0.2)'];
   }
 
+  var total = data.reduce(function(s, v) { return s + v; }, 0);
+
   new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -273,7 +276,24 @@ function initCourseChart() {
       plugins: {
         legend: {
           position: 'bottom',
-          labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
+          labels: {
+            boxWidth: 12,
+            padding: 12,
+            font: { size: 12 },
+            generateLabels: function(chart) {
+              var ds = chart.data.datasets[0];
+              return chart.data.labels.map(function(label, i) {
+                var val = ds.data[i];
+                var pct = total > 0 ? Math.round((val / total) * 100) : 0;
+                return {
+                  text: label + ': ' + val + ' (' + pct + '%)',
+                  fillStyle: ds.backgroundColor[i],
+                  strokeStyle: ds.backgroundColor[i],
+                  index: i
+                };
+              });
+            }
+          }
         }
       }
     }

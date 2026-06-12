@@ -186,10 +186,14 @@
               <img src="${c.icon}" alt="${c.title}" loading="lazy">
               <h2>${c.title}</h2>
               <p>${c.description}</p>
+              <div class="course-card-progress">
+                <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+              </div>
               <span class="course-level ${levelColors[level] || 'course-level-beginner'}">${level.charAt(0).toUpperCase() + level.slice(1)}</span>
             </a>
           `;
         }).join('');
+        if (typeof updateCourseCardProgress === 'function') updateCourseCardProgress();
       });
     }
 

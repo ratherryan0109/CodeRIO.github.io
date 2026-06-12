@@ -31,7 +31,7 @@ async function loadLesson(courseId, moduleId) {
 
   renderBreadcrumb(course, module);
   renderHero(course, module);
-  renderModuleList(course, moduleId);
+  renderModuleList(course, moduleId, data);
   renderObjectives(module.objectives);
   renderContent(module.content);
   renderCodeExamples(module.content);
@@ -61,69 +61,53 @@ function renderHero(course, module) {
   const courseP = progress[course.id];
   const completed = courseP ? courseP.completed : [];
   const fill = document.getElementById('lessonProgressFill');
-  if (completed.includes(module.id + '')) {
+  if (completed.includes(course.id + '_' + module.id)) {
     fill.style.width = '100%';
   } else {
     fill.style.width = '0%';
   }
 }
 
-function renderModuleList(course, activeId) {
+function renderModuleList(course, activeId, allData) {
   var container = document.getElementById('lessonModuleList');
   var progress = Utils.getStorage('course_progress', {});
-  var completed = progress[course.id] ? progress[course.id].completed : [];
+  var courseIds = Object.keys(allData);
 
-  var courseList = [
-    { id: 'html', title: 'HTML' }, { id: 'css', title: 'CSS' }, { id: 'javascript', title: 'JavaScript' },
-    { id: 'python', title: 'Python' }, { id: 'java', title: 'Java' }, { id: 'sql', title: 'SQL' },
-    { id: 'cpp', title: 'C++' }, { id: 'react', title: 'React' }, { id: 'git', title: 'Git' },
-    { id: 'go', title: 'Go' }, { id: 'docker', title: 'Docker' }, { id: 'nodejs', title: 'Node.js' },
-    { id: 'dsa', title: 'DSA' }, { id: 'mysql', title: 'MySQL' }, { id: 'rust', title: 'Rust' },
-    { id: 'typescript', title: 'TypeScript' }, { id: 'c', title: 'C' }, { id: 'csharp', title: 'C#' },
-    { id: 'kotlin', title: 'Kotlin' }, { id: 'linux', title: 'Linux' }, { id: 'mongodb', title: 'MongoDB' },
-    { id: 'pandas', title: 'Pandas' }, { id: 'swift', title: 'Swift' }, { id: 'security', title: 'Security' }
-  ];
+  var html = '<div style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid var(--glass-border)">' + courseIds.length + ' courses</div>';
 
-  var html = '<div style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid var(--glass-border)">' + courseList.length + ' courses</div>';
-
-  courseList.forEach(function(c) {
-    var isCurrent = c.id === course.id;
-    var cProgress = progress[c.id];
+  courseIds.forEach(function(cid) {
+    var cData = allData[cid];
+    if (!cData || !cData.modules) return;
+    var isCurrent = cid === course.id;
+    var cProgress = progress[cid];
+    var completed = cProgress ? cProgress.completed : [];
     var modulesDone = cProgress && cProgress.modulesCompleted ? cProgress.modulesCompleted.length : 0;
-    var totalMods = course.modules ? course.modules.length : 10;
+    var totalMods = cData.modules.length;
     var cPct = modulesDone > 0 ? Math.min(100, Math.round((modulesDone / Math.max(totalMods, 1)) * 100)) : 0;
 
     html += '<div style="margin-bottom:0.3rem">'
-      + '<a href="' + (isCurrent ? '#' : 'lesson.html?course=' + c.id + '&module=1') + '"'
-      + ' style="display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:500;transition:var(--transition);'
-      + (isCurrent ? 'background:rgba(6,182,212,0.12);color:var(--primary);' : 'color:var(--text-secondary);')
-      + '"'
-      + ' onmouseover="this.style.background=\'rgba(6,182,212,0.15)\'"'
-      + ' onmouseout="this.style.background=\'' + (isCurrent ? 'rgba(6,182,212,0.12)' : 'transparent') + '\'"'
-      + '>'
+      + '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;' + (isCurrent ? 'background:rgba(6,182,212,0.12);color:var(--primary);' : 'color:var(--text-secondary);') + '">'
       + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:' + (isCurrent ? 'var(--primary)' : cPct > 0 ? 'var(--success)' : 'var(--text-muted)') + '"></span>'
-      + '<span style="flex:1">' + c.title + '</span>'
+      + '<span style="flex:1">' + (cData.title || cid) + '</span>'
       + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
-      + '</a>';
+      + '</div>';
 
-    if (isCurrent && course.modules) {
-      html += '<div style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem">';
-      course.modules.forEach(function(m) {
-        var isActive = m.id === activeId;
-        var isCompleted = completed.includes(m.id + '') || completed.includes(m.id);
-        html += '<a href="lesson.html?course=' + course.id + '&module=' + m.id + '"'
-          + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
-          + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
-          + '"'
-          + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
-          + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
-          + '>'
-          + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
-          + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
-          + '</a>';
-      });
-      html += '</div>';
-    }
+    html += '<div style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem">';
+    cData.modules.forEach(function(m) {
+      var isActive = isCurrent && m.id === activeId;
+      var isCompleted = completed.includes(cid + '_' + m.id);
+      html += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
+        + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
+        + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
+        + '"'
+        + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
+        + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
+        + '>'
+        + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
+        + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
+        + '</a>';
+    });
+    html += '</div>';
 
     html += '</div>';
   });
@@ -219,7 +203,7 @@ function renderContent(content) {
           <h4 style="font-size:1rem;color:var(--primary-dark)"><i class="fas fa-laptop-code" style="color:var(--primary)"></i> ${item.title || 'Try it yourself'}</h4>
           <span class="badge badge-primary">${lang}</span>
         </div>
-        <textarea id="${id}_editor" rows="${item.rows || 6}" style="width:100%;padding:1rem;background:#0f172a;color:#e2e8f0;border:none;border-radius:8px;font-family:'Fira Code','Cascadia Code',monospace;font-size:0.85rem;line-height:1.6;resize:vertical;tab-size:2">${Utils.sanitize(item.code || '')}</textarea>
+        <textarea id="${id}_editor" rows="${item.rows || 6}" style="width:100%;max-width:100%;overflow-x:auto;padding:1rem;background:#0f172a;color:#e2e8f0;border:none;border-radius:8px;font-family:'Fira Code','Cascadia Code',monospace;font-size:0.85rem;line-height:1.6;resize:vertical;tab-size:2">${Utils.sanitize(item.code || '')}</textarea>
         <div style="display:flex;gap:0.5rem;margin-top:0.6rem">
           <button class="btn btn-sm btn-primary" onclick="runInteractiveCode('${id}','${lang}')"><i class="fas fa-play"></i> Run</button>
           <button class="btn btn-sm btn-ghost" onclick="copyInteractiveCode('${id}')"><i class="fas fa-copy"></i> Copy</button>
@@ -252,7 +236,7 @@ function renderContent(content) {
             <button class="btn btn-sm btn-ghost" onclick="copyCodeBlock(this)" style="padding:0.3rem 0.6rem;font-size:0.75rem"><i class="fas fa-copy"></i> Copy</button>
           </div>
         </div>
-        <pre style="background:#0f172a;color:#e2e8f0;padding:1.2rem;border-radius:12px;overflow-x:auto;font-size:0.9rem;line-height:1.6;margin-bottom:0;position:relative"><code>${Utils.sanitize(item.code)}</code></pre>`;
+        <pre style="background:#0f172a;color:#e2e8f0;padding:1.2rem;border-radius:12px;overflow-x:auto;font-size:0.9rem;line-height:1.6;margin-bottom:0;position:relative;max-width:100%"><code>${Utils.sanitize(item.code)}</code></pre>`;
 
       if (item.explanation) {
         codeHtml += `<div style="overflow-x:auto;margin-top:1rem">

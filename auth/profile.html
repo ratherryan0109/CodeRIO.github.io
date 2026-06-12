@@ -316,7 +316,7 @@
       function loadLearningProgress() {
         const courseProgress = Utils.getStorage('course_progress', {});
         const courseIds = Object.keys(courseProgress);
-        const moduleCount = courseIds.reduce((sum, cid) => sum + (courseProgress[cid].completed || []).length, 0);
+        const moduleCount = courseIds.reduce((sum, cid) => sum + (courseProgress[cid].modulesCompleted || []).length, 0);
         const quizResults = Utils.getStorage('quiz_results', {});
         const quizCount = Object.values(quizResults).reduce((sum, arr) => sum + arr.length, 0);
         document.getElementById('coursesStarted').textContent = courseIds.length || 0;
