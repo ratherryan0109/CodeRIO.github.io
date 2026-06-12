@@ -140,21 +140,27 @@ function initLearningPrefs() {
     });
   });
 
-  const lessonGoal = document.getElementById('dailyLessonGoal');
-  const practiceGoal = document.getElementById('dailyPracticeGoal');
-  const dailyGoals = Utils.getStorage('daily_goals_config', { lessons: 3, practice: 30 });
+  var goalsDefault = { lessons: 3, quizQuestions: 20, codingProblems: 5, typingTests: 1, modules: 1 };
+  var lessonGoal = document.getElementById('dailyLessonGoal');
+  var practiceGoal = document.getElementById('dailyPracticeGoal');
+  var dailyGoals = Utils.getStorage('daily_goals_config', Object.assign({}, goalsDefault));
   if (lessonGoal) { lessonGoal.value = dailyGoals.lessons || 3; }
   if (practiceGoal) { practiceGoal.value = dailyGoals.practice || 30; }
+  function mergeGoals(saved) {
+    var m = Object.assign({}, goalsDefault);
+    if (saved && typeof saved === 'object') Object.keys(saved).forEach(function(k) { m[k] = saved[k]; });
+    return m;
+  }
   if (lessonGoal) {
     lessonGoal.addEventListener('change', function() {
-      const prefs = Utils.getStorage('daily_goals_config', { lessons: 3, practice: 30 });
+      var prefs = mergeGoals(Utils.getStorage('daily_goals_config', null));
       prefs.lessons = parseInt(this.value) || 3;
       Utils.setStorage('daily_goals_config', prefs);
     });
   }
   if (practiceGoal) {
     practiceGoal.addEventListener('change', function() {
-      const prefs = Utils.getStorage('daily_goals_config', { lessons: 3, practice: 30 });
+      var prefs = mergeGoals(Utils.getStorage('daily_goals_config', null));
       prefs.practice = parseInt(this.value) || 30;
       Utils.setStorage('daily_goals_config', prefs);
     });

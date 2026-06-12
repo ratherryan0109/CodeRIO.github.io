@@ -12,7 +12,10 @@ var DailyGoals = {
   },
 
   getGoals() {
-    return Utils.getStorage('daily_goals_config', Object.assign({}, this.DEFAULTS));
+    var stored = Utils.getStorage('daily_goals_config', {});
+    var merged = Object.assign({}, this.DEFAULTS);
+    Object.keys(stored).forEach(function(k) { if (k !== 'date' && typeof merged[k] !== 'undefined') merged[k] = stored[k]; });
+    return merged;
   },
 
   saveGoals(config) {
@@ -72,15 +75,18 @@ var DailyGoals = {
     var progress = this.getProgress();
     var goals = this.getGoals();
 
-    if (progress[type] !== undefined) {
-      progress[type] += amount;
-      if (progress[type] > (goals[type] || Infinity)) {
-        progress[type] = goals[type] || progress[type];
-      }
-      Utils.setStorage('daily_goals_progress', progress);
+    if (typeof progress[type] === 'undefined') progress[type] = 0;
+    progress[type] += amount;
+    if (goals[type] && progress[type] > goals[type]) {
+      progress[type] = goals[type];
     }
+    Utils.setStorage('daily_goals_progress', progress);
 
     this._loadGoals();
+
+    // Re-render widget if it exists on this page
+    var widget = document.getElementById('dailyGoalsWidget');
+    if (widget) this.renderWidget('dailyGoalsWidget');
   },
 
   getCompletionPercentage() {
