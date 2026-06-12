@@ -6,7 +6,6 @@ const LearningTracker = {
     var sessions = Utils.getStorage('learning_sessions', {});
     sessions[lessonId] = { startTime: Date.now(), completed: false, quizAttempted: false };
     Utils.setStorage('learning_sessions', sessions);
-    this._logActivity('started_lesson', lessonId);
   },
 
   hasMetTimeRequirement(lessonId) {

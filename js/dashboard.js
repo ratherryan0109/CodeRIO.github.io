@@ -125,7 +125,7 @@ function updateStreak() {
   }
 }
 
-function loadRecentActivity() {
+async function loadRecentActivity() {
   var activityList = document.getElementById('activityList');
   if (!activityList) return;
 
@@ -135,8 +135,66 @@ function loadRecentActivity() {
     return;
   }
 
+  var lessonsData = await Utils.fetchJSON('../data/lessons.json');
+
+  function getLessonDisplay(type) {
+    if (!type || type.indexOf('_') === -1) return null;
+    var parts = type.split('_');
+    var cid = parts[0];
+    var mid = parseInt(parts[1]);
+    if (!lessonsData || !lessonsData[cid]) return null;
+    var mod = lessonsData[cid].modules.find(function(m) { return m.id === mid; });
+    if (!mod) return null;
+    return { courseTitle: lessonsData[cid].title || cid, moduleTitle: mod.title };
+  }
+
   activityList.innerHTML = activities.slice(-10).reverse().map(function(a) {
-    return '<div class="activity-item"><div class="activity-dot blue"></div><div class="activity-content"><p>' + a.text + '</p><small>' + Utils.timeAgo(a.time) + '</small></div></div>';
+    var display = getLessonDisplay(a.type);
+    var icon = 'fa-book-open';
+    var dotClass = 'blue';
+    var text = a.text || '';
+
+    if (a.type === 'started_lesson' || text === 'started_lesson') {
+      if (display) {
+        text = 'Started: ' + display.courseTitle + ' - ' + display.moduleTitle;
+      } else {
+        text = 'Started learning';
+      }
+      icon = 'fa-play-circle';
+      dotClass = 'green';
+    } else if (a.type === 'completed_lesson' || text === 'completed_lesson') {
+      if (display) {
+        text = 'Completed: ' + display.courseTitle + ' - ' + display.moduleTitle;
+      } else {
+        text = 'Completed a lesson';
+      }
+      icon = 'fa-check-circle';
+      dotClass = 'green';
+    } else if (a.type && a.type.indexOf('quiz_attempt') !== -1) {
+      var parts = a.type.split('|');
+      var scoreInfo = parts.length > 1 ? parts[1] : '';
+      if (display) {
+        text = 'Quiz: ' + display.courseTitle + ' - ' + display.moduleTitle + ' (' + scoreInfo + ')';
+      } else {
+        text = 'Quiz attempt ' + (scoreInfo ? '(' + scoreInfo + ')' : '');
+      }
+      icon = 'fa-question-circle';
+      dotClass = 'purple';
+    } else if (a.type === 'completed_course' || text === 'completed_course') {
+      if (display) {
+        text = 'Completed course: ' + display.courseTitle;
+      } else {
+        text = 'Completed a course';
+      }
+      icon = 'fa-trophy';
+      dotClass = 'gold';
+    } else if (a.type === 'completed_project' || text === 'completed_project') {
+      text = 'Completed a project';
+      icon = 'fa-code';
+      dotClass = 'blue';
+    }
+
+    return '<div class="activity-item"><div class="activity-dot ' + dotClass + '"><i class="fas ' + icon + '"></i></div><div class="activity-content"><p>' + text + '</p><small>' + Utils.timeAgo(a.time) + '</small></div></div>';
   }).join('');
 }
 
