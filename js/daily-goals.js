@@ -17,147 +17,156 @@ var DailyGoals = {
     modules: 'fa-layer-group'
   },
 
-  _localDateStr(d) {
-    var date = d || new Date();
-    return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+  _today() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   },
 
-  _prevLocalDateStr(dateStr) {
-    var parts = dateStr.split('-');
+  _yesterday(str) {
+    var parts = str.split('-');
     var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
     d.setDate(d.getDate() - 1);
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   },
 
-  _todayStr: null,
-
-  init() {
-    this._checkDailyReset();
-    this._loadGoals();
-  },
-
-  _validKeys() {
+  _keys() {
     return Object.keys(this.DEFAULTS);
   },
 
-  getGoals() {
-    var stored = Utils.getStorage('daily_goals_config', {});
+  // Backward-compat aliases (used by 7 call sites in other files)
+  getGoals: function() { return this.config(); },
+
+  saveGoals: function(cfg) {
+    if (cfg && typeof cfg === 'object') {
+      try { localStorage.setItem('daily_goals_config', JSON.stringify(cfg)); } catch {}
+    }
+  },
+
+  getProgress: function() { return this.progress(); },
+
+  recordProgress: function(type, amount) { this.record(type, amount); },
+
+  getCompletionPercentage: function() { return this.pct(); },
+
+  renderWidget: function(id) { this.render(id); },
+
+  getStreak: function() { return this.streak(); },
+
+  // ----- core API -----
+
+  config() {
+    var stored = {};
+    try {
+      var raw = localStorage.getItem('daily_goals_config');
+      if (raw) stored = JSON.parse(raw);
+    } catch {}
     if (!stored || typeof stored !== 'object') stored = {};
-    var merged = {};
-    var valid = this._validKeys();
-    for (var i = 0; i < valid.length; i++) {
-      var k = valid[i];
+    var out = {};
+    var defs = this.DEFAULTS;
+    var keys = this._keys();
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
       var v = stored[k];
-      merged[k] = (typeof v === 'number' && v >= 0) ? v : this.DEFAULTS[k];
+      out[k] = (typeof v === 'number' && v >= 0) ? v : defs[k];
     }
-    return merged;
+    return out;
   },
 
-  saveGoals(config) {
-    Utils.setStorage('daily_goals_config', config);
-  },
-
-  getProgress() {
-    var progress = Utils.getStorage('daily_goals_progress', {});
-    var today = this._localDateStr();
-    if (progress.date !== today) {
-      progress = { date: today };
-      var valid = this._validKeys();
-      for (var i = 0; i < valid.length; i++) progress[valid[i]] = 0;
-      Utils.setStorage('daily_goals_progress', progress);
+  progress() {
+    var p = {};
+    try {
+      var raw = localStorage.getItem('daily_goals_progress');
+      if (raw) p = JSON.parse(raw);
+    } catch {}
+    if (!p || typeof p !== 'object') p = {};
+    var today = this._today();
+    if (p.date !== today) {
+      p = { date: today };
+      var keys = this._keys();
+      for (var i = 0; i < keys.length; i++) p[keys[i]] = 0;
+      try { localStorage.setItem('daily_goals_progress', JSON.stringify(p)); } catch {}
+      return p;
     }
-    return progress;
-  },
-
-  _checkDailyReset() {
-    var progress = Utils.getStorage('daily_goals_progress', {});
-    var today = this._localDateStr();
-    if (progress.date !== today) {
-      progress = { date: today };
-      var valid = this._validKeys();
-      for (var i = 0; i < valid.length; i++) progress[valid[i]] = 0;
-      Utils.setStorage('daily_goals_progress', progress);
-    }
-  },
-
-  _loadGoals() {
-    var progress = this.getProgress();
-    var goals = this.getGoals();
-    var allComplete = true;
-    var anyProgress = false;
-
-    var valid = this._validKeys();
-    for (var i = 0; i < valid.length; i++) {
-      var key = valid[i];
-      if (goals[key] > 0) {
-        if (progress[key] >= goals[key]) {
-          if (typeof AchievementSystem !== 'undefined') {
-            AchievementSystem.checkAndAward();
-          }
-        } else {
-          allComplete = false;
-        }
-        if (progress[key] > 0) anyProgress = true;
+    // Backfill any missing keys for today
+    var changed = false;
+    var keys = this._keys();
+    for (var i = 0; i < keys.length; i++) {
+      if (typeof p[keys[i]] !== 'number') {
+        p[keys[i]] = 0;
+        changed = true;
       }
     }
+    if (changed) {
+      try { localStorage.setItem('daily_goals_progress', JSON.stringify(p)); } catch {}
+    }
+    return p;
+  },
 
-    if (allComplete && anyProgress) {
-      var dateStr = this._localDateStr();
-      var completedDates = Utils.getStorage('daily_goals_completed', []);
-      if (completedDates.indexOf(dateStr) === -1) {
-        completedDates.push(dateStr);
-        Utils.setStorage('daily_goals_completed', completedDates);
+  record(type, amount) {
+    if (typeof amount !== 'number' || amount <= 0) return;
+    var keys = this._keys();
+    if (keys.indexOf(type) === -1) return;
+
+    var p = this.progress(); // ensures today with all keys
+    var cfg = this.config();
+
+    p[type] = Math.min((p[type] || 0) + amount, cfg[type] || amount);
+    try { localStorage.setItem('daily_goals_progress', JSON.stringify(p)); } catch {}
+
+    this._checkCompletion(p, cfg);
+    this._refresh();
+  },
+
+  _checkCompletion(p, cfg) {
+    var allDone = true;
+    var any = false;
+    var keys = this._keys();
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      if (cfg[k] > 0) {
+        if ((p[k] || 0) < cfg[k]) allDone = false;
+        if (p[k] > 0) any = true;
+      }
+    }
+    if (allDone && any) {
+      var today = this._today();
+      var done = [];
+      try {
+        var raw = localStorage.getItem('daily_goals_completed');
+        if (raw) done = JSON.parse(raw);
+      } catch {}
+      if (!Array.isArray(done)) done = [];
+      if (done.indexOf(today) === -1) {
+        done.push(today);
+        try { localStorage.setItem('daily_goals_completed', JSON.stringify(done)); } catch {}
         Utils.showToast('All daily goals completed! Great work!', 'success');
       }
+      if (typeof AchievementSystem !== 'undefined') AchievementSystem.checkAndAward();
     }
   },
 
-  recordProgress(type, amount) {
-    if (typeof amount !== 'number' || amount <= 0) return;
-    var valid = this._validKeys();
-    if (valid.indexOf(type) === -1) return;
-
-    var progress = this.getProgress();
-    var goals = this.getGoals();
-
-    if (typeof progress[type] !== 'number') progress[type] = 0;
-    progress[type] = Math.min(progress[type] + amount, goals[type] || amount);
-    Utils.setStorage('daily_goals_progress', progress);
-
-    this._loadGoals();
-    this._refreshWidget();
-  },
-
-  _refreshWidget() {
-    var container = document.getElementById('dailyGoalsWidget');
-    if (container) this.renderWidget('dailyGoalsWidget');
-  },
-
-  getCompletionPercentage() {
-    var progress = this.getProgress();
-    var goals = this.getGoals();
-    var total = 0;
-    var completed = 0;
-
-    var valid = this._validKeys();
-    for (var i = 0; i < valid.length; i++) {
-      var key = valid[i];
-      if (goals[key] > 0) {
+  pct() {
+    var p = this.progress();
+    var cfg = this.config();
+    var total = 0, done = 0;
+    var keys = this._keys();
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      if (cfg[k] > 0) {
         total++;
-        if (progress[key] >= goals[key]) completed++;
+        if ((p[k] || 0) >= cfg[k]) done++;
       }
     }
-
-    return total > 0 ? Math.round((completed / total) * 100) : 0;
+    return total > 0 ? Math.round((done / total) * 100) : 0;
   },
 
-  renderWidget(containerId) {
-    var container = document.getElementById(containerId);
-    if (!container) return;
+  render(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
 
-    var goals = this.getGoals();
-    var progress = this.getProgress();
-    var pct = this.getCompletionPercentage();
+    var cfg = this.config();
+    var p = this.progress();
+    var pct = this.pct();
 
     var html = '<div class="daily-goals-widget">'
       + '<div class="dg-header"><h3><i class="fas fa-bullseye" style="color:var(--primary)"></i> Daily Goals</h3>'
@@ -166,58 +175,69 @@ var DailyGoals = {
       + '<div style="height:100%;width:' + pct + '%;background:var(--primary);border-radius:3px;transition:width 0.5s"></div></div>'
       + '<div class="dg-list">';
 
-    var valid = this._validKeys();
-    for (var i = 0; i < valid.length; i++) {
-      var key = valid[i];
-      if (goals[key] <= 0) continue;
-      var val = typeof progress[key] === 'number' ? Math.min(progress[key], goals[key]) : 0;
-      var barPct = goals[key] > 0 ? Math.round((val / goals[key]) * 100) : 0;
-      html += '<div class="dg-item"><div class="dg-item-header"><i class="fas ' + (this.ICONS[key] || 'fa-circle') + '"></i>'
-        + '<span>' + (this.LABELS[key] || key) + '</span><span class="dg-count">' + val + '/' + goals[key] + '</span></div>'
+    var keys = this._keys();
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      if (cfg[k] <= 0) continue;
+      var val = typeof p[k] === 'number' ? Math.min(p[k], cfg[k]) : 0;
+      var bar = cfg[k] > 0 ? Math.round((val / cfg[k]) * 100) : 0;
+      html += '<div class="dg-item"><div class="dg-item-header">'
+        + '<i class="fas ' + (this.ICONS[k] || 'fa-circle') + '"></i>'
+        + '<span>' + (this.LABELS[k] || k) + '</span>'
+        + '<span class="dg-count">' + val + '/' + cfg[k] + '</span></div>'
         + '<div style="height:4px;background:#f1f5f9;border-radius:2px;overflow:hidden">'
-        + '<div style="height:100%;width:' + barPct + '%;background:' + (barPct >= 100 ? 'var(--success)' : 'var(--primary)') + ';border-radius:2px;transition:width 0.3s"></div></div></div>';
+        + '<div style="height:100%;width:' + bar + '%;background:' + (bar >= 100 ? 'var(--success)' : 'var(--primary)') + ';border-radius:2px;transition:width 0.3s"></div></div></div>';
     }
 
     html += '</div></div>';
-    container.innerHTML = html;
+    el.innerHTML = html;
   },
 
-  getStreak() {
-    var completedDates = Utils.getStorage('daily_goals_completed', []);
-    var sorted = completedDates.slice().sort().reverse();
-    var streak = 0;
-    var today = this._localDateStr();
+  _refresh() {
+    var el = document.getElementById('dailyGoalsWidget');
+    if (el) this.render('dailyGoalsWidget');
+  },
+
+  streak() {
+    var done = [];
+    try {
+      var raw = localStorage.getItem('daily_goals_completed');
+      if (raw) done = JSON.parse(raw);
+    } catch {}
+    if (!Array.isArray(done)) done = [];
+    var sorted = done.slice().sort().reverse();
+    var today = this._today();
+    var count = 0;
     var check = today;
 
     for (var i = 0; i < sorted.length; i++) {
       if (sorted[i] === check) {
-        streak++;
-        check = this._prevLocalDateStr(check);
+        count++;
+        check = this._yesterday(check);
       } else if (i === 0 && sorted[i] < today) {
-        var yesterday = this._prevLocalDateStr(today);
-        if (sorted[0] === yesterday) {
-          var altCheck = yesterday;
-          streak = 1;
+        var y = this._yesterday(today);
+        if (sorted[0] === y) {
+          count = 1;
+          check = this._yesterday(y);
           for (var j = 1; j < sorted.length; j++) {
-            var expected = this._prevLocalDateStr(altCheck);
-            if (sorted[j] === expected) {
-              streak++;
-              altCheck = expected;
-            } else break;
+            if (sorted[j] === check) { count++; check = this._yesterday(check); }
+            else break;
           }
         }
         break;
-      } else {
-        break;
-      }
+      } else break;
     }
 
-    return streak;
+    return count;
+  },
+
+  init() {
+    // Migrate legacy data: strip non-standard keys from config
+    this.config(); // ensures clean config via getter
+    this.progress(); // ensures clean progress via getter
   }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-  if (typeof Utils !== 'undefined') {
-    DailyGoals.init();
-  }
+  if (typeof Utils !== 'undefined') DailyGoals.init();
 });

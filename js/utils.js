@@ -45,7 +45,7 @@ const Utils = {
     return Utils.formatDate(date);
   },
 
-  _globalKeys: { coderio_user: 1, accent_color: 1, theme: 1, last_course: 1 },
+  _globalKeys: { coderio_user: 1, accent_color: 1, theme: 1, last_course: 1, daily_goals_config: 1, daily_goals_progress: 1, daily_goals_completed: 1 },
 
   _userPrefix() {
     try {
