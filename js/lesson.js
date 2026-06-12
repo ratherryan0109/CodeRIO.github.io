@@ -376,6 +376,16 @@ function renderQuiz(quiz, courseId) {
   var link = document.getElementById('quizHubLink');
   var container = document.getElementById('lessonQuiz');
   if (!quiz || quiz.length === 0) { container.style.display = 'none'; return; }
+  if (!Utils.getStorage('coderio_user')) {
+    container.style.display = 'block';
+    container.innerHTML = '\
+      <div style="text-align:center;padding:1.5rem">\
+        <i class="fas fa-lock" style="font-size:2rem;color:var(--text-muted);margin-bottom:0.8rem;display:block"></i>\
+        <p style="color:var(--text-secondary);margin-bottom:1rem">Log in to take the full course quiz.</p>\
+        <a href="auth/login.html" class="btn btn-primary btn-sm" style="display:inline-flex"><i class="fas fa-sign-in-alt"></i> Log In</a>\
+      </div>';
+    return;
+  }
   container.style.display = 'block';
   document.getElementById('quizScore').textContent = '';
   if (link) {

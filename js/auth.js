@@ -142,7 +142,9 @@ async function initLoginPage() {
       } catch (err) {
         if (err.code === 'auth/account-exists-with-different-credential') {
           await handleAccountLinking(err);
-        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        } else if (err.code === 'auth/popup-blocked') {
+          Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
+        } else if (err.code !== 'auth/popup-closed-by-user') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -160,7 +162,9 @@ async function initLoginPage() {
       } catch (err) {
         if (err.code === 'auth/account-exists-with-different-credential') {
           await handleAccountLinking(err);
-        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        } else if (err.code === 'auth/popup-blocked') {
+          Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
+        } else if (err.code !== 'auth/popup-closed-by-user') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -234,7 +238,9 @@ async function initRegisterPage() {
       } catch (err) {
         if (err.code === 'auth/account-exists-with-different-credential') {
           await handleAccountLinking(err);
-        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        } else if (err.code === 'auth/popup-blocked') {
+          Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
+        } else if (err.code !== 'auth/popup-closed-by-user') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -252,7 +258,9 @@ async function initRegisterPage() {
       } catch (err) {
         if (err.code === 'auth/account-exists-with-different-credential') {
           await handleAccountLinking(err);
-        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/popup-blocked') {
+        } else if (err.code === 'auth/popup-blocked') {
+          Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
+        } else if (err.code !== 'auth/popup-closed-by-user') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
       }
@@ -525,6 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } else {
       localStorage.removeItem('coderio_user');
+      document.querySelectorAll('.nav-links a[href*="quiz-hub"]').forEach(function(el) { if (el.parentElement) el.parentElement.remove(); });
     }
   });
 });

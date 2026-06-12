@@ -51,6 +51,14 @@
 </nav>
 
 <section class="quiz-container">
+<div id="loginRequired" style="display:none">
+  <div class="glass" style="padding:2.5rem;text-align:center;max-width:420px;margin:3rem auto;border-radius:var(--border-radius-lg)">
+    <i class="fas fa-lock" style="font-size:2.5rem;color:var(--text-muted);margin-bottom:1rem;display:block"></i>
+    <h2 style="color:var(--text);margin-bottom:0.5rem">Login Required</h2>
+    <p style="color:var(--text-secondary);margin-bottom:1.5rem">Please log in to access quizzes and track your progress.</p>
+    <a href="auth/login.html" class="btn btn-primary" style="justify-content:center"><i class="fas fa-sign-in-alt"></i> Log In</a>
+  </div>
+</div>
 <div id="quizSetup">
 <h1 style="font-size:2rem;margin-bottom:2rem"><i class="fas fa-question-circle" style="color:var(--primary)"></i> Quiz Hub</h1>
 
@@ -156,6 +164,12 @@ var currentQuiz = null;
 function esc(s) { if (typeof s !== 'string') return String(s); return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;'); }
 
 function initQuizHub() {
+  if (!Utils.getStorage('coderio_user')) {
+    document.getElementById('quizSetup').style.display = 'none';
+    document.getElementById('quizArea').style.display = 'none';
+    document.getElementById('loginRequired').style.display = 'block';
+    return;
+  }
   populateCourseSelect();
   setupEventListeners();
   loadPerformanceSummary();

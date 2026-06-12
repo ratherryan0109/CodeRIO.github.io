@@ -30,6 +30,7 @@ function initNavbar() {
     }, 100));
   }
 
+  navLinks.querySelectorAll('a[href*="quiz-hub"]').forEach(function(el) { if (el.parentElement) el.parentElement.remove(); });
   if (navLinks && Utils.getStorage('coderio_user')) {
     var quizLi = document.createElement('li');
     var quizA = document.createElement('a');
@@ -165,6 +166,28 @@ function initScrollSidebar(sidebarClass, cardClass) {
     });
   }, { rootMargin: '-100px 0px -60% 0px' });
   document.querySelectorAll('.' + cardClass).forEach(function(s) { observer.observe(s); });
+}
+
+function showQuizLoginOverlay() {
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)';
+  overlay.innerHTML = '\
+    <div class="glass" style="padding:2.5rem;text-align:center;max-width:420px;width:100%;border-radius:var(--border-radius-lg)">\
+      <i class="fas fa-lock" style="font-size:2.5rem;color:var(--text-muted);margin-bottom:1rem;display:block"></i>\
+      <h2 style="color:var(--text);margin-bottom:0.5rem">Login Required</h2>\
+      <p style="color:var(--text-secondary);margin-bottom:1.5rem">Please log in to access quizzes and track your progress.</p>\
+      <a href="' + (window.location.pathname.includes('/courses/') ? '../../' : '') + 'auth/login.html" class="btn btn-primary" style="justify-content:center"><i class="fas fa-sign-in-alt"></i> Log In</a>\
+      <button onclick="this.closest(\'div[style]\').remove()" style="display:block;margin:0.75rem auto 0;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.85rem">Cancel</button>\
+    </div>';
+  document.body.appendChild(overlay);
+}
+
+if (typeof checkQuiz === 'function') {
+  var _checkQuiz = checkQuiz;
+  checkQuiz = function() {
+    if (!Utils.getStorage('coderio_user')) { showQuizLoginOverlay(); return; }
+    return _checkQuiz.apply(this, arguments);
+  };
 }
 
 function updateCopyrightYear() {
