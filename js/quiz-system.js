@@ -513,8 +513,11 @@ var QuizSystem = {
       timeTaken: quiz.endTime - quiz.startTime
     });
     Utils.setStorage('quiz_results', results);
+    if (typeof LearningTracker !== 'undefined') {
+      LearningTracker.recordQuizAttempt(quiz.courseId + '_hub', quiz.score, quiz.questions.length);
+      LearningTracker._awardAP('quiz_complete', Math.round(pct));
+    }
     if (typeof DailyGoals !== 'undefined') DailyGoals.recordProgress('quizQuestions', quiz.score);
-    if (typeof LearningTracker !== 'undefined') LearningTracker._awardAP('quiz_complete', Math.round(pct));
     if (typeof AchievementSystem !== 'undefined') AchievementSystem.checkAndAward(quiz.courseId);
   },
 

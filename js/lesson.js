@@ -17,6 +17,18 @@ async function loadLesson(courseId, moduleId) {
     LearningTracker.startLesson(courseId + '_' + moduleId);
   }
 
+  var progress = Utils.getStorage('course_progress', {});
+  if (!progress[courseId]) {
+    progress[courseId] = { completed: [], modulesCompleted: [], lessonsCompleted: [], status: 'active', startedAt: new Date().toISOString(), lastActivity: new Date().toISOString(), timeSpent: 0, currentModule: 1 };
+  }
+  var fullId = courseId + '_' + moduleId;
+  if (!progress[courseId].modulesCompleted.includes(fullId)) {
+    progress[courseId].modulesCompleted.push(fullId);
+    progress[courseId].lessonsCompleted.push(fullId);
+  }
+  progress[courseId].lastActivity = new Date().toISOString();
+  Utils.setStorage('course_progress', progress);
+
   renderBreadcrumb(course, module);
   renderHero(course, module);
   renderModuleList(course, moduleId);

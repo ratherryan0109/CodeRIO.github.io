@@ -34,7 +34,7 @@ function initNavbar() {
   if (navLinks && Utils.getStorage('coderio_user')) {
     var quizLi = document.createElement('li');
     var quizA = document.createElement('a');
-    quizA.href = (window.location.pathname.includes('/dashboard/') || window.location.pathname.includes('/auth/') ? '../' : '') + 'quiz-hub.html';
+    quizA.href = rel('../quiz-hub.html');
     quizA.innerHTML = 'Quiz';
     quizLi.appendChild(quizA);
     var practiceLink = navLinks.querySelector('a[href*="Practice"]');

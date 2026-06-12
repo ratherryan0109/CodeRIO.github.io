@@ -8,6 +8,7 @@ const FIREBASE_CONFIG = {
 };
 
 let firebaseApp = null;
+var _popupInProgress = false;
 let firebaseReady = false;
 
 function getFirebase() {
@@ -133,6 +134,8 @@ async function initLoginPage() {
 
   if (googleBtn) {
     googleBtn.addEventListener('click', async () => {
+      if (_popupInProgress) return;
+      _popupInProgress = true;
       try {
         const provider = new firebase.auth.GoogleAuthProvider();
         const result = await firebase.auth().signInWithPopup(provider);
@@ -144,15 +147,19 @@ async function initLoginPage() {
           await handleAccountLinking(err);
         } else if (err.code === 'auth/popup-blocked') {
           Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
-        } else if (err.code !== 'auth/popup-closed-by-user') {
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
+      } finally {
+        _popupInProgress = false;
       }
     });
   }
 
   if (githubBtn) {
     githubBtn.addEventListener('click', async () => {
+      if (_popupInProgress) return;
+      _popupInProgress = true;
       try {
         const provider = new firebase.auth.GithubAuthProvider();
         const result = await firebase.auth().signInWithPopup(provider);
@@ -164,9 +171,11 @@ async function initLoginPage() {
           await handleAccountLinking(err);
         } else if (err.code === 'auth/popup-blocked') {
           Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
-        } else if (err.code !== 'auth/popup-closed-by-user') {
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
+      } finally {
+        _popupInProgress = false;
       }
     });
   }
@@ -229,6 +238,8 @@ async function initRegisterPage() {
 
   if (googleBtn) {
     googleBtn.addEventListener('click', async () => {
+      if (_popupInProgress) return;
+      _popupInProgress = true;
       try {
         const provider = new firebase.auth.GoogleAuthProvider();
         const result = await firebase.auth().signInWithPopup(provider);
@@ -240,15 +251,19 @@ async function initRegisterPage() {
           await handleAccountLinking(err);
         } else if (err.code === 'auth/popup-blocked') {
           Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
-        } else if (err.code !== 'auth/popup-closed-by-user') {
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
+      } finally {
+        _popupInProgress = false;
       }
     });
   }
 
   if (githubBtn) {
     githubBtn.addEventListener('click', async () => {
+      if (_popupInProgress) return;
+      _popupInProgress = true;
       try {
         const provider = new firebase.auth.GithubAuthProvider();
         const result = await firebase.auth().signInWithPopup(provider);
@@ -260,9 +275,11 @@ async function initRegisterPage() {
           await handleAccountLinking(err);
         } else if (err.code === 'auth/popup-blocked') {
           Utils.showToast('Popup blocked. Please allow popups for this site and try again.', 'warning');
-        } else if (err.code !== 'auth/popup-closed-by-user') {
+        } else if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
           Utils.showToast(handleFirebaseError(err), 'error');
         }
+      } finally {
+        _popupInProgress = false;
       }
     });
   }
