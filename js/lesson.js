@@ -80,8 +80,16 @@ function renderModuleList(course, activeId, allData) {
     if (!cData || !cData.modules) return;
     var isCurrent = cid === course.id;
     var cProgress = progress[cid];
-    var completed = cProgress ? cProgress.completed : [];
-    var modulesDone = cProgress && cProgress.modulesCompleted ? cProgress.modulesCompleted.length : 0;
+    var completedArr = cProgress ? cProgress.completed : [];
+    var modulesDone = 0;
+    cData.modules.forEach(function(m) {
+      if (completedArr.includes(cid + '_' + m.id) || completedArr.includes(String(m.id)) || completedArr.includes(m.id)) {
+        modulesDone++;
+      }
+    });
+    if (modulesDone === 0 && cProgress && cProgress.modulesCompleted) {
+      modulesDone = cProgress.modulesCompleted.length;
+    }
     var totalMods = cData.modules.length;
     var cPct = modulesDone > 0 ? Math.min(100, Math.round((modulesDone / Math.max(totalMods, 1)) * 100)) : 0;
 
@@ -96,7 +104,7 @@ function renderModuleList(course, activeId, allData) {
       html += '<div style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem">';
       cData.modules.forEach(function(m) {
         var isActive = m.id === activeId;
-        var isCompleted = completed.includes(cid + '_' + m.id);
+        var isCompleted = completedArr.includes(cid + '_' + m.id) || completedArr.includes(String(m.id)) || completedArr.includes(m.id);
         html += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
           + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
           + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')

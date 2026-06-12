@@ -233,7 +233,7 @@ async function initCourseChart() {
   var courseProgress = Utils.getStorage('course_progress', {});
   var courseIds = Object.keys(courseProgress);
 
-  var courseData = await Utils.fetchJSON('data/courses.json');
+  var courseData = await Utils.fetchJSON('../data/courses.json');
   var totalCourses = courseData ? courseData.length : courseIds.length;
 
   var completed = courseIds.filter(function(cid) {
