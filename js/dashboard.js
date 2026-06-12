@@ -83,8 +83,10 @@ function formatTimeSpent(ms) {
   var totalSec = Math.floor(ms / 1000);
   var h = Math.floor(totalSec / 3600);
   var m = Math.floor((totalSec % 3600) / 60);
+  var s = totalSec % 60;
   if (h > 0) return h + 'h ' + m + 'm';
-  return m + 'm';
+  if (m > 0) return m + 'm ' + s + 's';
+  return s + 's';
 }
 
 function updateStreak() {

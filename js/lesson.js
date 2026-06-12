@@ -43,27 +43,29 @@ async function loadLesson(courseId, moduleId) {
 
   // Auto-save time spent every 30 seconds while on the lesson
   var lessonKey = courseId + '_' + moduleId;
+  var _lastTimeSave = Date.now();
   var timeInterval = setInterval(function() {
     var sessions = Utils.getStorage('learning_sessions', {});
     var session = sessions[lessonKey];
     if (session && !session.completed) {
-      var elapsed = Date.now() - session.startTime;
+      var now = Date.now();
+      var elapsed = now - _lastTimeSave;
+      _lastTimeSave = now;
       var p = Utils.getStorage('course_progress', {});
+      if (!p[courseId]) p[courseId] = { timeSpent: 0 };
       p[courseId].timeSpent = (p[courseId].timeSpent || 0) + elapsed;
-      session.startTime = Date.now();
       Utils.setStorage('course_progress', p);
-      Utils.setStorage('learning_sessions', sessions);
     }
   }, 30000);
 
   // Save remaining time when leaving the page
   function saveTimeOnExit() {
     clearInterval(timeInterval);
-    var sessions = Utils.getStorage('learning_sessions', {});
-    var session = sessions[lessonKey];
-    if (session && !session.completed) {
-      var elapsed = Date.now() - session.startTime;
+    var now = Date.now();
+    var elapsed = now - _lastTimeSave;
+    if (elapsed > 0) {
       var p = Utils.getStorage('course_progress', {});
+      if (!p[courseId]) p[courseId] = { timeSpent: 0 };
       p[courseId].timeSpent = (p[courseId].timeSpent || 0) + elapsed;
       Utils.setStorage('course_progress', p);
     }
