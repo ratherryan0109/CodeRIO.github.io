@@ -41,42 +41,35 @@ async function loadLesson(courseId, moduleId) {
   renderNavigation(course, moduleId);
   loadLessonNotes();
 
-  // Auto-save time spent every 30 seconds while on the lesson
-  var lessonKey = courseId + '_' + moduleId;
-  var _lastTimeSave = Date.now();
+  // Track time spent on this lesson
+  var sessionStart = Date.now();
 
-  function _saveTime(ms) {
-    if (ms <= 0) return;
-    // Per-course timeSpent (writes first — safe, Utils.setStorage has try/catch)
+  function saveTime(spent) {
+    if (spent <= 0) return;
+    // Per-course timeSpent (for My Courses view)
     var p = Utils.getStorage('course_progress', {});
     if (!p[courseId]) p[courseId] = { timeSpent: 0 };
-    p[courseId].timeSpent = (p[courseId].timeSpent || 0) + ms;
+    p[courseId].timeSpent = (p[courseId].timeSpent || 0) + spent;
     Utils.setStorage('course_progress', p);
-    // Redundant flat total counter (wrap in try/catch in case localStorage is restricted)
+    // Flat total counter (immune to scope issues)
     try {
-      var total = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
-      localStorage.setItem('coderio_total_time', String(total + ms));
+      var old = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
+      localStorage.setItem('coderio_total_time', String(old + spent));
     } catch(e) {}
   }
 
+  // Auto-save every 30s (crash safety)
   var timeInterval = setInterval(function() {
-    var sessions = Utils.getStorage('learning_sessions', {});
-    var session = sessions[lessonKey];
-    if (session) {
-      var now = Date.now();
-      _saveTime(now - _lastTimeSave);
-      _lastTimeSave = now;
-    }
+    var now = Date.now();
+    saveTime(now - sessionStart);
+    sessionStart = now;
   }, 30000);
 
-  // Save remaining time when leaving the page
-  function saveTimeOnExit() {
+  // Save on page leave
+  window.addEventListener('beforeunload', function() {
     clearInterval(timeInterval);
-    var now = Date.now();
-    var elapsed = now - _lastTimeSave;
-    if (elapsed > 0) _saveTime(elapsed);
-  }
-  window.addEventListener('beforeunload', saveTimeOnExit);
+    saveTime(Date.now() - sessionStart);
+  });
 }
 
 function renderBreadcrumb(course, module) {
