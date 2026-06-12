@@ -37,9 +37,7 @@ var DailyGoals = {
   getGoals: function() { return this.config(); },
 
   saveGoals: function(cfg) {
-    if (cfg && typeof cfg === 'object') {
-      try { localStorage.setItem('daily_goals_config', JSON.stringify(cfg)); } catch {}
-    }
+    if (cfg && typeof cfg === 'object') Utils.setStorage('daily_goals_config', cfg);
   },
 
   getProgress: function() { return this.progress(); },
@@ -55,11 +53,7 @@ var DailyGoals = {
   // ----- core API -----
 
   config() {
-    var stored = {};
-    try {
-      var raw = localStorage.getItem('daily_goals_config');
-      if (raw) stored = JSON.parse(raw);
-    } catch {}
+    var stored = Utils.getStorage('daily_goals_config', {});
     if (!stored || typeof stored !== 'object') stored = {};
     var out = {};
     var defs = this.DEFAULTS;
@@ -73,21 +67,16 @@ var DailyGoals = {
   },
 
   progress() {
-    var p = {};
-    try {
-      var raw = localStorage.getItem('daily_goals_progress');
-      if (raw) p = JSON.parse(raw);
-    } catch {}
+    var p = Utils.getStorage('daily_goals_progress', {});
     if (!p || typeof p !== 'object') p = {};
     var today = this._today();
     if (p.date !== today) {
       p = { date: today };
       var keys = this._keys();
       for (var i = 0; i < keys.length; i++) p[keys[i]] = 0;
-      try { localStorage.setItem('daily_goals_progress', JSON.stringify(p)); } catch {}
+      Utils.setStorage('daily_goals_progress', p);
       return p;
     }
-    // Backfill any missing keys for today
     var changed = false;
     var keys = this._keys();
     for (var i = 0; i < keys.length; i++) {
@@ -96,9 +85,7 @@ var DailyGoals = {
         changed = true;
       }
     }
-    if (changed) {
-      try { localStorage.setItem('daily_goals_progress', JSON.stringify(p)); } catch {}
-    }
+    if (changed) Utils.setStorage('daily_goals_progress', p);
     return p;
   },
 
@@ -111,7 +98,7 @@ var DailyGoals = {
     var cfg = this.config();
 
     p[type] = Math.min((p[type] || 0) + amount, cfg[type] || amount);
-    try { localStorage.setItem('daily_goals_progress', JSON.stringify(p)); } catch {}
+    Utils.setStorage('daily_goals_progress', p);
 
     this._checkCompletion(p, cfg);
     this._refresh();
@@ -130,15 +117,11 @@ var DailyGoals = {
     }
     if (allDone && any) {
       var today = this._today();
-      var done = [];
-      try {
-        var raw = localStorage.getItem('daily_goals_completed');
-        if (raw) done = JSON.parse(raw);
-      } catch {}
+      var done = Utils.getStorage('daily_goals_completed', []);
       if (!Array.isArray(done)) done = [];
       if (done.indexOf(today) === -1) {
         done.push(today);
-        try { localStorage.setItem('daily_goals_completed', JSON.stringify(done)); } catch {}
+        Utils.setStorage('daily_goals_completed', done);
         Utils.showToast('All daily goals completed! Great work!', 'success');
       }
       if (typeof AchievementSystem !== 'undefined') AchievementSystem.checkAndAward();
@@ -199,11 +182,7 @@ var DailyGoals = {
   },
 
   streak() {
-    var done = [];
-    try {
-      var raw = localStorage.getItem('daily_goals_completed');
-      if (raw) done = JSON.parse(raw);
-    } catch {}
+    var done = Utils.getStorage('daily_goals_completed', []);
     if (!Array.isArray(done)) done = [];
     var sorted = done.slice().sort().reverse();
     var today = this._today();
@@ -232,9 +211,30 @@ var DailyGoals = {
   },
 
   init() {
-    // Migrate legacy data: strip non-standard keys from config
-    this.config(); // ensures clean config via getter
-    this.progress(); // ensures clean progress via getter
+    this._migrateLegacy();
+    this.config();
+    this.progress();
+  },
+
+  _migrateLegacy() {
+    var goalsKeys = ['daily_goals_config', 'daily_goals_progress', 'daily_goals_completed'];
+    for (var i = 0; i < goalsKeys.length; i++) {
+      var k = goalsKeys[i];
+      try {
+        if (localStorage.getItem(k) !== null) continue;
+        for (var j = 0; j < localStorage.length; j++) {
+          var lk = localStorage.key(j);
+          if (lk && lk.indexOf(':') > 0 && lk.endsWith(':' + k)) {
+            var val = localStorage.getItem(lk);
+            if (val !== null) {
+              localStorage.setItem(k, val);
+              localStorage.removeItem(lk);
+            }
+            break;
+          }
+        }
+      } catch {}
+    }
   }
 };
 

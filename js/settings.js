@@ -142,33 +142,23 @@ function initLearningPrefs() {
 
   var lessonGoal = document.getElementById('dailyLessonGoal');
   var practiceGoal = document.getElementById('dailyPracticeGoal');
-  var goalDefs = { lessons: 3, quizQuestions: 20, codingProblems: 5, typingTests: 1, modules: 1 };
-  function _readGoals() {
-    var g = {};
-    try { var r = localStorage.getItem('daily_goals_config'); if (r) g = JSON.parse(r); } catch {}
-    if (!g || typeof g !== 'object') g = {};
-    var out = {};
-    Object.keys(goalDefs).forEach(function(k) { out[k] = (typeof g[k] === 'number' && g[k] >= 0) ? g[k] : goalDefs[k]; });
-    return out;
-  }
-  function _writeGoals(g) { try { localStorage.setItem('daily_goals_config', JSON.stringify(g)); } catch {} }
-  var cur = _readGoals();
-  if (lessonGoal) { lessonGoal.value = cur.lessons; }
-  if (practiceGoal) {
-    var pm = 30;
-    try { var r = localStorage.getItem('daily_practice_mins'); if (r !== null) pm = parseInt(r, 10) || 30; } catch {}
-    practiceGoal.value = pm;
-  }
+  var goalConfig = Utils.getStorage('daily_goals_config', {});
+  if (typeof goalConfig.lessons !== 'number') goalConfig.lessons = 3;
+  if (lessonGoal) lessonGoal.value = goalConfig.lessons;
+  if (practiceGoal) practiceGoal.value = Utils.getStorage('daily_practice_mins', 30);
   if (lessonGoal) {
     lessonGoal.addEventListener('change', function() {
-      var g = _readGoals();
+      var g = Utils.getStorage('daily_goals_config', {});
+      if (typeof g !== 'object' || !g) g = {};
+      var defs = { lessons: 3, quizQuestions: 20, codingProblems: 5, typingTests: 1, modules: 1 };
+      Object.keys(defs).forEach(function(k) { if (typeof g[k] !== 'number') g[k] = defs[k]; });
       g.lessons = parseInt(this.value) || 3;
-      _writeGoals(g);
+      Utils.setStorage('daily_goals_config', g);
     });
   }
   if (practiceGoal) {
     practiceGoal.addEventListener('change', function() {
-      try { localStorage.setItem('daily_practice_mins', String(parseInt(this.value) || 30)); } catch {}
+      Utils.setStorage('daily_practice_mins', parseInt(this.value) || 30);
     });
   }
 }
