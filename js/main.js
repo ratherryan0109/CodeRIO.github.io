@@ -1,3 +1,19 @@
+// Global time tracker — runs on every page, saves to coderio_total_time
+var _pageStart = Date.now();
+setInterval(function() {
+  var now = Date.now(); var elapsed = now - _pageStart;
+  if (elapsed >= 5000) {
+    try { var old = parseInt(localStorage.getItem('coderio_total_time') || '0', 10); localStorage.setItem('coderio_total_time', String(old + elapsed)); } catch(e) {}
+    _pageStart = now;
+  }
+}, 5000);
+window.addEventListener('beforeunload', function() {
+  var spent = Date.now() - _pageStart;
+  if (spent > 0) {
+    try { var old = parseInt(localStorage.getItem('coderio_total_time') || '0', 10); localStorage.setItem('coderio_total_time', String(old + spent)); } catch(e) {}
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCurrentPage();

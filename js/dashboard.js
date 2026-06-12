@@ -1,14 +1,3 @@
-var sessionStart = Date.now();
-window.addEventListener('beforeunload', function() {
-  var spent = Date.now() - sessionStart;
-  if (spent > 0) {
-    try {
-      var old = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
-      localStorage.setItem('coderio_total_time', String(old + spent));
-    } catch(e) {}
-  }
-});
-
 async function initDashboard() {
   var user = Utils.getStorage('coderio_user');
   if (!user) return;
@@ -34,13 +23,15 @@ function updateWelcomeMessage() {
 }
 
 function getTotalTimeSpent() {
-  // Primary: sum per-course timeSpent from course_progress
-  var cp = Utils.getStorage('course_progress', {});
-  var total = Object.keys(cp).reduce(function(sum, cid) { return sum + (cp[cid].timeSpent || 0); }, 0);
-  // Fallback: flat counter (immune to scope/course_progress overwrite issues)
-  var flat = 0;
-  try { flat = parseInt(localStorage.getItem('coderio_total_time') || '0', 10); } catch(e) {}
-  return Math.max(total, flat);
+  // Primary: flat counter (global heartbeat in main.js saves to this)
+  var total = 0;
+  try { total = parseInt(localStorage.getItem('coderio_total_time') || '0', 10); } catch(e) {}
+  // Fallback: per-course sum from lesson pages
+  if (total === 0) {
+    var cp = Utils.getStorage('course_progress', {});
+    total = Object.keys(cp).reduce(function(sum, cid) { return sum + (cp[cid].timeSpent || 0); }, 0);
+  }
+  return total;
 }
 
 function updateStats() {
