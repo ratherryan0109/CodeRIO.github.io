@@ -1,20 +1,55 @@
 var DailyGoals = {
   DEFAULTS: { lessons: 1, quizQuestions: 20, codingProblems: 5, typingTests: 1, modules: 1 },
 
+  LABELS: {
+    lessons: 'Lessons',
+    quizQuestions: 'Quiz Questions',
+    codingProblems: 'Coding Problems',
+    typingTests: 'Typing Tests',
+    modules: 'Modules'
+  },
+
+  ICONS: {
+    lessons: 'fa-book',
+    quizQuestions: 'fa-question-circle',
+    codingProblems: 'fa-code',
+    typingTests: 'fa-keyboard',
+    modules: 'fa-layer-group'
+  },
+
   _localDateStr(d) {
     var date = d || new Date();
     return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
   },
+
+  _prevLocalDateStr(dateStr) {
+    var parts = dateStr.split('-');
+    var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+    d.setDate(d.getDate() - 1);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  },
+
+  _todayStr: null,
 
   init() {
     this._checkDailyReset();
     this._loadGoals();
   },
 
+  _validKeys() {
+    return Object.keys(this.DEFAULTS);
+  },
+
   getGoals() {
     var stored = Utils.getStorage('daily_goals_config', {});
-    var merged = Object.assign({}, this.DEFAULTS);
-    Object.keys(stored).forEach(function(k) { if (k !== 'date' && typeof merged[k] !== 'undefined') merged[k] = stored[k]; });
+    if (!stored || typeof stored !== 'object') stored = {};
+    var merged = {};
+    var valid = this._validKeys();
+    for (var i = 0; i < valid.length; i++) {
+      var k = valid[i];
+      var v = stored[k];
+      merged[k] = (typeof v === 'number' && v >= 0) ? v : this.DEFAULTS[k];
+    }
     return merged;
   },
 
@@ -26,7 +61,9 @@ var DailyGoals = {
     var progress = Utils.getStorage('daily_goals_progress', {});
     var today = this._localDateStr();
     if (progress.date !== today) {
-      progress = { date: today, lessons: 0, quizQuestions: 0, codingProblems: 0, typingTests: 0, modules: 0 };
+      progress = { date: today };
+      var valid = this._validKeys();
+      for (var i = 0; i < valid.length; i++) progress[valid[i]] = 0;
       Utils.setStorage('daily_goals_progress', progress);
     }
     return progress;
@@ -36,7 +73,9 @@ var DailyGoals = {
     var progress = Utils.getStorage('daily_goals_progress', {});
     var today = this._localDateStr();
     if (progress.date !== today) {
-      progress = { date: today, lessons: 0, quizQuestions: 0, codingProblems: 0, typingTests: 0, modules: 0 };
+      progress = { date: today };
+      var valid = this._validKeys();
+      for (var i = 0; i < valid.length; i++) progress[valid[i]] = 0;
       Utils.setStorage('daily_goals_progress', progress);
     }
   },
@@ -47,7 +86,9 @@ var DailyGoals = {
     var allComplete = true;
     var anyProgress = false;
 
-    Object.keys(goals).forEach(function(key) {
+    var valid = this._validKeys();
+    for (var i = 0; i < valid.length; i++) {
+      var key = valid[i];
       if (goals[key] > 0) {
         if (progress[key] >= goals[key]) {
           if (typeof AchievementSystem !== 'undefined') {
@@ -58,7 +99,7 @@ var DailyGoals = {
         }
         if (progress[key] > 0) anyProgress = true;
       }
-    });
+    }
 
     if (allComplete && anyProgress) {
       var dateStr = this._localDateStr();
@@ -72,21 +113,24 @@ var DailyGoals = {
   },
 
   recordProgress(type, amount) {
+    if (typeof amount !== 'number' || amount <= 0) return;
+    var valid = this._validKeys();
+    if (valid.indexOf(type) === -1) return;
+
     var progress = this.getProgress();
     var goals = this.getGoals();
 
-    if (typeof progress[type] === 'undefined') progress[type] = 0;
-    progress[type] += amount;
-    if (goals[type] && progress[type] > goals[type]) {
-      progress[type] = goals[type];
-    }
+    if (typeof progress[type] !== 'number') progress[type] = 0;
+    progress[type] = Math.min(progress[type] + amount, goals[type] || amount);
     Utils.setStorage('daily_goals_progress', progress);
 
     this._loadGoals();
+    this._refreshWidget();
+  },
 
-    // Re-render widget if it exists on this page
-    var widget = document.getElementById('dailyGoalsWidget');
-    if (widget) this.renderWidget('dailyGoalsWidget');
+  _refreshWidget() {
+    var container = document.getElementById('dailyGoalsWidget');
+    if (container) this.renderWidget('dailyGoalsWidget');
   },
 
   getCompletionPercentage() {
@@ -95,12 +139,14 @@ var DailyGoals = {
     var total = 0;
     var completed = 0;
 
-    Object.keys(goals).forEach(function(key) {
+    var valid = this._validKeys();
+    for (var i = 0; i < valid.length; i++) {
+      var key = valid[i];
       if (goals[key] > 0) {
         total++;
         if (progress[key] >= goals[key]) completed++;
       }
-    });
+    }
 
     return total > 0 ? Math.round((completed / total) * 100) : 0;
   },
@@ -120,46 +166,25 @@ var DailyGoals = {
       + '<div style="height:100%;width:' + pct + '%;background:var(--primary);border-radius:3px;transition:width 0.5s"></div></div>'
       + '<div class="dg-list">';
 
-    var labels = {
-      lessons: 'Lessons',
-      quizQuestions: 'Quiz Questions',
-      codingProblems: 'Coding Problems',
-      typingTests: 'Typing Tests',
-      modules: 'Modules'
-    };
-    var icons = {
-      lessons: 'fa-book',
-      quizQuestions: 'fa-question-circle',
-      codingProblems: 'fa-code',
-      typingTests: 'fa-keyboard',
-      modules: 'fa-layer-group'
-    };
-
-    Object.keys(goals).forEach(function(key) {
-      if (goals[key] > 0) {
-        var val = Math.min(progress[key] || 0, goals[key]);
-        var barPct = goals[key] > 0 ? Math.round((val / goals[key]) * 100) : 0;
-        html += '<div class="dg-item"><div class="dg-item-header"><i class="fas ' + (icons[key] || 'fa-circle') + '"></i>'
-          + '<span>' + (labels[key] || key) + '</span><span class="dg-count">' + val + '/' + goals[key] + '</span></div>'
-          + '<div style="height:4px;background:#f1f5f9;border-radius:2px;overflow:hidden">'
-          + '<div style="height:100%;width:' + barPct + '%;background:' + (barPct >= 100 ? 'var(--success)' : 'var(--primary)') + ';border-radius:2px;transition:width 0.3s"></div></div></div>';
-      }
-    });
+    var valid = this._validKeys();
+    for (var i = 0; i < valid.length; i++) {
+      var key = valid[i];
+      if (goals[key] <= 0) continue;
+      var val = typeof progress[key] === 'number' ? Math.min(progress[key], goals[key]) : 0;
+      var barPct = goals[key] > 0 ? Math.round((val / goals[key]) * 100) : 0;
+      html += '<div class="dg-item"><div class="dg-item-header"><i class="fas ' + (this.ICONS[key] || 'fa-circle') + '"></i>'
+        + '<span>' + (this.LABELS[key] || key) + '</span><span class="dg-count">' + val + '/' + goals[key] + '</span></div>'
+        + '<div style="height:4px;background:#f1f5f9;border-radius:2px;overflow:hidden">'
+        + '<div style="height:100%;width:' + barPct + '%;background:' + (barPct >= 100 ? 'var(--success)' : 'var(--primary)') + ';border-radius:2px;transition:width 0.3s"></div></div></div>';
+    }
 
     html += '</div></div>';
     container.innerHTML = html;
   },
 
-  _prevLocalDateStr(dateStr) {
-    var parts = dateStr.split('-');
-    var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-    d.setDate(d.getDate() - 1);
-    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  },
-
   getStreak() {
     var completedDates = Utils.getStorage('daily_goals_completed', []);
-    var sorted = completedDates.sort().reverse();
+    var sorted = completedDates.slice().sort().reverse();
     var streak = 0;
     var today = this._localDateStr();
     var check = today;
@@ -168,21 +193,21 @@ var DailyGoals = {
       if (sorted[i] === check) {
         streak++;
         check = this._prevLocalDateStr(check);
-      } else if (sorted[i] < check) {
-        if (i === 0 && sorted[i] < today) {
-          var yesterday = this._prevLocalDateStr(today);
-          if (sorted[0] === yesterday) {
-            var altCheck = yesterday;
-            streak = 1;
-            for (var j = 1; j < sorted.length; j++) {
-              var expected = this._prevLocalDateStr(altCheck);
-              if (sorted[j] === expected) {
-                streak++;
-                altCheck = expected;
-              } else break;
-            }
+      } else if (i === 0 && sorted[i] < today) {
+        var yesterday = this._prevLocalDateStr(today);
+        if (sorted[0] === yesterday) {
+          var altCheck = yesterday;
+          streak = 1;
+          for (var j = 1; j < sorted.length; j++) {
+            var expected = this._prevLocalDateStr(altCheck);
+            if (sorted[j] === expected) {
+              streak++;
+              altCheck = expected;
+            } else break;
           }
         }
+        break;
+      } else {
         break;
       }
     }

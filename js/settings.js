@@ -140,29 +140,29 @@ function initLearningPrefs() {
     });
   });
 
-  var goalsDefault = { lessons: 3, quizQuestions: 20, codingProblems: 5, typingTests: 1, modules: 1 };
   var lessonGoal = document.getElementById('dailyLessonGoal');
   var practiceGoal = document.getElementById('dailyPracticeGoal');
-  var dailyGoals = Utils.getStorage('daily_goals_config', Object.assign({}, goalsDefault));
-  if (lessonGoal) { lessonGoal.value = dailyGoals.lessons || 3; }
-  if (practiceGoal) { practiceGoal.value = dailyGoals.practice || 30; }
-  function mergeGoals(saved) {
-    var m = Object.assign({}, goalsDefault);
-    if (saved && typeof saved === 'object') Object.keys(saved).forEach(function(k) { m[k] = saved[k]; });
-    return m;
+  var dg = Utils.getStorage('daily_goals_config', {});
+  if (lessonGoal) { lessonGoal.value = (typeof dg.lessons === 'number' && dg.lessons >= 0) ? dg.lessons : 3; }
+  if (practiceGoal) { practiceGoal.value = Utils.getStorage('daily_practice_minutes', 30); }
+  function _goalsWithDefaults() {
+    var g = Utils.getStorage('daily_goals_config', {});
+    if (!g || typeof g !== 'object') g = {};
+    var out = {};
+    var defs = { lessons: 3, quizQuestions: 20, codingProblems: 5, typingTests: 1, modules: 1 };
+    Object.keys(defs).forEach(function(k) { out[k] = (typeof g[k] === 'number' && g[k] >= 0) ? g[k] : defs[k]; });
+    return out;
   }
   if (lessonGoal) {
     lessonGoal.addEventListener('change', function() {
-      var prefs = mergeGoals(Utils.getStorage('daily_goals_config', null));
-      prefs.lessons = parseInt(this.value) || 3;
-      Utils.setStorage('daily_goals_config', prefs);
+      var g = _goalsWithDefaults();
+      g.lessons = parseInt(this.value) || 3;
+      Utils.setStorage('daily_goals_config', g);
     });
   }
   if (practiceGoal) {
     practiceGoal.addEventListener('change', function() {
-      var prefs = mergeGoals(Utils.getStorage('daily_goals_config', null));
-      prefs.practice = parseInt(this.value) || 30;
-      Utils.setStorage('daily_goals_config', prefs);
+      Utils.setStorage('daily_practice_minutes', parseInt(this.value) || 30);
     });
   }
 }
