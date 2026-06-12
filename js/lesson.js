@@ -93,45 +93,91 @@ function renderModuleList(course, activeId, allData) {
     var totalMods = cData.modules.length;
     var cPct = modulesDone > 0 ? Math.min(100, Math.round((modulesDone / Math.max(totalMods, 1)) * 100)) : 0;
 
-    html += '<div style="margin-bottom:0.3rem">'
-      + (isCurrent
-        ? '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;background:rgba(6,182,212,0.12);color:var(--primary)">'
-          + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--primary)"></span>'
-          + '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (cData.title || cid) + '</span>'
-          + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
-          + '</div>'
-        : '<a href="lesson.html?course=' + cid + '&module=1"'
-          + ' style="text-decoration:none;display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;color:var(--text-secondary);transition:var(--transition)"'
-          + ' onmouseover="this.style.background=\'var(--bg-card)\'" onmouseout="this.style.background=\'transparent\'"'
-          + '>'
-          + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:' + (cPct > 0 ? 'var(--success)' : 'var(--text-muted)') + '"></span>'
-          + '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (cData.title || cid) + '</span>'
-          + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
-          + '</a>')
-      + '<div style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem">'
-        + (function() {
-          var modHtml = '';
-          cData.modules.forEach(function(m) {
-            var isActive = isCurrent && m.id === activeId;
-            var isCompleted = completedArr.includes(cid + '_' + m.id) || completedArr.includes(String(m.id)) || completedArr.includes(m.id);
-            modHtml += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
-              + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
-              + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
-              + '"'
-              + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
-              + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
-              + '>'
-              + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
-              + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
-              + '</a>';
-          });
-          return modHtml;
-        })()
-        + '</div>'
-      + '</div>';
+    html += '<div style="margin-bottom:0.3rem">';
+
+    // Header row
+    html += '<div style="display:flex;align-items:center;gap:0.2rem" id="ch-' + cid + '">';
+
+    // Toggle icon (fa-chevron-down rotated 90deg for collapsed state)
+    html += '<span style="cursor:pointer;width:1.2rem;text-align:center;flex-shrink:0;color:var(--text-muted)" onclick="toggleCourse(\'' + cid + '\')">'
+      + '<i class="fas fa-chevron-down" style="font-size:0.65rem;transition:transform 0.2s' + (isCurrent ? '' : ';transform:rotate(90deg)') + '"></i>'
+      + '</span>';
+
+    // Course name
+    if (isCurrent) {
+      html += '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;background:rgba(6,182,212,0.12);color:var(--primary)">'
+        + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--primary)"></span>'
+        + '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (cData.title || cid) + '</span>'
+        + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
+        + '</span>';
+    } else {
+      html += '<a href="lesson.html?course=' + cid + '&module=1"'
+        + ' style="text-decoration:none;flex:1;display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;color:var(--text-secondary);transition:var(--transition);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"'
+        + ' onmouseover="this.style.background=\'var(--bg-card)\'" onmouseout="this.style.background=\'transparent\'"'
+        + '>'
+        + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:' + (cPct > 0 ? 'var(--success)' : 'var(--text-muted)') + '"></span>'
+        + '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (cData.title || cid) + '</span>'
+        + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
+        + '</a>';
+    }
+
+    html += '</div>'; // end header row
+
+    // Module list
+    html += '<div id="cm-' + cid + '" class="' + (isCurrent ? 'course-modules current-course' : 'course-modules') + '" style="margin-left:0.2rem;border-left:2px solid var(--glass-border);padding-left:0.6rem;margin-top:0.2rem;margin-bottom:0.3rem;' + (isCurrent ? '' : 'display:none') + '">';
+    cData.modules.forEach(function(m) {
+      var isActive = isCurrent && m.id === activeId;
+      var isCompleted = completedArr.includes(cid + '_' + m.id) || completedArr.includes(String(m.id)) || completedArr.includes(m.id);
+      html += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
+        + ' class="' + (isActive ? 'module-link module-active' : 'module-link') + '"'
+        + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
+        + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
+        + '"'
+        + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
+        + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
+        + '>'
+        + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
+        + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
+        + '</a>';
+    });
+    html += '</div>'; // end module list
+
+    html += '</div>';
   });
 
   container.innerHTML = html;
+
+  // Remove old handler to avoid duplicates
+  if (window._sidebarClickHandler) document.removeEventListener('click', window._sidebarClickHandler);
+  window._sidebarClickHandler = function(e) {
+    var sidebar = document.querySelector('.lesson-sidebar');
+    if (sidebar && !sidebar.contains(e.target)) {
+      document.querySelectorAll('.course-modules:not(.current-course)').forEach(function(el) {
+        el.style.display = 'none';
+        var cid = el.id.replace('cm-', '');
+        var icon = document.querySelector('#ch-' + cid + ' i');
+        if (icon) icon.style.transform = 'rotate(90deg)';
+      });
+    }
+  };
+  document.addEventListener('click', window._sidebarClickHandler);
+
+  requestAnimationFrame(function() {
+    var activeEl = container.querySelector('.module-active');
+    if (activeEl) activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+}
+
+function toggleCourse(courseId) {
+  var list = document.getElementById('cm-' + courseId);
+  if (!list) return;
+  var hidden = list.style.display === 'none' || list.style.display === '';
+  list.style.display = hidden ? '' : 'none';
+  var header = document.querySelector('#ch-' + courseId);
+  if (header) {
+    var icon = header.querySelector('i');
+    if (icon) icon.style.transform = hidden ? 'rotate(90deg)' : 'rotate(0deg)';
+  }
 }
 
 function renderObjectives(objectives) {
