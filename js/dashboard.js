@@ -22,6 +22,15 @@ function updateWelcomeMessage() {
   if (el) el.textContent = greeting;
 }
 
+function getTotalTimeSpent() {
+  // Primary: sum per-course timeSpent from course_progress
+  var cp = Utils.getStorage('course_progress', {});
+  var total = Object.keys(cp).reduce(function(sum, cid) { return sum + (cp[cid].timeSpent || 0); }, 0);
+  // Fallback: flat counter (immune to scope/course_progress overwrite issues)
+  var flat = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
+  return Math.max(total, flat);
+}
+
 function updateStats() {
   var quizResultsObj = Utils.getStorage('quiz_results', {});
   var quizCorrect = 0, quizTotal = 0;
@@ -59,8 +68,7 @@ function updateStats() {
     setStat('statCompletedCourses', completedCount || '0');
     setStat('statTotalLessons', totalCompleted || '0');
     setStat('statTypingTests', typingHistory.length || '0');
-    var totalTime = courseIds.reduce(function(sum, cid) { return sum + (courseProgress[cid].timeSpent || 0); }, 0);
-    setStat('statTotalTime', formatTimeSpent(totalTime));
+    setStat('statTotalTime', formatTimeSpent(getTotalTimeSpent()));
     setStat('statAP', typeof AchievementSystem !== 'undefined' ? AchievementSystem.getUserAP() : 0);
     return;
   }
@@ -70,7 +78,7 @@ function updateStats() {
   setStat('statCompletedCourses', stats.completedCourses || '0');
   setStat('statTotalLessons', stats.totalModulesCompleted || '0');
   setStat('statTypingTests', stats.totalTypingTests || '0');
-  setStat('statTotalTime', formatTimeSpent(stats.totalTimeSpent || 0));
+  setStat('statTotalTime', formatTimeSpent(getTotalTimeSpent()));
   setStat('statAP', typeof AchievementSystem !== 'undefined' ? AchievementSystem.getUserAP() : 0);
 }
 

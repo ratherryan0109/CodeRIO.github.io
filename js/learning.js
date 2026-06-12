@@ -79,8 +79,7 @@ const LearningTracker = {
     var sessions = Utils.getStorage('learning_sessions', {});
     var session = sessions[lessonId];
     if (session) {
-      var timeSpent = Date.now() - session.startTime;
-      progress[courseId].timeSpent = (progress[courseId].timeSpent || 0) + timeSpent;
+      // Time is tracked by the lesson page's heartbeat + beforeunload handler
       session.completed = true;
       Utils.setStorage('learning_sessions', sessions);
     }

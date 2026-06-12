@@ -44,17 +44,26 @@ async function loadLesson(courseId, moduleId) {
   // Auto-save time spent every 30 seconds while on the lesson
   var lessonKey = courseId + '_' + moduleId;
   var _lastTimeSave = Date.now();
+
+  function _saveTime(ms) {
+    if (ms <= 0) return;
+    // Per-course timeSpent
+    var p = Utils.getStorage('course_progress', {});
+    if (!p[courseId]) p[courseId] = { timeSpent: 0 };
+    p[courseId].timeSpent = (p[courseId].timeSpent || 0) + ms;
+    Utils.setStorage('course_progress', p);
+    // Redundant flat total counter (immune to scope/course_progress issues)
+    var total = parseInt(localStorage.getItem('coderio_total_time') || '0', 10);
+    localStorage.setItem('coderio_total_time', String(total + ms));
+  }
+
   var timeInterval = setInterval(function() {
     var sessions = Utils.getStorage('learning_sessions', {});
     var session = sessions[lessonKey];
-    if (session && !session.completed) {
+    if (session) {
       var now = Date.now();
-      var elapsed = now - _lastTimeSave;
+      _saveTime(now - _lastTimeSave);
       _lastTimeSave = now;
-      var p = Utils.getStorage('course_progress', {});
-      if (!p[courseId]) p[courseId] = { timeSpent: 0 };
-      p[courseId].timeSpent = (p[courseId].timeSpent || 0) + elapsed;
-      Utils.setStorage('course_progress', p);
     }
   }, 30000);
 
@@ -63,12 +72,7 @@ async function loadLesson(courseId, moduleId) {
     clearInterval(timeInterval);
     var now = Date.now();
     var elapsed = now - _lastTimeSave;
-    if (elapsed > 0) {
-      var p = Utils.getStorage('course_progress', {});
-      if (!p[courseId]) p[courseId] = { timeSpent: 0 };
-      p[courseId].timeSpent = (p[courseId].timeSpent || 0) + elapsed;
-      Utils.setStorage('course_progress', p);
-    }
+    if (elapsed > 0) _saveTime(elapsed);
   }
   window.addEventListener('beforeunload', saveTimeOnExit);
 }
