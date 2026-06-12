@@ -17,131 +17,138 @@ var DailyGoals = {
     modules: 'fa-layer-group'
   },
 
+  // ---- storage key names ----
+  _CFG: 'daily_goals_config',
+  _PROG: 'daily_goals_progress',
+  _DONE: 'daily_goals_completed',
+
+  // ---- date helpers ----
+
   _today() {
     var d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   },
 
-  _yesterday(str) {
-    var parts = str.split('-');
+  _yesterday(s) {
+    var parts = s.split('-');
     var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
     d.setDate(d.getDate() - 1);
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   },
 
-  _keys() {
-    return Object.keys(this.DEFAULTS);
-  },
+  _validKeys() { return Object.keys(this.DEFAULTS); },
 
-  // Backward-compat aliases (used by 7 call sites in other files)
-  getGoals: function() { return this.config(); },
+  // ---- backward-compat aliases (used by 8 call sites in 6 files) ----
 
-  saveGoals: function(cfg) {
-    if (cfg && typeof cfg === 'object') Utils.setStorage('daily_goals_config', cfg);
-  },
+  getGoals:               function()      { return this.config(); },
+  saveGoals:              function(cfg)   { if (cfg && typeof cfg === 'object') Utils.setStorage(this._CFG, cfg); },
+  getProgress:            function()      { return this.progress(); },
+  recordProgress:         function(t, a)  { this.record(t, a); },
+  getCompletionPercentage: function()     { return this.pct(); },
+  renderWidget:           function(id)    { this.render(id); },
+  getStreak:              function()      { return this.streak(); },
 
-  getProgress: function() { return this.progress(); },
-
-  recordProgress: function(type, amount) { this.record(type, amount); },
-
-  getCompletionPercentage: function() { return this.pct(); },
-
-  renderWidget: function(id) { this.render(id); },
-
-  getStreak: function() { return this.streak(); },
-
-  // ----- core API -----
+  // ---- core: config ----
 
   config() {
-    var stored = Utils.getStorage('daily_goals_config', {});
-    if (!stored || typeof stored !== 'object') stored = {};
+    var stored = Utils.getStorage(this._CFG, {}) || {};
     var out = {};
-    var defs = this.DEFAULTS;
-    var keys = this._keys();
+    var keys = this._validKeys();
     for (var i = 0; i < keys.length; i++) {
       var k = keys[i];
       var v = stored[k];
-      out[k] = (typeof v === 'number' && v >= 0) ? v : defs[k];
+      out[k] = (typeof v === 'number' && v >= 0) ? v : this.DEFAULTS[k];
     }
     return out;
   },
 
+  // ---- core: today's progress ----
+
   progress() {
-    var p = Utils.getStorage('daily_goals_progress', {});
-    if (!p || typeof p !== 'object') p = {};
+    var p = Utils.getStorage(this._PROG, {}) || {};
     var today = this._today();
     if (p.date !== today) {
       p = { date: today };
-      var keys = this._keys();
+      var keys = this._validKeys();
       for (var i = 0; i < keys.length; i++) p[keys[i]] = 0;
-      Utils.setStorage('daily_goals_progress', p);
+      Utils.setStorage(this._PROG, p);
       return p;
     }
     var changed = false;
-    var keys = this._keys();
+    var keys = this._validKeys();
     for (var i = 0; i < keys.length; i++) {
       if (typeof p[keys[i]] !== 'number') {
         p[keys[i]] = 0;
         changed = true;
       }
     }
-    if (changed) Utils.setStorage('daily_goals_progress', p);
+    if (changed) Utils.setStorage(this._PROG, p);
     return p;
   },
 
+  // ---- core: record progress ----
+
   record(type, amount) {
-    if (typeof amount !== 'number' || amount <= 0) return;
-    var keys = this._keys();
+    if (typeof amount !== 'number') return;
+    var keys = this._validKeys();
     if (keys.indexOf(type) === -1) return;
 
-    var p = this.progress(); // ensures today with all keys
+    var p = this.progress();
     var cfg = this.config();
 
-    p[type] = Math.min((p[type] || 0) + amount, cfg[type] || amount);
-    Utils.setStorage('daily_goals_progress', p);
+    if (typeof p[type] !== 'number') p[type] = 0;
+    var goal = typeof cfg[type] === 'number' ? cfg[type] : 0;
+    p[type] = Math.min(p[type] + Math.max(0, amount), goal);
+    Utils.setStorage(this._PROG, p);
 
-    this._checkCompletion(p, cfg);
+    this._checkComplete(p, cfg);
     this._refresh();
   },
 
-  _checkCompletion(p, cfg) {
-    var allDone = true;
+  // ---- core: check if all goals met today ----
+
+  _checkComplete(p, cfg) {
+    var allMet = true;
     var any = false;
-    var keys = this._keys();
+    var keys = this._validKeys();
     for (var i = 0; i < keys.length; i++) {
       var k = keys[i];
       if (cfg[k] > 0) {
-        if ((p[k] || 0) < cfg[k]) allDone = false;
+        if ((p[k] || 0) < cfg[k]) allMet = false;
         if (p[k] > 0) any = true;
       }
     }
-    if (allDone && any) {
-      var today = this._today();
-      var done = Utils.getStorage('daily_goals_completed', []);
-      if (!Array.isArray(done)) done = [];
-      if (done.indexOf(today) === -1) {
-        done.push(today);
-        Utils.setStorage('daily_goals_completed', done);
-        Utils.showToast('All daily goals completed! Great work!', 'success');
-      }
-      if (typeof AchievementSystem !== 'undefined') AchievementSystem.checkAndAward();
-    }
+    if (!allMet || !any) return;
+
+    var today = this._today();
+    var done = Utils.getStorage(this._DONE, []);
+    if (!Array.isArray(done)) done = [];
+    if (done.indexOf(today) !== -1) return;
+
+    done.push(today);
+    Utils.setStorage(this._DONE, done);
+    Utils.showToast('All daily goals completed! Great work!', 'success');
+    if (typeof AchievementSystem !== 'undefined') AchievementSystem.checkAndAward();
   },
+
+  // ---- core: completion percentage ----
 
   pct() {
     var p = this.progress();
     var cfg = this.config();
-    var total = 0, done = 0;
-    var keys = this._keys();
+    var total = 0, met = 0;
+    var keys = this._validKeys();
     for (var i = 0; i < keys.length; i++) {
       var k = keys[i];
       if (cfg[k] > 0) {
         total++;
-        if ((p[k] || 0) >= cfg[k]) done++;
+        if ((p[k] || 0) >= cfg[k]) met++;
       }
     }
-    return total > 0 ? Math.round((done / total) * 100) : 0;
+    return total > 0 ? Math.round((met / total) * 100) : 0;
   },
+
+  // ---- core: render widget ----
 
   render(id) {
     var el = document.getElementById(id);
@@ -158,18 +165,19 @@ var DailyGoals = {
       + '<div style="height:100%;width:' + pct + '%;background:var(--primary);border-radius:3px;transition:width 0.5s"></div></div>'
       + '<div class="dg-list">';
 
-    var keys = this._keys();
+    var keys = this._validKeys();
     for (var i = 0; i < keys.length; i++) {
       var k = keys[i];
       if (cfg[k] <= 0) continue;
       var val = typeof p[k] === 'number' ? Math.min(p[k], cfg[k]) : 0;
       var bar = cfg[k] > 0 ? Math.round((val / cfg[k]) * 100) : 0;
+      var color = bar >= 100 ? 'var(--success)' : 'var(--primary)';
       html += '<div class="dg-item"><div class="dg-item-header">'
         + '<i class="fas ' + (this.ICONS[k] || 'fa-circle') + '"></i>'
         + '<span>' + (this.LABELS[k] || k) + '</span>'
         + '<span class="dg-count">' + val + '/' + cfg[k] + '</span></div>'
         + '<div style="height:4px;background:#f1f5f9;border-radius:2px;overflow:hidden">'
-        + '<div style="height:100%;width:' + bar + '%;background:' + (bar >= 100 ? 'var(--success)' : 'var(--primary)') + ';border-radius:2px;transition:width 0.3s"></div></div></div>';
+        + '<div style="height:100%;width:' + bar + '%;background:' + color + ';border-radius:2px;transition:width 0.3s"></div></div></div>';
     }
 
     html += '</div></div>';
@@ -181,8 +189,10 @@ var DailyGoals = {
     if (el) this.render('dailyGoalsWidget');
   },
 
+  // ---- core: current streak ----
+
   streak() {
-    var done = Utils.getStorage('daily_goals_completed', []);
+    var done = Utils.getStorage(this._DONE, []);
     if (!Array.isArray(done)) done = [];
     var sorted = done.slice().sort().reverse();
     var today = this._today();
@@ -206,34 +216,34 @@ var DailyGoals = {
         break;
       } else break;
     }
-
     return count;
   },
 
+  // ---- initialization + legacy migration ----
+
   init() {
-    this._migrateLegacy();
+    this._migrate();
     this.config();
     this.progress();
   },
 
-  _migrateLegacy() {
-    var goalsKeys = ['daily_goals_config', 'daily_goals_progress', 'daily_goals_completed'];
-    for (var i = 0; i < goalsKeys.length; i++) {
-      var k = goalsKeys[i];
+  _migrate() {
+    var keys = [this._CFG, this._PROG, this._DONE];
+    for (var i = 0; i < keys.length; i++) {
       try {
-        if (localStorage.getItem(k) !== null) continue;
+        if (localStorage.getItem(keys[i]) !== null) continue;
         for (var j = 0; j < localStorage.length; j++) {
           var lk = localStorage.key(j);
-          if (lk && lk.indexOf(':') > 0 && lk.endsWith(':' + k)) {
+          if (lk && lk.indexOf(':') > 0 && lk.endsWith(':' + keys[i])) {
             var val = localStorage.getItem(lk);
             if (val !== null) {
-              localStorage.setItem(k, val);
+              localStorage.setItem(keys[i], val);
               localStorage.removeItem(lk);
             }
             break;
           }
         }
-      } catch {}
+      } catch (e) {}
     }
   }
 };
