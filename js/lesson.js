@@ -92,36 +92,45 @@ function renderModuleList(course, activeId, allData) {
     }
     var totalMods = cData.modules.length;
     var cPct = modulesDone > 0 ? Math.min(100, Math.round((modulesDone / Math.max(totalMods, 1)) * 100)) : 0;
-    var modListId = 'modlist_' + cid.replace(/[^a-zA-Z0-9]/g, '_');
 
     html += '<div style="margin-bottom:0.3rem">'
-      + '<div class="course-sidebar-header" data-target="' + modListId + '" style="cursor:pointer;display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;' + (isCurrent ? 'background:rgba(6,182,212,0.12);color:var(--primary);' : 'color:var(--text-secondary);') + '"'
-      + (isCurrent ? '' : ' onclick="var el=document.getElementById(\'' + modListId + '\');if(el){el.style.display=el.style.display===\'none\'?\'\':\'none\';var c=this.querySelector(\'.collapse-icon\');if(c)c.style.transform=el.style.display===\'none\'?\'rotate(0deg)\':\'rotate(90deg)\'}"')
-      + '>'
-      + '<span class="collapse-icon" style="font-size:0.6rem;width:12px;text-align:center;transition:transform 0.2s;' + (isCurrent ? 'transform:rotate(90deg)' : 'transform:rotate(0deg)') + '"><i class="fas fa-chevron-right"></i></span>'
-      + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:' + (isCurrent ? 'var(--primary)' : cPct > 0 ? 'var(--success)' : 'var(--text-muted)') + '"></span>'
-      + '<span style="flex:1">' + (cData.title || cid) + '</span>'
-      + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
+      + (isCurrent
+        ? '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;background:rgba(6,182,212,0.12);color:var(--primary)">'
+          + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--primary)"></span>'
+          + '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (cData.title || cid) + '</span>'
+          + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
+          + '</div>'
+        : '<a href="lesson.html?course=' + cid + '&module=1"'
+          + ' style="text-decoration:none;display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;border-radius:8px;font-size:0.82rem;font-weight:500;color:var(--text-secondary);transition:var(--transition)"'
+          + ' onmouseover="this.style.background=\'var(--bg-card)\'" onmouseout="this.style.background=\'transparent\'"'
+          + '>'
+          + '<span style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:' + (cPct > 0 ? 'var(--success)' : 'var(--text-muted)') + '"></span>'
+          + '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (cData.title || cid) + '</span>'
+          + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
+          + '</a>')
+      + (isCurrent
+        ? '<div style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem">'
+          + (function() {
+            var modHtml = '';
+            cData.modules.forEach(function(m) {
+              var isActive = m.id === activeId;
+              var isCompleted = completedArr.includes(cid + '_' + m.id) || completedArr.includes(String(m.id)) || completedArr.includes(m.id);
+              modHtml += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
+                + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
+                + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
+                + '"'
+                + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
+                + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
+                + '>'
+                + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
+                + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
+                + '</a>';
+            });
+            return modHtml;
+          })()
+          + '</div>'
+        : '')
       + '</div>';
-
-    html += '<div id="' + modListId + '" style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem;' + (isCurrent ? '' : 'display:none') + '">';
-    cData.modules.forEach(function(m) {
-      var isActive = isCurrent && m.id === activeId;
-      var isCompleted = completedArr.includes(cid + '_' + m.id) || completedArr.includes(String(m.id)) || completedArr.includes(m.id);
-      html += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
-        + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
-        + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
-        + '"'
-        + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
-        + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
-        + '>'
-        + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
-        + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
-        + '</a>';
-    });
-    html += '</div>';
-
-    html += '</div>';
   });
 
   container.innerHTML = html;
