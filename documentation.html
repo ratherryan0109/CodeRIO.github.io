@@ -9,30 +9,31 @@
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
-        .docs-wrapper { display: flex; gap: 2rem; align-items: flex-start; }
-        .docs-sidebar { flex: 0 0 280px; position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; }
-        .docs-sidebar .glass-card { padding: 1.5rem; }
-        .docs-sidebar h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted, #94a3b8); margin-bottom: 0.75rem; }
+        .docs-wrapper { display: flex; gap: 2.5rem; align-items: flex-start; }
+        .docs-sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; padding: 1.5rem; border-radius: var(--border-radius-lg); background: var(--bg-card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); }
+        .docs-sidebar h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1rem; }
         .docs-sidebar ul { list-style: none; padding: 0; }
         .docs-sidebar li { margin-bottom: 0.4rem; }
-        .docs-sidebar a { color: var(--text-secondary, #cbd5e1); font-size: 0.9rem; padding: 0.3rem 0.75rem; border-radius: 6px; display: block; transition: all 0.2s; }
-        .docs-sidebar a:hover, .docs-sidebar a.active { background: rgba(99,102,241,0.15); color: #818cf8; }
-        .docs-main { flex: 1; min-width: 0; }
-        .docs-section { margin-bottom: 3rem; }
-        .docs-section h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #f1f5f9; }
-        .docs-section h3 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; color: #e2e8f0; }
-        .docs-section p { color: #94a3b8; line-height: 1.8; margin-bottom: 1rem; }
-        .docs-section ul, .docs-section ol { color: #94a3b8; line-height: 1.8; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .docs-sidebar a { display: flex; align-items: center; gap: 0.7rem; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0.8rem; border-radius: 10px; transition: var(--transition); text-decoration: none; }
+        .docs-sidebar a:hover, .docs-sidebar a.active { background: rgba(6,182,212,0.1); color: var(--primary); }
+        .docs-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1.5rem; }
+        .docs-section { padding: 2rem 2.5rem; border-radius: var(--border-radius-lg); background: var(--bg-card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); transition: var(--transition); scroll-margin-top: 100px; }
+        .docs-section:hover { box-shadow: var(--shadow-sm); }
+        .docs-section h2 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--primary-dark); }
+        .docs-section h3 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; color: var(--text); }
+        .docs-section p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
+        .docs-section p:last-child { margin-bottom: 0; }
+        .docs-section ul, .docs-section ol { color: var(--text-secondary); line-height: 1.8; padding-left: 1.5rem; margin-bottom: 1rem; }
         .docs-section li { margin-bottom: 0.5rem; }
-        .docs-section code { background: rgba(99,102,241,0.1); color: #a5b4fc; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; }
-        .docs-section pre { background: rgba(15,23,42,0.6); border: 1px solid rgba(99,102,241,0.2); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
-        .docs-section pre code { background: none; padding: 0; color: #e2e8f0; }
-        .docs-toc { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.15); border-radius: 8px; padding: 1.25rem; margin-bottom: 2rem; }
-        .docs-toc h3 { font-size: 1rem; margin-top: 0; margin-bottom: 0.75rem; }
-        .docs-toc a { display: block; padding: 0.25rem 0; color: #94a3b8; font-size: 0.9rem; }
-        .docs-toc a:hover { color: #818cf8; }
-        .docs-nav-toggle { display: none; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); color: #e2e8f0; padding: 0.75rem 1rem; border-radius: 8px; width: 100%; text-align: left; cursor: pointer; margin-bottom: 1rem; font-size: 0.95rem; }
-        @media (max-width: 768px) {
+        .docs-section code { background: rgba(6,182,212,0.08); color: var(--primary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; }
+        .docs-section pre { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+        .docs-section pre code { background: none; padding: 0; color: var(--text); }
+        .docs-toc { background: rgba(6,182,212,0.06); border: 1px solid var(--glass-border); border-radius: var(--border-radius-md); padding: 1.25rem; margin-bottom: 2rem; }
+        .docs-toc h3 { font-size: 1rem; margin-top: 0; margin-bottom: 0.75rem; color: var(--text); }
+        .docs-toc a { display: block; padding: 0.3rem 0; color: var(--text-secondary); font-size: 0.9rem; text-decoration: none; }
+        .docs-toc a:hover { color: var(--primary); }
+        .docs-nav-toggle { display: none; background: var(--bg-card); border: 1px solid var(--glass-border); color: var(--text); padding: 0.75rem 1rem; border-radius: var(--border-radius-md); width: 100%; text-align: left; cursor: pointer; margin-bottom: 1rem; font-size: 0.95rem; }
+        @media (max-width: 900px) {
             .docs-wrapper { flex-direction: column; }
             .docs-sidebar { position: static; flex: none; width: 100%; max-height: none; display: none; }
             .docs-sidebar.open { display: block; }
@@ -83,26 +84,24 @@
                 </button>
                 <div class="docs-wrapper">
                     <aside class="docs-sidebar">
-                        <div class="glass-card">
-                            <h4>Getting Started</h4>
-                            <ul>
-                                <li><a href="#getting-started" class="active">Introduction</a></li>
-                                <li><a href="#platform-guide">Platform Guide</a></li>
-                                <li><a href="#dashboard-guide">Dashboard Guide</a></li>
-                                <li><a href="#course-guide">Course Guide</a></li>
-                            </ul>
-                            <h4 style="margin-top:1.25rem;">Features</h4>
-                            <ul>
-                                <li><a href="#typing-lab">Typing Lab</a></li>
-                                <li><a href="#practice-hub">Practice Hub</a></li>
-                                <li><a href="#projects">Projects</a></li>
-                            </ul>
-                            <h4 style="margin-top:1.25rem;">Community</h4>
-                            <ul>
-                                <li><a href="#community">Community</a></li>
-                                <li><a href="#faq">FAQ</a></li>
-                            </ul>
-                        </div>
+                        <h4>Getting Started</h4>
+                        <ul>
+                            <li><a href="#getting-started" class="active">Introduction</a></li>
+                            <li><a href="#platform-guide">Platform Guide</a></li>
+                            <li><a href="#dashboard-guide">Dashboard Guide</a></li>
+                            <li><a href="#course-guide">Course Guide</a></li>
+                        </ul>
+                        <h4 style="margin-top:1.5rem;">Features</h4>
+                        <ul>
+                            <li><a href="#typing-lab">Typing Lab</a></li>
+                            <li><a href="#practice-hub">Practice Hub</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                        </ul>
+                        <h4 style="margin-top:1.5rem;">Community</h4>
+                        <ul>
+                            <li><a href="#community">Community</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                        </ul>
                     </aside>
 
                     <div class="docs-main">
@@ -119,7 +118,7 @@
                             <a href="#faq">FAQ</a>
                         </div>
 
-                        <div id="getting-started" class="docs-section glass-card">
+                        <div id="getting-started" class="docs-section">
                             <h2>Getting Started</h2>
                             <p>Welcome to CodeRio! This guide will help you get started with our platform and make the most of your learning experience.</p>
                             <h3>Creating Your Account</h3>
@@ -130,7 +129,7 @@
                             <p>CodeRio is organized into five main areas: Learn (courses), Practice (coding challenges), Projects (hands-on builds), Community (discussions), and Dashboard (your progress). Use the navigation bar to switch between sections.</p>
                         </div>
 
-                        <div id="platform-guide" class="docs-section glass-card">
+                        <div id="platform-guide" class="docs-section">
                             <h2>Platform Guide</h2>
                             <p>CodeRio is built around an interactive, project-based learning philosophy. Here's how each component works together to create your learning journey.</p>
                             <h3>Learning Paths</h3>
@@ -141,7 +140,7 @@
                             <p>Earn XP points, badges, and achievements as you complete lessons and challenges. Leaderboards let you compare your progress with peers, and daily streaks reward consistent practice.</p>
                         </div>
 
-                        <div id="dashboard-guide" class="docs-section glass-card">
+                        <div id="dashboard-guide" class="docs-section">
                             <h2>Dashboard Guide</h2>
                             <p>Your Dashboard is the central hub for monitoring your learning journey. Access it anytime by clicking your profile avatar or the Dashboard link.</p>
                             <h3>Progress Overview</h3>
@@ -152,7 +151,7 @@
                             <p>Based on your performance and interests, the dashboard suggests next steps: relevant courses, practice challenges, or community events. These recommendations adapt as you progress.</p>
                         </div>
 
-                        <div id="course-guide" class="docs-section glass-card">
+                        <div id="course-guide" class="docs-section">
                             <h2>Course Guide</h2>
                             <p>Courses are structured learning modules that combine theory with hands-on practice. Each course includes multiple lessons, projects, and assessments.</p>
                             <h3>Course Structure</h3>
@@ -168,7 +167,7 @@ function greet(name) {
 console.log(greet("Developer"));</code></pre>
                         </div>
 
-                        <div id="typing-lab" class="docs-section glass-card">
+                        <div id="typing-lab" class="docs-section">
                             <h2>Typing Lab</h2>
                             <p>The Typing Lab helps you improve your coding speed and accuracy through targeted practice with real syntax.</p>
                             <h3>How It Works</h3>
@@ -184,7 +183,7 @@ console.log(greet("Developer"));</code></pre>
                             <p>View detailed statistics on your typing performance over time, including speed trends, accuracy improvements, and which characters or patterns you find most challenging.</p>
                         </div>
 
-                        <div id="practice-hub" class="docs-section glass-card">
+                        <div id="practice-hub" class="docs-section">
                             <h2>Practice Hub</h2>
                             <p>The Practice Hub is where you hone your coding skills through challenges, coding problems, and algorithmic exercises.</p>
                             <h3>Problem Categories</h3>
@@ -200,7 +199,7 @@ console.log(greet("Developer"));</code></pre>
                             <p>Our code runner supports multiple languages including Python, JavaScript, Java, C++, Go, and Rust. Solutions are tested against hidden test cases for thorough validation.</p>
                         </div>
 
-                        <div id="projects" class="docs-section glass-card">
+                        <div id="projects" class="docs-section">
                             <h2>Projects</h2>
                             <p>Projects are real-world applications you build from scratch, applying everything you've learned in courses and practice.</p>
                             <h3>Project Categories</h3>
@@ -217,7 +216,7 @@ console.log(greet("Developer"));</code></pre>
                             <p>Completed projects are added to your public portfolio page, which you can share with employers. Each project includes a live demo link, source code repository, and your reflection on the development process.</p>
                         </div>
 
-                        <div id="community" class="docs-section glass-card">
+                        <div id="community" class="docs-section">
                             <h2>Community</h2>
                             <p>CodeRio's community features connect you with fellow learners, mentors, and industry professionals.</p>
                             <h3>Discussion Forums</h3>
@@ -230,7 +229,7 @@ console.log(greet("Developer"));</code></pre>
                             <p>Participate in weekly coding competitions, monthly hackathons, and guest speaker sessions. Events are announced in the community calendar and through notifications.</p>
                         </div>
 
-                        <div id="faq" class="docs-section glass-card">
+                        <div id="faq" class="docs-section">
                             <h2>FAQ</h2>
                             <p>Quick answers to common questions about using CodeRio.</p>
                             <h3>Is CodeRio free?</h3>

@@ -147,8 +147,8 @@ function renderModuleList(course, activeId, allData) {
 
   container.innerHTML = html;
 
-  // Remove old handler to avoid duplicates
-  if (window._sidebarClickHandler) document.removeEventListener('click', window._sidebarClickHandler);
+  // Remove old handler and re-attach with a capture-phase guard
+  if (window._sidebarClickHandler) document.removeEventListener('click', window._sidebarClickHandler, true);
   window._sidebarClickHandler = function(e) {
     var sidebar = document.querySelector('.lesson-sidebar');
     if (sidebar && !sidebar.contains(e.target)) {
@@ -160,12 +160,16 @@ function renderModuleList(course, activeId, allData) {
       });
     }
   };
-  document.addEventListener('click', window._sidebarClickHandler);
+  document.addEventListener('click', window._sidebarClickHandler, true);
 
-  requestAnimationFrame(function() {
+  setTimeout(function() {
     var activeEl = container.querySelector('.module-active');
-    if (activeEl) activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  });
+    if (activeEl) {
+      var containerRect = container.getBoundingClientRect();
+      var elRect = activeEl.getBoundingClientRect();
+      container.scrollTop = elRect.top - containerRect.top + container.scrollTop - 20;
+    }
+  }, 50);
 }
 
 function toggleCourse(courseId) {

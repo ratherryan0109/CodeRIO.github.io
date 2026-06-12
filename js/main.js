@@ -151,6 +151,9 @@ function initTerms() {
 function initPrivacy() {
   initScrollSidebar('pp-sidebar', 'pp-card');
 }
+function initDocumentation() {
+  initScrollSidebar('docs-sidebar', 'docs-section');
+}
 function initScrollSidebar(sidebarClass, cardClass) {
   var sidebar = document.querySelector('.' + sidebarClass);
   if (!sidebar) return;
