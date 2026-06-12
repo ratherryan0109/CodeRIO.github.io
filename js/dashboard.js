@@ -23,6 +23,14 @@ function updateWelcomeMessage() {
 }
 
 function updateStats() {
+  var quizResultsObj = Utils.getStorage('quiz_results', {});
+  var quizCorrect = 0, quizTotal = 0;
+  Object.values(quizResultsObj).forEach(function(arr) {
+    arr.forEach(function(q) { quizCorrect += q.score || 0; quizTotal += q.total || 0; });
+  });
+  var accuracy = quizTotal > 0 ? Math.round((quizCorrect / quizTotal) * 100) + '%' : '0%';
+  setStat('statAvgAccuracy', accuracy);
+
   var stats = typeof LearningTracker !== 'undefined' ? LearningTracker.getTotalStats() : null;
   if (!stats) {
     var courseProgress = Utils.getStorage('course_progress', {});
@@ -43,20 +51,13 @@ function updateStats() {
       return courseProgress[cid].status === 'completed';
     }).length;
 
-    var quizResultsObj = Utils.getStorage('quiz_results', {});
     var quizCount = Object.values(quizResultsObj).reduce(function(sum, arr) { return sum + arr.length; }, 0);
     var typingHistory = Utils.getStorage('typing_history', []);
-    var quizCorrect = 0, quizTotal = 0;
-    Object.values(quizResultsObj).forEach(function(arr) {
-      arr.forEach(function(q) { quizCorrect += q.score || 0; quizTotal += q.total || 0; });
-    });
-    var accuracy = quizTotal > 0 ? Math.round((quizCorrect / quizTotal) * 100) + '%' : '0%';
 
     setStat('statLearningProgress', totalCompleted > 0 ? Math.min(100, Math.round((totalCompleted / Math.max(courseIds.length * 5, 1)) * 100)) + '%' : '0%');
     setStat('statActiveCourses', activeCount || '0');
     setStat('statCompletedCourses', completedCount || '0');
     setStat('statTotalLessons', totalCompleted || '0');
-    setStat('statAvgAccuracy', accuracy);
     setStat('statTypingTests', typingHistory.length || '0');
     var totalTime = courseIds.reduce(function(sum, cid) { return sum + (courseProgress[cid].timeSpent || 0); }, 0);
     setStat('statTotalTime', formatTimeSpent(totalTime));
@@ -68,7 +69,6 @@ function updateStats() {
   setStat('statActiveCourses', stats.activeCourses || '0');
   setStat('statCompletedCourses', stats.completedCourses || '0');
   setStat('statTotalLessons', stats.totalModulesCompleted || '0');
-  setStat('statAvgAccuracy', stats.totalQuizAccuracy + '%');
   setStat('statTypingTests', stats.totalTypingTests || '0');
   setStat('statTotalTime', formatTimeSpent(stats.totalTimeSpent || 0));
   setStat('statAP', typeof AchievementSystem !== 'undefined' ? AchievementSystem.getUserAP() : 0);
@@ -180,11 +180,12 @@ function getActivityData(days) {
   for (var i = days - 1; i >= 0; i--) {
     var d = new Date(now);
     d.setDate(d.getDate() - i);
-    var dateStr = d.toISOString().split('T')[0];
     var count = activities.filter(function(a) {
-      return a.time && a.time.startsWith(dateStr);
+      if (!a.time) return false;
+      var actDate = new Date(a.time);
+      return actDate.getFullYear() === d.getFullYear() && actDate.getMonth() === d.getMonth() && actDate.getDate() === d.getDate();
     }).length;
-    result.push({ date: dateStr, count: count, label: days <= 8 ? d.toLocaleDateString('en-US', { weekday: 'short' }) : 'Day ' + (days - i) });
+    result.push({ date: d.toISOString().split('T')[0], count: count, label: days <= 8 ? d.toLocaleDateString('en-US', { weekday: 'short' }) : 'Day ' + (days - i) });
   }
   return result;
 }
@@ -372,12 +373,18 @@ function initAnalyticsToggle() {
     if (btn) btn.classList.add('active');
   }
 
+  function setTitle(text) {
+    var titleEl = document.getElementById('analyticsTitle');
+    if (titleEl) titleEl.innerHTML = '<i class="fas fa-chart-line" style="color:var(--primary)"></i> ' + text;
+  }
+
   if (weeklyBtn) {
     weeklyBtn.addEventListener('click', function() {
       setActive(this);
       var old = Chart.getChart('weeklyChart');
       if (old) old.destroy();
       initWeeklyChart();
+      setTitle('Weekly Activity');
     });
   }
   if (monthlyBtn) {
@@ -386,6 +393,7 @@ function initAnalyticsToggle() {
       var old = Chart.getChart('weeklyChart');
       if (old) old.destroy();
       initMonthlyChart();
+      setTitle('Monthly Activity');
     });
   }
   if (todayBtn) {
@@ -394,6 +402,7 @@ function initAnalyticsToggle() {
       var old = Chart.getChart('weeklyChart');
       if (old) old.destroy();
       initTodayChart();
+      setTitle('Today\'s Activity');
     });
   }
 }
@@ -435,8 +444,12 @@ function initTodayChart() {
   var ctx = canvas.getContext('2d');
 
   var activities = Utils.getStorage('coderio_activity', []);
-  var today = new Date().toISOString().split('T')[0];
-  var todayActivities = activities.filter(function(a) { return a.time && a.time.startsWith(today); });
+  var now = new Date();
+  var todayActivities = activities.filter(function(a) {
+    if (!a.time) return false;
+    var actDate = new Date(a.time);
+    return actDate.getFullYear() === now.getFullYear() && actDate.getMonth() === now.getMonth() && actDate.getDate() === now.getDate();
+  });
 
   var hours = [];
   for (var i = 0; i < 24; i++) {
@@ -445,7 +458,8 @@ function initTodayChart() {
   }
 
   todayActivities.forEach(function(a) {
-    var h = parseInt(a.time.split('T')[1].split(':')[0]);
+    var d = new Date(a.time);
+    var h = d.getHours();
     if (h >= 0 && h < 24) hours[h].count++;
   });
 

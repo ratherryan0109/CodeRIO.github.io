@@ -142,21 +142,21 @@ function initLearningPrefs() {
 
   const lessonGoal = document.getElementById('dailyLessonGoal');
   const practiceGoal = document.getElementById('dailyPracticeGoal');
-  const dailyGoals = Utils.getStorage('daily_goals', { lessons: 3, practice: 30 });
+  const dailyGoals = Utils.getStorage('daily_goals_config', { lessons: 3, practice: 30 });
   if (lessonGoal) { lessonGoal.value = dailyGoals.lessons || 3; }
   if (practiceGoal) { practiceGoal.value = dailyGoals.practice || 30; }
   if (lessonGoal) {
     lessonGoal.addEventListener('change', function() {
-      const prefs = Utils.getStorage('daily_goals', { lessons: 3, practice: 30 });
+      const prefs = Utils.getStorage('daily_goals_config', { lessons: 3, practice: 30 });
       prefs.lessons = parseInt(this.value) || 3;
-      Utils.setStorage('daily_goals', prefs);
+      Utils.setStorage('daily_goals_config', prefs);
     });
   }
   if (practiceGoal) {
     practiceGoal.addEventListener('change', function() {
-      const prefs = Utils.getStorage('daily_goals', { lessons: 3, practice: 30 });
+      const prefs = Utils.getStorage('daily_goals_config', { lessons: 3, practice: 30 });
       prefs.practice = parseInt(this.value) || 30;
-      Utils.setStorage('daily_goals', prefs);
+      Utils.setStorage('daily_goals_config', prefs);
     });
   }
 }

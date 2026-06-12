@@ -1,6 +1,11 @@
 var DailyGoals = {
   DEFAULTS: { lessons: 1, quizQuestions: 20, codingProblems: 5, typingTests: 1, modules: 1 },
 
+  _localDateStr(d) {
+    var date = d || new Date();
+    return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+  },
+
   init() {
     this._checkDailyReset();
     this._loadGoals();
@@ -16,7 +21,7 @@ var DailyGoals = {
 
   getProgress() {
     var progress = Utils.getStorage('daily_goals_progress', {});
-    var today = new Date().toISOString().split('T')[0];
+    var today = this._localDateStr();
     if (progress.date !== today) {
       progress = { date: today, lessons: 0, quizQuestions: 0, codingProblems: 0, typingTests: 0, modules: 0 };
       Utils.setStorage('daily_goals_progress', progress);
@@ -26,7 +31,7 @@ var DailyGoals = {
 
   _checkDailyReset() {
     var progress = Utils.getStorage('daily_goals_progress', {});
-    var today = new Date().toISOString().split('T')[0];
+    var today = this._localDateStr();
     if (progress.date !== today) {
       progress = { date: today, lessons: 0, quizQuestions: 0, codingProblems: 0, typingTests: 0, modules: 0 };
       Utils.setStorage('daily_goals_progress', progress);
@@ -53,7 +58,7 @@ var DailyGoals = {
     });
 
     if (allComplete && anyProgress) {
-      var dateStr = new Date().toISOString().split('T')[0];
+      var dateStr = this._localDateStr();
       var completedDates = Utils.getStorage('daily_goals_completed', []);
       if (completedDates.indexOf(dateStr) === -1) {
         completedDates.push(dateStr);
@@ -139,31 +144,32 @@ var DailyGoals = {
     container.innerHTML = html;
   },
 
+  _prevLocalDateStr(dateStr) {
+    var parts = dateStr.split('-');
+    var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+    d.setDate(d.getDate() - 1);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  },
+
   getStreak() {
     var completedDates = Utils.getStorage('daily_goals_completed', []);
     var sorted = completedDates.sort().reverse();
     var streak = 0;
-    var today = new Date().toISOString().split('T')[0];
+    var today = this._localDateStr();
     var check = today;
 
     for (var i = 0; i < sorted.length; i++) {
       if (sorted[i] === check) {
         streak++;
-        var d = new Date(check);
-        d.setDate(d.getDate() - 1);
-        check = d.toISOString().split('T')[0];
+        check = this._prevLocalDateStr(check);
       } else if (sorted[i] < check) {
         if (i === 0 && sorted[i] < today) {
-          var yesterday = new Date();
-          yesterday.setDate(yesterday.getDate() - 1);
-          var yesterdayStr = yesterday.toISOString().split('T')[0];
-          if (sorted[0] === yesterdayStr) {
-            var altCheck = yesterdayStr;
+          var yesterday = this._prevLocalDateStr(today);
+          if (sorted[0] === yesterday) {
+            var altCheck = yesterday;
             streak = 1;
             for (var j = 1; j < sorted.length; j++) {
-              var prev = new Date(altCheck);
-              prev.setDate(prev.getDate() - 1);
-              var expected = prev.toISOString().split('T')[0];
+              var expected = this._prevLocalDateStr(altCheck);
               if (sorted[j] === expected) {
                 streak++;
                 altCheck = expected;
