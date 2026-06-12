@@ -92,22 +92,24 @@ function renderModuleList(course, activeId, allData) {
       + (cPct > 0 ? '<span style="font-size:0.65rem;color:var(--success);font-weight:600">' + cPct + '%</span>' : '')
       + '</div>';
 
-    html += '<div style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem">';
-    cData.modules.forEach(function(m) {
-      var isActive = isCurrent && m.id === activeId;
-      var isCompleted = completed.includes(cid + '_' + m.id);
-      html += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
-        + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
-        + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
-        + '"'
-        + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
-        + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
-        + '>'
-        + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
-        + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
-        + '</a>';
-    });
-    html += '</div>';
+    if (isCurrent) {
+      html += '<div style="margin-left:0.8rem;border-left:2px solid var(--glass-border);padding-left:0.4rem;margin-top:0.2rem;margin-bottom:0.3rem">';
+      cData.modules.forEach(function(m) {
+        var isActive = m.id === activeId;
+        var isCompleted = completed.includes(cid + '_' + m.id);
+        html += '<a href="lesson.html?course=' + cid + '&module=' + m.id + '"'
+          + ' style="display:flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.15rem;font-size:0.75rem;font-weight:400;transition:var(--transition);text-decoration:none;'
+          + (isActive ? 'background:var(--primary);color:white;' : 'color:var(--text);background:transparent;')
+          + '"'
+          + ' onmouseover="this.style.background=\'' + (isActive ? 'var(--primary-dark)' : 'var(--bg-card)') + '\'"'
+          + ' onmouseout="this.style.background=\'' + (isActive ? 'var(--primary)' : 'transparent') + '\'"'
+          + '>'
+          + (isCompleted ? '<i class="fas fa-check-circle" style="font-size:0.65rem;color:' + (isActive ? 'white' : 'var(--success)') + '"></i>' : '<span style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--text-muted);display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;flex-shrink:0;color:var(--text-muted)">' + m.id + '</span>')
+          + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">' + m.title + '</span>'
+          + '</a>';
+      });
+      html += '</div>';
+    }
 
     html += '</div>';
   });
