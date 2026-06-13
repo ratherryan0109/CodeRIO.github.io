@@ -1,4 +1,103 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["PROJECT_CONTEXT.md"]
+  "instructions": ["PROJECT_CONTEXT.md"],
+  "model": "nvidia/minimaxai/minimax-m2.7",
+  "small_model": "nvidia/mistralai/mixtral-8x7b-instruct-v0.1",
+  "provider": {
+    "nvidia": {
+      "api": "https://integrate.api.nvidia.com/v1",
+      "options": {
+        "apiKey": "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"
+      },
+      "models": {
+        "minimaxai/minimax-m2.7": {
+          "name": "MiniMax M2.7",
+          "family": "general",
+          "temperature": true,
+          "tool_call": true,
+          "limit": {
+            "context": 128000,
+            "output": 8192
+          },
+          "cost": {
+            "input": 0.000002,
+            "output": 0.000008
+          },
+          "status": "active"
+        },
+        "mistralai/mixtral-8x7b-instruct-v0.1": {
+          "name": "Mixtral 8x7B",
+          "family": "general",
+          "temperature": true,
+          "tool_call": true,
+          "limit": {
+            "context": 32768,
+            "output": 1024
+          },
+          "cost": {
+            "input": 0.0000005,
+            "output": 0.000002
+          },
+          "status": "active"
+        },
+        "qwen/qwen3-next-80b-a3b-instruct": {
+          "name": "Qwen3 Next 80B A3B",
+          "family": "general",
+          "temperature": true,
+          "tool_call": true,
+          "limit": {
+            "context": 131072,
+            "output": 4096
+          },
+          "cost": {
+            "input": 0.000004,
+            "output": 0.000016
+          },
+          "status": "active"
+        },
+        "openai/gpt-oss-120b": {
+          "name": "GPT-OSS 120B",
+          "family": "reasoning",
+          "temperature": true,
+          "tool_call": true,
+          "reasoning": true,
+          "interleaved": {
+            "field": "reasoning_content"
+          },
+          "limit": {
+            "context": 128000,
+            "output": 4096
+          },
+          "cost": {
+            "input": 0.000005,
+            "output": 0.00002
+          },
+          "status": "active"
+        }
+      }
+    }
+  },
+  "agent": {
+    "explore": {
+      "model": "nvidia/minimaxai/minimax-m2.7",
+      "temperature": 0.7,
+      "description": "Quick codebase exploration and targeted searches"
+    },
+    "build": {
+      "model": "nvidia/qwen/qwen3-next-80b-a3b-instruct",
+      "temperature": 0.6,
+      "top_p": 0.7,
+      "description": "Primary coding agent — implementation and refactoring"
+    },
+    "plan": {
+      "model": "nvidia/openai/gpt-oss-120b",
+      "temperature": 0.6,
+      "description": "Architecture and implementation planning"
+    },
+    "code-reviewer": {
+      "model": "nvidia/openai/gpt-oss-120b",
+      "temperature": 0.3,
+      "description": "Deep code review and quality analysis"
+    }
+  }
 }

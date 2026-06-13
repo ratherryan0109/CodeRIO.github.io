@@ -124,7 +124,7 @@ var ChallengeCenter = {
     }
 
     if (typeof DailyGoals !== 'undefined') {
-      DailyGoals.recordProgress('quizQuestions', attempted);
+      DailyGoals.recordProgress('codingProblems', attempted);
     }
 
     return result;

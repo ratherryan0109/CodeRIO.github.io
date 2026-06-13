@@ -89,7 +89,8 @@ var DailyGoals = {
   // ---- core: record progress ----
 
   record(type, amount) {
-    if (typeof amount !== 'number') return;
+    if (typeof amount === 'string') amount = parseFloat(amount);
+    if (typeof amount !== 'number' || isNaN(amount)) return;
     var keys = this._validKeys();
     if (keys.indexOf(type) === -1) return;
 
@@ -102,7 +103,16 @@ var DailyGoals = {
     Utils.setStorage(this._PROG, p);
 
     this._checkComplete(p, cfg);
+    this._notify();
     this._refresh();
+  },
+
+  _notify() {
+    try {
+      window.dispatchEvent(new CustomEvent('dailygoals-update', { detail: { progress: Utils.getStorage(this._PROG) } }));
+    } catch (e) {}
+    // Also flag via localStorage so other tabs can pick it up
+    try { localStorage.setItem('dailygoals_updated', Date.now()); } catch (e) {}
   },
 
   // ---- core: check if all goals met today ----

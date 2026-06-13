@@ -236,6 +236,20 @@ function initDailyGoals() {
   DailyGoals.renderWidget('dailyGoalsWidget');
   // Re-render on tab focus (user returns from lesson/quiz page)
   window.addEventListener('focus', function() { DailyGoals.renderWidget('dailyGoalsWidget'); });
+  // Re-render when tab becomes visible again
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) DailyGoals.renderWidget('dailyGoalsWidget');
+  });
+  // Listen for custom events dispatched by record()
+  window.addEventListener('dailygoals-update', function() {
+    DailyGoals.renderWidget('dailyGoalsWidget');
+  });
+  // Listen for cross-tab localStorage changes
+  window.addEventListener('storage', function(e) {
+    if (e.key && (e.key.indexOf('daily_goals') !== -1 || e.key === 'dailygoals_updated')) {
+      DailyGoals.renderWidget('dailyGoalsWidget');
+    }
+  });
   // Periodically re-render to catch progress from other tabs
   setInterval(function() { DailyGoals.renderWidget('dailyGoalsWidget'); }, 30000);
 }
