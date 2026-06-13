@@ -68,6 +68,7 @@ var DailyGoals = {
     var p = Utils.getStorage(this._PROG, {}) || {};
     var today = this._today();
     if (p.date !== today) {
+      console.log('[DailyGoals] Date mismatch: stored=' + p.date + ' today=' + today + ' — resetting');
       p = { date: today };
       var keys = this._validKeys();
       for (var i = 0; i < keys.length; i++) p[keys[i]] = 0;
@@ -89,18 +90,21 @@ var DailyGoals = {
   // ---- core: record progress ----
 
   record(type, amount) {
+    console.log('[DailyGoals] record() called: type=' + type + ' amount=' + amount + ' (typeof=' + typeof amount + ')');
     if (typeof amount === 'string') amount = parseFloat(amount);
-    if (typeof amount !== 'number' || isNaN(amount)) return;
+    if (typeof amount !== 'number' || isNaN(amount)) { console.log('[DailyGoals] record() bailed — amount not a number'); return; }
     var keys = this._validKeys();
-    if (keys.indexOf(type) === -1) return;
+    if (keys.indexOf(type) === -1) { console.log('[DailyGoals] record() bailed — unknown type: ' + type); return; }
 
     var p = this.progress();
     var cfg = this.config();
 
     if (typeof p[type] !== 'number') p[type] = 0;
     var goal = typeof cfg[type] === 'number' ? cfg[type] : 0;
+    var before = p[type];
     p[type] = Math.min(p[type] + Math.max(0, amount), goal);
     Utils.setStorage(this._PROG, p);
+    console.log('[DailyGoals] Saved progress: ' + type + ' ' + before + ' → ' + p[type] + ' (goal=' + goal + ')');
 
     this._checkComplete(p, cfg);
     this._notify();

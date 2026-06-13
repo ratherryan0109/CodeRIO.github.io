@@ -457,7 +457,6 @@ function renderVideos(videos) {
 }
 
 function renderQuiz(quiz, courseId) {
-  var link = document.getElementById('quizHubLink');
   var container = document.getElementById('lessonQuiz');
   if (!quiz || quiz.length === 0) { container.style.display = 'none'; return; }
   if (!Utils.getStorage('coderio_user')) {
@@ -465,16 +464,36 @@ function renderQuiz(quiz, courseId) {
     container.innerHTML = '\
       <div style="text-align:center;padding:1.5rem">\
         <i class="fas fa-lock" style="font-size:2rem;color:var(--text-muted);margin-bottom:0.8rem;display:block"></i>\
-        <p style="color:var(--text-secondary);margin-bottom:1rem">Log in to take the full course quiz.</p>\
+        <p style="color:var(--text-secondary);margin-bottom:1rem">Log in to take quizzes.</p>\
         <a href="auth/login.html" class="btn btn-primary btn-sm" style="display:inline-flex"><i class="fas fa-sign-in-alt"></i> Log In</a>\
       </div>';
     return;
   }
   container.style.display = 'block';
-  document.getElementById('quizScore').textContent = '';
-  if (link) {
-    link.href = 'quiz-hub.html?course=' + (courseId || '');
-  }
+
+  var html = '<h3 style="margin-bottom:1rem"><i class="fas fa-question-circle" style="color:var(--primary)"></i> Module Quiz</h3>'
+    + '<p style="color:var(--text-secondary);margin-bottom:1rem">Answer the questions below to test your knowledge of this module.</p>';
+
+  quiz.forEach(function(q, qi) {
+    html += '<div style="margin-bottom:1.5rem;padding:1rem;border:1px solid #e2e8f0;border-radius:12px;background:var(--white)">'
+      + '<p style="font-weight:600;margin-bottom:0.8rem">' + (qi + 1) + '. ' + q.question + '</p>';
+    q.options.forEach(function(opt, oi) {
+      html += '<label style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.8rem;margin-bottom:0.3rem;border-radius:8px;cursor:pointer">'
+        + '<input type="radio" name="q' + qi + '" value="' + oi + '" style="accent-color:var(--primary)">'
+        + '<span>' + opt + '</span>'
+        + '</label>';
+    });
+    html += '</div>';
+  });
+
+  html += '<button class="btn btn-primary" onclick="submitLessonQuiz()" style="justify-content:center"><i class="fas fa-check-circle"></i> Submit Quiz</button>'
+    + '<div id="quizScore" style="margin-top:1rem;font-weight:600"></div>'
+    + '<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid #e2e8f0;text-align:center">'
+    + '<p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem">Want a full course quiz with all modules?</p>'
+    + '<a href="quiz-hub.html?course=' + (courseId || '') + '" class="btn btn-ghost btn-sm"><i class="fas fa-external-link-alt"></i> Take Full Course Quiz</a>'
+    + '</div>';
+
+  container.innerHTML = html;
 }
 
 function submitLessonQuiz() {
