@@ -408,6 +408,13 @@ async function signOut() {
 }
 
 async function requireAuth() {
+  if (typeof firebase === 'undefined') {
+    const localUser = Utils.getStorage('coderio_user');
+    if (localUser) return localUser;
+    const dirs = window.location.pathname.split('/').filter(s => s && !s.includes('.'));
+    window.location.href = '../'.repeat(dirs.length) + 'auth/login.html';
+    return null;
+  }
   const user = firebase.auth().currentUser;
   if (user) {
     saveUserSession(user);
@@ -541,6 +548,7 @@ function detectUserLocation() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (typeof firebase === 'undefined' || !firebase.apps || !firebase.apps.length) return;
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       saveUserSession(user);
