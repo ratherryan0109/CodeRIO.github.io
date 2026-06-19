@@ -478,7 +478,7 @@ function renderQuiz(quiz, courseId) {
     html += '<div style="margin-bottom:1.5rem;padding:1rem;border:1px solid #e2e8f0;border-radius:12px;background:var(--white)">'
       + '<p style="font-weight:600;margin-bottom:0.8rem">' + (qi + 1) + '. ' + q.question + '</p>';
     q.options.forEach(function(opt, oi) {
-      html += '<label style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.8rem;margin-bottom:0.3rem;border-radius:8px;cursor:pointer">'
+      html += '<label class="quiz-option" style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.8rem;margin-bottom:0.3rem;border-radius:8px;cursor:pointer">'
         + '<input type="radio" name="q' + qi + '" value="' + oi + '" style="accent-color:var(--primary)">'
         + '<span>' + opt + '</span>'
         + '</label>';
@@ -503,7 +503,7 @@ function submitLessonQuiz() {
 
   Utils.fetchJSON('data/lessons.json').then(data => {
     const course = data[courseId];
-    if (!course) return;
+    if (!course) { Utils.showToast('Course not found.', 'error'); return; }
     const module = course.modules.find(m => m.id === moduleId) || course.modules[0];
     const quiz = module.quiz;
     if (!quiz) return;
@@ -514,13 +514,15 @@ function submitLessonQuiz() {
       const options = document.querySelectorAll(`input[name="q${qi}"]`);
       options.forEach((opt, oi) => {
         const label = opt.closest('.quiz-option');
-        if (oi === q.answer) {
-          label.style.borderColor = 'var(--success)';
-          label.style.background = 'rgba(34,197,94,0.1)';
-        }
-        if (opt.checked && oi !== q.answer) {
-          label.style.borderColor = 'var(--error)';
-          label.style.background = 'rgba(239,68,68,0.1)';
+        if (label) {
+          if (oi === q.answer) {
+            label.style.borderColor = 'var(--success)';
+            label.style.background = 'rgba(34,197,94,0.1)';
+          }
+          if (opt.checked && oi !== q.answer) {
+            label.style.borderColor = 'var(--error)';
+            label.style.background = 'rgba(239,68,68,0.1)';
+          }
         }
       });
       if (selected && parseInt(selected.value) === q.answer) {
@@ -559,6 +561,8 @@ function submitLessonQuiz() {
     }
 
     document.querySelectorAll('.quiz-option input').forEach(inp => inp.disabled = true);
+  }).catch(function(err) {
+    Utils.showToast('Failed to load quiz. Please try again.', 'error');
   });
 }
 
