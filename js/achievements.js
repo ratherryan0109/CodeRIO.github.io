@@ -292,6 +292,10 @@ var AchievementSystem = {
     var bestWpm = typingHistory.length > 0 ? Math.max.apply(null, typingHistory.map(function(t) { return t.wpm || 0; })) : 0;
     var bestAccuracy = typingHistory.length > 0 ? Math.max.apply(null, typingHistory.map(function(t) { return Math.round(t.accuracy || 0); })) : 0;
 
+    var challengeHistory = Utils.getStorage('challenge_history', []);
+    var totalChallenges = challengeHistory.length;
+    var perfectChallenges = challengeHistory.filter(function(c) { return c.accuracy === 100; }).length;
+
     var streakData = typeof LearningTracker !== 'undefined' ? LearningTracker._calcStreak() : { currentStreak: 0, longestStreak: 0 };
 
     var tracking = Utils.getStorage('interview_tracking', {});
@@ -432,6 +436,12 @@ var AchievementSystem = {
         case 'interview_all_courses': check(studiedCourseCount >= 28, ach); break;
         case 'interactive_done': check(interactiveRuns >= 1, ach); break;
         case 'interactive_25': check(interactiveRuns >= 25, ach); break;
+        case 'first_challenge': check(totalChallenges >= 1, ach); break;
+        case 'challenge_10': check(totalChallenges >= 10, ach); break;
+        case 'challenge_25': check(totalChallenges >= 25, ach); break;
+        case 'challenge_50': check(totalChallenges >= 50, ach); break;
+        case 'challenge_100': check(totalChallenges >= 100, ach); break;
+        case 'challenge_perfect': check(perfectChallenges >= 1, ach); break;
         case 'daily_goal_200': case 'daily_goal_500': case 'daily_login_7': case 'daily_login_30': case 'daily_login_100': case 'night_study_5': case 'weekend_study_10': case 'practice_2000': case 'practice_5000': case 'job_search_started': case 'job_saved_3': case 'job_saved_10': case 'job_saved_25': case 'interview_questions_viewed': case 'interview_questions_10': case 'interview_questions_all': case 'career_country_switched': case 'salary_compared': case 'remote_roles_viewed': break;
         default: break;
       }
