@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -48,7 +48,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -63,7 +63,7 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
   <div id="toastContainer" class="toast-container"></div>
 
@@ -80,7 +80,7 @@
           <label for="registerName">Full Name</label>
           <div class="input-group">
             <i class="fas fa-user input-icon"></i>
-            <input type="text" id="registerName" placeholder="Enter your full name" required autocomplete="name">
+            <input type="text" id="registerName" placeholder="Enter your full name" aria-label="Enter your full name" required autocomplete="name">
           </div>
           <p class="inline-error" id="nameError">Please enter your name.</p>
         </div>
@@ -88,7 +88,7 @@
           <label for="registerEmail">Email</label>
           <div class="input-group">
             <i class="fas fa-envelope input-icon"></i>
-            <input type="email" id="registerEmail" placeholder="Enter your email" required autocomplete="email">
+            <input type="email" id="registerEmail" placeholder="Enter your email" aria-label="Enter your email" required autocomplete="email">
           </div>
           <p class="inline-error" id="emailError">Please enter a valid email address.</p>
         </div>
@@ -97,7 +97,7 @@
           <div class="input-group">
             <i class="fas fa-lock input-icon"></i>
             <div class="password-input-wrap" style="flex:1;border:none;background:transparent;padding:0;">
-              <input type="password" id="registerPassword" placeholder="Create a password" required autocomplete="new-password" style="border:none;background:transparent;padding-left:0;">
+              <input type="password" id="registerPassword" placeholder="Create a password" aria-label="Create a password" required autocomplete="new-password" style="border:none;background:transparent;padding-left:0;">
               <button type="button" class="password-toggle" id="pwdToggle" tabindex="-1" aria-label="Toggle password visibility">
                 <i class="fas fa-eye"></i>
               </button>
@@ -115,12 +115,12 @@
           <label for="registerConfirm">Confirm Password</label>
           <div class="input-group">
             <i class="fas fa-lock input-icon"></i>
-            <input type="password" id="registerConfirm" placeholder="Confirm your password" required autocomplete="new-password">
+            <input type="password" id="registerConfirm" placeholder="Confirm your password" aria-label="Confirm your password" required autocomplete="new-password">
           </div>
           <p class="inline-error" id="confirmError">Passwords do not match.</p>
         </div>
         <div class="terms-check" id="termsGroup">
-          <input type="checkbox" id="termsCheck">
+          <span style="display:inline-flex;align-items:center;gap:0.5rem"><input type="checkbox" id="termsCheck" aria-label="I agree to the terms">
           <label for="termsCheck">I agree to the <a href="../terms-of-service.html" target="_blank">Terms of Service</a> and <a href="../privacy-policy.html" target="_blank">Privacy Policy</a></label>
         </div>
         <div id="registerError" class="form-error" style="display:none"></div>

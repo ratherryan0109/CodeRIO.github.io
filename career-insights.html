@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -82,7 +82,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -94,7 +94,7 @@
       <li><a href="auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"><a href="Register.html" class="btn btn-primary btn-sm">Sign Up</a></div>
-  </nav>
+  </nav></header>
 
   <div id="toastContainer" class="toast-container"></div>
 
@@ -104,7 +104,7 @@
       <p>Explore salary benchmarks, hiring demand, and top skills for developer roles across the globe. Data is based on publicly available sources and industry surveys.</p>
       <div class="country-selector-wrap">
         <label for="countrySelect"><i class="fas fa-globe"></i> Country:</label>
-        <select id="countrySelect"></select>
+        <select id="countrySelect" aria-label="Select country"></select>
         <span class="detected-badge"><i class="fas fa-map-pin"></i> Detected: <span id="detectedCountry">--</span></span>
       </div>
     </section>
@@ -174,11 +174,11 @@
         <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
           <div style="flex:1;min-width:200px">
             <label style="font-weight:600;display:block;margin-bottom:0.4rem;font-size:0.85rem;color:var(--text-secondary)">Role</label>
-            <select id="jobRoleSelect" style="width:100%;padding:0.7rem 1rem;border-radius:var(--border-radius-sm);border:1px solid var(--glass-border);background:var(--bg-card);font-size:0.9rem;color:var(--text)"></select>
+            <select id="jobRoleSelect" aria-label="Select job role" style="width:100%;padding:0.7rem 1rem;border-radius:var(--border-radius-sm);border:1px solid var(--glass-border);background:var(--bg-card);font-size:0.9rem;color:var(--text)"></select>
           </div>
           <div style="flex:1;min-width:200px">
             <label style="font-weight:600;display:block;margin-bottom:0.4rem;font-size:0.85rem;color:var(--text-secondary)">Location</label>
-            <input type="text" id="jobLocationInput" placeholder="e.g. San Francisco, London, Remote" style="width:100%;padding:0.7rem 1rem;border-radius:var(--border-radius-sm);border:1px solid var(--glass-border);background:var(--bg-card);font-size:0.9rem;color:var(--text)">
+            <input type="text" id="jobLocationInput" placeholder="e.g. San Francisco, London, Remote" aria-label="Job location" style="width:100%;padding:0.7rem 1rem;border-radius:var(--border-radius-sm);border:1px solid var(--glass-border);background:var(--bg-card);font-size:0.9rem;color:var(--text)">
           </div>
         </div>
         <div id="jobBoardLinks" style="display:flex;gap:1rem;flex-wrap:wrap">
@@ -215,15 +215,15 @@
   <script>
   var COUNTRIES = [
     { id: "US", name: "United States", locale: "en-US", currency: "USD", symbol: "$" },
-    { id: "GB", name: "United Kingdom", locale: "en-GB", currency: "GBP", symbol: "Â£" },
+    { id: "GB", name: "United Kingdom", locale: "en-GB", currency: "GBP", symbol: "£" },
     { id: "CA", name: "Canada", locale: "en-CA", currency: "CAD", symbol: "C$" },
     { id: "AU", name: "Australia", locale: "en-AU", currency: "AUD", symbol: "A$" },
-    { id: "DE", name: "Germany", locale: "de-DE", currency: "EUR", symbol: "â‚¬" },
-    { id: "FR", name: "France", locale: "fr-FR", currency: "EUR", symbol: "â‚¬" },
-    { id: "IN", name: "India", locale: "en-IN", currency: "INR", symbol: "â‚¹" },
+    { id: "DE", name: "Germany", locale: "de-DE", currency: "EUR", symbol: "€" },
+    { id: "FR", name: "France", locale: "fr-FR", currency: "EUR", symbol: "€" },
+    { id: "IN", name: "India", locale: "en-IN", currency: "INR", symbol: "?" },
     { id: "SG", name: "Singapore", locale: "en-SG", currency: "SGD", symbol: "S$" },
     { id: "BR", name: "Brazil", locale: "pt-BR", currency: "BRL", symbol: "R$" },
-    { id: "JP", name: "Japan", locale: "ja-JP", currency: "JPY", symbol: "Â¥" }
+    { id: "JP", name: "Japan", locale: "ja-JP", currency: "JPY", symbol: "¥" }
   ];
   var ROLES = [
     "Frontend Developer", "Backend Developer", "Full-Stack Developer",
@@ -247,7 +247,7 @@
       roles: { "Frontend Developer":{salary:[95000,155000],demand:"High",growth:"8%",positions:28500}, "Backend Developer":{salary:[100000,165000],demand:"High",growth:"10%",positions:32000}, "Full-Stack Developer":{salary:[105000,170000],demand:"High",growth:"9%",positions:27800}, "DevOps Engineer":{salary:[110000,175000],demand:"High",growth:"12%",positions:19500}, "Data Scientist":{salary:[115000,180000],demand:"Medium",growth:"7%",positions:14200}, "Mobile Developer":{salary:[95000,150000],demand:"Medium",growth:"6%",positions:12100}, "AI/ML Engineer":{salary:[125000,200000],demand:"High",growth:"15%",positions:16800} }
     },
     "GB": {
-      name: "United Kingdom", currency: "GBP", symbol: "Â£", costOfLiving: 72,
+      name: "United Kingdom", currency: "GBP", symbol: "£", costOfLiving: 72,
       skills: { "Frontend": ["React","TypeScript","Angular","Vue.js","Sass","Node.js","Jasmine"], "Backend": ["Node.js","Python","Java","AWS","PostgreSQL","Docker","Spring Boot"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","Jenkins","Linux","Git"], "Data": ["Python","SQL","R","Tableau","Power BI","Spark","Machine Learning"], "Mobile": ["Swift","Kotlin","React Native","Flutter","Xcode","Android Studio"], "AI": ["Python","TensorFlow","PyTorch","NLP","scikit-learn","LLMs","MLOps"] },
       roles: { "Frontend Developer":{salary:[45000,85000],demand:"High",growth:"7%",positions:12500}, "Backend Developer":{salary:[50000,90000],demand:"High",growth:"8%",positions:14000}, "Full-Stack Developer":{salary:[48000,88000],demand:"High",growth:"8%",positions:11200}, "DevOps Engineer":{salary:[55000,95000],demand:"Medium",growth:"10%",positions:8200}, "Data Scientist":{salary:[52000,95000],demand:"Medium",growth:"6%",positions:6800}, "Mobile Developer":{salary:[42000,80000],demand:"Medium",growth:"5%",positions:5400}, "AI/ML Engineer":{salary:[60000,110000],demand:"High",growth:"14%",positions:7200} }
     },
@@ -262,17 +262,17 @@
       roles: { "Frontend Developer":{salary:[85000,140000],demand:"High",growth:"7%",positions:5200}, "Backend Developer":{salary:[90000,150000],demand:"High",growth:"8%",positions:5800}, "Full-Stack Developer":{salary:[88000,145000],demand:"High",growth:"8%",positions:4600}, "DevOps Engineer":{salary:[100000,160000],demand:"Medium",growth:"10%",positions:3200}, "Data Scientist":{salary:[95000,155000],demand:"Medium",growth:"6%",positions:2600}, "Mobile Developer":{salary:[80000,130000],demand:"Medium",growth:"5%",positions:2100}, "AI/ML Engineer":{salary:[110000,180000],demand:"High",growth:"13%",positions:2800} }
     },
     "DE": {
-      name: "Germany", currency: "EUR", symbol: "â‚¬", costOfLiving: 62,
+      name: "Germany", currency: "EUR", symbol: "€", costOfLiving: 62,
       skills: { "Frontend": ["React","TypeScript","Angular","Vue.js","JavaScript","Node.js","Sass"], "Backend": ["Java","Python","Node.js","AWS","Docker","PostgreSQL","Spring Boot"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","Jenkins","Linux","GitLab CI"], "Data": ["Python","SQL","R","TensorFlow","Tableau","Spark","Machine Learning"], "Mobile": ["Kotlin","Swift","React Native","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","scikit-learn","LLMs"] },
       roles: { "Frontend Developer":{salary:[50000,85000],demand:"High",growth:"7%",positions:9800}, "Backend Developer":{salary:[55000,90000],demand:"High",growth:"8%",positions:11000}, "Full-Stack Developer":{salary:[52000,88000],demand:"High",growth:"8%",positions:8400}, "DevOps Engineer":{salary:[60000,95000],demand:"Medium",growth:"10%",positions:5800}, "Data Scientist":{salary:[58000,95000],demand:"Medium",growth:"7%",positions:4500}, "Mobile Developer":{salary:[48000,80000],demand:"Medium",growth:"5%",positions:3800}, "AI/ML Engineer":{salary:[65000,110000],demand:"High",growth:"14%",positions:5100} }
     },
     "FR": {
-      name: "France", currency: "EUR", symbol: "â‚¬", costOfLiving: 58,
+      name: "France", currency: "EUR", symbol: "€", costOfLiving: 58,
       skills: { "Frontend": ["React","TypeScript","JavaScript","Angular","Vue.js","Node.js","Sass"], "Backend": ["Java","Python","Node.js","AWS","Docker","PostgreSQL","Symfony"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","CI/CD","Linux","Ansible"], "Data": ["Python","SQL","R","TensorFlow","Tableau","Spark","Machine Learning"], "Mobile": ["Kotlin","Swift","React Native","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","scikit-learn","MLOps","LLMs"] },
       roles: { "Frontend Developer":{salary:[42000,72000],demand:"High",growth:"6%",positions:7200}, "Backend Developer":{salary:[45000,78000],demand:"Medium",growth:"7%",positions:8100}, "Full-Stack Developer":{salary:[44000,75000],demand:"High",growth:"7%",positions:6200}, "DevOps Engineer":{salary:[50000,82000],demand:"Medium",growth:"9%",positions:4100}, "Data Scientist":{salary:[48000,80000],demand:"Medium",growth:"6%",positions:3200}, "Mobile Developer":{salary:[40000,70000],demand:"Low",growth:"4%",positions:2600}, "AI/ML Engineer":{salary:[55000,95000],demand:"High",growth:"13%",positions:3800} }
     },
     "IN": {
-      name: "India", currency: "INR", symbol: "â‚¹", costOfLiving: 22,
+      name: "India", currency: "INR", symbol: "?", costOfLiving: 22,
       skills: { "Frontend": ["React","JavaScript","TypeScript","Angular","Vue.js","Node.js","CSS"], "Backend": ["Node.js","Python","Java","AWS","Docker","PostgreSQL","MongoDB"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","Jenkins","Linux","Ansible"], "Data": ["Python","SQL","Machine Learning","Tableau","TensorFlow","Spark","R"], "Mobile": ["React Native","Kotlin","Flutter","Swift","Android","Firebase"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","LLMs","MLOps"] },
       roles: { "Frontend Developer":{salary:[600000,1800000],demand:"High",growth:"12%",positions:45000}, "Backend Developer":{salary:[700000,2000000],demand:"High",growth:"13%",positions:52000}, "Full-Stack Developer":{salary:[650000,1900000],demand:"High",growth:"12%",positions:38000}, "DevOps Engineer":{salary:[800000,2200000],demand:"High",growth:"15%",positions:18000}, "Data Scientist":{salary:[900000,2500000],demand:"Medium",growth:"10%",positions:12000}, "Mobile Developer":{salary:[550000,1600000],demand:"Medium",growth:"8%",positions:15000}, "AI/ML Engineer":{salary:[1000000,3000000],demand:"High",growth:"18%",positions:14000} }
     },
@@ -287,7 +287,7 @@
       roles: { "Frontend Developer":{salary:[60000,150000],demand:"High",growth:"10%",positions:8500}, "Backend Developer":{salary:[70000,160000],demand:"High",growth:"11%",positions:9200}, "Full-Stack Developer":{salary:[65000,155000],demand:"High",growth:"10%",positions:7200}, "DevOps Engineer":{salary:[80000,180000],demand:"Medium",growth:"13%",positions:4200}, "Data Scientist":{salary:[85000,190000],demand:"Medium",growth:"9%",positions:3100}, "Mobile Developer":{salary:[55000,140000],demand:"Medium",growth:"7%",positions:3800}, "AI/ML Engineer":{salary:[95000,220000],demand:"High",growth:"16%",positions:3500} }
     },
     "JP": {
-      name: "Japan", currency: "JPY", symbol: "Â¥", costOfLiving: 70,
+      name: "Japan", currency: "JPY", symbol: "¥", costOfLiving: 70,
       skills: { "Frontend": ["React","TypeScript","JavaScript","Vue.js","Angular","Node.js","Sass"], "Backend": ["Java","Python","Node.js","AWS","Docker","PostgreSQL","Spring"], "DevOps": ["Docker","Kubernetes","AWS","Terraform","CI/CD","Linux","Ansible"], "Data": ["Python","SQL","R","TensorFlow","Tableau","Spark","Machine Learning"], "Mobile": ["Swift","Kotlin","React Native","Flutter","Android","iOS"], "AI": ["Python","TensorFlow","PyTorch","NLP","Computer Vision","scikit-learn","LLMs"] },
       roles: { "Frontend Developer":{salary:[4500000,9000000],demand:"Medium",growth:"5%",positions:6200}, "Backend Developer":{salary:[5000000,10000000],demand:"Medium",growth:"6%",positions:7100}, "Full-Stack Developer":{salary:[4800000,9500000],demand:"Medium",growth:"6%",positions:5400}, "DevOps Engineer":{salary:[5500000,11000000],demand:"Medium",growth:"8%",positions:3500}, "Data Scientist":{salary:[6000000,12000000],demand:"Low",growth:"5%",positions:2800}, "Mobile Developer":{salary:[4200000,8500000],demand:"Low",growth:"3%",positions:2400}, "AI/ML Engineer":{salary:[6500000,13000000],demand:"Medium",growth:"10%",positions:3200} }
     }

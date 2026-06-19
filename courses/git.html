@@ -19,7 +19,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -33,9 +33,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Git & GitHub</h1>
       <p>Git is the most widely used version control system in the world, created by Linus Torvalds in 2005. It tracks changes to files, enables collaboration, and provides a complete history of project evolution.</p>
@@ -89,11 +90,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Git is the industry standard for version control across all software development:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apple</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="Microsoft" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Meta" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="Amazon" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Apple" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apple</p></div>
       </div>
       <p style="color:var(--text-secondary)">Every software company, from startups to FAANG, uses Git. GitHub alone hosts over 100 million repositories. Git is used for code, documentation, configuration (Infrastructure as Code), data science notebooks, game development, and open source projects. The Linux kernel, Kubernetes, VS Code, and TensorFlow are all developed with Git.</p>
     </div>
@@ -392,6 +393,8 @@ git mergetool  # Opens configured tool (vscode, meld, kdiff3)</code></pre>
 
     
   </section>
+  </main>
+
 
 
     <footer class="footer">

@@ -42,7 +42,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -56,9 +56,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Node.js</h1>
       <p>Node.js is an open-source, cross-platform JavaScript runtime built on Chrome's V8 JavaScript engine. Created by Ryan Dahl in 2009, Node.js revolutionized server-side programming by bringing JavaScript to the backend. Its event-driven, non-blocking I/O model makes it ideal for building scalable network applications, real-time services, and microservices.</p>
@@ -112,11 +113,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Node.js is adopted by companies of all sizes for backend services:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">PayPal</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" alt="Netflix" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" alt="Uber" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" alt="PayPal" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">PayPal</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
       </div>
       <p style="color:var(--text-secondary)">Node.js is used by LinkedIn (mobile API feeding all device platforms), Netflix (user experience and streaming optimization), PayPal (transaction processing), Uber (trip management and real-time tracking), Walmart (e-commerce backend), Medium (content serving), NASA (astronaut health monitoring), and Trello (real-time collaboration). Startups and enterprises alike use Node.js for prototyping and production.</p>
     </div>
@@ -710,6 +711,8 @@ program.parse();</code></pre>
     </div>
 
   </section>
+  </main>
+
   
     <footer class="footer">
     <div class="footer-grid" style="padding:3rem 6% 1.5rem;max-width:1400px;margin:0 auto">

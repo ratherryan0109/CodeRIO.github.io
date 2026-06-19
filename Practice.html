@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -129,7 +129,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -144,8 +144,9 @@
       <li><a href="auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
+  <main>
   <div class="practice-page">
     <div class="page-header">
       <h1>Practice Hub</h1>
@@ -209,6 +210,7 @@
       </div>
       <p style="color:var(--text-secondary);margin-bottom:1rem;">Enter your username on <strong id="connectPlatformName">Platform</strong> to link your account.</p>
       <div class="connection-input-group">
+        <label for="connectUsername" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0">Your username</label>
         <input type="text" id="connectUsername" placeholder="Your username" autocomplete="off">
         <button class="btn btn-primary" id="connectSaveBtn" onclick="saveConnection()">Save</button>
       </div>
@@ -233,6 +235,7 @@
       </div>
     </div>
   </div>
+  </main>
 
     <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

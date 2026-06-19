@@ -39,7 +39,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
   <div class="toast-container"></div>
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -53,8 +53,9 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
-  <section class="course-hero">
+  </nav></header>
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Pandas</h1>
       <p>Pandas is a powerful, open-source Python library for data manipulation and analysis. Built on top of NumPy, it provides easy-to-use data structures like Series and DataFrame for working with structured data, making it an essential tool for data scientists and analysts worldwide.</p>
@@ -104,11 +105,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Pandas is the backbone of data analytics across industries:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spotify</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" alt="Netflix" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg" alt="Spotify" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spotify</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" alt="Uber" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" alt="Airbnb" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
       </div>
       <p style="color:var(--text-secondary)">Pandas is used in finance (JP Morgan, Goldman Sachs for risk analysis), healthcare (genomic data analysis), retail (inventory optimization), social media (user behavior analytics), sports analytics, and scientific research. It is typically the first tool data professionals reach for when exploring new datasets.</p>
     </div>
@@ -476,6 +477,8 @@ sales['revenue_ma7'] = sales.groupby('product')['revenue'].transform(
     </div>
   
   </section>
+  </main>
+
   
   
     <footer class="footer">

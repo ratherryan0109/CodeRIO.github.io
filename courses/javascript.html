@@ -18,7 +18,7 @@
   <div class="blob blob4"></div>
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -32,9 +32,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>JavaScript</h1>
       <p>JavaScript is the programming language of the web, powering interactive experiences, dynamic content, and full-stack applications. Master JavaScript to build anything from simple scripts to complex web apps.</p>
@@ -70,11 +71,11 @@
     <div class="course-section">
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">React (Meta)</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Angular (Google)</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Node.js</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Meta" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React (Meta)" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">React (Meta)</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular (Google)" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Angular (Google)</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Node.js</p></div>
       </div>
       <p style="color:var(--text-secondary)">Netflix uses React for its UI, PayPal transitioned to Node.js for its backend, Airbnb relies on React Native for mobile, VS Code is built with Electron (JavaScript/TypeScript), and MongoDB uses JavaScript for its query language. From startups to FAANG companies, JavaScript powers the modern web.</p>
     </div>
@@ -268,6 +269,8 @@ displayUsers();</code></pre></div>
 
    
   </section>
+  </main>
+
 
 
     <footer class="footer">

@@ -1,8 +1,5 @@
-var fs = require('fs');
-var path = require('path');
-var genCode = fs.readFileSync(path.join(__dirname, 'generate-data.js'), 'utf8');
-genCode = genCode.replace(/var output = build\(\);[\s\S]*$/, '');
-eval(genCode);
+var genData = require('./generate-data.cjs');
+var courses = genData.courses;
 
 var out = {};
 courses.forEach(function(c) {

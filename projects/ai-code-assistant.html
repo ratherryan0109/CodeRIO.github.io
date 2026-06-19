@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -51,7 +51,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -66,9 +66,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>AI Code Assistant</h1>
@@ -91,14 +92,14 @@
       <!-- 2. Problem Statement -->
       <div class="section">
         <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
-        <p>Modern software development is characterized by increasing codebase complexity, shrinking delivery timelines, and a growing surface area for bugs and security vulnerabilities. Developers spend approximately 40% of their time searching for information and debugging, while only 20% actually writing new code. Existing tools either provide shallow syntactic analysis (linters) or require expensive manual code reviews. There is no unified system that combines deep semantic understanding of code with real-time interactive assistance. The challenge is to build an AI-powered system that understands code holistically — its syntax, semantics, intent, and surrounding context — and provides actionable, context-aware suggestions that adapt to the developer's coding style, project conventions, and the specific problem domain.</p>
+        <p>Modern software development is characterized by increasing codebase complexity, shrinking delivery timelines, and a growing surface area for bugs and security vulnerabilities. Developers spend approximately 40% of their time searching for information and debugging, while only 20% actually writing new code. Existing tools either provide shallow syntactic analysis (linters) or require expensive manual code reviews. There is no unified system that combines deep semantic understanding of code with real-time interactive assistance. The challenge is to build an AI-powered system that understands code holistically � its syntax, semantics, intent, and surrounding context � and provides actionable, context-aware suggestions that adapt to the developer's coding style, project conventions, and the specific problem domain.</p>
       </div>
 
       <!-- 3. Real World Use Cases -->
       <div class="section">
         <h2><i class="fas fa-briefcase" style="color:var(--success)"></i> Real World Use Cases</h2>
         <div class="feature-grid">
-          <div class="feature-item"><i class="fas fa-terminal"></i><h4>Enterprise IDE Plugin</h4><p>Integrated into JetBrains IntelliJ, VS Code, and Eclipse to provide real-time AI completions for Java, Kotlin, and Python enterprise codebases — reducing boilerplate writing by 60%.</p></div>
+          <div class="feature-item"><i class="fas fa-terminal"></i><h4>Enterprise IDE Plugin</h4><p>Integrated into JetBrains IntelliJ, VS Code, and Eclipse to provide real-time AI completions for Java, Kotlin, and Python enterprise codebases � reducing boilerplate writing by 60%.</p></div>
           <div class="feature-item"><i class="fas fa-shield-alt"></i><h4>Security-First Code Review</h4><p>CI/CD integration that scans every PR for OWASP Top 10 vulnerabilities (SQL injection, XSS, CSRF) using both static analysis and LLM-based semantic understanding with confidence scoring.</p></div>
           <div class="feature-item"><i class="fas fa-graduation-cap"></i><h4>Code Learning Platform</h4><p>Educational tool for CS students that explains code in natural language, generates practice exercises from existing codebases, and provides step-by-step refactoring walkthroughs.</p></div>
           <div class="feature-item"><i class="fas fa-database"></i><h4>Legacy Modernization</h4><p>Automated migration assistant that reads legacy COBOL/Fortran code, generates semantically equivalent Python/Go implementations, and produces diff reports for manual verification.</p></div>
@@ -119,7 +120,7 @@
           <li><strong>Abstract Syntax Tree (AST) Parsing:</strong> Build language-agnostic code analyzers using tree-sitter and Language Server Protocol (LSP) for deep code understanding across 10+ languages.</li>
           <li><strong>Vector Databases & RAG:</strong> Implement Retrieval-Augmented Generation using Chroma/Pinecone to store and retrieve code embeddings for context-aware suggestions across large codebases.</li>
           <li><strong>Real-Time WebSocket Architecture:</strong> Design bidirectional streaming systems with debouncing, cancellation, reconnection logic, and backpressure handling for sub-200ms latency.</li>
-          <li><strong>Prompt Engineering for Code:</strong> Master prompt design patterns specific to code generation, bug detection, refactoring, and explanation — including few-shot, chain-of-thought, and structured output formats.</li>
+          <li><strong>Prompt Engineering for Code:</strong> Master prompt design patterns specific to code generation, bug detection, refactoring, and explanation � including few-shot, chain-of-thought, and structured output formats.</li>
           <li><strong>Fine-Tuning & Model Customization:</strong> Learn to fine-tune CodeLlama and StarCoder on custom codebases using LoRA/QLoRA for domain-specific optimization.</li>
           <li><strong>Frontend Editor Integration:</strong> Integrate Monaco Editor with inline completion providers, decoration APIs, and custom keybindings for seamless UX.</li>
           <li><strong>CI/CD for ML Systems:</strong> Build MLOps pipelines for model evaluation, A/B testing, and gradual rollout of AI features.</li>
@@ -206,7 +207,7 @@
 |  +----------------------------------------------------------+  |
 +------------------------------------------------------------------+
         </div>
-        <p><strong>Data Flow:</strong> (1) User types in Monaco Editor → (2) Debounced keystrokes sent via WebSocket → (3) Orchestrator decides completion strategy (local model for simple, cloud for complex) → (4) Vector DB retrieves similar code patterns from codebase → (5) LLM generates completion with RAG context → (6) Streaming response returns to editor as ghost text → (7) User feedback loop stores accepted/rejected suggestions for fine-tuning.</p>
+        <p><strong>Data Flow:</strong> (1) User types in Monaco Editor ? (2) Debounced keystrokes sent via WebSocket ? (3) Orchestrator decides completion strategy (local model for simple, cloud for complex) ? (4) Vector DB retrieves similar code patterns from codebase ? (5) LLM generates completion with RAG context ? (6) Streaming response returns to editor as ghost text ? (7) User feedback loop stores accepted/rejected suggestions for fine-tuning.</p>
       </div>
 
       <!-- 9. Database Design -->
@@ -229,7 +230,7 @@
           </table>
         </div>
         <h3>Relationships</h3>
-        <p><code>users 1→* projects → files → code_embeddings</code> — A user has many projects, each project has many files, each file can be chunked into multiple embeddings. The <code>completions</code>, <code>bug_reports</code>, and <code>refactoring_history</code> tables all reference files and form the feedback loop. The <code>feedback</code> table uses polymorphic associations via <code>target_type</code> + <code>target_id</code>.</p>
+        <p><code>users 1?* projects ? files ? code_embeddings</code> � A user has many projects, each project has many files, each file can be chunked into multiple embeddings. The <code>completions</code>, <code>bug_reports</code>, and <code>refactoring_history</code> tables all reference files and form the feedback loop. The <code>feedback</code> table uses polymorphic associations via <code>target_type</code> + <code>target_id</code>.</p>
       </div>
 
       <!-- 10. API Structure -->
@@ -260,119 +261,119 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
         <div class="structure-tree">
 ai-code-assistant/
-├── backend/
-│   ├── app.py                        # FastAPI app entry, middleware setup
-│   ├── config.py                     # Settings via pydantic-settings
-│   ├── requirements.txt              # Python dependencies
-│   ├── Dockerfile                    # Multi-stage GPU build
-│   ├── docker-compose.yml            # Full stack orchestration
-│   ├── alembic/                      # DB migrations
-│   │   ├── versions/
-│   │   └── env.py
-│   ├── api/
-│   │   ├── __init__.py
-│   │   ├── routes_chat.py            # /api/chat endpoints
-│   │   ├── routes_refactor.py        # /api/refactor endpoints
-│   │   ├── routes_projects.py        # /api/projects CRUD
-│   │   ├── routes_feedback.py        # /api/feedback
-│   │   ├── routes_models.py          # /api/models listing
-│   │   └── routes_finetune.py        # /api/fine-tune
-│   ├── ws/
-│   │   ├── __init__.py
-│   │   ├── completion_handler.py     # WebSocket completion stream
-│   │   ├── analyze_handler.py        # WebSocket analysis stream
-│   │   └── connection_manager.py     # WS connection pool, room mgmt
-│   ├── services/
-│   │   ├── __init__.py
-│   │   ├── llm_service.py            # Unified LLM interface (multi-provider)
-│   │   ├── local_model.py            # vLLM/TGI wrapper for self-hosted
-│   │   ├── embedding_service.py      # Code chunking + embedding generation
-│   │   ├── vector_db.py              # Chroma/Pinecone client abstraction
-│   │   ├── rag_service.py            # Retrieval-Augmented Generation pipeline
-│   │   ├── completion_service.py     # Debounce, cache, fallback logic
-│   │   ├── static_analyzer.py        # tree-sitter AST analysis engine
-│   │   ├── refactoring_engine.py     # Refactoring suggestion generator
-│   │   └── feedback_collector.py     # User feedback → dataset pipeline
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── user.py                   # SQLAlchemy User model
-│   │   ├── project.py                # Project model
-│   │   ├── file.py                   # File model
-│   │   ├── completion.py             # Completion log model
-│   │   ├── bug_report.py             # Bug report model
-│   │   ├── feedback.py               # Feedback model
-│   │   └── embedding.py              # Code embedding model
-│   ├── core/
-│   │   ├── __init__.py
-│   │   ├── auth.py                   # JWT authentication
-│   │   ├── rate_limiter.py           # Token bucket rate limiter
-│   │   ├── cache.py                  # Redis cache client
-│   │   └── logger.py                 # Structured logging (ELK)
-│   └── tests/
-│       ├── test_llm_service.py
-│       ├── test_analyzer.py
-│       ├── test_ws_handlers.py
-│       └── test_refactoring.py
-├── frontend/
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── vite.config.ts
-│   ├── public/
-│   │   └── workers/
-│   │       └── completion.worker.js  # Web Worker for debounce
-│   ├── src/
-│   │   ├── App.tsx                   # Root app with routing
-│   │   ├── main.tsx                  # Entry point
-│   │   ├── store/
-│   │   │   ├── editorStore.ts        # MobX store for editor state
-│   │   │   ├── completionStore.ts    # Completion suggestions store
-│   │   │   ├── bugStore.ts           # Bug list store
-│   │   │   └── userStore.ts          # Auth / preferences store
-│   │   ├── components/
-│   │   │   ├── CodeEditor.tsx        # Monaco Editor wrapper
-│   │   │   ├── InlineSuggestion.tsx  # Ghost text overlay
-│   │   │   ├── SuggestionPanel.tsx   # Sidebar with AI suggestions
-│   │   │   ├── BugList.tsx           # Bug list with severity filters
-│   │   │   ├── BugAnnotation.tsx     # Squiggly line underlines
-│   │   │   ├── ChatPanel.tsx         # NL → Code chat interface
-│   │   │   ├── FileTree.tsx          # Project file explorer
-│   │   │   ├── DiffView.tsx          # Refactoring diff preview
-│   │   │   ├── ModelSelector.tsx     # AI model picker dropdown
-│   │   │   └── FeedbackForm.tsx      # Rating widget for suggestions
-│   │   ├── hooks/
-│   │   │   ├── useWebSocket.ts       # WS connection with reconnection
-│   │   │   ├── useDebounce.ts        # Debounced value hook
-│   │   │   └── useCompletion.ts      # Completion stream hook
-│   │   ├── services/
-│   │   │   ├── api.ts                # REST API client (axios)
-│   │   │   ├── ws.ts                 # WebSocket client singleton
-│   │   │   └── monaco.ts             # Monaco editor setup helpers
-│   │   ├── utils/
-│   │   │   ├── debounce.ts
-│   │   │   ├── languages.ts          # Language configs
-│   │   │   └── diff.ts               # Diff computation
-│   │   └── styles/
-│   │       ├── editor.css
-│   │       ├── panel.css
-│   │       └── chat.css
-│   └── tests/
-│       ├── CodeEditor.test.tsx
-│       └── CompletionStore.test.ts
-├── models/
-│   ├── codellama-7b/                 # Quantized CodeLlama weights
-│   ├── adapter_config.json           # LoRA adapter config
-│   └── tokenizer_config.json
-├── notebooks/
-│   ├── 01_data_collection.ipynb      # Collect completions → dataset
-│   ├── 02_fine_tuning.ipynb          # LoRA fine-tuning pipeline
-│   └── 03_evaluation.ipynb           # Model eval with HumanEval
-├── scripts/
-│   ├── serve_model.sh                # vLLM model serving script
-│   ├── seed_data.py                  # Database seeding
-│   └── evaluate.py                   # Offline eval script
-├── .env.example
-├── .gitignore
-└── README.md
++-- backend/
+�   +-- app.py                        # FastAPI app entry, middleware setup
+�   +-- config.py                     # Settings via pydantic-settings
+�   +-- requirements.txt              # Python dependencies
+�   +-- Dockerfile                    # Multi-stage GPU build
+�   +-- docker-compose.yml            # Full stack orchestration
+�   +-- alembic/                      # DB migrations
+�   �   +-- versions/
+�   �   +-- env.py
+�   +-- api/
+�   �   +-- __init__.py
+�   �   +-- routes_chat.py            # /api/chat endpoints
+�   �   +-- routes_refactor.py        # /api/refactor endpoints
+�   �   +-- routes_projects.py        # /api/projects CRUD
+�   �   +-- routes_feedback.py        # /api/feedback
+�   �   +-- routes_models.py          # /api/models listing
+�   �   +-- routes_finetune.py        # /api/fine-tune
+�   +-- ws/
+�   �   +-- __init__.py
+�   �   +-- completion_handler.py     # WebSocket completion stream
+�   �   +-- analyze_handler.py        # WebSocket analysis stream
+�   �   +-- connection_manager.py     # WS connection pool, room mgmt
+�   +-- services/
+�   �   +-- __init__.py
+�   �   +-- llm_service.py            # Unified LLM interface (multi-provider)
+�   �   +-- local_model.py            # vLLM/TGI wrapper for self-hosted
+�   �   +-- embedding_service.py      # Code chunking + embedding generation
+�   �   +-- vector_db.py              # Chroma/Pinecone client abstraction
+�   �   +-- rag_service.py            # Retrieval-Augmented Generation pipeline
+�   �   +-- completion_service.py     # Debounce, cache, fallback logic
+�   �   +-- static_analyzer.py        # tree-sitter AST analysis engine
+�   �   +-- refactoring_engine.py     # Refactoring suggestion generator
+�   �   +-- feedback_collector.py     # User feedback ? dataset pipeline
+�   +-- models/
+�   �   +-- __init__.py
+�   �   +-- user.py                   # SQLAlchemy User model
+�   �   +-- project.py                # Project model
+�   �   +-- file.py                   # File model
+�   �   +-- completion.py             # Completion log model
+�   �   +-- bug_report.py             # Bug report model
+�   �   +-- feedback.py               # Feedback model
+�   �   +-- embedding.py              # Code embedding model
+�   +-- core/
+�   �   +-- __init__.py
+�   �   +-- auth.py                   # JWT authentication
+�   �   +-- rate_limiter.py           # Token bucket rate limiter
+�   �   +-- cache.py                  # Redis cache client
+�   �   +-- logger.py                 # Structured logging (ELK)
+�   +-- tests/
+�       +-- test_llm_service.py
+�       +-- test_analyzer.py
+�       +-- test_ws_handlers.py
+�       +-- test_refactoring.py
++-- frontend/
+�   +-- package.json
+�   +-- tsconfig.json
+�   +-- vite.config.ts
+�   +-- public/
+�   �   +-- workers/
+�   �       +-- completion.worker.js  # Web Worker for debounce
+�   +-- src/
+�   �   +-- App.tsx                   # Root app with routing
+�   �   +-- main.tsx                  # Entry point
+�   �   +-- store/
+�   �   �   +-- editorStore.ts        # MobX store for editor state
+�   �   �   +-- completionStore.ts    # Completion suggestions store
+�   �   �   +-- bugStore.ts           # Bug list store
+�   �   �   +-- userStore.ts          # Auth / preferences store
+�   �   +-- components/
+�   �   �   +-- CodeEditor.tsx        # Monaco Editor wrapper
+�   �   �   +-- InlineSuggestion.tsx  # Ghost text overlay
+�   �   �   +-- SuggestionPanel.tsx   # Sidebar with AI suggestions
+�   �   �   +-- BugList.tsx           # Bug list with severity filters
+�   �   �   +-- BugAnnotation.tsx     # Squiggly line underlines
+�   �   �   +-- ChatPanel.tsx         # NL ? Code chat interface
+�   �   �   +-- FileTree.tsx          # Project file explorer
+�   �   �   +-- DiffView.tsx          # Refactoring diff preview
+�   �   �   +-- ModelSelector.tsx     # AI model picker dropdown
+�   �   �   +-- FeedbackForm.tsx      # Rating widget for suggestions
+�   �   +-- hooks/
+�   �   �   +-- useWebSocket.ts       # WS connection with reconnection
+�   �   �   +-- useDebounce.ts        # Debounced value hook
+�   �   �   +-- useCompletion.ts      # Completion stream hook
+�   �   +-- services/
+�   �   �   +-- api.ts                # REST API client (axios)
+�   �   �   +-- ws.ts                 # WebSocket client singleton
+�   �   �   +-- monaco.ts             # Monaco editor setup helpers
+�   �   +-- utils/
+�   �   �   +-- debounce.ts
+�   �   �   +-- languages.ts          # Language configs
+�   �   �   +-- diff.ts               # Diff computation
+�   �   +-- styles/
+�   �       +-- editor.css
+�   �       +-- panel.css
+�   �       +-- chat.css
+�   +-- tests/
+�       +-- CodeEditor.test.tsx
+�       +-- CompletionStore.test.ts
++-- models/
+�   +-- codellama-7b/                 # Quantized CodeLlama weights
+�   +-- adapter_config.json           # LoRA adapter config
+�   +-- tokenizer_config.json
++-- notebooks/
+�   +-- 01_data_collection.ipynb      # Collect completions ? dataset
+�   +-- 02_fine_tuning.ipynb          # LoRA fine-tuning pipeline
+�   +-- 03_evaluation.ipynb           # Model eval with HumanEval
++-- scripts/
+�   +-- serve_model.sh                # vLLM model serving script
+�   +-- seed_data.py                  # Database seeding
+�   +-- evaluate.py                   # Offline eval script
++-- .env.example
++-- .gitignore
++-- README.md
         </div>
       </div>
 
@@ -381,7 +382,7 @@ ai-code-assistant/
         <h2><i class="fas fa-paint-brush" style="color:var(--primary)"></i> UI/UX Design Strategy</h2>
         <p>The design prioritizes minimal cognitive load and seamless AI integration into the developer's existing workflow. Key principles:</p>
         <ul>
-          <li><strong>Ghost Text Completions:</strong> AI suggestions appear as faded text directly in the editor at the cursor position — just like Copilot. Users press Tab to accept, Esc to dismiss. No pop-ups, no modals.</li>
+          <li><strong>Ghost Text Completions:</strong> AI suggestions appear as faded text directly in the editor at the cursor position � just like Copilot. Users press Tab to accept, Esc to dismiss. No pop-ups, no modals.</li>
           <li><strong>Squiggly Underlines:</strong> Bugs are highlighted with colored squiggly lines (red=high, yellow=medium, blue=suggestion) directly in the editor gutter, matching the familiar IDE paradigm.</li>
           <li><strong>Side Panel:</strong> A collapsible right sidebar shows: (a) Bug list grouped by severity with filter toggles, (b) Refactoring suggestions with expandable diff previews, (c) AI chat for NL queries, (d) File explorer tree.</li>
           <li><strong>Status Bar:</strong> Bottom status bar shows active model, latency stats, token usage for the session, and a feedback button.</li>
@@ -411,11 +412,11 @@ ai-code-assistant/
         </div>
         <div class="phase-card">
           <h4>Phase 5: Self-Hosted Models (Week 9-10)</h4>
-          <p>Set up vLLM serving for CodeLlama and StarCoder models. Implement model fallback strategy (local → cloud). Add GPU-accelerated inference with quantization (4-bit GPTQ). Create A/B testing framework for comparing model outputs. Build model selector UI.</p>
+          <p>Set up vLLM serving for CodeLlama and StarCoder models. Implement model fallback strategy (local ? cloud). Add GPU-accelerated inference with quantization (4-bit GPTQ). Create A/B testing framework for comparing model outputs. Build model selector UI.</p>
         </div>
         <div class="phase-card">
           <h4>Phase 6: Refactoring & Advanced Features (Week 11-12)</h4>
-          <p>Build full refactoring engine with diff generation and one-click apply. Implement NL → code chat interface with conversation history. Add documentation generation feature. Create user feedback collection and analytics dashboard. Implement project-level code understanding.</p>
+          <p>Build full refactoring engine with diff generation and one-click apply. Implement NL ? code chat interface with conversation history. Add documentation generation feature. Create user feedback collection and analytics dashboard. Implement project-level code understanding.</p>
         </div>
         <div class="phase-card">
           <h4>Phase 7: Testing & Optimization (Week 13-14)</h4>
@@ -1224,7 +1225,7 @@ export function useWebSocket({
         <h2><i class="fas fa-brain" style="color:var(--primary)"></i> LLM Fundamentals</h2>
         <p><strong>Transformer Architecture:</strong> Modern LLMs are based on the Transformer architecture (Vaswani et al., 2017). Key components include: </p>
         <ul>
-          <li><strong>Self-Attention:</strong> Allows each token to attend to every other token in the sequence. For code, this means the model can understand relationships between distant variables, function calls, and control flow structures. The attention mechanism computes Query (Q), Key (K), and Value (V) matrices and produces output as: <code>Attention(Q,K,V) = softmax(QK^T/√d)V</code></li>
+          <li><strong>Self-Attention:</strong> Allows each token to attend to every other token in the sequence. For code, this means the model can understand relationships between distant variables, function calls, and control flow structures. The attention mechanism computes Query (Q), Key (K), and Value (V) matrices and produces output as: <code>Attention(Q,K,V) = softmax(QK^T/vd)V</code></li>
           <li><strong>Multi-Head Attention:</strong> Runs multiple attention operations in parallel, allowing the model to capture different types of relationships (syntax, semantics, data flow) simultaneously.</li>
           <li><strong>Positional Encoding:</strong> Since attention has no inherent notion of sequence order, positional encodings (sinusoidal or learned) are added to token embeddings. For code, relative positional encodings are often preferred as they better handle code blocks of varying lengths.</li>
           <li><strong>Feed-Forward Networks:</strong> Each transformer block contains a two-layer MLP with ReLU/GELU activation that processes each token independently, adding non-linear transformations.</li>
@@ -1264,7 +1265,7 @@ export function useWebSocket({
           <li><strong>Embedding Models:</strong> OpenAI's text-embedding-3-small (1536d), sentence-transformers/all-MiniLM-L6-v2 (384d), or CodeBERT for code-specific embeddings.</li>
           <li><strong>Code Chunking Strategy:</strong> Split code into chunks at function/class boundaries (semantic chunks) rather than fixed token counts. Each chunk has 50-200 lines with 20-line overlap to prevent context splitting.</li>
           <li><strong>Similarity Metrics:</strong> Cosine similarity is standard for comparing code embeddings. Values range from 0 (completely different) to 1 (identical). Threshold of 0.7+ indicates high similarity.</li>
-          <li><strong>Use Cases:</strong> (a) Similar code search — "find all places where we parse user input", (b) Deduplication — find and flag duplicated code, (c) RAG context retrieval — fetch relevant code before LLM completion, (d) Anomaly detection — flag code that significantly differs from project patterns.</li>
+          <li><strong>Use Cases:</strong> (a) Similar code search � "find all places where we parse user input", (b) Deduplication � find and flag duplicated code, (c) RAG context retrieval � fetch relevant code before LLM completion, (d) Anomaly detection � flag code that significantly differs from project patterns.</li>
         </ul>
       </div>
 
@@ -1301,19 +1302,19 @@ export function useWebSocket({
           <li><strong>Augmentation:</strong> Retrieved snippets are inserted into the prompt as context: "Here are similar code patterns from your project:\n\n{retrieved_code}\n\nNow complete this code:"</li>
           <li><strong>Generation:</strong> LLM generates completion with the enriched context, producing suggestions that follow project-specific patterns and conventions.</li>
         </ol>
-        <p><strong>Benefits:</strong> (1) 40% more relevant completions on project-specific code, (2) Learns project conventions without fine-tuning, (3) Works across languages without model retraining, (4) Provides transparency — users can see which code influenced the suggestion.</p>
+        <p><strong>Benefits:</strong> (1) 40% more relevant completions on project-specific code, (2) Learns project conventions without fine-tuning, (3) Works across languages without model retraining, (4) Provides transparency � users can see which code influenced the suggestion.</p>
         <p><strong>Challenges:</strong> Retrieval latency adds 50-150ms. Implement caching for frequent code patterns. Use hybrid search (keyword + semantic) for better precision. Implement re-ranking with cross-encoder for top-3 results.</p>
       </div>
 
       <!-- 20. Model Serving & Inference -->
       <div class="section">
         <h2><i class="fas fa-server" style="color:var(--primary)"></i> Model Serving and Inference</h2>
-        <p>For self-hosted models, use <strong>vLLM</strong> — a high-throughput, memory-efficient serving engine for LLMs. Key features:</p>
+        <p>For self-hosted models, use <strong>vLLM</strong> � a high-throughput, memory-efficient serving engine for LLMs. Key features:</p>
         <ul>
           <li><strong>PagedAttention:</strong> vLLM's novel attention algorithm that manages KV cache in non-contiguous memory blocks, reducing memory waste by up to 96%.</li>
           <li><strong>Continuous Batching:</strong> Dynamically adds/removes requests from the running batch, maximizing GPU utilization.</li>
           <li><strong>Quantization:</strong> Supports GPTQ (4-bit), AWQ (4-bit), and FP8 quantization. A 70B model can be served on a single A100 (80GB) with 4-bit quantization.</li>
-          <li><strong>Tensor Parallelism:</strong> Distribute model across multiple GPUs for larger models. CodeLlama-34B fits on 2×A10G GPUs with tensor parallelism.</li>
+          <li><strong>Tensor Parallelism:</strong> Distribute model across multiple GPUs for larger models. CodeLlama-34B fits on 2�A10G GPUs with tensor parallelism.</li>
         </ul>
         <div class="code-block" data-lang="bash"><code># Serve CodeLlama with vLLM
 pip install vllm
@@ -1584,7 +1585,7 @@ scrape_configs:
         <ul>
           <li><strong>Edge Caching:</strong> Cache completions at the CDN level for common code patterns. Use Vercel Edge Config for global key-value cache. Cache hit rate target: 20%.</li>
           <li><strong>Predictive Pre-fetching:</strong> When a user opens a file, pre-compute embeddings for the entire file and pre-fetch the most likely completion points (function starts, after import statements).</li>
-          <li><strong>Lazy Loading:</strong> Load the static analyzer and embedding models lazily — only when a file is opened for analysis, not on app startup. Use job queues for heavy analysis tasks.</li>
+          <li><strong>Lazy Loading:</strong> Load the static analyzer and embedding models lazily � only when a file is opened for analysis, not on app startup. Use job queues for heavy analysis tasks.</li>
           <li><strong>WebSocket Connection Pooling:</strong> Maintain a pool of WebSocket connections per user. Reuse connections across requests to avoid TLS handshake overhead.</li>
           <li><strong>Database Optimization:</strong> Index completions on (user_id, file_id, created_at). Use materialized views for analytics queries. Partition the completions table by month.</li>
           <li><strong>Model Quantization:</strong> Use 4-bit AWQ quantization for self-hosted models. This reduces memory by 4x and improves throughput by 2-3x with minimal quality loss.</li>
@@ -1609,23 +1610,23 @@ scrape_configs:
         <div class="mistake-card"><strong>1. Not handling streaming properly:</strong> Developers often buffer the entire completion response before showing it to the user. Always stream tokens to the editor for a responsive feel. Use async generators properly and handle cancellation.</div>
         <div class="mistake-card"><strong>2. Ignoring code context limits:</strong> Sending too much context causes slow responses and high costs. Implement smart context prioritization. Never send more than 4K tokens of context for completion requests.</div>
         <div class="mistake-card"><strong>3. Weak prompt engineering:</strong> Generic prompts like "Complete this code" produce poor results. Use structured prompts with language, style guidelines, and output format specifications. Test prompts systematically with different code patterns.</div>
-        <div class="mistake-card"><strong>4. Missing fallback strategy:</strong> Relying on a single LLM provider leads to failures during API outages or rate limits. Implement a fallback chain: local model → cloud model → cached suggestion → empty suggestion.</div>
+        <div class="mistake-card"><strong>4. Missing fallback strategy:</strong> Relying on a single LLM provider leads to failures during API outages or rate limits. Implement a fallback chain: local model ? cloud model ? cached suggestion ? empty suggestion.</div>
         <div class="mistake-card"><strong>5. No user feedback loop:</strong> Without tracking which completions users accept, the system cannot improve. Implement implicit feedback (accepted/rejected) and explicit feedback (thumbs up/down) with a feedback database table.</div>
       </div>
 
       <!-- 29. Interview Questions -->
       <div class="section">
         <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
-        <div class="qa-card"><strong>Q1:</strong> How does a Transformer model generate code completions?<br><strong>A:</strong> The model takes tokenized code as input, passes it through multiple transformer blocks (each with self-attention and feed-forward layers), and predicts the next token. For completion, it's conditioned on the preceding context. The self-attention mechanism allows the model to understand which earlier tokens are most relevant for predicting the next token — e.g., when completing a function call, it attends to the function signature and variable definitions.</div>
-        <div class="qa-card"><strong>Q2:</strong> Explain the difference between static analysis and LLM-based analysis for bug detection.<br><strong>A:</strong> Static analysis uses predefined rules and AST patterns to detect known bug patterns (e.g., SQL injection via string concatenation). It's fast, deterministic, and explainable but limited to known patterns. LLM-based analysis uses semantic understanding to detect logical errors, race conditions, and business logic bugs. It's slower and less predictable but can find novel bugs. Best practice: combine both — static analysis for high-precision known patterns, LLM for broader semantic analysis.</div>
+        <div class="qa-card"><strong>Q1:</strong> How does a Transformer model generate code completions?<br><strong>A:</strong> The model takes tokenized code as input, passes it through multiple transformer blocks (each with self-attention and feed-forward layers), and predicts the next token. For completion, it's conditioned on the preceding context. The self-attention mechanism allows the model to understand which earlier tokens are most relevant for predicting the next token � e.g., when completing a function call, it attends to the function signature and variable definitions.</div>
+        <div class="qa-card"><strong>Q2:</strong> Explain the difference between static analysis and LLM-based analysis for bug detection.<br><strong>A:</strong> Static analysis uses predefined rules and AST patterns to detect known bug patterns (e.g., SQL injection via string concatenation). It's fast, deterministic, and explainable but limited to known patterns. LLM-based analysis uses semantic understanding to detect logical errors, race conditions, and business logic bugs. It's slower and less predictable but can find novel bugs. Best practice: combine both � static analysis for high-precision known patterns, LLM for broader semantic analysis.</div>
         <div class="qa-card"><strong>Q3:</strong> What is Retrieval-Augmented Generation and why is it important for code assistants?<br><strong>A:</strong> RAG retrieves relevant code snippets from a vector database and includes them in the LLM prompt as context. For code assistants, this is critical because it allows the model to understand project-specific patterns, API usage, and conventions without requiring fine-tuning. It bridges the gap between general-purpose LLMs and project-specific coding needs.</div>
         <div class="qa-card"><strong>Q4:</strong> How would you handle context windows for very large files?<br><strong>A:</strong> Implement priority-based context selection: (1) Extract the current function/method using AST parsing, (2) Include class context if inside a class, (3) Include the file's imports and module docstring, (4) Include recently modified nearby functions, (5) If context still exceeds limits, truncate from lowest priority items first. Use a sliding window that follows the cursor position.</div>
         <div class="qa-card"><strong>Q5:</strong> Design a rate limiting system for the AI Code Assistant API.<br><strong>A:</strong> Use a token bucket algorithm with Redis. Each user gets a bucket with capacity 60 tokens/minute. WebSocket messages consume 1 token, chat messages consume 5 tokens (more expensive). Tokens refill at rate/60 per second. Premium users get higher capacity and refill rate. When the bucket is empty, reject requests with 429 status and a Retry-After header. Queue non-critical requests for later processing.</div>
-        <div class="qa-card"><strong>Q6:</strong> What are the trade-offs between cloud LLMs and self-hosted models?<br><strong>A:</strong> Cloud (OpenAI/Anthropic): higher quality, zero upfront cost, no GPU management, but higher per-token cost, data privacy concerns, latency variability, and dependency on external API availability. Self-hosted (CodeLlama/StarCoder): one-time GPU cost, full data control, consistent latency, offline capability, but lower quality with smaller models, ongoing maintenance, and require ML infrastructure expertise. Best approach: hybrid — use cloud for complex tasks, self-hosted for quick completions.</div>
+        <div class="qa-card"><strong>Q6:</strong> What are the trade-offs between cloud LLMs and self-hosted models?<br><strong>A:</strong> Cloud (OpenAI/Anthropic): higher quality, zero upfront cost, no GPU management, but higher per-token cost, data privacy concerns, latency variability, and dependency on external API availability. Self-hosted (CodeLlama/StarCoder): one-time GPU cost, full data control, consistent latency, offline capability, but lower quality with smaller models, ongoing maintenance, and require ML infrastructure expertise. Best approach: hybrid � use cloud for complex tasks, self-hosted for quick completions.</div>
         <div class="qa-card"><strong>Q7:</strong> Explain how you would implement multi-language support in the static analyzer.<br><strong>A:</strong> Use tree-sitter which supports 40+ languages through separate grammar files. Create a LanguageRegistry that maps file extensions to language grammars. Each language shares common rules (SQL injection, hardcoded secrets) but has language-specific rules (Python's mutable default args, JavaScript's == vs ===, Go's error handling). The architecture uses the visitor pattern: each language contributes its own rule set that gets merged with the universal rules.</div>
-        <div class="qa-card"><strong>Q8:</strong> How do you measure and improve the quality of AI code suggestions?<br><strong>A:</strong> Metrics: (1) Acceptance rate — percentage of suggestions the user accepts (target: >35%), (2) Latency — time from keystroke to suggestion display (target: P95 < 500ms), (3) Relevance — user rating after accepting (target: >4.0/5.0). Improvement: (1) Fine-tune on accepted completions, (2) Use RLHF with user feedback, (3) A/B test prompt templates, (4) Personalize completions based on user's coding style.</div>
+        <div class="qa-card"><strong>Q8:</strong> How do you measure and improve the quality of AI code suggestions?<br><strong>A:</strong> Metrics: (1) Acceptance rate � percentage of suggestions the user accepts (target: >35%), (2) Latency � time from keystroke to suggestion display (target: P95 < 500ms), (3) Relevance � user rating after accepting (target: >4.0/5.0). Improvement: (1) Fine-tune on accepted completions, (2) Use RLHF with user feedback, (3) A/B test prompt templates, (4) Personalize completions based on user's coding style.</div>
         <div class="qa-card"><strong>Q9:</strong> Design the database schema for tracking user completions and feedback.<br><strong>A:</strong> completions(id, user_id, file_id, trigger_context, suggestion, accepted, latency_ms, model_used, created_at). feedback(id, user_id, target_type, target_id, rating, comment, created_at). indexes: (user_id, created_at) for analytics, (model_used) for model comparison, (file_id) for project-level analysis. Partition completions by month for query performance. Use JSONB for flexible metadata fields.</div>
-        <div class="qa-card"><strong>Q10:</strong> What security vulnerabilities are specific to AI code assistants?<br><strong>A:</strong> (1) Prompt injection — users craft inputs that hijack the AI's behavior. (2) Code injection — AI generates malicious code (backdoors, malware). (3) Data leakage — AI memorizes and exposes sensitive code from other users. (4) Supply chain — AI recommends malicious packages. (5) Denial of wallet — attackers generate expensive API calls to exhaust your budget. Mitigations: input/output sanitization, static analysis on all generated code, API budget limits, and anomaly detection on usage patterns.</div>
+        <div class="qa-card"><strong>Q10:</strong> What security vulnerabilities are specific to AI code assistants?<br><strong>A:</strong> (1) Prompt injection � users craft inputs that hijack the AI's behavior. (2) Code injection � AI generates malicious code (backdoors, malware). (3) Data leakage � AI memorizes and exposes sensitive code from other users. (4) Supply chain � AI recommends malicious packages. (5) Denial of wallet � attackers generate expensive API calls to exhaust your budget. Mitigations: input/output sanitization, static analysis on all generated code, API budget limits, and anomaly detection on usage patterns.</div>
       </div>
 
       <!-- 30. Resume Description -->
@@ -1751,7 +1752,7 @@ scrape_configs:
           <li><strong>Native async support:</strong> Essential for handling concurrent WebSocket connections without blocking. FastAPI's async routes handle 10K+ concurrent connections per instance.</li>
           <li><strong>WebSocket support:</strong> Built-in WebSocket handling with automatic upgrade negotiation and disconnection handling.</li>
           <li><strong>Pydantic validation:</strong> Automatic request/response validation with detailed error messages. Critical for ensuring malformed prompts don't reach the LLM.</li>
-          <li><strong>OpenAPI documentation:</strong> Auto-generated API docs with interactive testing interface — useful for debugging and onboarding.</li>
+          <li><strong>OpenAPI documentation:</strong> Auto-generated API docs with interactive testing interface � useful for debugging and onboarding.</li>
           <li><strong>Dependency injection:</strong> Clean separation of concerns for database sessions, authentication, and rate limiting.</li>
         </ul>
         <p>The backend uses a service layer pattern: routes handle HTTP/WS concerns, services contain business logic, and models handle data access via SQLAlchemy async ORM.</p>
@@ -1776,6 +1777,8 @@ scrape_configs:
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

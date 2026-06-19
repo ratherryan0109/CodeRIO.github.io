@@ -42,7 +42,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -56,9 +56,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>MySQL</h1>
       <p>MySQL is the world's most popular open-source relational database management system. Developed originally by MySQL AB (founded by David Axmark, Allan Larsson, and Michael Widenius) and now owned by Oracle Corporation, MySQL powers millions of web applications, from personal blogs to large-scale enterprise systems.</p>
@@ -112,11 +113,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">MySQL is the backbone of countless web applications and enterprise systems:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">WordPress</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Meta" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter/X" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" alt="WordPress" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">WordPress</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">LinkedIn</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/uber/uber-original.svg" alt="Uber" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Uber</p></div>
       </div>
       <p style="color:var(--text-secondary)">MySQL is used by Facebook (user data, photos, messages), Twitter (core infrastructure), YouTube (video metadata), Netflix (some services), Uber (trip data), Airbnb (listings and bookings), Shopify (product and order data), and millions of WordPress sites. Cloud providers offer managed MySQL services including Amazon RDS, Google Cloud SQL, and Azure Database for MySQL.</p>
     </div>
@@ -588,6 +589,8 @@ CALL search_customers('john', 1, 20);</code></pre>
 
    
   </section>
+  </main>
+
 
 
     <footer class="footer">

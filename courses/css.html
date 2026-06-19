@@ -19,7 +19,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -33,9 +33,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>CSS</h1>
       <p>CSS (Cascading Style Sheets) brings life to web pages with colors, layouts, animations, and responsive design. Learn to create stunning user interfaces that work beautifully across all devices.</p>
@@ -89,11 +90,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">CSS is used by every company with a web presence. Here are major adopters:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Figma</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Sass (uses CSS)</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Bootstrap</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Tailwind CSS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter/X" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Figma</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" alt="Sass (uses CSS)" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Sass (uses CSS)</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Bootstrap</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Tailwind CSS</p></div>
       </div>
       <p style="color:var(--text-secondary)">Real-world uses include designing e-commerce stores (Shopify, Amazon), social media interfaces (Instagram, LinkedIn), dashboard UIs (Stripe, GitHub), mobile app styling (React Native uses CSS-like syntax), email templates, and print stylesheets for documents.</p>
     </div>
@@ -382,6 +383,8 @@ form:has(input[type="email"]:valid) {
     </div>
 
   </section>
+  </main>
+
 
 
     <footer class="footer">

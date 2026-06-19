@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -49,7 +49,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -64,9 +64,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero glass-card">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>E-Commerce Store</h1>
@@ -152,35 +153,35 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
         <div class="structure-tree">
 ecommerce-store/
-├── client/                  # React frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   │   ├── Layout/
-│   │   │   ├── Product/
-│   │   │   ├── Cart/
-│   │   │   └── Checkout/
-│   │   ├── contexts/        # State management
-│   │   │   ├── CartContext.js
-│   │   │   ├── AuthContext.js
-│   │   │   └── UIContext.js
-│   │   ├── hooks/           # Custom hooks
-│   │   ├── pages/           # Route pages
-│   │   ├── services/        # API calls
-│   │   ├── utils/           # Helpers
-│   │   └── App.js
-│   └── package.json
-├── server/                  # Node.js backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   ├── config/
-│   └── server.js
-├── .env.example
-├── docker-compose.yml
-├── .gitignore
-└── README.md
++-- client/                  # React frontend
+�   +-- public/
+�   +-- src/
+�   �   +-- components/      # Reusable UI components
+�   �   �   +-- Layout/
+�   �   �   +-- Product/
+�   �   �   +-- Cart/
+�   �   �   +-- Checkout/
+�   �   +-- contexts/        # State management
+�   �   �   +-- CartContext.js
+�   �   �   +-- AuthContext.js
+�   �   �   +-- UIContext.js
+�   �   +-- hooks/           # Custom hooks
+�   �   +-- pages/           # Route pages
+�   �   +-- services/        # API calls
+�   �   +-- utils/           # Helpers
+�   �   +-- App.js
+�   +-- package.json
++-- server/                  # Node.js backend
+�   +-- controllers/
+�   +-- models/
+�   +-- routes/
+�   +-- middleware/
+�   +-- config/
+�   +-- server.js
++-- .env.example
++-- docker-compose.yml
++-- .gitignore
++-- README.md
         </div>
       </div>
 
@@ -673,6 +674,8 @@ function Checkout() {
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -52,7 +52,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -67,9 +67,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>Blockchain Explorer</h1>
@@ -90,7 +91,7 @@
 
       <div class="section">
         <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
-        <p>Blockchain networks generate massive amounts of on-chain data — blocks, transactions, logs, internal transactions, token transfers, and contract state changes. While public explorers like Etherscan exist, they offer limited customization, no programmatic access for power users, and no real-time alerting. Developers building on blockchain need: (1) Real-time transaction monitoring with custom filters, (2) Smart contract verification and interaction tools, (3) Gas price analytics for optimal transaction timing, (4) Portfolio tracking across multiple addresses and networks, (5) WebSocket-based push notifications for on-chain events. The goal is to build an extensible, self-hosted blockchain explorer that provides deep insights into blockchain data with a modern, responsive UI and a comprehensive REST + WebSocket API.</p>
+        <p>Blockchain networks generate massive amounts of on-chain data � blocks, transactions, logs, internal transactions, token transfers, and contract state changes. While public explorers like Etherscan exist, they offer limited customization, no programmatic access for power users, and no real-time alerting. Developers building on blockchain need: (1) Real-time transaction monitoring with custom filters, (2) Smart contract verification and interaction tools, (3) Gas price analytics for optimal transaction timing, (4) Portfolio tracking across multiple addresses and networks, (5) WebSocket-based push notifications for on-chain events. The goal is to build an extensible, self-hosted blockchain explorer that provides deep insights into blockchain data with a modern, responsive UI and a comprehensive REST + WebSocket API.</p>
       </div>
 
       <div class="section">
@@ -143,7 +144,7 @@
           <li><strong>JavaScript/TypeScript Proficiency:</strong> Strong Node.js skills including async/await, streams, event emitters. TypeScript is strongly recommended for type safety with blockchain data structures.</li>
           <li><strong>Database Design:</strong> Experience with PostgreSQL including indexing strategies, query optimization, and materialized views. Understanding of time-series data patterns is essential.</li>
           <li><strong>React & State Management:</strong> Solid React knowledge including hooks, context, and component lifecycle. Experience with Recharts or D3.js for data visualization.</li>
-          <li><strong>Blockchain Concepts:</strong> Basic understanding of how blockchain works — blocks, transactions, wallets, gas, smart contracts. Familiarity with Ethereum's architecture is a plus.</li>
+          <li><strong>Blockchain Concepts:</strong> Basic understanding of how blockchain works � blocks, transactions, wallets, gas, smart contracts. Familiarity with Ethereum's architecture is a plus.</li>
           <li><strong>WebSocket Knowledge:</strong> Understanding of WebSocket protocol, Socket.io patterns (rooms, namespaces), and reconnection strategies.</li>
           <li><strong>DevOps Basics:</strong> Docker containerization, basic Linux administration, and experience with cloud deployment (AWS/GCP).</li>
         </ul>
@@ -280,156 +281,156 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
         <div class="structure-tree">
 blockchain-explorer/
-├── docker-compose.yml
-├── README.md
-├── indexer/
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── Dockerfile
-│   ├── src/
-│   │   ├── index.ts                    # Entry point
-│   │   ├── config.ts                   # Network config, RPC endpoints
-│   │   ├── listeners/
-│   │   │   ├── blockListener.ts        # New block subscription
-│   │   │   ├── mempoolListener.ts      # Pending tx subscription
-│   │   │   └── reorgHandler.ts         # Chain reorganization handler
-│   │   ├── processors/
-│   │   │   ├── blockProcessor.ts       # Full block processing pipeline
-│   │   │   ├── txProcessor.ts          # Transaction parsing and enrichment
-│   │   │   ├── logProcessor.ts         # Event log parsing
-│   │   │   ├── tokenProcessor.ts       # ERC20/721/1155 transfer decoding
-│   │   │   └── internalTxProcessor.ts  # debug_traceTransaction parsing
-│   │   ├── services/
-│   │   │   ├── ethService.ts           # JSON-RPC client (ethers.js)
-│   │   │   ├── dbService.ts            # PostgreSQL via Prisma
-│   │   │   ├── searchService.ts        # Elasticsearch indexing
-│   │   │   ├── cacheService.ts         # Redis caching
-│   │   │   └── notificationService.ts  # Alert dispatch
-│   │   ├── models/
-│   │   │   ├── block.ts
-│   │   │   ├── transaction.ts
-│   │   │   ├── log.ts
-│   │   │   ├── tokenTransfer.ts
-│   │   │   └── internalTx.ts
-│   │   ├── utils/
-│   │   │   ├── decoder.ts              # ABI decoding utilities
-│   │   │   ├── formatter.ts            # Data normalization
-│   │   │   ├── retry.ts                # Retry with exponential backoff
-│   │   │   └── logger.ts               # Structured logging
-│   │   └── tests/
-│   │       ├── blockProcessor.test.ts
-│   │       ├── tokenProcessor.test.ts
-│   │       └── reorgHandler.test.ts
-├── api/
-│   ├── package.json
-│   ├── Dockerfile
-│   ├── src/
-│   │   ├── index.ts                    # Express app entry
-│   │   ├── app.ts                      # App setup, middleware
-│   │   ├── routes/
-│   │   │   ├── blocks.ts
-│   │   │   ├── transactions.ts
-│   │   │   ├── addresses.ts
-│   │   │   ├── tokens.ts
-│   │   │   ├── contracts.ts
-│   │   │   ├── gas.ts
-│   │   │   ├── stats.ts
-│   │   │   ├── search.ts
-│   │   │   ├── mempool.ts
-│   │   │   └── watch.ts
-│   │   ├── middleware/
-│   │   │   ├── auth.ts                 # API key / JWT auth
-│   │   │   ├── rateLimiter.ts          # Express rate limit
-│   │   │   ├── cache.ts                # Response caching
-│   │   │   └── validator.ts            # Request validation
-│   │   ├── websocket/
-│   │   │   ├── socketServer.ts         # Socket.io server setup
-│   │   │   ├── rooms.ts                # Per-address WebSocket rooms
-│   │   │   └── events.ts               # Event mapping constants
-│   │   ├── services/
-│   │   │   ├── blockService.ts
-│   │   │   ├── txService.ts
-│   │   │   ├── addressService.ts
-│   │   │   ├── tokenService.ts
-│   │   │   ├── contractService.ts
-│   │   │   ├── gasService.ts
-│   │   │   ├── searchService.ts
-│   │   │   └── statsService.ts
-│   │   └── types/
-│   │       └── api.ts                  # TypeScript interfaces
-├── frontend/
-│   ├── package.json
-│   ├── vite.config.ts
-│   ├── tsconfig.json
-│   ├── public/
-│   │   └── workers/
-│   │       └── search.worker.js
-│   ├── src/
-│   │   ├── App.tsx
-│   │   ├── main.tsx
-│   │   ├── store/
-│   │   │   ├── blockStore.ts
-│   │   │   ├── txStore.ts
-│   │   │   ├── addressStore.ts
-│   │   │   ├── gasStore.ts
-│   │   │   ├── searchStore.ts
-│   │   │   └── websocketStore.ts
-│   │   ├── components/
-│   │   │   ├── Layout.tsx
-│   │   │   ├── Header.tsx
-│   │   │   ├── Dashboard.tsx
-│   │   │   ├── BlockList.tsx
-│   │   │   ├── BlockDetail.tsx
-│   │   │   ├── TransactionList.tsx
-│   │   │   ├── TransactionDetail.tsx
-│   │   │   ├── AddressView.tsx
-│   │   │   ├── TokenBalances.tsx
-│   │   │   ├── TokenTransfers.tsx
-│   │   │   ├── ContractVerification.tsx
-│   │   │   ├── GasTracker.tsx
-│   │   │   ├── GasChart.tsx
-│   │   │   ├── NetworkStats.tsx
-│   │   │   ├── MempoolView.tsx
-│   │   │   ├── SearchBar.tsx
-│   │   │   ├── SearchResults.tsx
-│   │   │   ├── WatchList.tsx
-│   │   │   ├── PortFolioView.tsx
-│   │   │   └── AlertConfig.tsx
-│   │   ├── hooks/
-│   │   │   ├── useWebSocket.ts
-│   │   │   ├── useBlockSubscription.ts
-│   │   │   ├── useAddressMonitor.ts
-│   │   │   └── useGasData.ts
-│   │   ├── services/
-│   │   │   ├── api.ts
-│   │   │   ├── ws.ts
-│   │   │   └── formatters.ts
-│   │   ├── utils/
-│   │   │   ├── constants.ts
-│   │   │   ├── address.ts
-│   │   │   ├── time.ts
-│   │   │   └── web3.ts
-│   │   └── styles/
-│   │       ├── explorer.css
-│   │       ├── dashboard.css
-│   │       └── charts.css
-│   └── tests/
-│       ├── BlockList.test.tsx
-│       └── GasTracker.test.tsx
-├── prisma/
-│   ├── schema.prisma
-│   └── migrations/
-├── scripts/
-│   ├── seed_labels.sql
-│   ├── backfill_blocks.sh
-│   └── validate_db.sh
-└── .env.example
++-- docker-compose.yml
++-- README.md
++-- indexer/
+�   +-- package.json
+�   +-- tsconfig.json
+�   +-- Dockerfile
+�   +-- src/
+�   �   +-- index.ts                    # Entry point
+�   �   +-- config.ts                   # Network config, RPC endpoints
+�   �   +-- listeners/
+�   �   �   +-- blockListener.ts        # New block subscription
+�   �   �   +-- mempoolListener.ts      # Pending tx subscription
+�   �   �   +-- reorgHandler.ts         # Chain reorganization handler
+�   �   +-- processors/
+�   �   �   +-- blockProcessor.ts       # Full block processing pipeline
+�   �   �   +-- txProcessor.ts          # Transaction parsing and enrichment
+�   �   �   +-- logProcessor.ts         # Event log parsing
+�   �   �   +-- tokenProcessor.ts       # ERC20/721/1155 transfer decoding
+�   �   �   +-- internalTxProcessor.ts  # debug_traceTransaction parsing
+�   �   +-- services/
+�   �   �   +-- ethService.ts           # JSON-RPC client (ethers.js)
+�   �   �   +-- dbService.ts            # PostgreSQL via Prisma
+�   �   �   +-- searchService.ts        # Elasticsearch indexing
+�   �   �   +-- cacheService.ts         # Redis caching
+�   �   �   +-- notificationService.ts  # Alert dispatch
+�   �   +-- models/
+�   �   �   +-- block.ts
+�   �   �   +-- transaction.ts
+�   �   �   +-- log.ts
+�   �   �   +-- tokenTransfer.ts
+�   �   �   +-- internalTx.ts
+�   �   +-- utils/
+�   �   �   +-- decoder.ts              # ABI decoding utilities
+�   �   �   +-- formatter.ts            # Data normalization
+�   �   �   +-- retry.ts                # Retry with exponential backoff
+�   �   �   +-- logger.ts               # Structured logging
+�   �   +-- tests/
+�   �       +-- blockProcessor.test.ts
+�   �       +-- tokenProcessor.test.ts
+�   �       +-- reorgHandler.test.ts
++-- api/
+�   +-- package.json
+�   +-- Dockerfile
+�   +-- src/
+�   �   +-- index.ts                    # Express app entry
+�   �   +-- app.ts                      # App setup, middleware
+�   �   +-- routes/
+�   �   �   +-- blocks.ts
+�   �   �   +-- transactions.ts
+�   �   �   +-- addresses.ts
+�   �   �   +-- tokens.ts
+�   �   �   +-- contracts.ts
+�   �   �   +-- gas.ts
+�   �   �   +-- stats.ts
+�   �   �   +-- search.ts
+�   �   �   +-- mempool.ts
+�   �   �   +-- watch.ts
+�   �   +-- middleware/
+�   �   �   +-- auth.ts                 # API key / JWT auth
+�   �   �   +-- rateLimiter.ts          # Express rate limit
+�   �   �   +-- cache.ts                # Response caching
+�   �   �   +-- validator.ts            # Request validation
+�   �   +-- websocket/
+�   �   �   +-- socketServer.ts         # Socket.io server setup
+�   �   �   +-- rooms.ts                # Per-address WebSocket rooms
+�   �   �   +-- events.ts               # Event mapping constants
+�   �   +-- services/
+�   �   �   +-- blockService.ts
+�   �   �   +-- txService.ts
+�   �   �   +-- addressService.ts
+�   �   �   +-- tokenService.ts
+�   �   �   +-- contractService.ts
+�   �   �   +-- gasService.ts
+�   �   �   +-- searchService.ts
+�   �   �   +-- statsService.ts
+�   �   +-- types/
+�   �       +-- api.ts                  # TypeScript interfaces
++-- frontend/
+�   +-- package.json
+�   +-- vite.config.ts
+�   +-- tsconfig.json
+�   +-- public/
+�   �   +-- workers/
+�   �       +-- search.worker.js
+�   +-- src/
+�   �   +-- App.tsx
+�   �   +-- main.tsx
+�   �   +-- store/
+�   �   �   +-- blockStore.ts
+�   �   �   +-- txStore.ts
+�   �   �   +-- addressStore.ts
+�   �   �   +-- gasStore.ts
+�   �   �   +-- searchStore.ts
+�   �   �   +-- websocketStore.ts
+�   �   +-- components/
+�   �   �   +-- Layout.tsx
+�   �   �   +-- Header.tsx
+�   �   �   +-- Dashboard.tsx
+�   �   �   +-- BlockList.tsx
+�   �   �   +-- BlockDetail.tsx
+�   �   �   +-- TransactionList.tsx
+�   �   �   +-- TransactionDetail.tsx
+�   �   �   +-- AddressView.tsx
+�   �   �   +-- TokenBalances.tsx
+�   �   �   +-- TokenTransfers.tsx
+�   �   �   +-- ContractVerification.tsx
+�   �   �   +-- GasTracker.tsx
+�   �   �   +-- GasChart.tsx
+�   �   �   +-- NetworkStats.tsx
+�   �   �   +-- MempoolView.tsx
+�   �   �   +-- SearchBar.tsx
+�   �   �   +-- SearchResults.tsx
+�   �   �   +-- WatchList.tsx
+�   �   �   +-- PortFolioView.tsx
+�   �   �   +-- AlertConfig.tsx
+�   �   +-- hooks/
+�   �   �   +-- useWebSocket.ts
+�   �   �   +-- useBlockSubscription.ts
+�   �   �   +-- useAddressMonitor.ts
+�   �   �   +-- useGasData.ts
+�   �   +-- services/
+�   �   �   +-- api.ts
+�   �   �   +-- ws.ts
+�   �   �   +-- formatters.ts
+�   �   +-- utils/
+�   �   �   +-- constants.ts
+�   �   �   +-- address.ts
+�   �   �   +-- time.ts
+�   �   �   +-- web3.ts
+�   �   +-- styles/
+�   �       +-- explorer.css
+�   �       +-- dashboard.css
+�   �       +-- charts.css
+�   +-- tests/
+�       +-- BlockList.test.tsx
+�       +-- GasTracker.test.tsx
++-- prisma/
+�   +-- schema.prisma
+�   +-- migrations/
++-- scripts/
+�   +-- seed_labels.sql
+�   +-- backfill_blocks.sh
+�   +-- validate_db.sh
++-- .env.example
         </div>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-paint-brush" style="color:var(--primary)"></i> UI/UX Design Strategy</h2>
-        <p>The explorer follows a data-dense design philosophy — showing maximum information at a glance without overwhelming the user:</p>
+        <p>The explorer follows a data-dense design philosophy � showing maximum information at a glance without overwhelming the user:</p>
         <ul>
           <li><strong>Dashboard as Landing:</strong> The home page shows a live dashboard with: latest blocks (auto-scrolling list), gas price gauge with trend arrow, mempool size indicator, daily transaction count chart, and top tokens by transfer volume. All charts update in real-time via WebSocket.</li>
           <li><strong>Search-First Navigation:</strong> A prominent search bar accepts any input (address, tx hash, block number, domain name) and auto-detects the type. Results appear in a dropdown with instant preview. Use Elasticsearch's auto-complete with fuzzy matching.</li>
@@ -1294,8 +1295,8 @@ export class ContractService {
       <div class="section">
         <h2><i class="fas fa-brain" style="color:var(--primary)"></i> Blockchain Fundamentals</h2>
         <p><strong>Block Structure:</strong> An Ethereum block contains: (1) Block header: parentHash, ommersHash, beneficiary (miner), stateRoot, transactionsRoot, receiptsRoot, logsBloom, difficulty, number, gasLimit, gasUsed, timestamp, extraData, mixHash, nonce, baseFeePerGas (EIP-1559). (2) Transaction list: array of signed transactions. (3) Uncle (ommer) headers: for PoW consensus.</p>
-        <p><strong>Mining (PoW):</strong> Miners solve a computational puzzle by varying the nonce until the block hash is below the target difficulty. The difficulty adjusts every 1024 blocks to maintain ~13-second block time. With The Merge (Sep 2022), Ethereum switched to Proof of Stake — validators propose blocks based on their staked ETH.</p>
-        <p><strong>Transaction Lifecycle:</strong> (1) User signs transaction with private key → (2) Transaction broadcast to mempool → (3) Validators/miners pick transactions based on priority fee → (4) Transaction included in a block → (5) Block propagated to network → (6) After 12 confirmations (~2 minutes), transaction considered final.</p>
+        <p><strong>Mining (PoW):</strong> Miners solve a computational puzzle by varying the nonce until the block hash is below the target difficulty. The difficulty adjusts every 1024 blocks to maintain ~13-second block time. With The Merge (Sep 2022), Ethereum switched to Proof of Stake � validators propose blocks based on their staked ETH.</p>
+        <p><strong>Transaction Lifecycle:</strong> (1) User signs transaction with private key ? (2) Transaction broadcast to mempool ? (3) Validators/miners pick transactions based on priority fee ? (4) Transaction included in a block ? (5) Block propagated to network ? (6) After 12 confirmations (~2 minutes), transaction considered final.</p>
       </div>
 
       <div class="section">
@@ -1402,9 +1403,9 @@ describe('BlockProcessor', () => {
         <div class="qa-card"><strong>Q4:</strong> How do you decode ERC20 Transfer events from raw logs?<br><strong>A:</strong> The Transfer event has signature `Transfer(address indexed from, address indexed to, uint256 value)`, generating topic0 = keccak256('Transfer(...)'). Topics[1] = from (indexed), topics[2] = to (indexed). Data field = hex-encoded uint256 value. Use ethers.js Interface to parse: `const iface = new ethers.Interface(['event Transfer(address indexed from, address indexed to, uint256 value)'])` then `iface.parseLog({ topics, data })`.</div>
         <div class="qa-card"><strong>Q5:</strong> Design a gas price prediction system.<br><strong>A:</strong> (1) Historical data: store last 24h gas prices in PostgreSQL. (2) Feature engineering: time of day, day of week, pending tx count, mempool congestion, upcoming NFT mints/events. (3) Model: LightGBM or XGBoost with rolling window features. (4) Prediction: output 4 percentiles for safe/standard/fast/instant. (5) Fallback: exponential moving average of last 20 blocks when model is unavailable. (6) Update: retrain model daily with new data.</div>
         <div class="qa-card"><strong>Q6:</strong> How would you implement full-text search across millions of transactions and addresses?<br><strong>A:</strong> Use Elasticsearch with optimized mappings: (1) Blocks: index number, hash, miner, timestamp. (2) Transactions: index hash (keyword), from, to, value, method_signature (first 4 bytes of input data). (3) Addresses: index address, label, tags. Use multi_match queries with field boosting (hash^3, from^2). Implement auto-complete using edge_ngram tokenizer on addresses. Use search_as_you_type for instant suggestions. Separate index per chain for multi-chain support.</div>
-        <div class="qa-card"><strong>Q7:</strong> Explain the difference between internal transactions and regular transactions.<br><strong>A:</strong> Regular transactions are signed by an EOA (externally owned account) and appear in the block's transaction list. Internal transactions are calls made by contracts during execution — they're not signed and don't appear in the block. Examples: (1) Contract A calls Contract B's function, (2) ETH transfers during contract execution, (3) Contract creation via CREATE/CREATE2 opcode. Internal transactions are obtained via debug_traceTransaction (requires archival node) or by parsing execution traces.</div>
+        <div class="qa-card"><strong>Q7:</strong> Explain the difference between internal transactions and regular transactions.<br><strong>A:</strong> Regular transactions are signed by an EOA (externally owned account) and appear in the block's transaction list. Internal transactions are calls made by contracts during execution � they're not signed and don't appear in the block. Examples: (1) Contract A calls Contract B's function, (2) ETH transfers during contract execution, (3) Contract creation via CREATE/CREATE2 opcode. Internal transactions are obtained via debug_traceTransaction (requires archival node) or by parsing execution traces.</div>
         <div class="qa-card"><strong>Q8:</strong> How do you handle blockchain data storage costs?<br><strong>A:</strong> (1) Tiered storage: hot data (last 7 days) on NVMe SSD, warm (7-90 days) on standard SSD, cold (&gt;90 days) on S3 Glacier. (2) Compression: use PostgreSQL column compression for large TEXT fields (input_data, bytecode). (3) Partitioning: partition blocks and transactions by month with automatic partition creation. (4) Archival: move blocks older than 1 year to a separate archive database. (5) Sampling: for analytics, store aggregated data (hourly/daily) instead of raw transactions.</div>
-        <div class="qa-card"><strong>Q9:</strong> How would you add support for a new blockchain (e.g., Solana)?<br><strong>A:</strong> (1) Create new RPC client adapter for Solana's JSON-RPC (different API, different data structures). (2) Implement Solana-specific block/transaction/token processors (SPL tokens instead of ERC20). (3) Create unified data model that maps Solana concepts to our generic schema (account → address, instruction → transaction, token program → token transfer). (4) Add chain_id to all tables for multi-tenant storage. (5) New frontend components for Solana-specific features (stake accounts, vote instructions).</div>
+        <div class="qa-card"><strong>Q9:</strong> How would you add support for a new blockchain (e.g., Solana)?<br><strong>A:</strong> (1) Create new RPC client adapter for Solana's JSON-RPC (different API, different data structures). (2) Implement Solana-specific block/transaction/token processors (SPL tokens instead of ERC20). (3) Create unified data model that maps Solana concepts to our generic schema (account ? address, instruction ? transaction, token program ? token transfer). (4) Add chain_id to all tables for multi-tenant storage. (5) New frontend components for Solana-specific features (stake accounts, vote instructions).</div>
         <div class="qa-card"><strong>Q10:</strong> Describe the architecture of a production blockchain explorer handling 100+ TPS.<br><strong>A:</strong> (1) Distributed indexer fleet: 3-5 instances behind load balancer, each assigned block ranges via Redis coordinator. (2) Write-ahead log (Kafka) for blockchain events before DB write. (3) PostgreSQL with Citus extension sharded by block_number range. (4) Elasticsearch cluster with 3 nodes for search. (5) Redis cluster for caching with read-replicas. (6) API layer: 10+ instances behind ALB with WebSocket stickiness. (7) CDN (CloudFront) for API responses with short TTL. (8) Monitoring: Prometheus + Grafana for indexer lag, DB query latency, RPC call success rates.</div>
       </div>
 
@@ -1445,6 +1446,8 @@ describe('BlockProcessor', () => {
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

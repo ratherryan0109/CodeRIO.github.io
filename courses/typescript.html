@@ -19,7 +19,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -33,9 +33,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>TypeScript</h1>
       <p>TypeScript is a typed superset of JavaScript developed by Microsoft that compiles to plain JavaScript. It adds optional static typing, classes, interfaces, generics, and advanced tooling to catch errors before runtime.</p>
@@ -89,11 +90,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">TypeScript powers the tech stacks of leading companies worldwide:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Figma</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="Microsoft" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Slack" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" alt="Airbnb" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Figma</p></div>
       </div>
       <p style="color:var(--text-secondary)">TypeScript is used in almost every modern JavaScript codebase. Examples include the VS Code editor (built in TS), Angular framework, Deno runtime, Next.js, Prisma ORM, and thousands of npm packages. Companies adopt TypeScript for large codebases to reduce bugs, improve developer experience, and enable confident refactoring.</p>
     </div>
@@ -391,6 +392,8 @@ emitter.on('userLogin', data => {
     </div>
 
   </section>
+  </main>
+
 
 
     <footer class="footer">

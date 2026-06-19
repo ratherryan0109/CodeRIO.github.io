@@ -86,7 +86,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -101,7 +101,7 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
   <div id="toastContainer" class="toast-container"></div>
 
@@ -123,23 +123,23 @@
               <div class="avatar-overlay"><i class="fas fa-camera"></i></div>
             </div>
             <div class="form-group" style="margin-bottom:0;">
-              <input type="url" id="avatarUrlInput" placeholder="Avatar image URL" style="width:100%;padding:0.6rem 0.8rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.85rem;text-align:center;">
+              <input type="url" id="avatarUrlInput" placeholder="Avatar image URL" aria-label="Avatar image URL" style="width:100%;padding:0.6rem 0.8rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.85rem;text-align:center;">
             </div>
           </div>
 
           <form id="profileForm">
             <div class="form-group" id="nameGroup">
               <label for="profileName">Full Name</label>
-              <input type="text" id="profileName" placeholder="Your name" required style="padding-left:10px;border-radius:1px;">
+              <input type="text" id="profileName" placeholder="Your name" aria-label="Your name" required style="padding-left:10px;border-radius:1px;">
               <p class="inline-error" id="nameError">Name is required.</p>
             </div>
             <div class="form-group">
               <label for="profileEmail">Email</label>
-              <input type="email" id="profileEmail" placeholder="Your email" disabled style="opacity:0.7;padding-left:10px ;">
+              <input type="email" id="profileEmail" placeholder="Your email" aria-label="Your email" disabled style="opacity:0.7;padding-left:10px ;">
             </div>
             <div class="form-group">
               <label for="profileBio">Bio</label>
-              <textarea id="profileBio" placeholder="Tell us about yourself..." rows="3" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.9rem;resize:vertical;font-family:inherit;"></textarea>
+              <textarea id="profileBio" placeholder="Tell us about yourself..." aria-label="Tell us about yourself" rows="3" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.9rem;resize:vertical;font-family:inherit;"></textarea>
             </div>
             <button type="submit" id="profileSave" class="btn btn-primary btn-block">Save Changes</button>
           </form>

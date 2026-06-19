@@ -19,7 +19,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -33,9 +33,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Linux</h1>
       <p>Linux is a free, open-source operating system kernel created by Linus Torvalds in 1991. It powers the majority of servers, cloud infrastructure, embedded systems, Android devices, and supercomputers worldwide.</p>
@@ -89,11 +90,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Linux powers the infrastructure of the entire technology industry:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Meta" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="Microsoft" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter/X" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
       </div>
       <p style="color:var(--text-secondary)">Linux runs 96.3% of the top 1 million web servers, 90% of public cloud workloads, and 100% of the top 500 supercomputers. Every major website - Google, Facebook, Amazon, Netflix, YouTube - runs on Linux. Android (based on Linux kernel) powers 70%+ of mobile devices. Even Microsoft uses Linux for Azure and WSL (Windows Subsystem for Linux).</p>
     </div>
@@ -515,6 +516,8 @@ fi</code></pre>
    
 
   </section>
+  </main>
+
 
   
     <footer class="footer">

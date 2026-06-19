@@ -42,7 +42,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -56,9 +56,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Kotlin</h1>
       <p>Kotlin is a modern, cross-platform, statically typed programming language developed by JetBrains. First released in 2016, Kotlin is fully interoperable with Java and has become the preferred language for Android development (officially supported by Google since 2017). It combines functional and object-oriented programming paradigms with a concise syntax.</p>
@@ -112,11 +113,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Kotlin is adopted by major companies for Android and server-side development:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pinterest/pinterest-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Pinterest</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Trello</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" alt="Netflix" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Netflix</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pinterest/pinterest-original.svg" alt="Pinterest" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Pinterest</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-original.svg" alt="Trello" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Trello</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
       </div>
       <p style="color:var(--text-secondary)">Kotlin powers the Android apps of Pinterest, Trello, Evernote, Uber, Twitter/X, Reddit, Flipboard, and many more. On the server side, Netflix uses Kotlin for streaming services, JetBrains builds all its tools in Kotlin, and Spring Boot has had first-class Kotlin support since Spring 5. Kotlin Multiplatform is increasingly used for sharing business logic across iOS and Android.</p>
     </div>
@@ -649,6 +650,8 @@ class UserRepository {
     </div>
 
   </section>
+  </main>
+
 
 
       

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -52,7 +52,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -67,9 +67,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>Real-Time Collaboration Tool</h1>
@@ -90,7 +91,7 @@
 
       <div class="section">
         <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
-        <p>Real-time collaboration introduces fundamental distributed systems challenges: (1) Multiple users editing the same document simultaneously creates conflicts that must be resolved without data loss. (2) Network latency (50-300ms) means users see stale states and make edits on diverged versions. (3) Cursor positions, selections, and scroll positions must be synchronized across users. (4) Undo/redo becomes exponentially complex — should Alice undoing affect Bob's edits? (5) Scaling from 2 to 1000 editors per document requires fundamentally different architectures. Existing solutions (Google Docs, Notion, Coda) are proprietary or rely on Google's OT implementation. The challenge is to build a production-grade collaboration engine that handles all these concerns with sub-100ms operation propagation, offline editing support, and conflict resolution that never loses user data.</p>
+        <p>Real-time collaboration introduces fundamental distributed systems challenges: (1) Multiple users editing the same document simultaneously creates conflicts that must be resolved without data loss. (2) Network latency (50-300ms) means users see stale states and make edits on diverged versions. (3) Cursor positions, selections, and scroll positions must be synchronized across users. (4) Undo/redo becomes exponentially complex � should Alice undoing affect Bob's edits? (5) Scaling from 2 to 1000 editors per document requires fundamentally different architectures. Existing solutions (Google Docs, Notion, Coda) are proprietary or rely on Google's OT implementation. The challenge is to build a production-grade collaboration engine that handles all these concerns with sub-100ms operation propagation, offline editing support, and conflict resolution that never loses user data.</p>
       </div>
 
       <div class="section">
@@ -105,16 +106,16 @@
 
       <div class="section">
         <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
-        <p>The real-time collaboration tools market is valued at $45B+ with Microsoft 365, Google Workspace, and Notion leading. Figma's $20B valuation proved that real-time collaboration is essential for modern software. Key trends: (1) Local-first software — CRDT enables offline editing with sync-on-reconnect (Linear, Obsidian), (2) AI-powered collaboration — real-time suggestions and auto-completion with awareness of other users' edits, (3) Decentralized collaboration — peer-to-peer sync without central servers using CRDT, (4) Collaborative code editing — VS Code Live Share, Replit Multiplayer, (5) Embedded collaboration — adding real-time editing to any web app. This project directly builds skills for roles at Figma, Google Docs, Notion, Microsoft 365, and Coda.</p>
+        <p>The real-time collaboration tools market is valued at $45B+ with Microsoft 365, Google Workspace, and Notion leading. Figma's $20B valuation proved that real-time collaboration is essential for modern software. Key trends: (1) Local-first software � CRDT enables offline editing with sync-on-reconnect (Linear, Obsidian), (2) AI-powered collaboration � real-time suggestions and auto-completion with awareness of other users' edits, (3) Decentralized collaboration � peer-to-peer sync without central servers using CRDT, (4) Collaborative code editing � VS Code Live Share, Replit Multiplayer, (5) Embedded collaboration � adding real-time editing to any web app. This project directly builds skills for roles at Figma, Google Docs, Notion, Microsoft 365, and Coda.</p>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-check-circle" style="color:var(--success)"></i> Learning Outcomes</h2>
         <ul>
-          <li><strong>Operational Transform (OT):</strong> Deep understanding of OT algorithms — transform operations against each other to maintain consistency. Implement client-server OT with acknowledgement (OT-with-server-control) and understand why OT is hard to scale to multiple users.</li>
-          <li><strong>CRDT (Conflict-free Replicated Data Types):</strong> Master CRDT theory and implementation — specifically RGA (Replicated Growable Array) for ordered sequences and LWW-Register for last-writer-wins semantics. Understand how CRDT achieves eventual consistency without a central server.</li>
+          <li><strong>Operational Transform (OT):</strong> Deep understanding of OT algorithms � transform operations against each other to maintain consistency. Implement client-server OT with acknowledgement (OT-with-server-control) and understand why OT is hard to scale to multiple users.</li>
+          <li><strong>CRDT (Conflict-free Replicated Data Types):</strong> Master CRDT theory and implementation � specifically RGA (Replicated Growable Array) for ordered sequences and LWW-Register for last-writer-wins semantics. Understand how CRDT achieves eventual consistency without a central server.</li>
           <li><strong>WebSocket Architecture:</strong> Design scalable WebSocket infrastructure with rooms, namespaces, sticky sessions, and Redis pub/sub for horizontal scaling. Handle backpressure, reconnection, and message ordering.</li>
-          <li><strong>Presence Systems:</strong> Implement real-time presence — cursors (position, color, name), selections (ranges), online/offline status, and typing indicators. Use Canvas overlay for cursor rendering over the editing surface.</li>
+          <li><strong>Presence Systems:</strong> Implement real-time presence � cursors (position, color, name), selections (ranges), online/offline status, and typing indicators. Use Canvas overlay for cursor rendering over the editing surface.</li>
           <li><strong>Version History & Diffing:</strong> Build a version tree with branching (like Git for documents). Implement efficient diff algorithms (Myers' diff, patience diff) and snapshot compression.</li>
           <li><strong>Conflict Resolution:</strong> Design conflict resolution strategies for different data types: text (OT/CRDT), rich text (formatting + text), objects (field-level merge), and lists (position-based merge).</li>
           <li><strong>Scalability:</strong> Design a system supporting 1000+ concurrent editors per document using operation batching, incremental snapshots, and connection pooling.</li>
@@ -195,7 +196,7 @@
 |  +----------------------------------------------------------------+|
 +------------------------------------------------------------------+
         </div>
-        <p><strong>Data Flow:</strong> (1) User types → ProseMirror captures local operation. (2) Operation sent to sync engine which applies OT transformation against pending concurrent operations. (3) Transformed operation sent via WebSocket to server. (4) Server receives operation, applies server-side OT, broadcasts to all other clients. (5) Other clients receive operation, transform against their pending local operations, and apply to their ProseMirror document. (6) Presence data (cursor position) is sent separately at lower priority (every 50ms vs operations which are sent immediately).</p>
+        <p><strong>Data Flow:</strong> (1) User types ? ProseMirror captures local operation. (2) Operation sent to sync engine which applies OT transformation against pending concurrent operations. (3) Transformed operation sent via WebSocket to server. (4) Server receives operation, applies server-side OT, broadcasts to all other clients. (5) Other clients receive operation, transform against their pending local operations, and apply to their ProseMirror document. (6) Presence data (cursor position) is sent separately at lower priority (every 50ms vs operations which are sent immediately).</p>
       </div>
 
       <div class="section">
@@ -245,128 +246,128 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
         <div class="structure-tree">
 collaboration-tool/
-├── docker-compose.yml
-├── README.md
-├── server/
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── Dockerfile
-│   ├── src/
-│   │   ├── index.ts                    # Entry point
-│   │   ├── app.ts                      # Express + Socket.io setup
-│   │   ├── config.ts                   # Environment config
-│   │   ├── sync/
-│   │   │   ├── index.ts
-│   │   │   ├── SyncServer.ts           # Main sync server class
-│   │   │   ├── operation.ts            # Operation types and interfaces
-│   │   │   ├── transform.ts            # OT transform functions
-│   │   │   ├── compose.ts              # Operation composition
-│   │   │   └── crdt/
-│   │   │       ├── RGA.ts              # Replicated Growable Array
-│   │   │       ├── LWWRegister.ts      # Last-Writer-Wins Register
-│   │   │       ├── CmRDT.ts            # Commutative Replicated Data Type
-│   │   │       └── merge.ts            # CRDT merge logic
-│   │   ├── presence/
-│   │   │   ├── PresenceManager.ts      # Presence tracking hub
-│   │   │   ├── CursorTracker.ts        # Cursor position sync
-│   │   │   └── TypingIndicator.ts      # Typing status management
-│   │   ├── websocket/
-│   │   │   ├── SocketServer.ts         # Socket.io initialization
-│   │   │   ├── DocumentRoom.ts         # Per-document WebSocket room
-│   │   │   ├── PresenceChannel.ts      # Presence WebSocket channel
-│   │   │   └── adapters/
-│   │   │       └── RedisAdapter.ts     # Redis pub/sub for horizontal scaling
-│   │   ├── api/
-│   │   │   ├── routes/
-│   │   │   │   ├── documents.ts
-│   │   │   │   ├── versions.ts
-│   │   │   │   ├── comments.ts
-│   │   │   │   ├── permissions.ts
-│   │   │   │   └── users.ts
-│   │   │   ├── middleware/
-│   │   │   │   ├── auth.ts
-│   │   │   │   ├── rateLimiter.ts
-│   │   │   │   └── validation.ts
-│   │   │   └── services/
-│   │   │       ├── DocumentService.ts
-│   │   │       ├── VersionService.ts
-│   │   │       ├── CommentService.ts
-│   │   │       └── PermissionService.ts
-│   │   ├── storage/
-│   │   │   ├── postgres.ts             # PostgreSQL client + queries
-│   │   │   ├── redis.ts                # Redis client
-│   │   │   └── s3.ts                   # S3 for attachments
-│   │   ├── models/
-│   │   │   ├── Document.ts
-│   │   │   ├── Version.ts
-│   │   │   ├── Operation.ts
-│   │   │   ├── Comment.ts
-│   │   │   └── User.ts
-│   │   └── utils/
-│   │       ├── diff.ts                 # Text diff algorithms
-│   │       ├── merge.ts                # Document merge logic
-│   │       ├── idgen.ts                # UUID v7 generation for ordering
-│   │       └── logger.ts
-├── client/
-│   ├── package.json
-│   ├── vite.config.ts
-│   ├── tsconfig.json
-│   ├── src/
-│   │   ├── App.tsx
-│   │   ├── main.tsx
-│   │   ├── editor/
-│   │   │   ├── Editor.tsx              # ProseMirror editor wrapper
-│   │   │   ├── EditorPlugins.tsx        # ProseMirror plugin setup
-│   │   │   ├── collaborationPlugin.ts   # Custom collab plugin
-│   │   │   ├── cursors.ts               # Cursor overlay rendering
-│   │   │   ├── highlights.ts            # Selection highlights
-│   │   │   └── menus.ts                 # Toolbar and context menus
-│   │   ├── sync/
-│   │   │   ├── SyncClient.ts           # Client-side sync engine
-│   │   │   ├── OTClient.ts             # Client-side OT (local + server ack)
-│   │   │   ├── CRDTClient.ts           # Client-side CRDT integration
-│   │   │   ├── operationBuffer.ts      # Pending operation buffer
-│   │   │   └── reconnection.ts         # Reconnection + state recovery
-│   │   ├── presence/
-│   │   │   ├── PresenceClient.ts        # Client presence sender
-│   │   │   ├── CursorOverlay.tsx        # React cursor overlay
-│   │   │   └── Avatars.tsx             # User avatar display
-│   │   ├── components/
-│   │   │   ├── DocumentList.tsx
-│   │   │   ├── DocumentView.tsx
-│   │   │   ├── Toolbar.tsx
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── CommentSidebar.tsx
-│   │   │   ├── VersionHistory.tsx
-│   │   │   ├── VersionDiff.tsx
-│   │   │   ├── SharingDialog.tsx
-│   │   │   ├── UserMenu.tsx
-│   │   │   └── ConnectionStatus.tsx
-│   │   ├── hooks/
-│   │   │   ├── useSync.ts
-│   │   │   ├── usePresence.ts
-│   │   │   ├── useDocument.ts
-│   │   │   └── useConnectionStatus.ts
-│   │   ├── services/
-│   │   │   ├── api.ts
-│   │   │   ├── ws.ts
-│   │   │   └── offline.ts              # Offline queue and sync
-│   │   └── styles/
-│   │       ├── editor.css
-│   │       ├── cursors.css
-│   │       └── layout.css
-│   └── tests/
-│       ├── OTClient.test.ts
-│       ├── SyncEngine.test.ts
-│       └── CursorOverlay.test.tsx
-├── shared/
-│   ├── types.ts                         # Shared operation types
-│   ├── constants.ts                     # Protocol constants
-│   └── serialization.ts                 # Binary serialization (CBOR)
-├── scripts/
-│   ├── seed.ts
-│   └── benchmark.ts                     # Load testing script
-└── .env.example
++-- docker-compose.yml
++-- README.md
++-- server/
+�   +-- package.json
+�   +-- tsconfig.json
+�   +-- Dockerfile
+�   +-- src/
+�   �   +-- index.ts                    # Entry point
+�   �   +-- app.ts                      # Express + Socket.io setup
+�   �   +-- config.ts                   # Environment config
+�   �   +-- sync/
+�   �   �   +-- index.ts
+�   �   �   +-- SyncServer.ts           # Main sync server class
+�   �   �   +-- operation.ts            # Operation types and interfaces
+�   �   �   +-- transform.ts            # OT transform functions
+�   �   �   +-- compose.ts              # Operation composition
+�   �   �   +-- crdt/
+�   �   �       +-- RGA.ts              # Replicated Growable Array
+�   �   �       +-- LWWRegister.ts      # Last-Writer-Wins Register
+�   �   �       +-- CmRDT.ts            # Commutative Replicated Data Type
+�   �   �       +-- merge.ts            # CRDT merge logic
+�   �   +-- presence/
+�   �   �   +-- PresenceManager.ts      # Presence tracking hub
+�   �   �   +-- CursorTracker.ts        # Cursor position sync
+�   �   �   +-- TypingIndicator.ts      # Typing status management
+�   �   +-- websocket/
+�   �   �   +-- SocketServer.ts         # Socket.io initialization
+�   �   �   +-- DocumentRoom.ts         # Per-document WebSocket room
+�   �   �   +-- PresenceChannel.ts      # Presence WebSocket channel
+�   �   �   +-- adapters/
+�   �   �       +-- RedisAdapter.ts     # Redis pub/sub for horizontal scaling
+�   �   +-- api/
+�   �   �   +-- routes/
+�   �   �   �   +-- documents.ts
+�   �   �   �   +-- versions.ts
+�   �   �   �   +-- comments.ts
+�   �   �   �   +-- permissions.ts
+�   �   �   �   +-- users.ts
+�   �   �   +-- middleware/
+�   �   �   �   +-- auth.ts
+�   �   �   �   +-- rateLimiter.ts
+�   �   �   �   +-- validation.ts
+�   �   �   +-- services/
+�   �   �       +-- DocumentService.ts
+�   �   �       +-- VersionService.ts
+�   �   �       +-- CommentService.ts
+�   �   �       +-- PermissionService.ts
+�   �   +-- storage/
+�   �   �   +-- postgres.ts             # PostgreSQL client + queries
+�   �   �   +-- redis.ts                # Redis client
+�   �   �   +-- s3.ts                   # S3 for attachments
+�   �   +-- models/
+�   �   �   +-- Document.ts
+�   �   �   +-- Version.ts
+�   �   �   +-- Operation.ts
+�   �   �   +-- Comment.ts
+�   �   �   +-- User.ts
+�   �   +-- utils/
+�   �       +-- diff.ts                 # Text diff algorithms
+�   �       +-- merge.ts                # Document merge logic
+�   �       +-- idgen.ts                # UUID v7 generation for ordering
+�   �       +-- logger.ts
++-- client/
+�   +-- package.json
+�   +-- vite.config.ts
+�   +-- tsconfig.json
+�   +-- src/
+�   �   +-- App.tsx
+�   �   +-- main.tsx
+�   �   +-- editor/
+�   �   �   +-- Editor.tsx              # ProseMirror editor wrapper
+�   �   �   +-- EditorPlugins.tsx        # ProseMirror plugin setup
+�   �   �   +-- collaborationPlugin.ts   # Custom collab plugin
+�   �   �   +-- cursors.ts               # Cursor overlay rendering
+�   �   �   +-- highlights.ts            # Selection highlights
+�   �   �   +-- menus.ts                 # Toolbar and context menus
+�   �   +-- sync/
+�   �   �   +-- SyncClient.ts           # Client-side sync engine
+�   �   �   +-- OTClient.ts             # Client-side OT (local + server ack)
+�   �   �   +-- CRDTClient.ts           # Client-side CRDT integration
+�   �   �   +-- operationBuffer.ts      # Pending operation buffer
+�   �   �   +-- reconnection.ts         # Reconnection + state recovery
+�   �   +-- presence/
+�   �   �   +-- PresenceClient.ts        # Client presence sender
+�   �   �   +-- CursorOverlay.tsx        # React cursor overlay
+�   �   �   +-- Avatars.tsx             # User avatar display
+�   �   +-- components/
+�   �   �   +-- DocumentList.tsx
+�   �   �   +-- DocumentView.tsx
+�   �   �   +-- Toolbar.tsx
+�   �   �   +-- Sidebar.tsx
+�   �   �   +-- CommentSidebar.tsx
+�   �   �   +-- VersionHistory.tsx
+�   �   �   +-- VersionDiff.tsx
+�   �   �   +-- SharingDialog.tsx
+�   �   �   +-- UserMenu.tsx
+�   �   �   +-- ConnectionStatus.tsx
+�   �   +-- hooks/
+�   �   �   +-- useSync.ts
+�   �   �   +-- usePresence.ts
+�   �   �   +-- useDocument.ts
+�   �   �   +-- useConnectionStatus.ts
+�   �   +-- services/
+�   �   �   +-- api.ts
+�   �   �   +-- ws.ts
+�   �   �   +-- offline.ts              # Offline queue and sync
+�   �   +-- styles/
+�   �       +-- editor.css
+�   �       +-- cursors.css
+�   �       +-- layout.css
+�   +-- tests/
+�       +-- OTClient.test.ts
+�       +-- SyncEngine.test.ts
+�       +-- CursorOverlay.test.tsx
++-- shared/
+�   +-- types.ts                         # Shared operation types
+�   +-- constants.ts                     # Protocol constants
+�   +-- serialization.ts                 # Binary serialization (CBOR)
++-- scripts/
+�   +-- seed.ts
+�   +-- benchmark.ts                     # Load testing script
++-- .env.example
         </div>
       </div>
 
@@ -375,18 +376,18 @@ collaboration-tool/
         <p>The collaboration tool's design focuses on making multiuser editing feel natural and uncluttered:</p>
         <ul>
           <li><strong>Cursor Presence:</strong> Each user gets a uniquely colored cursor with their name label. Cursors animate smoothly between positions using CSS transforms. Selection ranges shown as translucent colored highlights behind text. Cursor position updates at 20fps to balance bandwidth and smoothness.</li>
-          <li><strong>Minimal Interference:</strong> Remote cursors are visible but non-interactive — they don't interfere with clicking, selecting, or typing. Cursors fade out after 5 seconds of inactivity. User list in the header shows active editors with colored dots.</li>
+          <li><strong>Minimal Interference:</strong> Remote cursors are visible but non-interactive � they don't interfere with clicking, selecting, or typing. Cursors fade out after 5 seconds of inactivity. User list in the header shows active editors with colored dots.</li>
           <li><strong>Typing Indicators:</strong> When a user is typing, a small bubble appears in the margin showing their name and a typing animation. Prevents accidental interruption of someone who is actively typing.</li>
           <li><strong>Conflict Awareness:</strong> When a conflict occurs that can't be automatically resolved, affected text is highlighted with a yellow background and a merge tool UI appears. Users can choose "accept mine", "accept theirs", or "view diff".</li>
           <li><strong>Version History Timeline:</strong> A sidebar timeline shows all versions with author avatars, timestamps, and a visual diff preview. Users can click any version to see a side-by-side diff. Version names are auto-generated "Alice edited paragraph 3".</li>
-          <li><strong>Offline Indicator:</strong> When connection drops, a subtle banner appears: "Working offline — changes will sync when reconnected." Offline edits are queued and applied with operational transform when reconnecting.</li>
+          <li><strong>Offline Indicator:</strong> When connection drops, a subtle banner appears: "Working offline � changes will sync when reconnected." Offline edits are queued and applied with operational transform when reconnecting.</li>
         </ul>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-road" style="color:var(--primary)"></i> Development Roadmap</h2>
         <div class="phase-card"><h4>Phase 1: Single-User Editor (Week 1-2)</h4><p>Set up project scaffold with Vite + React + TypeScript. Integrate ProseMirror with basic text editing. Implement rich text formatting (bold, italic, headings, lists, links). Build toolbar UI with formatting buttons. Save/load documents from PostgreSQL.</p></div>
-        <div class="phase-card"><h4>Phase 2: WebSocket Infrastructure (Week 3-4)</h4><p>Set up Node.js + Socket.io server. Implement WebSocket connection with authentication. Create DocumentRoom abstraction — each document gets a Socket.io room. Build heartbeat/ping-pong for connection health. Implement reconnection logic with exponential backoff.</p></div>
+        <div class="phase-card"><h4>Phase 2: WebSocket Infrastructure (Week 3-4)</h4><p>Set up Node.js + Socket.io server. Implement WebSocket connection with authentication. Create DocumentRoom abstraction � each document gets a Socket.io room. Build heartbeat/ping-pong for connection health. Implement reconnection logic with exponential backoff.</p></div>
         <div class="phase-card"><h4>Phase 3: Operational Transform (Week 5-7)</h4><p>Implement OT transform functions for insert/delete/format operations. Build client-side pending operation buffer. Implement server-side OT with acknowledgement. Handle edge cases: concurrent insert at same position, concurrent delete of overlapping ranges. Write comprehensive tests for transform properties (TP1, TP2).</p></div>
         <div class="phase-card"><h4>Phase 4: Presence System (Week 8-9)</h4><p>Implement cursor position tracking and broadcasting. Build Canvas overlay for rendering remote cursors. Add selection highlighting with user colors. Implement typing indicators. Optimize: throttle cursor updates to 20fps, batch presence events.</p></div>
         <div class="phase-card"><h4>Phase 5: CRDT Integration (Week 10-12)</h4><p>Implement RGA (Replicated Growable Array) for the document text. Implement LWW-Register for document metadata. Replace OT with CRDT for text operations. Implement CRDT merge on reconnection. Handle offline editing with CRDT's natural merge properties. Benchmark OT vs CRDT performance.</p></div>
@@ -398,7 +399,7 @@ collaboration-tool/
       <div class="section">
         <h2><i class="fas fa-cogs" style="color:var(--primary)"></i> Implementation Guide</h2>
 
-        <h3>Step 1: OT Core — Operation Types & Transform</h3>
+        <h3>Step 1: OT Core � Operation Types & Transform</h3>
         <div class="code-block" data-lang="typescript"><code>// server/src/sync/operation.ts
 export enum OperationType {
   Insert = 'insert',
@@ -568,7 +569,7 @@ function transformInsertDelete(op1: InsertOp, op2: DeleteOp): [InsertOp, DeleteO
       op2,
     ];
   } else {
-    // Insert inside delete range — tricky
+    // Insert inside delete range � tricky
     // The insert survives (we keep it), but the delete splits around it
     // We split the delete into two: before insert and after insert
     // For simplicity, we keep the delete for the part before the insert
@@ -584,7 +585,7 @@ function transformInsertDelete(op1: InsertOp, op2: DeleteOp): [InsertOp, DeleteO
  * Compose: apply op1 then op2 = compose(op1, op2)
  */
 export function compose(a: Operation, b: Operation): Operation {
-  // Simplified compose — in production, handle all combinations
+  // Simplified compose � in production, handle all combinations
   if (a.type === OperationType.Insert && b.type === OperationType.Delete) {
     if (b.position >= a.position && b.position + b.length <= a.position + a.text.length) {
       // Deleting some of what was just inserted
@@ -598,7 +599,7 @@ export function compose(a: Operation, b: Operation): Operation {
   return b;
 }</code></div>
 
-        <h3>Step 2: CRDT — Replicated Growable Array (RGA)</h3>
+        <h3>Step 2: CRDT � Replicated Growable Array (RGA)</h3>
         <div class="code-block" data-lang="typescript"><code>// server/src/sync/crdt/RGA.ts
 import { v7 as uuidv7 } from 'uuid';
 
@@ -794,7 +795,7 @@ export class RGA {
   }
 }</code></div>
 
-        <h3>Step 3: Sync Engine — Client-Side OT</h3>
+        <h3>Step 3: Sync Engine � Client-Side OT</h3>
         <div class="code-block" data-lang="typescript"><code>// client/src/sync/OTClient.ts
 import { Socket } from 'socket.io-client';
 import { Operation, OperationType, InsertOp, DeleteOp, FormatOp, OperationBatch } from '../../../shared/types';
@@ -1336,7 +1337,7 @@ export class CursorOverlay {
 
       <div class="section">
         <h2><i class="fas fa-network-wired" style="color:var(--primary)"></i> WebSocket Fundamentals</h2>
-        <p>WebSocket provides full-duplex communication over a single TCP connection. For collaboration tools, WebSocket is superior to HTTP polling because: (1) Sub-50ms message latency vs 200-500ms for polling, (2) Server can push updates without client request, (3) Persistent connection reduces TLS handshake overhead, (4) Binary framing reduces overhead vs HTTP headers. Key considerations: (1) Socket.io provides automatic fallback to long-polling when WebSocket is blocked, (2) Use sticky sessions for horizontal scaling (or Redis adapter), (3) Heartbeat interval of 25s to detect stale connections, (4) Message ordering guarantees — Socket.io preserves order within a single transport, (5) Backpressure handling — if client is too slow, server should buffer or drop presence updates.</p>
+        <p>WebSocket provides full-duplex communication over a single TCP connection. For collaboration tools, WebSocket is superior to HTTP polling because: (1) Sub-50ms message latency vs 200-500ms for polling, (2) Server can push updates without client request, (3) Persistent connection reduces TLS handshake overhead, (4) Binary framing reduces overhead vs HTTP headers. Key considerations: (1) Socket.io provides automatic fallback to long-polling when WebSocket is blocked, (2) Use sticky sessions for horizontal scaling (or Redis adapter), (3) Heartbeat interval of 25s to detect stale connections, (4) Message ordering guarantees � Socket.io preserves order within a single transport, (5) Backpressure handling � if client is too slow, server should buffer or drop presence updates.</p>
       </div>
 
       <div class="section">
@@ -1353,23 +1354,23 @@ export class CursorOverlay {
 
       <div class="section">
         <h2><i class="fas fa-cubes" style="color:var(--primary)"></i> CRDT (Conflict-free Replicated Data Types)</h2>
-        <p>CRDT provides eventual consistency without a central server. Each character is a unique node with a globally unique ID. When conflicts occur (same position), CRDT uses deterministic rules (timestamp, creator ID) to decide order — no transformation needed. Benefits over OT: (1) No central server required for correctness, (2) Naturally handles offline editing — just merge on reconnect, (3) Scales to thousands of concurrent editors, (4) Simpler implementation (no transform functions). Trade-offs: (1) Larger metadata overhead (unique IDs per character), (2) Tombstones for deleted elements consume memory, (3) Less mature ecosystem. Libraries: yjs (used by Roam Research, Obsidian), automerge (used byJupyter Notebooks).</p>
+        <p>CRDT provides eventual consistency without a central server. Each character is a unique node with a globally unique ID. When conflicts occur (same position), CRDT uses deterministic rules (timestamp, creator ID) to decide order � no transformation needed. Benefits over OT: (1) No central server required for correctness, (2) Naturally handles offline editing � just merge on reconnect, (3) Scales to thousands of concurrent editors, (4) Simpler implementation (no transform functions). Trade-offs: (1) Larger metadata overhead (unique IDs per character), (2) Tombstones for deleted elements consume memory, (3) Less mature ecosystem. Libraries: yjs (used by Roam Research, Obsidian), automerge (used byJupyter Notebooks).</p>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-users" style="color:var(--primary)"></i> Presence Systems</h2>
-        <p>Presence tracking has different performance characteristics than document sync: (1) Cursor updates are ephemeral — if lost, the next update will correct position, (2) Can tolerate higher latency (50-100ms vs 10-50ms for ops), (3) Higher frequency (20fps cursor updates vs 1-5 ops/sec typing), (4) Use separate WebSocket channel to avoid head-of-line blocking. Implementation: Presence updates sent every 50ms on a dedicated channel. Server broadcasts to room without persistence. Client renders with requestAnimationFrame for smooth animation. Fade out after 10 seconds of inactivity.</p>
+        <p>Presence tracking has different performance characteristics than document sync: (1) Cursor updates are ephemeral � if lost, the next update will correct position, (2) Can tolerate higher latency (50-100ms vs 10-50ms for ops), (3) Higher frequency (20fps cursor updates vs 1-5 ops/sec typing), (4) Use separate WebSocket channel to avoid head-of-line blocking. Implementation: Presence updates sent every 50ms on a dedicated channel. Server broadcasts to room without persistence. Client renders with requestAnimationFrame for smooth animation. Fade out after 10 seconds of inactivity.</p>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-history" style="color:var(--primary)"></i> Version History and Diffing</h2>
-        <p>Version history is implemented as a directed acyclic graph (DAG) of document states. Each version stores: (1) Incremental operations since parent, (2) A full snapshot every 50 versions (checkpoint), (3) Author, timestamp, and auto-generated description. Diff between versions uses Myers' O(ND) diff algorithm. For rich text, we diff the underlying plain text and apply formatting overlays. The version tree supports branching (collaborators can diverge and merge) — displayed as a visual timeline with branch indicators.</p>
+        <p>Version history is implemented as a directed acyclic graph (DAG) of document states. Each version stores: (1) Incremental operations since parent, (2) A full snapshot every 50 versions (checkpoint), (3) Author, timestamp, and auto-generated description. Diff between versions uses Myers' O(ND) diff algorithm. For rich text, we diff the underlying plain text and apply formatting overlays. The version tree supports branching (collaborators can diverge and merge) � displayed as a visual timeline with branch indicators.</p>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-handshake" style="color:var(--primary)"></i> Conflict Resolution Strategies</h2>
         <ul>
-          <li><strong>Text (OT/CRDT):</strong> Automatic — characters never conflict because each has a unique ID. Simultaneous inserts at same position are ordered deterministically.</li>
+          <li><strong>Text (OT/CRDT):</strong> Automatic � characters never conflict because each has a unique ID. Simultaneous inserts at same position are ordered deterministically.</li>
           <li><strong>Rich Text Formatting:</strong> Last-writer-wins for formatting attributes. If Alice bolds "hello" and Bob underlines "hello", both formats are applied.</li>
           <li><strong>Object Fields:</strong> Last-writer-wins per field. If Alice edits title and Bob edits body, both changes are preserved.</li>
           <li><strong>List Items:</strong> Position-based conflict resolution using fractional indexing (Figma's approach) or CRDT list.</li>
@@ -1379,7 +1380,7 @@ export class CursorOverlay {
 
       <div class="section">
         <h2><i class="fas fa-expand-arrows-alt" style="color:var(--primary)"></i> Scalability with WebSocket Rooms</h2>
-        <p>Horizontal scaling for WebSocket connections: (1) Use Socket.io Redis adapter — broadcasts are published to Redis, each server instance subscribes and forwards to connected clients, (2) Each document is a room — operations are only sent to clients in that room, (3) For 1000+ editors per document, use hierarchical rooms: doc:123:section:A, doc:123:section:B — clients only sync the section they're viewing, (4) Load balancer with sticky sessions (WebSocket affinity), (5) Separate read-only replicas for viewers who don't need to edit.</p>
+        <p>Horizontal scaling for WebSocket connections: (1) Use Socket.io Redis adapter � broadcasts are published to Redis, each server instance subscribes and forwards to connected clients, (2) Each document is a room � operations are only sent to clients in that room, (3) For 1000+ editors per document, use hierarchical rooms: doc:123:section:A, doc:123:section:B � clients only sync the section they're viewing, (4) Load balancer with sticky sessions (WebSocket affinity), (5) Separate read-only replicas for viewers who don't need to edit.</p>
       </div>
 
       <div class="section">
@@ -1418,7 +1419,7 @@ describe('Operational Transform', () => {
     const op1 = { type: OperationType.Insert, position: 3, text: 'X', clientId: 'a', seq: 1 };
     const op2 = { type: OperationType.Delete, position: 5, length: 1, clientId: 'b', seq: 1 };
     const [op1Prime, op2Prime] = transform(op1, op2);
-    // Apply op1 then op2' vs op2 then op1' — same result
+    // Apply op1 then op2' vs op2 then op1' � same result
     const doc1 = applyOps('hello', [op1, op2Prime]);
     const doc2 = applyOps('hello', [op2, op1Prime]);
     expect(doc1).toBe(doc2);
@@ -1435,7 +1436,7 @@ describe('Operational Transform', () => {
         <h2><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> Common Mistakes</h2>
         <div class="mistake-card"><strong>1. Not handling concurrent operations correctly:</strong> OT transform functions must maintain TP1/TP2 properties. Many implementations handle 80% of cases but fail on edge cases like overlapping deletes or insert+delete at same position. Write property-based tests using fast-check to discover edge cases.</div>
         <div class="mistake-card"><strong>2. Mixing up operation ordering:</strong> The sequence of operations matters critically. Always include baseVersion in operation messages. Use vector clocks or version vectors to detect concurrent operations. Never assume operations arrive in causal order.</div>
-        <div class="mistake-card"><strong>3. Ignoring memory usage:</strong> CRDT tombstones and operation buffers grow unboundedly. Implement snapshot compression — periodically create a full document snapshot and discard operations before it. Use Redis with maxmemory-policy for ephemeral state.</div>
+        <div class="mistake-card"><strong>3. Ignoring memory usage:</strong> CRDT tombstones and operation buffers grow unboundedly. Implement snapshot compression � periodically create a full document snapshot and discard operations before it. Use Redis with maxmemory-policy for ephemeral state.</div>
         <div class="mistake-card"><strong>4. Blocking the main thread:</strong> CRDT merge operations on large documents (10K+ nodes) can take 10-100ms. Run heavy merge operations in a Web Worker on the client and a worker thread on the server. Use requestIdleCallback for non-critical updates.</div>
         <div class="mistake-card"><strong>5. No offline support in MVP:</strong> Users expect to work offline. Implement an offline queue using IndexedDB that stores pending operations. On reconnect, send all queued ops through OT transformation. Handle conflicts that arise from divergent offline edits.</div>
       </div>
@@ -1444,18 +1445,18 @@ describe('Operational Transform', () => {
         <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
         <div class="qa-card"><strong>Q1:</strong> Explain the difference between OT and CRDT for collaborative editing.<br><strong>A:</strong> OT transforms operations against each other so they can be applied in any order, requiring a central server to coordinate. CRDT gives each character a unique ID, so concurrent inserts naturally converge without transformation. OT is more mature (Google Docs), has less metadata overhead, but is harder to scale. CRDT is simpler for offline/peer-to-peer, handles arbitrary number of users, but uses more memory (tombstones, IDs per character).</div>
         <div class="qa-card"><strong>Q2:</strong> How does Google Docs handle real-time collaboration at scale?<br><strong>A:</strong> Google Docs uses OT with a central server. Each client sends operations to Google's servers, which transform against concurrent ops from other clients. They use a custom binary protocol over WebSocket. For scaling, they: (1) Share nothing between server instances (state in memory per document), (2) Use consistent hashing to route a document to a specific server, (3) Spawn per-document processes for isolation, (4) Limit concurrent editors to ~100 for performance.</div>
-        <div class="qa-card"><strong>Q3:</strong> Design a system supporting 1000 simultaneous editors on one document.<br><strong>A:</strong> (1) Use CRDT (yjs/automerge) instead of OT for better scalability. (2) Implement virtual document sections — only sync the section each user is viewing. (3) Hierarchical WebSocket rooms: doc:123:section:5. (4) Dedicated server per document with connection pooling. (5) Operation batching — coalesce multiple operations into one message. (6) Throttle presence updates to 10fps. (7) Use Redis Streams for persistent operation log with consumer groups.</div>
-        <div class="qa-card"><strong>Q4:</strong> How do you implement undo in a collaborative editor?<br><strong>A:</strong> Undo is complex because "undoing" Alice's edit shouldn't undo Bob's subsequent edit. Approach: (1) Each user has a local undo stack of their own operations. (2) When user triggers undo, generate an "inverse operation" (insert becomes delete, delete becomes insert). (3) The inverse operation is sent through OT like any other operation. (4) However, if another user's concurrent edit overlaps, the inverse might not restore the original state. (5) Better approach: selective undo — show a list of the user's recent operations and let them choose which to revert. Google Docs uses a "version history" approach instead of traditional undo.</div>
-        <div class="qa-card"><strong>Q5:</strong> Explain how cursor synchronization works in a collaborative editor.<br><strong>A:</strong> Each client broadcasts their cursor position (character offset, selection start/end) at ~20fps. Position is relative to the current document state. When remote operations are applied, the cursor position must be transformed accordingly — if Alice inserts 10 chars before Bob's cursor, Bob's cursor shifts right by 10. This transformation uses the same OT transform functions. Cursors are rendered as Canvas overlays positioned using ProseMirror's coordsAtPos() — which maps document position to screen coordinates even after scrolling.</div>
+        <div class="qa-card"><strong>Q3:</strong> Design a system supporting 1000 simultaneous editors on one document.<br><strong>A:</strong> (1) Use CRDT (yjs/automerge) instead of OT for better scalability. (2) Implement virtual document sections � only sync the section each user is viewing. (3) Hierarchical WebSocket rooms: doc:123:section:5. (4) Dedicated server per document with connection pooling. (5) Operation batching � coalesce multiple operations into one message. (6) Throttle presence updates to 10fps. (7) Use Redis Streams for persistent operation log with consumer groups.</div>
+        <div class="qa-card"><strong>Q4:</strong> How do you implement undo in a collaborative editor?<br><strong>A:</strong> Undo is complex because "undoing" Alice's edit shouldn't undo Bob's subsequent edit. Approach: (1) Each user has a local undo stack of their own operations. (2) When user triggers undo, generate an "inverse operation" (insert becomes delete, delete becomes insert). (3) The inverse operation is sent through OT like any other operation. (4) However, if another user's concurrent edit overlaps, the inverse might not restore the original state. (5) Better approach: selective undo � show a list of the user's recent operations and let them choose which to revert. Google Docs uses a "version history" approach instead of traditional undo.</div>
+        <div class="qa-card"><strong>Q5:</strong> Explain how cursor synchronization works in a collaborative editor.<br><strong>A:</strong> Each client broadcasts their cursor position (character offset, selection start/end) at ~20fps. Position is relative to the current document state. When remote operations are applied, the cursor position must be transformed accordingly � if Alice inserts 10 chars before Bob's cursor, Bob's cursor shifts right by 10. This transformation uses the same OT transform functions. Cursors are rendered as Canvas overlays positioned using ProseMirror's coordsAtPos() � which maps document position to screen coordinates even after scrolling.</div>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-trophy" style="color:var(--warning)"></i> Advanced Challenges</h2>
         <div class="challenge-card"><strong>Challenge 1: Decentralized P2P Collaboration</strong> Implement peer-to-peer collaboration using WebRTC + CRDT without a central server. Use a signalling server for discovery, then direct peer-to-peer WebRTC data channels for operation sync. Handle NAT traversal with STUN/TURN. Implement mesh topology for up to 10 peers and selective forwarding for larger groups.</div>
         <div class="challenge-card"><strong>Challenge 2: Real-Time Rich Text with Images</strong> Extend the editor to support embedded images, tables, and embeds (YouTube, Twitter). Images are uploaded to S3 during editing, and the CRDT stores the image URL with a unique content-addressed hash. Handle concurrent image uploads and deletions. Implement lazy loading for images outside the viewport.</div>
-        <div class="challenge-card"><strong>Challenge 3: Git-Like Branching & Merging</strong> Implement document branching — users can create branches for experimental edits. Show a visual branch graph similar to Git. Implement three-way merge when branches are consolidated. Allow merge requests with review workflow. This is used by Notion's "Document versions" and Coda's "Sync pages".</div>
+        <div class="challenge-card"><strong>Challenge 3: Git-Like Branching & Merging</strong> Implement document branching � users can create branches for experimental edits. Show a visual branch graph similar to Git. Implement three-way merge when branches are consolidated. Allow merge requests with review workflow. This is used by Notion's "Document versions" and Coda's "Sync pages".</div>
         <div class="challenge-card"><strong>Challenge 4: AI-Powered Collaboration Features</strong> Integrate an LLM that: (1) Suggests completions aware of other users' edits (don't suggest deleting something Bob just wrote), (2) Generates paragraph summaries for version history, (3) Detects and resolves merge conflicts by suggesting combined edits, (4) Provides inline suggestions that multiple users can review before applying.</div>
-        <div class="challenge-card"><strong>Challenge 5: Collaborative Code Editor</strong> Build a VS Code-style collaborative code editor. Challenges vs text editing: (1) AST-aware diffs — formatting changes shouldn't trigger full re-sync, (2) LSP integration — share language server results across users, (3) Terminal sharing — multiplex terminal I/O across WebSocket, (4) Dependency sync — ensure all users have the same packages installed, (5) Build output sharing — share compilation errors and test results in real-time.</div>
+        <div class="challenge-card"><strong>Challenge 5: Collaborative Code Editor</strong> Build a VS Code-style collaborative code editor. Challenges vs text editing: (1) AST-aware diffs � formatting changes shouldn't trigger full re-sync, (2) LSP integration � share language server results across users, (3) Terminal sharing � multiplex terminal I/O across WebSocket, (4) Dependency sync � ensure all users have the same packages installed, (5) Build output sharing � share compilation errors and test results in real-time.</div>
       </div>
 
       <div style="display:flex;justify-content:space-between;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border)">
@@ -1464,6 +1465,8 @@ describe('Operational Transform', () => {
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

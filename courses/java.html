@@ -10,16 +10,17 @@
 <body data-page="Course" data-course="java">
   <div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div>
   <div class="toast-container"></div>
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li><li><a href="../Learn.html">Learn</a></li><li><a href="../Practice.html">Practice</a></li><li><a href="../Projects.html">Projects</a></li><li><a href="../About.html">About</a></li><li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"><button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button></div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Java</h1>
       <p>Java is a robust, object-oriented programming language renowned for its "write once, run anywhere" capability. It powers enterprise applications, Android apps, web services, and large-scale systems worldwide.</p>
@@ -46,10 +47,10 @@
 
     <div class="course-section"><h2><i class="fas fa-building"></i> Industry Usage</h2>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apache</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spring</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="Amazon" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Apache" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Apache</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spring</p></div>
       </div>
       <p style="color:var(--text-secondary)">Netflix uses Java for its streaming infrastructure, LinkedIn runs on Java, Amazon's backend services are Java-based, Twitter moved from Ruby to Java for performance, and Android (Google) uses Java for its SDK. Major banks like Goldman Sachs and JP Morgan rely on Java for trading systems.</p>
     </div>
@@ -239,6 +240,8 @@ public class ProductService {
     </div>
 
   </section>
+  </main>
+
 
 
     <footer class="footer">

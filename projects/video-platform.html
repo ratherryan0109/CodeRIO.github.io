@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -45,7 +45,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -60,9 +60,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>Video Streaming Platform</h1>
@@ -83,7 +84,7 @@
 
       <div class="section">
         <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
-        <p>Modern video streaming at scale presents interconnected challenges: (1) Video files are large (1GB+ for 4K content) requiring efficient upload with resumable support, (2) Raw video must be transcoded into multiple formats/resolutions for adaptive streaming, (3) Global delivery with sub-second startup latency requires CDN optimization and edge caching, (4) Users on different devices and network conditions need adaptive quality switching, (5) Content creators need analytics — watch time, audience retention, geographic distribution, (6) Monetization requires subscription management, ad insertion, and pay-per-view access control. The goal is to build a platform that handles the entire video lifecycle — from upload to global delivery — with professional-grade quality, security, and analytics.</p>
+        <p>Modern video streaming at scale presents interconnected challenges: (1) Video files are large (1GB+ for 4K content) requiring efficient upload with resumable support, (2) Raw video must be transcoded into multiple formats/resolutions for adaptive streaming, (3) Global delivery with sub-second startup latency requires CDN optimization and edge caching, (4) Users on different devices and network conditions need adaptive quality switching, (5) Content creators need analytics � watch time, audience retention, geographic distribution, (6) Monetization requires subscription management, ad insertion, and pay-per-view access control. The goal is to build a platform that handles the entire video lifecycle � from upload to global delivery � with professional-grade quality, security, and analytics.</p>
       </div>
 
       <div class="section">
@@ -98,7 +99,7 @@
 
       <div class="section">
         <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
-        <p>The global video streaming market is valued at $500B+ with 3.5B+ internet users streaming video regularly. YouTube serves 500+ hours of video uploaded every minute. Netflix accounts for 15% of global internet traffic. Key trends: (1) Live streaming growth — 150% increase since 2020, (2) Short-form video (TikTok, Reels, Shorts) driving new encoding and delivery paradigms, (3) AI-powered video — automatic highlight generation, content moderation, and recommendation, (4) Serverless video processing — AWS Elemental MediaConvert, Lambda-based transcoding, (5) Low-latency streaming — WebRTC and LL-HLS reducing latency to sub-2 seconds. This project builds skills for video infrastructure roles at YouTube, Twitch, Netflix, and media companies.</p>
+        <p>The global video streaming market is valued at $500B+ with 3.5B+ internet users streaming video regularly. YouTube serves 500+ hours of video uploaded every minute. Netflix accounts for 15% of global internet traffic. Key trends: (1) Live streaming growth � 150% increase since 2020, (2) Short-form video (TikTok, Reels, Shorts) driving new encoding and delivery paradigms, (3) AI-powered video � automatic highlight generation, content moderation, and recommendation, (4) Serverless video processing � AWS Elemental MediaConvert, Lambda-based transcoding, (5) Low-latency streaming � WebRTC and LL-HLS reducing latency to sub-2 seconds. This project builds skills for video infrastructure roles at YouTube, Twitch, Netflix, and media companies.</p>
       </div>
 
       <div class="section">
@@ -107,7 +108,7 @@
           <li><strong>Video Encoding Pipelines:</strong> Master FFmpeg for transcoding, segmenting, and packaging video. Understand codecs (H.264, H.265, AV1), containers (MP4, TS, WebM), and encoding parameters (CRF, bitrate, preset).</li>
           <li><strong>Adaptive Bitrate Streaming:</strong> Implement HLS (HTTP Live Streaming) and MPEG-DASH with multiple renditions. Generate M3U8 playlists and MPD manifests. Implement client-side adaptive bitrate logic.</li>
           <li><strong>CDN Architecture:</strong> Design and optimize content delivery using CloudFront/Akamai. Implement origin shielding, edge caching strategies, and geo-distributed content delivery.</li>
-          <li><strong>Video Storage Strategies:</strong> Build tiered storage — hot (S3 Standard), warm (S3 Infrequent Access), cold (S3 Glacier). Implement multipart upload with resumable support.</li>
+          <li><strong>Video Storage Strategies:</strong> Build tiered storage � hot (S3 Standard), warm (S3 Infrequent Access), cold (S3 Glacier). Implement multipart upload with resumable support.</li>
           <li><strong>Real-Time Analytics Pipeline:</strong> Build event-driven analytics using Kafka/Kinesis for tracking watch events, buffering ratio, quality switches, and viewer engagement.</li>
           <li><strong>User & Subscription Management:</strong> Implement authentication, RBAC (viewer, creator, admin), subscription plans (Stripe/Billing), tiered content access, and family sharing.</li>
           <li><strong>Live Streaming Infrastructure:</strong> Set up RTMP ingestion, transcoding pipeline for live streams, HLS packaging with low-latency mode, and DVR functionality.</li>
@@ -137,14 +138,14 @@
 |                   VIDEO STREAMING PLATFORM ARCHITECTURE           |
 +------------------------------------------------------------------+
 | UPLOAD PIPELINE:                                                  |
-| Creator → Multipart Upload (S3 presigned URLs) → S3 Raw Bucket    |
-|   → S3 Event Notification → SQS → Transcoder Worker (ECS)          |
-|   → FFmpeg Transcoding → S3 HLS Output → CloudFront Invalidation   |
+| Creator ? Multipart Upload (S3 presigned URLs) ? S3 Raw Bucket    |
+|   ? S3 Event Notification ? SQS ? Transcoder Worker (ECS)          |
+|   ? FFmpeg Transcoding ? S3 HLS Output ? CloudFront Invalidation   |
 |                                                                   |
 | STREAMING DELIVERY:                                               |
-| Viewer → CloudFront Edge → S3 HLS Origin → HLS.js Player          |
-|   → Adaptive Bitrate (ABR) Logic switches quality based on BW     |
-|   → Analytics events sent to Kafka → ClickHouse for dashboards    |
+| Viewer ? CloudFront Edge ? S3 HLS Origin ? HLS.js Player          |
+|   ? Adaptive Bitrate (ABR) Logic switches quality based on BW     |
+|   ? Analytics events sent to Kafka ? ClickHouse for dashboards    |
 |                                                                   |
 | +-------------------+     +-------------------+     +-----------+ |
 | | Upload Service    |---->| Transcode Worker  |---->| S3 HLS   | |
@@ -194,86 +195,86 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
         <div class="structure-tree">
 video-platform/
-├── infrastructure/                     # AWS CDK IaC
-│   ├── lib/
-│   │   ├── storage-stack.ts            # S3 buckets + CloudFront
-│   │   ├── compute-stack.ts            # ECS cluster + task defs
-│   │   ├── pipeline-stack.ts           # SQS + Lambda triggers
-│   │   └── database-stack.ts           # RDS + ElastiCache
-│   └── bin/
-├── upload-service/                     # Video upload API
-│   ├── src/
-│   │   ├── routes/upload.ts            # Multipart upload endpoints
-│   │   ├── services/s3Service.ts       # S3 presigned URL generation
-│   │   └── middleware/auth.ts
-│   └── Dockerfile
-├── transcode-worker/                   # Video transcoding service
-│   ├── src/
-│   │   ├── workers/transcode.ts        # FFmpeg pipeline orchestrator
-│   │   ├── services/ffmpeg.ts          # FFmpeg command builder
-│   │   ├── services/hls.ts             # HLS playlist generator
-│   │   ├── services/thumbnail.ts       # Thumbnail extraction
-│   │   ├── services/caption.ts         # Auto-caption generation
-│   │   └── utils/codec.ts              # Codec detection and selection
-│   ├── scripts/
-│   │   ├── transcode.sh                # FFmpeg transcoding script
-│   │   ├── extract-thumbnails.sh
-│   │   └── validate-video.sh
-│   └── Dockerfile
-├── api-gateway/                         # REST + GraphQL API
-│   ├── src/
-│   │   ├── resolvers/                   # GraphQL resolvers
-│   │   │   ├── video.ts
-│   │   │   ├── user.ts
-│   │   │   ├── analytics.ts
-│   │   │   └── subscription.ts
-│   │   ├── routes/
-│   │   │   ├── auth.ts
-│   │   │   ├── videos.ts
-│   │   │   ├── comments.ts
-│   │   │   └── playlists.ts
-│   │   └── services/
-│   │       ├── videoService.ts
-│   │       ├── analyticsService.ts
-│   │       └── billingService.ts
-│   └── Dockerfile
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── VideoPlayer.tsx          # HLS.js player wrapper
-│   │   │   ├── VideoGrid.tsx
-│   │   │   ├── UploadPage.tsx
-│   │   │   ├── WatchPage.tsx
-│   │   │   ├── ChannelPage.tsx
-│   │   │   ├── CreatorDashboard.tsx
-│   │   │   ├── Subscriptions.tsx
-│   │   │   ├── Comments.tsx
-│   │   │   └── SearchBar.tsx
-│   │   ├── hooks/
-│   │   │   ├── useVideo.ts
-│   │   │   ├── useAnalytics.ts
-│   │   │   └── usePlayer.ts
-│   │   └── services/
-│   │       ├── api.ts
-│   │       └── player.ts
-│   └── package.json
-├── live-service/                        # Live streaming
-│   ├── src/
-│   │   ├── ingest/rtmp.ts              # RTMP server (Node-Media-Server)
-│   │   ├── transcode/live.ts           # Live transcoding pipeline
-│   │   └── playback/hls.ts             # Live HLS packaging
-│   └── Dockerfile
-├── analytics-pipeline/                  # Real-time analytics
-│   ├── src/
-│   │   ├── consumers/watchEvent.ts     # Kafka consumer for watch events
-│   │   └── aggregators/daily.ts        # Daily aggregation job
-│   └── docker-compose.kafka.yml
-├── scripts/
-│   ├── benchmark.sh                    # Load testing with k6
-│   ├── seed-data.ts
-│   └── deploy.sh
-├── docker-compose.yml
-└── README.md
++-- infrastructure/                     # AWS CDK IaC
+�   +-- lib/
+�   �   +-- storage-stack.ts            # S3 buckets + CloudFront
+�   �   +-- compute-stack.ts            # ECS cluster + task defs
+�   �   +-- pipeline-stack.ts           # SQS + Lambda triggers
+�   �   +-- database-stack.ts           # RDS + ElastiCache
+�   +-- bin/
++-- upload-service/                     # Video upload API
+�   +-- src/
+�   �   +-- routes/upload.ts            # Multipart upload endpoints
+�   �   +-- services/s3Service.ts       # S3 presigned URL generation
+�   �   +-- middleware/auth.ts
+�   +-- Dockerfile
++-- transcode-worker/                   # Video transcoding service
+�   +-- src/
+�   �   +-- workers/transcode.ts        # FFmpeg pipeline orchestrator
+�   �   +-- services/ffmpeg.ts          # FFmpeg command builder
+�   �   +-- services/hls.ts             # HLS playlist generator
+�   �   +-- services/thumbnail.ts       # Thumbnail extraction
+�   �   +-- services/caption.ts         # Auto-caption generation
+�   �   +-- utils/codec.ts              # Codec detection and selection
+�   +-- scripts/
+�   �   +-- transcode.sh                # FFmpeg transcoding script
+�   �   +-- extract-thumbnails.sh
+�   �   +-- validate-video.sh
+�   +-- Dockerfile
++-- api-gateway/                         # REST + GraphQL API
+�   +-- src/
+�   �   +-- resolvers/                   # GraphQL resolvers
+�   �   �   +-- video.ts
+�   �   �   +-- user.ts
+�   �   �   +-- analytics.ts
+�   �   �   +-- subscription.ts
+�   �   +-- routes/
+�   �   �   +-- auth.ts
+�   �   �   +-- videos.ts
+�   �   �   +-- comments.ts
+�   �   �   +-- playlists.ts
+�   �   +-- services/
+�   �       +-- videoService.ts
+�   �       +-- analyticsService.ts
+�   �       +-- billingService.ts
+�   +-- Dockerfile
++-- frontend/
+�   +-- src/
+�   �   +-- components/
+�   �   �   +-- VideoPlayer.tsx          # HLS.js player wrapper
+�   �   �   +-- VideoGrid.tsx
+�   �   �   +-- UploadPage.tsx
+�   �   �   +-- WatchPage.tsx
+�   �   �   +-- ChannelPage.tsx
+�   �   �   +-- CreatorDashboard.tsx
+�   �   �   +-- Subscriptions.tsx
+�   �   �   +-- Comments.tsx
+�   �   �   +-- SearchBar.tsx
+�   �   +-- hooks/
+�   �   �   +-- useVideo.ts
+�   �   �   +-- useAnalytics.ts
+�   �   �   +-- usePlayer.ts
+�   �   +-- services/
+�   �       +-- api.ts
+�   �       +-- player.ts
+�   +-- package.json
++-- live-service/                        # Live streaming
+�   +-- src/
+�   �   +-- ingest/rtmp.ts              # RTMP server (Node-Media-Server)
+�   �   +-- transcode/live.ts           # Live transcoding pipeline
+�   �   +-- playback/hls.ts             # Live HLS packaging
+�   +-- Dockerfile
++-- analytics-pipeline/                  # Real-time analytics
+�   +-- src/
+�   �   +-- consumers/watchEvent.ts     # Kafka consumer for watch events
+�   �   +-- aggregators/daily.ts        # Daily aggregation job
+�   +-- docker-compose.kafka.yml
++-- scripts/
+�   +-- benchmark.sh                    # Load testing with k6
+�   +-- seed-data.ts
+�   +-- deploy.sh
++-- docker-compose.yml
++-- README.md
         </div>
       </div>
 
@@ -735,12 +736,12 @@ async function runDailyAggregation() {
 
       <div class="section">
         <h2><i class="fas fa-tachometer-alt" style="color:var(--primary)"></i> Video Encoding Pipelines</h2>
-        <p><strong>FFmpeg Pipeline:</strong> Raw video → (1) Detect codec and container, (2) Generate keyframe index for seeking, (3) Transcode to H.264/AAC for maximum compatibility, (4) Generate multiple renditions at 1080p/720p/480p/360p, (5) Segment into 6-second HLS segments, (6) Generate master playlist and variant playlists, (7) Extract thumbnail at 25%, 50%, 75% positions, (8) Generate sprite sheet for timeline preview. The pipeline runs on ECS Fargate with GPU support for faster encoding. For 4K content, we also generate a 4K rendition using HEVC (H.265) codec for 50% bitrate savings.</p>
+        <p><strong>FFmpeg Pipeline:</strong> Raw video ? (1) Detect codec and container, (2) Generate keyframe index for seeking, (3) Transcode to H.264/AAC for maximum compatibility, (4) Generate multiple renditions at 1080p/720p/480p/360p, (5) Segment into 6-second HLS segments, (6) Generate master playlist and variant playlists, (7) Extract thumbnail at 25%, 50%, 75% positions, (8) Generate sprite sheet for timeline preview. The pipeline runs on ECS Fargate with GPU support for faster encoding. For 4K content, we also generate a 4K rendition using HEVC (H.265) codec for 50% bitrate savings.</p>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-globe" style="color:var(--primary)"></i> CDN Concepts (CloudFront, Cloudflare)</h2>
-        <p><strong>CloudFront Distribution:</strong> (1) Origin: S3 bucket with HLS content, (2) Behavior: /hls/* → Cached for 1 year (versioned content), /thumbnails/* → Cached 1 day, /api/* → Proxy to API Gateway, (3) Origin Shield: Reduces S3 request cost by consolidating requests at regional edge, (4) Price Class: Use Price Class 100 (US, Europe) for cost savings, (5) Lambda@Edge: For token authorization on premium content, (6) WAF: Block malicious requests, geo-restriction for licensed content.</p>
+        <p><strong>CloudFront Distribution:</strong> (1) Origin: S3 bucket with HLS content, (2) Behavior: /hls/* ? Cached for 1 year (versioned content), /thumbnails/* ? Cached 1 day, /api/* ? Proxy to API Gateway, (3) Origin Shield: Reduces S3 request cost by consolidating requests at regional edge, (4) Price Class: Use Price Class 100 (US, Europe) for cost savings, (5) Lambda@Edge: For token authorization on premium content, (6) WAF: Block malicious requests, geo-restriction for licensed content.</p>
       </div>
 
       <div class="section">
@@ -762,7 +763,7 @@ async function runDailyAggregation() {
 
       <div class="section">
         <h2><i class="fas fa-cut" style="color:var(--primary)"></i> Transcoding Workflows</h2>
-        <p>Workflow: (1) S3 event notification triggers SQS message when raw upload completes. (2) Transcode worker picks up message, downloads video metadata (duration, codec, resolution). (3) Determines optimal encoding ladder based on source resolution and bitrate. (4) Runs FFmpeg pipeline — outputs HLS segments to temporary storage. (5) Uploads segments to S3 HLS bucket with appropriate cache headers. (6) Generates thumbnail strip (10 screenshots evenly spaced). (7) Updates video status in PostgreSQL to 'ready'. (8) Invalidates CloudFront cache for the video's CDN path. (9) Optionally deletes raw upload.</p>
+        <p>Workflow: (1) S3 event notification triggers SQS message when raw upload completes. (2) Transcode worker picks up message, downloads video metadata (duration, codec, resolution). (3) Determines optimal encoding ladder based on source resolution and bitrate. (4) Runs FFmpeg pipeline � outputs HLS segments to temporary storage. (5) Uploads segments to S3 HLS bucket with appropriate cache headers. (6) Generates thumbnail strip (10 screenshots evenly spaced). (7) Updates video status in PostgreSQL to 'ready'. (8) Invalidates CloudFront cache for the video's CDN path. (9) Optionally deletes raw upload.</p>
       </div>
 
       <div class="section">
@@ -826,6 +827,8 @@ k6 run scripts/loadtest.js \
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

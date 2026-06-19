@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -49,7 +49,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -64,9 +64,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero glass-card">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>Social Media Dashboard</h1>
@@ -151,22 +152,22 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
         <div class="structure-tree">
 social-dashboard/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   ├── app.js
-│   ├── data.js          # Mock data generator
-│   ├── charts.js        # Chart.js manager
-│   ├── filters.js       # Date range filtering
-│   ├── kpi.js           # KPI card renderer
-│   ├── export.js        # CSV + PNG export
-│   ├── theme.js         # Dark/light theme toggle
-│   └── grid.js          # Drag-and-drop widget grid
-├── assets/
-│   └── icons/
-├── .gitignore
-└── README.md
++-- index.html
++-- css/
+�   +-- style.css
++-- js/
+�   +-- app.js
+�   +-- data.js          # Mock data generator
+�   +-- charts.js        # Chart.js manager
+�   +-- filters.js       # Date range filtering
+�   +-- kpi.js           # KPI card renderer
+�   +-- export.js        # CSV + PNG export
+�   +-- theme.js         # Dark/light theme toggle
+�   +-- grid.js          # Drag-and-drop widget grid
++-- assets/
+�   +-- icons/
++-- .gitignore
++-- README.md
         </div>
       </div>
 
@@ -903,6 +904,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

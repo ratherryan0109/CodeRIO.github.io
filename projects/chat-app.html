@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -49,7 +49,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -64,9 +64,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero glass-card">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>Chat Application</h1>
@@ -152,41 +153,41 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Folder Structure</h2>
         <div class="structure-tree">
 chat-app/
-├── server/
-│   ├── src/
-│   │   ├── index.js          # Entry point, HTTP + Socket.io setup
-│   │   ├── socket/
-│   │   │   ├── index.js      # Socket.io initialization
-│   │   │   ├── auth.js       # Socket authentication middleware
-│   │   │   ├── chatHandler.js # Message events
-│   │   │   ├── roomHandler.js # Room management
-│   │   │   └── presenceHandler.js # Online/offline
-│   │   ├── models/
-│   │   │   ├── Message.js
-│   │   │   ├── User.js
-│   │   │   └── Room.js
-│   │   ├── routes/
-│   │   │   ├── auth.js
-│   │   │   ├── users.js
-│   │   │   └── upload.js
-│   │   ├── middleware/
-│   │   │   ├── auth.js
-│   │   │   └── errorHandler.js
-│   │   └── utils/
-│   │       └── helpers.js
-│   ├── package.json
-│   └── .env
-├── client/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── hooks/
-│   │   ├── contexts/
-│   │   └── services/
-│   └── package.json
-├── docker-compose.yml
-├── .gitignore
-└── README.md
++-- server/
+�   +-- src/
+�   �   +-- index.js          # Entry point, HTTP + Socket.io setup
+�   �   +-- socket/
+�   �   �   +-- index.js      # Socket.io initialization
+�   �   �   +-- auth.js       # Socket authentication middleware
+�   �   �   +-- chatHandler.js # Message events
+�   �   �   +-- roomHandler.js # Room management
+�   �   �   +-- presenceHandler.js # Online/offline
+�   �   +-- models/
+�   �   �   +-- Message.js
+�   �   �   +-- User.js
+�   �   �   +-- Room.js
+�   �   +-- routes/
+�   �   �   +-- auth.js
+�   �   �   +-- users.js
+�   �   �   +-- upload.js
+�   �   +-- middleware/
+�   �   �   +-- auth.js
+�   �   �   +-- errorHandler.js
+�   �   +-- utils/
+�   �       +-- helpers.js
+�   +-- package.json
+�   +-- .env
++-- client/
+�   +-- public/
+�   +-- src/
+�   �   +-- components/
+�   �   +-- hooks/
+�   �   +-- contexts/
+�   �   +-- services/
+�   +-- package.json
++-- docker-compose.yml
++-- .gitignore
++-- README.md
         </div>
       </div>
 
@@ -616,6 +617,8 @@ socket.on('typing:update', (data) => {
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

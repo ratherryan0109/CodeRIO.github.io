@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -44,7 +44,7 @@
     <div class="blob blob4"></div>
   </div>
   <div id="toast-container"></div>
-    <nav class="navbar">
+    <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -59,9 +59,10 @@
       <li><a href="../auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
-  <div class="project-detail-page">
+  <main>
+<div class="project-detail-page">
     <div class="project-detail-hero">
       <a href="../Projects.html" class="btn btn-ghost" style="margin-bottom:1rem"><i class="fas fa-arrow-left"></i> Back to Projects</a>
       <h1>DevOps CI/CD Pipeline</h1>
@@ -77,12 +78,12 @@
 
       <div class="section">
         <h2><i class="fas fa-info-circle" style="color:var(--primary)"></i> Project Overview</h2>
-        <p>Build a production-grade DevOps CI/CD pipeline that automates the entire software delivery lifecycle — from code commit to production deployment with automated testing, security scanning, containerization, orchestration, and monitoring. This project implements GitOps workflows using GitHub Actions and Jenkins, containerization with Docker, orchestration with Kubernetes (EKS/GKE), infrastructure as Code (Terraform/Pulumi), and comprehensive observability with Prometheus, Grafana, and the ELK stack. You will design and implement blue-green deployments, canary releases, automated rollback, and feature flags. The pipeline handles multiple environments (dev, staging, production) with progressive delivery, secret management (Hashicorp Vault/AWS Secrets Manager), and compliance auditing. Deploy a sample microservices application to demonstrate the complete pipeline in action.</p>
+        <p>Build a production-grade DevOps CI/CD pipeline that automates the entire software delivery lifecycle � from code commit to production deployment with automated testing, security scanning, containerization, orchestration, and monitoring. This project implements GitOps workflows using GitHub Actions and Jenkins, containerization with Docker, orchestration with Kubernetes (EKS/GKE), infrastructure as Code (Terraform/Pulumi), and comprehensive observability with Prometheus, Grafana, and the ELK stack. You will design and implement blue-green deployments, canary releases, automated rollback, and feature flags. The pipeline handles multiple environments (dev, staging, production) with progressive delivery, secret management (Hashicorp Vault/AWS Secrets Manager), and compliance auditing. Deploy a sample microservices application to demonstrate the complete pipeline in action.</p>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-bullseye" style="color:var(--danger)"></i> Problem Statement</h2>
-        <p>Modern software teams face critical DevOps challenges: (1) Manual deployments are error-prone, slow, and inconsistent across environments. (2) Without automated testing in the pipeline, bugs reach production. (3) Infrastructure is treated as a snowflake — manually configured servers that can't be reproduced. (4) Security vulnerabilities go undetected until audits. (5) No standardized way to rollback bad deployments. (6) Monitoring is reactive — teams find out about issues from users rather than alerts. (7) Multi-environment management (dev, staging, prod) leads to configuration drift. The goal is to build a comprehensive CI/CD platform that treats infrastructure as code, automates quality gates, provides observability, and enables safe, rapid deployments with automated rollback capabilities.</p>
+        <p>Modern software teams face critical DevOps challenges: (1) Manual deployments are error-prone, slow, and inconsistent across environments. (2) Without automated testing in the pipeline, bugs reach production. (3) Infrastructure is treated as a snowflake � manually configured servers that can't be reproduced. (4) Security vulnerabilities go undetected until audits. (5) No standardized way to rollback bad deployments. (6) Monitoring is reactive � teams find out about issues from users rather than alerts. (7) Multi-environment management (dev, staging, prod) leads to configuration drift. The goal is to build a comprehensive CI/CD platform that treats infrastructure as code, automates quality gates, provides observability, and enables safe, rapid deployments with automated rollback capabilities.</p>
       </div>
 
       <div class="section">
@@ -97,7 +98,7 @@
 
       <div class="section">
         <h2><i class="fas fa-industry" style="color:var(--primary)"></i> Industry Relevance</h2>
-        <p>The DevOps market is projected to reach $25B by 2028. High-performing DevOps teams deploy 208x more frequently and recover from incidents 2,604x faster (DORA 2023 report). Key trends: (1) GitOps — ArgoCD/Flux as the standard for Kubernetes deployments, (2) Platform Engineering — building internal developer platforms with Backstage, (3) FinOps — cost optimization of cloud infrastructure, (4) Shift-left security — integrating security earlier in the pipeline (DevSecOps), (5) AIOps — AI-powered incident response and anomaly detection. This project directly maps to DevOps/SRE roles at any tech company and is essential for cloud infrastructure careers.</p>
+        <p>The DevOps market is projected to reach $25B by 2028. High-performing DevOps teams deploy 208x more frequently and recover from incidents 2,604x faster (DORA 2023 report). Key trends: (1) GitOps � ArgoCD/Flux as the standard for Kubernetes deployments, (2) Platform Engineering � building internal developer platforms with Backstage, (3) FinOps � cost optimization of cloud infrastructure, (4) Shift-left security � integrating security earlier in the pipeline (DevSecOps), (5) AIOps � AI-powered incident response and anomaly detection. This project directly maps to DevOps/SRE roles at any tech company and is essential for cloud infrastructure careers.</p>
       </div>
 
       <div class="section">
@@ -136,7 +137,7 @@
 |                  CI/CD PIPELINE ARCHITECTURE                       |
 +------------------------------------------------------------------+
 |                                                                   |
-|  DEVELOPER → git push → GitHub                                    |
+|  DEVELOPER ? git push ? GitHub                                    |
 |                              |                                     |
 |                              v                                     |
 |  +----------------------------------------------------------+    |
@@ -187,9 +188,9 @@
 |  |                                                          |    |
 |  | +------------------------------------------------------+ |    |
 |  | | OBSERVABILITY STACK                                  | |    |
-|  | | Prometheus → Grafana dashboards                     | |    |
-|  | | Fluentd → Elasticsearch → Kibana (logs)             | |    |
-|  | | Jaeger → Distributed Tracing                        | |    |
+|  | | Prometheus ? Grafana dashboards                     | |    |
+|  | | Fluentd ? Elasticsearch ? Kibana (logs)             | |    |
+|  | | Jaeger ? Distributed Tracing                        | |    |
 |  | +------------------------------------------------------+ |    |
 |  +----------------------------------------------------------+    |
 +------------------------------------------------------------------+
@@ -200,109 +201,109 @@
         <h2><i class="fas fa-folder-tree" style="color:var(--primary)"></i> Complete Folder Structure</h2>
         <div class="structure-tree">
 devops-pipeline/
-├── .github/
-│   └── workflows/
-│       ├── ci.yml                       # Main CI pipeline
-│       ├── security-scan.yml            # Weekly security scan
-│       ├── terraform-plan.yml           # Terraform plan on PR
-│       └── cleanup.yml                  # Cleanup old artifacts
-├── terraform/                           # Infrastructure as Code
-│   ├── environments/
-│   │   ├── dev/
-│   │   │   ├── main.tf
-│   │   │   ├── vars.tf
-│   │   │   └── terraform.tfvars
-│   │   ├── staging/
-│   │   └── production/
-│   ├── modules/
-│   │   ├── eks/                         # EKS cluster module
-│   │   │   ├── main.tf
-│   │   │   ├── outputs.tf
-│   │   │   └── variables.tf
-│   │   ├── rds/                         # RDS database module
-│   │   ├── vpc/                         # VPC networking module
-│   │   ├── redis/                       # ElastiCache module
-│   │   └── monitoring/                  # Prometheus + Grafana
-│   ├── backend.tf                       # Terraform state (S3 + DynamoDB)
-│   └── providers.tf
-├── kubernetes/                          # Kubernetes manifests
-│   ├── base/                            # Base overlays (kustomize)
-│   │   ├── deployment.yaml
-│   │   ├── service.yaml
-│   │   ├── ingress.yaml
-│   │   ├── configmap.yaml
-│   │   ├── hpa.yaml
-│   │   └── pdb.yaml
-│   ├── overlays/
-│   │   ├── dev/
-│   │   │   └── kustomization.yaml
-│   │   ├── staging/
-│   │   │   └── kustomization.yaml
-│   │   └── production/
-│   │       └── kustomization.yaml
-│   ├── istio/                           # Service mesh configs
-│   │   ├── virtual-service.yaml
-│   │   ├── destination-rule.yaml
-│   │   └── gateway.yaml
-│   └── monitoring/                       # Observability manifests
-│       ├── prometheus/
-│       │   ├── prometheus.yaml
-│       │   ├── rules.yaml
-│       │   └── service-monitor.yaml
-│       ├── grafana/
-│       │   ├── grafana.yaml
-│       │   └── dashboards/
-│       │       ├── kubernetes-cluster.json
-│       │       └── application-metrics.json
-│       └── fluentd/
-│           └── fluentd-daemonset.yaml
-├── helm-charts/                         # Helm charts
-│   └── sample-app/
-│       ├── Chart.yaml
-│       ├── values.yaml
-│       ├── values-dev.yaml
-│       ├── values-staging.yaml
-│       ├── values-production.yaml
-│       └── templates/
-│           ├── deployment.yaml
-│           ├── service.yaml
-│           ├── ingress.yaml
-│           ├── _helpers.tpl
-│           └── tests/
-│               └── test-connection.yaml
-├── sample-app/                          # Sample microservice
-│   ├── src/
-│   │   ├── app.js
-│   │   └── routes/
-│   ├── Dockerfile
-│   ├── Dockerfile.multistage
-│   ├── tests/
-│   │   ├── unit/
-│   │   └── integration/
-│   ├── package.json
-│   └── sonar-project.properties
-├── scripts/
-│   ├── deploy.sh                        # Deployment helper
-│   ├── rollback.sh                      # Rollback to previous version
-│   ├── canary.sh                        # Canary release script
-│   └── seed-vault.sh                    # Seed secrets in Vault
-├── jenkins/                             # Alternative Jenkins pipeline
-│   ├── Jenkinsfile
-│   └── shared-libraries/
-│       └── vars/
-│           ├── buildImage.groovy
-│           ├── deployToK8s.groovy
-│           └── runTests.groovy
-├── docker-compose.yml                   # Local dev environment
-├── .gitignore
-└── README.md
++-- .github/
+�   +-- workflows/
+�       +-- ci.yml                       # Main CI pipeline
+�       +-- security-scan.yml            # Weekly security scan
+�       +-- terraform-plan.yml           # Terraform plan on PR
+�       +-- cleanup.yml                  # Cleanup old artifacts
++-- terraform/                           # Infrastructure as Code
+�   +-- environments/
+�   �   +-- dev/
+�   �   �   +-- main.tf
+�   �   �   +-- vars.tf
+�   �   �   +-- terraform.tfvars
+�   �   +-- staging/
+�   �   +-- production/
+�   +-- modules/
+�   �   +-- eks/                         # EKS cluster module
+�   �   �   +-- main.tf
+�   �   �   +-- outputs.tf
+�   �   �   +-- variables.tf
+�   �   +-- rds/                         # RDS database module
+�   �   +-- vpc/                         # VPC networking module
+�   �   +-- redis/                       # ElastiCache module
+�   �   +-- monitoring/                  # Prometheus + Grafana
+�   +-- backend.tf                       # Terraform state (S3 + DynamoDB)
+�   +-- providers.tf
++-- kubernetes/                          # Kubernetes manifests
+�   +-- base/                            # Base overlays (kustomize)
+�   �   +-- deployment.yaml
+�   �   +-- service.yaml
+�   �   +-- ingress.yaml
+�   �   +-- configmap.yaml
+�   �   +-- hpa.yaml
+�   �   +-- pdb.yaml
+�   +-- overlays/
+�   �   +-- dev/
+�   �   �   +-- kustomization.yaml
+�   �   +-- staging/
+�   �   �   +-- kustomization.yaml
+�   �   +-- production/
+�   �       +-- kustomization.yaml
+�   +-- istio/                           # Service mesh configs
+�   �   +-- virtual-service.yaml
+�   �   +-- destination-rule.yaml
+�   �   +-- gateway.yaml
+�   +-- monitoring/                       # Observability manifests
+�       +-- prometheus/
+�       �   +-- prometheus.yaml
+�       �   +-- rules.yaml
+�       �   +-- service-monitor.yaml
+�       +-- grafana/
+�       �   +-- grafana.yaml
+�       �   +-- dashboards/
+�       �       +-- kubernetes-cluster.json
+�       �       +-- application-metrics.json
+�       +-- fluentd/
+�           +-- fluentd-daemonset.yaml
++-- helm-charts/                         # Helm charts
+�   +-- sample-app/
+�       +-- Chart.yaml
+�       +-- values.yaml
+�       +-- values-dev.yaml
+�       +-- values-staging.yaml
+�       +-- values-production.yaml
+�       +-- templates/
+�           +-- deployment.yaml
+�           +-- service.yaml
+�           +-- ingress.yaml
+�           +-- _helpers.tpl
+�           +-- tests/
+�               +-- test-connection.yaml
++-- sample-app/                          # Sample microservice
+�   +-- src/
+�   �   +-- app.js
+�   �   +-- routes/
+�   +-- Dockerfile
+�   +-- Dockerfile.multistage
+�   +-- tests/
+�   �   +-- unit/
+�   �   +-- integration/
+�   +-- package.json
+�   +-- sonar-project.properties
++-- scripts/
+�   +-- deploy.sh                        # Deployment helper
+�   +-- rollback.sh                      # Rollback to previous version
+�   +-- canary.sh                        # Canary release script
+�   +-- seed-vault.sh                    # Seed secrets in Vault
++-- jenkins/                             # Alternative Jenkins pipeline
+�   +-- Jenkinsfile
+�   +-- shared-libraries/
+�       +-- vars/
+�           +-- buildImage.groovy
+�           +-- deployToK8s.groovy
+�           +-- runTests.groovy
++-- docker-compose.yml                   # Local dev environment
++-- .gitignore
++-- README.md
         </div>
       </div>
 
       <div class="section">
         <h2><i class="fas fa-cogs" style="color:var(--primary)"></i> Implementation Guide</h2>
 
-        <h3>Step 1: CI Pipeline — GitHub Actions</h3>
+        <h3>Step 1: CI Pipeline � GitHub Actions</h3>
         <div class="code-block" data-lang="yaml"><code># .github/workflows/ci.yml
 name: CI/CD Pipeline
 
@@ -859,7 +860,7 @@ spec:
       <div class="section">
         <h2><i class="fas fa-chart-line" style="color:var(--primary)"></i> Monitoring and Alerting</h2>
         <p><strong>Prometheus:</strong> Collects metrics from: (1) Kubernetes API server (cluster state), (2) kubelet (pod metrics), (3) application /metrics endpoint (HTTP requests, latency, errors), (4) Istio (service mesh traffic metrics), (5) Node exporter (node-level CPU, memory, disk), (6) AWS EBS CSI driver (volume metrics). Alerting rules in PrometheusRule CRD trigger alerts to Alertmanager, which routes to PagerDuty (critical), Slack (warnings), and email (info).</p>
-        <p><strong>Grafana:</strong> Dashboards: (1) Kubernetes Cluster Overview — node/pod resource usage, (2) Application Performance — request rate, latency P50/P95/P99, error rate, (3) Deployment Dashboard — deployment frequency, lead time, change failure rate, (4) Cost Dashboard — per-namespace resource cost.</p>
+        <p><strong>Grafana:</strong> Dashboards: (1) Kubernetes Cluster Overview � node/pod resource usage, (2) Application Performance � request rate, latency P50/P95/P99, error rate, (3) Deployment Dashboard � deployment frequency, lead time, change failure rate, (4) Cost Dashboard � per-namespace resource cost.</p>
       </div>
 
       <div class="section">
@@ -874,7 +875,7 @@ spec:
 
       <div class="section">
         <h2><i class="fas fa-flask" style="color:var(--primary)"></i> Canary Releases</h2>
-        <p>Canary deployment in Istio: (1) New version deployed with `sample-app-canary` service. (2) Initial traffic weight: 10% canary, 90% stable. (3) Monitor canary error rate, latency, and business metrics for 5-30 minutes. (4) If metrics degrade, auto-rollback: set canary weight to 0%, send alert. (5) If stable, gradually increase canary: 25% → 50% → 75% → 100%. (6) After 100%, rename canary service or update main deployment. (7) Users can be pinned to a specific version using header-based routing (x-canary: true).</p>
+        <p>Canary deployment in Istio: (1) New version deployed with `sample-app-canary` service. (2) Initial traffic weight: 10% canary, 90% stable. (3) Monitor canary error rate, latency, and business metrics for 5-30 minutes. (4) If metrics degrade, auto-rollback: set canary weight to 0%, send alert. (5) If stable, gradually increase canary: 25% ? 50% ? 75% ? 100%. (6) After 100%, rename canary service or update main deployment. (7) Users can be pinned to a specific version using header-based routing (x-canary: true).</p>
       </div>
 
       <div class="section">
@@ -931,7 +932,7 @@ bash scripts/canary.sh --service sample-app --version v2.0.0 --percentage 10</co
 
       <div class="section">
         <h2><i class="fas fa-question-circle" style="color:var(--primary)"></i> Interview Questions</h2>
-        <div class="qa-card"><strong>Q1:</strong> Explain the difference between blue-green and canary deployments.<br><strong>A:</strong> Blue-green: Two identical environments (blue=current, green=new). Switch all traffic at once when green is ready. Fast cutover, instant rollback (just switch back), but double the resources during deployment. Canary: Gradually shift traffic percentage (10% → 50% → 100%) to new version. More granular validation, slower rollout, auto-rollback based on metrics, but more complex traffic management. Choose blue-green for simple apps, canary for critical services.</div>
+        <div class="qa-card"><strong>Q1:</strong> Explain the difference between blue-green and canary deployments.<br><strong>A:</strong> Blue-green: Two identical environments (blue=current, green=new). Switch all traffic at once when green is ready. Fast cutover, instant rollback (just switch back), but double the resources during deployment. Canary: Gradually shift traffic percentage (10% ? 50% ? 100%) to new version. More granular validation, slower rollout, auto-rollback based on metrics, but more complex traffic management. Choose blue-green for simple apps, canary for critical services.</div>
         <div class="qa-card"><strong>Q2:</strong> How do you secure a containerized application in Kubernetes?<br><strong>A:</strong> (1) Run as non-root user in container. (2) Read-only root filesystem. (3) Drop all Linux capabilities, add only needed ones. (4) Pod Security Standards: restricted profile. (5) Network policies: deny all ingress/egress by default. (6) Seccomp profile limiting syscalls. (7) Image scanning + signing. (8) Secrets not in environment variables, use volume mounts. (9) Resource limits prevent DoS. (10) Regular pod security audits with kubescape.</div>
         <div class="qa-card"><strong>Q3:</strong> Design a GitOps workflow for microservices deployment.<br><strong>A:</strong> (1) Each microservice has a repo with source code + Dockerfile. (2) CI pipeline builds and pushes image to ECR with git SHA tag. (3) CI updates the deployment manifest in a separate "config" repo (k8s-manifests). (4) ArgoCD monitors the config repo and syncs changes to the cluster. (5) Each microservice has: Deployment, Service, HPA, PDB, ServiceMonitor, VirtualService. (6) Environment overlays via kustomize (dev/staging/prod differ in replicas, resources, env vars). (7) Rollback: revert config repo commit, ArgoCD auto-syncs.</div>
         <div class="qa-card"><strong>Q4:</strong> How do you handle database migrations in CI/CD?<br><strong>A:</strong> (1) Migration scripts are versioned and run as part of deployment. (2) Use a dedicated init container that runs migrations before the app starts. (3) Migrations must be backward-compatible: adding columns (safe), removing columns (2-step: stop writing, then remove), renaming columns (add new, dual-write, migrate data, remove old). (4) For rollback: have revert migrations. (5) Test migrations against a clone of production data in staging. (6) Use tools like Flyway or Alembic with automated rollback validation.</div>
@@ -953,6 +954,8 @@ bash scripts/canary.sh --service sample-app --version v2.0.0 --percentage 10</co
       </div>
     </div>
   </div>
+  </main>
+
 
       <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">

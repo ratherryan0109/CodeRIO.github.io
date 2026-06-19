@@ -42,7 +42,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -56,9 +56,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Rust</h1>
       <p>Rust is a systems programming language focused on safety, speed, and concurrency. Developed by Mozilla Research and first stabilized in 2015, Rust guarantees memory safety without a garbage collector through its unique ownership and borrowing system. It has been voted the most loved language on Stack Overflow every year since 2016.</p>
@@ -112,11 +113,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Rust is adopted by leading technology companies for performance-critical and safety-critical systems:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mozilla/mozilla-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Mozilla</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dropbox/dropbox-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Dropbox</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mozilla/mozilla-original.svg" alt="Mozilla" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Mozilla</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">AWS</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="Microsoft" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dropbox/dropbox-original.svg" alt="Dropbox" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Dropbox</p></div>
       </div>
       <p style="color:var(--text-secondary)">Real-world applications include the Firefox Servo CSS engine, AWS Firecracker microVM, Cloudflare's Pingora proxy, Discord's read-state service, Figma's multiplayer engine, Meta's source control system, and the Android OS networking stack. Rust is increasingly adopted in blockchain development, embedded systems, WebAssembly compilation, and secure cryptography libraries.</p>
     </div>
@@ -479,6 +480,8 @@ fn main() -> io::Result<()> {
     
 
   </section>
+  </main>
+
 
 
     <footer class="footer">

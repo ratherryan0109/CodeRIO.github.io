@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -179,7 +179,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -194,8 +194,9 @@
       <li><a href="auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
+  <main>
   <div class="projects-wrapper">
 
     <!-- Hero -->
@@ -264,7 +265,7 @@
           </div>
           <a href="projects/ai-code-assistant.html" class="btn-feat">Start Project <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="feat-visual">🤖</div>
+        <div class="feat-visual">??</div>
       </div>
     </section>
 
@@ -295,7 +296,7 @@
       <div class="filter-bar">
         <div class="search-wrap">
           <i class="fas fa-search"></i>
-          <input type="text" id="searchInput" placeholder="Search projects..." autocomplete="off">
+          <input type="text" id="searchInput" placeholder="Search projects..." aria-label="Search projects" autocomplete="off">
         </div>
         <div class="filter-tabs" id="projectTabs">
           <button class="filter-tab active" data-filter="all">All</button>
@@ -312,6 +313,7 @@
     </section>
 
   </div>
+  </main>
 
     <footer class="footer">
     <div class="footer-grid" style="padding:3rem 8% 1.5rem;max-width:1400px;margin:0 auto">
@@ -344,10 +346,10 @@
     ];
 
     const iconMap = {
-      'Personal Portfolio Website': '🎨', 'Weather Dashboard': '🌤️', 'To-Do List App': '✅', 'Calculator': '🔢',
-      'E-Commerce Store': '🛒', 'Chat Application': '💬', 'Blog Platform': '📝', 'Movie Search App': '🎬',
-      'Social Media Dashboard': '📊', 'AI Code Assistant': '🤖', 'Scalable Video Platform': '🎥',
-      'Real-Time Collaboration Tool': '👥', 'Blockchain Explorer': '🔗', 'DevOps Pipeline Visualizer': '🔄'
+      'Personal Portfolio Website': '??', 'Weather Dashboard': '???', 'To-Do List App': '?', 'Calculator': '??',
+      'E-Commerce Store': '??', 'Chat Application': '??', 'Blog Platform': '??', 'Movie Search App': '??',
+      'Social Media Dashboard': '??', 'AI Code Assistant': '??', 'Scalable Video Platform': '??',
+      'Real-Time Collaboration Tool': '??', 'Blockchain Explorer': '??', 'DevOps Pipeline Visualizer': '??'
     };
 
     const skillLevels = { beginner: { pct: 30, label: 'Beginner' }, intermediate: { pct: 60, label: 'Intermediate' }, advanced: { pct: 90, label: 'Advanced' } };
@@ -372,7 +374,7 @@
         const db = diffBadge[p.difficulty];
         return `<div class="project-card glass" style="animation: fadeUp 0.5s ease ${i * 0.06}s both;">
           <div class="p-top">
-            <div class="p-icon">${iconMap[p.title] || '📁'}</div>
+            <div class="p-icon">${iconMap[p.title] || '??'}</div>
             <span class="diff-badge ${db}"><i class="fas fa-tag"></i> ${p.difficulty}</span>
           </div>
           <h3>${p.title}</h3>

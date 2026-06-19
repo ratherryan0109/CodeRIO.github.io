@@ -1,4 +1,4 @@
-const FIREBASE_CONFIG = {
+const FIREBASE_CONFIG = window.FIREBASE_CONFIG || {
   apiKey: "AIzaSyCOOsgmrRhyb11aPbnTXe7L4t6MTUIYAgs",
   authDomain: "coderio-88084.firebaseapp.com",
   projectId: "coderio-88084",

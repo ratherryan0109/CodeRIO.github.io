@@ -6,12 +6,12 @@
 </head>
 <body data-page="InterviewPrep">
 <div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="blob blob4"></div>
-<nav class="navbar">
+<header><nav class="navbar" aria-label="Main navigation">
 <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
 <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
 <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="Learn.html">Learn</a></li><li><a href="Practice.html">Practice</a></li><li><a href="Projects.html">Projects</a></li><li><a href="About.html">About</a></li><li><a href="auth/profile.html">Profile</a></li></ul>
 <div class="nav-auth"><a href="auth/login.html" class="btn btn-primary btn-sm">Sign In</a></div>
-</nav>
+</nav></header>
 
 <section class="interview-hero">
 <div class="course-hero-content">
@@ -27,15 +27,15 @@
 <div class="interview-filter-bar">
 <div class="interview-filter-group">
 <label><i class="fas fa-book"></i> Course</label>
-<select id="intCourseSelect"><option value="">Loading courses...</option></select>
+<select id="intCourseSelect" aria-label="Select course"><option value="">Loading courses...</option></select>
 </div>
 <div class="interview-filter-group">
 <label><i class="fas fa-tag"></i> Topic</label>
-<select id="intTopicSelect"><option value="all">All Topics</option></select>
+<select id="intTopicSelect" aria-label="Select topic"><option value="all">All Topics</option></select>
 </div>
 <div class="interview-filter-group">
 <label><i class="fas fa-filter"></i> Type</label>
-<select id="intTypeSelect"><option value="all">All Types</option><option value="conceptual">Conceptual</option><option value="scenario">Scenario</option><option value="code_analysis">Code Analysis</option><option value="debugging">Debugging</option><option value="real_interview">Real Interview</option><option value="compare_contrast">Compare/Contrast</option><option value="best_practice">Best Practice</option><option value="system_design">System Design</option><option value="fill_blank">Fill in the Blank</option><option value="output_prediction">Output Prediction</option></select>
+<select id="intTypeSelect" aria-label="Select question type"><option value="all">All Types</option><option value="conceptual">Conceptual</option><option value="scenario">Scenario</option><option value="code_analysis">Code Analysis</option><option value="debugging">Debugging</option><option value="real_interview">Real Interview</option><option value="compare_contrast">Compare/Contrast</option><option value="best_practice">Best Practice</option><option value="system_design">System Design</option><option value="fill_blank">Fill in the Blank</option><option value="output_prediction">Output Prediction</option></select>
 </div>
 <div class="interview-filter-group">
 <label><i class="fas fa-signal"></i> Difficulty</label>
@@ -50,7 +50,7 @@
 <label><i class="fas fa-search"></i> Search</label>
 <div class="interview-search-wrap">
 <i class="fas fa-search"></i>
-<input type="text" id="intSearchInput" placeholder="Search questions, topics, companies...">
+<input type="text" id="intSearchInput" placeholder="Search questions, topics, companies..." aria-label="Search interview questions">
 </div>
 </div>
 <div class="interview-filter-group" style="flex:0 0 auto">

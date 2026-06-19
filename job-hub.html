@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -87,7 +87,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -99,7 +99,7 @@
       <li><a href="auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"><a href="Register.html" class="btn btn-primary btn-sm">Sign Up</a></div>
-  </nav>
+  </nav></header>
 
   <div id="toastContainer" class="toast-container"></div>
 
@@ -110,7 +110,7 @@
       <div class="search-bar-wrap">
         <div class="search-input-wrap">
           <i class="fas fa-search"></i>
-          <input type="text" id="searchInput" placeholder="Search by job title, company, or keyword...">
+          <input type="text" id="searchInput" placeholder="Search by job title, company, or keyword..." aria-label="Search jobs">
         </div>
         <button class="btn btn-primary" id="searchBtn"><i class="fas fa-search"></i> Search</button>
         <button class="clear-filters-btn" id="clearFiltersBtn"><i class="fas fa-times"></i> Clear</button>
@@ -121,20 +121,20 @@
       <div class="filter-grid">
         <div class="filter-item">
           <label for="filterCountry">Country</label>
-          <select id="filterCountry">
+          <select id="filterCountry" aria-label="Filter by country">
             <option value="all">All Countries</option>
           </select>
         </div>
         <div class="filter-item" style="min-width:100px;flex:0.5">
           <label for="filterRemote">Remote Only</label>
           <div style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0">
-            <input type="checkbox" id="filterRemote" style="width:18px;height:18px;accent-color:var(--primary)">
+            <input type="checkbox" id="filterRemote" aria-label="Remote only" style="width:18px;height:18px;accent-color:var(--primary)">
             <span style="font-size:0.9rem;color:var(--text-secondary)">Remote / Hybrid</span>
           </div>
         </div>
         <div class="filter-item">
           <label for="filterSalary">Salary Range</label>
-          <select id="filterSalary">
+          <select id="filterSalary" aria-label="Filter by salary">
             <option value="all">Any Salary</option>
             <option value="0-30000">Under $30K</option>
             <option value="30000-60000">$30K - $60K</option>
@@ -145,7 +145,7 @@
         </div>
         <div class="filter-item">
           <label for="filterExperience">Experience Level</label>
-          <select id="filterExperience">
+          <select id="filterExperience" aria-label="Filter by experience level">
             <option value="all">All Levels</option>
             <option value="Junior">Junior</option>
             <option value="Mid-Level">Mid-Level</option>
@@ -197,37 +197,37 @@
     { id: 2, title: "Backend Engineer", company: "Stripe", location: "San Francisco, CA, USA", country: "US", salaryMin: 140000, salaryMax: 200000, currency: "$", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-06-03", description: "Design and build scalable payment infrastructure APIs. Work with Ruby, Java, and distributed systems at massive scale." },
     { id: 3, title: "Full Stack Developer", company: "Shopify", location: "Ottawa, ON, Canada", country: "CA", salaryMin: 110000, salaryMax: 160000, currency: "C$", experience: "Mid-Level", tags: ["remote","fulltime"], posted: "2026-05-28", description: "Build merchant-facing features across the Shopify stack. Work with React, Ruby on Rails, and GraphQL to power e-commerce experiences." },
     { id: 4, title: "DevOps Engineer", company: "Amazon Web Services", location: "Seattle, WA, USA", country: "US", salaryMin: 130000, salaryMax: 190000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-06-05", description: "Design and operate AWS infrastructure at planet scale. Automate deployment pipelines and build monitoring solutions for internal services." },
-    { id: 5, title: "Data Scientist", company: "Spotify", location: "London, UK", country: "GB", salaryMin: 70000, salaryMax: 105000, currency: "Â£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Analyze user behavior data to improve music recommendations. Use Python, SQL, and machine learning to drive product decisions." },
-    { id: 6, title: "Junior Frontend Developer", company: "HubSpot", location: "Dublin, Ireland", country: "GB", salaryMin: 42000, salaryMax: 58000, currency: "Â£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-07", description: "Build responsive marketing tools and customer-facing features. Work with React, TypeScript, and CSS-in-JS in a collaborative team." },
-    { id: 7, title: "AI/ML Engineer", company: "DeepMind", location: "London, UK", country: "GB", salaryMin: 90000, salaryMax: 150000, currency: "Â£", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-05-25", description: "Research and implement cutting-edge machine learning models. Work on reinforcement learning, NLP, and generative AI projects." },
-    { id: 8, title: "Mobile Developer (React Native)", company: "Uber", location: "Amsterdam, Netherlands", country: "DE", salaryMin: 65000, salaryMax: 95000, currency: "â‚¬", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-04", description: "Build cross-platform mobile experiences for Uber's rider and driver apps using React Native and TypeScript." },
+    { id: 5, title: "Data Scientist", company: "Spotify", location: "London, UK", country: "GB", salaryMin: 70000, salaryMax: 105000, currency: "£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Analyze user behavior data to improve music recommendations. Use Python, SQL, and machine learning to drive product decisions." },
+    { id: 6, title: "Junior Frontend Developer", company: "HubSpot", location: "Dublin, Ireland", country: "GB", salaryMin: 42000, salaryMax: 58000, currency: "£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-07", description: "Build responsive marketing tools and customer-facing features. Work with React, TypeScript, and CSS-in-JS in a collaborative team." },
+    { id: 7, title: "AI/ML Engineer", company: "DeepMind", location: "London, UK", country: "GB", salaryMin: 90000, salaryMax: 150000, currency: "£", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-05-25", description: "Research and implement cutting-edge machine learning models. Work on reinforcement learning, NLP, and generative AI projects." },
+    { id: 8, title: "Mobile Developer (React Native)", company: "Uber", location: "Amsterdam, Netherlands", country: "DE", salaryMin: 65000, salaryMax: 95000, currency: "€", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-04", description: "Build cross-platform mobile experiences for Uber's rider and driver apps using React Native and TypeScript." },
     { id: 9, title: "Full Stack Developer", company: "Atlassian", location: "Sydney, Australia", country: "AU", salaryMin: 110000, salaryMax: 165000, currency: "A$", experience: "Mid-Level", tags: ["remote","fulltime"], posted: "2026-06-01", description: "Develop cloud-based collaboration tools. Full stack role spanning React, Node.js, and microservices architecture." },
-    { id: 10, title: "Backend Developer", company: "Flipkart", location: "Bangalore, India", country: "IN", salaryMin: 1200000, salaryMax: 2500000, currency: "â‚¹", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-06", description: "Build scalable backend systems for India's largest e-commerce platform. Work with Java, Spring Boot, and distributed databases." },
+    { id: 10, title: "Backend Developer", company: "Flipkart", location: "Bangalore, India", country: "IN", salaryMin: 1200000, salaryMax: 2500000, currency: "?", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-06", description: "Build scalable backend systems for India's largest e-commerce platform. Work with Java, Spring Boot, and distributed databases." },
     { id: 11, title: "DevOps Lead", company: "GitLab", location: "Remote", country: "US", salaryMin: 140000, salaryMax: 200000, currency: "$", experience: "Lead", tags: ["remote","fulltime"], posted: "2026-05-30", description: "Lead infrastructure and platform engineering for GitLab's SaaS offering. Drive Kubernetes, Terraform, and CI/CD strategy." },
     { id: 12, title: "Frontend Developer", company: "Canva", location: "Sydney, Australia", country: "AU", salaryMin: 95000, salaryMax: 140000, currency: "A$", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Build intuitive design tools used by millions. Work with React, TypeScript, and WebGL to create stunning visual interfaces." },
-    { id: 13, title: "AI Engineer", company: "SAP", location: "Berlin, Germany", country: "DE", salaryMin: 70000, salaryMax: 110000, currency: "â‚¬", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-05-29", description: "Integrate AI capabilities into enterprise software products. Develop NLP models and intelligent automation solutions." },
-    { id: 14, title: "Senior Backend Developer", company: "Zomato", location: "Gurgaon, India", country: "IN", salaryMin: 1800000, salaryMax: 3500000, currency: "â‚¹", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-06-03", description: "Architect and build high-throughput food delivery systems. Work with Go, Kafka, and PostgreSQL at massive scale." },
+    { id: 13, title: "AI Engineer", company: "SAP", location: "Berlin, Germany", country: "DE", salaryMin: 70000, salaryMax: 110000, currency: "€", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-05-29", description: "Integrate AI capabilities into enterprise software products. Develop NLP models and intelligent automation solutions." },
+    { id: 14, title: "Senior Backend Developer", company: "Zomato", location: "Gurgaon, India", country: "IN", salaryMin: 1800000, salaryMax: 3500000, currency: "?", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-06-03", description: "Architect and build high-throughput food delivery systems. Work with Go, Kafka, and PostgreSQL at massive scale." },
     { id: 15, title: "Data Engineer", company: "Netflix", location: "Los Gatos, CA, USA", country: "US", salaryMin: 160000, salaryMax: 250000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-06-05", description: "Build data pipelines processing petabytes of streaming data. Work with Spark, Flink, and Kafka to power personalization." },
     { id: 16, title: "Frontend Developer (Vue.js)", company: "GitLab", location: "Remote", country: "US", salaryMin: 100000, salaryMax: 155000, currency: "$", experience: "Mid-Level", tags: ["remote","fulltime"], posted: "2026-06-01", description: "Build Vue.js components for GitLab's web interface. Contribute to open source and improve developer experience." },
-    { id: 17, title: "Junior Backend Developer", company: "Twilio", location: "Dublin, Ireland", country: "GB", salaryMin: 38000, salaryMax: 52000, currency: "Â£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-08", description: "Learn and contribute to building communication APIs. Work with Python, Django, and PostgreSQL in a supportive team." },
-    { id: 18, title: "Full Stack Developer", company: "Razorpay", location: "Bangalore, India", country: "IN", salaryMin: 1000000, salaryMax: 2200000, currency: "â‚¹", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-04", description: "Build payment solutions for millions of businesses. Full stack with React, Node.js, and microservices." },
+    { id: 17, title: "Junior Backend Developer", company: "Twilio", location: "Dublin, Ireland", country: "GB", salaryMin: 38000, salaryMax: 52000, currency: "£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-08", description: "Learn and contribute to building communication APIs. Work with Python, Django, and PostgreSQL in a supportive team." },
+    { id: 18, title: "Full Stack Developer", company: "Razorpay", location: "Bangalore, India", country: "IN", salaryMin: 1000000, salaryMax: 2200000, currency: "?", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-04", description: "Build payment solutions for millions of businesses. Full stack with React, Node.js, and microservices." },
     { id: 19, title: "Mobile Developer (Flutter)", company: "Nubank", location: "Sao Paulo, Brazil", country: "BR", salaryMin: 110000, salaryMax: 200000, currency: "R$", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Build cross-platform banking experiences using Flutter. Work on features that serve millions of customers across Latin America." },
     { id: 20, title: "DevOps Engineer", company: "Thoughtworks", location: "Singapore", country: "SG", salaryMin: 70000, salaryMax: 110000, currency: "S$", experience: "Mid-Level", tags: ["hybrid","contract"], posted: "2026-05-27", description: "Implement CI/CD pipelines and cloud infrastructure for client projects. Work with AWS, Terraform, and Docker." },
     { id: 21, title: "Senior Data Scientist", company: "Mercado Libre", location: "Buenos Aires, Argentina", country: "BR", salaryMin: 90000, salaryMax: 150000, currency: "R$", experience: "Senior", tags: ["remote","fulltime"], posted: "2026-06-06", description: "Build machine learning models for Latin America's largest e-commerce platform. Use Python, Spark, and MLflow." },
-    { id: 22, title: "Backend Developer (Go)", company: "Cloudflare", location: "London, UK", country: "GB", salaryMin: 75000, salaryMax: 120000, currency: "Â£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-05-31", description: "Build high-performance edge computing services using Go. Work on DNS, CDN, and security products." },
-    { id: 23, title: "AI/ML Engineer", company: "Cognizant", location: "Chennai, India", country: "IN", salaryMin: 800000, salaryMax: 1800000, currency: "â‚¹", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-03", description: "Develop AI solutions for enterprise clients. Build NLP models, chatbots, and intelligent automation systems." },
+    { id: 22, title: "Backend Developer (Go)", company: "Cloudflare", location: "London, UK", country: "GB", salaryMin: 75000, salaryMax: 120000, currency: "£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-05-31", description: "Build high-performance edge computing services using Go. Work on DNS, CDN, and security products." },
+    { id: 23, title: "AI/ML Engineer", company: "Cognizant", location: "Chennai, India", country: "IN", salaryMin: 800000, salaryMax: 1800000, currency: "?", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-03", description: "Develop AI solutions for enterprise clients. Build NLP models, chatbots, and intelligent automation systems." },
     { id: 24, title: "Lead Frontend Developer", company: "Salesforce", location: "San Francisco, CA, USA", country: "US", salaryMin: 170000, salaryMax: 250000, currency: "$", experience: "Lead", tags: ["hybrid","fulltime"], posted: "2026-05-26", description: "Lead frontend architecture for Salesforce's CRM platform. Drive component library design and performance optimization." },
-    { id: 25, title: "Full Stack Developer", company: "Revolut", location: "London, UK", country: "GB", salaryMin: 65000, salaryMax: 100000, currency: "Â£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-07", description: "Build financial products for millions of users. Work across React, Python, and Kubernetes in a fast-paced fintech environment." },
+    { id: 25, title: "Full Stack Developer", company: "Revolut", location: "London, UK", country: "GB", salaryMin: 65000, salaryMax: 100000, currency: "£", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-07", description: "Build financial products for millions of users. Work across React, Python, and Kubernetes in a fast-paced fintech environment." },
     { id: 26, title: "Backend Developer", company: "Sea Limited", location: "Singapore", country: "SG", salaryMin: 72000, salaryMax: 120000, currency: "S$", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-01", description: "Build backend systems for Shopee and Garena. Work with Go, C++, and large-scale distributed systems." },
     { id: 27, title: "Junior DevOps Engineer", company: "DigitalOcean", location: "New York, NY, USA", country: "US", salaryMin: 80000, salaryMax: 120000, currency: "$", experience: "Junior", tags: ["remote","fulltime"], posted: "2026-06-08", description: "Learn cloud infrastructure management. Assist with Kubernetes clusters, monitoring, and automation tooling." },
     { id: 28, title: "Mobile Developer (Swift)", company: "Apple", location: "Cupertino, CA, USA", country: "US", salaryMin: 140000, salaryMax: 200000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-05-29", description: "Build native iOS applications using Swift and SwiftUI. Work on features used by billions of users worldwide." },
-    { id: 29, title: "Data Scientist", company: "Alibaba", location: "Hangzhou, China", country: "JP", salaryMin: 500000, salaryMax: 900000, currency: "Â¥", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-04", description: "Analyze e-commerce and cloud data to drive business decisions. Use Python, SQL, and machine learning at massive scale." },
+    { id: 29, title: "Data Scientist", company: "Alibaba", location: "Hangzhou, China", country: "JP", salaryMin: 500000, salaryMax: 900000, currency: "¥", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-04", description: "Analyze e-commerce and cloud data to drive business decisions. Use Python, SQL, and machine learning at massive scale." },
     { id: 30, title: "Frontend Developer (Angular)", company: "DBS Bank", location: "Singapore", country: "SG", salaryMin: 60000, salaryMax: 95000, currency: "S$", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-06-02", description: "Build digital banking portals using Angular and TypeScript. Create responsive, accessible financial dashboards." },
     { id: 31, title: "Senior DevOps Engineer", company: "Adobe", location: "San Jose, CA, USA", country: "US", salaryMin: 150000, salaryMax: 215000, currency: "$", experience: "Senior", tags: ["hybrid","fulltime"], posted: "2026-06-06", description: "Build and maintain CI/CD infrastructure for Adobe Creative Cloud. Drive Kubernetes adoption and cloud optimization." },
-    { id: 32, title: "Backend Developer (Python)", company: "Booking.com", location: "Amsterdam, Netherlands", country: "DE", salaryMin: 60000, salaryMax: 90000, currency: "â‚¬", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-05-28", description: "Build travel booking backend systems using Python and Django. Work on high-traffic APIs serving millions of users daily." },
+    { id: 32, title: "Backend Developer (Python)", company: "Booking.com", location: "Amsterdam, Netherlands", country: "DE", salaryMin: 60000, salaryMax: 90000, currency: "€", experience: "Mid-Level", tags: ["hybrid","fulltime"], posted: "2026-05-28", description: "Build travel booking backend systems using Python and Django. Work on high-traffic APIs serving millions of users daily." },
     { id: 33, title: "AI/ML Research Engineer", company: "OpenAI", location: "San Francisco, CA, USA", country: "US", salaryMin: 200000, salaryMax: 350000, currency: "$", experience: "Senior", tags: ["onsite","fulltime"], posted: "2026-06-07", description: "Research and develop advanced AI models. Work on cutting-edge NLP, multimodal AI, and reinforcement learning." },
     { id: 34, title: "Full Stack Developer", company: "Gojek", location: "Jakarta, Indonesia", country: "SG", salaryMin: 30000, salaryMax: 60000, currency: "S$", experience: "Mid-Level", tags: ["onsite","fulltime"], posted: "2026-06-05", description: "Build super-app features for millions of Southeast Asian users. Work with Go, React, and microservices." },
-    { id: 35, title: "Junior Full Stack Developer", company: "Intercom", location: "Dublin, Ireland", country: "GB", salaryMin: 40000, salaryMax: 55000, currency: "Â£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-09", description: "Build customer communication tools. Learn Ruby on Rails, React, and PostgreSQL in a supportive engineering team." }
+    { id: 35, title: "Junior Full Stack Developer", company: "Intercom", location: "Dublin, Ireland", country: "GB", salaryMin: 40000, salaryMax: 55000, currency: "£", experience: "Junior", tags: ["hybrid","fulltime"], posted: "2026-06-09", description: "Build customer communication tools. Learn Ruby on Rails, React, and PostgreSQL in a supportive engineering team." }
   ];
   // ======================== APP STATE ========================
   var currentPage = 1;

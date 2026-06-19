@@ -19,7 +19,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -33,9 +33,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>React</h1>
       <p>React is a JavaScript library for building user interfaces, developed by Facebook (Meta). It uses a component-based architecture with a virtual DOM for efficient rendering, making it one of the most popular frontend frameworks worldwide.</p>
@@ -89,11 +90,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">React is used by thousands of companies across every industry:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Facebook/Meta</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/instagram/instagram-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Instagram</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Facebook/Meta" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Facebook/Meta</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/instagram/instagram-original.svg" alt="Instagram" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Instagram</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter/X" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Twitter/X</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/airbnb/airbnb-original.svg" alt="Airbnb" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Airbnb</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Slack" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Slack</p></div>
       </div>
       <p style="color:var(--text-secondary)">React is used everywhere from startups to Fortune 500 companies. Netflix uses React for their UI platform, Uber uses it for their web dashboard, Discord built their app with React, and WhatsApp Web is a React application. The React ecosystem powers e-commerce (Shopify), content platforms (Medium), design tools (Figma), and productivity apps (Notion, Trello).</p>
     </div>
@@ -444,6 +445,8 @@ function UserProfile({ userId }) {
   
 
   </section>
+  </main>
+
 
             
     <footer class="footer">

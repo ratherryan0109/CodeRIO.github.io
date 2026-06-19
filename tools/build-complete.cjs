@@ -35,9 +35,8 @@ function c(term, difficulty, definition, extras) {
 }
 var fs = require('fs');
 var path = require('path');
-var genCode = fs.readFileSync(path.join(__dirname, 'generate-data.js'), 'utf8');
-genCode = genCode.replace(/var output = build\(\);[\s\S]*$/, '');
-eval(genCode);
+var genData = require('./generate-data.cjs');
+var courses = genData.courses;
 function addC(courseId, topicName, term, difficulty, definition, extras) {
   for (var ci = 0; ci < courses.length; ci++) {
     if (courses[ci].id === courseId) {

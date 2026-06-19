@@ -720,6 +720,9 @@ course('system-design', 'System Design', 'fas fa-sitemap', '#FF6F00', [
     c('Rate Limiter Design', 'Intermediate', 'Designing a system to limit API request rates from clients', { codeExample: '// Algorithms:\n// 1. Token Bucket\n//    - Tokens added at rate r (bucket size b)\n//    - Request consumes token; if none, reject\n//    - Allows bursts up to bucket size\n\n// 2. Leaky Bucket\n//    - Requests enter queue, processed at constant rate\n//    - Queue overflow -> reject\n//    - Smooths traffic (no bursts)\n\n// 3. Fixed Window Counter\n//    - Reset counter every N seconds\n//    - Problem: traffic spikes at window boundary\n//    - Example: 100 req/min, reset at :00\n//    99 req at :59, 99 req at :01 -> 198 in 2 seconds\n\n// 4. Sliding Window Log\n//    - Track timestamps of all requests\n//    - Count requests in sliding window\n//    - Memory intensive\n\n// 5. Sliding Window Counter\n//    - Approximate: previous window * overlap + current\n//    - Redis implementation:\n\n// Redis Token Bucket (Lua script for atomicity)\nconst luaScript = `\n    local key = KEYS[1]\n    local capacity = tonumber(ARGV[1])\n    local refillRate = tonumber(ARGV[2])\n    local now = tonumber(ARGV[3])\n\n    local tokens = redis.call("get", key)\n    local lastRefill = redis.call("get", key .. ":last_refill")\n\n    if not tokens then\n        tokens = capacity\n        lastRefill = now\n    else\n        local elapsed = now - lastRefill\n        tokens = math.min(capacity, tokens + elapsed * refillRate)\n        lastRefill = now\n    end\n\n    if tokens >= 1 then\n        redis.call("set", key, tokens - 1)\n        redis.call("set", key .. ":last_refill", now)\n        return 1  -- allowed\n    else\n        return 0  -- rate limited\n    end\n`;\n\n// HTTP response for rate limited:\n// 429 Too Many Requests\n// Retry-After: 60\n// X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset', keyPoints: ['Token Bucket: burst + steady state', 'Sliding Window: more accurate than fixed', 'Redis + Lua for atomic rate counting', 'Return 429 with Retry-After header'] }),
   ]},
 ]);
-var output = build();
-require('fs').writeFileSync(require('path').join(__dirname, 'interview-data.js'), output, 'utf8');
-console.log(output);
+module.exports = { courses, course, c, build, esc, q, arr };
+if (require.main === module) {
+  var output = build();
+  require('fs').writeFileSync(require('path').join(__dirname, 'interview-data.js'), output, 'utf8');
+  console.log(output);
+}

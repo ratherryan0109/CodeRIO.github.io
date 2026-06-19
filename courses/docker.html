@@ -19,7 +19,7 @@
 
   <div class="toast-container"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo"><span class="logo-icon"><i class="fas fa-code"></i></span>CodeRio</div>
     <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     <ul class="nav-links">
@@ -33,9 +33,10 @@
     <div class="nav-auth">
       <button class="btn btn-primary btn-sm" onclick="window.location.href='../auth/login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav></header>
 
-  <section class="course-hero">
+  <main>
+<section class="course-hero">
     <div class="course-hero-content">
       <h1>Docker</h1>
       <p>Docker is a platform for developing, shipping, and running applications in containers. Containers are lightweight, portable, and consistent environments that package application code with all dependencies, eliminating the "it works on my machine" problem.</p>
@@ -89,11 +90,11 @@
       <h2><i class="fas fa-building"></i> Industry Usage</h2>
       <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Docker is adopted by virtually every tech company for development and production:</p>
       <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center">
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spotify</p></div>
-        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">PayPal</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Google</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="Amazon" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Amazon</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="Microsoft" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Microsoft</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg" alt="Spotify" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">Spotify</p></div>
+        <div style="text-align:center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" alt="PayPal" width="48"><p style="font-size:0.8rem;margin-top:0.3rem">PayPal</p></div>
       </div>
       <p style="color:var(--text-secondary)">Docker is used in every stage of the software lifecycle. Developers use it for local development environments. CI/CD pipelines build and test inside Docker containers. Production deployments use Docker with orchestration platforms. Companies like Netflix, Uber, Airbnb, Stripe, and Shopify all use Docker to run their applications at scale.</p>
     </div>
@@ -487,6 +488,8 @@ jobs:
     </div>
 
   </section>
+  </main>
+
 
     <footer class="footer">
     <div class="footer-grid" style="padding:3rem 6% 1.5rem;max-width:1400px;margin:0 auto">

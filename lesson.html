@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,7 +17,7 @@
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <nav class="navbar">
+  <header><nav class="navbar" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-icon"><i class="fas fa-code"></i></span>
       CodeRio
@@ -32,7 +32,7 @@
       <li><a href="auth/profile.html">Profile</a></li>
     </ul>
     <div class="nav-auth"></div>
-  </nav>
+  </nav></header>
 
   <section class="lesson-container" style="padding:2rem 8%;max-width:1000px;margin:0 auto">
     <!-- Breadcrumb -->
@@ -101,7 +101,7 @@
         <!-- Take Notes -->
         <div class="glass" style="padding:1.5rem;border-radius:var(--border-radius-md);margin-bottom:2rem">
           <h3 style="margin-bottom:1rem"><i class="fas fa-sticky-note" style="color:var(--primary)"></i> Take Notes</h3>
-          <textarea id="lessonNotesInput" placeholder="Write your notes for this lesson..." rows="4" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.9rem;resize:vertical;font-family:inherit;margin-bottom:0.8rem"></textarea>
+          <textarea id="lessonNotesInput" placeholder="Write your notes for this lesson..." aria-label="Write your notes for this lesson" rows="4" style="width:100%;padding:0.7rem 1rem;border:2px solid #e2e8f0;border-radius:var(--border-radius-sm);font-size:0.9rem;resize:vertical;font-family:inherit;margin-bottom:0.8rem"></textarea>
           <button class="btn btn-primary btn-sm" onclick="saveLessonNotes()"><i class="fas fa-save"></i> Save Notes</button>
           <span id="lessonNotesStatus" style="margin-left:1rem;font-size:0.85rem;color:var(--success);display:none"></span>
         </div>
